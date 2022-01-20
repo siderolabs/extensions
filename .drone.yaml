@@ -1,0 +1,124 @@
+kind: pipeline
+name: default
+type: kubernetes
+
+steps:
+  - name: setup-ci
+    image: autonomy/build-container:latest
+    commands:
+      - git fetch --tags
+      - install-ci-key
+      - setup-buildx-amd64-arm64
+    environment:
+      SSH_KEY:
+        from_secret: ssh_key
+      DOCKER_CLI_EXPERIMENTAL: enabled
+    resources:
+      requests:
+        cpu: 24000
+        memory: 48GiB
+    volumes:
+      - name: docker-socket
+        path: /var/run
+      - name: ssh
+        path: /root/.ssh
+      - name: docker
+        path: /root/.docker/buildx
+
+  - name: build-pull-request
+    image: autonomy/build-container:latest
+    pull: always
+    environment:
+      DOCKER_CLI_EXPERIMENTAL: enabled
+    commands:
+      - make
+    when:
+      event:
+        include:
+          - pull_request
+    volumes:
+      - name: docker-socket
+        path: /var/run
+      - name: ssh
+        path: /root/.ssh
+      - name: docker
+        path: /root/.docker/buildx
+
+  - name: build-nonfree-pull-request
+    image: autonomy/build-container:latest
+    pull: always
+    environment:
+      DOCKER_CLI_EXPERIMENTAL: enabled
+    commands:
+      - make nonfree
+    when:
+      event:
+        include:
+          - pull_request
+    volumes:
+      - name: docker-socket
+        path: /var/run
+      - name: ssh
+        path: /root/.ssh
+      - name: docker
+        path: /root/.docker/buildx
+
+  - name: build-and-publish
+    image: autonomy/build-container:latest
+    pull: always
+    environment:
+      GHCR_USERNAME:
+        from_secret: ghcr_username
+      GHCR_PASSWORD:
+        from_secret: ghcr_token
+    commands:
+      - docker login ghcr.io --username "$${GHCR_USERNAME}" --password "$${GHCR_PASSWORD}"
+      - make PUSH=true
+    when:
+      event:
+        exclude:
+          - pull_request
+    volumes:
+      - name: docker-socket
+        path: /var/run
+      - name: ssh
+        path: /root/.ssh
+      - name: docker
+        path: /root/.docker/buildx
+
+volumes:
+  - name: docker-socket
+    host:
+      path: /var/ci-docker
+  - name: docker
+    temp: {}
+  - name: ssh
+    temp: {}
+---
+kind: pipeline
+type: kubernetes
+name: notify
+
+clone:
+  disable: true
+
+steps:
+  - name: slack
+    image: plugins/slack
+    settings:
+      webhook:
+        from_secret: slack_webhook
+      channel: proj-talos-maintainers
+    when:
+      status:
+        - success
+        - failure
+
+trigger:
+  status:
+    - success
+    - failure
+
+depends_on:
+  - default
+

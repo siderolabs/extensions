@@ -1,0 +1,50 @@
+name: gvisor
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      # sync with commit in build
+      - url: https://github.com/google/gvisor/archive/c1512ec8067c772473a4d6bad12953848eab8552.tar.gz
+        destination: gvisor.tar.gz
+        sha256: df41a38cc4d6068e6475f2f0a29c083bf11fd682869957b1b325980d3892725b
+        sha512: f4fd4bd5fbf482fceb7c46311c5dfd808cbf40e921c5f92ce4011f9b58e477af0dc3d5da8e1175c7ff22ad42d8351d6e8b9d8cc4d8339ded7cd782d617331002
+    env:
+      GOPATH: /go
+    prepare:
+      - |
+        mkdir -p /etc/ssl/certs/
+        ln -s /toolchain/etc/ssl/certs/ca-certificates /etc/ssl/certs/ca-certificates
+
+        mkdir -p ${GOPATH}/src/github.com/google/gvisor
+
+        tar -xzf gvisor.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/google/gvisor
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        cd ${GOPATH}/src/github.com/google/gvisor
+
+        mkdir ./bin
+
+        CGO_ENABLED=0 go build -o ./bin/runsc ./runsc
+
+        CGO_ENABLED=0 go build -o ./bin/containerd-shim-runsc-v1 ./shim
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+
+        cd ${GOPATH}/src/github.com/google/gvisor
+
+        cp ./bin/runsc /rootfs/usr/local/bin/runsc
+        chmod +x /rootfs/usr/local/bin/runsc
+
+        cp ./bin/containerd-shim-runsc-v1 /rootfs/usr/local/bin/containerd-shim-runsc-v1
+        chmod +x /rootfs/usr/local/bin/containerd-shim-runsc-v1
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/gvisor.part
+    to: /rootfs/etc/cri/conf.d/gvisor.part

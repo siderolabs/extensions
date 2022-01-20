@@ -1,0 +1,9 @@
+# syntax = ghcr.io/talos-systems/bldr:v0.2.0-alpha.6-frontend
+
+format: v1alpha2
+
+vars:
+  TOOLS_IMAGE: ghcr.io/talos-systems/tools:v0.10.0-alpha.0-1-g67314b1
+
+labels:
+  org.opencontainers.image.source: https://github.com/talos-systems/extensions

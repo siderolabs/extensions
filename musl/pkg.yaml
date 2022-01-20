@@ -1,0 +1,41 @@
+name: musl
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - image: "{{ .TOOLS_IMAGE }}"
+steps:
+  - sources:
+      - url: https://www.musl-libc.org/releases/musl-1.2.2.tar.gz
+        destination: musl.tar.gz
+        sha256: 9b969322012d796dc23dda27a35866034fa67d8fb67e0e2c45c913c3d43219dd
+        sha512: 5344b581bd6463d71af8c13e91792fa51f25a96a1ecbea81e42664b63d90b325aeb421dfbc8c22e187397ca08e84d9296a0c0c299ba04fa2b751d6864914bd82
+    prepare:
+      - |
+        export PATH=${TOOLCHAIN}/cross/bin:${PATH}
+
+        tar -xzf musl.tar.gz --strip-components=1
+
+        mkdir /bin
+        ln -sv /toolchain/bin/bash /bin/sh
+
+        mkdir build
+        cd build
+
+        # From https://www.musl-libc.org/doc/1.0.0/manual.html:
+        #    $(syslibdir), $(includedir), and $(libdir) refer to the paths
+        #    chosen at build time (by default, /lib, $(prefix)/include, and
+        #    $(prefix)/lib, respectively)
+        ../configure \
+        --prefix=/usr
+    build:
+      - |
+        cd build
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        make DESTDIR=/rootfs install
+finalize:
+  - from: /rootfs
+    to: /
+
