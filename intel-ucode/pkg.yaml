@@ -1,0 +1,23 @@
+name: intel-ucode
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/refs/tags/microcode-20210608.tar.gz
+        destination: intel-ucode.tar.gz
+        sha256: fd85b6b769efd029dec6a2c07106fd18fb4dcb548b7bc4cde09295a8344ef6d7
+        sha512: 61acd2e76aa019fa0002fbf56c503791080a937ff93d81e020f8f0cc089dc08928b4c7e9884f713b886e2f9d4a8409fea59e39f628ef534a588515e1c3fc861d
+    prepare:
+      - |
+        tar -xzf intel-ucode.tar.gz --strip-components=1
+    install:
+      - |
+        mkdir -p /rootfs/lib/firmware
+        cp -R -p intel-ucode /rootfs/lib/firmware
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

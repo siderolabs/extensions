@@ -19,7 +19,7 @@ COMMON_ARGS += --build-arg=https_proxy=$(https_proxy)
 empty :=
 space = $(empty) $(empty)
 
-TARGETS =  gvisor
+TARGETS =  gvisor intel-ucode
 NONFREE_TARGETS =
 
 all: $(TARGETS) ## Builds all known pkgs.
@@ -63,4 +63,3 @@ kernel-%: ## Updates the kernel configs: e.g. make kernel-olddefconfig; make ker
 .PHONY: conformance
 conformance: ## Performs policy checks against the commit and source code.
 	docker run --rm -it -v $(PWD):/src -w /src ghcr.io/talos-systems/conform:v0.1.0-alpha.22 enforce
-
