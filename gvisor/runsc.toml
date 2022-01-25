@@ -1,0 +1,3 @@
+[runsc_config]
+# See https://github.com/talos-systems/extensions/issues/4
+ignore-cgroups = "true"
