@@ -1,0 +1,47 @@
+name: nvidia-container-runtime
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/v1.9.0/container-toolkit-v1.9.0.tar.gz
+        destination: container-toolkit.tar.gz
+        sha256: e95ad56d08bee14f54d3c15e5201ba502676afda3392a40c09f112a29a3e3679
+        sha512: d742d297dc9cb29e2d775c64fe5dc668a230cd8b0a193eb9b44518efd1e092817038c8ed015ab28b0cf2a45ad03b99d0e215df9e18586bb917d8c5b5d783aa90
+    env:
+      GOPATH: /go
+    prepare:
+      - |
+        mkdir -p container-toolkit
+        tar -xzf container-toolkit.tar.gz --strip-components=1 -C container-toolkit
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        cd container-toolkit
+
+        patch -p0 < /pkg/patches/nvidia-container-runtime/main.go.patch
+        patch -p0 < /pkg/patches/nvidia-container-toolkit/hook_config.go.patch
+
+        make cmds
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+
+        cd container-toolkit
+
+        cp ./nvidia-container-runtime /rootfs/usr/local/bin/nvidia-container-runtime
+        cp ./nvidia-container-toolkit /rootfs/usr/local/bin/nvidia-container-toolkit
+
+        ln -s nvidia-container-toolkit /rootfs/usr/local/bin/nvidia-container-runtime-hook
+        
+        chmod +x /rootfs/usr/local/bin/nvidia-container-runtime
+        chmod +x /rootfs/usr/local/bin/nvidia-container-toolkit
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/nvidia-container-runtime.part
+    to: /rootfs/etc/cri/conf.d/nvidia-container-runtime.part
+  - from: /pkg/nvidia-container-runtime.toml
+    to: /rootfs/usr/local/etc/nvidia-container-runtime/config.toml

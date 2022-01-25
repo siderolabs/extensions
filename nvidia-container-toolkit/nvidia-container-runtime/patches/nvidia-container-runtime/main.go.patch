@@ -1,0 +1,13 @@
+diff --git cmd/nvidia-container-runtime/main.go cmd/nvidia-container-runtime/main.go
+index cbb52b7..789a2b0 100644
+--- cmd/nvidia-container-runtime/main.go
++++ cmd/nvidia-container-runtime/main.go
+@@ -16,7 +16,7 @@ const (
+ )
+ 
+ var (
+-	configDir = "/etc/"
++	configDir = "/usr/local/etc/"
+ )
+ 
+ var logger = NewLogger()

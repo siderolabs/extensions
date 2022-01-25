@@ -1,0 +1,86 @@
+name: nvidia-container-cli
+variant: scratch
+dependencies:
+  - image: ubuntu:20.04
+  # nvidia-pkgs depends on glibc,
+  # so any stage depending on nvidia-container-cli will have the updated cache,
+  # from both nvidia-pkgs and nvidia-container-cli
+  - stage: nvidia-pkgs
+shell: /bin/bash
+steps:
+  - sources:
+      - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/v1.9.0/libnvidia-container-v1.9.0.tar.gz
+        destination: libnvidia-container.tar.gz
+        sha256: b33b83e90d5e07271c28f1fb330c2d32958fa91b3a8f3238e43d691728829299
+        sha512: c1a2a43733580eb2bc1d0798c164dd5f8f5b65bfb3d6e47a067fd5a6a93cc18fd0d718e314881f9d4e596c1376363340d4a35f89973e0e43cdb25b07922c8430
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      GOPATH: /go
+      REVISION: abd4e14d8cb923e2a70b7dcfee55fbc16bffa353
+      WITH_TIRPC: no
+      WITH_NVCGO: yes
+      WITH_SECCOMP: yes
+      WITH_LIBELF: no
+    prepare:
+      - |
+        apt-get update
+        apt-get install -y \
+        apt-utils \
+        bmake \
+        build-essential \
+        bzip2 \
+        ca-certificates \
+        curl \
+        devscripts \
+        dh-make \
+        fakeroot \
+        git \
+        libcap-dev \
+        libelf-dev \
+        libseccomp-dev \
+        lintian \
+        lsb-release \
+        m4 \
+        pkg-config \
+        xz-utils \
+        patchelf
+
+        # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        curl https://storage.googleapis.com/golang/go1.17.8.linux-amd64.tar.gz | tar -C /usr/local -xz
+        # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        curl https://storage.googleapis.com/golang/go1.17.8.linux-arm64.tar.gz | tar -C /usr/local -xz
+        # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+
+        mkdir libnvidia-container
+        tar -xzf  libnvidia-container.tar.gz --strip-components=1 -C libnvidia-container
+    build:
+      - |
+        export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+
+        cd libnvidia-container
+
+        patch -p0 < /pkg/patches/libnvidia-container/Makefile.patch
+        patch -p0 < /pkg/patches/libnvidia-container/common.h.patch
+        patch -p0 < /pkg/patches/libnvidia-container/nvc_ldcache.c.patch
+        make
+    install:
+      - |
+        export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
+        mkdir -p /rootfs
+
+        cd libnvidia-container
+
+        make install DESTDIR=/rootfs
+
+        rm -rf /rootfs/usr/local/lib/debug
+        rm -rf /rootfs/usr/local/lib/pkgconfig
+        rm -rf /rootfs/usr/local/include
+        rm -rf /rootfs/usr/local/share
+
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 /rootfs/usr/local/bin/nvidia-container-cli
+
+        # run ldconfig to update the cache
+        /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs
+finalize:
+  - from: /rootfs
+    to: /rootfs

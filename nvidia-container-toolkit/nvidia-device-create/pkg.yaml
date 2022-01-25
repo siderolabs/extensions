@@ -1,0 +1,47 @@
+# https://download.nvidia.com/XFree86/Linux-x86_64/510.54/README/faq.html
+# check the section under NVIDIA-INSTALLER -> How and when are the NVIDIA device files created?
+name: nvidia-device-create
+variant: scratch
+dependencies:
+  - image: ubuntu:21.10
+shell: /bin/bash
+steps:
+  - sources:
+      # https://github.com/tseliot/nvidia-graphics-drivers/commit/6b655df8a905f2ea00298d44ad6003f7b51fd37a
+      - url: https://github.com/tseliot/nvidia-graphics-drivers/archive/6b655df8a905f2ea00298d44ad6003f7b51fd37a.tar.gz
+        destination: nvidia-graphics-drivers-build.tar.gz
+        sha256: 48a293271d0f38d0f7029c798bad01cbbe39290a36116fda53503463357b47d9
+        sha512: 764ffba4851ff76d4461da7eefcb818ba36e7fc1d3651643a5501e8fdd1ed459aab647656e297887d8a0c805e825bb27794f7c0952d6896b77415b9f2737ab5f
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    prepare:
+      - |
+        apt-get update
+        apt install -y libpciaccess-dev \
+          libkmod-dev \
+          build-essential
+
+        # https://download.nvidia.com/XFree86/Linux-x86_64/510.54/README/faq.html#devicenodes
+        # https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-verifications
+        mkdir nvidia-graphics-drivers-build
+
+        tar -xzf nvidia-graphics-drivers-build.tar.gz --strip-components=1 -C nvidia-graphics-drivers-build
+    build:
+      - |
+        cd nvidia-graphics-drivers-build/debian/device-create
+
+        patch -p0 < /pkg/patches/nvidia-graphics-drivers-build/Makefile.patch
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin \
+          mkdir -p /rootfs/usr/etc/udev/rules.d
+
+        cd nvidia-graphics-drivers-build/debian/device-create
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/nvidia-kernel-common-510.install
+        cp ub-device-create /rootfs/usr/local/bin
+        cp /pkg/15-nvidia-device.rules /rootfs/usr/etc/udev/rules.d
+finalize:
+  - from: /rootfs
+    to: /rootfs

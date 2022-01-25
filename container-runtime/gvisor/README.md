@@ -8,7 +8,7 @@ Enable the extension in the machine configuration before installing Talos:
 machine:
   install:
     extensions:
-      - image: ghcr.io/talos-systems/gvisor:<VERSION>
+      - image: ghcr.io/siderolabs/gvisor:<VERSION>
 ```
 
 gVisor requires unprivileged user namespace creation, so Talos default setting

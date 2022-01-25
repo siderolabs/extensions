@@ -1,0 +1,167 @@
+name: nvidia-pkgs
+variant: scratch
+dependencies:
+  - image: ubuntu:22.04
+  # depends on glibc to update ld.so.cache
+  # so any stage depending on nvidia-pkgs will have the updated cache
+  - stage: glibc
+shell: /bin/bash
+steps:
+  - sources:
+    # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://download.nvidia.com/XFree86/Linux-aarch64/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}/NVIDIA-Linux-aarch64-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}.run
+        destination: nvidia.run
+        sha256: bff7a5640445b3e38b35d9d589b52c7353bb473703b7a5d050aa96aaa35ca896
+        sha512: 9d872748dc0957c0754561582a1984a8f912c345a5e616116edfd86d629efb5674c29723c80ae47d458b23aaec6fc5a71724441dd7e11ba4f5b94f8b04591f81
+    # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://download.nvidia.com/XFree86/Linux-x86_64/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}/NVIDIA-Linux-x86_64-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}.run
+        destination: nvidia.run
+        sha256: 4c20deccae3fe347adfd0e6989a306f9024fdadf831adc1e8e60855675335161
+        sha512: 1e65e96c1ae1cccd5cd483f2b65927e3594d28f3774459dfd094530f445f4b0f5368a3b7eebf4970bd2632438cca2cbb93af50a59a3a87a2c13d08ed5155164c
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    prepare:
+      - |
+        apt update && \
+        apt install -y \
+          patchelf
+
+        bash nvidia.run --extract-only
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin \
+          /rootfs/usr/local/lib/gbm \
+          /rootfs/usr/local/lib/nvidia/xorg \
+          /rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} \
+          /rootfs/usr/local/lib/containers/nvidia-persistenced \
+          /rootfs/usr/local/etc/containers
+        
+        cd NVIDIA-Linux*
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-cfg1-510.install
+        cp libnvidia-cfg.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-cfg1-510.links
+        ln -s libnvidia-cfg.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-cfg.so.1
+        ln -s libnvidia-cfg.so.1 /rootfs/usr/local/lib/libnvidia-cfg.so
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-compute-510.install
+        cp libcuda.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        cp libnvidia-compiler-next.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-compiler.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        cp libnvidia-ml.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-nvvm.so.4.0.0 /rootfs/usr/local/lib
+        cp libnvidia-opencl.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-ptxjitcompiler.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-compute-510.links
+        ln -s libnvidia-nvvm.so.4.0.0 /rootfs/usr/local/lib/libnvidia-nvvm.so.4
+        ln -s libnvidia-nvvm.so.4 /rootfs/usr/local/lib/libnvidia-nvvm.so
+        ln -s libcuda.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libcuda.so.1
+        ln -s libcuda.so.1 /rootfs/usr/local/lib/libcuda.so
+        ln -s libnvidia-ml.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-ml.so.1
+        ln -s libnvidia-ml.so.1 /rootfs/usr/local/lib/libnvidia-ml.so
+        ln -s libnvidia-opencl.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-opencl.so.1
+        ln -s libnvidia-ptxjitcompiler.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-ptxjitcompiler.so.1
+        ln -s libnvidia-ptxjitcompiler.so.1 /rootfs/usr/local/lib/libnvidia-ptxjitcompiler.so
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-decode-510.install
+        cp libnvcuvid.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-opticalflow.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libvdpau_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-decode-510.links
+        ln -s libnvcuvid.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvcuvid.so.1
+        ln -s libnvcuvid.so.1 /rootfs/usr/local/lib/libnvcuvid.so
+        ln -s libnvidia-opticalflow.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-opticalflow.so.1
+        ln -s libnvidia-opticalflow.so.1 /rootfs/usr/local/lib/libnvidia-opticalflow.so
+        ln -s libvdpau_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libvdpau_nvidia.so.1
+        ln -s libvdpau_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libvdpau_nvidia.so
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-encode-510.install
+        cp libnvidia-encode.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-encode.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-encode-510.links
+        ln -s libnvidia-encode.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-encode.so.1
+        ln -s libnvidia-encode.so.1 /rootfs/usr/local/lib/libnvidia-encode.so
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-extra-510.install
+        cp libnvidia-allocator.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-allocator.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}
+        
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-extra-510.links
+        ln -s libnvidia-allocator.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-allocator.so.1
+        ln -s libnvidia-allocator.so.1 /rootfs/usr/local/lib/libnvidia-allocator.so
+        ln -s ../libnvidia-allocator.so.1 /rootfs/usr/local/lib/gbm/nvidia-drm_gbm.so
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-fbc1-510.install
+        cp libnvidia-fbc.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-fbc1-510.links
+        ln -s libnvidia-fbc.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-fbc.so.1
+        ln -s libnvidia-fbc.so.1 /rootfs/usr/local/lib/libnvidia-fbc.so
+
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 nvidia-ngx-updater
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-gl-510.install
+        cp libEGL_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libGLESv1_CM_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libGLESv2_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libGLX_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libglxserver_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-egl-gbm.so.1.1.0 /rootfs/usr/local/lib
+        cp libnvidia-eglcore.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-glcore.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-glsi.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-glvkspirv.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-ngx.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-rtcore.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-tls.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvidia-vulkan-producer.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp libnvoptix.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib
+        cp nvidia-ngx-updater /rootfs/usr/local/bin
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-gl-510.links
+        ln -s libnvidia-vulkan-producer.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-vulkan-producer.so
+        ln -s libnvoptix.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvoptix.so.1
+        ln -s nvidia/xorg/libglxserver_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/nvidia/xorg/libglxserver_nvidia.so
+        ln -s libEGL_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libEGL_nvidia.so.0
+        ln -s libGLESv1_CM_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libGLESv1_CM_nvidia.so.1
+        ln -s libGLESv2_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libGLESv2_nvidia.so.2
+        ln -s libGLX_nvidia.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libGLX_nvidia.so.0
+
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 nvidia-cuda-mps-control
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 nvidia-cuda-mps-server
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 nvidia-persistenced
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/nvidia-compute-utils-510.install
+        cp nvidia-cuda-mps-control /rootfs/usr/local/bin/
+        cp nvidia-cuda-mps-server /rootfs/usr/local/bin/
+        cp nvidia-persistenced /rootfs/usr/local/bin/
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/nvidia-kernel-common-510.install
+        cp firmware/gsp.bin /rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}/gsp.bin
+
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 nvidia-debugdump
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 nvidia-smi
+        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 nvidia-xconfig
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/nvidia-utils-510.install
+        cp nvidia-debugdump /rootfs/usr/local/bin/
+        cp nvidia-smi /rootfs/usr/local/bin/
+        cp nvidia-xconfig /rootfs/usr/local/bin/
+
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/xserver-xorg-video-nvidia-510.install
+        cp nvidia_drv.so /rootfs/usr/local/lib/nvidia/xorg/nvidia_drv.so
+        
+        # missing ones
+        ln -s libnvidia-ngx.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-ngx.so.1
+        ln -s libnvidia-egl-gbm.so.1.1.0 /rootfs/usr/local/lib/libnvidia-egl-gbm.so.1
+
+        # run ldconfig to update the cache
+        /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs
+finalize:
+  - from: /rootfs
+    to: /rootfs

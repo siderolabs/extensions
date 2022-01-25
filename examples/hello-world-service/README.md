@@ -10,7 +10,7 @@ Enable the extension in the machine configuration before installing Talos:
 machine:
   install:
     extensions:
-      - image: ghcr.io/talos-systems/hello-world-service:<VERSION>
+      - image: ghcr.io/siderolabs/hello-world-service:<VERSION>
 ```
 
 Once this example extension is installed, it will provide simple HTTP server which responds with a message on port 80:

@@ -1,0 +1,17 @@
+name: nvidia-container-toolkit
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - stage: nvidia-container-cli
+  - stage: nvidia-container-runtime
+  - stage: nvidia-device-create
+steps:
+  - install:
+      - |
+        mkdir -p /rootfs
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

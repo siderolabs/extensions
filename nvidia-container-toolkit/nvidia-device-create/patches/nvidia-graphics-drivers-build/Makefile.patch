@@ -1,0 +1,13 @@
+diff --git Makefile Makefile
+index cc7610bd..0c325c75 100644
+--- Makefile
++++ Makefile
+@@ -3,7 +3,7 @@
+ PROGRAM = ub-device-create
+ PROGRAM_FILES = ub-device-create.c
+ CC = gcc
+-CFLAGS =-g -Wall $(shell pkg-config --cflags --libs pciaccess libkmod)
++CFLAGS =-g -static -Wall -l:libpciaccess.a
+ 
+ all: build
+ 

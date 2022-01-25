@@ -1,0 +1,13 @@
+diff --git cmd/nvidia-container-toolkit/hook_config.go cmd/nvidia-container-toolkit/hook_config.go
+index b4cb013..fdf1664 100644
+--- cmd/nvidia-container-toolkit/hook_config.go
++++ cmd/nvidia-container-toolkit/hook_config.go
+@@ -10,7 +10,7 @@ import (
+ )
+ 
+ const (
+-	configPath = "/etc/nvidia-container-runtime/config.toml"
++	configPath = "/usr/local/etc/nvidia-container-runtime/config.toml"
+ 	driverPath = "/run/nvidia/driver"
+ )
+ 

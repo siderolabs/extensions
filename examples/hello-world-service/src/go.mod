@@ -1,3 +1,3 @@
-module github.com/talos-systems/hello-world
+module github.com/siderolabs/hello-world
 
 go 1.17

@@ -12,7 +12,7 @@ The image is composed of a `manifest.yaml` file that provides information and co
 
 ## Building Extensions
 
-In the current form, building extensions requires the use of our [bldr](https://github.com/talos-systems/bldr) tool.
+In the current form, building extensions requires the use of our [bldr](https://github.com/siderolabs/bldr) tool.
 It is highly recommended to take a look at an existing extensions as a template for building your own.
 The rough flow should look like the following:
 
@@ -44,7 +44,7 @@ metadata:
 ### Creating `pkg.yaml`
 
 Creating a `pkg.yaml` file is the normal process from bldr.
-See instructions [here](https://github.com/talos-systems/bldr#pkgyaml) for details and examples on this format.
+See instructions [here](https://github.com/siderolabs/bldr#pkgyaml) for details and examples on this format.
 Using other existing extensions in this repo for tips is also highly recommended.
 One important note is that the final directory tree of the generated package should look like this example from the `gvisor` package:
 

@@ -1,0 +1,63 @@
+name: glibc
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - image: ubuntu:22.04
+steps:
+  - sources:
+      - url: https://ftpmirror.gnu.org/libc/glibc-2.35.tar.gz
+        destination: glibc.tar.gz
+        sha256: 3e8e0c6195da8dfbd31d77c56fb8d99576fb855fafd47a9e0a895e51fd5942d4
+        sha512: 45bf782aeda508e17fd51b45cf5ad96bd1067cf96b758b5c2d5def681af713df15e75c253d9c85de047f0a1dd22cf4f2239d70ae392cdb9291092e6570734d43
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    prepare:
+      - |
+        apt update && \
+        apt install -y \
+          bison \
+          build-essential \
+          gawk \
+          gettext \
+          openssl \
+          python3 \
+          texinfo
+      - |
+        mkdir -p glibc glibc-build
+
+        tar -xzf glibc.tar.gz --strip-components=1 -C glibc
+    build:
+      - |
+        # unset the variables bldr sets by default
+        unset CXXFLAGS
+        unset LDFLAGS
+        unset CFLAGS
+        unset TARGET
+        unset HOST
+
+        cd glibc-build
+
+        ../glibc/configure \
+          --prefix=/usr/local/glibc \
+          --libdir=/usr/local/glibc/lib \
+          --libexecdir=/usr/local/glibc/lib \
+          --enable-stack-protector=strong
+        
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs
+
+        cd glibc-build
+        make install DESTDIR=/rootfs
+
+        cp /pkg/ld.so.conf /rootfs/usr/local/glibc/etc/ld.so.conf
+
+        # cleanup include, var and share
+        rm -rf /rootfs/usr/local/glibc/include
+        rm -rf /rootfs/usr/local/glibc/share
+        rm -rf /rootfs/usr/local/glibc/var
+finalize:
+  - from: /rootfs
+    to: /rootfs
+ 
