@@ -1,0 +1,58 @@
+name: nvidia-container-runtime
+variant: alpine
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/v1.7.0/container-toolkit-v1.7.0.tar.gz
+        destination: container-toolkit.tar.gz
+        sha256: 87a1399946b7d4f9c611583f8c603a95562a8abfe840c5bc45771d008c8da0fa
+        sha512: 068ac636f131925e995a8b2198d10a83e410c0d84f1b03edf223ebb0d54547b01e958ac4fea9e67a89fce1edfff7e4d8a9dd2f140bfe6d0f3a6e93bf91081b5d
+      - url: https://github.com/NVIDIA/libnvidia-container/archive/refs/tags/v1.7.0.tar.gz
+        destination:  libnvidia-container.tar.gz
+        sha256: 8229a5931c3a51dddbe4f30ff6d0b298bc80fd2b6da7d1507669f68bb1f75bf5
+        sha512: cb2bedc7f3278c56f9da003257ea1c16116ac52cc4a792e4bdfc7e1739a5504436b61db65abb159f4bd4702d961ebd4c455605ce5e9daac00a2ab282a1b1348f
+    env:
+      GOPATH: /go
+    prepare:
+      - |
+        apk add rpcgen bmake
+
+        mkdir -p /etc/ssl/certs/
+        ln -s /toolchain/etc/ssl/certs/ca-certificates /etc/ssl/certs/ca-certificates
+
+        mkdir -p ${GOPATH}/src/gitlab.com/nvidia/container-toolkit
+
+        tar -xzf container-toolkit.tar.gz --strip-components=1 -C ${GOPATH}/src/gitlab.com/nvidia/container-toolkit
+
+        mkdir  libnvidia-container
+        tar -xzf  libnvidia-container.tar.gz --strip-components=1 -C  libnvidia-container
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        cd libnvidia-container
+        mkdir /rootfs
+        WITH_NVCGO=no WITH_LIBELF=no WITH_TIRPC=no WITH_SECCOMP=no DESTDIR=/rootfs make install -j "$(nproc)" --prefix=/usr/local COMPILER=/toolchain/bin/gcc REVISION=xyz 
+
+        cd ${GOPATH}/src/gitlab.com/nvidia/container-toolkit/cmd/nvidia-container-runtime
+
+        go build .
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+
+        cd ${GOPATH}/src/gitlab.com/nvidia/container-toolkit/cmd/nvidia-container-runtime
+
+        cp ./nvidia-container-runtime /rootfs/usr/local/bin/nvidia-container-runtime
+        chmod +x /rootfs/usr/local/bin/nvidia-container-runtime
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/nvidia-container-runtime.part
+    to: /rootfs/etc/cri/conf.d/nvidia-container-runtime.part
+  - from: /pkg/nvidia-container-runtime.toml
+    to: /rootfs/etc/nvidia-container-runtime/config.toml
