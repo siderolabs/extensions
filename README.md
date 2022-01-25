@@ -64,3 +64,18 @@ One important note is that the final directory tree of the generated package sho
 ```
 
 Note that the `manifest.yaml` file lives at the root, while all installed files live under `/rootfs` with the full tree of where they should live on the eventual Talos Linux install.
+
+### `rootfs` Restrictions
+
+The following restrictions are applied to the contents of the `rootfs` of the system extension:
+
+- no symlinks, no hardlinks
+- no special files (FIFOs, devices, etc.)
+- no world-writeable files or directories
+- no empty directories
+
+Any paths in the `rootfs` should be contained within the following hierarchies:
+
+- `/etc/cri/conf.d/`
+- `/lib/firmware/`
+- `/usr/local/`
