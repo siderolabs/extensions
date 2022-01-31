@@ -7,4 +7,4 @@ metadata:
     This system extension provides Intel microcode binaries.
   compatibility:
     talos:
-      version: ">= v1.0.0"
+      version: "> v0.15.0-alpha.1"
