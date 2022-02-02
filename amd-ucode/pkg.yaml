@@ -1,0 +1,16 @@
+name: amd-ucode
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .LINUX_FIRMWARE_IMAGE }}"
+steps:
+  - install:
+      - |
+        mkdir -p /rootfs/lib/firmware
+        cp -R -p /lib/firmware/amd-ucode /rootfs/lib/firmware
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

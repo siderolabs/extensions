@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: amd-ucode
+  version: 20211216-v1.0.0
+  author: Spencer Smith
+  description: |
+    This system extension provides AMD microcode binaries.
+  compatibility:
+    talos:
+      version: "> v0.15.0-alpha.1"
