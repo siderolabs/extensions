@@ -78,4 +78,5 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 
 - `/etc/cri/conf.d/`
 - `/lib/firmware/`
+- `/usr/etc/udev/rules.d`
 - `/usr/local/`
