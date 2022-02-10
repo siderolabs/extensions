@@ -1,7 +1,7 @@
 version: v1alpha1
 metadata:
   name: intel-ucode
-  version: microcode-20210608-v1.0.0
+  version: microcode-20220207-v1.0.0
   author: Spencer Smith
   description: |
     This system extension provides Intel microcode binaries.
