@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: mdadm
+  version: 4.2
+  author: Serge Logvinov
+  description: |
+    This system extension provides mdadm binaries.
+  compatibility:
+    talos:
+      version: "> v0.15.0-alpha.1"

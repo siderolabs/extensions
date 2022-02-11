@@ -19,7 +19,7 @@ COMMON_ARGS += --build-arg=https_proxy=$(https_proxy)
 empty :=
 space = $(empty) $(empty)
 
-TARGETS = amd-ucode bnx2-bnx2x gvisor intel-ucode
+TARGETS = amd-ucode bnx2-bnx2x mdadm gvisor intel-ucode
 NONFREE_TARGETS =
 
 all: $(TARGETS) ## Builds all known pkgs.

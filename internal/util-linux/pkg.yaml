@@ -1,0 +1,38 @@
+name: util-linux
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/v2.37/util-linux-2.37.tar.xz
+        destination: util-linux.tar.xz
+        sha256: bd07b7e98839e0359842110525a3032fdb8eaf3a90bedde3dd1652d32d15cce5
+        sha512: 84cf1df46165f286caa1a1204b335dc1fc826a8e1d52a817c28eb80ef19734eccd6efdfb078e87ade9e4381a9102e59d4df83e9bb100e4c73aff2aa4bfb85615
+    prepare:
+      - |
+        tar -xJf util-linux.tar.xz --strip-components=1
+
+        mkdir build
+        cd build
+        ../configure \
+            --prefix=/usr \
+            --without-python \
+            --disable-makeinstall-chown \
+            --without-systemdsystemunitdir \
+            --disable-all-programs \
+            --enable-libmount \
+            --enable-libblkid \
+            --enable-libuuid
+    build:
+      - |
+        cd build
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        mkdir /rootfs
+        make install DESTDIR=/rootfs
+finalize:
+  - from: /rootfs
+    to: /
