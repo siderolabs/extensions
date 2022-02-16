@@ -1,0 +1,29 @@
+name: hello-world-service
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /go
+    prepare:
+      - |
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        cd /pkg/src
+        CGO_ENABLED=0 go build -o ./hello-world .
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        mkdir -p /rootfs/usr/local/lib/containers/hello-world
+
+        cp -p /pkg/src/hello-world /rootfs/usr/local/lib/containers/hello-world/
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/hello-world.yaml
+    to: /rootfs/usr/local/etc/containers
