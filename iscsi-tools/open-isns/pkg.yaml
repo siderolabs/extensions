@@ -1,0 +1,50 @@
+name: open-isns
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .PKGS_VERSION }}"
+steps:
+  - sources:
+      - url: https://github.com/open-iscsi/open-isns/archive/refs/tags/v0.101.tar.gz
+        destination: open-isns.tar.gz
+        sha256: f672ec86b6c9e984843a7a28d76f07e26393499c486f86034b8b18caa8deb556
+        sha512: e5a392127b0d85f36e9e4aa963c0c502af8c5aea0aba6d12abb4425649969dcc20ba6e87a99083626d981438439b17b71a86320f816042d82ed5dbe7e7a63e77
+    prepare:
+      - |
+        tar -xzf open-isns.tar.gz --strip-components=1
+
+      - |
+        cp /toolchain/share/automake-1.16/config.guess aclocal/
+        autoreconf -fi
+
+      - |
+        mkdir build
+        cd build
+
+        ../configure \
+          --prefix=/usr/local \
+          --sysconfdir=/usr/local/etc \
+          --mandir=/usr/local/share/man \
+          --infodir=/usr/local/share/info \
+          --enable-shared \
+          CFLAGS="$CFLAGS -Wno-error"
+    build:
+      - |
+        cd build
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        # open-isns libraries only needed
+        # make prefix=/usr/local etcdir=/usr/local/etc DESTDIR=/rootfs install
+        make prefix=/usr/local DESTDIR=/rootfs install_hdrs
+        make prefix=/usr/local DESTDIR=/rootfs install_lib
+
+        # cleanup
+        rm -rf /rootfs/usr/local/lib/systemd
+        rm -rf /rootfs/usr/local/lib/*.a
+        rm -rf /rootfs/usr/local/lib/pkgconfig
+finalize:
+  - from: /rootfs
+    to: /rootfs

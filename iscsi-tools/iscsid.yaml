@@ -1,0 +1,67 @@
+name: iscsid
+depends:
+  - service: cri
+  - service: ext-tgtd
+  - network:
+       - addresses
+       - connectivity
+       - hostname
+       - etcfiles
+container:
+  entrypoint: /usr/local/sbin/iscsid-wrapper
+  mounts:
+    # ld-musl-x86_64.so.1
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # libcrypto.so and libc.so
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # iscsi libs
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/sbin
+      destination: /usr/local/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    # persistent storage for iscsi
+    - source: /system/iscsi
+      destination: /etc/iscsi
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /usr/local/etc/iscsi/iscsid.conf
+      destination: /etc/iscsi/iscsid.conf
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/etc/passwd
+      destination: /etc/passwd
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /run/lock/iscsi
+      destination: /run/lock/iscsi
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always

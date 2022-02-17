@@ -1,0 +1,48 @@
+name: tgtd
+depends:
+  - service: cri
+  - network:
+       - addresses
+       - connectivity
+       - hostname
+       - etcfiles
+container:
+  entrypoint: /usr/local/sbin/tgtd
+  args:
+    - -f
+  mounts:
+    # ld-musl-x86_64.so.1
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+     # libcrypto.so and libc.so
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /var/run/tgtd
+      destination: /var/run/tgtd
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /proc
+      destination: /proc
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /usr/local/sbin
+      destination: /usr/local/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+restart: always

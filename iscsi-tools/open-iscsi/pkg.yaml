@@ -1,0 +1,61 @@
+name: open-iscsi
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/kmod:{{ .PKGS_VERSION }}"
+  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .PKGS_VERSION }}"
+  - image: "{{ .PKGS_PREFIX }}/util-linux:{{ .PKGS_VERSION }}"
+  - stage: open-isns
+    from: /rootfs
+steps:
+  - sources:
+      - url: https://github.com/open-iscsi/open-iscsi/archive/refs/tags/2.1.6.tar.gz
+        destination: open-iscsi.tar.gz
+        sha256: b67350d106696779c6bee421c60a64ade2a9dabe247dc4bd44f59c751e22d7f7
+        sha512: 4a32a76c1c32d7d1a01fe3a0f88ce9616a54323ec043757be73051eb41ebae8de90ce057acce72fb6fe07aa47e814c9bc6ee88b13fa7d7769ca10c5175974f1d
+    prepare:
+      - |
+        tar -xzf open-iscsi.tar.gz --strip-components=1
+
+        # Create symlinks for binaries required by libtoolize.
+        ln -s /toolchain/bin/sed /bin/sed
+        ln -s /toolchain/bin/sed /usr/bin/sed
+        ln -s /toolchain/bin/grep /bin/grep
+
+        # Create symlinks for files used when building.
+        mkdir -p /usr/bin
+        ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
+        ln -s /toolchain/bin/file /usr/bin/file
+
+        patch -p1 < /pkg/patches/musl-fixes.patch
+        patch -p1 < /pkg/patches/add-missing-headers.patch
+        patch -p1 < /pkg/patches/dont-use-lib64.patch
+        patch -p1 < /pkg/patches/remove-werror.patch
+    build:
+      - |
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+
+        LDFLAGS="$LDFLAGS -L/usr/local/lib" \
+        make -j $(nproc) \
+          prefix=/usr/local \
+          exec_prefix=/usr/local \
+          localstatedir=/var \
+          sysconfdir=/usr/local/etc \
+          mandir=/usr/local/share/man \
+          OPTFLAGS="$CFLAGS -I/usr/local/include -DNO_SYSTEMD"
+    install:
+      - |
+        mkdir -p /usr/local/etc
+        make prefix=/usr/local exec_prefix=/usr/local/ etcdir=/usr/local/etc DESTDIR=/rootfs install
+
+        # cleanup
+        rm -rf /rootfs/usr/local/share
+        rm -rf /rootfs/usr/local/include
+        rm -rf /rootfs/usr/local/lib/pkgconfig
+        rm -rf /rootfs/usr/local/etc/iscsi/ifaces
+
+        cp /pkg/files/passwd /rootfs/usr/local/etc/passwd
+finalize:
+  - from: /rootfs
+    to: /rootfs

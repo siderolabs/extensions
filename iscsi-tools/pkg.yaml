@@ -1,0 +1,37 @@
+name: iscsi-tools
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  # `base` dependency is used for doing cleanups
+  # not copied to rootfs
+  - stage: base
+  - stage: open-isns
+  - stage: open-iscsi
+  - stage: tgt
+steps:
+  - build:
+    - |
+      cp /pkg/main.go main.go
+
+      export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+      CGO_ENABLED=0 go build -o iscsid-wrapper main.go
+    install:
+    - |
+      mkdir -p /rootfs/usr/local/lib/containers/{iscsid,tgtd}
+      
+      cp iscsid-wrapper /rootfs/usr/local/sbin/iscsid-wrapper
+
+      sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+
+      # cleanup
+      rm -rf /rootfs/usr/local/include
+finalize:
+  - from: /pkg/iscsid.yaml
+    to: /rootfs/usr/local/etc/containers/iscsid.yaml
+  - from: /pkg/tgtd.yaml
+    to: /rootfs/usr/local/etc/containers/tgtd.yaml
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

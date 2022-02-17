@@ -1,0 +1,27 @@
+name: tgt
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/fujita/tgt/archive/refs/tags/v1.0.82.tar.gz
+        destination: tgtadm.tar.gz
+        sha256: 35156277465e0ced5f3ca7e301110a937a7a2b90bbb5aecbca1349b91ada1c2c
+        sha512: e81a56fae8010ee2af8643b6accc1e51f6667e27b07c986e6a5412dcb483b46ccc0e4fe1aeb399c352282284fe516f3fc1cab5d8cbb431cc9f97f00d5faa0430
+    env:
+      PREFIX: /usr/local
+    prepare:
+      - |
+        tar -xzf tgtadm.tar.gz --strip-components=1
+      - |
+        patch -p1 < /pkg/musl.patch
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        make install-programs DESTDIR=/rootfs
+finalize:
+  - from: /rootfs
+    to: /rootfs
