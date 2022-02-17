@@ -1,0 +1,6 @@
+name: iscsid
+container:
+  entrypoint: /sbin/iscsid
+  args:
+    - -f
+restart: always
