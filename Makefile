@@ -22,7 +22,7 @@ empty :=
 space = $(empty) $(empty)
 
 TARGETS = amd-ucode bnx2-bnx2x gvisor hello-world-service intel-ucode
-DOCKER_TARGETS = iscsid
+DOCKER_TARGETS = frr iscsid
 NONFREE_TARGETS =
 
 all: $(TARGETS) ## Builds all known pkgs.
