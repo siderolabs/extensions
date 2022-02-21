@@ -3,7 +3,7 @@
 format: v1alpha2
 
 vars:
-  TOOLS_IMAGE: ghcr.io/talos-systems/tools:v0.10.0-alpha.0-3-g4c9e7a4
+  TOOLS_IMAGE: ghcr.io/talos-systems/tools:v0.10.0-alpha.0-5-g8197edb
   LINUX_FIRMWARE_IMAGE: ghcr.io/talos-systems/linux-firmware:v0.9.0-2-g447ce75
 
 labels:
