@@ -69,13 +69,13 @@ Note that the `manifest.yaml` file lives at the root, while all installed files 
 
 The following restrictions are applied to the contents of the `rootfs` of the system extension:
 
-- no symlinks, no hardlinks
+- no hardlinks
 - no special files (FIFOs, devices, etc.)
 - no world-writeable files or directories
-- no empty directories
 
 Any paths in the `rootfs` should be contained within the following hierarchies:
 
 - `/etc/cri/conf.d/`
 - `/lib/firmware/`
+- `/usr/etc/udev/rules.d`
 - `/usr/local/`
