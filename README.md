@@ -69,7 +69,6 @@ Note that the `manifest.yaml` file lives at the root, while all installed files 
 
 The following restrictions are applied to the contents of the `rootfs` of the system extension:
 
-- no hardlinks
 - no special files (FIFOs, devices, etc.)
 - no world-writeable files or directories
 
