@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: frr
+  version: v2.1.4
+  author: Andrew Rynhard 
+  description: |
+    This system extension provides `frr`.
+  compatibility:
+    talos:
+      version: "> v0.15.0-alpha.2"

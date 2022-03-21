@@ -1,0 +1,6 @@
+name: frr
+container:
+  entrypoint: /bin/frr
+  args:
+    - -f
+restart: always

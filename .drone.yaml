@@ -32,6 +32,7 @@ steps:
       DOCKER_CLI_EXPERIMENTAL: enabled
     commands:
       - make
+      - make docker_all
     when:
       event:
         include:
@@ -74,6 +75,7 @@ steps:
     commands:
       - docker login ghcr.io --username "$${GHCR_USERNAME}" --password "$${GHCR_PASSWORD}"
       - make PUSH=true
+      - make docker_all PUSH=true
     when:
       event:
         exclude:
