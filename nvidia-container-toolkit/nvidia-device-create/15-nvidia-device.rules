@@ -4,5 +4,5 @@ ACTION=="add", DEVPATH=="/bus/pci/drivers/nvidia", RUN+="/usr/local/bin/ub-devic
 # Create the device node for the nvidia-uvm module
 ACTION=="add", DEVPATH=="/module/nvidia_uvm", SUBSYSTEM=="module", RUN+="/usr/local/bin/ub-device-create"
 
-# https://download.nvidia.com/XFree86/Linux-x86_64/510.54/README/nvidia-persistenced.html
+# https://download.nvidia.com/XFree86/Linux-x86_64/510.60.02/README/nvidia-persistenced.html
 ACTION=="add", DEVPATH=="/bus/pci/drivers/nvidia", RUN+="/usr/local/bin/nvidia-persistenced --no-persistence-mode --verbose"

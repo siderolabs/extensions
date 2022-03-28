@@ -6,7 +6,7 @@ vars:
   TOOLS_IMAGE: ghcr.io/siderolabs/tools:v1.1.0-alpha.0-2-gbfc99ca
   LINUX_FIRMWARE_IMAGE: ghcr.io/siderolabs/linux-firmware:v1.0.0-5-g615d1a0
   NVIDIA_DRIVER_VERSION_MAJOR: 510
-  NVIDIA_DRIVER_VERSION_MINOR: 54
+  NVIDIA_DRIVER_VERSION_MINOR: 60.02
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions

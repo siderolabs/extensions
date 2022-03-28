@@ -11,13 +11,13 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://download.nvidia.com/XFree86/Linux-aarch64/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}/NVIDIA-Linux-aarch64-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}.run
         destination: nvidia.run
-        sha256: bff7a5640445b3e38b35d9d589b52c7353bb473703b7a5d050aa96aaa35ca896
-        sha512: 9d872748dc0957c0754561582a1984a8f912c345a5e616116edfd86d629efb5674c29723c80ae47d458b23aaec6fc5a71724441dd7e11ba4f5b94f8b04591f81
+        sha256: 931521e4fc8175411f2a232e2d3704f8369c21e530283b4fdc4cacb323acc568
+        sha512: fca54ba6abff197dbce55761a4755e98aebd16a851b54ba072c2a10296eadc7924adc102be6599d16052d94d9a0a4e260a0d63a098e039afe46210c65dfb3b32
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://download.nvidia.com/XFree86/Linux-x86_64/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}/NVIDIA-Linux-x86_64-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}.run
         destination: nvidia.run
-        sha256: 4c20deccae3fe347adfd0e6989a306f9024fdadf831adc1e8e60855675335161
-        sha512: 1e65e96c1ae1cccd5cd483f2b65927e3594d28f3774459dfd094530f445f4b0f5368a3b7eebf4970bd2632438cca2cbb93af50a59a3a87a2c13d08ed5155164c
+        sha256: a800dfc0549078fd8c6e8e6780efb8eee87872e6055c7f5f386a4768ce07e003
+        sha512: ccc459bdf5f89a37f79a1831bac8c03980deaa13082b516d5e9c74a49e1aea7f1f6b03304705a95564a390bf0ca38df10b8c8b73e3470a31444dd5ebfd981cfd
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     env:
       DEBIAN_FRONTEND: noninteractive

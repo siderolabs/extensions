@@ -62,22 +62,33 @@ Apply the following manifest to run CUDA pod via nvidia runtime:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: cuda-vector-add
+  name: gpu-operator-test
 spec:
   restartPolicy: OnFailure
   runtimeClassName: nvidia
   containers:
-    - name: cuda-vector-add
-      image: "quay.io/giantswarm/nvidia-gpu-demo:latest"
-      resources:
-        limits:
-          nvidia.com/gpu: 1
+  - name: cuda-vector-add
+    image: "nvidia/samples:vectoradd-cuda11.6.0"
+    resources:
+      limits:
+         nvidia.com/gpu: 1
 ```
 
-The pod should be up and running:
+
+The status can be viewed by running:
 
 ```bash
 ❯ kubectl get pods
 NAME                READY   STATUS      RESTARTS   AGE
-cuda-vector-add     0/1     Completed   0          17m
+gpu-operator-test   0/1     Completed   0          13s
+```
+
+```bash
+❯ kubectl logs gpu-operator-test
+[Vector addition of 50000 elements]
+Copy input data from the host memory to the CUDA device
+CUDA kernel launch with 196 blocks of 256 threads
+Copy output data from the CUDA device to the host memory
+Test PASSED
+Done
 ```

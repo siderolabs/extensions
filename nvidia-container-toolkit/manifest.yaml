@@ -2,7 +2,7 @@ version: v1alpha1
 metadata:
   name: nvidia-container-toolkit
   # the first part is the driver version and the second the container-toolkit version
-  version: 510.54-v1.9.0
+  version: 510.60.02-v1.9.0
   author: Andrew Rynhard
   description: |
     This system extension provides nvidia runtime and it's dependencies using NVIDIA's runtime handler.
