@@ -1,10 +1,10 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.2.0-alpha.7-1-g9d49478-frontend
+# syntax = ghcr.io/siderolabs/bldr:v0.2.0-alpha.7-4-g81055c0-frontend
 
 format: v1alpha2
 
 vars:
-  TOOLS_IMAGE: ghcr.io/siderolabs/tools:v1.1.0-alpha.0-2-gbfc99ca
-  LINUX_FIRMWARE_IMAGE: ghcr.io/siderolabs/linux-firmware:v1.0.0-5-g615d1a0
+  PKGS_PREFIX: ghcr.io/siderolabs
+  PKGS_VERSION: v1.1.0-alpha.0-17-g4dace49
   NVIDIA_DRIVER_VERSION_MAJOR: 510
   NVIDIA_DRIVER_VERSION_MINOR: 60.02
 

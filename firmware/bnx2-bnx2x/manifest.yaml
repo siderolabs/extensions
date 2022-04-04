@@ -7,4 +7,4 @@ metadata:
     This system extension provides bnx2 and bnx2x binaries.
   compatibility:
     talos:
-      version: "> v0.15.0-alpha.1"
+      version: ">= v1.0.0"

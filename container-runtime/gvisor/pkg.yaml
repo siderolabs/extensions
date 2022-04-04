@@ -14,9 +14,6 @@ steps:
       GOPATH: /go
     prepare:
       - |
-        mkdir -p /etc/ssl/certs/
-        ln -s /toolchain/etc/ssl/certs/ca-certificates /etc/ssl/certs/ca-certificates
-
         mkdir -p ${GOPATH}/src/github.com/google/gvisor
 
         tar -xzf gvisor.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/google/gvisor

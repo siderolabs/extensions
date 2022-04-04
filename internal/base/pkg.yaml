@@ -2,20 +2,8 @@ name: base
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
-  - image: "{{ .TOOLS_IMAGE }}"
-  - stage: musl
-    runtime: yes
-steps:
-  - prepare:
-      - |
-        cp -R /toolchain/lib/gcc /lib
-        cp -R /toolchain/lib/libgcc* /lib
-        cp -R /toolchain/lib/libz* /lib
-        mkdir /bin
-        ln -sv /toolchain/bin/bash /bin/bash
-        ln -sv /toolchain/bin/bash /bin/sh
-        ln -sv /toolchain/bin/pwd /bin/pwd
-        adjust.sh
+  - image: "{{ .PKGS_PREFIX }}/base:{{ .PKGS_VERSION }}"
+  - image: "{{ .PKGS_PREFIX }}/ca-certificates:{{ .PKGS_VERSION }}"
 finalize:
   - from: /
     to: /

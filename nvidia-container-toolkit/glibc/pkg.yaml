@@ -13,6 +13,7 @@ steps:
       DEBIAN_FRONTEND: noninteractive
     prepare:
       - |
+        chmod 1777 /tmp
         apt update && \
         apt install -y \
           bison \
@@ -42,7 +43,7 @@ steps:
           --libdir=/usr/local/glibc/lib \
           --libexecdir=/usr/local/glibc/lib \
           --enable-stack-protector=strong
-        
+
         make -j $(nproc)
     install:
       - |
@@ -60,4 +61,3 @@ steps:
 finalize:
   - from: /rootfs
     to: /rootfs
- 

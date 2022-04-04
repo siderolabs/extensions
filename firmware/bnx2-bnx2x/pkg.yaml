@@ -3,7 +3,7 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
-  - image: "{{ .LINUX_FIRMWARE_IMAGE }}"
+  - image: "{{ .PKGS_PREFIX }}/linux-firmware:{{ .PKGS_VERSION }}"
 steps:
   - install:
       - |

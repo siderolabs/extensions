@@ -23,6 +23,8 @@ steps:
       WITH_LIBELF: no
     prepare:
       - |
+        chmod 1777 /tmp
+
         apt-get update
         apt-get install -y \
         apt-utils \

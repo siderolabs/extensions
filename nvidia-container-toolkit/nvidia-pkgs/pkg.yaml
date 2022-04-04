@@ -23,6 +23,7 @@ steps:
       DEBIAN_FRONTEND: noninteractive
     prepare:
       - |
+        chmod 1777 /tmp
         apt update && \
         apt install -y \
           patchelf
@@ -36,7 +37,7 @@ steps:
           /rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} \
           /rootfs/usr/local/lib/containers/nvidia-persistenced \
           /rootfs/usr/local/etc/containers
-        
+
         cd NVIDIA-Linux*
 
         # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-cfg1-510.install
@@ -90,7 +91,7 @@ steps:
 
         # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-extra-510.install
         cp libnvidia-allocator.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-allocator.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}
-        
+
         # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/libnvidia-extra-510.links
         ln -s libnvidia-allocator.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-allocator.so.1
         ln -s libnvidia-allocator.so.1 /rootfs/usr/local/lib/libnvidia-allocator.so
@@ -155,7 +156,7 @@ steps:
 
         # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/xserver-xorg-video-nvidia-510.install
         cp nvidia_drv.so /rootfs/usr/local/lib/nvidia/xorg/nvidia_drv.so
-        
+
         # missing ones
         ln -s libnvidia-ngx.so.{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} /rootfs/usr/local/lib/libnvidia-ngx.so.1
         ln -s libnvidia-egl-gbm.so.1.1.0 /rootfs/usr/local/lib/libnvidia-egl-gbm.so.1
