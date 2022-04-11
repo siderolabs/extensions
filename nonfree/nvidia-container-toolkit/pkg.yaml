@@ -7,7 +7,10 @@ dependencies:
   - stage: nvidia-container-runtime
   - stage: nvidia-device-create
 steps:
-  - install:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
       - |
         mkdir -p /rootfs
 finalize:

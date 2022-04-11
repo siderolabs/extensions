@@ -5,14 +5,16 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      # sync with commit in build
-      - url: https://github.com/google/gvisor/archive/c1512ec8067c772473a4d6bad12953848eab8552.tar.gz
+      # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
+      - url: https://github.com/google/gvisor/archive/795f4f0139bb1f590528b3638ecc1bd3c6bba35e.tar.gz
         destination: gvisor.tar.gz
-        sha256: df41a38cc4d6068e6475f2f0a29c083bf11fd682869957b1b325980d3892725b
-        sha512: f4fd4bd5fbf482fceb7c46311c5dfd808cbf40e921c5f92ce4011f9b58e477af0dc3d5da8e1175c7ff22ad42d8351d6e8b9d8cc4d8339ded7cd782d617331002
+        sha256: 646b8e8a8edc32ef491a2e4e5630fcfc07fda0dec1eb3602ec7083d687c825a4
+        sha512: dc5bcdc43d02f51598f09f76e7b0a94412f44e5d8b589a3bc2b083c151879a02a23a6f7af673485e2d0433c74f8827cf6f864174e6d2066918c3d7231c7117a5
     env:
       GOPATH: /go
     prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
         mkdir -p ${GOPATH}/src/github.com/google/gvisor
 

@@ -8,6 +8,7 @@ steps:
       GOPATH: /go
     prepare:
       - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     build:
       - |
         export PATH=${PATH}:${TOOLCHAIN}/go/bin

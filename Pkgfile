@@ -1,12 +1,11 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.2.0-alpha.7-4-g81055c0-frontend
+# syntax = ghcr.io/siderolabs/bldr:v0.2.0-alpha.8-frontend
 
 format: v1alpha2
 
 vars:
   PKGS_PREFIX: ghcr.io/siderolabs
-  PKGS_VERSION: v1.1.0-alpha.0-17-g4dace49
-  NVIDIA_DRIVER_VERSION_MAJOR: 510
-  NVIDIA_DRIVER_VERSION_MINOR: 60.02
+  PKGS_VERSION: v1.1.0-alpha.0-21-gff13660
+  LINUX_FIRMWARE_VERSION: "20220310" # update this when updating PKGS_VERSION above
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions

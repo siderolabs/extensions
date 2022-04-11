@@ -1,8 +1,8 @@
 version: v1alpha1
 metadata:
   name: hello-world-service
-  version: v1.0.0
-  author: Andrey Smirnov
+  version: "$VERSION"
+  author: Sidero Labs
   description: |
     This system extension provides an example Talos extension service.
   compatibility:

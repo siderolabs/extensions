@@ -4,6 +4,16 @@ SHA ?= $(shell git describe --match=none --always --abbrev=8 --dirty)
 TAG ?= $(shell git describe --tag --always --dirty)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 REGISTRY_AND_USERNAME := $(REGISTRY)/$(USERNAME)
+ARTIFACTS ?= _out/
+OPERATING_SYSTEM := $(shell uname -s | tr "[:upper:]" "[:lower:]")
+GOARCH :=$(shell uname -m | tr '[:upper:]' '[:lower:]')
+
+ifeq ($(GOARCH),x86_64)
+GOARCH := amd64
+endif
+
+# keep in sync with Pkgfile
+BLDR_RELEASE ?= v0.2.0-alpha.8
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -14,6 +24,7 @@ COMMON_ARGS += --progress=$(PROGRESS)
 COMMON_ARGS += --platform=$(PLATFORM)
 COMMON_ARGS += --build-arg=http_proxy=$(http_proxy)
 COMMON_ARGS += --build-arg=https_proxy=$(https_proxy)
+COMMON_ARGS += --build-arg=TAG=$(TAG)
 
 , := ,
 empty :=
@@ -24,6 +35,7 @@ NONFREE_TARGETS = nvidia-container-toolkit
 
 all: $(TARGETS) ## Builds all known pkgs.
 
+.PHONY: nonfree
 nonfree: $(NONFREE_TARGETS) ## Builds all known non-free pkgs.
 
 .PHONY: help
@@ -44,13 +56,19 @@ docker-%: ## Builds the specified target defined in the Dockerfile using the doc
 	@$(MAKE) target-$* TARGET_ARGS="$(TARGET_ARGS)"
 
 .PHONY: $(TARGETS) $(NONFREE_TARGETS)
-$(TARGETS) $(NONFREE_TARGETS):
-	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:$(TAG) --push=$(PUSH)"
+$(TARGETS) $(NONFREE_TARGETS): $(ARTIFACTS)/bldr
+	@$(MAKE) docker-$@ \
+		TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:$(shell $(ARTIFACTS)/bldr eval --target $@ --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) --push=$(PUSH)"
 
 .PHONY: deps.png
-deps.png:
-	bldr graph | dot -Tpng > deps.png
+deps.png: $(ARTIFACTS)/bldr
+	$(ARTIFACTS)/bldr graph | dot -Tpng > deps.png
 
 .PHONY: conformance
 conformance: ## Performs policy checks against the commit and source code.
 	docker run --rm -it -v $(PWD):/src -w /src ghcr.io/siderolabs/conform:latest enforce
+
+$(ARTIFACTS)/bldr:
+	@mkdir -p $(ARTIFACTS)
+	@curl -L https://github.com/siderolabs/bldr/releases/download/$(BLDR_RELEASE)/bldr-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/bldr
+	@chmod +x $(ARTIFACTS)/bldr

@@ -5,7 +5,10 @@ dependencies:
   - stage: base
   - image: "{{ .PKGS_PREFIX }}/linux-firmware:{{ .PKGS_VERSION }}"
 steps:
-  - install:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
       - |
         mkdir -p /rootfs/lib/firmware
         cp -R -p /lib/firmware/amd-ucode /rootfs/lib/firmware

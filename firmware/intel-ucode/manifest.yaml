@@ -1,8 +1,8 @@
 version: v1alpha1
 metadata:
   name: intel-ucode
-  version: microcode-20220207-v1.0.0
-  author: Spencer Smith
+  version: "$VERSION"
+  author: Sidero Labs
   description: |
     This system extension provides Intel microcode binaries.
   compatibility:

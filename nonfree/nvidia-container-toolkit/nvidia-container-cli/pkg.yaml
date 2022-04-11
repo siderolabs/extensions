@@ -9,7 +9,7 @@ dependencies:
 shell: /bin/bash
 steps:
   - sources:
-      - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/v1.9.0/libnvidia-container-v1.9.0.tar.gz
+      - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}/libnvidia-container-{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
         sha256: b33b83e90d5e07271c28f1fb330c2d32958fa91b3a8f3238e43d691728829299
         sha512: c1a2a43733580eb2bc1d0798c164dd5f8f5b65bfb3d6e47a067fd5a6a93cc18fd0d718e314881f9d4e596c1376363340d4a35f89973e0e43cdb25b07922c8430

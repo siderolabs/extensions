@@ -78,3 +78,7 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 - `/lib/firmware/`
 - `/usr/etc/udev/rules.d`
 - `/usr/local/`
+
+## Dependency Diagram
+
+![Dependency Diagram](/deps.png)

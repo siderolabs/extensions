@@ -1,8 +1,8 @@
 version: v1alpha1
 metadata:
   name: bnx2-bnx2x
-  version: 20211216-v1.0.0
-  author: Spencer Smith
+  version: "$VERSION"
+  author: Sidero Labs
   description: |
     This system extension provides bnx2 and bnx2x binaries.
   compatibility:
