@@ -4,8 +4,8 @@ format: v1alpha2
 
 vars:
   PKGS_PREFIX: ghcr.io/siderolabs
-  PKGS_VERSION: v1.1.0-alpha.0-21-gff13660
-  LINUX_FIRMWARE_VERSION: "20220310" # update this when updating PKGS_VERSION above
+  PKGS_VERSION: v1.1.0-alpha.0-24-g5b498d8
+  LINUX_FIRMWARE_VERSION: "20220411" # update this when updating PKGS_VERSION above
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions
