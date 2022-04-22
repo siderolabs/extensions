@@ -6,9 +6,35 @@ Things like gVisor, GPU support, etc. are good candidates for extensions.
 
 ## Using Extensions
 
-Extensions in this repo are published as Docker images.
+Extensions in this repo are published as container images.
 These images can be specified in the Talos Linux machine configuration and, when present, will get extracted and laid down as part of the installation process.
 The image is composed of a `manifest.yaml` file that provides information and compatibility information, as well as a `rootfs` that contains things like compiled binaries that are bind mounted into the system.
+
+## Extension Catalog
+
+All system extensions provided by Sidero Labs can be found in the [ghcr.io registry](https://github.com/orgs/siderolabs/packages?tab=packages&q=repo%3Asiderolabs%2Fextensions).
+
+### Container Runtimes
+
+| Name                                       | Image                                                                                          | Description                                                | Version Format                                       |
+|--------------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------|
+| [gvisor](container-runtime/gvisor/)        | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor)    | [gVisor](https://gvisor.dev/) container runtime            | `upstream version`-`talos version`                   |
+
+### Firmware
+
+| Name                                       | Image                                                                                                 | Description                                                | Version Format                                       |
+|--------------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------|
+| [amd-ucode](firmware/amd-ucode/)           | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode)     | AMD CPU microcode updates                                  | `linux firmware version`                             |
+| [bnx2-bnx2x](firmware/bnx2-bnx2x/)         | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x)   | Broadcom NetXtreme firmware                                | `linux firmware version`                             |
+| [intel-ucode](firmware/intel-ucode/)       | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | Intel CPU microcode updates                                | `upstream version`                                   |
+
+### Non-free
+
+System extensions in this section are not distributed by Sidero Labs, they should be built manually following the build instructions.
+
+| Name                                                          | Description                                                    | Version Format                                       |
+|---------------------------------------------------------------|----------------------------------------------------------------|------------------------------------------------------|
+| [nvidia-container-toolkit](nonfree/nvidia-container-toolkit/) | [NVIDIA container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html): running GPU workloads in containers | `driver version`-`toolkit version`                   |
 
 ## Building Extensions
 
