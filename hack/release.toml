@@ -1,0 +1,26 @@
+# commit to be tagged for new release
+commit = "HEAD"
+
+project_name = "Talos System Extensions"
+github_repo = "siderolabs/extensions"
+match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
+
+# previous release
+# previous =
+
+pre_release = false
+
+preface = """\
+See [Talos Linux documentation](https://www.talos.dev/v1.0/talos-guides/configuration/system-extensions/) for information on using system extensions.
+"""
+
+[notes]
+
+    [notes.compatibility]
+        title = "Talos Linux Compatibility"
+        description = """\
+System extensions are compatible with Talos v1.0.x.
+"""
+
+
+[make_deps]
