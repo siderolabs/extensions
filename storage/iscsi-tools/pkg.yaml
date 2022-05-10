@@ -8,19 +8,11 @@ dependencies:
   - stage: open-isns
   - stage: open-iscsi
   - stage: tgt
+  - stage: iscsid-wrapper
 steps:
-  - build:
-    - |
-      cp /pkg/main.go main.go
-
-      export PATH=${PATH}:${TOOLCHAIN}/go/bin
-
-      CGO_ENABLED=0 go build -o iscsid-wrapper main.go
-    install:
+  - install:
     - |
       mkdir -p /rootfs/usr/local/lib/containers/{iscsid,tgtd}
-      
-      cp iscsid-wrapper /rootfs/usr/local/sbin/iscsid-wrapper
 
       sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
 

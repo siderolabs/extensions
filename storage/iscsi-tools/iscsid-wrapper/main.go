@@ -8,7 +8,8 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"syscall"
+
+	"golang.org/x/sys/unix"
 )
 
 func main() {
@@ -36,7 +37,7 @@ func main() {
 	}
 
 	log.Println("iscsid-wrapper: completed..., execing into iscsid")
-	if err := syscall.Exec("/usr/local/sbin/iscsid", []string{"iscsid", "-f"}, os.Environ()); err != nil {
+	if err := unix.Exec("/usr/local/sbin/iscsid", []string{"iscsid", "-f"}, os.Environ()); err != nil {
 		log.Fatalf("iscsid: error execing /usr/local/sbin/iscsid %v\n", err)
 	}
 }
