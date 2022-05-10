@@ -25,8 +25,7 @@ This is used to create the required NVIDIA device files under `/dev`. This requi
 ## Updating the nvidia driver version
 
 - Update the driver version in `pkgs` repo [here](https://github.com/siderolabs/pkgs/blob/master/nonfree/kmod-nvidia/pkg.yaml)
-- Update the driver version [here](../Pkgfile) and [here](./manifest.yaml)
-- Update the driver checksums [here](./nvidia-pkgs/pkg.yaml)
+- Update the driver version [here](../vars.yaml)
 
 ## Updating the nvidia-container-toolkit version
 

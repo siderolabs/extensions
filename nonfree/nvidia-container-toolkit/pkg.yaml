@@ -6,6 +6,7 @@ dependencies:
   - stage: nvidia-container-cli
   - stage: nvidia-container-runtime
   - stage: nvidia-device-create
+  - stage: nvidia-persistenced-wrapper
 steps:
   - prepare:
       - |
@@ -16,5 +17,7 @@ steps:
 finalize:
   - from: /rootfs
     to: /rootfs
+  - from: /pkg/nvidia-persistenced.yaml
+    to: /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
   - from: /pkg/manifest.yaml
     to: /

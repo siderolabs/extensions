@@ -7,7 +7,7 @@ index d73d0f1..c28e982 100644
                  return (-1);
  
 -        argv = (char * []){cnt->cfg.ldconfig, cnt->cfg.libs_dir, cnt->cfg.libs32_dir, NULL};
-+        argv = (char * []){cnt->cfg.ldconfig, cnt->cfg.libs_dir, cnt->cfg.libs32_dir, "-C", "/etc/ld.so.cache", NULL};
++        argv = (char * []){cnt->cfg.ldconfig, "-f", "/etc/ld.so.conf", "-C", "/etc/ld.so.cache", cnt->cfg.libs_dir, cnt->cfg.libs32_dir, NULL};
          if (*argv[0] == '@') {
                  /*
                   * We treat this path specially to be relative to the host filesystem.
