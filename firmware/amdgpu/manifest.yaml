@@ -4,7 +4,7 @@ metadata:
   version: "$VERSION"
   author: Sidero Labs
   description: |
-    This system extension provides AMD GPU firmware for entablement.
+    This system extension provides AMD GPU firmware for enablement.
   compatibility:
     talos:
       version: ">= v1.0.0"
