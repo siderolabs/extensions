@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: amdgpu
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides AMD GPU firmware for entablement.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
