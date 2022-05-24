@@ -14,7 +14,6 @@ steps:
     install:
     - |
       mkdir -p /rootfs/usr/local/bin
-      mkdir -p /rootfs/usr/lib/containers/nvidia-persistenced
 
       cp nvidia-persistenced-wrapper /rootfs/usr/local/bin/nvidia-persistenced-wrapper
 finalize:

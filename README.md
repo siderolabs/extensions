@@ -16,31 +16,32 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 
 ### Container Runtimes
 
-| Name                                       | Image                                                                                          | Description                                                | Version Format                                       |
-|--------------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------|
-| [gvisor](container-runtime/gvisor/)        | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor)    | [gVisor](https://gvisor.dev/) container runtime            | `upstream version`-`talos version`                   |
+| Name                                | Image                                                                                       | Description                                     | Version Format                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------- |
+| [gvisor](container-runtime/gvisor/) | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | [gVisor](https://gvisor.dev/) container runtime | `upstream version`-`talos version` |
 
 ### Firmware
 
-| Name                                       | Image                                                                                                 | Description                                                | Version Format                                       |
-|--------------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------|
-| [amd-ucode](firmware/amd-ucode/)           | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode)     | AMD CPU microcode updates                                  | `linux firmware version`                             |
-| [bnx2-bnx2x](firmware/bnx2-bnx2x/)         | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x)   | Broadcom NetXtreme firmware                                | `linux firmware version`                             |
-| [intel-ucode](firmware/intel-ucode/)       | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | Intel CPU microcode updates                                | `upstream version`                                   |
+| Name                                 | Image                                                                                                 | Description                 | Version Format           |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------ |
+| [amd-ucode](firmware/amd-ucode/)     | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode)     | AMD CPU microcode updates   | `linux firmware version` |
+| [bnx2-bnx2x](firmware/bnx2-bnx2x/)   | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x)   | Broadcom NetXtreme firmware | `linux firmware version` |
+| [intel-ucode](firmware/intel-ucode/) | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | Intel CPU microcode updates | `upstream version`       |
 
 ### Storage
 
 | Name                                | Image                                                                                                 | Description      | Version Format |
-|-------------------------------------|-------------------------------------------------------------------------------------------------------|------------------|----------------|
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
 | [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools | `v0.1.0`       |
 
 ### Non-free
 
 System extensions in this section are not distributed by Sidero Labs, they should be built manually following the build instructions.
 
-| Name                                                          | Description                                                    | Version Format                                       |
-|---------------------------------------------------------------|----------------------------------------------------------------|------------------------------------------------------|
-| [nvidia-container-toolkit](nonfree/nvidia-container-toolkit/) | [NVIDIA container toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html): running GPU workloads in containers | `driver version`-`toolkit version`                   |
+| Name                                                          | Description                                                                                                                        | Version Format                     |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| [nvidia-container-toolkit](nonfree/nvidia-container-toolkit/) | Tools to run [NVIDIA GPU workloads](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html) in containers | `driver version`-`toolkit version` |
+| [nvidia-fabricmanager](nonfree/nvidia-fabricmanager/)         | [NVIDIA fabric manager](https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf) support for GPU workloads      | `driver version`                   |
 
 ## Building Extensions
 

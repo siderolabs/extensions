@@ -1,4 +1,4 @@
-# https://download.nvidia.com/XFree86/Linux-x86_64/510.68.02/README/faq.html#devicenodes
+# https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/faq.html#devicenodes
 # check the section under NVIDIA-INSTALLER -> How and when are the NVIDIA device files created?
 name: nvidia-device-create
 variant: scratch
@@ -22,7 +22,7 @@ steps:
           libkmod-dev \
           build-essential
 
-        # https://download.nvidia.com/XFree86/Linux-x86_64/510.68.02/README/faq.html#devicenodes
+        # https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/faq.html#devicenodes
         # https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-verifications
         mkdir nvidia-graphics-drivers-build
 
@@ -40,7 +40,7 @@ steps:
 
         cd nvidia-graphics-drivers-build/debian/device-create
 
-        # https://github.com/tseliot/nvidia-graphics-drivers/blob/510/debian/nvidia-kernel-common-510.install
+        # https://github.com/tseliot/nvidia-graphics-drivers/blob/515/debian/nvidia-kernel-common-515.install
         cp ub-device-create /rootfs/usr/local/bin
         cp /pkg/15-nvidia-device.rules /rootfs/usr/etc/udev/rules.d
 finalize:

@@ -36,7 +36,7 @@ empty :=
 space = $(empty) $(empty)
 
 TARGETS = amd-ucode bnx2-bnx2x gvisor hello-world-service intel-ucode iscsi-tools
-NONFREE_TARGETS = nvidia-container-toolkit
+NONFREE_TARGETS = nvidia-container-toolkit nvidia-fabricmanager
 
 all: $(TARGETS) ## Builds all known pkgs.
 
