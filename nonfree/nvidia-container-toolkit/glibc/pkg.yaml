@@ -5,10 +5,10 @@ dependencies:
   - image: ubuntu:22.04
 steps:
   - sources:
-      - url: https://ftpmirror.gnu.org/libc/glibc-2.35.tar.gz
+      - url: https://ftpmirror.gnu.org/libc/glibc-2.36.tar.gz
         destination: glibc.tar.gz
-        sha256: 3e8e0c6195da8dfbd31d77c56fb8d99576fb855fafd47a9e0a895e51fd5942d4
-        sha512: 45bf782aeda508e17fd51b45cf5ad96bd1067cf96b758b5c2d5def681af713df15e75c253d9c85de047f0a1dd22cf4f2239d70ae392cdb9291092e6570734d43
+        sha256: 02efa6ffbbaf3e10e88f16818a862608d04b0ef838c66f6025ae120530792c9c
+        sha512: a898d76fb88a68cda122aba26794d91d1088afbc90aaf93505afbf8b607403e8e92f2dd1acface417b9289cb18056579f49176dd88c88e2815b2552bb355f63e
     env:
       DEBIAN_FRONTEND: noninteractive
     prepare:
@@ -47,14 +47,15 @@ steps:
         make -j $(nproc)
     install:
       - |
-        mkdir -p /rootfs
+        mkdir -p /rootfs/lib64
 
         cd glibc-build
         make install DESTDIR=/rootfs
 
         cp /pkg/ld.so.conf /rootfs/usr/local/glibc/etc/ld.so.conf
+        ln -s /usr/local/glibc/lib/ld-linux-x86-64.so.2 /rootfs/lib64/ld-linux-x86-64.so.2
 
-        # cleanup include, var and share
+        # cleanup
         rm -rf /rootfs/usr/local/glibc/include
         rm -rf /rootfs/usr/local/glibc/share
         rm -rf /rootfs/usr/local/glibc/var

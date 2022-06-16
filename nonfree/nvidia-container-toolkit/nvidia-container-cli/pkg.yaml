@@ -1,9 +1,9 @@
 name: nvidia-container-cli
 variant: scratch
 dependencies:
-  - image: ubuntu:20.04
+  - image: debian:10
   # nvidia-pkgs depends on glibc,
-  # so any stage depending on nvidia-container-cli will have the updated cache,
+  # so any stage depending on nvidia-container-cli will have the updated ld.so.cache,
   # from both nvidia-pkgs and nvidia-container-cli
   - stage: nvidia-pkgs
 shell: /bin/bash
@@ -11,12 +11,12 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}/libnvidia-container-{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: b33b83e90d5e07271c28f1fb330c2d32958fa91b3a8f3238e43d691728829299
-        sha512: c1a2a43733580eb2bc1d0798c164dd5f8f5b65bfb3d6e47a067fd5a6a93cc18fd0d718e314881f9d4e596c1376363340d4a35f89973e0e43cdb25b07922c8430
+        sha256: 777bc66e86458a9e9023f4dfc9260b436620b10fbbace7dec9086d71c4df234b
+        sha512: 4ecbd5f96e41c090db3ff4bcd2d493b9b0953d203d977d04187d9d860dcf25e8b3593e971451afec10ce7efe1af1c732426d268b6f06f1ae5bb31c860d8d317a
     env:
       DEBIAN_FRONTEND: noninteractive
       GOPATH: /go
-      REVISION: abd4e14d8cb923e2a70b7dcfee55fbc16bffa353
+      REVISION: 395fd41701117121f1fd04ada01e1d7e006a37ae
       WITH_TIRPC: no
       WITH_NVCGO: yes
       WITH_SECCOMP: yes
@@ -44,13 +44,12 @@ steps:
         lsb-release \
         m4 \
         pkg-config \
-        xz-utils \
-        patchelf
+        xz-utils
 
         # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go1.17.8.linux-amd64.tar.gz | tar -C /usr/local -xz
+        curl https://storage.googleapis.com/golang/go1.17.13.linux-amd64.tar.gz | tar -C /usr/local -xz
         # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go1.17.8.linux-arm64.tar.gz | tar -C /usr/local -xz
+        curl https://storage.googleapis.com/golang/go1.17.13.linux-arm64.tar.gz | tar -C /usr/local -xz
         # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
 
         mkdir libnvidia-container
@@ -62,8 +61,7 @@ steps:
         cd libnvidia-container
 
         patch -p0 < /pkg/patches/libnvidia-container/Makefile.patch
-        patch -p0 < /pkg/patches/libnvidia-container/common.h.patch
-        patch -p0 < /pkg/patches/libnvidia-container/nvc_ldcache.c.patch
+
         make
     install:
       - |
@@ -78,8 +76,6 @@ steps:
         rm -rf /rootfs/usr/local/lib/pkgconfig
         rm -rf /rootfs/usr/local/include
         rm -rf /rootfs/usr/local/share
-
-        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 /rootfs/usr/local/bin/nvidia-container-cli
 
         # run ldconfig to update the cache
         /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs

@@ -1,17 +1,17 @@
-# https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/faq.html#devicenodes
+# https://download.nvidia.com/XFree86/Linux-x86_64/515.65.01/README/faq.html#devicenodes
 # check the section under NVIDIA-INSTALLER -> How and when are the NVIDIA device files created?
 name: nvidia-device-create
 variant: scratch
 dependencies:
-  - image: ubuntu:21.10
+  - image: ubuntu:22.10
 shell: /bin/bash
 steps:
   - sources:
-      # https://github.com/tseliot/nvidia-graphics-drivers/commit/4f9e4b3b5859b7058b0c961762ce1a89df3150ca
-      - url: https://github.com/tseliot/nvidia-graphics-drivers/archive/4f9e4b3b5859b7058b0c961762ce1a89df3150ca.tar.gz
+      # https://github.com/tseliot/nvidia-graphics-drivers/commit/ea9f099a8d1e6a7e6bdc1c95232a98f26e851d14
+      - url: https://github.com/tseliot/nvidia-graphics-drivers/archive/ea9f099a8d1e6a7e6bdc1c95232a98f26e851d14.tar.gz
         destination: nvidia-graphics-drivers-build.tar.gz
-        sha256: d59c376a8371d829fb733901b71e163f263648ee7506bd92f7bf2a06e3495455
-        sha512: 949c6cff617de1cc62364dc781fa195d1b545d868945f323a4fc6de9b2b0467dc6e7a93f32ba1206ddf71d95cc3adca749e7a73d37a9155149e00d139beec9a4
+        sha256: 0e466c801cbe60ae4c9d0d8387ed0f2b43d10372a70865605290e2864d10eb0c
+        sha512: 20f6907270ad0f4179663a4aede0d2435ed7e701f45aaedc4ecba5f8eed23a046c85db2bcde6b17f0edc7bad882f84e93787dcdd9c7c15736b27033170021c30
     env:
       DEBIAN_FRONTEND: noninteractive
     prepare:
@@ -22,7 +22,6 @@ steps:
           libkmod-dev \
           build-essential
 
-        # https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/faq.html#devicenodes
         # https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html#runfile-verifications
         mkdir nvidia-graphics-drivers-build
 

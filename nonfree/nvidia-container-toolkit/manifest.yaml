@@ -7,4 +7,4 @@ metadata:
     This system extension provides nvidia runtime and it's dependencies using NVIDIA's runtime handler.
   compatibility:
     talos:
-      version: ">= v1.0.0"
+      version: ">= v1.2.0"

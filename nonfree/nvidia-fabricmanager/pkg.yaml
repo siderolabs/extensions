@@ -1,26 +1,24 @@
 name: nvidia-fabricmanager
-variant: alpine
-#shell: /toolchain/bin/bash
-#dependencies:
-#  - stage: base
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+ - stage: base
 steps:
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://developer.download.nvidia.com/compute/cuda/redist/fabricmanager/linux-sbsa/fabricmanager-linux-sbsa-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-sbsa/fabricmanager-linux-sbsa-{{ .NVIDIA_FABRICMANAGER_VERSION_MAJOR }}.{{ .NVIDIA_FABRICMANAGER_VERSION_MINOR }}-archive.tar.xz
         destination: fabricmanager.tar.xz
-        sha256: eb5cda2505cb5fcc3508ab84e8703d9cf318e0df5c2e5b0a832b4fa243b88bea
-        sha512: 3fbf505a9afad1d99665b26c19213bb0b0674297a3c677f0730bea2a957dda5aca9336699774da82d10a4c651d01029854332f548119ce8d49129f0d61c3c0af
+        sha256: dac775eaed6bf26ffb7b8e281db7fd83f5edca5625dc86a0aca26f479263b38d
+        sha512: 7f2c2415c06b6fc993c80e5b21b3c47f5e344e56c5504c72bdfa41a71cd31886b6feb784c93ba74a526e548df0293b6fce1722b09aba822c32b5a5c7255deae1
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://developer.download.nvidia.com/compute/cuda/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_FABRICMANAGER_VERSION_MAJOR }}.{{ .NVIDIA_FABRICMANAGER_VERSION_MINOR }}-archive.tar.xz
         destination: fabricmanager.tar.xz
-        sha256: 2f4bce4620ce69683428d1752464adcaef466fc471d82618e28d554c7591efe6
-        sha512: 127642c8ea73bc534701d261554971e32de8419c2191345043ede216924cc3c6c3329a0a554bae0a4f0954098aeb51af092a70bfa2c5149eb40b9e6b00341d46
+        sha256: f3271a899151c762641e2beab68335ab1f52cb5beecef0f474780f8fbe804f58
+        sha512: 2beb4de1415d234a76981d03cc9f85fa6ff47bdccf9de679547ff37970d680d6227d1696eefaa8921acd9c9b4df813df9f8ec0b448bbeaf15fb8e507016edb92
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
         tar -xf fabricmanager.tar.xz --strip-components=1
-
-        apk add --no-cache patchelf
 
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     install:
@@ -36,8 +34,6 @@ steps:
 
         cp bin/nv-fabricmanager /rootfs/usr/local/bin/
         cp bin/nvswitch-audit /rootfs/usr/local/bin/
-
-        patchelf --set-interpreter /usr/local/glibc/lib/ld-linux-x86-64.so.2 /rootfs/usr/local/bin/nv-fabricmanager
 
         cp share/nvidia/nvswitch/dgx2_hgx2_topology /rootfs/usr/local/share/nvidia/nvswitch/
         cp share/nvidia/nvswitch/dgxa100_hgxa100_topology /rootfs/usr/local/share/nvidia/nvswitch/

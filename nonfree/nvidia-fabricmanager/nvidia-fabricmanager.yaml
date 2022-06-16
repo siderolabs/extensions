@@ -15,6 +15,13 @@ container:
         - rbind
         - rw
     # shared libraries
+    - source: /lib64
+      destination: /lib64
+      type: bind
+      options:
+        - bind
+        - ro
+    # shared libraries
     - source: /usr/local/glibc
       destination: /usr/local/glibc
       type: bind

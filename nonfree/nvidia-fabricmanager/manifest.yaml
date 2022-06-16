@@ -7,4 +7,4 @@ metadata:
     This system extension provides the Nvidia fabricmanager for GPU's that need NVLink support.
   compatibility:
     talos:
-      version: ">= v1.0.0"
+      version: ">= v1.2.0"

@@ -1,4 +1,4 @@
-# https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/nvidia-persistenced.html
+# https://download.nvidia.com/XFree86/Linux-x86_64/515.65.01/README/nvidia-persistenced.html
 name: nvidia-persistenced
 container:
   entrypoint: /usr/local/bin/nvidia-persistenced-wrapper
@@ -11,6 +11,13 @@ container:
         - rshared
         - rbind
         - rw
+    # shared libraries
+    - source: /lib64
+      destination: /lib64
+      type: bind
+      options:
+        - bind
+        - ro
     # shared libraries
     - source: /usr/local/glibc
       destination: /usr/local/glibc

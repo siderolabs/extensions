@@ -1,27 +1,40 @@
 name: nvidia-container-runtime
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
-  - stage: base
+  - image: ubuntu:22.10
 steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}/container-toolkit-{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: container-toolkit.tar.gz
-        sha256: e95ad56d08bee14f54d3c15e5201ba502676afda3392a40c09f112a29a3e3679
-        sha512: d742d297dc9cb29e2d775c64fe5dc668a230cd8b0a193eb9b44518efd1e092817038c8ed015ab28b0cf2a45ad03b99d0e215df9e18586bb917d8c5b5d783aa90
+        sha256: 9aa63b8ec9ed2b4b04493eaeaf2c9bea50f0b9eef08b9112961f5ae096fdc5bd
+        sha512: 6455fe985444081c3c361bfbd008fdfb5366ca8e02d76d2a44e2df2341b722b4269b1f16fd2111ba53a56bb41f7378e924dfe607883a4bf3ce15ee98dac6fecb
     env:
       GOPATH: /go
+      GIT_COMMIT: 7cfd3bd
     prepare:
       - |
+
+        chmod 1777 /tmp
+
+        apt update && \
+        apt install -y curl patch build-essential
+
+        # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        curl https://storage.googleapis.com/golang/go1.17.13.linux-amd64.tar.gz | tar -C /usr/local -xz
+        # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        curl https://storage.googleapis.com/golang/go1.17.13.linux-arm64.tar.gz | tar -C /usr/local -xz
+        # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+
         mkdir -p container-toolkit
         tar -xzf container-toolkit.tar.gz --strip-components=1 -C container-toolkit
     build:
       - |
-        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
         cd container-toolkit
 
-        patch -p0 < /pkg/patches/nvidia-container-runtime/main.go.patch
+        patch -p0 < /pkg/patches/nvidia-container-runtime/config.go.patch
         patch -p0 < /pkg/patches/nvidia-container-toolkit/hook_config.go.patch
 
         make cmds
