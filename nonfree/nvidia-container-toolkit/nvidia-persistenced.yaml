@@ -1,4 +1,4 @@
-# https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/nvidia-persistenced.html
+# https://download.nvidia.com/XFree86/Linux-x86_64/515.48.07/README/nvidia-persistenced.html
 name: nvidia-persistenced
 container:
   entrypoint: /usr/local/bin/nvidia-persistenced-wrapper
