@@ -1,7 +1,10 @@
-# https://download.nvidia.com/XFree86/Linux-x86_64/515.43.04/README/nvidia-persistenced.html
-name: nvidia-persistenced
+# https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf
+name: nvidia-fabricmanager
 container:
-  entrypoint: /usr/local/bin/nvidia-persistenced-wrapper
+  entrypoint: /usr/local/bin/nv-fabricmanager
+  args:
+   - --config
+   - /usr/local/share/nvidia/nvswitch/fabricmanager.cfg
   mounts:
     # device files
     - source: /dev
@@ -26,13 +29,29 @@ container:
         - bind
         - ro
     # service state file
-    - source: /var/run/nvidia-persistenced
-      destination: /var/run/nvidia-persistenced
+    - source: /var/run/nvidia-fabricmanager
+      destination: /var/run/nvidia-fabricmanager
       type: bind
       options:
         - rshared
         - rbind
         - rw
+    # log files
+    - source: /var/log
+      destination: /var/log
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # fabric topology files
+    - source: /usr/local/share/nvidia/nvswitch
+      destination: /usr/local/share/nvidia/nvswitch
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - ro
     # binaries
     - source: /usr/local/bin
       destination: /usr/local/bin

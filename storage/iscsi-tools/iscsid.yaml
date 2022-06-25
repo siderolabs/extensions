@@ -9,6 +9,10 @@ depends:
        - etcfiles
 container:
   entrypoint: /usr/local/sbin/iscsid-wrapper
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+    writeableSysfs: true
   mounts:
     # ld-musl-x86_64.so.1
     - source: /lib

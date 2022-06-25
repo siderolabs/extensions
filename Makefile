@@ -4,6 +4,10 @@ SHA ?= $(shell git describe --match=none --always --abbrev=8 --dirty)
 TAG ?= $(shell git describe --tag --always --dirty)
 BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
 REGISTRY_AND_USERNAME := $(REGISTRY)/$(USERNAME)
+# inital commit time
+# git rev-list --max-parents=0 HEAD
+# git log a46b3f24d158614d582da5e6e7e34b596d10cb8e --pretty=%ct
+SOURCE_DATE_EPOCH ?= "1642703752"
 ARTIFACTS ?= _out/
 OPERATING_SYSTEM := $(shell uname -s | tr "[:upper:]" "[:lower:]")
 GOARCH :=$(shell uname -m | tr '[:upper:]' '[:lower:]')
@@ -24,14 +28,15 @@ COMMON_ARGS += --progress=$(PROGRESS)
 COMMON_ARGS += --platform=$(PLATFORM)
 COMMON_ARGS += --build-arg=http_proxy=$(http_proxy)
 COMMON_ARGS += --build-arg=https_proxy=$(https_proxy)
+COMMON_ARGS += --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
 COMMON_ARGS += --build-arg=TAG=$(TAG)
 
 , := ,
 empty :=
 space = $(empty) $(empty)
 
-TARGETS = amd-ucode bnx2-bnx2x gvisor hello-world-service intel-ucode iscsi-tools amdgpu
-NONFREE_TARGETS = nvidia-container-toolkit
+TARGETS = amdgpu amd-ucode bnx2-bnx2x gvisor hello-world-service intel-ucode iscsi-tools
+NONFREE_TARGETS = nvidia-container-toolkit nvidia-fabricmanager
 
 all: $(TARGETS) ## Builds all known pkgs.
 
