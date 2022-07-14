@@ -1,0 +1,13 @@
+diff --git internal/config/config.go internal/config/config.go
+index 6adc604..af374d0 100644
+--- internal/config/config.go
++++ internal/config/config.go
+@@ -39,7 +39,7 @@ var (
+ 	// NVIDIAContainerToolkitExecutable is the executable name for the NVIDIA Container Toolkit (an alias for the NVIDIA Container Runtime Hook)
+ 	NVIDIAContainerToolkitExecutable = "nvidia-container-toolkit"
+ 
+-	configDir = "/etc/"
++	configDir = "/usr/local/etc/"
+ )
+ 
+ // Config represents the contents of the config.toml file for the NVIDIA Container Toolkit

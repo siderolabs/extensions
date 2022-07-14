@@ -30,10 +30,10 @@ This is used to create the required NVIDIA device files under `/dev`. This requi
 
 ## Updating the nvidia-container-toolkit version
 
-- Update the `libnvidia-container` version [here](./nvidia-container-cli/pkg.yaml)
-- Update the `container-toolkit` version [here](./nvidia-container-runtime/pkg.yaml)
+- Update the `libnvidia-container` version checksums and `REVISION` [here](./nvidia-container-cli/pkg.yaml)
+- Update the `container-toolkit` version checksums and `GIT_COMMIT` [here](./nvidia-container-runtime/pkg.yaml)
 
-Make sure to also update the `nvidia-device-create` [here](./nvidia-device-create/pkg.yaml)
+Make sure to also update the `nvidia-device-create` version and checksums [here](./nvidia-device-create/pkg.yaml)
 
 ### Patches
 
