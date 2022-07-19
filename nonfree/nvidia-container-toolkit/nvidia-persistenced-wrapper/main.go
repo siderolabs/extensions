@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"errors"
 	"io/ioutil"
 	"log"
@@ -70,6 +71,8 @@ func getProcessId() (int, error) {
 	if err != nil {
 		return 0, err
 	}
+	// remove any newlines
+	pidData = bytes.TrimRight(pidData, "\n")
 	pid, err := strconv.Atoi(string(pidData))
 	if err != nil {
 		return 0, err
