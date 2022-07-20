@@ -2,7 +2,7 @@ version: v1alpha1
 metadata:
   name: amdgpu
   version: "$VERSION"
-  author: Sidero Labs
+  author: Antony Rabbito
   description: |
     This system extension provides AMD GPU firmware for enablement.
   compatibility:
