@@ -109,8 +109,9 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 
 - `/etc/cri/conf.d/`
 - `/lib/firmware/`
+- `/lib/modules/`
 - `/lib64/ld-linux-x86-64.so.2`
-- `/usr/etc/udev/rules.d`
+- `/usr/etc/udev/rules.d/`
 - `/usr/local/`
 
 ## Dependency Diagram
