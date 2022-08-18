@@ -1,0 +1,2 @@
+# the first part is the driver version and the second the talos version for which the module is built against
+VERSION: "{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}-v1.2.0-beta.0"

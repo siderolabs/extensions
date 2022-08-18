@@ -34,14 +34,13 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
 | [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools | `v0.1.0`       |
 
-### Non-free
+### NVIDIA GPU
 
-System extensions in this section are not distributed by Sidero Labs, they should be built manually following the build instructions.
-
-| Name                                                          | Description                                                                                                                        | Version Format                     |
-| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| [nvidia-container-toolkit](nonfree/nvidia-container-toolkit/) | Tools to run [NVIDIA GPU workloads](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html) in containers | `driver version`-`toolkit version` |
-| [nvidia-fabricmanager](nonfree/nvidia-fabricmanager/)         | [NVIDIA fabric manager](https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf) support for GPU workloads      | `driver version`                   |
+| Name                                                             | Description                                                                                                                        | Version Format                     |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| [nvidia-container-toolkit](nvidia-gpu/nvidia-container-toolkit/) | Tools to run [NVIDIA GPU workloads](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html) in containers | `driver version`-`toolkit version` |
+| [nvidia-fabricmanager](nvidia-gpu/nvidia-fabricmanager/)         | [NVIDIA fabric manager](https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf) support for GPU workloads      | `driver version`                   |
+| [nvidia-open-gpu-kernel-modules](nvidia-gpu/nvidia-modules/)     | NVIDIA driver kernel modules                                                                                                       | `driver version`-`talos version`   |
 
 ## Building Extensions
 
