@@ -34,6 +34,12 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
 | [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools | `v0.1.0`       |
 
+### Power
+
+| Name                                | Image                                                                                                     | Description                                                    | Version Format                     |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------- |
+| [nut-client](power/nut-client/)     | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/talos-extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version`-`talos version` |
+
 ### NVIDIA GPU
 
 | Name                                                             | Description                                                                                                                        | Version Format                     |

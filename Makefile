@@ -35,7 +35,7 @@ COMMON_ARGS += --build-arg=TAG=$(TAG)
 empty :=
 space = $(empty) $(empty)
 
-TARGETS = amd-ucode bnx2-bnx2x gvisor hello-world-service intel-ucode iscsi-tools nvidia-container-toolkit nvidia-fabricmanager nvidia-open-gpu-kernel-modules
+TARGETS = amd-ucode bnx2-bnx2x gvisor hello-world-service intel-ucode iscsi-tools nut-client nvidia-container-toolkit nvidia-fabricmanager nvidia-open-gpu-kernel-modules
 NONFREE_TARGETS = 
 
 all: $(TARGETS) ## Builds all known pkgs.

@@ -6,9 +6,9 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.2.0"
+previous = "v1.2.1"
 
-pre_release = false
+pre_release = true
 
 preface = """\
 See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
@@ -16,10 +16,10 @@ See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configur
 
 [notes]
 
-    [notes.updates]
-        title = "Updates"
+    [notes.power]
+        title = "Power management"
         description = """\
-Update to support Talos v1.2.1
+Support for Network UPS Tools client system extension to handle node graceful shutdown on power events from supported UPS's.
 """
 
 

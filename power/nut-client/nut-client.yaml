@@ -1,0 +1,47 @@
+name: nut-client
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+container:
+  entrypoint: ./upsmon
+  args:
+    - -F
+  mounts:
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # config via .machine.files
+    - source: /var/etc/nut
+      destination: /usr/local/etc/nut
+      type: bind
+      options:
+        - bind
+        - ro
+    # /sbin/init talks to apid
+    - source: /system/run/apid/apid.sock
+      destination: /system/run/apid/apid.sock
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # symlinked to /sbin/poweroff
+    - source: /sbin/init
+      destination: /sbin/init
+      type: bind
+      options:
+        - bind
+        - ro
+restart: always

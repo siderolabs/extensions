@@ -1,0 +1,43 @@
+--- a/clients/upsmon.c	2022-04-23 04:56:06.000000000 -0700
++++ b/clients/upsmon.c	2022-09-04 13:21:28.072170502 -0700
+@@ -26,6 +26,7 @@
+ #include <sys/socket.h>
+ #include <unistd.h>
+ #include <fcntl.h>
++#include <spawn.h>
+ 
+ #include "nut_stdint.h"
+ #include "upsclient.h"
+@@ -1874,6 +1875,23 @@
+ static void runparent(int fd)
+ 	__attribute__((noreturn));
+ 
++static int runcmd(const char *cmd)
++{
++	int	sret, status;
++	pid_t pid;
++	char *argv[] = {cmd, NULL};
++	char *env[] = {NULL};
++
++	/* TODO support tokenizing cmd */
++	sret = posix_spawn(&pid, cmd, NULL, NULL, argv, env);
++	if (sret != 0)
++		/* parent */
++		exit(EXIT_SUCCESS);
++
++	sret = waitpid(pid, &status, 0);
++	return status;
++}
++
+ static void runparent(int fd)
+ {
+ 	ssize_t	ret;
+@@ -1907,7 +1925,7 @@
+ 	/* have to do this here - child is unprivileged */
+ 	set_pdflag();
+ 
+-	sret = system(shutdowncmd);
++	sret = runcmd(shutdowncmd);
+ 
+ 	if (sret != 0)
+ 		upslogx(LOG_ERR, "parent: Unable to call shutdown command: %s",

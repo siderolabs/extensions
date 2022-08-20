@@ -1,0 +1,101 @@
+name: nut-client
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .PKGS_VERSION }}"
+  - image: "{{ .PKGS_PREFIX }}/util-linux:{{ .PKGS_VERSION }}"
+steps:
+  - sources:
+      - url: https://github.com/networkupstools/nut/releases/download/v{{ .NUT_VERSION }}/nut-{{ .NUT_VERSION }}.tar.gz
+        destination: nut.tar.gz
+        sha256: c3e5a708da797b7c70b653d37b1206a000fcb503b85519fe4cdf6353f792bfe5
+        sha512: 3c413ae54088045a713eb80cf1bdda474f41bb3b67c7c0248aa7a0c4d441dce1ff42627a2735273d7e36892d1f2eeb895220cf28af63fec2fa0c7a267f82d577
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzf nut.tar.gz --strip-components=1
+      - |
+        # no shell for you
+        patch -p1 < /pkg/patches/replace_system.patch
+      - |
+        export PATH="$PATH:/toolchain/bin"
+
+        # Create symlinks for binaries required by libtoolize.
+        ln -s /toolchain/bin/sed /bin/sed
+        ln -s /toolchain/bin/grep /bin/grep
+
+        # Create symlinks for files used when building.
+        mkdir -p /usr/bin
+        ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
+        ln -s /toolchain/bin/file /usr/bin/file
+
+        cp /toolchain/share/automake-1.16/config.guess config.guess
+        cp /toolchain/lib/libstdc++* /lib
+        autoreconf -if
+
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+        ./configure \
+                --prefix=/usr/local \
+                --libexecdir=/usr/local/lib/nut \
+                --datadir=/usr/local/share/nut \
+                --sysconfdir=/usr/local/etc/nut \
+                --with-drvpath=/usr/local/lib/nut \
+                --with-statepath=/var/run/nut \
+                --with-altpidpath=/var/run/nut \
+                --with-udev-dir=/usr/local/etc/udev \
+                --with-systemdsystemunitdir=no \
+                --with-systemdshutdowndir=no \
+                --with-systemdtmpfilesdir=no \
+                --with-user=nut \
+                --with-group=nut \
+                --with-openssl \
+                --disable-static \
+                --without-avahi \
+                --without-cgi \
+                --without-freeipmi \
+                --without-ipmi \
+                --without-libltdl \
+                --without-modbus \
+                --without-neon \
+                --without-nss \
+                --without-powerman \
+                --without-serial \
+                --without-snmp \
+                --without-wrap \
+                --without-usb
+    build:
+      - |
+        make -j $(nproc) all
+    install:
+      - |
+        make DESTDIR=/rootfs install-exec
+
+        containerRoot=/rootfs/usr/local/lib/containers/nut-client
+        mkdir -p "$containerRoot"/{etc,sbin,usr/local/lib}
+        cp /rootfs/usr/local/sbin/upsmon "$containerRoot/upsmon"
+        mv /rootfs/usr/local/lib/lib* "$containerRoot/usr/local/lib/"
+        cp /pkg/files/* "$containerRoot/etc/"
+
+        # TODO replace /usr/bin/wall with either a wrapper for printk or a
+        # Go cmd to log to Talos Events
+
+        # /sbin/init is bind mounted in nut-client.yaml
+        pushd "$containerRoot/sbin"
+        ln -sv ./init poweroff
+        popd
+
+        # cleanup
+        rm -rf /rootfs/usr/local/bin
+        rm -rf /rootfs/usr/local/etc
+        rm -rf /rootfs/usr/local/lib/nut
+        rm -rf /rootfs/usr/local/sbin
+
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/nut-client.yaml
+    to: /rootfs/usr/local/etc/containers/
