@@ -4,7 +4,7 @@ format: v1alpha2
 
 vars:
   PKGS_PREFIX: ghcr.io/siderolabs
-  PKGS_VERSION: v1.2.0-alpha.0-25-g6feece4
+  PKGS_VERSION: v1.2.0-4-ga7609bb
   LINUX_FIRMWARE_VERSION: "20220411" # update this when updating PKGS_VERSION above
 
 labels:
