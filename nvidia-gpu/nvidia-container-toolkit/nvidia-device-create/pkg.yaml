@@ -3,7 +3,7 @@
 name: nvidia-device-create
 variant: scratch
 dependencies:
-  - image: ubuntu:22.10
+  - image: ubuntu:{{ .UBUNTU_IMAGE_VERSION }}
 shell: /bin/bash
 steps:
   - sources:

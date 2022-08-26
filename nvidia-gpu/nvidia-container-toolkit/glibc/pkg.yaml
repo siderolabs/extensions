@@ -2,10 +2,10 @@ name: glibc
 variant: scratch
 shell: /bin/bash
 dependencies:
-  - image: ubuntu:22.04
+  - image: ubuntu:{{ .UBUNTU_IMAGE_VERSION }}
 steps:
   - sources:
-      - url: https://ftpmirror.gnu.org/libc/glibc-2.36.tar.gz
+      - url: https://ftpmirror.gnu.org/libc/glibc-{{ .GLIBC_VERSION }}.tar.gz
         destination: glibc.tar.gz
         sha256: 02efa6ffbbaf3e10e88f16818a862608d04b0ef838c66f6025ae120530792c9c
         sha512: a898d76fb88a68cda122aba26794d91d1088afbc90aaf93505afbf8b607403e8e92f2dd1acface417b9289cb18056579f49176dd88c88e2815b2552bb355f63e

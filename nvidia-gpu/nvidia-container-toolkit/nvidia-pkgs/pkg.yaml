@@ -1,7 +1,7 @@
 name: nvidia-pkgs
 variant: scratch
 dependencies:
-  - image: ubuntu:22.10
+  - image: ubuntu:{{ .UBUNTU_IMAGE_VERSION }}
   # depends on glibc to update ld.so.cache
   # so any stage depending on nvidia-pkgs will have the updated cache
   - stage: glibc
@@ -9,12 +9,12 @@ shell: /bin/bash
 steps:
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://download.nvidia.com/XFree86/Linux-aarch64/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}/NVIDIA-Linux-aarch64-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}.run
+      - url: https://download.nvidia.com/XFree86/Linux-aarch64/{{ .NVIDIA_DRIVER_VERSION }}/NVIDIA-Linux-aarch64-{{ .NVIDIA_DRIVER_VERSION }}.run
         destination: nvidia.run
         sha256: 0d2ac6c6ca144c8c7bbf1a62034998463b21f2660a793607d88c031650d93e93
         sha512: 31ec7ba727bf14263eeadc3880bd8f2aaa0fe8c144aa216bb8af06a154dd1aa5f4a787fe386b20f5d739a49c80435bca5f6deba3010c593e1e54ecd29b4ab1b0
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://download.nvidia.com/XFree86/Linux-x86_64/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}/NVIDIA-Linux-x86_64-{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}.run
+      - url: https://download.nvidia.com/XFree86/Linux-x86_64/{{ .NVIDIA_DRIVER_VERSION }}/NVIDIA-Linux-x86_64-{{ .NVIDIA_DRIVER_VERSION }}.run
         destination: nvidia.run
         sha256: 0492ddc5b5e65aa00cbc762e8d6680205c8d08e103b7131087a15126aee495e9
         sha512: 5221a4ac071eb39a37a841f19cfe4983286dc35e918956b40604404ef36c122612475df7b9a391a9a70bd60f44e598c8a0e5ec54ccc3e90d51f01e1b2fbe5e33
@@ -52,7 +52,7 @@ steps:
           --no-check-for-alternate-installs \
           --no-install-libglvnd \
           --override-file-type-destination=NVIDIA_MODPROBE:/rootfs/usr/local/bin \
-          --override-file-type-destination=FIRMWARE:/rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }} \
+          --override-file-type-destination=FIRMWARE:/rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_VERSION }} \
           --no-systemd
 
         # run ldconfig to update the cache

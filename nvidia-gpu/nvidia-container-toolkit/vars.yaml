@@ -1,2 +1,2 @@
 # the first part is the driver version and the second the container-toolkit version
-VERSION: "{{ .NVIDIA_DRIVER_VERSION_MAJOR }}.{{ .NVIDIA_DRIVER_VERSION_MINOR }}-{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}"
+VERSION: "{{ .NVIDIA_DRIVER_VERSION }}-{{ .CONTAINER_TOOLKIT_VERSION }}"

@@ -2,16 +2,16 @@ name: nvidia-container-runtime
 variant: scratch
 shell: /bin/bash
 dependencies:
-  - image: ubuntu:22.10
+  - image: ubuntu:{{ .UBUNTU_IMAGE_VERSION }}
 steps:
   - sources:
-      - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}/container-toolkit-{{ .NVIDIA_CONTAINER_TOOLKIT_VERSION }}.tar.gz
+      - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/{{ .CONTAINER_TOOLKIT_VERSION }}/container-toolkit-{{ .CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: container-toolkit.tar.gz
         sha256: 9aa63b8ec9ed2b4b04493eaeaf2c9bea50f0b9eef08b9112961f5ae096fdc5bd
         sha512: 6455fe985444081c3c361bfbd008fdfb5366ca8e02d76d2a44e2df2341b722b4269b1f16fd2111ba53a56bb41f7378e924dfe607883a4bf3ce15ee98dac6fecb
     env:
       GOPATH: /go
-      GIT_COMMIT: 7cfd3bd
+      GIT_COMMIT: {{ substr 0 7 .CONTAINER_TOOLKIT_REF }} # build is using short sha
     prepare:
       - |
 
@@ -21,9 +21,9 @@ steps:
         apt install -y curl patch build-essential
 
         # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go1.17.13.linux-amd64.tar.gz | tar -C /usr/local -xz
+        curl https://storage.googleapis.com/golang/go{{ .GOLANG_VERSION }}.linux-amd64.tar.gz | tar -C /usr/local -xz
         # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go1.17.13.linux-arm64.tar.gz | tar -C /usr/local -xz
+        curl https://storage.googleapis.com/golang/go{{ .GOLANG_VERSION }}.linux-arm64.tar.gz | tar -C /usr/local -xz
         # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
 
         mkdir -p container-toolkit
