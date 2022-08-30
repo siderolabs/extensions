@@ -11,7 +11,7 @@ LIBNVIDIA_CONTAINER_REF: 395fd41701117121f1fd04ada01e1d7e006a37ae
 GOLANG_VERSION: 1.17.13
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ versioning=loose depName=https://sourceware.org/git/glibc.git
 GLIBC_VERSION: 2.36
-# renovate: datasource=docker versioning=loose depName=ubuntu
+# renovate: datasource=docker versioning=docker depName=ubuntu
 UBUNTU_IMAGE_VERSION: 22.10
-# renovate: datasource=docker versioning=loose depName=debian
+# renovate: datasource=docker versioning=docker depName=debian
 DEBIAN_IMAGE_VERSION: 10
