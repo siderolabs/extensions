@@ -6,20 +6,20 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.0.0"
+previous = "v1.2.0"
 
 pre_release = false
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.0/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
 
-    [notes.compatibility]
-        title = "Talos Linux Compatibility"
+    [notes.updates]
+        title = "Updates"
         description = """\
-System extensions are compatible with Talos v1.0.x.
+Update to support Talos v1.2.1
 """
 
 
