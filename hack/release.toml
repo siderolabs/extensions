@@ -16,6 +16,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configur
 
 [notes]
 
+    [notes.tpu]
+        title = "Coral.ai TPU gasket driver"
+        description = """\
+Extensions now publish the gasket driver for [Coral.ai](https://coral.ai/) PCIe TPU modules.
+"""
+
     [notes.updates]
         title = "Component Updates"
         description = """\
