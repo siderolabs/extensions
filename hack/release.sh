@@ -19,18 +19,7 @@ function changelog {
 }
 
 function release-notes {
-  release-tool "${2}" --gfm > "${1}"
-
-  echo -e '\n## Images\n\n```' >> ${1}
-  ${ARTIFACTS}/talosctl-linux-amd64 images >> ${1}
-  echo -e '```\n' >> ${1}
-
-  size=$(stat -c%s "${1}")
-
-  if (( size > 50000 )); then
-    echo "Release notes size exceeds GitHub limit of 50000 bytes"
-    exit 1
-  fi
+  release-tool "${2}" > "${1}"
 }
 
 function cherry-pick {

@@ -86,6 +86,54 @@ steps:
       - name: docker
         path: /root/.docker/buildx
 
+  - name: release-notes
+    image: autonomy/build-container:latest
+    pull: always
+    commands:
+    - make release-notes
+    volumes:
+    - name: outer-docker-socket
+      path: /var/outer-run
+    - name: docker-socket
+      path: /var/run
+    - name: buildx
+      path: /root/.docker/buildx
+    - name: ssh
+      path: /root/.ssh
+    when:
+      event:
+      - tag
+    depends_on:
+    - build-and-publish
+
+  - name: release
+    image: plugins/github-release
+    pull: always
+    settings:
+      api_key:
+        from_secret: github_token
+      checksum:
+      - sha256
+      - sha512
+      draft: true
+      files:
+      - _out/RELEASE_NOTES.md
+      note: _out/RELEASE_NOTES.md
+    volumes:
+    - name: outer-docker-socket
+      path: /var/outer-run
+    - name: docker-socket
+      path: /var/run
+    - name: buildx
+      path: /root/.docker/buildx
+    - name: ssh
+      path: /root/.ssh
+    when:
+      event:
+      - tag
+    depends_on:
+    - release-notes
+
 volumes:
   - name: docker-socket
     host:
@@ -121,4 +169,3 @@ trigger:
 
 depends_on:
   - default
-

@@ -1,3 +1,35 @@
+## [Talos System Extensions 1.2.2](https://github.com/siderolabs/extensions/releases/tag/v1.2.2) (2022-09-13)
+
+Welcome to the v1.2.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Power management
+
+Support for Network UPS Tools client system extension to handle node graceful shutdown on power events from supported UPS's.
+
+
+### Contributors
+
+* Daniel Quinlan
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`47bd65c`](https://github.com/siderolabs/extensions/commit/47bd65c61bb38b1512c6b90d4b704622fad4b588) feat: add nut-client
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.2.1](https://github.com/siderolabs/extensions/releases/tag/v1.2.1)
+
 ## [Talos System Extensions 1.2.1](https://github.com/siderolabs/extensions/releases/tag/v1.2.1) (2022-09-07)
 
 Welcome to the 1.2.1 release of Talos System Extensions!

@@ -36,7 +36,7 @@ empty :=
 space = $(empty) $(empty)
 
 TARGETS = amd-ucode bnx2-bnx2x gvisor hello-world-service intel-ucode iscsi-tools nut-client nvidia-container-toolkit nvidia-fabricmanager nvidia-open-gpu-kernel-modules
-NONFREE_TARGETS = 
+NONFREE_TARGETS =
 
 all: $(TARGETS) ## Builds all known pkgs.
 
@@ -68,6 +68,11 @@ $(TARGETS) $(NONFREE_TARGETS): $(ARTIFACTS)/bldr
 .PHONY: deps.png
 deps.png: $(ARTIFACTS)/bldr
 	$(ARTIFACTS)/bldr graph | dot -Tpng > deps.png
+
+.PHONY: release-notes
+release-notes:
+	mkdir -p $(ARTIFACTS)
+	@ARTIFACTS=$(ARTIFACTS) ./hack/release.sh $@ $(ARTIFACTS)/RELEASE_NOTES.md $(TAG)
 
 .PHONY: conformance
 conformance: ## Performs policy checks against the commit and source code.
