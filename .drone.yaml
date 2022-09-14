@@ -92,19 +92,12 @@ steps:
     commands:
     - make release-notes
     volumes:
-    - name: outer-docker-socket
-      path: /var/outer-run
-    - name: docker-socket
-      path: /var/run
-    - name: buildx
-      path: /root/.docker/buildx
-    - name: ssh
-      path: /root/.ssh
-    when:
-      event:
-      - tag
-    depends_on:
-    - build-and-publish
+      - name: docker-socket
+        path: /var/run
+      - name: ssh
+        path: /root/.ssh
+      - name: docker
+        path: /root/.docker/buildx
 
   - name: release
     image: plugins/github-release
@@ -120,17 +113,12 @@ steps:
       - _out/RELEASE_NOTES.md
       note: _out/RELEASE_NOTES.md
     volumes:
-    - name: outer-docker-socket
-      path: /var/outer-run
-    - name: docker-socket
-      path: /var/run
-    - name: buildx
-      path: /root/.docker/buildx
-    - name: ssh
-      path: /root/.ssh
-    when:
-      event:
-      - tag
+      - name: docker-socket
+        path: /var/run
+      - name: ssh
+        path: /root/.ssh
+      - name: docker
+        path: /root/.docker/buildx
     depends_on:
     - release-notes
 
