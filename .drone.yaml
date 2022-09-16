@@ -18,11 +18,11 @@ steps:
         cpu: 24000
         memory: 48GiB
     volumes:
-      - name: docker-socket
+      - name: outer-docker-socket
         path: /var/run
       - name: ssh
         path: /root/.ssh
-      - name: docker
+      - name: buildx
         path: /root/.docker/buildx
 
   - name: build-pull-request
@@ -37,11 +37,11 @@ steps:
         include:
           - pull_request
     volumes:
-      - name: docker-socket
+      - name: outer-docker-socket
         path: /var/run
       - name: ssh
         path: /root/.ssh
-      - name: docker
+      - name: buildx
         path: /root/.docker/buildx
 
   - name: build-nonfree-pull-request
@@ -56,11 +56,11 @@ steps:
         include:
           - pull_request
     volumes:
-      - name: docker-socket
+      - name: outer-docker-socket
         path: /var/run
       - name: ssh
         path: /root/.ssh
-      - name: docker
+      - name: buildx
         path: /root/.docker/buildx
 
   - name: build-and-publish
@@ -79,11 +79,11 @@ steps:
         exclude:
           - pull_request
     volumes:
-      - name: docker-socket
+      - name: outer-docker-socket
         path: /var/run
       - name: ssh
         path: /root/.ssh
-      - name: docker
+      - name: buildx
         path: /root/.docker/buildx
 
   - name: release-notes
@@ -91,20 +91,19 @@ steps:
     pull: always
     commands:
     - make release-notes
-    volumes:
-    - name: outer-docker-socket
-      path: /var/outer-run
-    - name: docker-socket
-      path: /var/run
-    - name: buildx
-      path: /root/.docker/buildx
-    - name: ssh
-      path: /root/.ssh
     when:
       event:
-      - tag
+        include:
+          - pull_request
+    volumes:
+      - name: docker-socket
+        path: /var/run
+      - name: buildx
+        path: /root/.docker/buildx
+      - name: ssh
+        path: /root/.ssh
     depends_on:
-    - build-and-publish
+      - setup-ci
 
   - name: release
     image: plugins/github-release
@@ -120,28 +119,56 @@ steps:
       - _out/RELEASE_NOTES.md
       note: _out/RELEASE_NOTES.md
     volumes:
-    - name: outer-docker-socket
-      path: /var/outer-run
-    - name: docker-socket
-      path: /var/run
-    - name: buildx
-      path: /root/.docker/buildx
-    - name: ssh
-      path: /root/.ssh
+      - name: docker-socket
+        path: /var/run
+      - name: buildx
+        path: /root/.docker/buildx
+      - name: ssh
+        path: /root/.ssh
     when:
       event:
       - tag
     depends_on:
     - release-notes
 
-volumes:
+services:
+- name: docker
+  image: docker:20.10-dind
+  entrypoint:
+  - dockerd
+  commands:
+  - --dns=8.8.8.8
+  - --dns=8.8.4.4
+  - --mtu=1500
+  - --log-level=error
+  privileged: true
+  volumes:
   - name: docker-socket
+    path: /var/run
+  - name: buildx
+    path: /root/.docker/buildx
+  - name: ssh
+    path: /root/.ssh
+
+volumes:
+  - name: outer-docker-socket
     host:
       path: /var/ci-docker
-  - name: docker
-    temp: {}
+  - name: docker-socket
+    temp:
+      medium: memory
+  - name: buildx
+    temp:
+      medium: memory
   - name: ssh
-    temp: {}
+    temp:
+      medium: memory
+
+trigger:
+  branch:
+    exclude:
+      - renovate/*
+      - dependabot/*
 ---
 kind: pipeline
 type: kubernetes
@@ -163,9 +190,10 @@ steps:
         - failure
 
 trigger:
-  status:
-    - success
-    - failure
+  branch:
+    exclude:
+    - renovate/*
+    - dependabot/*
 
 depends_on:
   - default
