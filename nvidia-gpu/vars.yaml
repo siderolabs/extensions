@@ -2,11 +2,11 @@
 NVIDIA_DRIVER_VERSION: 515.65.01
 NVIDIA_FABRICMANAGER_VERSION: 515.65.01
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
-CONTAINER_TOOLKIT_VERSION: v1.10.0
-CONTAINER_TOOLKIT_REF: 7cfd3bd5108c512354472c779edb05010f8569b7
+CONTAINER_TOOLKIT_VERSION: v1.11.0
+CONTAINER_TOOLKIT_REF: d9de4a09b8fd51a46207398199ecfeb3998ad49d
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/libnvidia-container.git
-LIBNVIDIA_CONTAINER_VERSION: v1.10.0
-LIBNVIDIA_CONTAINER_REF: 395fd41701117121f1fd04ada01e1d7e006a37ae
+LIBNVIDIA_CONTAINER_VERSION: v1.11.0
+LIBNVIDIA_CONTAINER_REF: c8f267be0bac1c654d59ad4ea5df907141149977
 # renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ versioning=loose depName=golang/go
 GOLANG_VERSION: 1.17.13
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ versioning=loose depName=https://sourceware.org/git/glibc.git

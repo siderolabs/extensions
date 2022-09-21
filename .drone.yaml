@@ -43,6 +43,8 @@ steps:
         path: /root/.ssh
       - name: buildx
         path: /root/.docker/buildx
+    depends_on:
+      - setup-ci
 
   - name: build-nonfree-pull-request
     image: autonomy/build-container:latest
@@ -62,6 +64,8 @@ steps:
         path: /root/.ssh
       - name: buildx
         path: /root/.docker/buildx
+    depends_on:
+      - setup-ci
 
   - name: build-and-publish
     image: autonomy/build-container:latest
@@ -85,6 +89,8 @@ steps:
         path: /root/.ssh
       - name: buildx
         path: /root/.docker/buildx
+    depends_on:
+      - setup-ci
 
   - name: release-notes
     image: autonomy/build-container:latest

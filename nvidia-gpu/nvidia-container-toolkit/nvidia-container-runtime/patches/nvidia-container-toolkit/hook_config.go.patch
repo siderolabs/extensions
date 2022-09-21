@@ -1,8 +1,8 @@
-diff --git cmd/nvidia-container-toolkit/hook_config.go cmd/nvidia-container-toolkit/hook_config.go
-index b4cb013..fdf1664 100644
---- cmd/nvidia-container-toolkit/hook_config.go
-+++ cmd/nvidia-container-toolkit/hook_config.go
-@@ -10,7 +10,7 @@ import (
+diff --git cmd/nvidia-container-runtime-hook/hook_config.go cmd/nvidia-container-runtime-hook/hook_config.go
+index 9913ccc..405aa92 100644
+--- cmd/nvidia-container-runtime-hook/hook_config.go
++++ cmd/nvidia-container-runtime-hook/hook_config.go
+@@ -11,7 +11,7 @@ import (
  )
  
  const (
@@ -11,3 +11,4 @@ index b4cb013..fdf1664 100644
  	driverPath = "/run/nvidia/driver"
  )
  
+

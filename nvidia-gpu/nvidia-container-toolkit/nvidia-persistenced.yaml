@@ -33,8 +33,8 @@ container:
         - bind
         - ro
     # service state file
-    - source: /var/run/nvidia-persistenced
-      destination: /var/run/nvidia-persistenced
+    - source: /var/run
+      destination: /var/run
       type: bind
       options:
         - rshared

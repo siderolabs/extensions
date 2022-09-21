@@ -7,8 +7,8 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/{{ .CONTAINER_TOOLKIT_VERSION }}/container-toolkit-{{ .CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: container-toolkit.tar.gz
-        sha256: 9aa63b8ec9ed2b4b04493eaeaf2c9bea50f0b9eef08b9112961f5ae096fdc5bd
-        sha512: 6455fe985444081c3c361bfbd008fdfb5366ca8e02d76d2a44e2df2341b722b4269b1f16fd2111ba53a56bb41f7378e924dfe607883a4bf3ce15ee98dac6fecb
+        sha256: b57699534414b3c3e2319a70d5532deeb2056bf95af711c5bc08173b50190888
+        sha512: 07bc724afebff63cafeffd9d85bf0411286b31c1e37a94f1884a64aa7c6f1b6dbf1528b0e0e7d5fc25dbc08a619cafdb153a64786f510f515e51c20507af85b2
     env:
       GOPATH: /go
       GIT_COMMIT: {{ substr 0 7 .CONTAINER_TOOLKIT_REF }} # build is using short sha
@@ -45,12 +45,10 @@ steps:
         cd container-toolkit
 
         cp ./nvidia-container-runtime /rootfs/usr/local/bin/nvidia-container-runtime
-        cp ./nvidia-container-toolkit /rootfs/usr/local/bin/nvidia-container-toolkit
-
-        ln -s nvidia-container-toolkit /rootfs/usr/local/bin/nvidia-container-runtime-hook
+        cp ./nvidia-container-runtime-hook /rootfs/usr/local/bin/nvidia-container-runtime-hook
 
         chmod +x /rootfs/usr/local/bin/nvidia-container-runtime
-        chmod +x /rootfs/usr/local/bin/nvidia-container-toolkit
+        chmod +x /rootfs/usr/local/bin/nvidia-container-runtime-hook
 finalize:
   - from: /rootfs
     to: /rootfs

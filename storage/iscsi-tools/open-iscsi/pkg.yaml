@@ -10,12 +10,16 @@ dependencies:
     from: /rootfs
 steps:
   - sources:
-      - url: https://github.com/open-iscsi/open-iscsi/archive/refs/tags/2.1.6.tar.gz
+      - url: https://github.com/open-iscsi/open-iscsi/archive/refs/tags/{{ .OPEN_ISCSI_VERSION }}.tar.gz
         destination: open-iscsi.tar.gz
-        sha256: b67350d106696779c6bee421c60a64ade2a9dabe247dc4bd44f59c751e22d7f7
-        sha512: 4a32a76c1c32d7d1a01fe3a0f88ce9616a54323ec043757be73051eb41ebae8de90ce057acce72fb6fe07aa47e814c9bc6ee88b13fa7d7769ca10c5175974f1d
+        sha256: d96761e47a69f8214c5fbd251d844f37961b14c3e437b63a15cc64f5b8cba2f0
+        sha512: 619c57b988c6972da09428b3a84ca375ca46653fbfca9cb61389c70a95871b665f93b75b8e6ff2aa993bdb89e2a078a188c0a7b45c3bf9c15a16b496e9ebc892
     prepare:
       - |
+        mkdir -p /usr/bin \
+            && ln -sf /toolchain/bin/env /usr/bin/env \
+            && ln -sf /toolchain/bin/install /usr/bin/install
+
         tar -xzf open-iscsi.tar.gz --strip-components=1
 
         # Create symlinks for binaries required by libtoolize.
@@ -24,7 +28,6 @@ steps:
         ln -s /toolchain/bin/grep /bin/grep
 
         # Create symlinks for files used when building.
-        mkdir -p /usr/bin
         ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
         ln -s /toolchain/bin/file /usr/bin/file
 
