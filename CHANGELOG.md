@@ -1,3 +1,49 @@
+## [Talos System Extensions 1.3.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-alpha.0) (2022-09-29)
+
+Welcome to the v1.3.0-alpha.0 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Coral.ai TPU gasket driver
+
+Extensions now publish the gasket driver for [Coral.ai](https://coral.ai/) PCIe TPU modules.
+
+
+### Component Updates
+
+* Gvisor: 20220919.0
+* Linux firmware: 20220913
+* NVIDIA container-toolkit: v1.11.0
+* NVIDIA libnvidia-container: v1.11.0
+* nvidia-container-toolkit system extension: v1.11.0
+* Open iSCSI: 2.1.7
+* Open iSNS: 0.102
+* iscsi-tools system extension: v0.1.2
+
+
+### Contributors
+
+* Branden Cash
+* Noel Georgi
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`d428c1f`](https://github.com/siderolabs/extensions/commit/d428c1f81d3252793c1c3c5fa047bc92f68079f0) feat: add gasket driver
+* [`b4edb73`](https://github.com/siderolabs/extensions/commit/b4edb73cd4dd1f2cc06f9357ae67305213ae2537) chore: bump deps
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.2.3](https://github.com/siderolabs/extensions/releases/tag/v1.2.3)
+
 ## [Talos System Extensions 1.2.3](https://github.com/siderolabs/extensions/releases/tag/v1.2.3) (2022-09-20)
 
 Welcome to the v1.2.3 release of Talos System Extensions!
