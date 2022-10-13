@@ -12,8 +12,8 @@ steps:
   - sources:
       - url: https://github.com/open-iscsi/open-iscsi/archive/refs/tags/{{ .OPEN_ISCSI_VERSION }}.tar.gz
         destination: open-iscsi.tar.gz
-        sha256: d96761e47a69f8214c5fbd251d844f37961b14c3e437b63a15cc64f5b8cba2f0
-        sha512: 619c57b988c6972da09428b3a84ca375ca46653fbfca9cb61389c70a95871b665f93b75b8e6ff2aa993bdb89e2a078a188c0a7b45c3bf9c15a16b496e9ebc892
+        sha256: 9565bdf6b68b223e1e0d455d9a04d7536724a3f5b5a254e9398d06b2a0c6b6d2
+        sha512: 168ce68dc495cc8b2f217ad0373851d681f9274036b8ec562ece513de493adfdbba55f2038518f246f5244f6405102b2e096a9cce15e73fce9654f06790002c1
     prepare:
       - |
         mkdir -p /usr/bin \
