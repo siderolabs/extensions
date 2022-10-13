@@ -1,2 +1,2 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ versioning=loose depName=google/gvisor
-GVISOR_VERSION: 20220919.0
+GVISOR_VERSION: 20221010.0
