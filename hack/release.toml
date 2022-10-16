@@ -6,9 +6,9 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.2.3"
+previous = "v1.3.0-alpha.0"
 
-pre_release = false
+pre_release = true
 
 preface = """\
 See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
@@ -20,6 +20,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configur
         title = "Coral.ai TPU gasket driver"
         description = """\
 Extensions now publish the gasket driver for [Coral.ai](https://coral.ai/) PCIe TPU modules.
+"""
+
+    [notes.drbd]
+        title = "Linbit DRDB driver"
+        description = """\
+Extensions now publish the [DRBD driver](https://linbit.com/drbd/)
 """
 
     [notes.updates]

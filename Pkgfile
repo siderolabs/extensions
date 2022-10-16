@@ -4,8 +4,9 @@ format: v1alpha2
 
 vars:
   PKGS_PREFIX: ghcr.io/siderolabs
-  PKGS_VERSION: v1.3.0-alpha.0-29-g91e73b3
+  PKGS_VERSION: v1.3.0-alpha.0-31-g54d7e5c
   LINUX_FIRMWARE_VERSION: "20220913" # update this when updating PKGS_VERSION above
+  DRBD_DRIVER_VERSION: 9.1.8 # update this when updating PKGS_VERSION above
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions

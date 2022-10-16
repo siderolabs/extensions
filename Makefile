@@ -38,6 +38,7 @@ space = $(empty) $(empty)
 TARGETS = \
 		amd-ucode \
 		bnx2-bnx2x \
+		drbd \
 		gasket-driver \
 		gvisor \
 		hello-world-service \
