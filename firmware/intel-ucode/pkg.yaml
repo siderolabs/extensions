@@ -7,8 +7,8 @@ steps:
   - sources:
       - url: https://github.com/intel/Intel-Linux-Processor-Microcode-Data-Files/archive/refs/tags/microcode-{{ .INTEL_UCODE_VERSION }}.tar.gz
         destination: intel-ucode.tar.gz
-        sha256: 084463c82fbcb679e7fa211e676fd12a8ae464fed7d445e92ccc67101ced5a94
-        sha512: 1c91df1cbba33953f4ad19cc53215cad843c61a08509596fad32a84b4f0012d9d29bce64b58eb405c345af7f646d5982e45227570ce3605780be6e8bf31a63e1
+        sha256: 8d14a914815f56c27b1f41be0fd699d1afcfdbc05432056427e455100798975e
+        sha512: d86bee1269d31d3028f0d2b7d4886795b96d8f1f9d5dbd5149c2dd4cec3b0319fd869f8138f283e2135ecb0bb6387cfd3c2ef1f597b4194a250ac4f2df7f15a4
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml

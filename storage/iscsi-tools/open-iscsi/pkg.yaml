@@ -40,7 +40,7 @@ steps:
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
         LDFLAGS="$LDFLAGS -L/usr/local/lib" \
-        make -j $(nproc) \
+        make \
           prefix=/usr/local \
           exec_prefix=/usr/local \
           localstatedir=/var \
