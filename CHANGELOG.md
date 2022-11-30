@@ -1,3 +1,55 @@
+## [Talos System Extensions 1.3.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-beta.0) (2022-11-30)
+
+Welcome to the v1.3.0-beta.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Linbit DRDB driver
+
+Extensions now publish the [DRBD driver](https://linbit.com/drbd/)
+
+
+### Coral.ai TPU gasket driver
+
+Extensions now publish the gasket driver for [Coral.ai](https://coral.ai/) PCIe TPU modules.
+
+
+### Component Updates
+
+* Gvisor: 20221107.0
+* Linux firmware: 20221109
+* NVIDIA container-toolkit: v1.11.0
+* NVIDIA libnvidia-container: v1.11.0
+* nvidia-container-toolkit system extension: v1.11.0
+* Open iSCSI: 2.1.7
+* Open iSNS: 0.102
+* iscsi-tools system extension: v0.1.2
+* Intel ucode: 20221108
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`01e60b4`](https://github.com/siderolabs/extensions/commit/01e60b47ebfa682d1e36432611f5fc735e822121) feat: bump pkgs to 1.3.0
+* [`b35af1d`](https://github.com/siderolabs/extensions/commit/b35af1df6373cbecc99c9b330e0d27672bbc2d48) chore: bump dependencies
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.3.0-alpha.1](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-alpha.1)
+
 ## [Talos System Extensions 1.3.0-alpha.1](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-alpha.1) (2022-10-31)
 
 Welcome to the v1.3.0-alpha.1 release of Talos System Extensions!  
