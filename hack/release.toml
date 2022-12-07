@@ -19,7 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configur
     [notes.iscsi-tools]
         title = "fixed iscsci tools extension"
         description = """\
-iscsi-tools extension version v0.1.2 is broken, please use v0.1.3 or higher.
+iscsi-tools extension version v0.1.2 and v0.1.3 is broken, please use v0.1.4 or higher.
 """
 
     [notes.tpu]

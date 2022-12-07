@@ -18,6 +18,7 @@ steps:
 
       # cleanup
       rm -rf /rootfs/usr/local/include
+      rm -rf /rootfs/usr/share
 finalize:
   - from: /pkg/iscsid.yaml
     to: /rootfs/usr/local/etc/containers/iscsid.yaml
