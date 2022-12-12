@@ -1,3 +1,62 @@
+## [Talos System Extensions 1.3.0-beta.2](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-beta.2) (2022-12-12)
+
+Welcome to the v1.3.0-beta.2 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Linbit DRDB driver
+
+Extensions now publish the [DRBD driver](https://linbit.com/drbd/)
+
+
+### fixed iscsci tools extension
+
+iscsi-tools extension version v0.1.2 and v0.1.3 is broken, please use v0.1.4 or higher.
+
+
+### Coral.ai TPU gasket driver
+
+Extensions now publish the gasket driver for [Coral.ai](https://coral.ai/) PCIe TPU modules.
+
+
+### Component Updates
+
+* Gvisor: 20221107.0
+* Linux firmware: 20221109
+* NVIDIA container-toolkit: v1.11.0
+* NVIDIA libnvidia-container: v1.11.0
+* nvidia-container-toolkit system extension: v1.11.0
+* Open iSCSI: 2.1.7
+* Open iSNS: 0.102
+* iscsi-tools system extension: v0.1.2
+* Intel ucode: 20221108
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`5c0244b`](https://github.com/siderolabs/extensions/commit/5c0244bac063922a50b789eb534e63c1b1448960) fix: iscsi-tools paths
+* [`a054fce`](https://github.com/siderolabs/extensions/commit/a054fceed2547e29865c96b623028f99723d6401) feat: update Go to 1.19.4
+* [`8f25abc`](https://github.com/siderolabs/extensions/commit/8f25abc56dcceceb5589cdb7e8f1d26fc1010275) fix: iscsi-tools extension
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.3.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-beta.0)
+
 ## [Talos System Extensions 1.3.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-beta.0) (2022-11-30)
 
 Welcome to the v1.3.0-beta.0 release of Talos System Extensions!  
