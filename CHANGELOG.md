@@ -1,3 +1,90 @@
+## [Talos System Extensions 1.3.0](https://github.com/siderolabs/extensions/releases/tag/v1.3.0) (2022-12-15)
+
+Welcome to the v1.3.0 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Linbit DRDB driver
+
+Extensions now publish the [DRBD driver](https://linbit.com/drbd/)
+
+
+### fixed iscsci tools extension
+
+iscsi-tools extension version v0.1.2 and v0.1.3 is broken, please use v0.1.4 or higher.
+
+
+### Coral.ai TPU gasket driver
+
+Extensions now publish the gasket driver for [Coral.ai](https://coral.ai/) PCIe TPU modules.
+
+
+### Component Updates
+
+* Gvisor: 20221107.0
+* Linux firmware: 20221109
+* NVIDIA container-toolkit: v1.11.0
+* NVIDIA libnvidia-container: v1.11.0
+* nvidia-container-toolkit system extension: v1.11.0
+* Open iSCSI: 2.1.7
+* Open iSNS: 0.102
+* iscsi-tools system extension: v0.1.2
+* Intel ucode: 20221108
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+* Branden Cash
+* DJAlPee
+* Daniel Quinlan
+* Tim Jones
+
+### Changes
+<details><summary>21 commits</summary>
+<p>
+
+* [`15fc062`](https://github.com/siderolabs/extensions/commit/15fc0621f8d8b461d1c5ee536fe215b221ce012c) release(v1.3.0-beta.2): prepare release
+* [`5c0244b`](https://github.com/siderolabs/extensions/commit/5c0244bac063922a50b789eb534e63c1b1448960) fix: iscsi-tools paths
+* [`a054fce`](https://github.com/siderolabs/extensions/commit/a054fceed2547e29865c96b623028f99723d6401) feat: update Go to 1.19.4
+* [`8f25abc`](https://github.com/siderolabs/extensions/commit/8f25abc56dcceceb5589cdb7e8f1d26fc1010275) fix: iscsi-tools extension
+* [`4819453`](https://github.com/siderolabs/extensions/commit/48194537922ddc3436e26c1156fa1f9495cb27ca) release(v1.3.0-beta.0): prepare release
+* [`01e60b4`](https://github.com/siderolabs/extensions/commit/01e60b47ebfa682d1e36432611f5fc735e822121) feat: bump pkgs to 1.3.0
+* [`b35af1d`](https://github.com/siderolabs/extensions/commit/b35af1df6373cbecc99c9b330e0d27672bbc2d48) chore: bump dependencies
+* [`29bc381`](https://github.com/siderolabs/extensions/commit/29bc381374496e1e4c70572052e8133d73fa2de6) release(v1.3.0-alpha.1): prepare release
+* [`0ea902e`](https://github.com/siderolabs/extensions/commit/0ea902e326091246e38b490660a15850cec7d933) chore: update dependencies
+* [`a9f42bb`](https://github.com/siderolabs/extensions/commit/a9f42bb207df64e9ed598c5394c19ca9ff9b3e1a) feat: add 'drbd' extension
+* [`eff6a5d`](https://github.com/siderolabs/extensions/commit/eff6a5d048cb50984492b620864c4e669bc4faa5) feat: update releases
+* [`70252ea`](https://github.com/siderolabs/extensions/commit/70252ea98ddcf9a51b4b8ed676969ba5f5688d0d) release(v1.3.0-alpha.0): prepare release
+* [`d428c1f`](https://github.com/siderolabs/extensions/commit/d428c1f81d3252793c1c3c5fa047bc92f68079f0) feat: add gasket driver
+* [`b4edb73`](https://github.com/siderolabs/extensions/commit/b4edb73cd4dd1f2cc06f9357ae67305213ae2537) chore: bump deps
+* [`a105040`](https://github.com/siderolabs/extensions/commit/a105040d42e5e2b2d08c073c32dcb937a1b3492c) release(v1.2.3): prepare release
+* [`0991e6c`](https://github.com/siderolabs/extensions/commit/0991e6c8a06f158ada10ae98150f15801ff755b3) fix: drone release pipeline
+* [`e6951d3`](https://github.com/siderolabs/extensions/commit/e6951d323133821361b5e03d4e27f1569efe8b6a) chore: fix release script
+* [`1cf0239`](https://github.com/siderolabs/extensions/commit/1cf0239f5590ee63f0db95a0581e18f334c86d77) release(v1.2.2): prepare release
+* [`47bd65c`](https://github.com/siderolabs/extensions/commit/47bd65c61bb38b1512c6b90d4b704622fad4b588) feat: add nut-client
+* [`e5a68dd`](https://github.com/siderolabs/extensions/commit/e5a68ddac7cacceb7f61c2cd44720f953f01af97) release(v1.2.1): prepare release
+* [`b5be6a9`](https://github.com/siderolabs/extensions/commit/b5be6a9ce178b6ef7d9f3653a9d9e2abfe5b29e5) chore: fix changelog
+</p>
+</details>
+
+### Changes since v1.3.0-beta.2
+<details><summary>0 commit</summary>
+<p>
+
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.2.0](https://github.com/siderolabs/extensions/releases/tag/v1.2.0)
+
 ## [Talos System Extensions 1.3.0-beta.2](https://github.com/siderolabs/extensions/releases/tag/v1.3.0-beta.2) (2022-12-12)
 
 Welcome to the v1.3.0-beta.2 release of Talos System Extensions!  
