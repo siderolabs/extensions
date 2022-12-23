@@ -6,10 +6,10 @@ dependencies:
 steps:
   - sources:
       # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
-      - url: https://github.com/google/gvisor/archive/4793b32eb08bd852a92e5318d4fb7874a9ba0a78.tar.gz
+      - url: https://github.com/google/gvisor/archive/6ec92611f02490966e8a2d482e33f7ba38546b90.tar.gz
         destination: gvisor.tar.gz
-        sha256: 33ef486f8cfb7810dbd99ab7b12b19f24f47f1478d164c898a202915a943a9b6
-        sha512: cddb1afd12064ec6075b6d5cd7154ab6d7ed60d93609eded8a88ce7fd39db03ce13bb187a499928411239df1a8d28a585139e66549ab39fcbc1bf0b8dd31ed28
+        sha256: 529885afba906aa277fdba90254c5ec42d4f8757904b1ee1a134f9f48cf1909c
+        sha512: d3e6be510c76d4747daabfe447117526072ab7eb6e7ad9a793246b32459a64639380eb023e6111c5810c6e6d67a33418f48109619ba865e6cd61994259040415
     env:
       GOPATH: /go
     prepare:

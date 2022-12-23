@@ -38,7 +38,6 @@ space = $(empty) $(empty)
 TARGETS = \
 		amd-ucode \
 		bnx2-bnx2x \
-		drbd \
 		gasket-driver \
 		gvisor \
 		hello-world-service \
@@ -48,6 +47,9 @@ TARGETS = \
 		nvidia-container-toolkit \
 		nvidia-fabricmanager \
 		nvidia-open-gpu-kernel-modules
+
+# Temporarily disabled, as drbd-pkg fails to build with Linux 6.1
+#		drbd \
 
 NONFREE_TARGETS =
 

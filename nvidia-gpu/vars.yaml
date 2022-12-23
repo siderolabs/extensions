@@ -1,6 +1,6 @@
 # renovate: datasource=github-releases depName=NVIDIA/open-gpu-kernel-modules
-NVIDIA_DRIVER_VERSION: 515.65.01
-NVIDIA_FABRICMANAGER_VERSION: 515.65.01
+NVIDIA_DRIVER_VERSION: 525.60.13
+NVIDIA_FABRICMANAGER_VERSION: 525.60.13
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
 CONTAINER_TOOLKIT_VERSION: v1.11.0
 CONTAINER_TOOLKIT_REF: d9de4a09b8fd51a46207398199ecfeb3998ad49d
