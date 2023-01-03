@@ -6,47 +6,15 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.2.0"
+previous = "v1.3.0"
 
 pre_release = false
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.3/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
-
-    [notes.iscsi-tools]
-        title = "fixed iscsci tools extension"
-        description = """\
-iscsi-tools extension version v0.1.2 and v0.1.3 is broken, please use v0.1.4 or higher.
-"""
-
-    [notes.tpu]
-        title = "Coral.ai TPU gasket driver"
-        description = """\
-Extensions now publish the gasket driver for [Coral.ai](https://coral.ai/) PCIe TPU modules.
-"""
-
-    [notes.drbd]
-        title = "Linbit DRDB driver"
-        description = """\
-Extensions now publish the [DRBD driver](https://linbit.com/drbd/)
-"""
-
-    [notes.updates]
-        title = "Component Updates"
-        description = """\
-* Gvisor: 20221107.0
-* Linux firmware: 20221109
-* NVIDIA container-toolkit: v1.11.0
-* NVIDIA libnvidia-container: v1.11.0
-* nvidia-container-toolkit system extension: v1.11.0
-* Open iSCSI: 2.1.7
-* Open iSNS: 0.102
-* iscsi-tools system extension: v0.1.2
-* Intel ucode: 20221108
-"""
 
 
 [make_deps]
