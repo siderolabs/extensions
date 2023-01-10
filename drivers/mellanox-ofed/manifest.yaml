@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: mellanox-ofed
+  version: "$VERSION"
+  author: SideroLabs
+  description: |
+    This system extension provides kernel module driver for Mellanox OFED built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.3.0"

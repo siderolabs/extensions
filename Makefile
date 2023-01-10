@@ -51,6 +51,7 @@ TARGETS = \
 
 # Temporarily disabled, as drbd-pkg fails to build with Linux 6.1
 #		drbd \
+#       mellanox-ofed \
 
 NONFREE_TARGETS =
 
