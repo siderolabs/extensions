@@ -23,9 +23,7 @@ steps:
         tar -xzf open-iscsi.tar.gz --strip-components=1
 
         # Create symlinks for binaries required by libtoolize.
-        ln -s /toolchain/bin/sed /bin/sed
         ln -s /toolchain/bin/sed /usr/bin/sed
-        ln -s /toolchain/bin/grep /bin/grep
 
         # Create symlinks for files used when building.
         ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config

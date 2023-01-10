@@ -23,10 +23,6 @@ steps:
         mkdir -p /usr/bin \
             && ln -sf /toolchain/bin/env /usr/bin/env
 
-        # Create symlinks for binaries required by libtoolize.
-        ln -s /toolchain/bin/sed /bin/sed
-        ln -s /toolchain/bin/grep /bin/grep
-
         # Create symlinks for files used when building.
         ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
         ln -s /toolchain/bin/file /usr/bin/file
