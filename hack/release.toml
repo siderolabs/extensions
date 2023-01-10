@@ -20,8 +20,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configur
     [notes.updates]
         title = "Component Updates"
         description = """\
-* Gvisor: 20230109.0
-* Linux firmware: 20221214
+* Gvisor: 20231214.0
+* Linux firmware: 20230210
+* Intel ucode: 20230214
+* nvidia-container-toolkit: v1.12.0
+* nvidia driver: 525.89.02
+* nvidia-fabricmanager: 525.85.12
 """
 
 

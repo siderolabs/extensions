@@ -17,7 +17,7 @@ GOARCH := amd64
 endif
 
 # keep in sync with Pkgfile
-BLDR_RELEASE ?= v0.2.0-alpha.10
+BLDR_RELEASE ?= v0.2.0-alpha.12
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -52,7 +52,7 @@ TARGETS = \
 
 # Temporarily disabled, as drbd-pkg fails to build with Linux 6.1
 #		drbd \
-#       mellanox-ofed \
+#		mellanox-ofed \
 
 NONFREE_TARGETS =
 

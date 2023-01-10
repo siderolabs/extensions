@@ -7,8 +7,8 @@ steps:
   - sources:
       - url: https://ftpmirror.gnu.org/libc/glibc-{{ .GLIBC_VERSION }}.tar.gz
         destination: glibc.tar.gz
-        sha256: 02efa6ffbbaf3e10e88f16818a862608d04b0ef838c66f6025ae120530792c9c
-        sha512: a898d76fb88a68cda122aba26794d91d1088afbc90aaf93505afbf8b607403e8e92f2dd1acface417b9289cb18056579f49176dd88c88e2815b2552bb355f63e
+        sha256: 811f19f9200118ff94ede28a6e12307584152cdcbf3d366cd729ea2f855db255
+        sha512: 9cfd8b3ce87710623736b305ff836040112263439278d4ff19b0d332c0193d3bb123dcda2c584215fe2f5c9c81d5b0c4104ea9904d6b7a7ff161a6ce254d6773
     env:
       DEBIAN_FRONTEND: noninteractive
     prepare:

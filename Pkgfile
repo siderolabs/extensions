@@ -1,12 +1,12 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.2.0-alpha.10
+# syntax = ghcr.io/siderolabs/bldr:v0.2.0-alpha.12
 
 format: v1alpha2
 
 vars:
   PKGS_PREFIX: ghcr.io/siderolabs
-  PKGS_VERSION: v1.4.0-alpha.0-18-g987d24a
-  LINUX_FIRMWARE_VERSION: "20221214" # update this when updating PKGS_VERSION above
-  DRBD_DRIVER_VERSION: 9.2.1 # update this when updating PKGS_VERSION above
+  PKGS_VERSION: v1.4.0-alpha.0-27-g7493721
+  LINUX_FIRMWARE_VERSION: "20230210" # update this when updating PKGS_VERSION above
+  DRBD_DRIVER_VERSION: 9.2.2 # update this when updating PKGS_VERSION above
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions

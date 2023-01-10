@@ -19,9 +19,10 @@
                 "Pkgfile"
             ],
             "matchStrings": [
-                "(?<depName>ghcr.io\\/siderolabs\\/bldr):(?<currentValue>v.*-frontend)"
+                "ghcr.io\\/siderolabs\\/bldr:(?<currentValue>v.*)"
             ],
-            "datasourceTemplate": "docker",
+            "depNameTemplate": "siderolabs/bldr",
+            "datasourceTemplate": "github-tags",
             "versioningTemplate": "semver"
         },
         {
@@ -31,11 +32,25 @@
             "matchStrings": [
                 "BLDR_RELEASE\\s+\\?=\\s+(?<currentValue>.*)\\n"
             ],
-            "datasourceTemplate": "github-releases",
-            "depNameTemplate": "siderolabs/bldr"
+            "depNameTemplate": "siderolabs/bldr",
+            "datasourceTemplate": "github-tags",
+            "versioningTemplate": "semver"
         }
     ],
     "packageRules": [
+        {
+            "matchPackageNames": [
+                "golang/go",
+                "nvidia/open-gpu-kernel-modules"
+            ],
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>\\d+)?$"
+        },
+        {
+            "matchPackageNames": [
+                "https://sourceware.org/git/glibc.git"
+            ],
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>(?!9000$)\\d+)?$"
+        },
         {
             "matchPackagePatterns": [
                 "*"

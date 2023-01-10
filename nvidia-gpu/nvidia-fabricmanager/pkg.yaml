@@ -8,13 +8,13 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-sbsa/fabricmanager-linux-sbsa-{{ .NVIDIA_FABRICMANAGER_VERSION }}-archive.tar.xz
         destination: fabricmanager.tar.xz
-        sha256: 6c74abdb3f5bb54742a71e0c610d9e550c2754a10f12581dc058324799416a44
-        sha512: 97b9928a965ffde294e6299e474455c29f68598c428c0b833b5da76d9754aa4bc039b121e0e6773e77a50c0f88154c8c5d8596f86e6e5db712c47df06169bbe4
+        sha256: ba615237bda8b4e939d2cd0967b4c76a74f18266a410414069368b04a3a25d74
+        sha512: c7ce62ab2da6d3d837ef6180efe9535bf036c155ff6ae9114cd70d5b4860bdf5fd0a5cf2e10bf3b45d5bd2d8eb2e4b36eeeb2a3a00e6a24a8c621df1ab6994f3
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_FABRICMANAGER_VERSION }}-archive.tar.xz
         destination: fabricmanager.tar.xz
-        sha256: 1adfbb12817f213e39d389442505f75dd7cc085ce4afa98ecdc2ea26dcb321da
-        sha512: 8e91c084148a8df3f5d2fd6f3f4b470719da2459618b560b5322433c53274680ff817821dc9aa89e08996c1e917faae5042faaccaa309bd4871561d29edc886a
+        sha256: 01e6e1a873347c91489860509e6332d5224eb48704dd3160335601083ffd0c74
+        sha512: f1193c9bea894e1396c9c5820ccc5c54c5479c3714120cd646b51550db509214cc57502d790dc3246d70b9858041bfd5b80d959bc0c4b3502026ec7b887dd281
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |

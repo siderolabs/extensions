@@ -1,16 +1,16 @@
-# renovate: datasource=github-releases depName=NVIDIA/open-gpu-kernel-modules
-NVIDIA_DRIVER_VERSION: 525.60.13
-NVIDIA_FABRICMANAGER_VERSION: 525.60.13
+# renovate: datasource=github-releases depName=nvidia/open-gpu-kernel-modules
+NVIDIA_DRIVER_VERSION: 525.89.02
+NVIDIA_FABRICMANAGER_VERSION: 525.85.12
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
-CONTAINER_TOOLKIT_VERSION: v1.11.0
-CONTAINER_TOOLKIT_REF: d9de4a09b8fd51a46207398199ecfeb3998ad49d
+CONTAINER_TOOLKIT_VERSION: v1.12.0
+CONTAINER_TOOLKIT_REF: 62bd015475656ef795cb0d59cc4030a6bd4a9526
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/libnvidia-container.git
-LIBNVIDIA_CONTAINER_VERSION: v1.11.0
-LIBNVIDIA_CONTAINER_REF: c8f267be0bac1c654d59ad4ea5df907141149977
-# renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ versioning=loose depName=golang/go
-GOLANG_VERSION: 1.17.13
-# renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ versioning=loose depName=https://sourceware.org/git/glibc.git
-GLIBC_VERSION: 2.36
+LIBNVIDIA_CONTAINER_VERSION: v1.12.0
+LIBNVIDIA_CONTAINER_REF: 7678e1af094d865441d0bc1b97c3e72d15fcab50
+# renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ depName=golang/go
+GOLANG_VERSION: 1.20.1
+# renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ depName=https://sourceware.org/git/glibc.git
+GLIBC_VERSION: 2.37
 # renovate: datasource=docker versioning=docker depName=ubuntu
 UBUNTU_IMAGE_VERSION: 23.04
 # renovate: datasource=docker versioning=docker depName=debian
