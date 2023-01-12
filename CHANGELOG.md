@@ -1,3 +1,30 @@
+## [Talos System Extensions 1.3.2](https://github.com/siderolabs/extensions/releases/tag/v1.3.2) (2023-01-12)
+
+Welcome to the v1.3.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.3/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`1bbe831`](https://github.com/siderolabs/extensions/commit/1bbe831d9be6ef22d7a0c44fb14856228b04b6d8) chore: disable provenance in buildx
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.3.1](https://github.com/siderolabs/extensions/releases/tag/v1.3.1)
+
 ## [Talos System Extensions 1.3.1](https://github.com/siderolabs/extensions/releases/tag/v1.3.1) (2023-01-03)
 
 Welcome to the v1.3.1 release of Talos System Extensions!
