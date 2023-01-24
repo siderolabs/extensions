@@ -4,7 +4,7 @@ format: v1alpha2
 
 vars:
   PKGS_PREFIX: ghcr.io/siderolabs
-  PKGS_VERSION: v1.3.0-9-g9543590
+  PKGS_VERSION: v1.3.0-10-g6f6a030
   LINUX_FIRMWARE_VERSION: "20221109" # update this when updating PKGS_VERSION above
   DRBD_DRIVER_VERSION: 9.2.0 # update this when updating PKGS_VERSION above
 
