@@ -42,6 +42,7 @@ TARGETS = \
 		gasket-driver \
 		gvisor \
 		hello-world-service \
+		i915-ucode \
 		intel-ucode \
 		iscsi-tools \
 		nut-client \
