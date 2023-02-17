@@ -41,7 +41,8 @@
         {
             "matchPackageNames": [
                 "golang/go",
-                "nvidia/open-gpu-kernel-modules"
+                "nvidia/open-gpu-kernel-modules",
+                "open-iscsi/open-isns"
             ],
             "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>\\d+)?$"
         },
@@ -49,7 +50,7 @@
             "matchPackageNames": [
                 "https://sourceware.org/git/glibc.git"
             ],
-            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>(?!9000$)\\d+)?$"
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>[0-9]{1,3})?$"
         },
         {
             "matchPackagePatterns": [
