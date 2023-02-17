@@ -5,7 +5,7 @@ dependencies:
   - stage: base
   # The pkgs version for a particular release of Talos as defined in
   # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
-  - image: "{{ .PKGS_PREFIX }}/gasket-driver-pkg:{{ .PKGS_VERSION }}"
+  - image: "{{ .PKGS_PREFIX }}/gasket-driver-pkg:{{ .BUILD_ARG_PKGS_VERSION }}"
 steps:
   - prepare:
       - |

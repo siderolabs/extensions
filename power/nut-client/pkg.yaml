@@ -3,8 +3,8 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
-  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .PKGS_VERSION }}"
-  - image: "{{ .PKGS_PREFIX }}/util-linux:{{ .PKGS_VERSION }}"
+  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS_VERSION }}"
+  - image: "{{ .PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS_VERSION }}"
 steps:
   - sources:
       - url: https://github.com/networkupstools/nut/releases/download/v{{ .NUT_VERSION }}/nut-{{ .NUT_VERSION }}.tar.gz

@@ -18,6 +18,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.0-alpha.12
+PKGS_VERSION ?= v1.4.0-alpha.0-29-g5dbce6b
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -31,6 +32,7 @@ COMMON_ARGS += --build-arg=http_proxy=$(http_proxy)
 COMMON_ARGS += --build-arg=https_proxy=$(https_proxy)
 COMMON_ARGS += --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
 COMMON_ARGS += --build-arg=TAG=$(TAG)
+COMMON_ARGS += --build-arg=PKGS_VERSION=$(PKGS_VERSION)
 
 , := ,
 empty :=
@@ -39,6 +41,7 @@ space = $(empty) $(empty)
 TARGETS = \
 		amd-ucode \
 		bnx2-bnx2x \
+		drbd \
 		gasket-driver \
 		gvisor \
 		hello-world-service \
@@ -50,8 +53,7 @@ TARGETS = \
 		nvidia-fabricmanager \
 		nvidia-open-gpu-kernel-modules
 
-# Temporarily disabled, as drbd-pkg fails to build with Linux 6.1
-#		drbd \
+# Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1
 #		mellanox-ofed \
 
 NONFREE_TARGETS =
@@ -82,6 +84,11 @@ docker-%: ## Builds the specified target defined in the Dockerfile using the doc
 $(TARGETS) $(NONFREE_TARGETS): $(ARTIFACTS)/bldr
 	@$(MAKE) docker-$@ \
 		TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:$(shell $(ARTIFACTS)/bldr eval --target $@ --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) --push=$(PUSH)"
+
+deps: $(ARTIFACTS)/bldr
+	@rm -f _out/deps
+	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/deps;)
+	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/deps;)
 
 .PHONY: deps.png
 deps.png: $(ARTIFACTS)/bldr
