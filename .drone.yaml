@@ -1,3 +1,4 @@
+---
 kind: pipeline
 name: default
 type: kubernetes
@@ -82,6 +83,33 @@ steps:
       event:
         exclude:
           - pull_request
+          - promote
+    volumes:
+      - name: outer-docker-socket
+        path: /var/run
+      - name: ssh
+        path: /root/.ssh
+      - name: buildx
+        path: /root/.docker/buildx
+    depends_on:
+      - setup-ci
+
+  - name: e2e-talos
+    image: autonomy/build-container:latest
+    pull: always
+    environment:
+      AWS_ACCESS_KEY_ID:
+        from_secret: 'rook_access_key_id'
+      AWS_SECRET_ACCESS_KEY:
+        from_secret: 'rook_secret_access_key'
+    commands:
+      - make all deps PUSH=true
+      - s3cmd --host=rook-ceph-rgw-ci-store.rook-ceph.svc --host-bucket=rook-ceph-rgw-ci-store.rook-ceph.svc --no-ssl --stats sync _out/deps s3://${BUCKET_PATH}
+    when:
+      event:
+        - promote
+      target:
+        - e2e-talos
     volumes:
       - name: outer-docker-socket
         path: /var/run
