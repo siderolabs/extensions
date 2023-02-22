@@ -103,8 +103,8 @@ steps:
       AWS_SECRET_ACCESS_KEY:
         from_secret: 'rook_secret_access_key'
     commands:
-      - make all deps PUSH=true
-      - s3cmd --host=rook-ceph-rgw-ci-store.rook-ceph.svc --host-bucket=rook-ceph-rgw-ci-store.rook-ceph.svc --no-ssl --stats sync _out s3://${BUCKET_PATH}
+      - make all extensions-metadata PUSH=true
+      - s3cmd --host=rook-ceph-rgw-ci-store.rook-ceph.svc --host-bucket=rook-ceph-rgw-ci-store.rook-ceph.svc --no-ssl --stats sync _out/extensions-metadata s3://${BUCKET_PATH}/_out/extensions-metadata
     when:
       event:
         - promote
