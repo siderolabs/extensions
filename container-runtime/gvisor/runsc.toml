@@ -1,3 +1,1 @@
 [runsc_config]
-# See https://github.com/siderolabs/extensions/issues/4
-ignore-cgroups = "true"
