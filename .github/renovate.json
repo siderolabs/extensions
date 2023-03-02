@@ -42,7 +42,8 @@
             "matchPackageNames": [
                 "golang/go",
                 "nvidia/open-gpu-kernel-modules",
-                "open-iscsi/open-isns"
+                "open-iscsi/open-isns",
+                "linux-rdma/rdma-core"
             ],
             "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>\\d+)?$"
         },

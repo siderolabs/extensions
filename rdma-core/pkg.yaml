@@ -1,0 +1,38 @@
+name: rdma-core
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/linux-rdma/rdma-core/releases/download/v{{ .RDMA_CORE_VERSION }}/rdma-core-{{ .RDMA_CORE_VERSION }}.tar.gz
+        destination: rdma-core.tar.gz
+        sha256: 25d6601e60f27bbcd75e07fe340400cb80e6c3c487679700535385cfc9d9858b
+        sha512: f31c63aee415fb4aa721fdec2e4d9fb2bef964b1bea93f0170d30fb03b1e798cb11d46bb123db4b2a5002dec17ec16dc6e6aeaebe9f84517bf538dd114726ae1
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzf rdma-core.tar.gz --strip-components=1
+
+        mkdir build
+        cd build
+
+        cmake ..
+    build:
+      - |
+        cd build
+
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs/
+
+        cd build
+        
+        make DESTDIR=/rootfs install
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

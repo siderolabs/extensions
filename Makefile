@@ -18,7 +18,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.0-alpha.12
-PKGS ?= v1.4.0-alpha.0-29-g5dbce6b
+PKGS ?= v1.4.0-alpha.0-30-g0e63e95
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -51,7 +51,8 @@ TARGETS = \
 		nut-client \
 		nvidia-container-toolkit \
 		nvidia-fabricmanager \
-		nvidia-open-gpu-kernel-modules
+		nvidia-open-gpu-kernel-modules \
+		rdma-core
 
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1
 #		mellanox-ofed \
