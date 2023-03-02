@@ -1,0 +1,2 @@
+# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=linux-rdma/rdma-core
+RDMA_CORE_VERSION: 44.0
