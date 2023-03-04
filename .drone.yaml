@@ -98,13 +98,18 @@ steps:
     image: autonomy/build-container:latest
     pull: always
     environment:
-      AWS_ACCESS_KEY_ID:
-        from_secret: 'rook_access_key_id'
-      AWS_SECRET_ACCESS_KEY:
-        from_secret: 'rook_secret_access_key'
+      AZURE_STORAGE_ACCOUNT:
+        from_secret: 'az_storage_account'
+      AZURE_STORAGE_USER:
+        from_secret: 'az_storage_user'
+      AZURE_STORAGE_PASS:
+        from_secret: 'az_storage_pass'
+      AZURE_TENANT:
+        from_secret: 'az_tenant'
     commands:
+      - az login --service-principal -u "$${AZURE_STORAGE_USER}" -p "$${AZURE_STORAGE_PASS}" --tenant "$${AZURE_TENANT}"
       - make all extensions-metadata PUSH=true
-      - s3cmd --host=rook-ceph-rgw-ci-store.rook-ceph.svc --host-bucket=rook-ceph-rgw-ci-store.rook-ceph.svc --no-ssl --stats sync _out/extensions-metadata s3://${BUCKET_PATH}/_out/extensions-metadata
+      - az storage blob upload -f _out/extensions-metadata -n extensions-metadata -c "$${BUCKET_PATH}"
     when:
       event:
         - promote
