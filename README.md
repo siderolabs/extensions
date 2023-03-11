@@ -25,7 +25,7 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | Name                                 | Image                                                                                                 | Description                 | Version Format           |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------ |
 | [amd-ucode](firmware/amd-ucode/)     | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode)     | AMD CPU microcode updates   | `linux firmware version` |
-| [i915-ucode](firmware/i915-ucode/)   | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/i915-ucode)    | Intel GPU firmware          | `linux firmware version` |
+| [i915-ucode](firmware/i915-ucode/)   | [ghcr.io/siderolabs/i915-ucode](https://github.com/siderolabs/extensions/pkgs/container/i915-ucode)    | Intel GPU firmware          | `linux firmware version` |
 | [bnx2-bnx2x](firmware/bnx2-bnx2x/)   | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x)   | Broadcom NetXtreme firmware | `linux firmware version` |
 | [intel-ucode](firmware/intel-ucode/) | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | Intel CPU microcode updates | `upstream version`       |
 
