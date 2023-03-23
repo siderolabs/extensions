@@ -11,7 +11,7 @@ previous = "v1.3.0"
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.4/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
@@ -21,9 +21,9 @@ See [Talos Linux documentation](https://www.talos.dev/v1.2/talos-guides/configur
         title = "Component Updates"
         description = """\
 * Gvisor: 20231214.0
-* Linux firmware: 20230210
+* Linux firmware: 20230310
 * Intel ucode: 20230214
-* nvidia-container-toolkit: v1.12.0
+* nvidia-container-toolkit: v1.12.1
 * NVIDIA driver: 530.30.02
 * nvidia-fabricmanager: 525.85.12
 """
