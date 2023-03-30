@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases depName=nvidia/open-gpu-kernel-modules
-NVIDIA_DRIVER_VERSION: 530.30.02
+NVIDIA_DRIVER_VERSION: 530.41.03
 NVIDIA_FABRICMANAGER_VERSION: 525.85.12
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
 CONTAINER_TOOLKIT_VERSION: v1.12.1
@@ -8,7 +8,7 @@ CONTAINER_TOOLKIT_REF: 0bedf07e7b06f89a02394e6d8e6b5f8cbb0828a7
 LIBNVIDIA_CONTAINER_VERSION: v1.12.1
 LIBNVIDIA_CONTAINER_REF: 7440a1ead8e4fe35edf1c973c73a662108b21a1f
 # renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ depName=golang/go
-GOLANG_VERSION: 1.20.1
+GOLANG_VERSION: 1.20.2
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ depName=https://sourceware.org/git/glibc.git
 GLIBC_VERSION: 2.37
 # renovate: datasource=docker versioning=docker depName=ubuntu

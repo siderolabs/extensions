@@ -53,6 +53,13 @@
             "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>[0-9]{1,3})?$"
         },
         {
+            "matchPackageNames": [
+                "google/gvisor",
+                "intel/Intel-Linux-Processor-Microcode-Data-Files"
+            ],
+            "versioning": "regex:^(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})\\.?(?<build>\\d+)?$"
+        },
+        {
             "matchPackagePatterns": [
                 "*"
             ],
