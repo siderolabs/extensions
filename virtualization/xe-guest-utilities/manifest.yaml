@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: xe-guest-utilities
+  version: "$VERSION"
+  author: Cas de Reuver
+  description: |
+    This system extension provides xe-guest-utilities for machines running on XenServer/XCP-ng.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"

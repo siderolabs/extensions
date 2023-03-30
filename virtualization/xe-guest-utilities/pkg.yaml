@@ -1,0 +1,37 @@
+name: xe-guest-utilities
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /go
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        git clone https://github.com/YannickTeKulve/xe-guest-utilities.git ${TOOLCHAIN}/go/src/github.com/xenserver/xe-guest-utilities
+        git clone https://github.com/golang/sys.git ${TOOLCHAIN}/go/src/golang.org/x/sys
+
+        cd ${TOOLCHAIN}/go/src/github.com/xenserver/xe-guest-utilities
+        git checkout ytk-net-fix
+
+        CGO_ENABLED=0 make build
+        
+        echo 'ACTION=="add", SUBSYSTEM=="cpu", RUN+="echo 1 > /sys$devpath/online"' > build/stage/etc/udev/rules.d/z10_xen-vcpu-hotplug.rules
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        mkdir -p /rootfs/usr/local/lib/containers/xe-guest-utilities
+
+        cp -ar ${TOOLCHAIN}/go/src/github.com/xenserver/xe-guest-utilities/build/stage/* /rootfs/usr/local/lib/containers/xe-guest-utilities
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/xe-guest-utilities.yaml
+    to: /rootfs/usr/local/etc/containers/
