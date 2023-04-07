@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: xen-guest-agent
+  version: "$VERSION"
+  author: Cas de Reuver
+  description: |
+    This system extension provides xen-guest-agent for machines running on XenServer/XCP-ng.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"

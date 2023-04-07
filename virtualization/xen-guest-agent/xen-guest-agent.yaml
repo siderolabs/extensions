@@ -1,0 +1,18 @@
+name: xen-guest-agent
+container:
+  entrypoint: /usr/sbin/xen-guest-agent
+  mounts:
+    - source: /lib/modules
+      destination: /lib/modules
+      type: bind
+      options:
+        - bind
+        - rw
+  security:
+    writeableRootfs: true
+    writeableSysfs: true
+depends:
+  - network:
+    - addresses
+    - etcfiles
+restart: always

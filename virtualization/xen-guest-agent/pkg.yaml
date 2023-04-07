@@ -1,0 +1,25 @@
+name: xen-guest-agent
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://gitlab.com/api/v4/projects/44965029/jobs/artifacts/cdr%2Fbuild-container/download?job=build-linux-default
+        destination: xen-guest-agent.tar.gz
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+        tar xzf /pkg/xen-guest-agent.tar.gz
+    install:
+      - |
+        chmod +x /pkg/target/debug/xen-guest-agent
+        mkdir -p /rootfs/usr/local/lib/containers/xen-guest-agent
+        cp /pkg/target/debug/xen-guest-agent /rootfs/usr/local/lib/containers/xen-guest-agent/usr/sbin/xen-guest-agent
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/xen-guest-agent.yaml
+    to: /rootfs/usr/local/etc/containers/

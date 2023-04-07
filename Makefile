@@ -51,7 +51,8 @@ TARGETS = \
 		nut-client \
 		nvidia-container-toolkit \
 		nvidia-fabricmanager \
-		nvidia-open-gpu-kernel-modules
+		nvidia-open-gpu-kernel-modules \
+		xen-guest-agent
 
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1
 #		mellanox-ofed \

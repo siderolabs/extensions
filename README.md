@@ -57,6 +57,12 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | [nvidia-fabricmanager](nvidia-gpu/nvidia-fabricmanager/)         | [NVIDIA fabric manager](https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf) support for GPU workloads      | `driver version`                   |
 | [nvidia-open-gpu-kernel-modules](nvidia-gpu/nvidia-modules/)     | NVIDIA driver kernel modules                                                                                                       | `driver version`-`talos version`   |
 
+### Virtualization
+
+| Name                                               | Image                                                                                                         | Description                                                       | Version Format                     |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------- |
+| [xen-guest-agent](virtualization/xen-guest-agent/) | [ghcr.io/siderolabs/xen-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/xen-guest-agent) | [xen-guest-agent](https://gitlab.com/xen-project/xen-guest-agent) | `upstream version`-`talos version` |
+
 ## Building Extensions
 
 In the current form, building extensions requires the use of our [bldr](https://github.com/siderolabs/bldr) tool.
