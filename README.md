@@ -70,6 +70,16 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | [nvidia-fabricmanager](nvidia-gpu/nvidia-fabricmanager/)         | [NVIDIA fabric manager](https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf) support for GPU workloads      | `driver version`                   |
 | [nvidia-open-gpu-kernel-modules](nvidia-gpu/nvidia-modules/)     | NVIDIA driver kernel modules                                                                                                       | `driver version`-`talos version`   |
 
+### Platforms
+
+#### Generic Pi
+
+| Name                                                 | Description                                                                                                                  | Version Format |
+|------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|----------------|
+| [boot-config-loader](generic-pi/boot-config-loader/) | Tool to update rpi boot config.txt, more instructions can be found [here](https://github.com/OGKevin/talos-ext-rpi-generic). | SemVer v1.0.0  |
+
+
+
 ## Building Extensions
 
 In the current form, building extensions requires the use of our [bldr](https://github.com/siderolabs/bldr) tool.

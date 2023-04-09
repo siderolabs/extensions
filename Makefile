@@ -54,7 +54,8 @@ TARGETS = \
 		nvidia-open-gpu-kernel-modules \
 		qemu-guest-agent \
 		tailscale \
-		usb-modem-drivers
+		usb-modem-drivers \
+		rpi-boot-config-loader
 
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1
 #		mellanox-ofed \

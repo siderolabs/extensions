@@ -1,0 +1,30 @@
+name: rpi-boot-config-loader
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/OGKevin/talos-ext-rpi-generic/archive/refs/tags/{{ .VERSION }}.tar.gz
+        destination: talos-ext-rpi-generic.tar.gz
+        sha256: a9103253955982616d0c9b0b0e49c926c6d63e2d466e2af06e8d97dd183dd1bb
+        sha512: 8efa0301ff7645214d469ee03aa5e089823cf7959ab090458c99431f9c44a9bfb5485358906918c4c93e9824330fc535bdc7767dec7fdf4e5bba2059e68cb0cd
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+        
+        mkdir talos-ext-rpi-generic
+        tar -xzf  talos-ext-rpi-generic.tar.gz --strip-components=1 -C talos-ext-rpi-generic
+    build:
+      - |
+          export PATH=${PATH}:${TOOLCHAIN}/go/bin
+          
+          cd talos-ext-rpi-generic
+          CGO_ENABLED=0 go build -o /generic-pi .
+finalize:
+  - from: /generic-pi
+    to: /rootfs/usr/local/lib/containers/rpi-boot-config-loader/
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/boot-config-loader.yaml
+    to: /rootfs/usr/local/etc/containers/rpi-boot-config-loader.yaml

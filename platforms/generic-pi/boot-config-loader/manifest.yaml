@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: rpi-boot-config-loader
+  version: "$VERSION"
+  author: OGKevin
+  description: |
+    This system extension provides an example Talos extension service.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"

@@ -1,0 +1,35 @@
+name: rpi-boot-config-loader
+container:
+  entrypoint: ./generic-pi
+  args:
+    - bootConfigLoader
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+    writeableSysfs: true
+    writeableRootfs: true
+  mounts:
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /var/etc/rpi-boot-config-loader
+      destination: /var/etc/rpi-boot-config-loader
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /var/etc/rpi-generic
+      destination: /var/etc/rpi-generic
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+depends:
+ - path: /var/etc/rpi-boot-config-loader/config.txt
+restart: never
