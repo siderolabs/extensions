@@ -90,6 +90,12 @@ extensions-metadata: $(ARTIFACTS)/bldr
 	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
 	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
 
+image-list: extensions-metadata ## Prints a list of all images built by this Makefile with digests.
+	@cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})'
+
+sign-images: ## Run cosign to sign all images built by this Makefile.
+	@$(MAKE) --quiet image-list | xargs -I{} sh -c 'cosign sign --yes {}'
+
 .PHONY: deps.png
 deps.png: $(ARTIFACTS)/bldr
 	$(ARTIFACTS)/bldr graph | dot -Tpng > deps.png
