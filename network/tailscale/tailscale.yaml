@@ -1,0 +1,62 @@
+name: tailscale
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+container:
+  entrypoint: /usr/local/bin/containerboot
+  environmentFile: /var/etc/tailscale/auth.env
+  environment:
+  - PATH=/sbin:/usr/local/bin
+  - TS_SOCKET=/var/run/tailscale/tailscaled.sock
+  - TS_STATE_DIR=/var/lib/tailscale
+  - TS_USERSPACE=false
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  # libs
+  - source: /lib
+    destination: /lib
+    type: bind
+    options:
+      - bind
+      - ro
+  # more libs
+  - source: /usr/lib
+    destination: /usr/lib
+    type: bind
+    options:
+      - bind
+      - ro
+  ## Required for tailscale. Ip addr and other commands
+  - source: /sbin
+    destination: /sbin
+    type: bind
+    options:
+      - bind
+      - ro
+  ## Tailscale needs to write to this to create the interfaces
+  - source: /dev/net/tun
+    destination: /dev/net/tun
+    type: bind
+    options:
+      - bind
+      - rw
+  ## Tailscale socket
+  - source: /var/run/tailscale
+    destination: /var/run/tailscale
+    type: bind
+    options:
+      - bind
+      - rw
+  ## Tailscale state. Particularly its 'auth' state
+  - source: /var/lib/tailscale
+    destination: /var/lib/tailscale
+    type: bind
+    options:
+      - bind
+      - rw
+restart: always

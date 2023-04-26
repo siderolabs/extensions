@@ -1,0 +1,44 @@
+name: tailscale
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /go
+  - sources:
+      - url: https://github.com/tailscale/tailscale/archive/refs/tags/v{{ .TAILSCALE_VERSION }}.tar.gz
+        destination: tailscale.tar.gz
+        sha256: dc230cf3ac290140e573268a6e8f17124752ef064c8d3a86765a9dbb6f1bd354
+        sha512: d3bd5adf469cb2cc5a6e7df08fd9327d1b2492f7779dbf9e4158cc137dfcbe7c07c51f10adc142d5cd2827b837633722b585f2f20dfdd5821703fc9e4aed333d
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+
+      - |
+        mkdir tailscale dist
+        tar -xzvf tailscale.tar.gz --strip-components=1 -C tailscale
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        go build \
+          -C tailscale \
+          -o ../dist \
+        	-ldflags "-X tailscale.com/version.shortStamp={{ .TAILSCALE_VERSION }} \
+         					  -X tailscale.com/version.longStamp={{ .TAILSCALE_VERSION }}-TalosLinux" \
+         tailscale.com/cmd/{tailscale,tailscaled,containerboot}
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/tailscale/usr/local/bin/
+        cp -pr dist/tailscale /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
+        cp -pr dist/tailscaled /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
+        cp -pr dist/containerboot /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
+
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/tailscale.yaml
+    to: /rootfs/usr/local/etc/containers/

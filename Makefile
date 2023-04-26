@@ -52,6 +52,7 @@ TARGETS = \
 		nvidia-container-toolkit \
 		nvidia-fabricmanager \
 		nvidia-open-gpu-kernel-modules \
+		tailscale \
 		usb-modem-drivers
 
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1

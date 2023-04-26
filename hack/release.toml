@@ -16,6 +16,11 @@ See [Talos Linux documentation](https://www.talos.dev/v1.5/talos-guides/configur
 
 [notes]
 
+    [notes.tailscale]
+        title = "Tailscale"
+        description = """\
+Tailscale is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
+"""
 
     [notes.updates]
         title = "Component Updates"
