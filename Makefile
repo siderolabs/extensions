@@ -48,6 +48,7 @@ TARGETS = \
 		i915-ucode \
 		intel-ucode \
 		iscsi-tools \
+		nfsd \
 		nut-client \
 		nvidia-container-toolkit \
 		nvidia-fabricmanager \

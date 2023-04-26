@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: nfsd
+  version: "$VERSION"
+  author: Subhash Chandra
+  description: |
+    This system extension provides kernel module driver for NFSD built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
