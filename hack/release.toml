@@ -6,12 +6,12 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.3.6"
+previous = "v1.4.0"
 
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.4/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.5/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
@@ -20,12 +20,8 @@ See [Talos Linux documentation](https://www.talos.dev/v1.4/talos-guides/configur
     [notes.updates]
         title = "Component Updates"
         description = """\
-* Gvisor: 20231214.0
-* Linux firmware: 20230310
-* Intel ucode: 20230214
-* nvidia-container-toolkit: v1.12.1
-* NVIDIA driver: 530.41.03
-* nvidia-fabricmanager: 525.85.12
+* Linux firmware: 20230404
+* DRBD: 9.2.3
 """
 
 
