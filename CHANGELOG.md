@@ -1,3 +1,30 @@
+## [Talos System Extensions 1.4.1](https://github.com/siderolabs/extensions/releases/tag/v1.4.1) (2023-04-27)
+
+Welcome to the v1.4.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.4/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`71f1832`](https://github.com/siderolabs/extensions/commit/71f1832d7518004785b1fd158f78975126216e42) chore: add make targets to automate image signing
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.4.0](https://github.com/siderolabs/extensions/releases/tag/v1.4.0)
+
 ## [Talos System Extensions 1.4.0](https://github.com/siderolabs/extensions/releases/tag/v1.4.0) (2023-04-18)
 
 Welcome to the v1.4.0 release of Talos System Extensions!
