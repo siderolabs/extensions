@@ -18,6 +18,7 @@ steps:
         patch -p1 < /pkg/musl.patch
     build:
       - |
+        CFLAGS="$CFLAGS -D_LARGEFILE64_SOURCE" \
         make -j $(nproc)
     install:
       - |

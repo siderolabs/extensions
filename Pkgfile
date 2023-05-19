@@ -1,10 +1,10 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.2.0-alpha.12
+# syntax = ghcr.io/siderolabs/bldr:v0.2.0
 
 format: v1alpha2
 
 vars:
   PKGS_PREFIX: ghcr.io/siderolabs
-  LINUX_FIRMWARE_VERSION: "20230404" # update this when updating PKGS_VERSION in Makefile
+  LINUX_FIRMWARE_VERSION: "20230515" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.2.3 # update this when updating PKGS_VERSION in Makefile
 
 labels:
