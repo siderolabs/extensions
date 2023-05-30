@@ -1,3 +1,39 @@
+## [Talos System Extensions 1.4.5](https://github.com/siderolabs/extensions/releases/tag/v1.4.5) (2023-05-30)
+
+Welcome to the v1.4.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.4/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Noel Georgi
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`95f6d18`](https://github.com/siderolabs/extensions/commit/95f6d18e3fe4ac8978730464198ce59b72f68795) release(v1.4.4): prepare release
+* [`3d5324c`](https://github.com/siderolabs/extensions/commit/3d5324cc11ed01b883924a43dd6d449293439be1) fix: match pkgs to talos v1.4.4
+* [`e489910`](https://github.com/siderolabs/extensions/commit/e48991006030c1053f23125de1eceb476588186c) release(v1.4.4): prepare release
+</p>
+</details>
+
+### Changes since v1.4.4
+<details><summary>0 commit</summary>
+<p>
+
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.4.3](https://github.com/siderolabs/extensions/releases/tag/v1.4.3)
+
 ## [Talos System Extensions 1.4.4](https://github.com/siderolabs/extensions/releases/tag/v1.4.4) (2023-05-16)
 
 Welcome to the v1.4.4 release of Talos System Extensions!
