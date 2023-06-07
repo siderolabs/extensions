@@ -25,7 +25,7 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | Name                                 | Image                                                                                                 | Description                 | Version Format           |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------ |
 | [amd-ucode](firmware/amd-ucode/)     | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode)     | AMD CPU microcode updates   | `linux firmware version` |
-| [i915-ucode](firmware/i915-ucode/)   | [ghcr.io/siderolabs/i915-ucode](https://github.com/siderolabs/extensions/pkgs/container/i915-ucode)    | Intel GPU firmware          | `linux firmware version` |
+| [i915-ucode](firmware/i915-ucode/)   | [ghcr.io/siderolabs/i915-ucode](https://github.com/siderolabs/extensions/pkgs/container/i915-ucode)   | Intel GPU firmware          | `linux firmware version` |
 | [bnx2-bnx2x](firmware/bnx2-bnx2x/)   | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x)   | Broadcom NetXtreme firmware | `linux firmware version` |
 | [intel-ucode](firmware/intel-ucode/) | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | Intel CPU microcode updates | `upstream version`       |
 
@@ -35,13 +35,14 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------- |
 | [gasket](drivers/gasket/)            | [ghcr.io/siderolabs/gasket-driver](https://github.com/siderolabs/extensions/pkgs/container/gasket-driver)                                   | Driver for Google Coral PCIe devices | `gasket driver upstream short commit`-`talos version` |
 | [nvidia](nvidia-gpu/nvidia-modules/) | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules) | NVIDIA OSS Driver                    | `nvidia driver upstream version`-`talos version`      |
+| [usb-modem](drivers/usb-modem)       | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers)                           | USB Modem drivers                    | `talos version`                                       |
 
 ### Storage
 
-| Name                                | Image                                                                                                 | Description      | Version Format |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
-| [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools | `v0.1.0`       |
-| [drbd](storage/drbd/) *disabled*    | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd) | DRBD driver module | `v0.1.0`       |
+| Name                                | Image                                                                                                 | Description        | Version Format                     |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------ | ---------------------------------- |
+| [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools   | `v0.1.0`                           |
+| [drbd](storage/drbd/) *disabled*    | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module | `upstream version`-`talos version` |
 
 ### Power
 
