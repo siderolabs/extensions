@@ -65,3 +65,34 @@ or
  kern:    info: [2023-06-07T16:40:10.265654521Z]: usb 6-1.2: GSM modem (1-port) converter now attached to ttyUSB7    
  kern:    info: [2023-06-07T16:40:10.280291521Z]: qmi_wwan 6-1.2:1.4: cdc-wdm1: USB WDM device  
 ```
+
+## Configurtion
+
+Talos currently does not have an OS level method of dialing up cellular modems, such as `ModemManager` or `uqmi`, so you will
+probably want to ignore it on the system level, pass the modems `/dev/` devices to a pod, and dial it up there using a tool such
+as `ModemManager` or `uqmi`.
+
+first, ignore the interface on the Talos level, so Talos doesn't try to bring it up:
+
+```yaml
+machine:
+  network:
+    interfaces:
+      - interface: wwan1 # The modem interface name, if you have several modems, you can optionally use deviceSelector instead.
+        ignore: true # ignore the interface.
+```
+
+Next, you can create a pod that might contain something like this:
+
+```yaml
+    volumeMounts:
+    - name: dev
+      mountPath: /dev/
+  volumes:
+  - name: dev
+    hostPath:
+      path: /dev/ttyUSB1 # you might want to mount all of the /dev/ttyUSB* and /dev/cdc-wdm* devices
+      type: Directory
+```
+
+Now the modem should be available to you normally on the pod.
