@@ -85,6 +85,21 @@ machine:
 Next, you can create a pod that might contain something like this:
 
 ```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ModemManager
+  namespace: modems # you might have to adjust your security settings for this namespace
+spec:
+  hostNetwork: true
+  nodeName: modems-server
+  containers:
+  - name: ubuntu-container
+    image: ubuntu:latest
+    command: ["/bin/bash", "-c", "--"]
+    args: ["while true; do sleep 30; done;"]
+    securityContext:
+      privileged: true
     volumeMounts:
     - name: dev
       mountPath: /dev/
