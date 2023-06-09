@@ -25,7 +25,6 @@ machine:
       - name: cdc_ncm
       - name: net1080
       - name: cdc_subset
-      - name: belkin_sa
       - name: zaurus
       - name: cdc_wdm
       - name: rtl8153_ecm
