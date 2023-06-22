@@ -21,8 +21,8 @@ See [Talos Linux documentation](https://www.talos.dev/v1.5/talos-guides/configur
         title = "Component Updates"
         description = """\
 * Linux firmware: 20230515
-* DRBD: 9.2.3
-* Intel ucode: 20230512
+* DRBD: 9.2.4
+* Intel ucode: 20230613
 """
 
 
