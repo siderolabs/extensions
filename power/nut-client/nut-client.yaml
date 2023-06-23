@@ -10,6 +10,7 @@ container:
   args:
     - -F
   mounts:
+    # Shared libraries.
     - source: /lib
       destination: /lib
       type: bind
@@ -22,24 +23,23 @@ container:
       options:
         - bind
         - ro
-    # config via .machine.files
+    # Configuration provided via `.machine.files`.
     - source: /var/etc/nut
       destination: /usr/local/etc/nut
       type: bind
       options:
         - bind
         - ro
-    # /sbin/init talks to apid
+    # `/sbin/init` talks to `apid`.
     - source: /system/run/apid/apid.sock
       destination: /system/run/apid/apid.sock
       type: bind
       options:
         - rshared
         - rbind
-        - rw
-    # symlinked to /sbin/poweroff
+        - ro
     - source: /sbin/init
-      destination: /sbin/init
+      destination: /sbin/poweroff
       type: bind
       options:
         - bind

@@ -8,25 +8,24 @@
  
  #include "nut_stdint.h"
  #include "upsclient.h"
-@@ -1874,6 +1875,23 @@
+@@ -1874,6 +1875,22 @@
  static void runparent(int fd)
  	__attribute__((noreturn));
  
 +static int runcmd(const char *cmd)
 +{
-+	int	sret, status;
-+	pid_t pid;
-+	char *argv[] = {cmd, NULL};
-+	char *env[] = {NULL};
++	// TODO: Support tokenizing `cmd`.
++	const char *argv[] = {cmd, NULL};
++	const char *env[] = {NULL};
 +
-+	/* TODO support tokenizing cmd */
-+	sret = posix_spawn(&pid, cmd, NULL, NULL, argv, env);
++	pid_t pid = 0;
++	int sret = posix_spawn(&pid, cmd, NULL, NULL, argv, env);
 +	if (sret != 0)
-+		/* parent */
-+		exit(EXIT_SUCCESS);
++		return -1;
 +
-+	sret = waitpid(pid, &status, 0);
-+	return status;
++	int status;
++	waitpid(pid, &status, 0);
++	return WEXITSTATUS(status);
 +}
 +
  static void runparent(int fd)

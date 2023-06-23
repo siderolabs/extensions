@@ -20,8 +20,8 @@ steps:
         # no shell for you
         patch -p1 < /pkg/patches/replace_system.patch
       - |
-        mkdir -p /usr/bin \
-            && ln -sf /toolchain/bin/env /usr/bin/env
+        mkdir -p /usr/bin
+        ln -sf /toolchain/bin/env /usr/bin/env
 
         # Create symlinks for files used when building.
         ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
@@ -76,11 +76,6 @@ steps:
 
         # TODO replace /usr/bin/wall with either a wrapper for printk or a
         # Go cmd to log to Talos Events
-
-        # /sbin/init is bind mounted in nut-client.yaml
-        pushd "$containerRoot/sbin"
-        ln -sv ./init poweroff
-        popd
 
         # cleanup
         rm -rf /rootfs/usr/local/bin
