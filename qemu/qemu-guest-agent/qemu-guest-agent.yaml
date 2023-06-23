@@ -1,0 +1,51 @@
+name: qemu-guest-agent
+depends:
+  - service: cri
+  - path: /dev/virtio-ports/org.qemu.guest_agent.0
+container:
+  entrypoint: ./qemu-ga
+  mounts:
+    # Shared libraries.
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # State files.
+    - source: /var/run
+      destination: /var/run
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # Device files.
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # `/sbin/init` talks to `apid`.
+    - source: /system/run/apid/apid.sock
+      destination: /system/run/apid/apid.sock
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - ro
+    - source: /sbin/init
+      destination: /sbin/shutdown
+      type: bind
+      options:
+        - bind
+        - ro
+restart: always

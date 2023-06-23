@@ -1,0 +1,1 @@
+VERSION: "{{ .QEMU_VERSION }}"

@@ -56,6 +56,12 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | ------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------- |
 | [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/talos-extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version`-`talos version` |
 
+### QEMU
+
+| Name                                       | Image                                                                                                                 | Description                                                   | Version Format     |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------ |
+| [qemu-guest-agent](qemu/qemu-guest-agent/) | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/qemu-guest-agent) | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent) | `upstream version` |
+
 ### NVIDIA GPU
 
 | Name                                                             | Description                                                                                                                        | Version Format                     |

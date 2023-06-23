@@ -1,0 +1,72 @@
+name: qemu-guest-agent
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+  - stage: pcre2
+  - stage: glib
+steps:
+  - sources:
+      - url: https://download.qemu.org/qemu-{{ .QEMU_VERSION }}.tar.xz
+        destination: qemu.tar.xz
+        sha256: f060abd435fbe6794125e2c398568ffc3cfa540042596907a8b18edca34cf6a5
+        sha512: 4e915d33a662bf55b09247fb85150be376c92270d3764e3d6470c452cb70cc558f54e84de5610dd60a9eb3ea02d5d4277b1ec75c9804967d278fa8361c7f9b9a
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xf qemu.tar.xz --strip-components=1
+        rm qemu.tar.xz
+      - |
+        mkdir -p /usr/bin
+
+        ln -s /toolchain/bin/env /usr/bin/env
+        ln -s /toolchain/bin/python3 /toolchain/bin/python
+
+        pip3 install ninja
+    build:
+      - |
+        extra_args=( )
+
+        if [[ "${ARCH}" == aarch64 ]]; then
+          # FIXME: Workaround for “read-only segment has dynamic relocations” linking error.
+          extra_args+=( --disable-pie )
+        fi
+
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+
+        ./configure \
+          --static \
+          --prefix=/usr/local \
+          --localstatedir=/var \
+          --without-default-features \
+          --disable-system \
+          --disable-user \
+          --disable-docs \
+          --disable-install-blobs \
+          --enable-guest-agent \
+          --enable-stack-protector \
+          "${extra_args[@]}"
+
+        make -j $(nproc) qemu-ga
+    install:
+      - |
+        make DESTDIR=/rootfs install
+
+        container_root=/rootfs/usr/local/lib/containers/qemu-guest-agent
+        mkdir -p "${container_root}"
+
+        mv /rootfs/usr/local/bin/qemu-ga "${container_root}/qemu-ga"
+        rmdir /rootfs/usr/local/bin
+        rm -r /rootfs/usr/local/share/qemu
+        rmdir /rootfs/usr/local/share
+        rmdir /rootfs/var/run
+        rmdir /rootfs/var
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/qemu-guest-agent.yaml
+    to: /rootfs/usr/local/etc/containers/

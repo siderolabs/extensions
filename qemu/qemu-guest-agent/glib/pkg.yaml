@@ -1,0 +1,40 @@
+name: glib
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+  - stage: pcre2
+steps:
+  - sources:
+      - url: https://download.gnome.org/sources/glib/2.76/glib-{{ .GLIB_VERSION }}.tar.xz
+        destination: glib.tar.xz
+        sha256: c0be444e403d7c3184d1f394f89f0b644710b5e9331b54fa4e8b5037813ad32a
+        sha512: 291b8913918d411b679442b888f56893a857a77decfe428086c8bd1da1949498938ddb0bf254ed99d192e4a09b5e8cee1905fd6932ee642463fb229cac7c226e
+    prepare:
+      - |
+        tar -xf glib.tar.xz --strip-components=1
+        rm glib.tar.xz
+      - |
+        mkdir -p /usr/bin
+
+        ln -s /toolchain/bin/env /usr/bin/env
+        ln -s /toolchain/bin/python3 /toolchain/bin/python
+
+        pip3 install ninja
+    build:
+      - |
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+
+        meson setup \
+          --prefix=/usr \
+          -Ddefault_library=both \
+          _build
+
+        ninja -C _build
+    install:
+      - |
+        DESTDIR=/rootfs ninja -C _build install
+finalize:
+  - from: /rootfs
+    to: /

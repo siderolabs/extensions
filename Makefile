@@ -52,6 +52,7 @@ TARGETS = \
 		nvidia-container-toolkit \
 		nvidia-fabricmanager \
 		nvidia-open-gpu-kernel-modules \
+		qemu-guest-agent \
 		tailscale \
 		usb-modem-drivers
 

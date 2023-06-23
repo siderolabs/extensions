@@ -1,0 +1,28 @@
+name: pcre2
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/PCRE2Project/pcre2/releases/download/pcre2-{{ .PCRE2_VERSION }}/pcre2-{{ .PCRE2_VERSION }}.tar.bz2
+        destination: pcre2.tar.bz2
+        sha256: 8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840
+        sha512: 72fbde87fecec3aa4b47225dd919ea1d55e97f2cbcf02aba26e5a0d3b1ffb58c25a80a9ef069eb99f9cf4e41ba9604ad06a7ec159870e1e875d86820e12256d3
+    prepare:
+      - |
+        tar -xf pcre2.tar.bz2 --strip-components=1
+        rm pcre2.tar.bz2
+    build:
+      - |
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+
+        ./configure --prefix=/usr
+
+        make -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs install
+finalize:
+  - from: /rootfs
+    to: /
