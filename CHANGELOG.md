@@ -1,3 +1,33 @@
+## [Talos System Extensions 1.4.6](https://github.com/siderolabs/extensions/releases/tag/v1.4.6) (2023-06-28)
+
+Welcome to the v1.4.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.4/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+DRBD: 9.2.4
+
+
+### Contributors
+
+
+### Changes
+<details><summary>0 commit</summary>
+<p>
+
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.4.5](https://github.com/siderolabs/extensions/releases/tag/v1.4.5)
+
 ## [Talos System Extensions 1.4.5](https://github.com/siderolabs/extensions/releases/tag/v1.4.5) (2023-05-30)
 
 Welcome to the v1.4.5 release of Talos System Extensions!
