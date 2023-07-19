@@ -7,4 +7,4 @@ metadata:
     This system extension provides the network-ups-tools upsmon service.
   compatibility:
     talos:
-      version: ">= v1.2.0"
+      version: ">= v1.5.0"

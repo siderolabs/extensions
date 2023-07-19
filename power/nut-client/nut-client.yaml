@@ -5,6 +5,7 @@ depends:
     - addresses
     - connectivity
     - etcfiles
+  - path: /system/run/machined/machine.sock
 container:
   entrypoint: ./upsmon
   args:
@@ -30,9 +31,9 @@ container:
       options:
         - bind
         - ro
-    # `/sbin/init` talks to `apid`.
-    - source: /system/run/apid/apid.sock
-      destination: /system/run/apid/apid.sock
+    # `/sbin/init` talks to `machined`.
+    - source: /system/run/machined/machine.sock
+      destination: /system/run/machined/machine.sock
       type: bind
       options:
         - rshared

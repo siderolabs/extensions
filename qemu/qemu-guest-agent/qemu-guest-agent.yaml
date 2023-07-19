@@ -1,6 +1,7 @@
 name: qemu-guest-agent
 depends:
   - service: cri
+  - path: /system/run/machined/machine.sock
   - path: /dev/virtio-ports/org.qemu.guest_agent.0
 container:
   entrypoint: ./qemu-ga
@@ -34,9 +35,9 @@ container:
         - rshared
         - rbind
         - rw
-    # `/sbin/init` talks to `apid`.
-    - source: /system/run/apid/apid.sock
-      destination: /system/run/apid/apid.sock
+    # `/sbin/init` talks to `machined`.
+    - source: /system/run/machined/machine.sock
+      destination: /system/run/machined/machine.sock
       type: bind
       options:
         - rshared

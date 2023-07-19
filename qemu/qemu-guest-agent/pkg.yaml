@@ -25,8 +25,7 @@ steps:
         ln -s /toolchain/bin/python3 /toolchain/bin/python
 
         pip3 install ninja
-    build:
-      - |
+
         extra_args=( )
 
         if [[ "${ARCH}" == aarch64 ]]; then
@@ -48,7 +47,8 @@ steps:
           --enable-guest-agent \
           --enable-stack-protector \
           "${extra_args[@]}"
-
+    build:
+      - |
         make -j $(nproc) qemu-ga
     install:
       - |
