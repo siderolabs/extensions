@@ -109,7 +109,7 @@ steps:
     commands:
       - az login --service-principal -u "$${AZURE_STORAGE_USER}" -p "$${AZURE_STORAGE_PASS}" --tenant "$${AZURE_TENANT}"
       - make all extensions-metadata PUSH=true
-      - az storage blob upload -f _out/extensions-metadata -n extensions-metadata -c "$${BUCKET_PATH}"
+      - az storage blob upload --overwrite -f _out/extensions-metadata -n extensions-metadata -c "$${BUCKET_PATH}"
     when:
       event:
         - promote
