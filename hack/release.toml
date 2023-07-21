@@ -47,6 +47,8 @@ Thunderbolt drivers is now supported as Talos System Extension. Requires Talos v
 * Intel ucode: 20230613
 * Open iSCSI: 2.1.9
 * NVIDIA drivers: 535.54.03
+* nvidia-container-toolkit: v1.13.5
+* libnvidia-container: v1.13.5
 """
 
 

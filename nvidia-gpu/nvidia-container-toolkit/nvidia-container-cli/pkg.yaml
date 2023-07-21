@@ -1,81 +1,62 @@
 name: nvidia-container-cli
 variant: scratch
+shell: /bin/bash
+install:
+  - build-base
+  - bash
+  - go
+  - coreutils
+  - sed
+  - curl
+  - rpcsvc-proto
+  - patch
 dependencies:
-  - image: debian:{{ .DEBIAN_IMAGE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
   # nvidia-pkgs depends on glibc,
   # so any stage depending on nvidia-container-cli will have the updated ld.so.cache,
   # from both nvidia-pkgs and nvidia-container-cli
   - stage: nvidia-pkgs
-shell: /bin/bash
+  - stage: libseccomp
+    from: /rootfs
+  - stage: libcap
+    from: /rootfs
+  - stage: elfutils
+    from: /rootfs
+  - stage: zlib
+    from: /rootfs
+  - stage: libtirpc
+    from: /rootfs
 steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .LIBNVIDIA_CONTAINER_VERSION }}/libnvidia-container-{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: 74da3adcbe34377b55a01b1a02e05bcbcdffd7d82b79795f860a9817b49c6ca8
-        sha512: e4fb1f2305fc3bd777c1cc483449e7820fa3e3539678b8c764d90d516657dfd9df5a2fd9d79b909af0a598bbf7801269e52e0bc98a6c6d2aecf8d7fe77f60e3b
+        sha256: 4beebedd045468e8174895f5d4a563f7880cf7a10f062d996719c061fcdaa0db
+        sha512: a16f163cb8689f4b6279bed1a5965ee4c56f413918cae6acf272ca5adf7dd929818d977dd6657ce496abeb842b56e03bfd83bda828a7b953625b2999ac174b93
     env:
-      DEBIAN_FRONTEND: noninteractive
-      GOPATH: /go
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}
-      WITH_TIRPC: no
       WITH_NVCGO: yes
+      WITH_LIBELF: yes
+      WITH_TIRPC: no # setting no means we'll use the system libtirpc
       WITH_SECCOMP: yes
-      WITH_LIBELF: no
+      PKG_CONFIG_PATH: /usr/local/lib/pkgconfig # to find runtime libraries compiled in extensions (libseccomp)
+      PATH: "/usr/bin:{{ .PATH }}" # bldr doesn't have /usr/bin in PATH
     prepare:
       - |
-        chmod 1777 /tmp
-
-        apt-get update
-        apt-get install -y \
-        apt-utils \
-        bmake \
-        build-essential \
-        bzip2 \
-        ca-certificates \
-        curl \
-        devscripts \
-        dh-make \
-        fakeroot \
-        git \
-        libcap-dev \
-        libelf-dev \
-        libseccomp-dev \
-        lintian \
-        lsb-release \
-        m4 \
-        pkg-config \
-        xz-utils
-
-        # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go{{ .GOLANG_VERSION }}.linux-amd64.tar.gz | tar -C /usr/local -xz
-        # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go{{ .GOLANG_VERSION }}.linux-arm64.tar.gz | tar -C /usr/local -xz
-        # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-
         mkdir libnvidia-container
         tar -xzf  libnvidia-container.tar.gz --strip-components=1 -C libnvidia-container
     build:
       - |
-        export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
-
         cd libnvidia-container
 
-        patch -p0 < /pkg/patches/libnvidia-container/Makefile.patch
-
-        make
+        # LDLIBS=-L/usr/local/lib is set so that libnvidia-container-cli libs which are hardcoded as -llibname and not using pkg-config
+        CPPFLAGS="-I/usr/local/include/tirpc" LDLIBS="-L/usr/local/lib -ltirpc" make
     install:
       - |
-        export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
         mkdir -p /rootfs
 
         cd libnvidia-container
 
         make install DESTDIR=/rootfs
-
-        rm -rf /rootfs/usr/local/lib/debug
-        rm -rf /rootfs/usr/local/lib/pkgconfig
-        rm -rf /rootfs/usr/local/include
-        rm -rf /rootfs/usr/local/share
 
         # run ldconfig to update the cache
         /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs

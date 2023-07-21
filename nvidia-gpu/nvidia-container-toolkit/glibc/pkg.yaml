@@ -1,55 +1,42 @@
 name: glibc
 variant: scratch
 shell: /bin/bash
+install:
+  - build-base
+  - bash
+  - gawk
+  - bison
+  - python3
 dependencies:
-  - image: ubuntu:{{ .UBUNTU_IMAGE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
 steps:
   - sources:
       - url: https://ftpmirror.gnu.org/libc/glibc-{{ .GLIBC_VERSION }}.tar.gz
         destination: glibc.tar.gz
-        sha256: 811f19f9200118ff94ede28a6e12307584152cdcbf3d366cd729ea2f855db255
-        sha512: 9cfd8b3ce87710623736b305ff836040112263439278d4ff19b0d332c0193d3bb123dcda2c584215fe2f5c9c81d5b0c4104ea9904d6b7a7ff161a6ce254d6773
-    env:
-      DEBIAN_FRONTEND: noninteractive
+        sha256: 16e51e0455e288f03380b436e41d5927c60945abd86d0c9852b84be57dd6ed5e
+        sha512: ca799ef40129433791777c698b62142edf0f0e8a87552f324ee6a036a2fe747b867696863692bde45bdd4a263ac6c419a52f92c1b6072b8ff49a887ebaa45299
     prepare:
       - |
-        chmod 1777 /tmp
-        apt update && \
-        apt install -y \
-          bison \
-          build-essential \
-          gawk \
-          gettext \
-          openssl \
-          python3 \
-          texinfo
-      - |
-        mkdir -p glibc glibc-build
+        tar -xzf glibc.tar.gz --strip-components=1
 
-        tar -xzf glibc.tar.gz --strip-components=1 -C glibc
-    build:
-      - |
-        # unset the variables bldr sets by default
-        unset CXXFLAGS
-        unset LDFLAGS
-        unset CFLAGS
-        unset TARGET
-        unset HOST
+        mkdir build
+        cd build
 
-        cd glibc-build
-
-        ../glibc/configure \
+        ../configure \
           --prefix=/usr/local/glibc \
           --libdir=/usr/local/glibc/lib \
           --libexecdir=/usr/local/glibc/lib \
-          --enable-stack-protector=strong
-
+          --enable-stack-protection=strong \
+          --disable-werror
+    build:
+      - |
+        cd build
         make -j $(nproc)
     install:
       - |
         mkdir -p /rootfs/lib64
 
-        cd glibc-build
+        cd build
         make install DESTDIR=/rootfs
 
         cp /pkg/ld.so.conf /rootfs/usr/local/glibc/etc/ld.so.conf

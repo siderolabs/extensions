@@ -28,7 +28,7 @@ container:
       options:
         - bind
         - ro
-    # shared libraries
+    # nvidia libraries
     - source: /usr/local/lib
       destination: /usr/local/lib
       type: bind

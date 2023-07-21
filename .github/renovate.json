@@ -40,9 +40,10 @@
     "packageRules": [
         {
             "matchPackageNames": [
-                "golang/go",
                 "nvidia/open-gpu-kernel-modules",
-                "open-iscsi/open-isns"
+                "open-iscsi/open-isns",
+                "git://git.kernel.org/pub/scm/libs/libcap/libcap.git",
+                "git://sourceware.org/git/elfutils.git"
             ],
             "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>\\d+)?$"
         },
@@ -58,6 +59,12 @@
                 "intel/Intel-Linux-Processor-Microcode-Data-Files"
             ],
             "versioning": "regex:^(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})\\.?(?<build>\\d+)?$"
+        },
+        {
+            "matchPackageNames": [
+                "git://linux-nfs.org/~steved/libtirpc"
+            ],
+            "versioning": "regex:^(?<major>\\d+)-(?<minor>\\d+)-?(?<patch>\\d+)?$"
         },
         {
             "matchPackagePatterns": [

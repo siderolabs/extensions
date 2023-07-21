@@ -1,0 +1,44 @@
+name: elfutils
+variant: scratch
+shell: /bin/bash
+install:
+  - build-base
+  - bash
+  - m4
+dependencies:
+  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
+  - stage: zlib
+    from: /rootfs
+steps:
+  - sources:
+      - url: https://sourceware.org/elfutils/ftp/{{ .ELFUTILS_VERSION }}/elfutils-{{ .ELFUTILS_VERSION }}.tar.bz2
+        destination: elfutils.tar.bz2
+        sha256: 39bd8f1a338e2b7cd4abc3ff11a0eddc6e690f69578a57478d8179b4148708c8
+        sha512: 93a877e34db93e5498581d0ab2d702b08c0d87e4cafd9cec9d6636dfa85a168095c305c11583a5b0fb79374dd93bc8d0e9ce6016e6c172764bcea12861605b71
+    prepare:
+      - |
+        tar -xjf elfutils.tar.bz2 --strip-components=1
+
+        mkdir build
+        cd build
+
+        ../configure \
+            --prefix=/usr/local \
+            --with-zstd=no \
+            --disable-libdebuginfod \
+            --disable-debuginfod \
+            CFLAGS="${CFLAGS} -fPIC -Wno-error"
+    build:
+      - |
+        cd build
+
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        make DESTDIR=/rootfs install
+        # we only need the libs and headers, remove everything else
+        find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+finalize:
+  - from: /rootfs
+    to: /rootfs

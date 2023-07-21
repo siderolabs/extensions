@@ -1,41 +1,31 @@
 name: nvidia-container-runtime
 variant: scratch
 shell: /bin/bash
+install:
+  - build-base
+  - bash
+  - go
+  - patch
 dependencies:
-  - image: ubuntu:{{ .UBUNTU_IMAGE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
 steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/{{ .CONTAINER_TOOLKIT_VERSION }}/container-toolkit-{{ .CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: container-toolkit.tar.gz
-        sha256: 05475917d945e701d3fa24171653172d9efb286d1b50db778ac1dd6e014b3132
-        sha512: 89980f4ba86e984257989bb1a1c1604c0c3d82fb09a7e7dfde7eb15e7579e740eea623ccd36c5d3deb488ae8bb59e808a62e9c2ea8a51098fc4b57bcdc3895f6
+        sha256: b9ee6f96addbcbace9503f29551b4f3c42d76293a0d54f5c6009971909dac0fc
+        sha512: 69bfac15d8be2797b09dda35650a90dcb2c24ca7a5107c3df5946840a55df8dc62cb5cc46f172169ee3e8447c416733848b513b92dc512df35e0aad7c77e5c1e
     env:
-      GOPATH: /go
       GIT_COMMIT: {{ substr 0 7 .CONTAINER_TOOLKIT_REF }} # build is using short sha
     prepare:
       - |
-
-        chmod 1777 /tmp
-
-        apt update && \
-        apt install -y curl patch build-essential
-
-        # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go{{ .GOLANG_VERSION }}.linux-amd64.tar.gz | tar -C /usr/local -xz
-        # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-        curl https://storage.googleapis.com/golang/go{{ .GOLANG_VERSION }}.linux-arm64.tar.gz | tar -C /usr/local -xz
-        # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-
         mkdir -p container-toolkit
         tar -xzf container-toolkit.tar.gz --strip-components=1 -C container-toolkit
-    build:
-      - |
-        export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 
         cd container-toolkit
-
-        patch -p0 < /pkg/patches/nvidia-container-runtime/config.go.patch
-        patch -p0 < /pkg/patches/nvidia-container-toolkit/hook_config.go.patch
+        patch -p0 < /pkg/patches/ldcache_path.patch
+    build:
+      - |
+        cd container-toolkit
 
         make cmds
     install:
@@ -44,11 +34,21 @@ steps:
 
         cd container-toolkit
 
-        cp ./nvidia-container-runtime /rootfs/usr/local/bin/nvidia-container-runtime
-        cp ./nvidia-container-runtime-hook /rootfs/usr/local/bin/nvidia-container-runtime-hook
+        # let's copy all built binaries suffixing them with .real
+        # the wrapper binary will call the real binary with the same name
+        for file in $(find . -maxdepth 1 -type f -executable); do
+          clean_file=$(basename $file)
 
-        chmod +x /rootfs/usr/local/bin/nvidia-container-runtime
-        chmod +x /rootfs/usr/local/bin/nvidia-container-runtime-hook
+          # oci-nvidia-hook is a shell script calling nvidia-container-runtime-hook
+          if [[ $clean_file == "oci-nvidia-hook" ]]; then
+            ln -sv nvidia-container-runtime-hook /rootfs/usr/local/bin/$clean_file
+
+            continue
+          fi
+
+          ln -sv nvidia-container-runtime-wrapper /rootfs/usr/local/bin/$(basename $clean_file)
+          cp $clean_file /rootfs/usr/local/bin/$(basename $clean_file).real
+        done
 finalize:
   - from: /rootfs
     to: /rootfs

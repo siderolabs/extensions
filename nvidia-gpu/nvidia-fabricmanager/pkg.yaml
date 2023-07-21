@@ -6,12 +6,12 @@ dependencies:
 steps:
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-sbsa/fabricmanager-linux-sbsa-{{ .NVIDIA_FABRICMANAGER_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-sbsa/fabricmanager-linux-sbsa-{{ .NVIDIA_DRIVER_VERSION }}-archive.tar.xz
         destination: fabricmanager.tar.xz
         sha256: d5d9ca3e4aad2fc5382b490b99c3a79e4bffce90b433dabcee99d66bbc8766d6
         sha512: cc23ad3c428afe57e6d98f928b2dea01b463488c43fd1e1bef181aff586c56e05bf62cdb083ed4a63f428db73c463e17b2718aabf7e38804fb39ad1648b3328e
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_FABRICMANAGER_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_DRIVER_VERSION }}-archive.tar.xz
         destination: fabricmanager.tar.xz
         sha256: a04f72d5491d102e402d48f91096272276caf38c868852ad5d13a151bcb41a62
         sha512: d5f7cad75015b943da7b3e0cc7fada25f12f7a32cf65f68705ebd8a63edc0d7fe5c77f931a3555b807cd4b97a272237decd0c92213b674a71a41b94798cc0abf

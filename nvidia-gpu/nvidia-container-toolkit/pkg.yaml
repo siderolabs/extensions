@@ -4,8 +4,13 @@ shell: /toolchain/bin/bash
 dependencies:
   - stage: base
   - stage: nvidia-container-cli
+  - stage: elfutils
+  - stage: zlib
+  - stage: libcap
+  - stage: libseccomp
+  - stage: libtirpc
   - stage: nvidia-container-runtime
-  - stage: nvidia-device-create
+  - stage: nvidia-container-runtime-wrapper
   - stage: nvidia-persistenced-wrapper
 steps:
   - prepare:

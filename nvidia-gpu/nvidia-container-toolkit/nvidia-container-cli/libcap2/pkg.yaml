@@ -1,0 +1,28 @@
+name: libcap
+variant: scratch
+shell: /bin/bash
+install:
+  - build-base
+  - bash
+dependencies:
+  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
+steps:
+  - sources:
+      - url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .LIBCAP_VERSION }}.tar.xz
+        destination: libcap.tar.xz
+        sha256: f311f8f3dad84699d0566d1d6f7ec943a9298b28f714cae3c931dfd57492d7eb
+        sha512: 647c307dc451517da9d089495ab959b4a6fbbe41c79f4e1e9bb663569dad630ead0c2e413dfb393319e3ea14dc9848c81b392107fe3382ce1813d278c3394a7f
+    prepare:
+      - |
+        tar -xf libcap.tar.xz --strip-components=1
+    build:
+      - |
+        make prefix=/usr/local lib=lib -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs prefix=/usr/local lib=lib install
+        # we only need the libs and headers, remove everything else
+        find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+finalize:
+  - from: /rootfs
+    to: /rootfs

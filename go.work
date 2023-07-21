@@ -1,0 +1,8 @@
+go 1.20
+
+use (
+	./examples/hello-world-service/src
+	./nvidia-gpu/nvidia-container-toolkit/nvidia-container-runtime-wrapper
+	./nvidia-gpu/nvidia-container-toolkit/nvidia-persistenced-wrapper
+	./storage/iscsi-tools/iscsid-wrapper
+)
