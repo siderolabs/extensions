@@ -33,6 +33,12 @@ Tailscale is now supported as Talos System Extension. Requires Talos v1.5.0 or l
 ZFS is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
 """
 
+    [notes.thunderbolt]
+        title = "Thunderbolt"
+        description = """\
+Thunderbolt drivers is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
+"""
+
     [notes.updates]
         title = "Component Updates"
         description = """\

@@ -18,7 +18,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.0
-PKGS ?= v1.5.0-alpha.0-38-g84cdfb6
+PKGS ?= v1.5.0-alpha.0-40-gfedfafa
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -54,6 +54,7 @@ TARGETS = \
 		nvidia-open-gpu-kernel-modules \
 		qemu-guest-agent \
 		tailscale \
+		thunderbolt \
 		usb-modem-drivers \
 		zfs
 

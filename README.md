@@ -35,7 +35,8 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------- |
 | [gasket](drivers/gasket/)            | [ghcr.io/siderolabs/gasket-driver](https://github.com/siderolabs/extensions/pkgs/container/gasket-driver)                                   | Driver for Google Coral PCIe devices | `gasket driver upstream short commit`-`talos version` |
 | [nvidia](nvidia-gpu/nvidia-modules/) | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules) | NVIDIA OSS Driver                    | `nvidia driver upstream version`-`talos version`      |
-| [usb-modem](drivers/usb-modem)       | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers)                           | USB Modem drivers                    | `talos version`                                       |
+| [thunderbolt](drivers/thunderbolt/)  | [ghcr.io/siderolabs/thunderbolt](https://github.com/siderolabs/extensions/pkgs/container/thunderbolt)                                       | Thunderbolt drivers                  | `talos version`                                       |
+| [usb-modem](drivers/usb-modem/)      | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers)                           | USB Modem drivers                    | `talos version`                                       |
 
 ### Network
 

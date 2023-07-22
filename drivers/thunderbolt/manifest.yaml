@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: thunderbolt
+  version: "$VERSION"
+  author: Igor Rzegocki
+  description: |
+    This system extension provides Thunderbolt/USB4 drivers kernel modules built against a specific Talos version.
+    This driver enables Thunderbolg/USB4 devices, including networking.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
