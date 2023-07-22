@@ -18,7 +18,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.0
-PKGS ?= v1.5.0-alpha.0-37-gd0eaedc
+PKGS ?= v1.5.0-alpha.0-38-g84cdfb6
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -54,7 +54,8 @@ TARGETS = \
 		nvidia-open-gpu-kernel-modules \
 		qemu-guest-agent \
 		tailscale \
-		usb-modem-drivers
+		usb-modem-drivers \
+		zfs
 
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1
 #		mellanox-ofed \
