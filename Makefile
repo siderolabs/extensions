@@ -18,7 +18,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.0-alpha.12
-PKGS ?= v1.4.1-14-ge911ac5
+PKGS ?= v1.4.1-16-g69266d9
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
