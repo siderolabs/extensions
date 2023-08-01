@@ -14,4 +14,4 @@ GLIBC_VERSION: 2.37
 # renovate: datasource=docker versioning=docker depName=ubuntu
 UBUNTU_IMAGE_VERSION: 23.04
 # renovate: datasource=docker versioning=docker depName=debian
-DEBIAN_IMAGE_VERSION: 10
+DEBIAN_IMAGE_VERSION: 12
