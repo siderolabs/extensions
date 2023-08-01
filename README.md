@@ -142,6 +142,9 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 - `/lib64/ld-linux-x86-64.so.2`
 - `/usr/etc/udev/rules.d/`
 - `/usr/local/`
+- `/usr/share/glvnd/`
+- `/usr/share/egl/`
+- `/etc/vulkan/`
 
 ## Dependency Diagram
 
