@@ -12,6 +12,6 @@ GOLANG_VERSION: 1.20.5
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ depName=https://sourceware.org/git/glibc.git
 GLIBC_VERSION: 2.37
 # renovate: datasource=docker versioning=docker depName=ubuntu
-UBUNTU_IMAGE_VERSION: 23.04
+UBUNTU_IMAGE_VERSION: 23.10
 # renovate: datasource=docker versioning=docker depName=debian
 DEBIAN_IMAGE_VERSION: 10
