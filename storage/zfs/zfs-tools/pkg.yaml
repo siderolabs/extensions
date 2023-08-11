@@ -1,0 +1,42 @@
+name: zfs-tools
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - stage: libtirpc-zfs
+    from: /rootfs
+  - stage: zlib-zfs
+    from: /rootfs
+steps:
+  - sources:
+      - url: https://github.com/openzfs/zfs/releases/download/zfs-{{ .ZFS_DRIVER_VERSION }}/zfs-{{ .ZFS_DRIVER_VERSION }}.tar.gz
+        destination: zfs.tar.gz
+        sha256: 64daa26aed3e12c931f6f4413d7527c4ebdb8da35416b356152b5f9fdd4c6e6d
+        sha512: f48493a21883e441cda705fb085353bed033f1620a1d0f93069c345c76cf2c0759a2e6f7a80c47c9398e9878abfe1d90d931fe5ceaf2588770a71491a434631e
+    env:
+      ARCH: {{ if eq .ARCH "aarch64"}}arm64{{ else if eq .ARCH "x86_64" }}x86_64{{ else }}unsupported{{ end }}
+    prepare:
+      - |
+        tar -xf zfs.tar.gz --strip-components=1
+    build:
+      - |
+        ./configure \
+          --prefix=/usr/local \
+          --with-udevdir=/usr/local/sbin \
+          --with-udevruledir=/usr/etc/udev/rules.d \
+          --with-config=user \
+          --disable-code-coverage \
+          --disable--sysvinit \
+          --disable-systemd
+
+        make -j $(nproc)
+    install:
+      - |
+        make install-exec DESTDIR=/rootfs
+        make install-data DESTDIR=/rootfs
+        rm -rf /rootfs/{etc,sbin,usr/{lib,local/share,share}}
+        # remove the 69-vdev.rules, since it depends on `vdev_id` which is a shell script
+        rm -f /rootfs/usr/etc/udev/rules.d/69-vdev.rules
+finalize:
+  - from: /rootfs
+    to: /rootfs

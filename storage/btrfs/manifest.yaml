@@ -7,4 +7,4 @@ metadata:
     This system extension provides kernel module driver for BTRFS built against a specific Talos version.
   compatibility:
     talos:
-      version: ">= v1.5.0"
+      version: ">= v1.6.0"

@@ -1,0 +1,32 @@
+name: zlib-zfs
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://zlib.net/fossils/zlib-{{ .ZLIB_VERSION }}.tar.gz
+        destination: zlib.tar.gz
+        sha256: b3a24de97a8fdbc835b9833169501030b8977031bcb54b3b3ac13740f846ab30
+        sha512: 99f0e843f52290e6950cc328820c0f322a4d934a504f66c7caa76bd0cc17ece4bf0546424fc95135de85a2656fed5115abb835fd8d8a390d60ffaf946c8887ad
+    prepare:
+      - |
+        tar -xf zlib.tar.gz --strip-components=1
+        mkdir build
+        cd build
+
+        ../configure \
+            --prefix=/usr/local
+    build:
+      - |
+        cd build
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        make DESTDIR=/rootfs install
+        # we only need the libs and headers, remove everything else
+        find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+finalize:
+  - from: /rootfs
+    to: /rootfs

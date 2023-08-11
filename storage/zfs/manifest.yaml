@@ -2,7 +2,7 @@ version: v1alpha1
 metadata:
   name: zfs
   version: "$VERSION"
-  author: Andrei Kvapil
+  author: Andrei Kvapil, Enix
   description: |
     This system extension provides kernel module driver for ZFS built against a specific Talos version.
   compatibility:
