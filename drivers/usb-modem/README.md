@@ -27,7 +27,7 @@ machine:
       - name: cdc_subset
       - name: zaurus
       - name: cdc_wdm
-      - name: rtl8153_ecm
+      - name: r8153_ecm
 ```
 
 ## Verifiying
