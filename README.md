@@ -46,11 +46,12 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 
 ### Storage
 
-| Name                                | Image                                                                                                 | Description        | Version Format                     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------ | ---------------------------------- |
-| [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools   | `v0.1.0`                           |
-| [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module | `upstream version`-`talos version` |
-| [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module  | `upstream version`-`talos version` |
+| Name                                | Image                                                                                                 | Description         | Version Format                     |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------- | ---------------------------------- |
+| [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools    | `v0.1.0`                           |
+| [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module  | `upstream version`-`talos version` |
+| [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module   | `upstream version`-`talos version` |
+| [btrfs](storage/btrfs/)             | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs)             | BTRFS driver module | `talos version`                    |
 
 ### Power
 
