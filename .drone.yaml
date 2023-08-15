@@ -79,6 +79,7 @@ steps:
     commands:
       - docker login ghcr.io --username "$${GHCR_USERNAME}" --password "$${GHCR_PASSWORD}"
       - make PUSH=true
+      - make nonfree PUSH=true
     when:
       event:
         exclude:

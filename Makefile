@@ -18,7 +18,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.0
-PKGS ?= v1.5.0-1-g8a2227d
+PKGS ?= v1.5.0-4-gac36033
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -61,7 +61,8 @@ TARGETS = \
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1
 #		mellanox-ofed \
 
-NONFREE_TARGETS =
+NONFREE_TARGETS = \
+	nonfree-kmod-nvidia \
 
 all: $(TARGETS) ## Builds all known pkgs.
 
