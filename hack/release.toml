@@ -8,7 +8,7 @@ match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 # previous release
 previous = "v1.4.0"
 
-pre_release = true
+pre_release = false
 
 preface = """\
 See [Talos Linux documentation](https://www.talos.dev/v1.5/talos-guides/configuration/system-extensions/) for information on using system extensions.
@@ -37,6 +37,12 @@ ZFS is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
         title = "Thunderbolt"
         description = """\
 Thunderbolt drivers is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
+"""
+
+    [notes.nvidia-kmod]
+        title = "NVIDIA Non-Free Kernel Module"
+        description = """\
+NVIDIA non-free kernel modules are now supported as Talos System Extension. Requires Talos v1.5.0 or later.
 """
 
     [notes.updates]
