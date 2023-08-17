@@ -41,6 +41,7 @@ space = $(empty) $(empty)
 TARGETS = \
 		amd-ucode \
 		bnx2-bnx2x \
+		btrfs \
 		drbd \
 		gasket-driver \
 		gvisor \

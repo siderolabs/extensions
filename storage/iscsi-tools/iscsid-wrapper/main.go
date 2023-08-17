@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -30,7 +29,7 @@ func main() {
 			initiatorName := fmt.Sprintf("InitiatorName=%s", cmdOut.String())
 			log.Printf("iscsid-wrapper: writing %s to /etc/iscsi/initiatorname.iscsi", initiatorName)
 
-			if err := ioutil.WriteFile("/etc/iscsi/initiatorname.iscsi", []byte(initiatorName), 0o644); err != nil {
+			if err := os.WriteFile("/etc/iscsi/initiatorname.iscsi", []byte(initiatorName), 0o644); err != nil {
 				log.Printf("iscsi-iname: error saving iscsi initiatorname %v\n", err)
 			}
 		}
