@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: device-mapper
+  version: "$VERSION"
+  author: Nathan Brewer
+  description: |
+    This system extension provides extra device-mapper kernel module drivers.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"

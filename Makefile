@@ -42,6 +42,7 @@ TARGETS = \
 		amd-ucode \
 		bnx2-bnx2x \
 		btrfs \
+		device-mapper \
 		drbd \
 		gasket-driver \
 		gvisor \
