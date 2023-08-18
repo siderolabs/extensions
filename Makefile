@@ -40,6 +40,7 @@ space = $(empty) $(empty)
 
 TARGETS = \
 		amd-ucode \
+		applesmc \
 		bnx2-bnx2x \
 		btrfs \
 		drbd \
