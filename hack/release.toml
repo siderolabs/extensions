@@ -24,13 +24,13 @@ AMD GPU firmware is now shipped as a system extension.
     [notes.btrfs]
         title = "BTRFS"
         description = """\
-BTRFS drivers is now supported as Talos System Extension. Requires Talos v1.6.0 or later.
+BTRFS drivers is now supported as Talos System Extension.
 """
 
     [notes.zfs]
         title = "ZFS"
         description = """\
-ZFS extensions now also ship zfs-tools and an extension service that imports all zpools on startup .
+ZFS extensions now also ship zfs-tools and an extension service that imports all zpools on startup.
 """
 
     [notes.updates]
