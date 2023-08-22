@@ -15,6 +15,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configur
 """
 
 [notes]
+    [notes.amdgpu-firmware]
+        title = "AMD GPU firmware"
+        description = """\
+AMD GPU firmware is now shipped as a system extension.
+"""
+
     [notes.btrfs]
         title = "BTRFS"
         description = """\
