@@ -1,3 +1,28 @@
+## [Talos System Extensions 1.5.1](https://github.com/siderolabs/extensions/releases/tag/v1.5.1) (2023-08-22)
+
+Welcome to the v1.5.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.5/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+
+### Changes
+<details><summary>0 commit</summary>
+<p>
+
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.5.0](https://github.com/siderolabs/extensions/releases/tag/v1.5.0)
+
 ## [Talos System Extensions 1.5.0](https://github.com/siderolabs/extensions/releases/tag/v1.5.0) (2023-08-16)
 
 Welcome to the v1.5.0 release of Talos System Extensions!
