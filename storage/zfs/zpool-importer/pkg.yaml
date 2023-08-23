@@ -1,0 +1,21 @@
+name: zpool-import-wrapper
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - build:
+    - |
+      export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+      cp -r /pkg/* .
+
+      CGO_ENABLED=1 go build -o zpool-importer main.go
+    install:
+    - |
+      mkdir -p /rootfs/usr/local/sbin
+
+      cp zpool-importer /rootfs/usr/local/sbin/zpool-importer
+finalize:
+  - from: /rootfs
+    to: /rootfs

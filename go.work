@@ -5,4 +5,5 @@ use (
 	./nvidia-gpu/nvidia-container-toolkit/nvidia-container-runtime-wrapper
 	./nvidia-gpu/nvidia-container-toolkit/nvidia-persistenced-wrapper
 	./storage/iscsi-tools/iscsid-wrapper
+	./storage/zfs/zpool-importer
 )

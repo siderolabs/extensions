@@ -39,6 +39,7 @@ empty :=
 space = $(empty) $(empty)
 
 TARGETS = \
+		amdgpu-firmware \
 		amd-ucode \
 		applesmc \
 		bnx2-bnx2x \

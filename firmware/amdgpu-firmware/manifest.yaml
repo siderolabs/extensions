@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: amdgpu-firmware
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides AMDGPU firmware binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
