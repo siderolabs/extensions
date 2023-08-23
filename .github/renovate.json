@@ -19,6 +19,15 @@
                 "Pkgfile"
             ],
             "matchStrings": [
+                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:\\s+.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:\\s.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
+            ],
+            "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
+        },
+        {
+            "fileMatch": [
+                "Pkgfile"
+            ],
+            "matchStrings": [
                 "ghcr.io\\/siderolabs\\/bldr:(?<currentValue>v.*)"
             ],
             "depNameTemplate": "siderolabs/bldr",

@@ -6,49 +6,37 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.4.0"
+previous = "v1.5.0"
 
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.5/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
-    [notes.qemu-guest-agent]
-        title = "QEMU Guest Agent"
+    [notes.amdgpu-firmware]
+        title = "AMD GPU firmware"
         description = """\
-QEMU Guest Agent is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
+AMD GPU firmware is now shipped as a system extension.
 """
 
-    [notes.tailscale]
-        title = "Tailscale"
+    [notes.btrfs]
+        title = "BTRFS"
         description = """\
-Tailscale is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
+BTRFS drivers is now supported as Talos System Extension.
 """
 
     [notes.zfs]
         title = "ZFS"
         description = """\
-ZFS is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
-"""
-
-    [notes.thunderbolt]
-        title = "Thunderbolt"
-        description = """\
-Thunderbolt drivers is now supported as Talos System Extension. Requires Talos v1.5.0 or later.
+ZFS extensions now also ship zfs-tools and an extension service that imports all zpools on startup.
 """
 
     [notes.updates]
         title = "Component Updates"
         description = """\
-* Linux firmware: 20230804
-* DRBD: 9.2.4
-* Intel ucode: 20230808
-* Open iSCSI: 2.1.9
-* NVIDIA drivers: 535.54.03
-* nvidia-container-toolkit: v1.13.5
-* libnvidia-container: v1.13.5
+* DRBD: 9.2.5
 """
 
 
