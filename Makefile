@@ -48,6 +48,7 @@ TARGETS = \
 		gvisor \
 		hello-world-service \
 		i915-ucode \
+		intel-ice-firmware \
 		intel-ucode \
 		iscsi-tools \
 		nut-client \

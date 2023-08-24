@@ -1,0 +1,19 @@
+name: intel-ice-firmware
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/linux-firmware:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/lib/firmware/intel/ice/ddp
+        cp /lib/firmware/intel/ice/ddp/ice-*.pkg /rootfs/lib/firmware/intel/ice/ddp/ice.pkg
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
