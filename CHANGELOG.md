@@ -1,3 +1,58 @@
+## [Talos System Extensions 1.6.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.6.0-alpha.0) (2023-08-24)
+
+Welcome to the v1.6.0-alpha.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### AMD GPU firmware
+
+AMD GPU firmware is now shipped as a system extension.
+
+
+### BTRFS
+
+BTRFS drivers is now supported as Talos System Extension.
+
+
+### Component Updates
+
+* DRBD: 9.2.5
+
+
+### ZFS
+
+ZFS extensions now also ship zfs-tools and an extension service that imports all zpools on startup.
+
+
+### Contributors
+
+* Noel Georgi
+* David Donchez
+* Enno Boland
+* Victor Seva
+
+### Changes
+<details><summary>5 commits</summary>
+<p>
+
+* [`ce60bd9`](https://github.com/siderolabs/extensions/commit/ce60bd90bfa7dd5a4551f76bed644e251a6b3b94) fix: btrfs extension constraint
+* [`31cdc8c`](https://github.com/siderolabs/extensions/commit/31cdc8c50594aa686f95ce453876e780a1207ab2) feat: add amdgpu firmware
+* [`d369468`](https://github.com/siderolabs/extensions/commit/d369468456794d84764b79092cd1092c37481e56) feat: zfs user tools and import service
+* [`0284425`](https://github.com/siderolabs/extensions/commit/02844256f9b67715dead196be4a2a47f2320befc) chore: minor fixes
+* [`1533478`](https://github.com/siderolabs/extensions/commit/1533478f5945b8483121080ec847386ca4488ff5) feat: add btrfs storage extension
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.5.0](https://github.com/siderolabs/extensions/releases/tag/v1.5.0)
+
 ## [Talos System Extensions 1.5.0-beta.1](https://github.com/siderolabs/extensions/releases/tag/v1.5.0-beta.1) (2023-08-09)
 
 Welcome to the v1.5.0-beta.1 release of Talos System Extensions!  
