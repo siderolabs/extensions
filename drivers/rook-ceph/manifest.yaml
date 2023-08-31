@@ -1,0 +1,13 @@
+version: v1alpha1
+metadata:
+  name: rook-ceph
+  version: "$VERSION"
+  author: George Onoufriou (DreamingRaven)
+  description: |
+    This system extension provides the necessary kernel module drivers for ceph under rook-ceph. 
+    These drivers are necessary to have a fully functioning rook-ceph or ceph setup.
+    You will almost certainly require all of the extensions with the exception of LVM if you
+    are not encrypting your devices.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
