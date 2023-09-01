@@ -1,0 +1,2 @@
+# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=xenserver/xe-guest-utilities
+XE_GUEST_UTILITIES_VERSION: 7.20.2

@@ -1,0 +1,17 @@
+name: xe-guest-utilities
+container:
+  entrypoint: /usr/local/bin/xe-daemon
+  environment:
+  - PATH=/sbin:/usr/local/bin
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  # libs
+  - source: /lib
+    destination: /lib
+    type: bind
+    options:
+      - bind
+      - ro
+restart: always

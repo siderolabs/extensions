@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: xe-guest-utilities
+  version: "$VERSION"
+  author: Cas de Reuver
+  description: |
+    xe-guest-utilities communicates information and metrics with the Xen host.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"

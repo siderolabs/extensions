@@ -65,6 +65,13 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------ |
 | [qemu-guest-agent](qemu/qemu-guest-agent/) | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/qemu-guest-agent) | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent) | `upstream version` |
 
+### Virtualisation
+
+| Name                                                     | Image                                                                                                                     | Description                                                            | Version Format     |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
+| [xe-guest-utilities](virtualisation/xe-guest-utilities/) | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/talos-extensions/pkgs/container/xe-guest-utilities) | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
+
+
 ### NVIDIA GPU
 
 | Name                                                             | Description                                                                                                                        | Version Format                     |

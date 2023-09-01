@@ -1,0 +1,30 @@
+name: xe-guest-utilities
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /go
+  - sources:
+      - url: https://github.com/xenserver/xe-guest-utilities/archive/refs/tags/v{{ .XE_GUEST_UTILITIES_VERSION }}.tar.gz
+        destination: xe-guest-utilities.tar.gz
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+
+      - |
+        mkdir xe-guest-utilities dist
+        tar -xzvf xe-guest-utilities.tar.gz --strip-components=1 -C xe-guest-utilities
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        export GO_BUILD="go build -ldflags \"-linkmode 'external' -extldflags '-static'\""
+        export DISTDIR=../dist
+
+        make build
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/xe-guest-utilities/usr/local/bin/
+        cp -pr dist/xe-linux-distribution /rootfs/usr/local/lib/containers/xe-guest-utilities/usr/local/bin
+        cp -pr dist/xe-daemon /rootfs/usr/local/lib/containers/xe-guest-utilities/usr/local/bin
