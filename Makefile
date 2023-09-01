@@ -60,6 +60,7 @@ TARGETS = \
 		thunderbolt \
 		usb-modem-drivers \
 		util-linux-tools \
+		xe-guest-utilities \
 		zfs
 
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1

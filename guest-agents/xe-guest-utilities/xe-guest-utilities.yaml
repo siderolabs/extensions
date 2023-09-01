@@ -1,0 +1,22 @@
+name: xe-guest-utilities
+container:
+  entrypoint: ./xe-daemon
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  # libs
+  - source: /lib/modules
+    destination: /lib/modules
+    type: bind
+    options:
+      - bind
+      - ro
+  # xenbus
+  - source: /dev/xen
+    destination: /dev/xen
+    type: bind
+    options:
+      - bind
+      - rw
+restart: always

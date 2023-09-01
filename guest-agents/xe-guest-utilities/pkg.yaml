@@ -1,0 +1,40 @@
+name: xe-guest-utilities
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /go
+  - sources:
+      - url: https://github.com/xenserver/xe-guest-utilities/archive/refs/tags/v{{ .XE_GUEST_UTILITIES_VERSION }}.tar.gz
+        sha256: ca3b98c329bfd899b55833b70815ddcca235847e098a72c4b696ea43a0eaa9ce
+        sha512: b6b0770fd950c1c2c202a33d7e95e4f33052e52733e1e96981c52a3b46231127db5b5e48bc1cae6f4558b6e85419ea3a4731d505a2f1222cc9c88cd526e0c5e4
+        destination: xe-guest-utilities.tar.gz
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        mkdir -p ${GOPATH}/src/github.com/xenserver/xe-guest-utilities
+        tar -xzvf xe-guest-utilities.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/xenserver/xe-guest-utilities
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        cd ${GOPATH}/src/github.com/xenserver/xe-guest-utilities
+
+        rm -rf vendor
+
+        make build
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/xe-guest-utilities/
+        cd ${GOPATH}/src/github.com/xenserver/xe-guest-utilities
+
+        cp build/obj/xe-daemon /rootfs/usr/local/lib/containers/xe-guest-utilities/
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/xe-guest-utilities.yaml
+    to: /rootfs/usr/local/etc/containers/

@@ -59,11 +59,12 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | ------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------- |
 | [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/talos-extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version`-`talos version` |
 
-### QEMU
+### Guest Agents
 
-| Name                                       | Image                                                                                                                 | Description                                                   | Version Format     |
-| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------ |
-| [qemu-guest-agent](qemu/qemu-guest-agent/) | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/qemu-guest-agent) | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent) | `upstream version` |
+| Name                                                   | Image                                                                                                                     | Description                                                            | Version Format     |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
+| [qemu-guest-agent](guest-agents/qemu-guest-agent/)     | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/qemu-guest-agent)     | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
+| [xe-guest-utilities](guest-agents/xe-guest-utilities/) | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/talos-extensions/pkgs/container/xe-guest-utilities) | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
 
 ### NVIDIA GPU
 
