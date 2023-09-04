@@ -15,6 +15,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configur
 """
 
 [notes]
+    [notes.util-linux-tools]
+        title = "Util Linux Tools"
+        description = """\
+Util Linux Tools is now shipped as a system extension. Includes fstrim only.
+"""
+
     [notes.intel-ice-firmware]
         title = "Intel ICE firmware"
         description = """\

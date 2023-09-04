@@ -1,4 +1,4 @@
-name: util-linux
+name: util-linux-tools
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:

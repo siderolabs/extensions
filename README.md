@@ -73,6 +73,12 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | [nvidia-fabricmanager](nvidia-gpu/nvidia-fabricmanager/)         | [NVIDIA fabric manager](https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf) support for GPU workloads      | `driver version`                   |
 | [nvidia-open-gpu-kernel-modules](nvidia-gpu/nvidia-modules/)     | NVIDIA driver kernel modules                                                                                                       | `driver version`-`talos version`   |
 
+#### Tools
+
+| Name                                  | Description                        | Version Format  |
+| ------------------------------------- | ---------------------------------- | --------------- |
+| [util-linux-tools](tools/util-linux/) | Util Linux tools (only fstrim now) | `talos version` |
+
 ## Building Extensions
 
 In the current form, building extensions requires the use of our [bldr](https://github.com/siderolabs/bldr) tool.

@@ -18,7 +18,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.0
-PKGS ?= v1.6.0-alpha.0-8-gcca80b7
+PKGS ?= v1.6.0-alpha.0-10-gd3d7d29
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -59,7 +59,7 @@ TARGETS = \
 		tailscale \
 		thunderbolt \
 		usb-modem-drivers \
-		util-linux \
+		util-linux-tools \
 		zfs
 
 # Temporarily disabled, as mellanox-ofed fails to build with Linux 6.1

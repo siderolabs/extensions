@@ -1,6 +1,6 @@
 version: v1alpha1
 metadata:
-  name: util-linux
+  name: util-linux-tools
   version: "$VERSION"
   author: Sidero Labs
   description: |
