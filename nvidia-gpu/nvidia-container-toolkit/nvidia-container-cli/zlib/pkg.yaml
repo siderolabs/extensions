@@ -5,7 +5,7 @@ install:
   - build-base
   - bash
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
   - sources:
       - url: https://zlib.net/fossils/zlib-{{ .ZLIB_VERSION }}.tar.gz

@@ -2,13 +2,13 @@
 # renovate: datasource=github-releases depName=nvidia/open-gpu-kernel-modules
 NVIDIA_DRIVER_VERSION: 535.54.03
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
-CONTAINER_TOOLKIT_VERSION: v1.13.5
-CONTAINER_TOOLKIT_REF: 6b8589dcb4dead72ab64f14a5912886e6165c079
+CONTAINER_TOOLKIT_VERSION: v1.14.0
+CONTAINER_TOOLKIT_REF: f2bd3173d44938eadb73252b866a9b3a7f44b8c6
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/libnvidia-container.git
-LIBNVIDIA_CONTAINER_VERSION: v1.13.5
-LIBNVIDIA_CONTAINER_REF: 66607bd046341f7aad7de80a9f022f122d1f2fce
+LIBNVIDIA_CONTAINER_VERSION: v1.14.0
+LIBNVIDIA_CONTAINER_REF: 6a24508dff6cb36841114ff4c1287cd29ded72af
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_VERSION: latest@sha256:255b803e19a867695128b838d54f115cbd0dfaa34d78a5119a4c23212814ae95 # latest-20230621 has a bug with buildng apps
+WOLFI_BASE_REF: sha256:f73a3360466ecc4d6df3f451d7d5c4c49663096e158848ddbc9603c52a47bffe
 # renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ depName=golang/go
 GLIBC_VERSION: 2.38
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp

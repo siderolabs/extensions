@@ -6,7 +6,7 @@ install:
   - bash
   - gperf
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
   - sources:
       - url: https://github.com/seccomp/libseccomp/releases/download/v{{ .LIBSECCOMP_VERSION }}/libseccomp-{{ .LIBSECCOMP_VERSION }}.tar.gz

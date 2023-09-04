@@ -5,7 +5,7 @@ install:
   - build-base
   - bash
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
   - sources:
       - url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .LIBCAP_VERSION }}.tar.xz

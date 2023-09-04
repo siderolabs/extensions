@@ -49,6 +49,10 @@ ZFS extensions now also ship zfs-tools and an extension service that imports all
         title = "Component Updates"
         description = """\
 * DRBD: 9.2.5
+* nvidia-container-toolkit: v1.14.0
+* libnvidia-container: v1.14.0
+* QEMU agent: v8.1.0
+* Tailscale: 1.48.1
 """
 
 

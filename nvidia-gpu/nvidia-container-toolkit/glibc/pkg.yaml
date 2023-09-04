@@ -8,7 +8,7 @@ install:
   - bison
   - python3
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
   - sources:
       - url: https://ftpmirror.gnu.org/libc/glibc-{{ .GLIBC_VERSION }}.tar.gz

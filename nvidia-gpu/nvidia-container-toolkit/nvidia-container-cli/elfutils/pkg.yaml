@@ -6,7 +6,7 @@ install:
   - bash
   - m4
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base:{{ .WOLFI_BASE_VERSION }}
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
   - stage: zlib
     from: /rootfs
 steps:
