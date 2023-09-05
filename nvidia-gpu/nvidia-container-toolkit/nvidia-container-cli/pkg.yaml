@@ -6,6 +6,7 @@ install:
   - bash
   - go
   - coreutils
+  - sed
   - curl
   - rpcsvc-proto
   - patch
@@ -29,16 +30,16 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .LIBNVIDIA_CONTAINER_VERSION }}/libnvidia-container-{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: e9cff43bbbe5d6b0e394713f7711b1ec7b0c2878c827f140ee350e44de4d1f4b
-        sha512: 79d55974b85f9596253f60821319f94652de1fc8f0a21f23ada65905e4b2547b3f594273c77b6d57a37a3c2b11ff0ca84f6efb4311c7be3b4b2066d53181e39c
+        sha256: 4beebedd045468e8174895f5d4a563f7880cf7a10f062d996719c061fcdaa0db
+        sha512: a16f163cb8689f4b6279bed1a5965ee4c56f413918cae6acf272ca5adf7dd929818d977dd6657ce496abeb842b56e03bfd83bda828a7b953625b2999ac174b93
     env:
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}
-      GIT_TAG: {{ .LIBNVIDIA_CONTAINER_VERSION | replace "v" "" }}
       WITH_NVCGO: yes
       WITH_LIBELF: yes
       WITH_TIRPC: no # setting no means we'll use the system libtirpc
       WITH_SECCOMP: yes
       PKG_CONFIG_PATH: /usr/local/lib/pkgconfig # to find runtime libraries compiled in extensions (libseccomp)
+      PATH: "/usr/bin:{{ .PATH }}" # bldr doesn't have /usr/bin in PATH
     prepare:
       - |
         mkdir libnvidia-container
