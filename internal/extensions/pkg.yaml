@@ -1,0 +1,6 @@
+# this is a meta-package that contains a list of extension images for each version
+name: extensions
+variant: scratch
+finalize:
+  - from: /pkg/image-digests
+    to: /image-digests

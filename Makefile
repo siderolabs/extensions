@@ -10,7 +10,8 @@ REGISTRY_AND_USERNAME := $(REGISTRY)/$(USERNAME)
 SOURCE_DATE_EPOCH ?= "1642703752"
 ARTIFACTS ?= _out/
 OPERATING_SYSTEM := $(shell uname -s | tr "[:upper:]" "[:lower:]")
-GOARCH :=$(shell uname -m | tr '[:upper:]' '[:lower:]')
+GOARCH := $(shell uname -m | tr '[:upper:]' '[:lower:]')
+EXTENSIONS_IMAGE_REF := $(REGISTRY)/$(USERNAME)/extensions:$(TAG)
 
 ifeq ($(GOARCH),x86_64)
 GOARCH := amd64
@@ -74,6 +75,11 @@ all: $(TARGETS) ## Builds all known pkgs.
 .PHONY: nonfree
 nonfree: $(NONFREE_TARGETS) ## Builds all known non-free pkgs.
 
+.PHONY: extensions
+extensions: internal/extensions/image-digests ## Builds a list of generated extension images as an image.
+	@$(MAKE) docker-$@ \
+		TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
+
 .PHONY: help
 help: ## This help menu.
 	@grep -E '^[a-zA-Z%_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -101,11 +107,17 @@ extensions-metadata: $(ARTIFACTS)/bldr
 	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
 	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
 
-image-list: extensions-metadata ## Prints a list of all images built by this Makefile with digests.
-	@cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})'
+.PHONY: internal/extensions/image-digests
+internal/extensions/image-digests: extensions-metadata ## Stores a list of all images built by this Makefile with digests.
+	@cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
 
+.PHONY: sign-images
 sign-images: ## Run cosign to sign all images built by this Makefile.
-	@$(MAKE) --quiet image-list | xargs -I{} sh -c 'cosign sign --yes {}'
+	@for image in $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF)); do \
+		echo '==>' $$image; \
+		cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
+			cosign sign --yes $$image; \
+	done
 
 .PHONY: deps.png
 deps.png: $(ARTIFACTS)/bldr
