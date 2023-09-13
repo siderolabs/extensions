@@ -1,0 +1,51 @@
+name: stargz-snapshotter
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/containerd/stargz-snapshotter/archive/refs/tags/v0.14.3.tar.gz
+        destination: stargz-snapshotter.tar.gz
+        sha256: 5397d799f76e5b7994820b1bf854f09e5a01c4607f5b9c4c5fd81a4ff7507754
+        sha512: 105ca1cb0c5128fefbcf80d4edf851d1d854e0aadc1872ff8fdb8bc3b2e7b1cc54f3a6776493c023bc6ef9abe903663a75c14fd349cdb331db9416f3ad8b7812
+    env:
+      GOPATH: /go
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        mkdir -p ${GOPATH}/src/github.com/containerd/stargz-snapshotter
+
+        tar -xzf stargz-snapshotter.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/containerd/stargz-snapshotter
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        cd ${GOPATH}/src/github.com/containerd/stargz-snapshotter
+
+        make containerd-stargz-grpc
+
+        make ctr-remote
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+        mkdir -p /rootfs/usr/local/lib/containers/stargz-snapshotter
+
+        cd ${GOPATH}/src/github.com/containerd/stargz-snapshotter
+
+        cp ./out/containerd-stargz-grpc /rootfs/usr/local/lib/containers/stargz-snapshotter/containerd-stargz-grpc
+        chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/containerd-stargz-grpc
+
+        cp ./out/ctr-remote /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
+        chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/stargz-snapshotter.part
+    to: /rootfs/etc/cri/conf.d/stargz-snapshotter.part
+  - from: /pkg/config.toml
+    to: /rootfs/usr/local/etc/containerd-stargz-grpc/config.toml
+  - from: /pkg/stargz-snapshotter.yaml
+    to: /rootfs/usr/local/etc/containers/

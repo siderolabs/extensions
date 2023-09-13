@@ -57,6 +57,7 @@ TARGETS = \
 		nvidia-fabricmanager \
 		nvidia-open-gpu-kernel-modules \
 		qemu-guest-agent \
+		stargz-snapshotter \
 		tailscale \
 		thunderbolt \
 		usb-modem-drivers \
