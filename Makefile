@@ -42,6 +42,7 @@ space = $(empty) $(empty)
 TARGETS = \
 		amdgpu-firmware \
 		amd-ucode \
+		binfmt-misc \
 		bnx2-bnx2x \
 		btrfs \
 		chelsio-drivers \

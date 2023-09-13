@@ -42,6 +42,12 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | [thunderbolt](drivers/thunderbolt/)  | [ghcr.io/siderolabs/thunderbolt](https://github.com/siderolabs/extensions/pkgs/container/thunderbolt)                                       | Thunderbolt drivers                  | `talos version`                                       |
 | [usb-modem](drivers/usb-modem/)      | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers)                           | USB Modem drivers                    | `talos version`                                       |
 
+### Miscellaneous
+
+| Name                            | Image                                                                                             | Description                        | Version Format     |
+| ------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------- | ------------------ |
+| [binfmt-misc](modules/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version`                                       |
+
 ### Network
 
 | Name                            | Image                                                                                             | Description                        | Version Format     |
