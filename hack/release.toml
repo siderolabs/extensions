@@ -51,6 +51,12 @@ BTRFS drivers is now supported as Talos System Extension.
 ZFS extensions now also ship zfs-tools and an extension service that imports all zpools on startup.
 """
 
+    [notes.stargz]
+        title = "stargz-snapshotter"
+        description = """\
+stargz-snapshotter extension is now supported as Talos System Extension.
+"""
+
     [notes.updates]
         title = "Component Updates"
         description = """\

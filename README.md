@@ -19,6 +19,7 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 | Name                                | Image                                                                                       | Description                                     | Version Format                     |
 | ----------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------- |
 | [gvisor](container-runtime/gvisor/) | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | [gVisor](https://gvisor.dev/) container runtime | `upstream version`-`talos version` |
+| [stargz-snapshotter](container-runtime/stargz-snapshotter/) | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter) | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime | `upstream version`-`talos version` |
 
 ### Firmware
 
