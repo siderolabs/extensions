@@ -1,0 +1,8 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/net/ethernet/chelsio/cxgb/cxgb.ko
+kernel/drivers/net/ethernet/chelsio/cxgb3/cxgb3.ko
+kernel/drivers/net/ethernet/chelsio/cxgb4/cxgb4.ko
+kernel/drivers/net/ethernet/chelsio/cxgb4vf/cxgb4vf.ko
+kernel/drivers/net/ethernet/chelsio/inline_crypto/ch_ipsec/ch_ipsec.ko

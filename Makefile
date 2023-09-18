@@ -19,7 +19,7 @@ endif
 
 # keep in sync with Pkgfile
 BLDR_RELEASE ?= v0.2.1
-PKGS ?= v1.6.0-alpha.0-11-g7d9e60e
+PKGS ?= v1.6.0-alpha.0-17-g1d16fd2
 
 BUILD := docker buildx build
 PLATFORM ?= linux/amd64,linux/arm64
@@ -44,6 +44,8 @@ TARGETS = \
 		amd-ucode \
 		bnx2-bnx2x \
 		btrfs \
+		chelsio-drivers \
+		chelsio-firmware \
 		drbd \
 		gasket-driver \
 		gvisor \
