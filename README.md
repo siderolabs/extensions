@@ -46,7 +46,7 @@ All system extensions provided by Sidero Labs can be found in the [ghcr.io regis
 
 | Name                            | Image                                                                                             | Description                        | Version Format     |
 | ------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------- | ------------------ |
-| [binfmt-misc](modules/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version`                                       |
+| [binfmt-misc](misc/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version`                                       |
 
 ### Network
 
