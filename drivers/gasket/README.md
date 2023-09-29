@@ -2,18 +2,9 @@
 
 ## Installation
 
-Add the extension to your machine config and enable the modules:
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
 
-```yaml
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/gasket-driver:<VERSION>
-  kernel:
-    modules:
-      - name: gasket
-      - name: apex
-```
+## Usage
 
 By default, the device will be owned by UID and GID `0` and is only accessible by root.
 If you need to change this, you may do this by adding udev rules to your machine configuration like this,
@@ -32,7 +23,7 @@ You can verify the modules are enabled by reading the `/proc/modules` where it _
 
 For example:
 
-```
+```bash
 ❯ talosctl -n 192.168.32.5  read /proc/modules
 apex 20480 - - Live 0xffffffffc01c9000 (O)
 gasket 94208 - - Live 0xffffffffc01aa000 (O)
@@ -42,7 +33,7 @@ In addition, if you actually have Coral module installed, you should be able to 
 
 For example:
 
-```
+```bash
 ❯ talosctl -n 192.168.32.5  ls -l /dev/apex_0
 NODE           MODE          UID   GID   SIZE(B)   LASTMOD           NAME
 192.168.32.5   Dcrw-rw----   0     44    0         Sep 10 18:15:52   apex_0

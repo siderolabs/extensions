@@ -4,13 +4,14 @@ Miscellaneous Binary Format is a capability of the Linux kernel that allows arbi
 
 ## Installation
 
-Add the extension to your machine config and enable the modules.
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
+## Usage
+
+Enable the kernel module in Talos machine config:
 
 ```yaml
 machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/binfmt-misc:<VERSION>
   kernel:
     modules:
       - name: binfmt_misc

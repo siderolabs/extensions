@@ -1,15 +1,17 @@
 # usb-modem-drivers extension
 
+
 ## Installation
 
-Add the extension to your machine config and enable the modules, your modem might not require
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
+## Usage
+
+Enable the modules in Talos Linux machine configuration, your modem might not require
 all of them, so feel free to remove the ones that are not needed:
 
 ```yaml
 machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/usb-modem-drivers:<VERSION>
   kernel:
     modules:
       - name: usbserial
@@ -59,10 +61,10 @@ or
 ```
 ❯ talosctl -n 192.168.32.5 dmesg
 # look for lines like these:
- kern:    info: [2023-06-07T16:40:10.189868521Z]: usbcore: registered new interface driver usbhid                                                                                                  
- kern:    info: [2023-06-07T16:40:10.190066521Z]: option 6-1.2:1.3: GSM modem (1-port) converter detected  
- kern:    info: [2023-06-07T16:40:10.265654521Z]: usb 6-1.2: GSM modem (1-port) converter now attached to ttyUSB7    
- kern:    info: [2023-06-07T16:40:10.280291521Z]: qmi_wwan 6-1.2:1.4: cdc-wdm1: USB WDM device  
+ kern:    info: [2023-06-07T16:40:10.189868521Z]: usbcore: registered new interface driver usbhid
+ kern:    info: [2023-06-07T16:40:10.190066521Z]: option 6-1.2:1.3: GSM modem (1-port) converter detected
+ kern:    info: [2023-06-07T16:40:10.265654521Z]: usb 6-1.2: GSM modem (1-port) converter now attached to ttyUSB7
+ kern:    info: [2023-06-07T16:40:10.280291521Z]: qmi_wwan 6-1.2:1.4: cdc-wdm1: USB WDM device
 ```
 
 ## Configurtion

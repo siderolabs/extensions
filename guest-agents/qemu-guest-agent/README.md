@@ -1,15 +1,9 @@
 # qemu-guest-agent extension
 
-## Usage
 
-Enable the extension in the machine configuration before installing Talos:
+## Installation
 
-```yaml
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/qemu-guest-agent:<VERSION>
-```
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
 
 ## Testing
 

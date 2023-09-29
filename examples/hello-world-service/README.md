@@ -2,16 +2,11 @@
 
 This repository is an example of an extension service.
 
+## Installation
+
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
 ## Usage
-
-Enable the extension in the machine configuration before installing Talos:
-
-```yaml
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/hello-world-service:<VERSION>
-```
 
 Once this example extension is installed, it will provide simple HTTP server which responds with a message on port 80:
 

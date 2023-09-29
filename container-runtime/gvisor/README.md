@@ -1,15 +1,10 @@
 # gVisor extension
 
+## Installation
+
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
 ## Usage
-
-Enable the extension in the machine configuration before installing Talos:
-
-```yaml
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/gvisor:<VERSION>
-```
 
 gVisor requires unprivileged user namespace creation, so Talos default setting
 should be overridden:

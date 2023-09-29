@@ -1,12 +1,5 @@
 # Stargz Snapshotter extension
 
-## Usage
+## Installation
 
-Enable the extension in the machine configuration before installing Talos:
-
-```yaml
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/stargz-snapshotter:<VERSION>
-```
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).

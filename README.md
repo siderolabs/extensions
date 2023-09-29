@@ -7,12 +7,36 @@ Things like gVisor, GPU support, etc. are good candidates for extensions.
 ## Using Extensions
 
 Extensions in this repo are published as container images.
-These images can be specified in the Talos Linux machine configuration and, when present, will get extracted and laid down as part of the installation process.
-The image is composed of a `manifest.yaml` file that provides information and compatibility information, as well as a `rootfs` that contains things like compiled binaries that are bind mounted into the system.
+These images can be added to the the Talos Linux [boot asset](https://www.talos.dev/latest/talos-guides/install/boot-assets/) to produce a final boot asset containing a base Talos `initramfs` and
+a set of [system extensions](https://www.talos.dev/latest/talos-guides/configuration/system-extensions/) appended to it.
+
+The extension image is composed of a `manifest.yaml` file that provides information and compatibility information, as well as a `rootfs` that contains things like compiled binaries that are bind mounted into the system.
+
+## Installing Extensions
+
+In order to find a container reference for a system extension compatible with your Talos Linux version, you can use the following command:
+
+```bash
+crane export ghcr.io/siderolabs/extensions:v<talos-version> | tar x -O image-digests | grep <extension-name>
+```
+
+For example, to find a compatible version of the `gasket-driver` extension for Talos v1.5.3, you can run:
+
+```bash
+$ crane export ghcr.io/siderolabs/extensions:v1.5.3 | tar x -O image-digests | grep gasket-driver
+ghcr.io/siderolabs/gasket-driver:97aeba58-v1.5.3@sha256:c786edb356edae3b451cb82d5322f94e54ea0710195181b93ae37ccc8e7ba908
+```
+
+Please always use the pinned digest when referencing an extension image.
+
+All extensions are signed with Google Accounts OIDC issuer matching `@siderolabs.com` domain, so the image signatures can be verified, for example:
+
+```bash
+cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oidc-issuer https://accounts.google.com ghcr.io/siderolabs/extensions:v1.5.3
+cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oidc-issuer https://accounts.google.com ghcr.io/siderolabs/gasket-driver:97aeba58-v1.5.3@sha256:c786edb356edae3b451cb82d5322f94e54ea0710195181b93ae37ccc8e7ba908
+```
 
 ## Extension Catalog
-
-All system extensions provided by Sidero Labs can be found in the [ghcr.io registry](https://github.com/orgs/siderolabs/packages?tab=packages&q=repo%3Asiderolabs%2Fextensions).
 
 ### Container Runtimes
 

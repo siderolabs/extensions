@@ -1,20 +1,14 @@
 # nut-client extension
 
+## Installation
+
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
 ## Usage
 
-Enable the extension in the machine configuration before installing Talos:
-
-```yaml
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/nut-client:<VERSION>
-```
-
-Configure the extension via .machine.files 
-You must replace upsmonHost and upsmonPasswd to match configuration on your nut server.  
+Configure the extension via `.machine.files`.
+You must replace upsmonHost and upsmonPasswd to match configuration on your nut server.
 See [upsd.users](https://networkupstools.org/docs/man/upsd.users.html) man page for details.
-
 
 On Talos SHUTDOWNCMD must be `/sbin/poweroff`
 

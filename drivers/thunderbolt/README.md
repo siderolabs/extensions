@@ -2,14 +2,16 @@
 
 ## Installation
 
-Add the extension to your machine config and enable the `thunderbolt` module. If you need Thunderbolt/USB4 networking,
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
+## Usage
+
+Enable the `thunderbolt` module in Talos machine config.
+If you need Thunderbolt/USB4 networking,
 enable `thunderbolt_net` module as well.
 
 ```yaml
 machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/thunderbolt:<VERSION>
   kernel:
     modules:
       - name: thunderbolt

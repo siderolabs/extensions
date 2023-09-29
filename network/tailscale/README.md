@@ -6,12 +6,12 @@ with tailscale
 
 ## Installation
 
-Simplest install
-```
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
+## Usage
+
+```yaml
 machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/tailscale:1.44.0
   files:
     - content: |
         TS_AUTHKEY=<your auth key>
@@ -20,7 +20,7 @@ machine:
       op: create
 ```
 
-```
+```bash
 > talosctl apply -n node myconfig.yaml
 > talosctl upgrade -n node
 ```

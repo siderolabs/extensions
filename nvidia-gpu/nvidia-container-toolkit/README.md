@@ -1,15 +1,12 @@
 # NVIDIA Container toolkit extension
 
+
+## Installation
+
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
+
 ## Usage
-
-Enable the extension in the machine configuration before installing Talos:
-
-```yaml
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/nvidia-container-toolkit:<VERSION>
-```
 
 The following NVIDIA modules needs to be loaded, so add this to the talos config:
 

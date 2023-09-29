@@ -4,13 +4,14 @@ This extension provides kernel modules needed to mount btrfs filesystems.
 
 ## Installation
 
-Add the extension to your machine config and enable the modules.
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
+
+## Usage
+
+Enable the module in Talos machine config:
 
 ```yaml
 machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/btrfs:<VERSION>
   kernel:
     modules:
       - name: btrfs

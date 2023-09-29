@@ -4,18 +4,7 @@ Adds xe-guest-utilities as system extensions.
 
 ## Installation
 
-Simplest install
-```
-machine:
-  install:
-    extensions:
-      - image: ghcr.io/siderolabs/xe-guest-utilities:8.3.0
-```
-
-```
-> talosctl apply -n node myconfig.yaml
-> talosctl upgrade -n node
-```
+See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
 
 ## Configuration
 
