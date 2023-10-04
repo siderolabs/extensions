@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-08T13:30:42Z by kres latest.
+# Generated on 2023-11-13T17:10:23Z by kres latest.
 
 # common variables
 
@@ -57,6 +57,7 @@ TARGETS += btrfs
 TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
 TARGETS += drbd
+TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
 TARGETS += gvisor

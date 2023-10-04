@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-07T19:17:25Z by kres latest.
+# Generated on 2023-11-13T17:09:48Z by kres latest.
 
 name: slack-notify
 "on":
@@ -17,33 +17,13 @@ jobs:
       - generic
     if: github.event.workflow_run.conclusion != 'skipped'
     steps:
-      - name: Download PR artifact
-        if: github.event.workflow_run.event == 'pull_request'
-        uses: actions/github-script@v6
-        with:
-          script: |-
-            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                run_id: context.payload.workflow_run.id,
-            });
-            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
-                return artifact.name == "pr-number"
-            })[0];
-            let download = await github.rest.actions.downloadArtifact({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                artifact_id: matchArtifact.id,
-                archive_format: 'zip',
-            });
-            let fs = require('fs');
-            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/pr-number.zip`, Buffer.from(download.data));
       - name: Get PR number
         id: get-pr-number
         if: github.event.workflow_run.event == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          unzip pr-number.zip
-          echo pull_request_number=$(cat pr-number.txt) >> $GITHUB_OUTPUT
+          echo pull_request_number=$(gh pr view -R ${{ github.repository }} ${{ github.event.workflow_run.head_repository.owner.login }}:${{ github.event.workflow_run.head_branch }} --json number --jq .number) >> $GITHUB_OUTPUT
       - name: Slack Notify
         uses: slackapi/slack-github-action@v1
         with:

@@ -10,6 +10,7 @@ spec:
     - chelsio-drivers
     - chelsio-firmware
     - drbd
+    - ecr-credential-provider
     - fuse3
     - gasket-driver
     - gvisor
