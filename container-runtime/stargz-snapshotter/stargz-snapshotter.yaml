@@ -2,6 +2,8 @@ name: stargz-snapshotter
 depends:
   - service: cri
 container:
+  environment:
+  - PATH=/usr/local/bin
   entrypoint: ./containerd-stargz-grpc
   args:
     - --address=/var/run/containerd-stargz-grpc/containerd-stargz-grpc.sock
@@ -26,4 +28,29 @@ container:
       options:
         - bind
         - ro
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/bin
+      destination: /usr/local/bin
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
 restart: always
