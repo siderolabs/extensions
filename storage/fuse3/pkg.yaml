@@ -1,0 +1,42 @@
+name: fuse3
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://github.com/libfuse/libfuse/releases/download/fuse-{{ .FUSE3_VERSION }}/fuse-{{ .FUSE3_VERSION }}.tar.gz
+        destination: fuse.tar.gz
+        sha256: 75a7140ce2d4589eda2784d2279be9d2b273a9b6b0f79ecb871dc4dded046fb5
+        sha512: 3f07919a7451a30d05bc174e2f8ec2c65b6225e63b4bbb40f2b097d760d4aa9b753a1da5da4874855094a01979fc4313ffabce54668ed20a6900f5eed92912c8
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzf fuse.tar.gz --strip-components=1
+
+        mkdir -p /usr/bin
+        ln -s /toolchain/bin/env /usr/bin/env
+        ln -s /toolchain/bin/python3 /toolchain/bin/python
+        pip3 install ninja
+
+        mkdir -p /rootfs/usr/local/etc
+        mkdir -p /rootfs/usr/local/bin
+        mkdir -p /rootfs/etc/init.d
+
+        mkdir _build
+        meson setup _build
+        meson configure -D useroot=false -D initscriptdir='' _build
+    build:
+      - |
+        ninja -C _build
+    install:
+      - |
+
+        DESTDIR=/rootfs ninja -C _build install
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

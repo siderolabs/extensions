@@ -48,6 +48,7 @@ TARGETS = \
 		chelsio-drivers \
 		chelsio-firmware \
 		drbd \
+		fuse3 \
 		gasket-driver \
 		gvisor \
 		hello-world-service \

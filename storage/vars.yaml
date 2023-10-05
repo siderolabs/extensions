@@ -1,0 +1,2 @@
+# renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=libfuse/libfuse
+FUSE3_VERSION: 3.16.1
