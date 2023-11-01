@@ -7,4 +7,4 @@
 [proxy_plugins]
   [proxy_plugins.stargz]
     type = "snapshot"
-    address = "/var/run/containerd-stargz-grpc/containerd-stargz-grpc.sock"
+    address = "/run/containerd-stargz-grpc/containerd-stargz-grpc.sock"

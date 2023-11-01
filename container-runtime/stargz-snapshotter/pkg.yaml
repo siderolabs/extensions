@@ -1,5 +1,5 @@
 name: stargz-snapshotter
-variant: scratch
+variant: alpine
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
@@ -9,15 +9,25 @@ steps:
         destination: stargz-snapshotter.tar.gz
         sha256: 5397d799f76e5b7994820b1bf854f09e5a01c4607f5b9c4c5fd81a4ff7507754
         sha512: 105ca1cb0c5128fefbcf80d4edf851d1d854e0aadc1872ff8fdb8bc3b2e7b1cc54f3a6776493c023bc6ef9abe903663a75c14fd349cdb331db9416f3ad8b7812
+      - url: https://busybox.net/downloads/binaries/1.35.0-x86_64-linux-musl/busybox
+        destination: busybox
+        sha256: 6e123e7f3202a8c1e9b1f94d8941580a25135382b99e8d3e34fb858bba311348
+        sha512: f44863b48048b9c6b7a4f4666bf1399117739a76f339ce178ab232d84e839685e6e92c624553b00943c694a73fa8aeaaf8841f7ef7b66f4b5b633f51cc43db24
     env:
       GOPATH: /go
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
+        mkdir -p /rootfs/usr/local/bin
+        mkdir -p /rootfs/usr/local/lib/containers/stargz-snapshotter
         mkdir -p ${GOPATH}/src/github.com/containerd/stargz-snapshotter
 
         tar -xzf stargz-snapshotter.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/containerd/stargz-snapshotter
+
+        mv busybox /rootfs/usr/local/bin/busybox
+        chmod +x /rootfs/usr/local/bin/busybox
+
     build:
       - |
         export PATH=${PATH}:${TOOLCHAIN}/go/bin
@@ -28,16 +38,17 @@ steps:
         make ctr-remote
     install:
       - |
-        mkdir -p /rootfs/usr/local/bin
-        mkdir -p /rootfs/usr/local/lib/containers/stargz-snapshotter
 
         cd ${GOPATH}/src/github.com/containerd/stargz-snapshotter
 
-        cp ./out/containerd-stargz-grpc /rootfs/usr/local/lib/containers/stargz-snapshotter/containerd-stargz-grpc
-        chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/containerd-stargz-grpc
+        cp ./out/containerd-stargz-grpc /rootfs/usr/local/bin/containerd-stargz-grpc
+        chmod +x /rootfs/usr/local/bin/containerd-stargz-grpc
 
-        cp ./out/ctr-remote /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
-        chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
+        cp ./out/ctr-remote /rootfs/usr/local/bin/ctr-remote
+        chmod +x /rootfs/usr/local/bin/ctr-remote
+
+        cp /bin/busybox /rootfs/usr/local/lib/containers/stargz-snapshotter/busybox
+        chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/busybox
 finalize:
   - from: /rootfs
     to: /rootfs

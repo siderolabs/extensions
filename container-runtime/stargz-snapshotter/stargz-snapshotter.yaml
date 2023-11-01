@@ -2,52 +2,23 @@ name: stargz-snapshotter
 depends:
   - service: cri
 container:
-  environment:
-  - PATH=/usr/local/bin
-  entrypoint: ./containerd-stargz-grpc
+  entrypoint: /usr/local/bin/busybox
   args:
-    - --address=/var/run/containerd-stargz-grpc/containerd-stargz-grpc.sock
+    - nsenter
+    - --mount=/proc/1/ns/mnt
+    - /usr/local/bin/containerd-stargz-grpc
+    - --address=/run/containerd-stargz-grpc/containerd-stargz-grpc.sock
     - --log-level=debug
   mounts:
-    - source: /etc/ssl
-      destination: /etc/ssl
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /var
-      destination: /var
+    - source: /usr/local/bin
+      destination: /usr/local/bin
       type: bind
       options:
         - rshared
         - rbind
         - rw
-    - source: /usr/local/etc/containerd-stargz-grpc
-      destination: /etc/containerd-stargz-grpc
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /lib
-      destination: /lib
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /usr/lib
-      destination: /usr/lib
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /usr/local/bin
-      destination: /usr/local/bin
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /dev
-      destination: /dev
+    - source: /proc
+      destination: /proc
       type: bind
       options:
         - rshared
