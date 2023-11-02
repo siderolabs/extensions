@@ -1,0 +1,114 @@
+---
+kind: pkgfile.Build
+spec:
+  targets:
+    - amdgpu-firmware
+    - amd-ucode
+    - binfmt-misc
+    - bnx2-bnx2x
+    - btrfs
+    - chelsio-drivers
+    - chelsio-firmware
+    - drbd
+    - fuse3
+    - gasket-driver
+    - gvisor
+    - hello-world-service
+    - i915-ucode
+    - intel-ice-firmware
+    - intel-ucode
+    - iscsi-tools
+    - nut-client
+    - nvidia-container-toolkit
+    - nvidia-fabricmanager
+    - nvidia-open-gpu-kernel-modules
+    - qemu-guest-agent
+    - stargz-snapshotter
+    - tailscale
+    - thunderbolt
+    - usb-modem-drivers
+    - util-linux-tools
+    - xe-guest-utilities
+    - zfs
+  additionalTargets:
+    nonfree:
+      - nonfree-kmod-nvidia
+  reproducibleTargetName: reproducibility
+  extraBuildArgs:
+    - TAG
+    - PKGS
+  useBldrPkgTagResolver: true
+---
+kind: common.Build
+spec:
+    ignoredPaths:
+        - "internal/extensions/image-digests"
+---
+kind: auto.CustomSteps
+spec:
+  steps:
+    - name: extensions
+      toplevel: true
+    - name: extensions-metadata
+      toplevel: true
+    - name: internal/extensions/image-digests
+      toplevel: true
+    - name: sign-images
+      toplevel: true
+---
+kind: custom.Step
+name: extensions
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    variables:
+      - name: EXTENSIONS_IMAGE_REF
+        defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
+      - name: PKGS
+        defaultValue: v1.6.0-alpha.0-26-g5f84302
+    depends:
+      - internal/extensions/image-digests
+    script:
+      - |
+        @$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
+---
+kind: custom.Step
+name: extensions-metadata
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    depends:
+      - $(ARTIFACTS)/bldr
+    script:
+      - |
+        @rm -f _out/extensions-metadata
+        @$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
+        @$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
+---
+kind: custom.Step
+name: internal/extensions/image-digests
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    depends:
+      - extensions-metadata
+    script:
+      - |
+        @cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+---
+kind: custom.Step
+name: sign-images
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    script:
+      - |
+        @for image in $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF)); do \
+          echo '==>' $$image; \
+          cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
+            cosign sign --yes $$image; \
+        done

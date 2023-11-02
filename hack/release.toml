@@ -64,7 +64,7 @@ stargz-snapshotter extension is now supported as Talos System Extension.
 * QEMU agent: v8.1.1
 * Tailscale: 1.50.0
 * Xen Guest Utilities: 8.3.1
-* Linux Firmware: 20230919
+* Linux Firmware: 20231030
 * gasket driver: 09385d4
 """
 

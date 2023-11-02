@@ -1,12 +1,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-01T12:40:50Z by kres f0cdabb-dirty.
+# Generated on 2023-11-03T11:00:40Z by kres latest.
 
 name: slack-notify
 "on":
   workflow_run:
     workflows:
       - default
+      - weekly
     types:
       - completed
 jobs:

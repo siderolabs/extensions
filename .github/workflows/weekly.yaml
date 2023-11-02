@@ -1,0 +1,42 @@
+# THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
+#
+# Generated on 2023-11-03T11:00:40Z by kres latest.
+
+name: weekly
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+"on":
+  schedule:
+    - cron: 30 1 * * 1
+jobs:
+  reproducibility:
+    runs-on:
+      - self-hosted
+      - pkgs
+    services:
+      buildkitd:
+        image: moby/buildkit:v0.12.2
+        options: --privileged
+        ports:
+          - 1234:1234
+        volumes:
+          - /var/lib/buildkit/${{ github.repository }}:/var/lib/buildkit
+          - /usr/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Unshallow
+        run: |
+          git fetch --prune --unshallow
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          append: |
+            - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
+              platforms: linux/arm64
+          driver: remote
+          endpoint: tcp://localhost:1234
+      - name: reproducibility-test
+        run: |
+          make reproducibility-test

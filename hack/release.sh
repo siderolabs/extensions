@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+# THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
+#
+# Generated on 2023-11-02T15:47:10Z by kres 32170a7-dirty.
 
 set -e
 
@@ -59,3 +63,4 @@ EOF
 
   exit 1
 fi
+

@@ -1,0 +1,63 @@
+name: reproducibility
+variant: scratch
+dependencies:
+  # amdgpu-firmware can be ignored from reproducibility test since it's linux-firmware copied from pkgs
+  # - stage: amdgpu-firmware
+  # amd-ucode can be ignored from reproducibility test since it's linux-firmware copied from pkgs
+  # - stage: amd-ucode
+  # binfmt-misc can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: binfmt-misc
+  # bnx2-bnx2x can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: bnx2-bnx2x
+  # btrfs can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: btrfs
+  # chelsio-drivers can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: chelsio-drivers
+  # chelsio-firmware can be ignored from reproducibility test since it's linux-firmware copied from pkgs
+  # - stage: chelsio-firmware
+  # drbd can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: drbd
+
+  - stage: fuse3
+
+  # gasket-driver can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: gasket-driver
+
+  - stage: gvisor
+  - stage: hello-world-service
+
+  # i915-ucode can be ignored from reproducibility test since it's linux-firmware copied from pkgs
+  # - stage: i915-ucode
+  # intel-ice-firmware can be ignored from reproducibility test since it's linux-firmware copied from pkgs
+  # - stage: intel-ice-firmware
+  # intel-ucode can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
+  # - stage: intel-ucode
+
+  - stage: iscsi-tools
+  - stage: nut-client
+  - stage: nvidia-container-toolkit
+
+  # nvidia-fabricmanager can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
+  # - stage: nvidia-fabricmanager
+  # nvidia-open-gpu-kernel-modules can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: nvidia-open-gpu-kernel-modules
+
+  - stage: qemu-guest-agent
+  - stage: stargz-snapshotter
+  - stage: tailscale
+
+  # thunderbolt can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: thunderbolt
+  # usb-modem-drivers can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: usb-modem-drivers
+
+  - stage: util-linux-tools
+  - stage: xe-guest-utilities
+  - stage: zfs
+
+  # nonfree-kmod-nvidia can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: nonfree-kmod-nvidia
+finalize:
+  #  here we're only copying /rootfs since we don't want the manifest.yaml files
+  - from: /rootfs
+    to: /

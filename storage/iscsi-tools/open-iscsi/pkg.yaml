@@ -14,11 +14,14 @@ steps:
         destination: open-iscsi.tar.gz
         sha256: 60e2a1e3058a8af7f702e86a5a0511b05b8754d29d3d2df4e0e301399b5cf70a
         sha512: 25c28da5918b775ca54d3e55591eca0b4f7b5be33d803cad28fce1e9b2334b43cee1423a4e1819497b322e0f420dcd8d74226f442ca432233d1753565b11a5bb
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
     prepare:
       - |
         mkdir -p /usr/bin \
             && ln -sf /toolchain/bin/env /usr/bin/env \
-            && ln -sf /toolchain/bin/install /usr/bin/install
+            && ln -sf /toolchain/bin/install /usr/bin/install \
+            && ln -s /toolchain/bin/python3 /toolchain/bin/python
 
         tar -xzf open-iscsi.tar.gz --strip-components=1
 
@@ -33,23 +36,27 @@ steps:
         patch -p1 < /pkg/patches/add-missing-headers.patch
         patch -p1 < /pkg/patches/dont-use-lib64.patch
         patch -p1 < /pkg/patches/remove-werror.patch
+
+        pip3 install ninja
     build:
       - |
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
-        # musl doesn't have glob_onlydir but by spec it's also not guaranteed to return only dirs anyway
+        mkdir -p output
+
         LDFLAGS="$LDFLAGS -L/usr/local/lib" \
-        make \
-          prefix=/usr/local \
-          exec_prefix=/usr/local \
-          localstatedir=/var \
-          sysconfdir=/usr/local/etc \
-          mandir=/usr/local/share/man \
-          OPTFLAGS="$CFLAGS -I/usr/local/include -DNO_SYSTEMD -DGLOB_ONLYDIR=0"
+        meson setup \
+          -Db_lto=true \
+          -Dno_systemd=true \
+          -Drulesdir="/usr/local/etc/udev/rules.d" \
+          -Dc_args="$CFLAGS -I/usr/local/include -DNO_SYSTEMD -DGLOB_ONLYDIR=0" \
+          output
+
+        ninja -C output
     install:
       - |
-        mkdir -p /usr/local/etc
-        make prefix=/usr/local exec_prefix=/usr/local/ etcdir=/usr/local/etc DESTDIR=/rootfs install
+        mkdir -p /rootfs/usr/local/etc
+        DESTDIR=/rootfs ninja -C output install
 
         # cleanup
         rm -rf /rootfs/usr/local/share
