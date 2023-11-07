@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-03T11:00:40Z by kres latest.
+# Generated on 2023-11-07T19:17:25Z by kres latest.
 
 name: slack-notify
 "on":
@@ -15,14 +15,35 @@ jobs:
     runs-on:
       - self-hosted
       - generic
-    if: ${{ github.event.workflow_run.conclusion != 'skipped' }}
+    if: github.event.workflow_run.conclusion != 'skipped'
     steps:
-      - name: Retrieve Workflow Run Info
-        id: retrieve-workflow-run-info
-        uses: potiuk/get-workflow-origin@v1_5
+      - name: Download PR artifact
+        if: github.event.workflow_run.event == 'pull_request'
+        uses: actions/github-script@v6
         with:
-          sourceRunId: ${{ github.event.workflow_run.id }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          script: |-
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+                return artifact.name == "pr-number"
+            })[0];
+            let download = await github.rest.actions.downloadArtifact({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                artifact_id: matchArtifact.id,
+                archive_format: 'zip',
+            });
+            let fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/pr-number.zip`, Buffer.from(download.data));
+      - name: Get PR number
+        id: get-pr-number
+        if: github.event.workflow_run.event == 'pull_request'
+        run: |
+          unzip pr-number.zip
+          echo pull_request_number=$(cat pr-number.txt) >> $GITHUB_OUTPUT
       - name: Slack Notify
         uses: slackapi/slack-github-action@v1
         with:
@@ -39,7 +60,7 @@ jobs:
                                 "fields": [
                                     {
                                         "type": "mrkdwn",
-                                        "text": "${{ github.event.workflow_run.event == 'pull_request' && format('*Pull Request:* {0} (`{1}`)\n<{2}/pull/{3}|{4}>', github.repository, github.ref_name, github.event.repository.html_url, steps.retrieve-workflow-run-info.outputs.pullRequestNumber, github.event.workflow_run.display_title) || format('*Build:* {0} (`{1}`)\n<{2}/commit/{3}|{4}>', github.repository, github.ref_name, github.event.repository.html_url, github.sha, github.event.workflow_run.display_title) }}"
+                                        "text": "${{ github.event.workflow_run.event == 'pull_request' && format('*Pull Request:* {0} (`{1}`)\n<{2}/pull/{3}|{4}>', github.repository, github.ref_name, github.event.repository.html_url, steps.get-pr-number.outputs.pull_request_number, github.event.workflow_run.display_title) || format('*Build:* {0} (`{1}`)\n<{2}/commit/{3}|{4}>', github.repository, github.ref_name, github.event.repository.html_url, github.sha, github.event.workflow_run.display_title) }}"
                                     },
                                     {
                                         "type": "mrkdwn",

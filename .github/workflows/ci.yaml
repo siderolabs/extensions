@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-03T11:00:40Z by kres latest.
+# Generated on 2023-11-07T19:17:25Z by kres latest.
 
 name: default
 concurrency:
@@ -22,6 +22,7 @@ jobs:
     permissions:
       actions: read
       contents: write
+      issues: read
       packages: write
       pull-requests: read
     runs-on:
@@ -29,10 +30,10 @@ jobs:
       - pkgs
     if: (!startsWith(github.head_ref, 'renovate/') && !startsWith(github.head_ref, 'dependabot/'))
     outputs:
-      labels: ${{ steps.workflow-run-info.outputs.pullRequestLabels }}
+      labels: ${{ steps.retrieve-pr-labels.outputs.result }}
     services:
       buildkitd:
-        image: moby/buildkit:v0.12.2
+        image: moby/buildkit:v0.12.3
         options: --privileged
         ports:
           - 1234:1234
@@ -53,6 +54,17 @@ jobs:
               platforms: linux/arm64
           driver: remote
           endpoint: tcp://localhost:1234
+      - name: Save PR number
+        if: github.event_name == 'pull_request' && always()
+        run: |
+          echo ${{ github.event.number }} > pr-number.txt
+      - name: Upload PR number
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: pr-number
+          path: pr-number.txt
+          retention-days: "1"
       - name: Build
         run: |
           make
@@ -74,11 +86,20 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           make nonfree PUSH=true
-      - name: Retrieve workflow info
-        id: workflow-run-info
-        uses: potiuk/get-workflow-origin@v1_5
+      - name: Retrieve PR labels
+        id: retrieve-pr-labels
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          retries: "3"
+          script: |
+            const resp = await github.rest.issues.get({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+            })
+
+            return resp.data.labels
       - name: release-notes
         if: startsWith(github.ref, 'refs/tags/')
         run: |
@@ -98,7 +119,7 @@ jobs:
       - default
     services:
       buildkitd:
-        image: moby/buildkit:v0.12.2
+        image: moby/buildkit:v0.12.3
         options: --privileged
         ports:
           - 1234:1234
