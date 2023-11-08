@@ -60,7 +60,7 @@ stargz-snapshotter extension is now supported as Talos System Extension.
     [notes.updates]
         title = "Component Updates"
         description = """\
-* DRBD: 9.2.5
+* DRBD: 9.2.6
 * QEMU agent: v8.1.1
 * Tailscale: 1.50.0
 * Xen Guest Utilities: 8.3.1
