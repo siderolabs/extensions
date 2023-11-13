@@ -1,0 +1,29 @@
+name: ikheaders
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  # The pkgs version for a particular release of Talos as defined in
+  # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .PKGS_PREFIX }}/kernel:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+  - install:
+      - |
+        export KERNELRELEASE=$(find /lib/modules -type d -name "*-talos" -exec basename {} \+)
+
+        mkdir -p /rootfs
+
+        xargs -a /pkg/files/modules.txt -I {} install -D /lib/modules/${KERNELRELEASE}/{} /rootfs/lib/modules/${KERNELRELEASE}/{}
+        depmod -b /rootfs ${KERNELRELEASE}
+  - test:
+      - |
+        # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
+        find /rootfs/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

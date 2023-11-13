@@ -17,6 +17,8 @@ dependencies:
   # - stage: chelsio-firmware
   # drbd can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: drbd
+  # ikheaders can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: ikheaders
 
   - stage: fuse3
 

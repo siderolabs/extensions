@@ -62,6 +62,7 @@ TARGETS += gasket-driver
 TARGETS += gvisor
 TARGETS += hello-world-service
 TARGETS += i915-ucode
+TARGETS += ikheaders
 TARGETS += intel-ice-firmware
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
