@@ -8,6 +8,8 @@ container:
   args:
     - --address=/var/run/containerd-stargz-grpc/containerd-stargz-grpc.sock
     - --log-level=debug
+  security:
+    rootfsPropagation: shared
   mounts:
     - source: /etc/ssl
       destination: /etc/ssl
