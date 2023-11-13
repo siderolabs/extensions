@@ -61,6 +61,13 @@ container:
       options:
         - bind
         - ro
+    - source: /var/lib/iscsi
+      destination: /var/lib/iscsi
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
     - source: /run/lock/iscsi
       destination: /run/lock/iscsi
       type: bind

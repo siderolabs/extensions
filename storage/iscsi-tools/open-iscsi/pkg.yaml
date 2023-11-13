@@ -48,7 +48,9 @@ steps:
         meson setup \
           -Db_lto=true \
           -Dno_systemd=true \
-          -Drulesdir="/usr/local/etc/udev/rules.d" \
+          -Dprefix=/usr/local \
+          -Discsi_sbindir=/usr/local/sbin \
+          -Drulesdir=/usr/local/etc/udev/rules.d \
           -Dc_args="$CFLAGS -I/usr/local/include -DNO_SYSTEMD -DGLOB_ONLYDIR=0" \
           output
 
@@ -59,11 +61,9 @@ steps:
         DESTDIR=/rootfs ninja -C output install
 
         # cleanup
-        rm -rf /rootfs/usr/local/share
-        rm -rf /rootfs/usr/local/include
-        rm -rf /rootfs/usr/local/lib/pkgconfig
-        rm -rf /rootfs/usr/local/etc/iscsi/ifaces
-        rm -rf /rootfs/etc
+        # we generate a one time initiatorname.iscsi when the iscsid-wrapper starts.
+        rm -rf /rootfs/usr/local/{etc/iscsi/initiatorname.iscsi,share,include,pkgconfig}
+        rm -rf /rootfs/var/lib/iscsi
 
         cp /pkg/files/passwd /rootfs/usr/local/etc/passwd
 finalize:
