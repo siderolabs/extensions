@@ -4,7 +4,12 @@ depends:
   - service: cri
   - path: /dev/zfs
 container:
-  entrypoint: /usr/local/sbin/zpool-importer
+  security:
+    rootfsPropagation: shared
+  entrypoint: /usr/local/sbin/zpool
+  args:
+    - import
+    - -fa
   mounts:
     # ld-musl-x86_64.so.1
     - source: /lib
@@ -20,14 +25,34 @@ container:
       options:
         - bind
         - ro
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options:
+        - bind
+        - ro
     - source: /usr/local/sbin
       destination: /usr/local/sbin
       type: bind
       options:
         - bind
         - ro
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
     - source: /proc
       destination: /proc
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /var
+      destination: /var
       type: bind
       options:
         - rshared

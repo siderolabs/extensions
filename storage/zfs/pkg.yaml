@@ -9,7 +9,6 @@ dependencies:
   - stage: libtirpc-zfs
   - stage: zlib-zfs
   - stage: zfs-tools
-  - stage: zpool-import-wrapper
 steps:
   - prepare:
       - |
