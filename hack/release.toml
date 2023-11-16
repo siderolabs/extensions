@@ -66,6 +66,7 @@ stargz-snapshotter extension is now supported as Talos System Extension.
 * Xen Guest Utilities: 8.3.1
 * Linux Firmware: 20231030
 * gasket driver: 09385d4
+* Intel ucode: 20231114
 """
 
 
