@@ -5,13 +5,13 @@
  #include <unistd.h>
  #include <fcntl.h>
 +#include <spawn.h>
- 
- #include "nut_stdint.h"
- #include "upsclient.h"
+ #else
+ #include <wincompat.h>
+ #endif
 @@ -1874,6 +1875,22 @@
  static void runparent(int fd)
  	__attribute__((noreturn));
- 
+
 +static int runcmd(const char *cmd)
 +{
 +	// TODO: Support tokenizing `cmd`.
@@ -34,9 +34,9 @@
 @@ -1907,7 +1925,7 @@
  	/* have to do this here - child is unprivileged */
  	set_pdflag();
- 
+
 -	sret = system(shutdowncmd);
 +	sret = runcmd(shutdowncmd);
- 
+
  	if (sret != 0)
  		upslogx(LOG_ERR, "parent: Unable to call shutdown command: %s",

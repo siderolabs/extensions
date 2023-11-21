@@ -9,8 +9,8 @@ steps:
   - sources:
       - url: https://download.gnome.org/sources/glib/{{ regexReplaceAll ".\\d+$" .GLIB_VERSION "${1}" }}/glib-{{ .GLIB_VERSION }}.tar.xz
         destination: glib.tar.xz
-        sha256: 44eaab8b720877ce303c5540b657b126f12dc94972d9880b52959f43fb537b30
-        sha512: 3d06890002f4b13f831c83fbb70cfce529f9750e30888619e4d6277116be15d106379a03143412cf4b2a289c0cbdbbc299ecf17284fbffc06c791ecf7556c765
+        sha256: 915bc3d0f8507d650ead3832e2f8fb670fce59aac4d7754a7dab6f1e6fed78b2
+        sha512: aa9ed9195951b00ac8221e958ea337fbda82621a862ef8f29dc2ea396a6253ce51c2a0a498dfa4e12642f1836f85f9564f09991979ae85c5ed4368355d857376
     prepare:
       - |
         tar -xf glib.tar.xz --strip-components=1

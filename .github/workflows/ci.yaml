@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-13T17:09:48Z by kres latest.
+# Generated on 2023-11-21T11:31:57Z by kres latest.
 
 name: default
 concurrency:
@@ -88,7 +88,7 @@ jobs:
                 repo: context.repo.repo,
             })
 
-            return resp.data.labels
+            return resp.data.labels.map(label => label.name)
       - name: release-notes
         if: startsWith(github.ref, 'refs/tags/')
         run: |
@@ -103,7 +103,7 @@ jobs:
     runs-on:
       - self-hosted
       - pkgs
-    if: contains(needs.default.outputs.labels, 'integration/reproducibility')
+    if: contains(fromJSON(needs.default.outputs.labels), 'integration/reproducibility')
     needs:
       - default
     services:

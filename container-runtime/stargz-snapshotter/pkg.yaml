@@ -5,10 +5,10 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      - url: https://github.com/containerd/stargz-snapshotter/archive/refs/tags/v0.14.3.tar.gz
+      - url: https://github.com/containerd/stargz-snapshotter/archive/refs/tags/{{ .STARGZ_SNAPSHOTTER_VERSION }}.tar.gz
         destination: stargz-snapshotter.tar.gz
-        sha256: 5397d799f76e5b7994820b1bf854f09e5a01c4607f5b9c4c5fd81a4ff7507754
-        sha512: 105ca1cb0c5128fefbcf80d4edf851d1d854e0aadc1872ff8fdb8bc3b2e7b1cc54f3a6776493c023bc6ef9abe903663a75c14fd349cdb331db9416f3ad8b7812
+        sha256: ca4a2052248507d9504468d6d2f6b3c4ab1daf1b5e83f27431309c02879ddb34
+        sha512: 3cc86e690ed63ed48acc3205225400e8fc6f64147e3f7424864e09007feb6ca8168fcc17bf60290519172cc049d6ccf338d4b223ac4e5050f35dee287318ade4
     env:
       GOPATH: /go
     prepare:
