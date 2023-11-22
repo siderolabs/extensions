@@ -1,0 +1,25 @@
+Description: Exit gracefully when md device not found
+Author: Felix Lechner <felix.lechner@lease-up.com>
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=970329
+Forwarded: no
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Monitor.c
++++ b/Monitor.c
+@@ -539,8 +539,14 @@ static int check_array(struct state *st,
+ 	if (fd < 0)
+ 		goto disappeared;
+ 
+-	if (st->devnm[0] == 0)
+-		strcpy(st->devnm, fd2devnm(fd));
++	if (st->devnm[0] == 0) {
++		char *found = fd2devnm(fd);
++		if (!found) {
++			alert("DeviceDisappeared", dev, NULL, ainfo);
++			goto out;
++		}
++		strcpy(st->devnm, found);
++	}
+ 
+ 	for (mse2 = mdstat; mse2; mse2 = mse2->next)
+ 		if (strcmp(mse2->devnm, st->devnm) == 0) {

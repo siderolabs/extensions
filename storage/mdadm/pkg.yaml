@@ -1,0 +1,39 @@
+name: mdadm
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .PKGS_PREFIX }}/eudev:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: http://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-{{ .MDADM_VERSION }}.tar.gz
+        destination: mdadm.tar.gz
+        sha256: c83447797cccc772d1c389b1917a2bfda59bd7545480bdccd792b57b310b428e
+        sha512: 112a897c6943d7343f44ffe32a8d7ef11e1f1624f51385c0f1d27458d661202bb378678a3ddc78ed2e24533be234441ea15cf33769345d5709b72b72ad9ec540
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzf mdadm.tar.gz --strip-components=1
+      - |
+        patch -p1 < /pkg/patches/exit-gracefully-when-md-device-not-found.patch
+        patch -p1 < /pkg/patches/sha1-includes.diff
+        patch -p1 < /pkg/patches/strcat-look-for-md-device-in-dev-md.patch
+    build:
+      - |
+        mkdir -p /run/mdadm
+
+        CXFLAGS=-D_LARGEFILE64_SOURCE \
+        make -j $(nproc) mdadm
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/sbin /rootfs/usr/etc/udev/rules.d
+        cp mdadm /rootfs/usr/local/sbin/mdadm
+        cp /pkg/files/udev-md-raid-arrays.rules   /rootfs/usr/etc/udev/rules.d/63-md-raid-arrays.rules
+        cp /pkg/files/udev-md-raid-assembly.rules /rootfs/usr/etc/udev/rules.d/64-md-raid-assembly.rules
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

@@ -1,0 +1,17 @@
+Description: Look for md device in /dev/md
+Author: Martin Mares <mj@ucw.cz>
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=958060
+Forwarded: no
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Monitor.c
++++ b/Monitor.c
+@@ -188,7 +188,7 @@ int Monitor(struct mddev_dev *devlist,
+ 				st->devname = xstrdup(mdlist->devname);
+ 			else {
+ 				st->devname = xmalloc(8+strlen(mdlist->devname)+1);
+-				strcpy(strcpy(st->devname, "/dev/md/"),
++				strcat(strcpy(st->devname, "/dev/md/"),
+ 				       mdlist->devname);
+ 			}
+ 			st->next = statelist;

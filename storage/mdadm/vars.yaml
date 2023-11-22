@@ -1,0 +1,1 @@
+VERSION: "v{{ .MDADM_VERSION }}-{{ .BUILD_ARG_TAG }}"

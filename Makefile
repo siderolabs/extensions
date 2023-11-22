@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-21T11:31:57Z by kres latest.
+# Generated on 2023-11-25T04:23:47Z by kres latest.
 
 # common variables
 
@@ -66,6 +66,7 @@ TARGETS += i915-ucode
 TARGETS += intel-ice-firmware
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
+TARGETS += mdadm
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit
 TARGETS += nvidia-fabricmanager
