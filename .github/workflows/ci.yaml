@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-21T11:31:57Z by kres latest.
+# Generated on 2023-11-22T14:00:12Z by kres latest.
 
 name: default
 concurrency:
@@ -89,6 +89,12 @@ jobs:
             })
 
             return resp.data.labels.map(label => label.name)
+      - name: extensions
+        if: github.event_name != 'pull_request'
+        env:
+          PUSH: "true"
+        run: |
+          make extensions
       - name: release-notes
         if: startsWith(github.ref, 'refs/tags/')
         run: |

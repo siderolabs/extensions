@@ -73,6 +73,11 @@ spec:
     script:
       - |
         @$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
+  ghaction:
+    enabled: true
+    condition: except-pull-request
+    environment:
+      PUSH: true
 ---
 kind: custom.Step
 name: extensions-metadata
