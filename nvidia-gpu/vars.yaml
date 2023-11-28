@@ -1,6 +1,6 @@
 # only update if there's a matching fabric manager version
 # renovate: datasource=github-releases depName=nvidia/open-gpu-kernel-modules
-NVIDIA_DRIVER_VERSION: 535.54.03
+NVIDIA_DRIVER_VERSION: 535.129.03
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
 CONTAINER_TOOLKIT_VERSION: v1.13.5
 CONTAINER_TOOLKIT_REF: 6b8589dcb4dead72ab64f14a5912886e6165c079
@@ -8,7 +8,7 @@ CONTAINER_TOOLKIT_REF: 6b8589dcb4dead72ab64f14a5912886e6165c079
 LIBNVIDIA_CONTAINER_VERSION: v1.13.5
 LIBNVIDIA_CONTAINER_REF: 66607bd046341f7aad7de80a9f022f122d1f2fce
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:f73a3360466ecc4d6df3f451d7d5c4c49663096e158848ddbc9603c52a47bffe
+WOLFI_BASE_REF: sha256:91f3e08712a854ff4a146b7cca7f1b7581f205bc589a06135f51590e00d2990e
 # renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ depName=golang/go
 GLIBC_VERSION: 2.38
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp
@@ -16,4 +16,4 @@ LIBSECCOMP_VERSION: 2.5.4
 # renovate: datasource=git-tags extractVersion=^libcap-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/libs/libcap/libcap.git
 LIBCAP_VERSION: 2.69
 # renovate: datasource=git-tags extractVersion=^elfutils-(?<version>.*)$ depName=git://sourceware.org/git/elfutils.git
-ELFUTILS_VERSION: 0.189
+ELFUTILS_VERSION: 0.190

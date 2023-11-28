@@ -1,5 +1,5 @@
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-QEMU_VERSION: 8.1.2
+QEMU_VERSION: 8.1.3
 # renovate: datasource=git-tags depName=https://gitlab.gnome.org/GNOME/glib.git
 GLIB_VERSION: 2.78.1
 # renovate: datasource=github-releases extractVersion=^pcre2-(?<version>.*)$ depName=PCRE2Project/pcre2

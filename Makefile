@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-25T04:23:47Z by kres latest.
+# Generated on 2023-11-28T17:50:53Z by kres latest.
 
 # common variables
 
@@ -84,7 +84,7 @@ NONFREE_TARGETS = nonfree-kmod-nvidia
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.6.0-alpha.0-31-g3aea711
+PKGS ?= v1.6.0-alpha.0-33-ge61c784
 
 # help menu
 
