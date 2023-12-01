@@ -1,3 +1,145 @@
+## [Talos System Extensions 1.6.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.6.0-beta.0) (2023-12-01)
+
+Welcome to the v1.6.0-beta.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### AMD GPU firmware
+
+AMD GPU firmware is now shipped as a system extension.
+
+
+### binfmt_misc
+
+`binfmt_misc` Linux module extension is now supported as Talos System Extension.
+
+
+### BTRFS
+
+BTRFS drivers is now supported as Talos System Extension.
+
+
+### Intel ICE firmware
+
+Intel ice firmware (E810) is now shipped as a system extension.
+
+
+### mdadm
+
+mdadm extension is now supported as Talos System Extension.
+
+
+### stargz-snapshotter
+
+stargz-snapshotter extension is now supported as Talos System Extension.
+
+
+### Component Updates
+
+* DRBD: 9.2.6
+* QEMU agent: v8.1.3
+* Tailscale: 1.54.0
+* Xen Guest Utilities: 8.3.1
+* Linux Firmware: 20231111
+* gasket driver: 09385d4
+* Intel ucode: 20231114
+* NVIDIA: 535.129.03
+
+
+### Util Linux Tools
+
+Util Linux Tools is now shipped as a system extension. Includes fstrim only.
+
+
+### ZFS
+
+ZFS extensions now also ship zfs-tools and an extension service that imports all zpools on startup.
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+* Andrew Rynhard
+* Serge Logvinov
+* Spencer Smith
+* Cas de Reuver
+* David Donchez
+* Enno Boland
+* Ströger Florian
+* Victor Seva
+* Will Glynn
+* cDR (Taco)
+
+### Changes
+<details><summary>41 commits</summary>
+<p>
+
+* [`8378499`](https://github.com/siderolabs/extensions/commit/83784991f521d9814b267678e4379e15513c794a) chore: update pkgs to final 1.6.0
+* [`9105eef`](https://github.com/siderolabs/extensions/commit/9105eef354b6b1fae9e6b5c6cd834af4d866c503) feat: bump dependencies
+* [`7618f8f`](https://github.com/siderolabs/extensions/commit/7618f8ff99844db86c959a924dff001698afa923) feat: mdadm extension
+* [`067c3b7`](https://github.com/siderolabs/extensions/commit/067c3b7b06c3b823ab5aa14ff9ea377662b0f6f1) fix: extensions image push was missed
+* [`cc5ccea`](https://github.com/siderolabs/extensions/commit/cc5cceadc187fefa6a7c5fcb74f9a5b4d3f42f05) release(v1.6.0-alpha.2): prepare release
+* [`9a57c65`](https://github.com/siderolabs/extensions/commit/9a57c65d10068b9d28230a34d60b22ecfdbf1664) feat: bump dependencies
+* [`af706ee`](https://github.com/siderolabs/extensions/commit/af706eedd4e6b1c38cca86fbcbc7c4b1c397d3a9) chore: bump Intel ucode to 20231114 (CVE-2023-23583)
+* [`f990683`](https://github.com/siderolabs/extensions/commit/f990683ef02db00219af69071bd4486b20a8b05d) chore: drop rexec in pid 1 namespace for zpool-import
+* [`2859c23`](https://github.com/siderolabs/extensions/commit/2859c2360934e019d9e0e93a0bde98a34780f5b7) fix: iscsi-tools install `prefix`
+* [`2f8e401`](https://github.com/siderolabs/extensions/commit/2f8e401d21c4d9b856429653b08da74a5d5d496e) feat: create 'ecr-credential-provider' extension
+* [`5914368`](https://github.com/siderolabs/extensions/commit/591436817af26272a7168557f811e39e1bb41f8c) fix: enable rootfs propagation for stargz-snapshotter
+* [`8eb47b1`](https://github.com/siderolabs/extensions/commit/8eb47b129ad4fbf1a0bdcd77e1a6c1a1653824fe) chore: update packages
+* [`d2aaecf`](https://github.com/siderolabs/extensions/commit/d2aaecfa1b9a4bf7d29dae478056a0f63477f281) feat: update Go to 1.21.4
+* [`7c68b1b`](https://github.com/siderolabs/extensions/commit/7c68b1b932c9f9d10afe2e1efc5401ef528fbf81) chore: use kres to manage project
+* [`d7fdcc9`](https://github.com/siderolabs/extensions/commit/d7fdcc958456c450c9d4fe53e2d1738b2305c25d) chore: move to gh actions
+* [`280ff1f`](https://github.com/siderolabs/extensions/commit/280ff1fae3cab1f8b31caf35e15bc3ff7b1d95fa) release(v1.6.0-alpha.1): prepare release
+* [`9b5c56f`](https://github.com/siderolabs/extensions/commit/9b5c56f0957bbee212f29a62fd310f47ec31fba4) chore: update stargz extension
+* [`dc619c4`](https://github.com/siderolabs/extensions/commit/dc619c40d0a9d884a8c493237eaf9184a5e40b43) feat: add fuse3 extension
+* [`0ba9f81`](https://github.com/siderolabs/extensions/commit/0ba9f8104350fbeb2832ecf796146f1ef242fb4d) docs: update documentation on installing extensions
+* [`e812c6f`](https://github.com/siderolabs/extensions/commit/e812c6f7e1b99d67027e91a7d95b2a4637b61619) docs: update README
+* [`ad30c33`](https://github.com/siderolabs/extensions/commit/ad30c330cd7885436b53cca86f613a0e0e6bb24d) feat: update releases
+* [`ac8ff02`](https://github.com/siderolabs/extensions/commit/ac8ff02bf406380aa609b40760695cbde2ab9d38) chore: update README.md
+* [`46a3004`](https://github.com/siderolabs/extensions/commit/46a30042937aa5dd269415dbfb6eaf13d521c242) feat: add binfmt_misc
+* [`336397b`](https://github.com/siderolabs/extensions/commit/336397bccc94bd28e2fd7c2b969d36dc68f5023d) feat: add chelsio drivers and firmware
+* [`1c94a09`](https://github.com/siderolabs/extensions/commit/1c94a09b1c663c912f3452fcf3c948617a0bb373) feat: add stargz-snapshotter
+* [`3765417`](https://github.com/siderolabs/extensions/commit/37654176b0edec665e9c0933545118f3b93d6f59) chore: use kernel image for upstream modules
+* [`8fa50a2`](https://github.com/siderolabs/extensions/commit/8fa50a2fa25f34f38f7bf4f393be0c618f5b8bb7) chore: add extensions catalog
+* [`66cbf19`](https://github.com/siderolabs/extensions/commit/66cbf19c18f4e201d61dd83b48439d0a76746cfb) chore: update pkgs
+* [`dc94329`](https://github.com/siderolabs/extensions/commit/dc94329fd3d235e96c5bb962f53bedea197bead7) feat: add xe-guest-utilities extension
+* [`782ccc5`](https://github.com/siderolabs/extensions/commit/782ccc52f5d95acc3b11c3890629f7177bc57bdc) chore: fix renovate config
+* [`a5c0b00`](https://github.com/siderolabs/extensions/commit/a5c0b0086be035b0eeb8a4e541cc9a4658dc55e5) chore: revert nvidia bumps from #220
+* [`d9145f9`](https://github.com/siderolabs/extensions/commit/d9145f9b6b7816e57ebaa4d351699be273f8ac17) chore: bump deps
+* [`0cba1b6`](https://github.com/siderolabs/extensions/commit/0cba1b6c1ca50ce7ab17a286251f3b688c166888) fix: util-linux pkg name
+* [`89f857d`](https://github.com/siderolabs/extensions/commit/89f857dd49ce6d35820de9c2a90988981297efc8) feat: add minimal util-linux
+* [`0f4a77e`](https://github.com/siderolabs/extensions/commit/0f4a77efed51c166539b9b1e699c5ce28ef8c98f) feat: add intel ice firmware
+* [`d56bab2`](https://github.com/siderolabs/extensions/commit/d56bab242144f8e08d200b5788efb09110b51847) release(v1.6.0-alpha.0): prepare release
+* [`ce60bd9`](https://github.com/siderolabs/extensions/commit/ce60bd90bfa7dd5a4551f76bed644e251a6b3b94) fix: btrfs extension constraint
+* [`31cdc8c`](https://github.com/siderolabs/extensions/commit/31cdc8c50594aa686f95ce453876e780a1207ab2) feat: add amdgpu firmware
+* [`d369468`](https://github.com/siderolabs/extensions/commit/d369468456794d84764b79092cd1092c37481e56) feat: zfs user tools and import service
+* [`0284425`](https://github.com/siderolabs/extensions/commit/02844256f9b67715dead196be4a2a47f2320befc) chore: minor fixes
+* [`1533478`](https://github.com/siderolabs/extensions/commit/1533478f5945b8483121080ec847386ca4488ff5) feat: add btrfs storage extension
+</p>
+</details>
+
+### Changes since v1.6.0-alpha.2
+<details><summary>4 commits</summary>
+<p>
+
+* [`8378499`](https://github.com/siderolabs/extensions/commit/83784991f521d9814b267678e4379e15513c794a) chore: update pkgs to final 1.6.0
+* [`9105eef`](https://github.com/siderolabs/extensions/commit/9105eef354b6b1fae9e6b5c6cd834af4d866c503) feat: bump dependencies
+* [`7618f8f`](https://github.com/siderolabs/extensions/commit/7618f8ff99844db86c959a924dff001698afa923) feat: mdadm extension
+* [`067c3b7`](https://github.com/siderolabs/extensions/commit/067c3b7b06c3b823ab5aa14ff9ea377662b0f6f1) fix: extensions image push was missed
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.5.0](https://github.com/siderolabs/extensions/releases/tag/v1.5.0)
+
 ## [Talos System Extensions 1.6.0-alpha.2](https://github.com/siderolabs/extensions/releases/tag/v1.6.0-alpha.2) (2023-11-21)
 
 Welcome to the v1.6.0-alpha.2 release of Talos System Extensions!  
