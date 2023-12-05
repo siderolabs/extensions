@@ -25,6 +25,7 @@ spec:
     - nvidia-fabricmanager
     - nvidia-open-gpu-kernel-modules
     - qemu-guest-agent
+    - qlogic-firmware
     - stargz-snapshotter
     - tailscale
     - thunderbolt
