@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: qlogic-firmware
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides firmware for QLogic devices.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
