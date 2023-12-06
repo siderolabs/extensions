@@ -19,6 +19,7 @@ spec:
     - intel-ice-firmware
     - intel-ucode
     - iscsi-tools
+    - kata-containers
     - mdadm
     - nut-client
     - nvidia-container-toolkit

@@ -66,6 +66,7 @@ TARGETS += i915-ucode
 TARGETS += intel-ice-firmware
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
+TARGETS += kata-containers
 TARGETS += mdadm
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit
