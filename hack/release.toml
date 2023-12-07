@@ -74,6 +74,7 @@ mdadm extension is now supported as Talos System Extension.
 * gasket driver: 09385d4
 * Intel ucode: 20231114
 * NVIDIA: 535.129.03
+* ZFS: 2.1.14
 """
 
 
