@@ -6,7 +6,7 @@ vars:
   PKGS_PREFIX: ghcr.io/siderolabs
   LINUX_FIRMWARE_VERSION: "20231111" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.2.6 # update this when updating PKGS_VERSION in Makefile
-  ZFS_DRIVER_VERSION: 2.1.13 # update this when updating PKGS_VERSION in Makefile
+  ZFS_DRIVER_VERSION: 2.2.2 # update this when updating PKGS_VERSION in Makefile
   UTIL_LINUX_VERSION: 2.39.2 # update this when updating PKGS_VERSION in Makefile
 
   # renovate: datasource=git-tags extractVersion=^libtiprc-(?<version>.*)$ depName=git://linux-nfs.org/~steved/libtirpc

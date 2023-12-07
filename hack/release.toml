@@ -6,74 +6,20 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.5.0"
+previous = "v1.6.0-beta.0"
 
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
-    [notes.util-linux-tools]
-        title = "Util Linux Tools"
-        description = """\
-Util Linux Tools is now shipped as a system extension. Includes fstrim only.
-"""
-
-    [notes.intel-ice-firmware]
-        title = "Intel ICE firmware"
-        description = """\
-Intel ice firmware (E810) is now shipped as a system extension.
-"""
-
-    [notes.amdgpu-firmware]
-        title = "AMD GPU firmware"
-        description = """\
-AMD GPU firmware is now shipped as a system extension.
-"""
-
-    [notes.btrfs]
-        title = "BTRFS"
-        description = """\
-BTRFS drivers is now supported as Talos System Extension.
-"""
-
-    [notes.binfmt_misc]
-        title = "binfmt_misc"
-        description = """\
-`binfmt_misc` Linux module extension is now supported as Talos System Extension.
-"""
-
-    [notes.zfs]
-        title = "ZFS"
-        description = """\
-ZFS extensions now also ship zfs-tools and an extension service that imports all zpools on startup.
-"""
-
-    [notes.stargz]
-        title = "stargz-snapshotter"
-        description = """\
-stargz-snapshotter extension is now supported as Talos System Extension.
-"""
-
-    [notes.mdadm]
-        title = "mdadm"
-        description = """\
-mdadm extension is now supported as Talos System Extension.
-"""
 
     [notes.updates]
         title = "Component Updates"
         description = """\
-* DRBD: 9.2.6
-* QEMU agent: v8.1.3
-* Tailscale: 1.54.0
-* Xen Guest Utilities: 8.3.1
-* Linux Firmware: 20231111
-* gasket driver: 09385d4
-* Intel ucode: 20231114
-* NVIDIA: 535.129.03
+* ZFS: 2.2.2
 """
 
 
