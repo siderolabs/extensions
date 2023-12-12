@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-22T14:00:12Z by kres latest.
+# Generated on 2023-12-12T23:07:05Z by kres latest.
 
 name: default
 concurrency:
@@ -33,7 +33,7 @@ jobs:
       labels: ${{ steps.retrieve-pr-labels.outputs.result }}
     services:
       buildkitd:
-        image: moby/buildkit:v0.12.3
+        image: moby/buildkit:v0.12.4
         options: --privileged
         ports:
           - 1234:1234
@@ -77,11 +77,12 @@ jobs:
           make nonfree PUSH=true
       - name: Retrieve PR labels
         id: retrieve-pr-labels
-        if: github.event_name == 'pull_request' && always()
         uses: actions/github-script@v6
         with:
           retries: "3"
           script: |
+            if (context.eventName != "pull_request") { return "[]" }
+
             const resp = await github.rest.issues.get({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
@@ -114,7 +115,7 @@ jobs:
       - default
     services:
       buildkitd:
-        image: moby/buildkit:v0.12.3
+        image: moby/buildkit:v0.12.4
         options: --privileged
         ports:
           - 1234:1234

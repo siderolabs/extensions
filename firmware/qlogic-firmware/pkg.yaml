@@ -1,4 +1,4 @@
-name: qlogic
+name: qlogic-firmware
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:

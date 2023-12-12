@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-12-01T10:26:12Z by kres latest.
+# Generated on 2023-12-12T23:07:05Z by kres latest.
 
 # common variables
 
@@ -72,6 +72,7 @@ TARGETS += nvidia-container-toolkit
 TARGETS += nvidia-fabricmanager
 TARGETS += nvidia-open-gpu-kernel-modules
 TARGETS += qemu-guest-agent
+TARGETS += qlogic-firmware
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
 TARGETS += thunderbolt

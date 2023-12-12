@@ -57,6 +57,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [i915-ucode](firmware/i915-ucode/)                 | [ghcr.io/siderolabs/i915-ucode](https://github.com/siderolabs/extensions/pkgs/container/i915-ucode)                 | Intel GPU firmware          | `linux firmware version` |
 | [intel-ice-firmware](firmware/intel-ice-firmware/) | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | Intel ICE NIC firmware      | `linux firmware version` |
 | [intel-ucode](firmware/intel-ucode/)               | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode)               | Intel CPU microcode updates | `upstream version`       |
+| [qlogic-firmware](firmware/qlogic-firmware/)       | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware)       | Qlogic firmware             | `linux firmware version` |
 
 ### Drivers
 
