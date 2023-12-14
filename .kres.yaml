@@ -69,7 +69,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.7.0-alpha.0
+        defaultValue: v1.7.0-alpha.0-7-g4c59641
     depends:
       - internal/extensions/image-digests
     script:
