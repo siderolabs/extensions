@@ -50,6 +50,8 @@ spec:
 kind: auto.CustomSteps
 spec:
   steps:
+    - name: check-dirty
+      toplevel: true
     - name: extensions
       toplevel: true
     - name: extensions-metadata
@@ -57,6 +59,8 @@ spec:
     - name: internal/extensions/image-digests
       toplevel: true
     - name: sign-images
+      toplevel: true
+    - name: extensions-info
       toplevel: true
 ---
 kind: custom.Step
@@ -94,6 +98,32 @@ spec:
         @rm -f _out/extensions-metadata
         @$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
         @$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
+---
+kind: custom.Step
+name: extensions-info
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    depends:
+      - $(ARTIFACTS)/bldr
+    script:
+      - |
+        @find ./ -name "manifest.yaml" -print0 | env LC_ALL=en_US sort -z | xargs -r0 -I{} sh -c 'echo "---\\n$$(cat {})"' > extensions.yaml
+---
+kind: custom.Step
+name: check-dirty
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    depends:
+      - extensions-info
+    script:
+      - |
+        @if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
+  ghaction:
+    enabled: true
 ---
 kind: custom.Step
 name: internal/extensions/image-digests

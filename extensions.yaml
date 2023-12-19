@@ -1,0 +1,370 @@
+---
+version: v1alpha1
+metadata:
+  name: ecr-credential-provider
+  version: "$VERSION"
+  author: Florian Ströger
+  description: |
+    This system extension provides a binary which implements Kubelet's CredentialProvider API
+    to authenticate against AWS' Elastic Container Registry and pull images.
+  compatibility:
+    talos:
+      version: ">= v1.6.0"
+---
+version: v1alpha1
+metadata:
+  name: gvisor
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides gVisor using containerd's runtime handler.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: stargz-snapshotter
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides Stargz Snapshotter using containerd's runtime handler.
+  compatibility:
+    talos:
+      version: ">= v1.6.0"
+---
+version: v1alpha1
+metadata:
+  name: chelsio-drivers
+  version: "$VERSION"
+  author: SideroLabs
+  description: |
+    This system extension provides Chelsio network drivers.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: gasket
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides google gasket driver kernel modules built against a specific Talos version.
+    This driver is required for PCIe and M.2 Google Coral accelerators. There are 2 kernel modules ("gasket"
+    and "apex") required to enable this driver.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
+---
+version: v1alpha1
+metadata:
+  name: mellanox-ofed
+  version: "$VERSION"
+  author: SideroLabs
+  description: |
+    This system extension provides kernel module driver for Mellanox OFED built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.3.0"
+---
+version: v1alpha1
+metadata:
+  name: thunderbolt
+  version: "$VERSION"
+  author: Igor Rzegocki
+  description: |
+    This system extension provides Thunderbolt/USB4 drivers kernel modules built against a specific Talos version.
+    This driver enables Thunderbolg/USB4 devices, including networking.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: usb-modem
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides USB modem drivers kernel modules built against a specific Talos version.
+    This driver is required for USB modems to function. This extension includes all the drivers needed to
+    operate any USB modem under Linux, but your device might not require all of them. Read your device's
+    docs to learn which drivers you need, or just enable them all as a starting point.
+  compatibility:
+    talos:
+      version: ">= v1.4.5"
+---
+version: v1alpha1
+metadata:
+  name: hello-world-service
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides an example Talos extension service.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: amd-ucode
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides AMD microcode binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: amdgpu-firmware
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides AMDGPU firmware binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: bnx2-bnx2x
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides bnx2 and bnx2x binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: chelsio-firmware
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides Chelsio NIC firmware binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: i915-ucode
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides Intel GPU microcode binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: intel-ice-firmware
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides Intel Ice firmware binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: intel-ucode
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides Intel microcode binaries.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: qlogic-firmware
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides firmware for QLogic devices.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: qemu-guest-agent
+  version: "$VERSION"
+  author: Markus Reiter
+  description: |
+    This system extension provides the QEMU Guest Agent service.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: xe-guest-utilities
+  version: "$VERSION"
+  author: Cas de Reuver
+  description: |
+    xe-guest-utilities communicates information and metrics with the Xen host.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: binfmt-misc
+  version: "$VERSION"
+  author: Serge Logvinov
+  description: |
+    This system extension provides kernel module driver for binfmt-misc built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: tailscale
+  version: "$VERSION"
+  author: Beau Trepp
+  description: |
+    Tailscale connects your team's devices and development environments for easy access to remote resources.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: nonfree-kmod-nvidia
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides nvidia proprietary kernel modules built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: nvidia-container-toolkit
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides nvidia runtime and it's dependencies using NVIDIA's runtime handler.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
+---
+version: v1alpha1
+metadata:
+  name: nvidia-fabricmanager
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides the Nvidia fabricmanager for GPU's that need NVLink support.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
+---
+version: v1alpha1
+metadata:
+  name: nvidia-open-gpu-kernel-modules
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides nvidia open source driver kernel modules built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
+---
+version: v1alpha1
+metadata:
+  name: nut-client
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides the network-ups-tools upsmon service.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: btrfs
+  version: "$VERSION"
+  author: Enno Boland
+  description: |
+    This system extension provides kernel module driver for BTRFS built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: drbd
+  version: "$VERSION"
+  author: Alexander Prentki
+  description: |
+    This system extension provides kernel module driver for DRBD built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
+---
+version: v1alpha1
+metadata:
+  name: fuse3
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides fuse3 functionality.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
+---
+version: v1alpha1
+metadata:
+  name: iscsi-tools
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides iscsi-tools.
+  compatibility:
+    talos:
+      version: ">= v1.1.0"
+---
+version: v1alpha1
+metadata:
+  name: mdadm
+  version: "$VERSION"
+  author: Serge Logvinov
+  description: |
+    This system extension provides mdadm binary.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
+---
+version: v1alpha1
+metadata:
+  name: zfs
+  version: "$VERSION"
+  author: Andrei Kvapil, Enix
+  description: |
+    This system extension provides kernel module driver for ZFS built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.6.0"
+---
+version: v1alpha1
+metadata:
+  name: util-linux-tools
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides a minimal util-linux package.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
