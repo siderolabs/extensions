@@ -4,3 +4,5 @@ variant: scratch
 finalize:
   - from: /pkg/image-digests
     to: /image-digests
+  - from: /pkg/descriptions.yaml
+    to: /descriptions.yaml

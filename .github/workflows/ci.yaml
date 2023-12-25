@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-12-19T16:28:49Z by kres latest.
+# Generated on 2023-12-25T14:50:46Z by kres latest.
 
 name: default
 concurrency:
@@ -90,9 +90,6 @@ jobs:
             })
 
             return resp.data.labels.map(label => label.name)
-      - name: check-dirty
-        run: |
-          make check-dirty
       - name: extensions
         if: github.event_name != 'pull_request'
         env:

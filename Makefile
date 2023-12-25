@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-12-19T15:09:45Z by kres latest.
+# Generated on 2023-12-25T18:19:39Z by kres latest.
 
 # common variables
 
@@ -163,12 +163,8 @@ $(ARTIFACTS)/bldr: $(ARTIFACTS)  ## Downloads bldr binary.
 deps.png:  ## Generates a dependency graph of the Pkgfile.
 	@$(BLDR) graph | dot -Tpng -o deps.png
 
-.PHONY: check-dirty
-check-dirty: extensions-info
-	@if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
-
 .PHONY: extensions
-extensions: internal/extensions/image-digests
+extensions: internal/extensions/descriptions.yaml
 	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
 
 .PHONY: extensions-metadata
@@ -179,7 +175,16 @@ extensions-metadata: $(ARTIFACTS)/bldr
 
 .PHONY: internal/extensions/image-digests
 internal/extensions/image-digests: extensions-metadata
+	@echo "Generating image digests..."
 	@cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+
+.PHONY: internal/extensions/descriptions.yaml
+internal/extensions/descriptions.yaml: internal/extensions/image-digests
+	@echo "Generating image descriptions..."
+	@echo -n "" > internal/extensions/descriptions.yaml
+	@for image in $(shell cat internal/extensions/image-digests); do \
+	  crane export $$image - | tar x -O --occurrence=1 manifest.yaml | yq -r ". += {\"$$image\": {\"author\": .metadata.author, \"description\": .metadata.description}} | del(.metadata, .version)" - >> internal/extensions/descriptions.yaml; \
+	done
 
 .PHONY: sign-images
 sign-images:
@@ -188,10 +193,6 @@ sign-images:
 	  cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
 	    cosign sign --yes $$image; \
 	done
-
-.PHONY: extensions-info
-extensions-info: $(ARTIFACTS)/bldr
-	@find ./ -name "manifest.yaml" -print0 | env LC_ALL=en_US sort -z | xargs -r0 -I{} sh -c 'echo "---\\n$$(cat {})"' > extensions.yaml
 
 .PHONY: rekres
 rekres:

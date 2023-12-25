@@ -1,6 +1,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-02T15:50:53Z by kres latest.
+# Generated on 2023-12-25T17:44:28Z by kres latest.
 
 _out
 internal/extensions/image-digests
+internal/extensions/descriptions.yaml
