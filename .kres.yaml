@@ -45,6 +45,7 @@ kind: common.Build
 spec:
     ignoredPaths:
         - "internal/extensions/image-digests"
+        - "internal/extensions/descriptions.yaml"
 ---
 kind: auto.CustomSteps
 spec:
@@ -54,6 +55,8 @@ spec:
     - name: extensions-metadata
       toplevel: true
     - name: internal/extensions/image-digests
+      toplevel: true
+    - name: internal/extensions/descriptions.yaml
       toplevel: true
     - name: sign-images
       toplevel: true
@@ -70,7 +73,7 @@ spec:
       - name: PKGS
         defaultValue: v1.6.0-9-g8fa73db
     depends:
-      - internal/extensions/image-digests
+      - internal/extensions/descriptions.yaml
     script:
       - |
         @$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
@@ -104,7 +107,24 @@ spec:
       - extensions-metadata
     script:
       - |
+        @echo "Generating image digests..."
         @cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+---
+kind: custom.Step
+name: internal/extensions/descriptions.yaml
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    depends:
+      - internal/extensions/image-digests
+    script:
+      - |
+        @echo "Generating image descriptions..."
+        @echo -n "" > internal/extensions/descriptions.yaml
+        @for image in $(shell cat internal/extensions/image-digests); do \
+          crane export $$image - | tar x -O --occurrence=1 manifest.yaml | yq -r ". += {\"$$image\": {\"author\": .metadata.author, \"description\": .metadata.description}} | del(.metadata, .version)" - >> internal/extensions/descriptions.yaml; \
+        done
 ---
 kind: custom.Step
 name: sign-images

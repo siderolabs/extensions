@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-12-22T08:42:50Z by kres latest.
+# Generated on 2023-12-26T13:31:34Z by kres latest.
 
 # common variables
 
@@ -163,7 +163,7 @@ deps.png:  ## Generates a dependency graph of the Pkgfile.
 	@$(BLDR) graph | dot -Tpng -o deps.png
 
 .PHONY: extensions
-extensions: internal/extensions/image-digests
+extensions: internal/extensions/descriptions.yaml
 	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
 
 .PHONY: extensions-metadata
@@ -174,7 +174,16 @@ extensions-metadata: $(ARTIFACTS)/bldr
 
 .PHONY: internal/extensions/image-digests
 internal/extensions/image-digests: extensions-metadata
+	@echo "Generating image digests..."
 	@cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+
+.PHONY: internal/extensions/descriptions.yaml
+internal/extensions/descriptions.yaml: internal/extensions/image-digests
+	@echo "Generating image descriptions..."
+	@echo -n "" > internal/extensions/descriptions.yaml
+	@for image in $(shell cat internal/extensions/image-digests); do \
+	  crane export $$image - | tar x -O --occurrence=1 manifest.yaml | yq -r ". += {\"$$image\": {\"author\": .metadata.author, \"description\": .metadata.description}} | del(.metadata, .version)" - >> internal/extensions/descriptions.yaml; \
+	done
 
 .PHONY: sign-images
 sign-images:
