@@ -1,6 +1,5 @@
 name: qemu-guest-agent
 depends:
-  - service: cri
   - path: /system/run/machined/machine.sock
   - path: /dev/virtio-ports/org.qemu.guest_agent.0
 container:
@@ -20,7 +19,7 @@ container:
         - bind
         - ro
     # State files.
-    - source: /var/run
+    - source: /system/run/qemu-guest-agent
       destination: /var/run
       type: bind
       options:
