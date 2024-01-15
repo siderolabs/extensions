@@ -52,6 +52,10 @@ dependencies:
   # - stage: usb-modem-drivers
 
   - stage: util-linux-tools
+
+  # v4l-uvc-drivers can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: v4l-uvc-drivers
+
   - stage: xe-guest-utilities
   - stage: zfs
 

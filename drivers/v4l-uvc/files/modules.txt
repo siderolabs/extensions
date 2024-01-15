@@ -1,0 +1,11 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/media/common/videobuf2/videobuf2-common.ko
+kernel/drivers/media/common/videobuf2/videobuf2-memops.ko
+kernel/drivers/media/common/videobuf2/videobuf2-v4l2.ko
+kernel/drivers/media/common/videobuf2/videobuf2-vmalloc.ko
+kernel/drivers/media/mc/mc.ko
+kernel/drivers/media/usb/uvc/uvcvideo.ko
+kernel/drivers/media/v4l2-core/v4l2-dv-timings.ko
+kernel/drivers/media/v4l2-core/videodev.ko

@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-12-25T18:19:39Z by kres latest.
+# Generated on 2024-01-16T14:25:28Z by kres latest.
 
 # common variables
 
@@ -78,6 +78,7 @@ TARGETS += tailscale
 TARGETS += thunderbolt
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
+TARGETS += v4l-uvc-drivers
 TARGETS += xe-guest-utilities
 TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia
@@ -85,7 +86,7 @@ NONFREE_TARGETS = nonfree-kmod-nvidia
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-alpha.0-7-g4c59641
+PKGS ?= v1.7.0-alpha.0-12-g583e519
 
 # help menu
 
