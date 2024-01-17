@@ -51,6 +51,7 @@ COMMON_ARGS += --build-arg=PKGS="$(PKGS)"
 
 TARGETS = amdgpu-firmware
 TARGETS += amd-ucode
+TARGETS += applesmc-t2
 TARGETS += binfmt-misc
 TARGETS += bnx2-bnx2x
 TARGETS += btrfs
