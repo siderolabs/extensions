@@ -3,8 +3,8 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
-  - image: "{{ .PKGS_PREFIX }}/eudev:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/eudev:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
 steps:
   - sources:
       - url: http://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-{{ .MDADM_VERSION }}.tar.gz

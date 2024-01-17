@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-01-17T14:50:07Z by kres latest.
+# Generated on 2024-01-22T17:59:56Z by kres latest.
 
 # common variables
 
@@ -46,6 +46,7 @@ COMMON_ARGS += --platform=$(PLATFORM)
 COMMON_ARGS += --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
 COMMON_ARGS += --build-arg=TAG="$(TAG)"
 COMMON_ARGS += --build-arg=PKGS="$(PKGS)"
+COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 
 # targets defines all the available targets
 
@@ -87,6 +88,7 @@ NONFREE_TARGETS = nonfree-kmod-nvidia
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
 PKGS ?= v1.7.0-alpha.0-13-gf376a53
+PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # help menu
 

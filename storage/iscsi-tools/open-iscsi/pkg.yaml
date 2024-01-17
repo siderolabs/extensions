@@ -3,9 +3,9 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
-  - image: "{{ .PKGS_PREFIX }}/kmod:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kmod:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
   - stage: open-isns
     from: /rootfs
 steps:

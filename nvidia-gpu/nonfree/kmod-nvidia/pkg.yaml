@@ -5,7 +5,7 @@ dependencies:
  - stage: base
 # The pkgs version for a particular release of Talos as defined in
 # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
- - image: "{{ .PKGS_PREFIX }}/nonfree-kmod-nvidia-pkg:{{ .BUILD_ARG_PKGS }}"
+ - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/nonfree-kmod-nvidia-pkg:{{ .BUILD_ARG_PKGS }}"
 steps:
   - prepare:
       - |

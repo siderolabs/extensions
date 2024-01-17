@@ -2,8 +2,8 @@ name: base
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
-  - image: "{{ .PKGS_PREFIX }}/base:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .PKGS_PREFIX }}/ca-certificates:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/base:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/ca-certificates:{{ .BUILD_ARG_PKGS }}"
 finalize:
   - from: /
     to: /
