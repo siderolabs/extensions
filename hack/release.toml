@@ -16,5 +16,10 @@ See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configur
 
 [notes]
 
+    [notes.updates]
+        title = "Component Updates"
+        description = """\
+* Linux Firmware: 20240115
+"""
 
 [make_deps]
