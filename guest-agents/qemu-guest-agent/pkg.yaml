@@ -10,8 +10,8 @@ steps:
   - sources:
       - url: https://download.qemu.org/qemu-{{ .QEMU_VERSION }}.tar.xz
         destination: qemu.tar.xz
-        sha256: 43cc176804105586f74f90398f34e9f85787dff400d3b640d81f7779fbe265bb
-        sha512: d3847f1c0c0099937d08bba604713ac288b6151867a8da230297ee1d93b7e741fa406a2f7bf6645ce3293c0a98458dc9c79454746e7c2920e9a73e0574753e5a
+        sha256: bf00d2fa12010df8b0ade93371def58e632cb32a6bfdc5f5a0ff8e6a1fb1bf32
+        sha512: 92ec41196ff145cdbb98948f6b6e43214fa4b4419554a8a1927fb4527080c8212ccb703e184baf8ee0bdfa50ad7a84689e8f5a69eba1bd7bbbdfd69e3b91256c
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
