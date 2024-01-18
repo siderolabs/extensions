@@ -7,8 +7,8 @@ steps:
   - sources:
       - url: https://www.kernel.org/pub/linux/utils/util-linux/v{{ regexReplaceAll ".\\d+$" .UTIL_LINUX_VERSION "${1}" }}/util-linux-{{  regexReplaceAll "\\.0$" .UTIL_LINUX_VERSION "${1}" }}.tar.xz
         destination: util-linux.tar.xz
-        sha256: 87abdfaa8e490f8be6dde976f7c80b9b5ff9f301e1b67e3899e1f05a59a1531f
-        sha512: cebecdd62749d0aeea2c4faf7ad1606426eff03ef3b15cd9c2df1126f216a4ed546d8fc3218c649fa95944eb87a98bb6a7cdd0bea31057c481c5cf608ffc19a3
+        sha256: 7b6605e48d1a49f43cc4b4cfc59f313d0dd5402fa40b96810bd572e167dfed0f
+        sha512: a2de1672f06ca5d2d431db1265a8499808770c3781019ec4a3a40170df4685826d8e3ca120841dcc5df4681ca8c935a993317bd0dc70465b21bf8e0efef65afa
     prepare:
       - |
         tar -xJf util-linux.tar.xz --strip-components=1
