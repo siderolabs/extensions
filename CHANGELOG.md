@@ -1,3 +1,39 @@
+## [Talos System Extensions 1.6.2](https://github.com/siderolabs/extensions/releases/tag/v1.6.2) (2024-01-18)
+
+Welcome to the v1.6.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+* Linux Firmware: 20240115
+
+
+### Contributors
+
+* Andrey Smirnov
+* Artem Chernyshev
+* Miguel Angel Jaimes Linares
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`c7fa3ab`](https://github.com/siderolabs/extensions/commit/c7fa3abf599079632bbab18633c011618dd2db6d) fix: qemu-guest-agent not starting in maintenance mode
+* [`1d12c19`](https://github.com/siderolabs/extensions/commit/1d12c199254be0ef26d59c6db3c2a0b69e5e0e21) chore: update dependencies
+* [`d0879ba`](https://github.com/siderolabs/extensions/commit/d0879ba3e46067de55f1cac4985bb8fa7e464d59) feat: generate extensions descriptions file as part of extensions image
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.6.1](https://github.com/siderolabs/extensions/releases/tag/v1.6.1)
+
 ## [Talos System Extensions 1.6.1](https://github.com/siderolabs/extensions/releases/tag/v1.6.1) (2023-12-22)
 
 Welcome to the v1.6.1 release of Talos System Extensions!
