@@ -32,6 +32,7 @@ spec:
     - usb-modem-drivers
     - util-linux-tools
     - v4l-uvc-drivers
+    - wasmedge
     - xe-guest-utilities
     # - zfs see https://github.com/siderolabs/pkgs/pull/873
   additionalTargets:

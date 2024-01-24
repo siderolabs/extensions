@@ -1,0 +1,2 @@
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.wasmedge]
+  runtime_type = "io.containerd.wasmedge.v1"

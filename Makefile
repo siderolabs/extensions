@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-02-01T17:35:15Z by kres latest.
+# Generated on 2024-02-02T14:30:15Z by kres latest.
 
 # common variables
 
@@ -79,6 +79,7 @@ TARGETS += thunderbolt
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
 TARGETS += v4l-uvc-drivers
+TARGETS += wasmedge
 TARGETS += xe-guest-utilities
 NONFREE_TARGETS = nonfree-kmod-nvidia
 

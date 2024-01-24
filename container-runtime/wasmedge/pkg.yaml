@@ -1,0 +1,33 @@
+name: wasmedge
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+    # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/containerd/runwasi/releases/download/containerd-shim-wasmedge/{{ .WASMEDGE_VERSION }}/containerd-shim-wasmedge-aarch64.tar.gz
+        destination: containerd-shim-wasmedge.tar.gz
+        sha256: beeba8ea5484eea8a3f73f67d755a9438507ede8b6d6292b99480b21b4b06b70
+        sha512: a42a219e02943e66fefee210e4d881c7d7e12117da3a7b0fb8139c63846aed2c9db2a60521d3c6f3decc30a7b6335036e5abcf3f13ff2ee67d569f3b7a085ca1
+    # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/containerd/runwasi/releases/download/containerd-shim-wasmedge/{{ .WASMEDGE_VERSION }}/containerd-shim-wasmedge-x86_64.tar.gz
+        destination: containerd-shim-wasmedge.tar.gz
+        sha256: e1b40eb21fb9d45ffa73a3b345a8dfc0a02e9336239a11cb59bdc3110f730682
+        sha512: d7529d8c449762d29e8186576174dbe55832c18f5e07f2f3085675a7c6369e22f178b13bcc2db4c3560aaa8496956e51f61bd092ee41733359f677f1761874d6
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+
+        tar xf containerd-shim-wasmedge.tar.gz -C /rootfs/usr/local/bin
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/wasm.part
+    to: /rootfs/etc/cri/conf.d/wasm.part

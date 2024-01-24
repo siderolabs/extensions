@@ -40,11 +40,12 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ### Container Runtimes
 
-| Name                                | Image                                                                                       | Description                                     | Version Format                     |
-| ----------------------------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- | ---------------------------------- |
-| [gvisor](container-runtime/gvisor/) | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | [gVisor](https://gvisor.dev/) container runtime | `upstream version`                 |
-| [stargz-snapshotter](container-runtime/stargz-snapshotter/) | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter) | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime | `upstream version` |
+| Name                                                                 | Image                                                                                                                         | Description                                                                                                                        | Version Format     |
+| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| [gvisor](container-runtime/gvisor/)                                  | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor)                                   | [gVisor](https://gvisor.dev/) container runtime                                                                                    | `upstream version` |
+| [stargz-snapshotter](container-runtime/stargz-snapshotter/)          | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter)           | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime                                           | `upstream version` |
 | [ecr-credential-provider](container-runtime/ecr-credential-provider) | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | [ECR Credential Provider](https://github.com/kubernetes/cloud-provider-aws/tree/master/cmd/ecr-credential-provider) kubelet plugin | `upstream version` |
+| [wasmedge](container-runtime/wasmedge)                               | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge)                               | [WasmEdge](https://github.com/containerd/runwasi) container runtime                                                                | `upstream_version` |
 
 ### Firmware
 
@@ -72,9 +73,9 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ### Miscellaneous
 
-| Name                            | Image                                                                                             | Description                        | Version Format     |
-| ------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------- | ------------------ |
-| [binfmt-misc](misc/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version`                                       |
+| Name                            | Image                                                                                                 | Description                 | Version Format  |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------- | --------------- |
+| [binfmt-misc](misc/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version` |
 
 ### Network
 
@@ -84,19 +85,19 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ### Storage
 
-| Name                                | Image                                                                                                 | Description         | Version Format                     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------- | ---------------------------------- |
-| [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools    | `v0.1.0`                           |
-| [mdadm](storage/mdadm/)             | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm)             | manage MD devices tool | `upstream version`              |
-| [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module  | `upstream version`-`talos version` |
-| [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module   | `upstream version`-`talos version` |
-| [btrfs](storage/btrfs/)             | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs)             | BTRFS driver module | `talos version`                    |
+| Name                                | Image                                                                                                 | Description            | Version Format                     |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------- | ---------------------------------- |
+| [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools       | `v0.1.0`                           |
+| [mdadm](storage/mdadm/)             | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm)             | manage MD devices tool | `upstream version`                 |
+| [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module     | `upstream version`-`talos version` |
+| [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module      | `upstream version`-`talos version` |
+| [btrfs](storage/btrfs/)             | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs)             | BTRFS driver module    | `talos version`                    |
 
 ### Power
 
-| Name                            | Image                                                                                                     | Description                                                    | Version Format                     |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------- |
-| [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/talos-extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version`                 |
+| Name                            | Image                                                                                                     | Description                                                    | Version Format     |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------ |
+| [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/talos-extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version` |
 
 ### Guest Agents
 
