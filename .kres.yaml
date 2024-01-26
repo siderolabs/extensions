@@ -9,7 +9,7 @@ spec:
     - btrfs
     - chelsio-drivers
     - chelsio-firmware
-    - drbd
+    # - drbd see https://github.com/siderolabs/pkgs/pull/873
     - ecr-credential-provider
     - fuse3
     - gasket-driver
@@ -33,7 +33,7 @@ spec:
     - util-linux-tools
     - v4l-uvc-drivers
     - xe-guest-utilities
-    - zfs
+    # - zfs see https://github.com/siderolabs/pkgs/pull/873
   additionalTargets:
     nonfree:
       - nonfree-kmod-nvidia
@@ -78,7 +78,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.7.0-alpha.0-13-gf376a53
+        defaultValue: v1.7.0-alpha.0-17-gefbbd23
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
     depends:

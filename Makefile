@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-01-22T17:59:56Z by kres latest.
+# Generated on 2024-01-26T09:29:52Z by kres latest.
 
 # common variables
 
@@ -57,7 +57,6 @@ TARGETS += bnx2-bnx2x
 TARGETS += btrfs
 TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
-TARGETS += drbd
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
@@ -81,13 +80,12 @@ TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
 TARGETS += v4l-uvc-drivers
 TARGETS += xe-guest-utilities
-TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia
 
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-alpha.0-13-gf376a53
+PKGS ?= v1.7.0-alpha.0-17-gefbbd23
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # help menu

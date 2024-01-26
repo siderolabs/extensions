@@ -2,4 +2,4 @@ modules.order
 modules.builtin
 modules.builtin.modinfo
 kernel/drivers/thunderbolt/thunderbolt.ko
-kernel/drivers/net/thunderbolt-net.ko
+kernel/drivers/net/thunderbolt/thunderbolt_net.ko

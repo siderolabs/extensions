@@ -1,6 +1,7 @@
 modules.order
 modules.builtin
 modules.builtin.modinfo
+kernel/drivers/media/common/uvc.ko
 kernel/drivers/media/common/videobuf2/videobuf2-common.ko
 kernel/drivers/media/common/videobuf2/videobuf2-memops.ko
 kernel/drivers/media/common/videobuf2/videobuf2-v4l2.ko
