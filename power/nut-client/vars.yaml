@@ -1,1 +1,1 @@
-VERSION: "{{ .NUT_VERSION }}-{{ .BUILD_ARG_TAG }}"
+VERSION: "{{ .NUT_VERSION }}"

@@ -1,1 +1,1 @@
-VERSION: "{{ .BUILD_ARG_TAG }}"
+VERSION: "v1.0.0"
