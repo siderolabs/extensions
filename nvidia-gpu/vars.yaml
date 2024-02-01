@@ -8,7 +8,7 @@ CONTAINER_TOOLKIT_REF: 6b8589dcb4dead72ab64f14a5912886e6165c079
 LIBNVIDIA_CONTAINER_VERSION: v1.13.5
 LIBNVIDIA_CONTAINER_REF: 66607bd046341f7aad7de80a9f022f122d1f2fce
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_VERSION: latest@sha256:255b803e19a867695128b838d54f115cbd0dfaa34d78a5119a4c23212814ae95 # latest-20230621 has a bug with buildng apps
+WOLFI_BASE_VERSION: latest@sha256:91f3e08712a854ff4a146b7cca7f1b7581f205bc589a06135f51590e00d2990e
 # renovate: datasource=github-tags extractVersion=^go(?<version>.*)$ depName=golang/go
 GLIBC_VERSION: 2.38
 # renovate: datasource=git-tags extractVersion=^libtiprc-(?<version>.*)$ depName=git://linux-nfs.org/~steved/libtirpc
