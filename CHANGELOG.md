@@ -1,3 +1,30 @@
+## [Talos System Extensions 1.5.6](https://github.com/siderolabs/extensions/releases/tag/v1.5.6) (2024-02-02)
+
+Welcome to the v1.5.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.5/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Noel Georgi
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`dba5051`](https://github.com/siderolabs/extensions/commit/dba5051bf6e0c4781f76ad13816db7173bb15f16) fix: set `DATABASE_PATH` for fabricmanager
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.5.5](https://github.com/siderolabs/extensions/releases/tag/v1.5.5)
+
 ## [Talos System Extensions 1.5.5](https://github.com/siderolabs/extensions/releases/tag/v1.5.5) (2023-11-09)
 
 Welcome to the v1.5.5 release of Talos System Extensions!
