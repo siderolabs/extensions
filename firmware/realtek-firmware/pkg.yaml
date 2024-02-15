@@ -1,0 +1,23 @@
+name: realtek-firmware
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/linux-firmware:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/lib/firmware
+        cp -R -p /lib/firmware/RTL8192E /rootfs/lib/firmware
+        cp -R -p /lib/firmware/rtl_bt /rootfs/lib/firmware
+        cp -R -p /lib/firmware/rtl_nic /rootfs/lib/firmware
+        cp -R -p /lib/firmware/rtlwifi /rootfs/lib/firmware
+        cp -R -p /lib/firmware/rtw88 /rootfs/lib/firmware
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
