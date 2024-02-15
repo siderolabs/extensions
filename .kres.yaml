@@ -26,6 +26,7 @@ spec:
     - nvidia-open-gpu-kernel-modules
     - qemu-guest-agent
     - qlogic-firmware
+    - realtek-firmware
     - stargz-snapshotter
     - tailscale
     - thunderbolt
