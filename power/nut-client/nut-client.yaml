@@ -6,6 +6,7 @@ depends:
     - connectivity
     - etcfiles
   - path: /system/run/machined/machine.sock
+  - configuration: true
 container:
   entrypoint: ./upsmon
   args:
@@ -20,13 +21,6 @@ container:
         - ro
     - source: /usr/lib
       destination: /usr/lib
-      type: bind
-      options:
-        - bind
-        - ro
-    # Configuration provided via `.machine.files`.
-    - source: /var/etc/nut
-      destination: /usr/local/etc/nut
       type: bind
       options:
         - bind

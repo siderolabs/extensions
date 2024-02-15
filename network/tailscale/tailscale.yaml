@@ -5,9 +5,9 @@ depends:
     - addresses
     - connectivity
     - etcfiles
+  - configuration: true
 container:
   entrypoint: /usr/local/bin/containerboot
-  environmentFile: /var/etc/tailscale/auth.env
   environment:
   - PATH=/sbin:/usr/local/bin
   - TS_SOCKET=/var/run/tailscale/tailscaled.sock

@@ -6,22 +6,22 @@ See [Installing Extensions](https://github.com/siderolabs/extensions#installing-
 
 ## Usage
 
-Configure the extension via `.machine.files`.
+Configure the extension via `ExtensionServiceConfig` document.
 You must replace upsmonHost and upsmonPasswd to match configuration on your nut server.
 See [upsd.users](https://networkupstools.org/docs/man/upsd.users.html) man page for details.
 
 On Talos SHUTDOWNCMD must be `/sbin/poweroff`
 
 ```yaml
-machine:
-  files:
-    - path: /var/etc/nut/upsmon.conf
-      permissions: 0o600
-      op: create
-      content: |-
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: nut-client
+configFiles:
+  - content: |-
         MONITOR ${upsmonHost} 1 remote ${upsmonPasswd} slave
         SHUTDOWNCMD "/sbin/poweroff"
-
+    mountPath: /usr/local/etc/nut/upsmon.conf
 ```
 
 ## Testing

@@ -10,14 +10,15 @@ See [Installing Extensions](https://github.com/siderolabs/extensions#installing-
 
 ## Usage
 
+Configure the extension via `ExtensionServiceConfig` document.
+
 ```yaml
-machine:
-  files:
-    - content: |
-        TS_AUTHKEY=<your auth key>
-      permissions: 0o644
-      path: /var/etc/tailscale/auth.env
-      op: create
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: tailscale
+environment:
+  - TS_AUTHKEY=<your auth key>
 ```
 
 ```bash
@@ -52,14 +53,13 @@ Current known env vars are:
 
 A pratical example is enabling subnetrouting
 ```
-machine:
-  files:
-    - content: |
-        TS_AUTHKEY=<your auth key>
-        TS_ROUTES=10.96.0.0/12
-      permissions: 0o644
-      path: /var/etc/tailscale/auth.env
-      op: create
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: tailscale
+environment:
+  - TS_AUTHKEY=<your auth key>
+  - TS_ROUTES=10.96.0.0/12
 ```
 
 10.96.0.0/12 is the service subnet talos uses by default (if you use a custom one, you will need to change it).
