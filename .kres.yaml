@@ -73,7 +73,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.6.0-16-gb77ffb7
+        defaultValue: v1.6.0-25-g6868f38
     depends:
       - internal/extensions/descriptions.yaml
     script:
