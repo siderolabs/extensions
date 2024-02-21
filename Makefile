@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-02-15T18:32:58Z by kres latest.
+# Generated on 2024-02-20T14:43:02Z by kres latest.
 
 # common variables
 
@@ -88,7 +88,7 @@ NONFREE_TARGETS = nonfree-kmod-nvidia
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-alpha.0-19-g96cc841
+PKGS ?= v1.7.0-alpha.0-29-g1904994
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # help menu

@@ -23,8 +23,11 @@ See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configur
 * Linux Firmware: 20240115
 * DRBD: 9.2.7
 * gvisor: 20240109.0
-* QEMU: 8.2.0
-* Tailscale: 1.56.1
+* QEMU: 8.2.1
+* Tailscale: 1.60.0
+* nvidia-container-runtime: v1.14.5
+* libnvidia-container: v1.14.5
+* xe-guest-utilities: 8.4.0
 """
 
 

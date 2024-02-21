@@ -4,7 +4,7 @@ shell: /bin/bash
 install:
   - build-base
   - bash
-  - go
+  - go~1.20 # ref: https://github.com/NVIDIA/nvidia-container-toolkit/issues/372
   - coreutils
   - sed
   - curl
@@ -30,11 +30,12 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .LIBNVIDIA_CONTAINER_VERSION }}/libnvidia-container-{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: 4beebedd045468e8174895f5d4a563f7880cf7a10f062d996719c061fcdaa0db
-        sha512: a16f163cb8689f4b6279bed1a5965ee4c56f413918cae6acf272ca5adf7dd929818d977dd6657ce496abeb842b56e03bfd83bda828a7b953625b2999ac174b93
+        sha256: d8980359437c7b9f1835ef3741609b4e688347f72c2213cdb522def0daf4a29c
+        sha512: 803c5e9941bf4def21ab4cf631aee90ceaa06bf23f4a735b174ce3272140fdabd037c5e0267d71c79fd506ffded182ed43dd07e30bda2636d72f9f67c2ea5621
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}
+      LIB_VERSION: {{ .LIBNVIDIA_CONTAINER_VERSION | replace "v" "" }}
       WITH_NVCGO: yes
       WITH_LIBELF: yes
       WITH_TIRPC: no # setting no means we'll use the system libtirpc

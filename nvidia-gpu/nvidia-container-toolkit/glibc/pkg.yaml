@@ -13,8 +13,8 @@ steps:
   - sources:
       - url: https://ftpmirror.gnu.org/libc/glibc-{{ .GLIBC_VERSION }}.tar.gz
         destination: glibc.tar.gz
-        sha256: 16e51e0455e288f03380b436e41d5927c60945abd86d0c9852b84be57dd6ed5e
-        sha512: ca799ef40129433791777c698b62142edf0f0e8a87552f324ee6a036a2fe747b867696863692bde45bdd4a263ac6c419a52f92c1b6072b8ff49a887ebaa45299
+        sha256: 97f84f3b7588cd54093a6f6389b0c1a81e70d99708d74963a2e3eab7c7dc942d
+        sha512: ba07187610f660236ba4fbff06420f01ce5aa0138c9b5f0ee7ad6a8c2a178bf899a65a097a769d890813e50942c0c9f793ca8a63a2d13bfcef6e21a12486af3a
     prepare:
       - |
         tar -xzf glibc.tar.gz --strip-components=1

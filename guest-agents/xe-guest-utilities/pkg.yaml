@@ -8,8 +8,8 @@ steps:
       GOPATH: /go
   - sources:
       - url: https://github.com/xenserver/xe-guest-utilities/archive/refs/tags/v{{ .XE_GUEST_UTILITIES_VERSION }}.tar.gz
-        sha256: 8c4f9b7d6492bb01b7629c67ae04b745acaf81d8afb0af96da484bb791d1c35c
-        sha512: 3db437c10dec61ff3620c8ce92eecc5239f8d5136f67bdac73f6e41001b3a45675258f02d8c8b06361891240a91790c7e3a9ba27cd8cf79a7aa70df7c5b2e404
+        sha256: b800a499df21b9993e0ceb36bce18046b3d4622df85693a8b5b40dcf21a78b4f
+        sha512: 1ecf9079537864e06ab9ef622f8fc17f12252d14a2003b757d8709f8409e59709f44243f79a5dd0e5715b94f58e6953c65fcf46da302f95abb91d18d86831dc8
         destination: xe-guest-utilities.tar.gz
     prepare:
       - |

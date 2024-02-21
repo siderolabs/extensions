@@ -9,8 +9,8 @@ steps:
   - sources:
       - url: https://download.gnome.org/sources/glib/{{ regexReplaceAll ".\\d+$" .GLIB_VERSION "${1}" }}/glib-{{ .GLIB_VERSION }}.tar.xz
         destination: glib.tar.xz
-        sha256: 915bc3d0f8507d650ead3832e2f8fb670fce59aac4d7754a7dab6f1e6fed78b2
-        sha512: aa9ed9195951b00ac8221e958ea337fbda82621a862ef8f29dc2ea396a6253ce51c2a0a498dfa4e12642f1836f85f9564f09991979ae85c5ed4368355d857376
+        sha256: a47f7ecf7bba0346e6cd562887b93ee4ee37a57d8dcae0755f0de8dc75ca5e8c
+        sha512: c4cf99546828d8b8310faafcafef6db17381d07973d465e7699a2b8743687c730496de38c5ab670613411b89358f6cd60cc9aad2f35bf0a80d12a53d79f15581
     prepare:
       - |
         tar -xf glib.tar.xz --strip-components=1
@@ -21,7 +21,7 @@ steps:
         ln -s /toolchain/bin/env /usr/bin/env
         ln -s /toolchain/bin/python3 /toolchain/bin/python
 
-        pip3 install ninja
+        pip3 install ninja packaging
     build:
       - |
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
