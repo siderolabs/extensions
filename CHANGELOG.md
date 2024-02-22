@@ -1,3 +1,39 @@
+## [Talos System Extensions 1.6.5](https://github.com/siderolabs/extensions/releases/tag/v1.6.5) (2024-02-22)
+
+Welcome to the v1.6.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### New Firmware Extensions
+
+Two extensions: `qlogic-firmware` and `realtek-firmware` were backported from Talos 1.7 release.
+
+
+### Contributors
+
+* Andrey Smirnov
+* Nathan Lee
+* Victor Seva
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`2b602a8`](https://github.com/siderolabs/extensions/commit/2b602a83c238b0de4ad33b209376c4b3dc42e58d) chore: update PKGS to match Talos 1.6.5
+* [`9aafd4e`](https://github.com/siderolabs/extensions/commit/9aafd4ec87a88fcab81c753f0c2ce6c2ce06609f) feat: realtek firmware
+* [`2bc347f`](https://github.com/siderolabs/extensions/commit/2bc347fe55d9916ed998b2ad20ebfaec62755874) feat: extension providing QLogic firmware
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.6.4](https://github.com/siderolabs/extensions/releases/tag/v1.6.4)
+
 ## [Talos System Extensions 1.6.4](https://github.com/siderolabs/extensions/releases/tag/v1.6.4) (2024-02-01)
 
 Welcome to the v1.6.4 release of Talos System Extensions!
