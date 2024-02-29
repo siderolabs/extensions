@@ -19,7 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configur
     [notes.updates]
         title = "Component Updates"
         description = """\
-* ZFS: 2.2.2
+* ZFS: 2.2.3
 * Linux Firmware: 20240115
 * DRBD: 9.2.7
 * gvisor: 20240109.0

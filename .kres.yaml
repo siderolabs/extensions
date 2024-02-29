@@ -36,7 +36,7 @@ spec:
     - v4l-uvc-drivers
     - wasmedge
     - xe-guest-utilities
-    # - zfs see https://github.com/siderolabs/pkgs/pull/873
+    - zfs
   additionalTargets:
     nonfree:
       - nonfree-kmod-nvidia
@@ -81,7 +81,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.7.0-alpha.0-29-g1904994
+        defaultValue: v1.7.0-alpha.0-31-gcb39126
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
     depends:

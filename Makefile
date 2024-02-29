@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-02-20T14:43:02Z by kres latest.
+# Generated on 2024-02-29T10:27:03Z by kres latest.
 
 # common variables
 
@@ -83,12 +83,13 @@ TARGETS += util-linux-tools
 TARGETS += v4l-uvc-drivers
 TARGETS += wasmedge
 TARGETS += xe-guest-utilities
+TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia
 
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-alpha.0-29-g1904994
+PKGS ?= v1.7.0-alpha.0-31-gcb39126
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # help menu
