@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-02-29T10:27:03Z by kres latest.
+# Generated on 2024-03-01T10:12:16Z by kres latest.
 
 # common variables
 
@@ -61,6 +61,7 @@ TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
 TARGETS += gvisor
+TARGETS += gvisor-debug
 TARGETS += hello-world-service
 TARGETS += i915-ucode
 TARGETS += intel-ice-firmware

@@ -1,0 +1,16 @@
+name: gvisor-debug
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+finalize:
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/gvisor-debug.part
+    to: /rootfs/etc/cri/conf.d/gvisor-debug.part
+  - from: /pkg/runsc.toml
+    to: /rootfs/etc/cri/conf.d/runsc.toml

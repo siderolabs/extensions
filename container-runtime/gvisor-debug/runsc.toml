@@ -1,0 +1,6 @@
+log_path = "/var/log/runsc/%ID%/shim.log"
+log_level = "debug"
+
+[runsc_config]
+  debug = "true"
+  debug-log = "/var/log/runsc/%ID%/gvisor.%COMMAND%.log"

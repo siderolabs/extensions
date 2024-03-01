@@ -1,0 +1,4 @@
+[debug]
+  level = "debug"
+[plugins."io.containerd.runtime.v1.linux"]
+  shim_debug = true
