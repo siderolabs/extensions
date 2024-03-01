@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20240109.0
+GVISOR_VERSION: 20240212.0
 # renovate: datasource=github-releases  depName=containerd/stargz-snapshotter
 STARGZ_SNAPSHOTTER_VERSION: v0.15.1
 # renovate: datasource=github-releases depName=kubernetes/cloud-provider-aws
