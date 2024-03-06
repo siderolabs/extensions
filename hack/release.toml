@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.6.4"
+previous = "v1.6.5"
 
 pre_release = false
 
@@ -15,12 +15,6 @@ See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configur
 """
 
 [notes]
-
-    [notes.firmware]
-        title = "New Firmware Extensions"
-        description = """\
-Two extensions: `qlogic-firmware` and `realtek-firmware` were backported from Talos 1.7 release.
-"""
 
 
 [make_deps]
