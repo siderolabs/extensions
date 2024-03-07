@@ -13,8 +13,8 @@ steps:
   - sources:
       - url: https://sourceware.org/elfutils/ftp/{{ .ELFUTILS_VERSION }}/elfutils-{{ .ELFUTILS_VERSION }}.tar.bz2
         destination: elfutils.tar.bz2
-        sha256: 8e00a3a9b5f04bc1dc273ae86281d2d26ed412020b391ffcc23198f10231d692
-        sha512: 9c4f5328097e028286c42f29e39dc3d80914b656cdfbbe05b639e91bc787ae8ae64dd4d69a6e317ce30c01648ded10281b86a51e718295f4c589df1225a48102
+        sha256: df76db71366d1d708365fc7a6c60ca48398f14367eb2b8954efc8897147ad871
+        sha512: e22d85f25317a79b36d370347e50284c9120c86f9830f08791b7b6a7b4ad89b9bf4c7c71129133b8d193a0edffb2a2c17987b7e48428b9670aff5ce918777e04
     prepare:
       - |
         tar -xjf elfutils.tar.bz2 --strip-components=1
