@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-01T10:12:16Z by kres latest.
+# Generated on 2024-03-08T14:57:49Z by kres latest.
 
 # common variables
 
@@ -28,7 +28,7 @@ SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 # sync bldr image with pkgfile
 
-BLDR_RELEASE := v0.2.3
+BLDR_RELEASE := v0.3.0
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
 BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
@@ -90,7 +90,7 @@ NONFREE_TARGETS = nonfree-kmod-nvidia
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-alpha.0-31-gcb39126
+PKGS ?= v1.7.0-alpha.0-33-g3aacf03
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # help menu
