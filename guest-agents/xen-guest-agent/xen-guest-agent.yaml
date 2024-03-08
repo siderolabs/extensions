@@ -1,17 +1,13 @@
-name: xe-guest-utilities
+name: xen-guest-agent
 container:
-  entrypoint: ./xe-daemon
+  entrypoint: ./xen-guest-agent
+  # log to stderr
+  args:
+    - -s
   security:
     writeableRootfs: false
     writeableSysfs: true
   mounts:
-  # libs
-  - source: /lib/modules
-    destination: /lib/modules
-    type: bind
-    options:
-      - bind
-      - ro
   # xenbus
   - source: /dev/xen
     destination: /dev/xen

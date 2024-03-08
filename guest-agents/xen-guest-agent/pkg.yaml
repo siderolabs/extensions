@@ -1,0 +1,37 @@
+name: xen-guest-agent
+variant: alpine
+shell: /bin/sh
+install:
+  - cargo
+  - xen-dev
+  - clang-dev
+  - llvm-dev
+  - pkgconf
+steps:
+  - env:
+      PKG_CONFIG_PATH: /usr/lib/pkgconfig
+      RUSTFLAGS: '-C target-feature=+crt-static'
+  - sources:
+      - url: https://gitlab.com/xen-project/xen-guest-agent/-/archive/{{ .XEN_GUEST_AGENT_VERSION }}/xen-guest-agent-{{ .XEN_GUEST_AGENT_VERSION }}.tar.gz
+        sha256: 492ba2022b4155b38443ddf34a5bdbb0d72966d0936aab8545b4a135fa69c990
+        sha512: 527611f1d0c4fec81ac44434304f426bb9ebe75ceeaac84a417397ec845da6a225514d6ff8b9dc03b5c27d4fa3b59a47fd1a64276fbf6b492664244796ef483c
+        destination: xe-guest-agent.tar.gz
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzvf xe-guest-agent.tar.gz --strip-components=1
+    build:
+      - cargo build --release -F static --target {{ .ARCH }}-alpine-linux-musl
+    install:
+      - |
+        containerRoot=/rootfs/usr/local/lib/containers/xen-guest-agent
+        mkdir -p "$containerRoot"
+        mv target/{{ .ARCH }}-alpine-linux-musl/release/xen-guest-agent "$containerRoot/xen-guest-agent"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/xen-guest-agent.yaml
+    to: /rootfs/usr/local/etc/containers/

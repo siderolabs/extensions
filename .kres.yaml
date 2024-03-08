@@ -36,7 +36,7 @@ spec:
     - util-linux-tools
     - v4l-uvc-drivers
     - wasmedge
-    - xe-guest-utilities
+    - xen-guest-agent
     - zfs
   additionalTargets:
     nonfree:
@@ -46,6 +46,14 @@ spec:
     - TAG
     - PKGS
     - PKGS_PREFIX
+  makefile:
+    extraVariables:
+      - name: EXTENSIONS_IMAGE_REF
+        defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
+      - name: PKGS
+        defaultValue: v1.7.0-alpha.0-33-g3aacf03
+      - name: PKGS_PREFIX
+        defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
 ---
 kind: common.Build
@@ -78,13 +86,6 @@ spec:
   makefile:
     enabled: true
     phony: true
-    variables:
-      - name: EXTENSIONS_IMAGE_REF
-        defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-      - name: PKGS
-        defaultValue: v1.7.0-alpha.0-33-g3aacf03
-      - name: PKGS_PREFIX
-        defaultValue: ghcr.io/siderolabs
     depends:
       - internal/extensions/descriptions.yaml
     script:

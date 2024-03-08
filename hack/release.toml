@@ -16,6 +16,13 @@ See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configur
 
 [notes]
 
+    [notes.xen]
+        title = "Xen Guest Agent"
+        description = """\
+Xen guest agent extension is now available. This removes the previous `xe-guest-utilities` extension.
+See [this](https://github.com/xenserver/xe-guest-utilities/issues/118) for more info.
+"""
+
     [notes.updates]
         title = "Component Updates"
         description = """\
@@ -27,7 +34,6 @@ See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configur
 * Tailscale: 1.60.1
 * nvidia-container-runtime: v1.14.5
 * libnvidia-container: v1.14.5
-* xe-guest-utilities: 8.4.0
 """
 
 

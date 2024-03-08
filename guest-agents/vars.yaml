@@ -4,5 +4,5 @@ QEMU_VERSION: 8.2.2
 GLIB_VERSION: 2.80.0
 # renovate: datasource=github-releases extractVersion=^pcre2-(?<version>.*)$ depName=PCRE2Project/pcre2
 PCRE2_VERSION: 10.42
-# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=xenserver/xe-guest-utilities
-XE_GUEST_UTILITIES_VERSION: 8.4.0
+# renovate: datasource=git-tags depName=https://gitlab.com/xen-project/xen-guest-agent.git
+XEN_GUEST_AGENT_VERSION: 0.4.0
