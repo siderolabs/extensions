@@ -14,10 +14,6 @@ steps:
       SSH_KEY:
         from_secret: ssh_key
       DOCKER_CLI_EXPERIMENTAL: enabled
-    resources:
-      requests:
-        cpu: 24000
-        memory: 48GiB
     volumes:
       - name: outer-docker-socket
         path: /var/run
