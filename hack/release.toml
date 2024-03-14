@@ -27,9 +27,9 @@ See [this](https://github.com/xenserver/xe-guest-utilities/issues/118) for more 
         title = "Component Updates"
         description = """\
 * ZFS: 2.2.3
-* Linux Firmware: 20240220
+* Linux Firmware: 20240312
 * DRBD: 9.2.8
-* gvisor: 20240109.0
+* gvisor: 20240305.0
 * QEMU: 8.2.2
 * Tailscale: 1.60.1
 * nvidia-container-runtime: v1.14.5

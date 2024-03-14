@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-02-02T18:53:51Z by kres latest.
+# Generated on 2024-03-14T10:29:26Z by kres latest.
 
 name: weekly
 concurrency:
@@ -36,7 +36,7 @@ jobs:
             - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
               platforms: linux/arm64
           driver: remote
-          endpoint: tcp://localhost:1234
+          endpoint: tcp://127.0.0.1:1234
       - name: reproducibility-test
         run: |
           make reproducibility-test

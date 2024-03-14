@@ -1,11 +1,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-03-08T17:16:57Z by kres latest.
+# Generated on 2024-03-14T10:30:34Z by kres latest.
 
 # common variables
 
 SHA := $(shell git describe --match=none --always --abbrev=8 --dirty)
-TAG := $(shell git describe --tag --always --dirty)
+TAG := $(shell git describe --tag --always --dirty --match v[0-9]\*)
 ABBREV_TAG := $(shell git describe --tags >/dev/null 2>/dev/null && git describe --tag --always --match v[0-9]\* --abbrev=0 || echo 'undefined')
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ARTIFACTS := _out
@@ -51,7 +51,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-alpha.0-33-g3aacf03
+PKGS ?= v1.7.0-alpha.0-35-g8804a60
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
