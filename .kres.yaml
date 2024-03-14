@@ -9,7 +9,7 @@ spec:
     - btrfs
     - chelsio-drivers
     - chelsio-firmware
-    # - drbd see https://github.com/siderolabs/pkgs/pull/873
+    - drbd
     - ecr-credential-provider
     - fuse3
     - gasket-driver
@@ -51,7 +51,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.7.0-alpha.0-35-g8804a60
+        defaultValue: v1.7.0-alpha.0-37-g4a9a027
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
