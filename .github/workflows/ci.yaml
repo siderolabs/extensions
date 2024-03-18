@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-02-21T10:59:05Z by kres latest.
+# Generated on 2024-03-20T10:05:39Z by kres latest.
 
 name: default
 concurrency:
@@ -53,7 +53,7 @@ jobs:
             - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
               platforms: linux/arm64
           driver: remote
-          endpoint: tcp://localhost:1234
+          endpoint: tcp://127.0.0.1:1234
       - name: Build
         run: |
           make
@@ -135,7 +135,7 @@ jobs:
             - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
               platforms: linux/arm64
           driver: remote
-          endpoint: tcp://localhost:1234
+          endpoint: tcp://127.0.0.1:1234
       - name: reproducibility-test
         run: |
           make reproducibility-test
