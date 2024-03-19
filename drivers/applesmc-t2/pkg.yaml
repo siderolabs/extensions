@@ -1,0 +1,23 @@
+name: applesmc-t2
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  # The pkgs version for a particular release of Talos as defined in
+  # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .PKGS_PREFIX }}/applesmc-t2-pkg:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - prepare:
+      - |
+        export KERNELRELEASE=$(find /lib/modules -type d -name "*-talos" -exec basename {} \+)
+        sed -i "s#\$VERSION#${KERNELRELEASE}-{{ .VERSION }}#" /pkg/manifest.yaml
+  - install:
+      - |
+        mkdir -p /rootfs/lib/modules
+
+        cp -R /lib/modules/* /rootfs/lib/modules
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
