@@ -1,3 +1,37 @@
+## [Talos System Extensions 1.6.7](https://github.com/siderolabs/extensions/releases/tag/v1.6.7) (2024-03-20)
+
+Welcome to the v1.6.7 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+* Linux Firmware: 20240312
+* DRBD: 9.2.8
+* Intel CPU Microcode: 20240312
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`b14f2d5`](https://github.com/siderolabs/extensions/commit/b14f2d5adc98109d3eeeec4c0625d9aa4b8955f6) feat: update for Talos 1.6.7
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.6.6](https://github.com/siderolabs/extensions/releases/tag/v1.6.6)
+
 ## [Talos System Extensions 1.6.6](https://github.com/siderolabs/extensions/releases/tag/v1.6.6) (2024-03-06)
 
 Welcome to the v1.6.6 release of Talos System Extensions!
