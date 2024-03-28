@@ -107,6 +107,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
 | [qemu-guest-agent](guest-agents/qemu-guest-agent/)     | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/qemu-guest-agent)     | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
 | [xe-guest-utilities](guest-agents/xe-guest-utilities/) | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/talos-extensions/pkgs/container/xe-guest-utilities) | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
+| [talos-vmtoolsd](guest-agents/talos-vmtoolsd/)         | [ghcr.io/siderolabs/talos-vmtoolsd](https://github.com/siderolabs/talos-extensions/pkgs/container/talos-vmtoolsd)         | [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd)         | `upstream version` |
 
 ### NVIDIA GPU
 

@@ -1,0 +1,9 @@
+name: talos-vmtoolsd
+variant: scratch
+dependencies:
+  - image: {{ .BUILD_ARG_PKGS_PREFIX }}/talos-vmtoolsd:{{ .TALOS_VMTOOLSD_VERSION }}
+    from: /
+    to: /rootfs
+finalize:
+  - from: /rootfs
+    to: /

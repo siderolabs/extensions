@@ -1,3 +1,7 @@
+# THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
+#
+# Generated on 2024-04-02T09:40:00Z by kres latest.
+
 policies:
   - type: commit
     spec:
@@ -22,7 +26,23 @@ policies:
           - docs
           - perf
           - refactor
+          - style
           - test
           - release
         scopes:
           - .*
+  - type: license
+    spec:
+      root: .
+      skipPaths:
+        - .git/
+        - testdata/
+      includeSuffixes:
+        - .go
+      excludeSuffixes:
+        - .pb.go
+        - .pb.gw.go
+      header: |
+        // This Source Code Form is subject to the terms of the Mozilla Public
+        // License, v. 2.0. If a copy of the MPL was not distributed with this
+        // file, You can obtain one at http://mozilla.org/MPL/2.0/.

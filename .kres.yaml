@@ -31,6 +31,7 @@ spec:
     - realtek-firmware
     - stargz-snapshotter
     - tailscale
+    - talos-vmtoolsd
     - thunderbolt
     - usb-modem-drivers
     - util-linux-tools
@@ -58,9 +59,9 @@ spec:
 ---
 kind: common.Build
 spec:
-    ignoredPaths:
-        - "internal/extensions/image-digests"
-        - "internal/extensions/descriptions.yaml"
+  ignoredPaths:
+    - "internal/extensions/image-digests"
+    - "internal/extensions/descriptions.yaml"
 ---
 kind: auto.CustomSteps
 spec:

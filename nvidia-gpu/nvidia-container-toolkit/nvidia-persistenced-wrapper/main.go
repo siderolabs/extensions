@@ -1,3 +1,7 @@
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this
+// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
 package main
 
 import (
@@ -28,7 +32,6 @@ func main() {
 		}
 	} else {
 		pid, err := getProcessId()
-
 		if err != nil {
 			log.Fatalf("nvidia-persistenced-wrapper: error reading pid file: %s%v\n", pidFile, err)
 		}

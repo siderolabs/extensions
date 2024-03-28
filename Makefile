@@ -85,6 +85,7 @@ TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
+TARGETS += talos-vmtoolsd
 TARGETS += thunderbolt
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
