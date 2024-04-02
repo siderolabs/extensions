@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20240305.0
+GVISOR_VERSION: 20240325.0
 # renovate: datasource=github-releases  depName=containerd/stargz-snapshotter
 STARGZ_SNAPSHOTTER_VERSION: v0.15.1
 # renovate: datasource=github-releases depName=kubernetes/cloud-provider-aws
@@ -7,4 +7,4 @@ CLOUD_PROVIDER_AWS_VERSION: v1.28.1
 # renovate: datasource=github-tags depName=containerd/runwasi
 WASMEDGE_VERSION: v0.3.0
 # renovate: datasource=github-releases depName=kata-containers/kata-containers
-KATA_CONTAINERS_VERSION: 3.2.0
+KATA_CONTAINERS_VERSION: 3.3.0

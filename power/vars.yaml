@@ -1,2 +1,2 @@
 # renovate: datasource=github-releases extractVersion=^(?<version>.*)$ depName=networkupstools/nut
-NUT_VERSION: 2.8.1
+NUT_VERSION: 2.8.2

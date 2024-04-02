@@ -9,8 +9,8 @@ steps:
   - sources:
       - url: https://github.com/networkupstools/nut/releases/download/v{{ .NUT_VERSION }}/nut-{{ .NUT_VERSION }}.tar.gz
         destination: nut.tar.gz
-        sha256: 7da48ee23b1f0d8d72560bb0af84f5c5ae4dbe35452b84cb49840132e47f099c
-        sha512: 32bff67749ef28cf57860bb5859d06b0a76daeada7f22eba59962f1695edb1f0f444d912fc4ae8c14ac3af5ab08b9cdb64d0ed65884fd38adc4bc8e470ce2a4c
+        sha256: e4b4b0cbe7dd39ba9097be7f7d787bb2fffbe35df64dff53b5fe393d659c597d
+        sha512: b6f8f22318e4a4fcb8073a63132b1cb083952c665191b82a7d6765a61b859575a4b0c2ba84ed17cfb8c88d34179876d64520dd2f75f02fe8707b406da2c0821c
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml

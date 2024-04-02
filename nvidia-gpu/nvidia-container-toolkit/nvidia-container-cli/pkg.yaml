@@ -30,8 +30,8 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .LIBNVIDIA_CONTAINER_VERSION }}/libnvidia-container-{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: d8980359437c7b9f1835ef3741609b4e688347f72c2213cdb522def0daf4a29c
-        sha512: 803c5e9941bf4def21ab4cf631aee90ceaa06bf23f4a735b174ce3272140fdabd037c5e0267d71c79fd506ffded182ed43dd07e30bda2636d72f9f67c2ea5621
+        sha256: 13a626b6fdfe1d98be754af5b80b59a8887dd4250ae199919a7a1ed513e03a3e
+        sha512: c9dd1fcf0534c53259a9f23a07ad89f17933484bea903a89bcb3abd792c3dee1a340f9e7c42047e90969ca8eea7e7c4a5e7dba759a7a5871d2aac4bc01f61ab8
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}

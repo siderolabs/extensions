@@ -8,18 +8,18 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-arm64.tar.xz
         destination: kata-static.tar.xz
-        sha256: 40627b7ac677ce0f5ffc73b32c1a8bc553e75b746b6cdf8f14642ac27dac3148
-        sha512: e16b577a4e5a34ff2db62ade47b1f9c75af5ba160af4475a4e3313830c7a029cb200b28df4b98aede05bbe72ec815f2ff37bf6f688c52d568318a09c56906828
+        sha256: 5437f0162e08154260c58642f433d8a9154fb6d443ca2c1ddee675154ec88c9d
+        sha512: 000cf484bd9a9a8500fcbed024b69c4337457bc3e054f6bc2bf6ca6258d8cd78c403d540729a97361ea2f0ca49de13d37078ec0e3ca6c6330003474bf5090e77
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.xz
         destination: kata-static.tar.xz
-        sha256: 21bb8484a060450d6522f29bed7d88d773c28520774eaa2c522b6f47fd12c4a1
-        sha512: 15e5cd3c1b6c083d995aee4b4f332b62a21920a679d6b095c4af11d5f118b9f20d75ef672f6582af6dbb2b30bec96348a3f29bd59c9de9b9f8cf94dce319ce3e
+        sha256: 72e29c7b3ee325e0049bf694bbb843ed07c3eb0a05d89c2b3a1635241e4bafe8
+        sha512: b7ff426d4ea44053b7028bae32b3aa2a94d000c5e2bdd361ac0f144988f52e86d61eccc73bf3a6fc888b5d6c6f8db44c9a8ca0fa651bb27a7ab95818144d3b9e
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/kata-containers/kata-containers/archive/refs/tags/{{ .KATA_CONTAINERS_VERSION }}.tar.gz
         destination: kata-containers.tar.gz
-        sha256: 9d73b91c98b0eaccd71add65d1224c02b5dacaff21333ca5b42286528c88e206
-        sha512: 3292dd4779e9b901b430887fa1b4c7fa1cf9f59610bc8af146228b4d3094ac4478ff6fa0790f2625fe98fcc520aab69ee7c7745332c9fbcb2804f5d3bc20d152
+        sha256: 6567498577888f29d186d14629e7e987e8afc49ab988c72e0bc80918fe99295a
+        sha512: 54b989b1db27e56266d1e40b18d3c4f353a3f876dad358afecbba7fb7e1238da1f0856c73f627cbb24e36176f784e2a809bb1b7a990ad21644b06e7b43d64a68
     env:
       GOPATH: /go
     prepare:

@@ -7,10 +7,10 @@ steps:
   - sources:
       # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
       # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
-      - url: https://github.com/google/gvisor/archive/bb26bfb010b840c3d99f8ffbc4c19147453982ff.tar.gz
+      - url: https://github.com/google/gvisor/archive/9d995324d058812a5476f8c06b20167012511e9c.tar.gz
         destination: gvisor.tar.gz
-        sha256: 043c1b6c65af610e37856d563e740446531a3bb304aecd4aa9bcefeee918a2bb
-        sha512: 29f44dceb4a8cc6b288dd2ed5f2640d21a73392528d137823344c57a78f36ea50397fa997d2a4c0535bf367305f3e43a6349589f227c6f174f570152c37b3ba5
+        sha256: 39ea7ee4691c8c1cc868aa0a1ae35a129898f0bea8980e8dec2a1908c1dab2d5
+        sha512: 1370bb0df975e4f5f78046d6a520c0056ccadef4b048919e384b7cecc0956f01acf5ea1fd498ffce5fa3af0dc7a8ee62da91e1fa4cd34bc1a87b550a43fd8b26
     env:
       GOPATH: /go
     prepare:

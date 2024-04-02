@@ -12,8 +12,8 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/{{ .CONTAINER_TOOLKIT_VERSION }}/container-toolkit-{{ .CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: container-toolkit.tar.gz
-        sha256: 5b1cadea5a79cde2049def4f01dc1ee6c26142391aede9056d69cfeee04d84dd
-        sha512: dc2ffc4f6d93b94c872c00a3f670952974205fc71030cd838859e5c3201f2900c19a23ab128784b9d945c59efd69792e9a54ce5658e2c8946c9ccf7e74e41453
+        sha256: 5284f689b8c55181cf215444dde3c0171cff5edde183f060f1e7e0611c055ce6
+        sha512: 49d87b316db0002d0b79c5f6c31fff78f3e54bf0310c396d7fc8d88b5d9f7ec4bd629547983a25530d9a709b872907c5941892733fef81df99a6764a00f6b229
     env:
       GIT_COMMIT: {{ substr 0 7 .CONTAINER_TOOLKIT_REF }} # build is using short sha
     prepare:

@@ -2,11 +2,11 @@
 # renovate: datasource=github-releases depName=nvidia/open-gpu-kernel-modules
 NVIDIA_DRIVER_VERSION: 535.129.03
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
-CONTAINER_TOOLKIT_VERSION: v1.14.5
-CONTAINER_TOOLKIT_REF: 9ea336070134e612145d342e495f2fc616aab063
+CONTAINER_TOOLKIT_VERSION: v1.14.6
+CONTAINER_TOOLKIT_REF: 5605d191332dcfeea802c4497360d60a65c7887e
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/libnvidia-container.git
-LIBNVIDIA_CONTAINER_VERSION: v1.14.5
-LIBNVIDIA_CONTAINER_REF: 870d7c5d957f5780b8afa57c4d5cc924d4d9ed26
+LIBNVIDIA_CONTAINER_VERSION: v1.14.6
+LIBNVIDIA_CONTAINER_REF: d2eb0afe86f0b643e33624ee64f065dd60e952d4
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
 WOLFI_BASE_REF: sha256:3d6dece13cdb5546cd03b20e14f9af354bc1a56ab5a7b47dca3e6c1557211fcf
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ depName=https://sourceware.org/git/glibc.git
