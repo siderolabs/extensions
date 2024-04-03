@@ -29,6 +29,7 @@ spec:
     - qemu-guest-agent
     - qlogic-firmware
     - realtek-firmware
+    - spin
     - stargz-snapshotter
     - tailscale
     - thunderbolt
