@@ -1,0 +1,33 @@
+name: spin
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+    # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/spinkube/containerd-shim-spin/releases/download/{{ .SPIN_VERSION }}/containerd-shim-spin-v2-linux-aarch64.tar.gz
+        destination: containerd-shim-spin.tar.gz
+        sha256: b358eb5c933359a999fb0e319d7f113773755c6afa1a4b1c84c1ffd13618844a
+        sha512: 635af2b980ba5bf7f5749138ef910ecd32f607d61846f64706e2f331f9a22beff0fe37f577d17f884e44b1731e064e46c370efbe083177993b0d583c68dbfe40
+    # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/spinkube/containerd-shim-spin/releases/download/{{ .SPIN_VERSION }}/containerd-shim-spin-v2-linux-x86_64.tar.gz
+        destination: containerd-shim-spin.tar.gz
+        sha256: 71b89c464f7892dd59ec3d082df220b617215ab49faf58165906560d581b0072
+        sha512: a7b2a9c2518cf0f648164230b615f76375f7444547661a8904335467bee12bae0129a81b4ea37a6352f5a9887015b1eedc5adf639d0051283bf6f46ad2cbcfcb
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+
+        tar xf containerd-shim-spin.tar.gz -C /rootfs/usr/local/bin
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/spin.part
+    to: /rootfs/etc/cri/conf.d/spin.part

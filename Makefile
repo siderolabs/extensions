@@ -83,6 +83,7 @@ TARGETS += nvidia-open-gpu-kernel-modules
 TARGETS += qemu-guest-agent
 TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
+TARGETS += spin
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
 TARGETS += thunderbolt
