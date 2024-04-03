@@ -23,17 +23,24 @@ Xen guest agent extension is now available. This removes the previous `xe-guest-
 See [this](https://github.com/xenserver/xe-guest-utilities/issues/118) for more info.
 """
 
+    [notes.vmtoolsd]
+        title = "VMware Tools Daemon"
+        description = """\
+VMware Tools Daemon extension is now available. This extension provides the VMware Tools Daemon for VMware guests.
+See [Talos VMToolsd](https://github.com/siderolabs/talos-vmtoolsd/) for more info.
+"""
+
     [notes.updates]
         title = "Component Updates"
         description = """\
 * ZFS: 2.2.3
 * Linux Firmware: 20240312
 * DRBD: 9.2.8
-* gvisor: 20240305.0
+* gvisor: 20240325.0
 * QEMU: 8.2.2
-* Tailscale: 1.60.1
-* nvidia-container-runtime: v1.14.5
-* libnvidia-container: v1.14.5
+* Tailscale: 1.62.1
+* nvidia-container-runtime: v1.14.6
+* libnvidia-container: v1.14.6
 * Intel CPU Microcode: 20240312
 """
 

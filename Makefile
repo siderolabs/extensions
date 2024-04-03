@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-04-02T12:54:22Z by kres latest.
+# Generated on 2024-04-03T11:18:15Z by kres latest.
 
 # common variables
 
@@ -85,11 +85,11 @@ TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
-TARGETS += talos-vmtoolsd
 TARGETS += thunderbolt
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
 TARGETS += v4l-uvc-drivers
+TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xen-guest-agent
 TARGETS += zfs

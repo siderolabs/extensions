@@ -31,11 +31,11 @@ spec:
     - realtek-firmware
     - stargz-snapshotter
     - tailscale
-    - talos-vmtoolsd
     - thunderbolt
     - usb-modem-drivers
     - util-linux-tools
     - v4l-uvc-drivers
+    - vmtoolsd-guest-agent
     - wasmedge
     - xen-guest-agent
     - zfs
