@@ -1,3 +1,113 @@
+## [Talos System Extensions 1.7.0-beta.1](https://github.com/siderolabs/extensions/releases/tag/v1.7.0-beta.1) (2024-04-12)
+
+Welcome to the v1.7.0-beta.1 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+* ZFS: 2.2.3
+* Linux Firmware: 20240312
+* DRBD: 9.2.8
+* gvisor: 20240325.0
+* QEMU: 8.2.2
+* Tailscale: 1.62.1
+* nvidia-container-runtime: v1.14.6
+* libnvidia-container: v1.14.6
+* Intel CPU Microcode: 20240312
+
+
+### VMware Tools Daemon
+
+VMware Tools Daemon extension is now available. This extension provides the VMware Tools Daemon for VMware guests.
+See [Talos VMToolsd](https://github.com/siderolabs/talos-vmtoolsd/) for more info.
+
+
+### Xen Guest Agent
+
+Xen guest agent extension is now available. This removes the previous `xe-guest-utilities` extension.
+See [this](https://github.com/xenserver/xe-guest-utilities/issues/118) for more info.
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Artem Chernyshev
+* Anthony ARNAUD
+* Damir Nugmanov
+* Eddie Garcia
+* Fabiano Fidêncio
+* Jacob McSwain
+* Miguel Angel Jaimes Linares
+* Nathan Lee
+* Saiyam Pathak
+* Sven Pfennig
+* Victor Seva
+* j3rwin
+
+### Changes
+<details><summary>37 commits</summary>
+<p>
+
+* [`4e21d26`](https://github.com/siderolabs/extensions/commit/4e21d2648adc0843073449751c8642d177f2ffc1) feat: add spin wasm runtime
+* [`4a7c83d`](https://github.com/siderolabs/extensions/commit/4a7c83d89d57cd338d3c475fdc1cc38789f113b8) release(v1.7.0-beta.0): prepare release
+* [`f1e64c2`](https://github.com/siderolabs/extensions/commit/f1e64c2b1dc327b76c98b06594f139d5e96297b2) chore: update Go to 1.22.2
+* [`eb36dc5`](https://github.com/siderolabs/extensions/commit/eb36dc50c3abe9119eb0f31a52959df1f14876ac) fix: vmtoolsd extension name
+* [`eb79cf8`](https://github.com/siderolabs/extensions/commit/eb79cf81c21e8da29c3c82334a7f1ee1a6701837) chore: bump dependencies
+* [`ee6d6e4`](https://github.com/siderolabs/extensions/commit/ee6d6e403987c60204d945413d0a7833d6c78608) feat: add talos-vmtoolsd extension
+* [`9d4f24f`](https://github.com/siderolabs/extensions/commit/9d4f24f9e7bfed35e523bd88de4cd14207c45d07) feat: update Intel CPU ucode to 20240312
+* [`0638039`](https://github.com/siderolabs/extensions/commit/0638039ba39dab2b8faa9638cf247a865947baf9) feat: re-enable drbd
+* [`d44b563`](https://github.com/siderolabs/extensions/commit/d44b56387312ae5aa8c1d79bfe581b3f6aecbe8d) release(v1.7.0-alpha.1): prepare release
+* [`1560ee6`](https://github.com/siderolabs/extensions/commit/1560ee6f46e88c701db478ba23f718a9c8352bd1) chore: drop Drone requests for resources
+* [`1459bc7`](https://github.com/siderolabs/extensions/commit/1459bc77271f5b0cc3cd90ec6c995fd1fd914be8) feat: update dependencies
+* [`e5488bd`](https://github.com/siderolabs/extensions/commit/e5488bdcd36068d9a91be060ecdcbb78ca17d5bf) feat: add the new rust-based xen-guest-agent as extension
+* [`ee6071c`](https://github.com/siderolabs/extensions/commit/ee6071ca7c8c9f38c3faacd872099d029ff6b87b) fix: glib build
+* [`ba40f6e`](https://github.com/siderolabs/extensions/commit/ba40f6e50846def5b0620f562fc48eb111894389) feat: update Go to 1.22.1, update releases
+* [`884722f`](https://github.com/siderolabs/extensions/commit/884722fdd2f2169e7ebe0e6bbad2dacb96826946) test: add gvisor-debug extension
+* [`0cf50cd`](https://github.com/siderolabs/extensions/commit/0cf50cdf429d4f65c07034c4e355e49076f7eaf0) feat: update gvisor to 20240212.0
+* [`5cb79a9`](https://github.com/siderolabs/extensions/commit/5cb79a9c29faa28b46770c692b54c01c78ec247d) feat: update pkgs, re-enable ZFS
+* [`ab5f8d9`](https://github.com/siderolabs/extensions/commit/ab5f8d95c770c8dc6fe23af138d1b646ea4745f5) feat: add mdmon to mdadm extension
+* [`9cdf805`](https://github.com/siderolabs/extensions/commit/9cdf805a5d3c5c0431a2db6f0515fe9744808232) chore: bump dependencies
+* [`ec1cf8c`](https://github.com/siderolabs/extensions/commit/ec1cf8c9579b6a869a6a47e574d985233379f1d5) feat: add kata-containers extension
+* [`97e59f8`](https://github.com/siderolabs/extensions/commit/97e59f833b77c0465460d7f5baf87359940cdf79) feat: realtek firmware
+* [`c677b87`](https://github.com/siderolabs/extensions/commit/c677b87c58a5768fd3e294b8c4efe9a6f51ee6f3) feat: use `ExtensionServiceConfig` document
+* [`fbaefd5`](https://github.com/siderolabs/extensions/commit/fbaefd573c86799d1053bb50bfb8e13a4ea0fb80) feat: add wasm runtime
+* [`cde1e75`](https://github.com/siderolabs/extensions/commit/cde1e7529461237eddacd67f5b3c43795dc4cf92) release(v1.7.0-alpha.0): prepare release
+* [`799a340`](https://github.com/siderolabs/extensions/commit/799a3403eab2e28baed1e44063c1851d72215eee) fix: set `DATABASE_PATH` for fabricmanager
+* [`4a93d56`](https://github.com/siderolabs/extensions/commit/4a93d56ec714b518f871c735763e7b2c5486b04b) chore: adjust extension versions (tags) to drop Talos version
+* [`66a1265`](https://github.com/siderolabs/extensions/commit/66a12656b2f08013d243c4e7f002faef341f73aa) feat: update extensions for Linux 6.6.x
+* [`0273100`](https://github.com/siderolabs/extensions/commit/0273100f77efb8263cbffa8dfa6491b7edadd7dc) fix: allow to use custom PKGS_PREFIX
+* [`805b20f`](https://github.com/siderolabs/extensions/commit/805b20fee819086bc13c409c8ce6d7f8e239eec8) fix: update SHAs for util-linux
+* [`056e5a8`](https://github.com/siderolabs/extensions/commit/056e5a831abfa2d14b90255df5b51b9ed40a5d07) chore: bump dependencies
+* [`5a97a46`](https://github.com/siderolabs/extensions/commit/5a97a46e24342ac7453c41578904e9c94a594da5) feat: usb video class (webcam) extension
+* [`411dbc2`](https://github.com/siderolabs/extensions/commit/411dbc23f4a7251dd8be939396a718399fe83f8f) fix: qemu-guest-agent not starting in maintenance mode
+* [`57503cc`](https://github.com/siderolabs/extensions/commit/57503ccd3bbba510401dbde67340b71eee0adfee) feat: generate extensions descriptions file as part of extensions image
+* [`3104df1`](https://github.com/siderolabs/extensions/commit/3104df1f68fc5edc88ff30a64e7f9258fae9ef64) feat: generate a single extensions information file for all extensions
+* [`32f106f`](https://github.com/siderolabs/extensions/commit/32f106f851278365320012eabacb6d6386833494) fix: zfs extension
+* [`7ba3b3a`](https://github.com/siderolabs/extensions/commit/7ba3b3a8b5c755aa3936804dc6d04d5173f5a115) feat: extension providing QLogic firmware
+* [`622ec82`](https://github.com/siderolabs/extensions/commit/622ec82db2121ea353d7bd88084e29883d446b52) chore: pull in latest pkgs
+</p>
+</details>
+
+### Changes since v1.7.0-beta.0
+<details><summary>1 commit</summary>
+<p>
+
+* [`4e21d26`](https://github.com/siderolabs/extensions/commit/4e21d2648adc0843073449751c8642d177f2ffc1) feat: add spin wasm runtime
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.6.0](https://github.com/siderolabs/extensions/releases/tag/v1.6.0)
+
 ## [Talos System Extensions 1.7.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.7.0-beta.0) (2024-04-04)
 
 Welcome to the v1.7.0-beta.0 release of Talos System Extensions!  
