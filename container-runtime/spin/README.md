@@ -1,4 +1,4 @@
-# WasmEdge extension
+# Spin extension
 
 ## Installation
 
