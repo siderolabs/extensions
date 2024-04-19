@@ -8,7 +8,7 @@ match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 # previous release
 previous = "v1.6.0"
 
-pre_release = true
+pre_release = false
 
 preface = """\
 See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
@@ -34,7 +34,7 @@ See [Talos VMToolsd](https://github.com/siderolabs/talos-vmtoolsd/) for more inf
         title = "Component Updates"
         description = """\
 * ZFS: 2.2.3
-* Linux Firmware: 20240312
+* Linux Firmware: 20240410
 * DRBD: 9.2.8
 * gvisor: 20240325.0
 * QEMU: 8.2.2
