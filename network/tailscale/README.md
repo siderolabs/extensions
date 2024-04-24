@@ -21,11 +21,18 @@ environment:
   - TS_AUTHKEY=<your auth key>
 ```
 
+Then apply the patch to your node's MachineConfigs
 ```bash
-> talosctl apply -n node myconfig.yaml
-> talosctl upgrade -n node
+talosctl patch mc -p @tailscale-config.yaml
 ```
 
+You will then be able to verify that it is in place with the following command
+```bash
+talosctl get extensionserviceconfigs
+
+NODE          NAMESPACE   TYPE                     ID           VERSION
+mynode   runtime     ExtensionServiceConfig   tailscale   1
+```
 ## Configuration
 
 This extension runs containerboot https://pkg.go.dev/tailscale.com@v1.40.1/cmd/containerboot

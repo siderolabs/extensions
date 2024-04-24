@@ -24,6 +24,19 @@ configFiles:
     mountPath: /usr/local/etc/nut/upsmon.conf
 ```
 
+Then apply the patch to your node's MachineConfigs
+```bash
+talosctl patch mc -p @nut-config.yaml
+```
+
+You will then be able to verify that it is in place with the following command
+```bash
+talosctl get extensionserviceconfigs
+
+NODE          NAMESPACE   TYPE                     ID           VERSION
+mynode   runtime     ExtensionServiceConfig   nut-client   1
+```
+
 ## Testing
 
 Confirm extension service is running
