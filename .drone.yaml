@@ -9,13 +9,15 @@ steps:
     commands:
       - git fetch --tags
       - install-ci-key
-      - setup-buildx-amd64-arm64
+      - setup-ci
     environment:
       SSH_KEY:
         from_secret: ssh_key
       DOCKER_CLI_EXPERIMENTAL: enabled
     volumes:
       - name: outer-docker-socket
+        path: /var/outer-run
+      - name: docker-socket
         path: /var/run
       - name: ssh
         path: /root/.ssh
@@ -36,7 +38,7 @@ steps:
         from_secret: 'az_tenant'
     commands:
       - az login --service-principal -u "$${AZURE_STORAGE_USER}" -p "$${AZURE_STORAGE_PASS}" --tenant "$${AZURE_TENANT}"
-      - make all extensions-metadata PUSH=true
+      - make all extensions-metadata PUSH=true PLATFORM=linux/amd64
       - az storage blob upload --overwrite -f _out/extensions-metadata -n extensions-metadata -c "$${BUCKET_PATH}"
     when:
       event:
@@ -45,6 +47,8 @@ steps:
         - e2e-talos
     volumes:
       - name: outer-docker-socket
+        path: /var/outer-run
+      - name: docker-socket
         path: /var/run
       - name: ssh
         path: /root/.ssh
@@ -67,6 +71,8 @@ services:
   volumes:
   - name: docker-socket
     path: /var/run
+  - name: outer-docker-socket
+    path: /var/outer-run
   - name: buildx
     path: /root/.docker/buildx
   - name: ssh
