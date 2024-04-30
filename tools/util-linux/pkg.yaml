@@ -27,6 +27,8 @@ steps:
             --enable-libmount \
             --enable-libblkid \
             --enable-fstrim \
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     build:
       - |
         cd build
