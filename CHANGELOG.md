@@ -1,3 +1,40 @@
+## [Talos System Extensions 1.8.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.8.0-alpha.0) (2024-05-01)
+
+Welcome to the v1.8.0-alpha.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Andrey Smirnov
+* Kingdon Barrett
+* Mathieu Dallaire
+* Noel Georgi
+* Sven Pfennig
+
+### Changes
+<details><summary>6 commits</summary>
+<p>
+
+* [`882b4ac`](https://github.com/siderolabs/extensions/commit/882b4ac9f59d0daf4e5bbd5d15ae80861a778de3) fix: version in util-linux manifest
+* [`4df073a`](https://github.com/siderolabs/extensions/commit/4df073ab7f5cc5d037a466e048144b57d655e408) chore(ci): only build amd64 for extensions e2e
+* [`69fe96c`](https://github.com/siderolabs/extensions/commit/69fe96ccc330ac84bcbc265a4a95bd35cfe0df2a) docs: improve ExtensionServiceConfig docs
+* [`8672c3b`](https://github.com/siderolabs/extensions/commit/8672c3baf51f36a9e796b0532db0f1159847cf4d) chore: update pkgs version to the latest
+* [`76d3797`](https://github.com/siderolabs/extensions/commit/76d3797fedad56cbe1c0a9ba85328ac9f545ce35) docs: update Spin README.md
+* [`213ef32`](https://github.com/siderolabs/extensions/commit/213ef326c12bcf0a97f8fd29caa46ff40c96a310) feat: add spin wasm runtime
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.7.0](https://github.com/siderolabs/extensions/releases/tag/v1.7.0)
+
 ## [Talos System Extensions 1.7.0-alpha.1](https://github.com/siderolabs/extensions/releases/tag/v1.7.0-alpha.1) (2024-03-14)
 
 Welcome to the v1.7.0-alpha.1 release of Talos System Extensions!  

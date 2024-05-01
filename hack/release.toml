@@ -6,43 +6,15 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.6.0"
+previous = "v1.7.0"
 
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
-
-    [notes.xen]
-        title = "Xen Guest Agent"
-        description = """\
-Xen guest agent extension is now available. This removes the previous `xe-guest-utilities` extension.
-See [this](https://github.com/xenserver/xe-guest-utilities/issues/118) for more info.
-"""
-
-    [notes.vmtoolsd]
-        title = "VMware Tools Daemon"
-        description = """\
-VMware Tools Daemon extension is now available. This extension provides the VMware Tools Daemon for VMware guests.
-See [Talos VMToolsd](https://github.com/siderolabs/talos-vmtoolsd/) for more info.
-"""
-
-    [notes.updates]
-        title = "Component Updates"
-        description = """\
-* ZFS: 2.2.3
-* Linux Firmware: 20240312
-* DRBD: 9.2.8
-* gvisor: 20240325.0
-* QEMU: 8.2.2
-* Tailscale: 1.62.1
-* nvidia-container-runtime: v1.14.6
-* libnvidia-container: v1.14.6
-* Intel CPU Microcode: 20240312
-"""
 
 
 [make_deps]
