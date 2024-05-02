@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-04-02T10:25:42Z by kres latest.
+# Generated on 2024-05-02T15:06:54Z by kres d15226e.
 
 name: default
 concurrency:
@@ -47,6 +47,7 @@ jobs:
         run: |
           git fetch --prune --unshallow
       - name: Set up Docker Buildx
+        id: setup-buildx
         uses: docker/setup-buildx-action@v3
         with:
           append: |
@@ -129,6 +130,7 @@ jobs:
         run: |
           git fetch --prune --unshallow
       - name: Set up Docker Buildx
+        id: setup-buildx
         uses: docker/setup-buildx-action@v3
         with:
           append: |
