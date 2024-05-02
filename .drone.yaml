@@ -6,6 +6,7 @@ type: kubernetes
 steps:
   - name: setup-ci
     image: autonomy/build-container:latest
+    pull: always
     commands:
       - git fetch --tags
       - install-ci-key
