@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-04-30T16:35:59Z by kres d15226e.
+# Generated on 2024-05-16T14:34:47Z by kres fe9bc66.
 
 # common variables
 
@@ -11,21 +11,13 @@ BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ARTIFACTS := _out
 IMAGE_TAG ?= $(TAG)
 OPERATING_SYSTEM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
-GOARCH := $(shell uname -m | tr '[:upper:]' '[:lower:]')
-
-ifeq ($(GOARCH),x86_64)
-  GOARCH := amd64
-endif
+GOARCH := $(shell uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')
+SOURCE_DATE_EPOCH := $(shell git log -1 --pretty=%ct)
 REGISTRY ?= ghcr.io
 USERNAME ?= siderolabs
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
 KRES_IMAGE ?= ghcr.io/siderolabs/kres:latest
 CONFORMANCE_IMAGE ?= ghcr.io/siderolabs/conform:latest
-
-# source date epoch of first commit
-
-INITIAL_COMMIT_SHA := $(shell git rev-list --max-parents=0 HEAD)
-SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 # sync bldr image with pkgfile
 
@@ -52,7 +44,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-9-g76bd73c
+PKGS ?= v1.7.0-14-g9caa8be
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -149,12 +141,12 @@ endef
 
 all: $(TARGETS)  ## Builds all targets defined.
 
+$(ARTIFACTS):  ## Creates artifacts directory.
+	@mkdir -p $(ARTIFACTS)
+
 .PHONY: clean
 clean:  ## Cleans up all artifacts.
 	@rm -rf $(ARTIFACTS)
-
-$(ARTIFACTS):  ## Creates artifacts directory.
-	@mkdir -p $(ARTIFACTS)
 
 target-%:  ## Builds the specified target defined in the Pkgfile. The build result will only remain in the build cache.
 	@$(BUILD) --target=$* $(COMMON_ARGS) $(TARGET_ARGS) $(CI_ARGS) .
@@ -232,8 +224,7 @@ help:  ## This help menu.
 	@grep -E '^[a-zA-Z%_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: release-notes
-release-notes:
-	mkdir -p $(ARTIFACTS)
+release-notes: $(ARTIFACTS)
 	@ARTIFACTS=$(ARTIFACTS) ./hack/release.sh $@ $(ARTIFACTS)/RELEASE_NOTES.md $(TAG)
 
 .PHONY: conformance

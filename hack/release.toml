@@ -16,6 +16,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configur
 
 [notes]
 
+[notes.updates]
+    title = "Component Updates"
+    description = """
+ZFS: 2.2.4
+"""
+
 
 
 [make_deps]
