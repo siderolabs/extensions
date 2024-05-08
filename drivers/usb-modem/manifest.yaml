@@ -1,6 +1,6 @@
 version: v1alpha1
 metadata:
-  name: usb-modem
+  name: usb-modem-drivers
   version: "$VERSION"
   author: Sidero Labs
   description: |
