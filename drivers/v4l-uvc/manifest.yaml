@@ -1,6 +1,6 @@
 version: v1alpha1
 metadata:
-  name: v4l-uvc
+  name: v4l-uvc-drivers
   version: "$VERSION"
   author: Jacob McSwain
   description: |
