@@ -1,2 +1,2 @@
 # update when pkgs version is updated
-VERSION: "09385d4-{{ .BUILD_ARG_TAG }}"
+VERSION: "5815ee3-{{ .BUILD_ARG_TAG }}"

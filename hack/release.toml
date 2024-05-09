@@ -20,6 +20,11 @@ See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configur
     title = "Component Updates"
     description = """
 ZFS: 2.2.4
+DRBD: 9.2.9
+gasket: 5815ee3
+Tailscale: 1.64.2
+ecr-credential-provider: 1.30.0
+qemu-guest-agent: 8.2.3
 """
 
 

@@ -17,6 +17,11 @@ steps:
       - |
         tar -xzf mdadm.tar.gz --strip-components=1
       - |
+        patch -p1 < /pkg/patches/lfs64.patch
+        patch -p1 < /pkg/patches/fix-monitor-tv_sec.patch
+        patch -p1 < /pkg/patches/mdadm-include-sysmacros.patch
+        patch -p1 < /pkg/patches/no-werror.patch
+      - |
         patch -p1 < /pkg/patches/exit-gracefully-when-md-device-not-found.patch
         patch -p1 < /pkg/patches/sha1-includes.diff
         patch -p1 < /pkg/patches/strcat-look-for-md-device-in-dev-md.patch
