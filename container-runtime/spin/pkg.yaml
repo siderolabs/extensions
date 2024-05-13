@@ -8,13 +8,13 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/spinkube/containerd-shim-spin/releases/download/{{ .SPIN_VERSION }}/containerd-shim-spin-v2-linux-aarch64.tar.gz
         destination: containerd-shim-spin.tar.gz
-        sha256: b358eb5c933359a999fb0e319d7f113773755c6afa1a4b1c84c1ffd13618844a
-        sha512: 635af2b980ba5bf7f5749138ef910ecd32f607d61846f64706e2f331f9a22beff0fe37f577d17f884e44b1731e064e46c370efbe083177993b0d583c68dbfe40
+        sha256: 73ad89dcfe3b9437a5da5cf549c65afba640a06d9dd98d3f87eb82889e41ad04
+        sha512: b4f18f9929edb16bc65e22f24f25389efd2838457c72856758f256b2b89d8f7ae61637802548436473b485847ad49da2601540f2883c2a954f6916cbd1835bf1
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/spinkube/containerd-shim-spin/releases/download/{{ .SPIN_VERSION }}/containerd-shim-spin-v2-linux-x86_64.tar.gz
         destination: containerd-shim-spin.tar.gz
-        sha256: 71b89c464f7892dd59ec3d082df220b617215ab49faf58165906560d581b0072
-        sha512: a7b2a9c2518cf0f648164230b615f76375f7444547661a8904335467bee12bae0129a81b4ea37a6352f5a9887015b1eedc5adf639d0051283bf6f46ad2cbcfcb
+        sha256: fe792b774f60dc4319ae138e2b5047e6541854f6897820a918f254e5c56e800e
+        sha512: b4e68215c1cde6ab846772a6cc576f2fb9e235e40fcd515fbf1ba878b664ab095c1bf0284ac6fd292019e5d97809d536d4d335636823d2124ff1b0c6e5f54f3d
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
