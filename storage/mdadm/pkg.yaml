@@ -9,22 +9,18 @@ steps:
   - sources:
       - url: http://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-{{ .MDADM_VERSION }}.tar.gz
         destination: mdadm.tar.gz
-        sha256: c83447797cccc772d1c389b1917a2bfda59bd7545480bdccd792b57b310b428e
-        sha512: 112a897c6943d7343f44ffe32a8d7ef11e1f1624f51385c0f1d27458d661202bb378678a3ddc78ed2e24533be234441ea15cf33769345d5709b72b72ad9ec540
+        sha256: 61a1c22477555364dea1862df7c3b4e8b9a53ee733bad320a45fda27dd0ed44f
+        sha512: a77af2b371ed27b7bd89b7991302282f0fc77999eb93d7959446fc4b1c28388582d08ff0abfc470a9f9a8c8036acb0158edc44d9a8d406f807ca28111bf74459
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
         tar -xzf mdadm.tar.gz --strip-components=1
       - |
-        patch -p1 < /pkg/patches/lfs64.patch
-        patch -p1 < /pkg/patches/fix-monitor-tv_sec.patch
         patch -p1 < /pkg/patches/mdadm-include-sysmacros.patch
         patch -p1 < /pkg/patches/no-werror.patch
-      - |
+        patch -p1 < /pkg/patches/musl-125.patch
         patch -p1 < /pkg/patches/exit-gracefully-when-md-device-not-found.patch
-        patch -p1 < /pkg/patches/sha1-includes.diff
-        patch -p1 < /pkg/patches/strcat-look-for-md-device-in-dev-md.patch
     build:
       - |
         mkdir -p /run/mdadm

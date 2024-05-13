@@ -25,6 +25,7 @@ gasket: 5815ee3
 Tailscale: 1.64.2
 ecr-credential-provider: 1.30.0
 qemu-guest-agent: 8.2.3
+mdadm: 4.3
 """
 
 
