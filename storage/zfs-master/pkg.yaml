@@ -1,0 +1,27 @@
+name: zfs-master
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+# The pkgs version for a particular release of Talos as defined in
+# https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/zfs-pkg:{{ .BUILD_ARG_PKGS }}"
+  - stage: libtirpc-zfs
+  - stage: zlib-zfs
+  - stage: zfs-tools
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+  - install:
+      - |
+        mkdir -p /rootfs/lib/modules /rootfs/usr/local/lib/containers/zpool-importer
+
+        cp -R /lib/modules/* /rootfs/lib/modules
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/zpool-importer.yaml
+    to: /rootfs/usr/local/etc/containers/zpool-importer.yaml

@@ -13,11 +13,14 @@ IMAGE_TAG ?= $(TAG)
 OPERATING_SYSTEM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 GOARCH := $(shell uname -m | tr '[:upper:]' '[:lower:]')
 
+UID ?= $(shell id -u)
+GID ?= $(shell id -g)
+
 ifeq ($(GOARCH),x86_64)
   GOARCH := amd64
 endif
 REGISTRY ?= ghcr.io
-USERNAME ?= siderolabs
+USERNAME ?= sergeybataev
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
 KRES_IMAGE ?= ghcr.io/siderolabs/kres:latest
 CONFORMANCE_IMAGE ?= ghcr.io/siderolabs/conform:latest
@@ -31,7 +34,7 @@ SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 BLDR_RELEASE := v0.3.0
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
-BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
+BLDR := docker run --rm --user $(UID):$(GID) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
 # docker build settings
 
@@ -57,45 +60,46 @@ PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
 
-TARGETS = amdgpu-firmware
-TARGETS += amd-ucode
-TARGETS += binfmt-misc
-TARGETS += bnx2-bnx2x
-TARGETS += btrfs
-TARGETS += chelsio-drivers
-TARGETS += chelsio-firmware
-TARGETS += drbd
-TARGETS += ecr-credential-provider
-TARGETS += fuse3
-TARGETS += gasket-driver
-TARGETS += gvisor
-TARGETS += gvisor-debug
-TARGETS += hello-world-service
-TARGETS += i915-ucode
-TARGETS += intel-ice-firmware
-TARGETS += intel-ucode
-TARGETS += iscsi-tools
-TARGETS += kata-containers
-TARGETS += mdadm
-TARGETS += nut-client
-TARGETS += nvidia-container-toolkit
-TARGETS += nvidia-fabricmanager
-TARGETS += nvidia-open-gpu-kernel-modules
-TARGETS += qemu-guest-agent
-TARGETS += qlogic-firmware
-TARGETS += realtek-firmware
-TARGETS += spin
-TARGETS += stargz-snapshotter
-TARGETS += tailscale
-TARGETS += thunderbolt
-TARGETS += usb-modem-drivers
-TARGETS += util-linux-tools
-TARGETS += v4l-uvc-drivers
-TARGETS += vmtoolsd-guest-agent
-TARGETS += wasmedge
-TARGETS += xen-guest-agent
-TARGETS += zfs
-NONFREE_TARGETS = nonfree-kmod-nvidia
+# TARGETS = amdgpu-firmware
+# TARGETS += amd-ucode
+# TARGETS += binfmt-misc
+# TARGETS += bnx2-bnx2x
+# TARGETS += btrfs
+# TARGETS += chelsio-drivers
+# TARGETS += chelsio-firmware
+# TARGETS += drbd
+# TARGETS += ecr-credential-provider
+# TARGETS += fuse3
+# TARGETS += gasket-driver
+# TARGETS += gvisor
+# TARGETS += gvisor-debug
+# TARGETS += hello-world-service
+# TARGETS += i915-ucode
+# TARGETS += intel-ice-firmware
+# TARGETS += intel-ucode
+# TARGETS += iscsi-tools
+# TARGETS += kata-containers
+# TARGETS += mdadm
+# TARGETS += nut-client
+# TARGETS += nvidia-container-toolkit
+# TARGETS += nvidia-fabricmanager
+# TARGETS += nvidia-open-gpu-kernel-modules
+# TARGETS += qemu-guest-agent
+# TARGETS += qlogic-firmware
+# TARGETS += realtek-firmware
+# TARGETS += spin
+# TARGETS += stargz-snapshotter
+# TARGETS += tailscale
+# TARGETS += thunderbolt
+# TARGETS += usb-modem-drivers
+# TARGETS += util-linux-tools
+# TARGETS += v4l-uvc-drivers
+# TARGETS += vmtoolsd-guest-agent
+# TARGETS += wasmedge
+# TARGETS += xen-guest-agent
+TARGETS = zfs
+# TARGETS = zfs-master
+# NONFREE_TARGETS = nonfree-kmod-nvidia
 
 # help menu
 

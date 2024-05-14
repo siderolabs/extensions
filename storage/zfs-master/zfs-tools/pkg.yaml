@@ -1,0 +1,50 @@
+name: zfs-tools-master
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - stage: libtirpc-zfs
+    from: /rootfs
+  - stage: zlib-zfs
+    from: /rootfs
+steps:
+  - sources:
+      - url: https://github.com/openzfs/zfs
+        destination: zfs.tar.gz
+        sha256: 9790905f7683d41759418e1ef3432828c31116654ff040e91356ff1c21c31ec0
+        sha512: 1d17e30573d594fb5c9ea77cde104616dca362fed7530296816d1b55173594f66170fcfb23ab57c27074f85b79d3eb557b4ee9a1c420e507b2434a7902d8dcc1
+    env:
+      ARCH: {{ if eq .ARCH "aarch64"}}arm64{{ else if eq .ARCH "x86_64" }}x86_64{{ else }}unsupported{{ end }}
+    prepare:
+      - |
+        git clone https://github.com/openzfs/zfs .
+        git config --global --add safe.directory $(pwd)
+        git log -n 5 --oneline
+        git reset --hard fcbd92b
+    build:
+      - |
+        ./autogen.sh
+        ./configure \
+          --prefix=/usr/local \
+          --with-udevdir=/usr/local/sbin \
+          --with-udevruledir=/usr/etc/udev/rules.d \
+          --with-config=user \
+          --disable-code-coverage \
+          --disable--sysvinit \
+          --disable-systemd
+
+        make -j $(nproc)
+    install:
+      - |
+        make install-exec DESTDIR=/rootfs
+        make install-data DESTDIR=/rootfs
+        rm -rf /rootfs/{etc,sbin,usr/{lib,local/share,share}}
+        # remove the 69-vdev.rules, since it depends on `vdev_id` which is a shell script
+        rm -f /rootfs/usr/etc/udev/rules.d/69-vdev.rules
+        # if this file is present creating a vdev tries to executes it
+        # since talos doesn't have a shell, this would fail
+        # the default shipped file is a no-op, so safe to remove.
+        rm -f /rootfs/usr/local/libexec/zfs/zfs_prepare_disk
+finalize:
+  - from: /rootfs
+    to: /rootfs

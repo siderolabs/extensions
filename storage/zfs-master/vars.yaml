@@ -1,0 +1,6 @@
+# the first part is the driver version and the second the talos version for which the module is built against
+# 41ae864b69991f7e13d5171f54a42c721b297233
+# May 10, 2024 master branch
+COMMIT: 41ae864b69991f7e13d5171f54a42c721b297233
+SHORT_COMMIT: 41ae864b6
+VERSION: "41ae864b6-{{ .BUILD_ARG_TAG }}"

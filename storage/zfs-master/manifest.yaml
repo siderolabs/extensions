@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: zfs-master
+  version: "$VERSION"
+  author: forked from Andrei Kvapil, Enix
+  description: |
+    This system extension provides kernel module driver for ZFS built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.6.0"

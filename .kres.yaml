@@ -2,47 +2,7 @@
 kind: pkgfile.Build
 spec:
   targets:
-    - amdgpu-firmware
-    - amd-ucode
-    - binfmt-misc
-    - bnx2-bnx2x
-    - btrfs
-    - chelsio-drivers
-    - chelsio-firmware
-    - drbd
-    - ecr-credential-provider
-    - fuse3
-    - gasket-driver
-    - gvisor
-    - gvisor-debug
-    - hello-world-service
-    - i915-ucode
-    - intel-ice-firmware
-    - intel-ucode
-    - iscsi-tools
-    - kata-containers
-    - mdadm
-    - nut-client
-    - nvidia-container-toolkit
-    - nvidia-fabricmanager
-    - nvidia-open-gpu-kernel-modules
-    - qemu-guest-agent
-    - qlogic-firmware
-    - realtek-firmware
-    - spin
-    - stargz-snapshotter
-    - tailscale
-    - thunderbolt
-    - usb-modem-drivers
-    - util-linux-tools
-    - v4l-uvc-drivers
-    - vmtoolsd-guest-agent
-    - wasmedge
-    - xen-guest-agent
     - zfs
-  additionalTargets:
-    nonfree:
-      - nonfree-kmod-nvidia
   reproducibleTargetName: reproducibility
   extraBuildArgs:
     - TAG
