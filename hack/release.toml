@@ -26,6 +26,7 @@ Tailscale: 1.64.2
 ecr-credential-provider: 1.30.0
 qemu-guest-agent: 8.2.3
 mdadm: 4.3
+Intel microcode: 20240514
 """
 
 
