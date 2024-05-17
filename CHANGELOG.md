@@ -1,3 +1,39 @@
+## [Talos System Extensions 1.7.2](https://github.com/siderolabs/extensions/releases/tag/v1.7.2) (2024-05-17)
+
+Welcome to the v1.7.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ZFS: 2.2.4
+Intel microcode: 20240514
+
+
+### Contributors
+
+* Andrey Smirnov
+* Bernard Gütermann
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`8b80caf`](https://github.com/siderolabs/extensions/commit/8b80caf75bb5729a80beda56a7c1ae6ad37fba40) feat: update Intel u-code to 20240514
+* [`ab465a5`](https://github.com/siderolabs/extensions/commit/ab465a56ba18559b9bc4a063d68ca93800cc0f3f) fix: extension name in manifests
+* [`4999171`](https://github.com/siderolabs/extensions/commit/499917104c9ed3eb974ea31bd5a5270eaab7f4fb) feat: update zfs extension to v2.2.4
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.7.1](https://github.com/siderolabs/extensions/releases/tag/v1.7.1)
+
 ## [Talos System Extensions 1.7.1](https://github.com/siderolabs/extensions/releases/tag/v1.7.1) (2024-05-01)
 
 Welcome to the v1.7.1 release of Talos System Extensions!
