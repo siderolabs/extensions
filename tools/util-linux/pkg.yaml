@@ -26,6 +26,7 @@ steps:
             --disable-all-programs \
             --enable-libmount \
             --enable-libblkid \
+            --enable-nsenter \
             --enable-fstrim \
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml

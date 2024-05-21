@@ -120,9 +120,9 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 #### Tools
 
-| Name                                  | Description                        | Version Format     |
-| ------------------------------------- | ---------------------------------- | ------------------ |
-| [util-linux-tools](tools/util-linux/) | Util Linux tools (only fstrim now) | `upstream version` |
+| Name                                  | Description                               | Version Format     |
+| ------------------------------------- | ----------------------------------------- | ------------------ |
+| [util-linux-tools](tools/util-linux/) | Util Linux tools (`fstrim` and `nsenter`) | `upstream version` |
 
 ## Building Extensions
 
