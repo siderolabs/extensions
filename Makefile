@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-05-13T12:53:55Z by kres ce88e1c.
+# Generated on 2024-05-22T11:43:14Z by kres 04ecdaf.
 
 # common variables
 
@@ -11,11 +11,7 @@ BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ARTIFACTS := _out
 IMAGE_TAG ?= $(TAG)
 OPERATING_SYSTEM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
-GOARCH := $(shell uname -m | tr '[:upper:]' '[:lower:]')
-
-ifeq ($(GOARCH),x86_64)
-  GOARCH := amd64
-endif
+GOARCH := $(shell uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')
 REGISTRY ?= ghcr.io
 USERNAME ?= siderolabs
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
@@ -52,7 +48,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.8.0-alpha.0-15-gf9559de
+PKGS ?= v1.8.0-alpha.0-19-gf350879
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -149,12 +145,12 @@ endef
 
 all: $(TARGETS)  ## Builds all targets defined.
 
+$(ARTIFACTS):  ## Creates artifacts directory.
+	@mkdir -p $(ARTIFACTS)
+
 .PHONY: clean
 clean:  ## Cleans up all artifacts.
 	@rm -rf $(ARTIFACTS)
-
-$(ARTIFACTS):  ## Creates artifacts directory.
-	@mkdir -p $(ARTIFACTS)
 
 target-%:  ## Builds the specified target defined in the Pkgfile. The build result will only remain in the build cache.
 	@$(BUILD) --target=$* $(COMMON_ARGS) $(TARGET_ARGS) $(CI_ARGS) .
@@ -232,8 +228,7 @@ help:  ## This help menu.
 	@grep -E '^[a-zA-Z%_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: release-notes
-release-notes:
-	mkdir -p $(ARTIFACTS)
+release-notes: $(ARTIFACTS)
 	@ARTIFACTS=$(ARTIFACTS) ./hack/release.sh $@ $(ARTIFACTS)/RELEASE_NOTES.md $(TAG)
 
 .PHONY: conformance
