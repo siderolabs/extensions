@@ -38,6 +38,12 @@ steps:
 
         cp ./out/ctr-remote /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
         chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
 finalize:
   - from: /rootfs
     to: /rootfs

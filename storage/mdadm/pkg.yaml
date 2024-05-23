@@ -35,6 +35,12 @@ steps:
         cp mdmon /rootfs/usr/local/sbin/mdmon
         cp /pkg/files/udev-md-raid-arrays.rules   /rootfs/usr/etc/udev/rules.d/63-md-raid-arrays.rules
         cp /pkg/files/udev-md-raid-assembly.rules /rootfs/usr/etc/udev/rules.d/64-md-raid-assembly.rules
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
 finalize:
   - from: /rootfs
     to: /rootfs

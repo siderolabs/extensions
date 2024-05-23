@@ -7,4 +7,4 @@ PCRE2_VERSION: 10.42
 # renovate: datasource=git-tags depName=https://gitlab.com/xen-project/xen-guest-agent.git
 XEN_GUEST_AGENT_VERSION: 0.4.0
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
-TALOS_VMTOOLSD_VERSION: 0.5.0
+TALOS_VMTOOLSD_VERSION: v0.5.1

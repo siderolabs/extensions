@@ -1,6 +1,10 @@
 name: xen-guest-agent
 variant: alpine
 shell: /bin/sh
+dependencies:
+  - stage: base
+    from: /
+    to: /base-rootfs
 install:
   - cargo
   - xen-dev
@@ -28,6 +32,12 @@ steps:
         containerRoot=/rootfs/usr/local/lib/containers/xen-guest-agent
         mkdir -p "$containerRoot"
         mv target/{{ .ARCH }}-alpine-linux-musl/release/xen-guest-agent "$containerRoot/xen-guest-agent"
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /base-rootfs/extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
 finalize:
   - from: /rootfs
     to: /rootfs

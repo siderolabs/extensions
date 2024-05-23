@@ -1,9 +1,14 @@
 name: vmtoolsd-guest-agent
 variant: scratch
 dependencies:
+  - stage: base
   - image: {{ .BUILD_ARG_PKGS_PREFIX }}/talos-vmtoolsd:{{ .TALOS_VMTOOLSD_VERSION }}
     from: /
     to: /rootfs
+steps:
+  - test:
+      - |
+        /extensions-validator validate --rootfs=/rootfs --pkg-name="${PKG_NAME}"
 finalize:
   - from: /rootfs
     to: /
