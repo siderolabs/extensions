@@ -21,3 +21,5 @@ steps:
 finalize:
   - from: /pkg/manifest.yaml
     to: /
+  - from: /rootfs
+    to: /rootfs
