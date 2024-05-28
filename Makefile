@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-05-16T14:34:47Z by kres fe9bc66.
+# Generated on 2024-05-28T13:37:31Z by kres a914cae.
 
 # common variables
 
@@ -12,16 +12,20 @@ ARTIFACTS := _out
 IMAGE_TAG ?= $(TAG)
 OPERATING_SYSTEM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 GOARCH := $(shell uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')
-SOURCE_DATE_EPOCH := $(shell git log -1 --pretty=%ct)
 REGISTRY ?= ghcr.io
 USERNAME ?= siderolabs
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
 KRES_IMAGE ?= ghcr.io/siderolabs/kres:latest
 CONFORMANCE_IMAGE ?= ghcr.io/siderolabs/conform:latest
 
+# source date epoch of first commit
+
+INITIAL_COMMIT_SHA := $(shell git rev-list --max-parents=0 HEAD)
+SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
+
 # sync bldr image with pkgfile
 
-BLDR_RELEASE := v0.3.0
+BLDR_RELEASE := v0.3.1
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
 BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
@@ -44,7 +48,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.7.0-14-g9caa8be
+PKGS ?= v1.7.0-17-ga201d27
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
