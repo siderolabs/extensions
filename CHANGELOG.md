@@ -1,3 +1,37 @@
+## [Talos System Extensions 1.7.3](https://github.com/siderolabs/extensions/releases/tag/v1.7.3) (2024-05-29)
+
+Welcome to the v1.7.3 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux firmware: 20240513
+
+
+### Contributors
+
+* Andrey Smirnov
+* Mark S
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`e292a1b`](https://github.com/siderolabs/extensions/commit/e292a1b7c2463af76b40200bf02bdeb2f086bf53) feat: include nsenter when building util-linux binaries
+* [`698b2b0`](https://github.com/siderolabs/extensions/commit/698b2b0f4a5328a9864e90cb357f9b570e288b63) feat: update Linux firmware to 20240513
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.7.2](https://github.com/siderolabs/extensions/releases/tag/v1.7.2)
+
 ## [Talos System Extensions 1.7.2](https://github.com/siderolabs/extensions/releases/tag/v1.7.2) (2024-05-17)
 
 Welcome to the v1.7.2 release of Talos System Extensions!
