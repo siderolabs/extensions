@@ -20,6 +20,8 @@ steps:
         tar -xf zfs.tar.gz --strip-components=1
     build:
       - |
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/libtirpc/lib/pkgconfig
+
         ./configure \
           --prefix=/usr/local \
           --with-udevdir=/usr/local/sbin \
