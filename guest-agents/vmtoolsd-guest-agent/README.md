@@ -1,6 +1,6 @@
-# talos-vmtoolsd
+# vmtoolsd-guest-agent
 
-Adds talos-vmtoolsd as a system extension.
+Adds [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd) as a system extension.
 
 ## Installation
 
