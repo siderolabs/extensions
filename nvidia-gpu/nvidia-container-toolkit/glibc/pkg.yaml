@@ -11,13 +11,13 @@ dependencies:
   - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
   - sources:
-      - url: https://ftpmirror.gnu.org/libc/glibc-{{ .GLIBC_VERSION }}.tar.gz
-        destination: glibc.tar.gz
-        sha256: 97f84f3b7588cd54093a6f6389b0c1a81e70d99708d74963a2e3eab7c7dc942d
-        sha512: ba07187610f660236ba4fbff06420f01ce5aa0138c9b5f0ee7ad6a8c2a178bf899a65a097a769d890813e50942c0c9f793ca8a63a2d13bfcef6e21a12486af3a
+      - url: https://src.fedoraproject.org/lookaside/pkgs/glibc/glibc-{{ .GLIBC_VERSION }}.tar.xz/sha512/818f58172a52815b4338ea9f2a69ecaa3335492b9f8f64cbf8afb24c0d737982341968ecd79631cae3d3074ab0ae4bc6056fc4ba3ffe790849dc374835cd57e2/glibc-{{ .GLIBC_VERSION }}.tar.xz
+        destination: glibc.tar.xz
+        sha256: f77bd47cf8170c57365ae7bf86696c118adb3b120d3259c64c502d3dc1e2d926
+        sha512: 818f58172a52815b4338ea9f2a69ecaa3335492b9f8f64cbf8afb24c0d737982341968ecd79631cae3d3074ab0ae4bc6056fc4ba3ffe790849dc374835cd57e2
     prepare:
       - |
-        tar -xzf glibc.tar.gz --strip-components=1
+        tar -xf glibc.tar.xz --strip-components=1
 
         mkdir build
         cd build
