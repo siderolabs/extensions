@@ -19,7 +19,7 @@ steps:
         tar -xf libtirpc.tar.bz2 --strip-components=1
 
         ./configure \
-          --prefix=/usr/local \
+          --prefix=/usr/local/glibc \
           --disable-gssapi
     build:
       - |

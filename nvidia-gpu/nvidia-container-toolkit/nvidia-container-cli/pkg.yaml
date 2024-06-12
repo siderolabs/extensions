@@ -40,7 +40,7 @@ steps:
       WITH_LIBELF: yes
       WITH_TIRPC: no # setting no means we'll use the system libtirpc
       WITH_SECCOMP: yes
-      PKG_CONFIG_PATH: /usr/local/lib/pkgconfig # to find runtime libraries compiled in extensions (libseccomp)
+      PKG_CONFIG_PATH: /usr/local/glibc/lib/pkgconfig # to find runtime libraries compiled in extensions (libseccomp)
       PATH: "/usr/bin:{{ .PATH }}" # bldr doesn't have /usr/bin in PATH
     prepare:
       - |
@@ -50,8 +50,8 @@ steps:
       - |
         cd libnvidia-container
 
-        # LDLIBS=-L/usr/local/lib is set so that libnvidia-container-cli libs which are hardcoded as -llibname and not using pkg-config
-        CPPFLAGS="-I/usr/local/include/tirpc" LDLIBS="-L/usr/local/lib -ltirpc" make
+        # LDLIBS=-L/usr/local/glibc/lib is set so that libnvidia-container-cli libs which are hardcoded as -llibname and not using pkg-config
+        CPPFLAGS="-I/usr/local/glibc/include/tirpc" LDLIBS="-L/usr/local/glibc/lib -ltirpc -lelf -lseccomp" make
     install:
       - |
         mkdir -p /rootfs

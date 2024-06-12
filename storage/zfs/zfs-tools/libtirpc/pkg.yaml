@@ -26,7 +26,7 @@ steps:
         export CFLAGS="${CFLAGS} -I/usr/local/include"
 
         ./configure \
-          --prefix=/usr/local/libtirpc \
+          --prefix=/usr/local \
           --disable-gssapi
     build:
       - |

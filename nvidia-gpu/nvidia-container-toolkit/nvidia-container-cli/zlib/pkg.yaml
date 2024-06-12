@@ -19,7 +19,7 @@ steps:
         cd build
 
         ../configure \
-            --prefix=/usr/local
+            --prefix=/usr/local/glibc
     build:
       - |
         cd build
@@ -29,7 +29,7 @@ steps:
         cd build
         make DESTDIR=/rootfs install
         # we only need the libs and headers, remove everything else
-        find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+        find /rootfs/usr/local/glibc -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
 finalize:
   - from: /rootfs
     to: /rootfs

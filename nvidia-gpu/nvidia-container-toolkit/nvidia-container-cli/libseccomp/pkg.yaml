@@ -21,7 +21,7 @@ steps:
         cd build
 
         ../configure \
-            --prefix=/usr/local
+            --prefix=/usr/local/glibc
     build:
       - |
         cd build

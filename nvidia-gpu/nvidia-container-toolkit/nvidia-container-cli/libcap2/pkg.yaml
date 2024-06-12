@@ -17,7 +17,7 @@ steps:
         tar -xf libcap.tar.xz --strip-components=1
     build:
       - |
-        make prefix=/usr/local lib=lib -j $(nproc)
+        make prefix=/usr/local/glibc lib=lib -j $(nproc)
     install:
       - |
         make DESTDIR=/rootfs prefix=/usr/local lib=lib install

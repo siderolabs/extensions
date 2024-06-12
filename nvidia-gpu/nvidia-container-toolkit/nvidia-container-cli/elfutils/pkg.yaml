@@ -22,8 +22,10 @@ steps:
         mkdir build
         cd build
 
+        export CFLAGS="${CFLAGS} -I/usr/local/glibc/include/ -L/usr/local/glibc/lib"
+
         ../configure \
-            --prefix=/usr/local \
+            --prefix=/usr/local/glibc \
             --with-zstd=no \
             --disable-libdebuginfod \
             --disable-debuginfod \
