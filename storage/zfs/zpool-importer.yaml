@@ -44,13 +44,6 @@ container:
         - rshared
         - rbind
         - rw
-    - source: /proc
-      destination: /proc
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
     - source: /var
       destination: /var
       type: bind

@@ -32,13 +32,6 @@ container:
         - rshared
         - rbind
         - rw
-    - source: /proc
-      destination: /proc
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
     - source: /usr/local/sbin
       destination: /usr/local/sbin
       type: bind
