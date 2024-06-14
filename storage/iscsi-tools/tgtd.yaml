@@ -7,6 +7,8 @@ depends:
        - hostname
        - etcfiles
 container:
+  security:
+    rootfsPropagation: shared
   entrypoint: /usr/local/sbin/tgtd
   args:
     - -f
