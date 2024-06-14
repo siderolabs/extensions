@@ -4,7 +4,10 @@ shell: /toolchain/bin/bash
 dependencies:
   - stage: base
 steps:
-  - build:
+  - cachePaths:
+      - /.cache/go-build
+      - /go/pkg
+    build:
     - |
       export PATH=${PATH}:${TOOLCHAIN}/go/bin
 

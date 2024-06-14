@@ -6,6 +6,9 @@ dependencies:
 steps:
   - env:
       GOPATH: /go
+    cachePaths:
+      - /.cache/go-build
+      - /go/pkg
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml

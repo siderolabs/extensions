@@ -6,7 +6,10 @@ dependencies:
 steps:
   - env:
       GOPATH: /go
-  - sources:
+  - cachePaths:
+      - /.cache/go-build
+      - /go/pkg
+    sources:
       - url: https://github.com/tailscale/tailscale/archive/refs/tags/v{{ .TAILSCALE_VERSION }}.tar.gz
         destination: tailscale.tar.gz
         sha256: e5e46f6b6b716b2c4696dce0b92dc2e36f02b06b7ad9f055042a820ad61b2a47

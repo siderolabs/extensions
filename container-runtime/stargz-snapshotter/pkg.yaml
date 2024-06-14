@@ -11,6 +11,9 @@ steps:
         sha512: 3cc86e690ed63ed48acc3205225400e8fc6f64147e3f7424864e09007feb6ca8168fcc17bf60290519172cc049d6ccf338d4b223ac4e5050f35dee287318ade4
     env:
       GOPATH: /go
+    cachePaths:
+      - /.cache/go-build
+      - /go/pkg
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
