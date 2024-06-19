@@ -1,3 +1,33 @@
+## [Talos System Extensions 1.7.5](https://github.com/siderolabs/extensions/releases/tag/v1.7.5) (2024-06-21)
+
+Welcome to the v1.7.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Noel Georgi
+* Mike Beaumont
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`188089e`](https://github.com/siderolabs/extensions/commit/188089e34888e5344861c9440a10ddada4ccc983) release(v1.7.5): prepare release
+* [`d439bea`](https://github.com/siderolabs/extensions/commit/d439beaf6242975e17a9e39740965d6d1582b111) chore: use fedora mirror for glibc
+* [`327ba56`](https://github.com/siderolabs/extensions/commit/327ba56b869d82f7b4c319073fe108f13d304504) chore: bump tailscale to v1.68.1
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.7.4](https://github.com/siderolabs/extensions/releases/tag/v1.7.4)
+
 ## [Talos System Extensions 1.7.4](https://github.com/siderolabs/extensions/releases/tag/v1.7.4) (2024-05-30)
 
 Welcome to the v1.7.4 release of Talos System Extensions!
