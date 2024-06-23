@@ -7,10 +7,10 @@ See [Installing Extensions](https://github.com/siderolabs/extensions#installing-
 ## Usage
 
 Configure the extension via `ExtensionServiceConfig` document.
-You must replace upsmonHost and upsmonPasswd to match configuration on your nut server.
-See [upsd.users](https://networkupstools.org/docs/man/upsd.users.html) man page for details.
+You must replace `upsmonHost`, `upsmonUser` and `upsmonPasswd` to match configuration on your nut server.
+See [`upsd.users`](https://networkupstools.org/docs/man/upsd.users.html) man page for details.
 
-On Talos SHUTDOWNCMD must be `/sbin/poweroff`
+On Talos, `SHUTDOWNCMD` must be `/sbin/poweroff`.
 
 ```yaml
 ---
@@ -19,27 +19,29 @@ kind: ExtensionServiceConfig
 name: nut-client
 configFiles:
   - content: |-
-        MONITOR ${upsmonHost} 1 remote ${upsmonPasswd} slave
+        MONITOR ${upsmonHost} 1 ${upsmonUser} ${upsmonPass} secondary
         SHUTDOWNCMD "/sbin/poweroff"
     mountPath: /usr/local/etc/nut/upsmon.conf
 ```
 
-Then apply the patch to your node's MachineConfigs
+Then apply the patch to your node's `MachineConfig`:
+
+
 ```bash
-talosctl patch mc -p @nut-config.yaml
+$ talosctl patch mc -p @nut-config.yaml
 ```
 
 You will then be able to verify that it is in place with the following command
-```bash
-talosctl get extensionserviceconfigs
 
-NODE          NAMESPACE   TYPE                     ID           VERSION
+```bash
+$ talosctl get extensionserviceconfigs
+NODE     NAMESPACE   TYPE                     ID           VERSION
 mynode   runtime     ExtensionServiceConfig   nut-client   1
 ```
 
 ## Testing
 
-Confirm extension service is running
+Confirm extension service is running:
 
 ```bash
 $ talosctl service ext-nut-client
@@ -57,12 +59,12 @@ EVENTS   [Running]: Started task ext-nut-client (PID 2263) for container ext-nut
          [Waiting]: Waiting for service "containerd" to be "up", service "cri" to be "up", network (1h0m3s ago)
 ```
 
-**CAUTION** this will power off all connected systems.
-
-Trigger a 'Full System Shutdown' on the nut-server
+Trigger a “Full System Shutdown” on the NUT server:
 
 ```bash
-# upsmon -c fsd
+$ upsmon -c fsd
 ```
 
-all connected upsmon clients should perform a full shutdown and power off.
+**CAUTION** ⚠️ This will power off **all** connected systems.
+
+All connected `upsmon` clients should perform a full shutdown and power off.
