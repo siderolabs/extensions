@@ -32,16 +32,12 @@ steps:
         bash nvidia.run --extract-only
     install:
       - |
-        mkdir -p /rootfs/usr/local \
-          /rootfs/usr/local/lib/containers/nvidia-persistenced \
-          /rootfs/usr/local/etc/containers \
-          /rootfs/usr/etc/udev/rules.d
-
         cd NVIDIA-Linux-*
 
         ./nvidia-installer --silent \
           --opengl-prefix=/rootfs/usr/local \
           --utility-prefix=/rootfs/usr/local \
+          --utility-libdir=glibc/lib \
           --documentation-prefix=/rootfs/usr/local \
           --no-rpms \
           --no-kernel-modules \
@@ -61,12 +57,19 @@ steps:
         cp -r /usr/share/egl/* /rootfs/usr/share/egl
         cp -r /etc/vulkan/* /rootfs/etc/vulkan
 
+        # mv over files from /usr/local/lib -> /usr/local/glibc/lib
+        mv /rootfs/usr/local/lib/* /rootfs/usr/local/glibc/lib/
+
         # copy xorg files
-        mkdir -p /rootfs/usr/local/lib/nvidia/xorg
-        find /usr/lib/xorg/modules -type f -exec cp {} /rootfs/usr/local/lib/nvidia/xorg \;
+        mkdir -p /rootfs/usr/local/glibc/lib/nvidia/xorg
+        find /usr/lib/xorg/modules -type f -exec cp {} /rootfs/usr/local/glibc/lib/nvidia/xorg \;
 
         # run ldconfig to update the cache
         /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs
+
+        mkdir -p /rootfs/usr/local/lib/containers/nvidia-persistenced \
+          /rootfs/usr/local/etc/containers \
+          /rootfs/usr/etc/udev/rules.d
 
         # copy udev rule
         cp /pkg/files/15-nvidia-device.rules /rootfs/usr/etc/udev/rules.d

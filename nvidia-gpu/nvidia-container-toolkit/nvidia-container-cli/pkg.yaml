@@ -51,7 +51,7 @@ steps:
         cd libnvidia-container
 
         # LDLIBS=-L/usr/local/glibc/lib is set so that libnvidia-container-cli libs which are hardcoded as -llibname and not using pkg-config
-        CPPFLAGS="-I/usr/local/glibc/include/tirpc" LDLIBS="-L/usr/local/glibc/lib -ltirpc -lelf -lseccomp" make
+        CPPFLAGS="-I/usr/local/glibc/include/tirpc" LDLIBS="-L/usr/local/glibc/lib -ltirpc -lelf -lseccomp" LDFLAGS='-Wl,--rpath=\$$ORIGIN/../glibc/\$$LIB' make
     install:
       - |
         mkdir -p /rootfs
