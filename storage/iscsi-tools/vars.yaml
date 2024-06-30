@@ -1,5 +1,5 @@
 VERSION: v0.1.4
 # renovate: datasource=github-tags depName=open-iscsi/open-iscsi
-OPEN_ISCSI_VERSION: 2.1.9
+OPEN_ISCSI_VERSION: 2.1.10
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=open-iscsi/open-isns
 OPEN_ISNS_VERSION: 0.102
