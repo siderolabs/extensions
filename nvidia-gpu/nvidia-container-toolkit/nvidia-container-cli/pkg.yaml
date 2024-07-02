@@ -4,7 +4,7 @@ shell: /bin/bash
 install:
   - build-base
   - bash
-  - go~1.20 # ref: https://github.com/NVIDIA/nvidia-container-toolkit/issues/372
+  - go
   - coreutils
   - sed
   - curl
@@ -30,8 +30,8 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .LIBNVIDIA_CONTAINER_VERSION }}/libnvidia-container-{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: 13a626b6fdfe1d98be754af5b80b59a8887dd4250ae199919a7a1ed513e03a3e
-        sha512: c9dd1fcf0534c53259a9f23a07ad89f17933484bea903a89bcb3abd792c3dee1a340f9e7c42047e90969ca8eea7e7c4a5e7dba759a7a5871d2aac4bc01f61ab8
+        sha256: d23984591004c59c33f6f13c8237f1fb84113b8eddb0f9943302df4c3b0cc549
+        sha512: a5a75b0cd29cf7c0484dbd650456c93bb495a0fe5449d6b8c7680af7509be3b9e1f12ab437b56309bfb4b66cfe2868b4adbe882e29b169c7733c0247ecf2489b
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}
