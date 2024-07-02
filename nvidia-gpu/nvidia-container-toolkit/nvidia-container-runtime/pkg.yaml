@@ -4,7 +4,7 @@ shell: /bin/bash
 install:
   - build-base
   - bash
-  - go~1.20 # ref: https://github.com/NVIDIA/nvidia-container-toolkit/issues/372
+  - go
   - patch
 dependencies:
   - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
@@ -12,8 +12,8 @@ steps:
   - sources:
       - url: https://gitlab.com/nvidia/container-toolkit/container-toolkit/-/archive/{{ .CONTAINER_TOOLKIT_VERSION }}/container-toolkit-{{ .CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: container-toolkit.tar.gz
-        sha256: 5284f689b8c55181cf215444dde3c0171cff5edde183f060f1e7e0611c055ce6
-        sha512: 49d87b316db0002d0b79c5f6c31fff78f3e54bf0310c396d7fc8d88b5d9f7ec4bd629547983a25530d9a709b872907c5941892733fef81df99a6764a00f6b229
+        sha256: b006700e31ed1475ed25695770cab10d74fdac55cdb94e66d70468740482fb53
+        sha512: 11ceffddb164194d0f10c60aeec2c1e20c699a6f3cb1887bca8f49496c9fda869c6c65f1f5f8e816467abee43da002fe2922b8e68ba8f6e61d30f635509da5e0
     env:
       GIT_COMMIT: {{ substr 0 7 .CONTAINER_TOOLKIT_REF }} # build is using short sha
     prepare:

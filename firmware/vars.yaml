@@ -1,2 +1,2 @@
 # renovate: datasource=github-releases extractVersion=^microcode-(?<version>.*)$ depName=intel/Intel-Linux-Processor-Microcode-Data-Files
-INTEL_UCODE_VERSION: 20240514
+INTEL_UCODE_VERSION: 20240531

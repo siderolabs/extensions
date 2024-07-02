@@ -8,13 +8,13 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/containerd/runwasi/releases/download/containerd-shim-wasmedge/{{ .WASMEDGE_VERSION }}/containerd-shim-wasmedge-aarch64.tar.gz
         destination: containerd-shim-wasmedge.tar.gz
-        sha256: beeba8ea5484eea8a3f73f67d755a9438507ede8b6d6292b99480b21b4b06b70
-        sha512: a42a219e02943e66fefee210e4d881c7d7e12117da3a7b0fb8139c63846aed2c9db2a60521d3c6f3decc30a7b6335036e5abcf3f13ff2ee67d569f3b7a085ca1
+        sha256: 294928f85d531de639158a0d4558bfacfa4fa242ac476c32e6b677dbf08512d0
+        sha512: 6e7e206102c9ff75ad0cc023d556d1c58b035c18856a7547c398d61d80feef501c42140e9123790ed243e201699dc287e578f1545a2110ce12a2aea93584ff89
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/containerd/runwasi/releases/download/containerd-shim-wasmedge/{{ .WASMEDGE_VERSION }}/containerd-shim-wasmedge-x86_64.tar.gz
         destination: containerd-shim-wasmedge.tar.gz
-        sha256: e1b40eb21fb9d45ffa73a3b345a8dfc0a02e9336239a11cb59bdc3110f730682
-        sha512: d7529d8c449762d29e8186576174dbe55832c18f5e07f2f3085675a7c6369e22f178b13bcc2db4c3560aaa8496956e51f61bd092ee41733359f677f1761874d6
+        sha256: e3cc12ebf485ad39743e8922770446e428fdb201b2c80b2ebc85bb6b2ac6b36f
+        sha512: 908cd3e72376a31dcb71d4eae13bc306bd320a218ec18ded6d31faede4732b978fb3ae96f760952aff90f21adb11557ab66be38d419a099dac028dea69101070
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
