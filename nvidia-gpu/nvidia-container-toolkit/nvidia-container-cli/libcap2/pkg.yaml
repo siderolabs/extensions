@@ -10,8 +10,8 @@ steps:
   - sources:
       - url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .LIBCAP_VERSION }}.tar.xz
         destination: libcap.tar.xz
-        sha256: f311f8f3dad84699d0566d1d6f7ec943a9298b28f714cae3c931dfd57492d7eb
-        sha512: 647c307dc451517da9d089495ab959b4a6fbbe41c79f4e1e9bb663569dad630ead0c2e413dfb393319e3ea14dc9848c81b392107fe3382ce1813d278c3394a7f
+        sha256: 23a6ef8aadaf1e3e875f633bb2d116cfef8952dba7bc7c569b13458e1952b30f
+        sha512: 4e0bf0efeccb654c409afe9727b2b53c1d4da8190d7a0a9848fc52550ff3e13502add3eacde04a68a5b7bec09e91df487f64c5746ba987f873236a9e53b3d4e8
     prepare:
       - |
         tar -xf libcap.tar.xz --strip-components=1
