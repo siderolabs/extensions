@@ -1,0 +1,38 @@
+name: mergerfs
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/trapexit/mergerfs/releases/download/{{ .MERGERFS_VERSION }}/mergerfs-static-linux_arm64.tar.gz
+        destination: mergerfs-static.tar.gz
+        sha256: 5a487019b4da69c1401d5a3ec10003af2f68291a777a0358e758c420beea0771
+        sha512: b6583f545c3d22541ae08513c3d8cfcda61a65a54cf3ab06b045ac62328d7ac526feb81926b809a1095a8c37016841ae2608293306201effc60ece6a5302e8af
+      # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/trapexit/mergerfs/releases/download/{{ .MERGERFS_VERSION }}/mergerfs-static-linux_amd64.tar.gz
+        destination: mergerfs-static.tar.gz
+        sha256: 524c7ec093b2339c5e3e90cf9876a01d6aa93706279f89beb9cff5efa9f6ba72
+        sha512: 24410f757f4cf2702ccb088dcceca147ce0e6a2f49c422e1898d1b7f5924d3037cb63243188e317492c8df5e1babccce84aa912d987f8362f8d97a2a3a8e1755
+      # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/mergerfs
+        mkdir -p /rootfs/usr/local/etc/mergerfs
+        tar xf mergerfs-static.tar.gz -C /rootfs/usr/local/lib/containers/mergerfs
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/mergerfs.yaml
+    to: /rootfs/usr/local/etc/containers/

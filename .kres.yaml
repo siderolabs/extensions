@@ -22,6 +22,7 @@ spec:
     - iscsi-tools
     - kata-containers
     - mdadm
+    - mergerfs
     - nut-client
     - nvidia-container-toolkit
     - nvidia-fabricmanager

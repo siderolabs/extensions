@@ -1,0 +1,15 @@
+name: mergerfs
+depends:
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/mergerfs
+  args:
+  - -o config=/usr/local/etc/mergerfs/config.ini
+  mounts:
+    - source: /var/mnt
+      destination: /var/mnt
+      type: bind
+      options:
+        - bind
+        - rw
+restart: always

@@ -1,0 +1,1 @@
+VERSION: "{{ .MERGERFS_VERSION }}"

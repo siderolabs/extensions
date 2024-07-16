@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: mergerfs
+  version: "$VERSION"
+  author: Skyler Mäntysaari
+  description: |
+    mergerfs is a union filesystem geared towards simplifying storage and management of files across numerous commodity storage devices.
+  compatibility:
+    talos:
+      version: ">= v1.7.0"
