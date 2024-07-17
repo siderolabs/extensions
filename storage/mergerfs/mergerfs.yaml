@@ -1,5 +1,6 @@
 name: mergerfs
 depends:
+  - service: cri
   - configuration: true
 container:
   entrypoint: /usr/local/bin/mergerfs
