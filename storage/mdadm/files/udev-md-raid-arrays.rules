@@ -17,7 +17,7 @@ TEST!="md/array_state", GOTO="md_end"
 ATTR{md/array_state}=="clear*|inactive", GOTO="md_end"
 LABEL="md_ignore_state"
 
-IMPORT{program}="/usr/local/sbin/mdadm --detail --no-devices --export $devnode"
+IMPORT{program}="/usr/local/sbin/mdadm --detail -c /var/run/mdadm/mdadm.conf --no-devices --export $devnode"
 ENV{DEVTYPE}=="disk", ENV{MD_NAME}=="?*", SYMLINK+="disk/by-id/md-name-$env{MD_NAME}", OPTIONS+="string_escape=replace"
 ENV{DEVTYPE}=="disk", ENV{MD_UUID}=="?*", SYMLINK+="disk/by-id/md-uuid-$env{MD_UUID}"
 ENV{DEVTYPE}=="disk", ENV{MD_DEVNAME}=="?*", SYMLINK+="md/$env{MD_DEVNAME}"
