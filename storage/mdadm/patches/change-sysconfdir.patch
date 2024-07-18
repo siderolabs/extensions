@@ -1,0 +1,11 @@
+--- mdadm.orig/Makefile
++++ mdadm/Makefile
+@@ -89,7 +89,7 @@
+ 
+ PKG_CONFIG ?= pkg-config
+ 
+-SYSCONFDIR = /etc
++SYSCONFDIR = /var/run/mdadm/
+ CONFFILE = $(SYSCONFDIR)/mdadm.conf
+ CONFFILE2 = $(SYSCONFDIR)/mdadm/mdadm.conf
+ MAILCMD =/usr/sbin/sendmail -t
