@@ -59,3 +59,7 @@ finalize:
     to: /rootfs/etc/cri/conf.d/gvisor.part
   - from: /pkg/runsc.toml
     to: /rootfs/etc/cri/conf.d/runsc.toml
+  - from: /pkg/gvisor-kvm.part
+    to: /rootfs/etc/cri/conf.d/gvisor-kvm.part
+  - from: /pkg/runsc-kvm.toml
+    to: /rootfs/etc/cri/conf.d/runsc-kvm.toml
