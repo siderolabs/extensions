@@ -1,3 +1,33 @@
+## [Talos System Extensions 1.6.8](https://github.com/siderolabs/extensions/releases/tag/v1.6.8) (2024-07-24)
+
+Welcome to the v1.6.8 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.6/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`a376e13`](https://github.com/siderolabs/extensions/commit/a376e13adf0bbc6012f21b202c6bf89f75e0fdac) fix: version in util-linux manifest
+* [`d102ff5`](https://github.com/siderolabs/extensions/commit/d102ff515f5f06d2216c941149122a9b7ec8379e) chore(ci): only build amd64 for extensions e2e
+* [`8344f32`](https://github.com/siderolabs/extensions/commit/8344f320293c9fef3f38993104e42dcff682102e) feat: update PKGS
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.6.7](https://github.com/siderolabs/extensions/releases/tag/v1.6.7)
+
 ## [Talos System Extensions 1.6.7](https://github.com/siderolabs/extensions/releases/tag/v1.6.7) (2024-03-20)
 
 Welcome to the v1.6.7 release of Talos System Extensions!
