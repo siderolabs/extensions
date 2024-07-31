@@ -10,6 +10,7 @@ spec:
     - chelsio-drivers
     - chelsio-firmware
     - drbd
+    - dvb-si2168-firmware
     - ecr-credential-provider
     - fuse3
     - gasket-driver

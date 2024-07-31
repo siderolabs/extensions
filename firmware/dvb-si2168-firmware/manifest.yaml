@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: dvb-si2168-firmware
+  version: "$VERSION"
+  author: Skyler Mäntysaari
+  description: |
+    This system extension provides dvb-si2168 firmware
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
