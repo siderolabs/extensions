@@ -1,0 +1,10 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/misc/mei/hdcp/mei_hdcp.ko
+kernel/drivers/misc/mei/pxp/mei_pxp.ko
+kernel/drivers/misc/mei/mei-gsc.ko
+kernel/drivers/misc/mei/mei-me.ko
+kernel/drivers/misc/mei/mei-txe.ko
+kernel/drivers/misc/mei/mei.ko
+kernel/drivers/watchdog/mei_wdt.ko

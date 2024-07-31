@@ -22,6 +22,7 @@ spec:
     - iscsi-tools
     - kata-containers
     - mdadm
+    - mei
     - nut-client
     - nvidia-container-toolkit
     - nvidia-fabricmanager
@@ -53,7 +54,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.8.0-alpha.0-34-gce49757
+        defaultValue: v1.8.0-alpha.0-41-ga97d58f
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
