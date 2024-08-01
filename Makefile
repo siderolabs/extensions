@@ -64,6 +64,7 @@ TARGETS += drbd
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
+TARGETS += crun
 TARGETS += gvisor
 TARGETS += gvisor-debug
 TARGETS += hello-world-service

@@ -10,3 +10,5 @@ WASMEDGE_VERSION: v0.4.0
 SPIN_VERSION: v0.15.0
 # renovate: datasource=github-releases depName=kata-containers/kata-containers
 KATA_CONTAINERS_VERSION: 3.3.0
+# renovate: datasource=github-releases depName=containers/crun
+CRUN_VERSION: 1.15
