@@ -19,7 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configur
 [notes.updates]
     title = "Component Updates"
     description = """
-Spin: 1.5.0
+spin: 1.5.0
 """
 
 [make_deps]
