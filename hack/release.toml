@@ -15,6 +15,23 @@ See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configur
 """
 
 [notes]
+    [notes.container-runtime-crun]
+        title = "CRUN Container Runtime"
+        description = """
+CRUN container runtime is now shipped as a Talos System Extension
+"""
+
+    [notes.container-runtime-gvisor]
+        title = "Gvisor Container Runtime"
+        description = """
+Gvisor now ships an additional runtime using `kvm` as the sandboxing mechanism.
+"""
+
+    [notes.intel-management-engine]
+        title = "Intel Management Engine"
+        description = """
+Intel Management Engine (IME) modules is now shipped as a Talos System Extension.
+"""
 
 [notes.updates]
     title = "Component Updates"
