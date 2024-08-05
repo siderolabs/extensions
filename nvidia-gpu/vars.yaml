@@ -1,6 +1,6 @@
 # only update if there's a matching fabric manager version
 # renovate: datasource=github-releases depName=nvidia/open-gpu-kernel-modules
-NVIDIA_DRIVER_VERSION: 535.129.03
+NVIDIA_DRIVER_VERSION: 560.28.03
 # renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
 CONTAINER_TOOLKIT_VERSION: v1.15.0
 CONTAINER_TOOLKIT_REF: ddeeca392c7bd8b33d0a66400b77af7a97e16cef
