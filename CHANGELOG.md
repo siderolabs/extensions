@@ -1,3 +1,38 @@
+## [Talos System Extensions 1.7.6](https://github.com/siderolabs/extensions/releases/tag/v1.7.6) (2024-08-06)
+
+Welcome to the v1.7.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+spin: 1.5.0
+
+
+### Contributors
+
+* Andrey Smirnov
+* Rui Lopes
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`b65a564`](https://github.com/siderolabs/extensions/commit/b65a5640e3da9a46dd235275703dc853fcc6a064) chore: no-op change
+* [`4892c34`](https://github.com/siderolabs/extensions/commit/4892c3457d6463e2ed969d13209e72c21eda1e0d) chore: update spin extension to v0.15.0
+* [`643fa18`](https://github.com/siderolabs/extensions/commit/643fa18dbf228962a6343c32c19e470e499528be) feat: update pkgs to match future Talos 1.7.6
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.7.5](https://github.com/siderolabs/extensions/releases/tag/v1.7.5)
+
 ## [Talos System Extensions 1.7.5](https://github.com/siderolabs/extensions/releases/tag/v1.7.5) (2024-06-21)
 
 Welcome to the v1.7.5 release of Talos System Extensions!
