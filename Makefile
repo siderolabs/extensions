@@ -60,6 +60,7 @@ TARGETS += bnx2-bnx2x
 TARGETS += btrfs
 TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
+TARGETS += crun
 TARGETS += drbd
 TARGETS += ecr-credential-provider
 TARGETS += fuse3

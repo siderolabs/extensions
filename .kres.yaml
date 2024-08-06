@@ -9,6 +9,7 @@ spec:
     - btrfs
     - chelsio-drivers
     - chelsio-firmware
+    - crun
     - drbd
     - ecr-credential-provider
     - fuse3

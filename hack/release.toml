@@ -60,18 +60,20 @@ If production version is required, the schematic id should be updated to the pro
 ZFS: 2.2.4
 DRBD: 9.2.9
 gasket: 5815ee3
-Tailscale: 1.64.2
-ecr-credential-provider: 1.30.2
-qemu-guest-agent: 9.0.1
+Tailscale: 1.70.0
+ecr-credential-provider: 1.30.3
+qemu-guest-agent: 9.0.2
 mdadm: 4.3
 Intel microcode: 20240531
-Linux firmware: 20240513
-Spin: 1.5.0
-Gvisor: 20240624.0
+Linux firmware: 20240709
+Spin: 0.15.1
+Gvisor: 20240729.0
 Wasmedge: v0.4.0
-Kata Containers: 3.6.0
+Kata Containers: 3.3.0
 NVIDIA container toolkit: v1.15.0
 iscsi-tools: v0.1.5
+vmtoolsd: v0.6.0
+util-linux-tools: 2.40.2
 """
 
 
