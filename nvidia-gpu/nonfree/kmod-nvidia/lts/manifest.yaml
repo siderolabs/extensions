@@ -1,6 +1,6 @@
 version: v1alpha1
 metadata:
-  name: nonfree-kmod-nvidia
+  name: nonfree-kmod-nvidia-lts
   version: "$VERSION"
   author: Sidero Labs
   description: |

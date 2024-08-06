@@ -27,8 +27,6 @@ steps:
         ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
         ln -s /toolchain/bin/file /usr/bin/file
 
-        cp /toolchain/share/automake-1.16/config.guess config.guess
-        cp /toolchain/lib/libstdc++* /lib
         autoreconf -if
 
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig

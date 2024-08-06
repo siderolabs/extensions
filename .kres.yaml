@@ -24,9 +24,12 @@ spec:
     - mdadm
     - mei
     - nut-client
-    - nvidia-container-toolkit
-    - nvidia-fabricmanager
-    - nvidia-open-gpu-kernel-modules
+    - nvidia-container-toolkit-lts
+    - nvidia-container-toolkit-production
+    - nvidia-fabricmanager-lts
+    - nvidia-fabricmanager-production
+    - nvidia-open-gpu-kernel-modules-lts
+    - nvidia-open-gpu-kernel-modules-production
     - qemu-guest-agent
     - qlogic-firmware
     - realtek-firmware
@@ -43,7 +46,8 @@ spec:
     - zfs
   additionalTargets:
     nonfree:
-      - nonfree-kmod-nvidia
+      - nonfree-kmod-nvidia-lts
+      - nonfree-kmod-nvidia-production
   reproducibleTargetName: reproducibility
   extraBuildArgs:
     - TAG
@@ -54,7 +58,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.8.0-alpha.0-41-ga97d58f
+        defaultValue: v1.8.0-alpha.0-45-gaf6b4e6
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true

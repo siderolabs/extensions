@@ -1,4 +1,4 @@
-name: nvidia-container-cli
+name: nvidia-container-cli-production
 variant: scratch
 shell: /bin/bash
 install:
@@ -15,7 +15,7 @@ dependencies:
   # nvidia-pkgs depends on glibc,
   # so any stage depending on nvidia-container-cli will have the updated ld.so.cache,
   # from both nvidia-pkgs and nvidia-container-cli
-  - stage: nvidia-pkgs
+  - stage: nvidia-pkgs-production
   - stage: libseccomp
     from: /rootfs
   - stage: libcap
@@ -28,10 +28,10 @@ dependencies:
     from: /rootfs
 steps:
   - sources:
-      - url: https://gitlab.com/nvidia/container-toolkit/libnvidia-container/-/archive/{{ .LIBNVIDIA_CONTAINER_VERSION }}/libnvidia-container-{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
+      - url: https://github.com/NVIDIA/libnvidia-container/archive/refs/tags/{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: d23984591004c59c33f6f13c8237f1fb84113b8eddb0f9943302df4c3b0cc549
-        sha512: a5a75b0cd29cf7c0484dbd650456c93bb495a0fe5449d6b8c7680af7509be3b9e1f12ab437b56309bfb4b66cfe2868b4adbe882e29b169c7733c0247ecf2489b
+        sha256: cbc1dda7ee90b8b729c5f178292cd07b421863015d84b84c37e69c8d580ab3ff
+        sha512: b304c284c5ab0c3544362307dc16ffcca8d34497e4356a520dc6da81a86a62b2a262b528cba559bb0d7a3addf018c3b50b6cb78669c82c1b4acae159e5922548
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}

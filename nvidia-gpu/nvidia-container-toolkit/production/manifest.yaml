@@ -1,6 +1,6 @@
 version: v1alpha1
 metadata:
-  name: nvidia-container-toolkit
+  name: nvidia-container-toolkit-production
   version: "$VERSION"
   author: Sidero Labs
   description: |

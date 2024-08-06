@@ -1,12 +1,14 @@
 # only update if there's a matching fabric manager version
-# renovate: datasource=github-releases depName=nvidia/open-gpu-kernel-modules
-NVIDIA_DRIVER_VERSION: 535.129.03
-# renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/container-toolkit.git
-CONTAINER_TOOLKIT_VERSION: v1.15.0
-CONTAINER_TOOLKIT_REF: ddeeca392c7bd8b33d0a66400b77af7a97e16cef
-# renovate: datasource=git-tags depName=https://gitlab.com/nvidia/container-toolkit/libnvidia-container.git
-LIBNVIDIA_CONTAINER_VERSION: v1.15.0
-LIBNVIDIA_CONTAINER_REF: 6c8f1df7fd32cea3280cf2a2c6e931c9b3132465
+# renovate: datasource=github-releases extractVersion=^\d+\.(?<version>\d+\.\d+)$ depName=nvidia/open-gpu-kernel-modules
+NVIDIA_DRIVER_LTS_VERSION: 535.183.06
+# renovate: datasource=github-releases extractVersion=^\d+\.(?<version>\d+\.\d+)$ depName=nvidia/open-gpu-kernel-modules
+NVIDIA_DRIVER_PRODUCTION_VERSION: 550.90.07
+# renovate: datasource=github-releases depName=nvidia/nvidia-container-toolkit
+CONTAINER_TOOLKIT_VERSION: v1.16.1
+CONTAINER_TOOLKIT_REF: a470818ba7d9166be282cd0039dd2fc9b0a34d73
+# renovate: datasource=git-tags depName=nvidia/libnvidia-container
+LIBNVIDIA_CONTAINER_VERSION: v1.16.1
+LIBNVIDIA_CONTAINER_REF: 4c2494f16573b585788a42e9c7bee76ecd48c73d
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
 WOLFI_BASE_REF: sha256:c9339087a6de501ba6989756aeb1e1c89af82ac0e53c8b1ccd1feb44ec2246d9
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ depName=https://sourceware.org/git/glibc.git

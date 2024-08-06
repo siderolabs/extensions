@@ -1,0 +1,59 @@
+name: nvidia-fabricmanager-production
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+ - stage: base
+steps:
+  - sources:
+    # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-sbsa/fabricmanager-linux-sbsa-{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }}-archive.tar.xz
+        destination: fabricmanager.tar.xz
+        sha256: c9760f6f1c582fd43ea15b93ca66dd368459432a39338f648c585d32514ab6d6
+        sha512: 9b0b6b7c8ce19f5a7408d338ebf123b2a5a8184d20590ee82744f44b182fbc555c43b2278cade063836493f2162cdfa2d984466a05956c95cbe4f0c172589422
+    # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }}-archive.tar.xz
+        destination: fabricmanager.tar.xz
+        sha256: 034c04ca2a6ce6a5d49bf293b969618609c90470e620fee97ec76cac1f4471f7
+        sha512: 6af90b415d82e448d81416daa36cb4588be6f796f53a3e04a1466a32c46212598ba3c60a96b4c066cde7af881a41f88f4f2015c499dedeed3c0d59611e0d6b21
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+      - |
+        tar -xf fabricmanager.tar.xz --strip-components=1
+
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin \
+          /rootfs/usr/local/lib \
+          /rootfs/usr/local/share/nvidia/nvswitch \
+          /rootfs/usr/local/lib/containers/nvidia-fabricmanager \
+          /rootfs/usr/local/etc/containers
+
+        cp lib/libnvfm.so.1 /rootfs/usr/local/lib/libnvfm.so.1
+        ln -s libnvfm.so.1 /rootfs/usr/local/lib/libnvfm.so
+
+        cp bin/nv-fabricmanager /rootfs/usr/local/bin/
+        cp bin/nvswitch-audit /rootfs/usr/local/bin/
+
+        cp share/nvidia/nvswitch/dgx2_hgx2_topology /rootfs/usr/local/share/nvidia/nvswitch/
+        cp share/nvidia/nvswitch/dgxa100_hgxa100_topology /rootfs/usr/local/share/nvidia/nvswitch/
+
+        cp etc/fabricmanager.cfg  /rootfs/usr/local/share/nvidia/nvswitch/
+
+        sed -i 's/DAEMONIZE=.*/DAEMONIZE=0/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
+        sed -i 's/STATE_FILE_NAME=.*/STATE_FILE_NAME=\/var\/run\/nvidia-fabricmanager\/fabricmanager.state/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
+        sed -i 's/TOPOLOGY_FILE_PATH=.*/TOPOLOGY_FILE_PATH=\/usr\/local\/share\/nvidia\/nvswitch/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
+        sed -i 's/DATABASE_PATH=.*/DATABASE_PATH=\/usr\/local\/share\/nvidia\/nvswitch/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/nvidia-fabricmanager.yaml
+    to: /rootfs/usr/local/etc/containers/nvidia-fabricmanager.yaml
+  - from: /pkg/manifest.yaml
+    to: /

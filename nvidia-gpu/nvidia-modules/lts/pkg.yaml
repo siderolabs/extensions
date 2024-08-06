@@ -1,24 +1,23 @@
-name: nvidia-container-toolkit
+name: nvidia-open-gpu-kernel-modules-lts
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
-  - stage: base
-  - stage: nvidia-container-cli
-  - stage: elfutils
-  - stage: zlib
-  - stage: libcap
-  - stage: libseccomp
-  - stage: libtirpc
-  - stage: nvidia-container-runtime
-  - stage: nvidia-container-runtime-wrapper
-  - stage: nvidia-persistenced-wrapper
+ - stage: base
+# The pkgs version for a particular release of Talos as defined in
+# https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+ - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/nvidia-open-gpu-kernel-modules-lts-pkg:{{ .BUILD_ARG_PKGS }}"
 steps:
   - prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-    install:
+  - install:
       - |
-        mkdir -p /rootfs
+        mkdir -p /rootfs/lib/modules \
+          /rootfs/usr/local/lib/modprobe.d
+
+        cp /pkg/files/nvidia.conf /rootfs/usr/local/lib/modprobe.d/nvidia.conf
+
+        cp -R /lib/modules/* /rootfs/lib/modules
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -28,7 +27,5 @@ steps:
 finalize:
   - from: /rootfs
     to: /rootfs
-  - from: /pkg/nvidia-persistenced.yaml
-    to: /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
   - from: /pkg/manifest.yaml
     to: /

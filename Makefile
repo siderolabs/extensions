@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-08-01T17:25:51Z by kres faf91e3.
+# Generated on 2024-08-06T11:36:28Z by kres 2fded2b.
 
 # common variables
 
@@ -25,7 +25,7 @@ SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 # sync bldr image with pkgfile
 
-BLDR_RELEASE := v0.3.1
+BLDR_RELEASE := v0.3.2
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
 BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
@@ -48,7 +48,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.8.0-alpha.0-41-ga97d58f
+PKGS ?= v1.8.0-alpha.0-45-gaf6b4e6
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -64,7 +64,6 @@ TARGETS += drbd
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
-TARGETS += crun
 TARGETS += gvisor
 TARGETS += gvisor-debug
 TARGETS += hello-world-service
@@ -76,9 +75,12 @@ TARGETS += kata-containers
 TARGETS += mdadm
 TARGETS += mei
 TARGETS += nut-client
-TARGETS += nvidia-container-toolkit
-TARGETS += nvidia-fabricmanager
-TARGETS += nvidia-open-gpu-kernel-modules
+TARGETS += nvidia-container-toolkit-lts
+TARGETS += nvidia-container-toolkit-production
+TARGETS += nvidia-fabricmanager-lts
+TARGETS += nvidia-fabricmanager-production
+TARGETS += nvidia-open-gpu-kernel-modules-lts
+TARGETS += nvidia-open-gpu-kernel-modules-production
 TARGETS += qemu-guest-agent
 TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
@@ -93,7 +95,8 @@ TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xen-guest-agent
 TARGETS += zfs
-NONFREE_TARGETS = nonfree-kmod-nvidia
+NONFREE_TARGETS = nonfree-kmod-nvidia-lts
+NONFREE_TARGETS += nonfree-kmod-nvidia-production
 
 # help menu
 

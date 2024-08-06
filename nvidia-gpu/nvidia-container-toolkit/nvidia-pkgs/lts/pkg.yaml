@@ -1,4 +1,4 @@
-name: nvidia-pkgs
+name: nvidia-pkgs-lts
 variant: scratch
 shell: /bin/bash
 install:
@@ -11,15 +11,15 @@ dependencies:
 steps:
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://download.nvidia.com/XFree86/Linux-aarch64/{{ .NVIDIA_DRIVER_VERSION }}/NVIDIA-Linux-aarch64-{{ .NVIDIA_DRIVER_VERSION }}.run
-        destination: nvidia.run
-        sha256: 8ba8d961457a241bcdf91b76d6fe2f36cb473c8bbdb02fb6650a622ce2e85b33
-        sha512: 706de7e53b81f909d8bc6a12a39c594754a164c49f5d23c7939dc3abcfc04f5d5b12b7d65762ae574582149a098f06ee5fe95be4f8ad1056a3307a6ce93f3c00
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvidia_driver/linux-sbsa/nvidia_driver-linux-sbsa-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
+        destination: nvidia.tar.xz
+        sha256: 970be3ae71332ca008f3e6589ae44a70aeffb9e29382980114e47b8fce7790d1
+        sha512: bd730a51a77d897509381ecb22eb21a9f4e0c2419288f1c1c26f8ef00e887b1cc09718d1d4c9d613912560e48185ff03ea221865be5c0e590a20868c45a8ea00
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://download.nvidia.com/XFree86/Linux-x86_64/{{ .NVIDIA_DRIVER_VERSION }}/NVIDIA-Linux-x86_64-{{ .NVIDIA_DRIVER_VERSION }}-no-compat32.run
-        destination: nvidia.run
-        sha256: ffed07a30323fd6cf9caad3fb45e6259223135f6004d832511921a788f719ba6
-        sha512: f75c288b27a17ea8c63dac68cda01b94184b41332778df6a702d30d814c407c1e45f30bd7c81511508ace6560a16e79c24e8698f457aaee3ee1d03c57725ab27
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvidia_driver/linux-x86_64/nvidia_driver-linux-x86_64-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
+        destination: nvidia.tar.xz
+        sha256: e66527c5c016d0bee9050a7a8573e38be86aad58adee2f40e808c88a4d0c6e90
+        sha512: 71624903e9d57a3f8a5dc7ffb2435991fe787b0609096e0e146d03ffef54bdb145940e8717510aa87cd6407c860e22938c840c126db7d4469c265f202db35e18
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
@@ -29,10 +29,29 @@ steps:
         ln -s /bin/true /bin/lsmod
         ln -s /bin/true /bin/depmod
 
-        bash nvidia.run --extract-only
+        tar xf nvidia.tar.xz --strip-components=1
     install:
       - |
-        cd NVIDIA-Linux-*
+        mkdir -p assets/{html,libglvnd_install_checker}
+
+        cp -r bin/* assets/
+        cp CHANGELOG assets/NVIDIA_Changelog
+        cp -r docs/* assets/html/
+        cp -r etc/* assets/
+        cp -r firmware assets/
+        cp -r lib/* assets/
+        cp LICENSE assets/
+        cp -r man/man1/* assets/
+        cp MANIFEST assets/.manifest
+        cp README assets/README.txt
+        cp -r sbin/* assets/
+        cp -r share/* assets/
+        cp -r supported-gpus assets/
+        cp -r systemd assets/
+        cp -r tests/glvnd/* assets/libglvnd_install_checker
+        # {{ if eq .ARCH "x86_64" }}cp -r wine/* assets/{{ end }}
+
+        cd assets
 
         ./nvidia-installer --silent \
           --opengl-prefix=/rootfs/usr/local \
@@ -47,11 +66,12 @@ steps:
           --no-kernel-module-source \
           --no-check-for-alternate-installs \
           --override-file-type-destination=NVIDIA_MODPROBE:/rootfs/usr/local/bin \
-          --override-file-type-destination=FIRMWARE:/rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_VERSION }} \
-          --no-systemd
+          --override-file-type-destination=FIRMWARE:/rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_LTS_VERSION }} \
+          --no-systemd \
+          # {{ if eq .ARCH "x86_64" }}--no-install-compat32-libs{{ end }}
 
         # copy vulkan/OpenGL json files
-        mkdir -p /rootfs/{etc/vulkan,usr/{lib/xorg,share/{glvnd,egl}}}
+        mkdir -p /rootfs/{etc/vulkan,usr/share/{glvnd,egl}}
 
         cp -r /usr/share/glvnd/* /rootfs/usr/share/glvnd
         cp -r /usr/share/egl/* /rootfs/usr/share/egl

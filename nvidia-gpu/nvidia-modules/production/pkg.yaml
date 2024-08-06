@@ -1,11 +1,11 @@
-name: nonfree-kmod-nvidia
+name: nvidia-open-gpu-kernel-modules-production
 variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
  - stage: base
 # The pkgs version for a particular release of Talos as defined in
 # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
- - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/nonfree-kmod-nvidia-pkg:{{ .BUILD_ARG_PKGS }}"
+ - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/nvidia-open-gpu-kernel-modules-production-pkg:{{ .BUILD_ARG_PKGS }}"
 steps:
   - prepare:
       - |
