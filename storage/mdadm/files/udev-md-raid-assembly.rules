@@ -23,7 +23,7 @@ LABEL="md_inc"
 
 # remember you can limit what gets auto/incrementally assembled by
 # mdadm.conf(5)'s 'AUTO' and selectively whitelist using 'ARRAY'
-ACTION=="add|change", IMPORT{program}="/usr/local/sbin/mdadm --incremental --export $devnode --offroot $env{DEVLINKS}"
+ACTION=="add|change", IMPORT{program}="/usr/local/sbin/mdadm --incremental -c /var/run/mdadm/mdadm.conf --export $devnode --offroot $env{DEVLINKS}"
 ACTION=="remove", ENV{ID_PATH}=="?*", RUN+="/usr/local/sbin/mdadm -If $name --path $env{ID_PATH}"
 ACTION=="remove", ENV{ID_PATH}!="?*", RUN+="/usr/local/sbin/mdadm -If $name"
 
