@@ -8,13 +8,13 @@ steps:
       # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/containers/crun/releases/download/{{ .CRUN_VERSION }}/crun-{{ .CRUN_VERSION }}-linux-arm64-disable-systemd
         destination: crun
-        sha256: 1bd840c95e9ae8edc25654dcf2481309724b9ff18ce95dbcd2535da9b026a47d
-        sha512: 3184eb0e440d9551003b4275c69ecaaef2ffaf84b11ac3ffdea2e22cc9d8c578bce032331bd476bf47e5d2247f0604b93b46c6a5c3225d6704378380d15d29ee
+        sha256: 0151e6ea9a7d36de94651347b69b2937c8e657a663afb55180ade3153d5d4064
+        sha512: 889e347890ed0b9ecd568830195ebf94d4cd63757ab37db622546c640df292a5816e91669054158ca3db816bd05ce2b6d37f734e6a30f81c978fd16cbfdc1e3e
       # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/containers/crun/releases/download/{{ .CRUN_VERSION }}/crun-{{ .CRUN_VERSION }}-linux-amd64-disable-systemd
         destination: crun
-        sha256: 03fd3ec6a7799183eaeefba5ebd3f66f9b5fb41a5b080c196285879631ff5dc1
-        sha512: 1989c491593691527f368cd13e56aa179a414ac31a789ee39c1646b7468cc7c32bbcf0cc7e26b90c53152936422fb12d699dd5654a11e1ed2f2c2dd7eb4588e7
+        sha256: 96f27bb57ba3d8441e76e8d3ac6af98d37a9907e6a0ffbcdbc19d72c652c48ae
+        sha512: e914ba72e9f6b1cc407585076321166c822cf49e0849e602e2f1ed1d4e355e589a39c15b3770ef43b7b9fccb9985c822b922277b204e04005091c8ce3917d767
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |

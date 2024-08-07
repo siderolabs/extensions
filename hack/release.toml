@@ -70,7 +70,7 @@ Spin: 0.15.1
 Gvisor: 20240729.0
 Wasmedge: v0.4.0
 Kata Containers: 3.3.0
-NVIDIA container toolkit: v1.15.0
+NVIDIA container toolkit: v1.16.1
 iscsi-tools: v0.1.5
 vmtoolsd: v0.6.0
 util-linux-tools: 2.40.2

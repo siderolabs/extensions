@@ -6,7 +6,7 @@ NVIDIA_DRIVER_PRODUCTION_VERSION: 550.90.07
 # renovate: datasource=github-releases depName=nvidia/nvidia-container-toolkit
 CONTAINER_TOOLKIT_VERSION: v1.16.1
 CONTAINER_TOOLKIT_REF: a470818ba7d9166be282cd0039dd2fc9b0a34d73
-# renovate: datasource=git-tags depName=nvidia/libnvidia-container
+# renovate: datasource=github-releases depName=nvidia/libnvidia-container
 LIBNVIDIA_CONTAINER_VERSION: v1.16.1
 LIBNVIDIA_CONTAINER_REF: 4c2494f16573b585788a42e9c7bee76ecd48c73d
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
