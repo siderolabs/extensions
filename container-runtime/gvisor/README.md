@@ -15,7 +15,7 @@ machine:
     user.max_user_namespaces: "11255"
 ```
 
-> Warning! This disables [KSPP best practices](https://kernsec.org/wiki/index.php/Kernel_Self_Protection_Project/Recommended_Settings#sysctls) setting.
+> Warning! This disables [KSPP best practices](https://kspp.github.io/Recommended_Settings#sysctls) setting.
 
 ## Testing
 
