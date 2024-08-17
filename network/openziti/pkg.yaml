@@ -1,0 +1,65 @@
+name: openziti
+variant: alpine
+shell: /toolchain/bin/bash
+install:
+  - unzip
+  - zip
+  - ninja-build
+  - ninja
+  - zlib-static
+dependencies:
+  - image: "ghcr.io/siderolabs/tools:v1.7.0-4-gc844dc3"
+steps:
+  - sources:
+      - url: https://github.com/openziti/ziti-tunnel-sdk-c/archive/refs/tags/{{ .OPENZITI_TUNNELER_VERSION }}.tar.gz
+        destination: edge-tunnel-source.tar.gz
+        sha256: d455672bf3b6ff28fd0ff864f868f7d6e3de99e6c666a120227fa9dab2d91f78
+        sha512: 5aeb05347381124e9d75693f12e0d234499a8c6482d322019576a24c622d986d43f159454a43c844623f171a456062a5e1afffcee7f7cbb03740216dbd3bb74c
+    env:
+      VCPKG_ROOT: /vcpkg
+      VCPKG_FORCE_SYSTEM_BINARIES: 1
+      CC: /toolchain/bin/gcc
+      CXX: /toolchain/bin/g++
+    prepare:
+      - |
+        # vcpkg depends on git as a delivery tool
+        # if to download .tar.gz from releases it would fail saying it cannot retrieve versions/baseline.json version using git show
+        # tried my best to find any CMAKE variable within vcpkg which disables this behaviour
+        # we fetch here commit to which tag 2024.07.12 is assigned
+        git clone https://github.com/microsoft/vcpkg.git /vcpkg
+        git --git-dir=/vcpkg/.git --work-tree=/vcpkg checkout 1de2026f28ead93ff1773e6e680387643e914ea1
+
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+
+      - |
+        mkdir -p /vcpkg-git /vcpkg /ziti-tunnel-sdk-c/build
+        tar -xzvf edge-tunnel-source.tar.gz --strip-components=1 -C /ziti-tunnel-sdk-c
+
+    build:
+      - |
+        export PATH=${PATH}:/toolchain/bin
+        /vcpkg/bootstrap-vcpkg.sh
+
+      - |
+        export PATH=${PATH}:/toolchain/bin
+        PRESET="ci-linux-x64"
+        if [[ "$(uname -m)" == "arm64" || "$(uname -m)" == "aarch64" ]]; then
+            PRESET="ci-linux-arm64"
+            ln -s /toolchain/bin/g++ /toolchain/bin/aarch64-linux-gnu-g++
+            ln -s /toolchain/bin/gcc /toolchain/bin/aarch64-linux-gnu-gcc
+        fi
+        cmake -DBUILD_SHARED_LIBS=OFF -DCMAKE_EXE_LINKER_FLAGS="-static" -DDISABLE_SEMVER_VERIFICATION=ON -DDISABLE_LIBSYSTEMD_FEATURE=ON  -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja --preset $PRESET -S /ziti-tunnel-sdk-c -B /ziti-tunnel-sdk-c/build
+      - |
+        cmake --build /ziti-tunnel-sdk-c/build --config Release
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/openziti/usr/local/bin/
+        mv /ziti-tunnel-sdk-c/build/programs/ziti-edge-tunnel/Release/ziti-edge-tunnel /rootfs/usr/local/lib/containers/openziti/usr/local/bin/
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/openziti.yaml
+    to: /rootfs/usr/local/etc/containers/

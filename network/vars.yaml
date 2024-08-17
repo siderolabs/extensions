@@ -1,2 +1,3 @@
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=tailscale/tailscale
 TAILSCALE_VERSION: 1.70.0
+OPENZITI_TUNNELER_VERSION: v1.1.2

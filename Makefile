@@ -88,6 +88,7 @@ TARGETS += realtek-firmware
 TARGETS += spin
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
+TARGETS += openziti
 TARGETS += thunderbolt
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
