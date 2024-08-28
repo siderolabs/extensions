@@ -1,0 +1,50 @@
+name: openziti
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/ziti-edge-tunnel
+  args:
+    - run-host
+    - --verbose=4
+    - --identity-dir=/var/lib/ziti/etc/identities
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+    # libssl lib
+  - source: /usr/lib
+    destination: /usr/lib
+    type: bind
+    options:
+      - bind
+      - ro
+  - source: /sbin
+    destination: /sbin
+    type: bind
+    options:
+      - bind
+      - ro
+  - source: /dev/net/tun
+    destination: /dev/net/tun
+    type: bind
+    options:
+      - bind
+      - rw
+  - source: /var/lib/ziti/etc/identities/
+    destination: /var/lib/ziti/etc/identities/
+    type: bind
+    options:
+      - bind
+      - rw
+  - source: /var/lib/ziti/
+    destination: /var/lib/ziti/
+    type: bind
+    options:
+      - bind
+      - rw
+restart: always
