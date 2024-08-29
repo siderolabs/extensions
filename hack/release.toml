@@ -58,14 +58,14 @@ If production version is required, the schematic id should be updated to the pro
     title = "Component Updates"
     description = """
 ZFS: 2.2.4
-DRBD: 9.2.9
+DRBD: 9.2.11
 gasket: 5815ee3
 Tailscale: 1.70.0
-ecr-credential-provider: 1.30.3
+ecr-credential-provider: 1.31.0
 qemu-guest-agent: 9.0.2
 mdadm: 4.3
-Intel microcode: 20240531
-Linux firmware: 20240709
+Intel microcode: 20240813
+Linux firmware: 20240811
 Spin: 0.15.1
 Gvisor: 20240729.0
 Wasmedge: v0.4.0

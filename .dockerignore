@@ -1,8 +1,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2023-11-02T15:47:10Z by kres 32170a7-dirty.
+# Generated on 2024-08-29T14:13:04Z by kres b5ca957.
 
 *
 !CHANGELOG.md
+!MAINTAINERS.md
 !README.md
 !pkg.yaml

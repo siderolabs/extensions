@@ -59,7 +59,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.8.0-alpha.0-45-gaf6b4e6
+        defaultValue: v1.8.0-alpha.0-52-g4fd2541
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true

@@ -30,6 +30,7 @@ steps:
           --prefix=/usr \
           -Ddefault_library=both \
           -Dlibelf=disabled \
+          -Dselinux=disabled \
           _build
 
         ninja -C _build
