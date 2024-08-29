@@ -38,6 +38,7 @@ spec:
     - stargz-snapshotter
     - tailscale
     - thunderbolt
+    - uinput
     - usb-modem-drivers
     - util-linux-tools
     - v4l-uvc-drivers
@@ -59,7 +60,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.8.0-alpha.0-52-g4fd2541
+        defaultValue: v1.8.0-alpha.0-54-g4ce5bc6
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true

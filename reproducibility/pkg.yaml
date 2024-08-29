@@ -48,6 +48,8 @@ dependencies:
 
   # thunderbolt can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: thunderbolt
+  # uinput can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: uinput
   # usb-modem-drivers can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: usb-modem-drivers
 

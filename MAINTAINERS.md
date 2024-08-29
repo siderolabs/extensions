@@ -48,6 +48,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | stargz-snapshotter                        | Sidero Labs         | NA                                                                   |
 | tailscale                                 | Beau Trepp          | [btrepp](https://github.com/btrepp)                                  |
 | thunderbolt                               | Igor Rzegocki       | [ajgon](https://github.com/ajgon)                                    |
+| uinput                                    | Judah Rand          | [judahrand](https://github.com/judahrand)                            |
 | usb-modem-drivers                         | Sidero Labs         | NA                                                                   |
 | util-linux-tools                          | Sidero Labs         | NA                                                                   |
 | v4l-uvc-drivers                           | Jacob McSwain       | [USA-RedDragon](https://github.com/USA-RedDragon)                    |
