@@ -1,3 +1,173 @@
+## [Talos System Extensions 1.8.0-alpha.2](https://github.com/siderolabs/extensions/releases/tag/v1.8.0-alpha.2) (2024-08-30)
+
+Welcome to the v1.8.0-alpha.2 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### CRUN Container Runtime
+
+CRUN container runtime is now shipped as a Talos System Extension
+
+
+### Gvisor Container Runtime
+
+Gvisor now ships an additional runtime using `kvm` as the sandboxing mechanism.
+
+
+### Intel Management Engine
+
+Intel Management Engine (IME) modules is now shipped as a Talos System Extension.
+
+
+### NVIDIA Driver and Container Toolkit
+
+The NVIDIA drivers and the container toolkits now ships an LTS and Production version as per https://docs.nvidia.com/datacenter/tesla/drivers/index.html#lifecycle.
+
+The new extensions are named below:
+
+* nvidia-container-toolkit-production
+* nvidia-container-toolkit-lts
+* nvidia-open-gpu-kernel-modules-production
+* nvidia-open-gpu-kernel-modules-lts
+* nonfree-kmod-nvidia-lts
+* nonfree-kmod-nvidia-production
+
+The extensions would ship the latest version of LTS/Production drivers available at the time of Talos release.
+
+Image Factory using an existing schematic id would upgrade the NVIDIA driver and container toolkit to the LTS version.
+
+If production version is required, the schematic id should be updated to the production version.
+
+
+### Component Updates
+
+ZFS: 2.2.4
+DRBD: 9.2.11
+gasket: 5815ee3
+Tailscale: 1.70.0
+ecr-credential-provider: 1.31.0
+qemu-guest-agent: 9.0.2
+mdadm: 4.3
+Intel microcode: 20240813
+Linux firmware: 20240811
+Spin: 0.15.1
+Gvisor: 20240729.0
+Wasmedge: v0.4.0
+Kata Containers: 3.3.0
+NVIDIA container toolkit: v1.16.1
+iscsi-tools: v0.1.5
+vmtoolsd: v0.6.0
+util-linux-tools: 2.40.2
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+* Rui Lopes
+* Bernard Gütermann
+* David Peralta
+* Dmitriy Matrenichev
+* Henrik Gerdes
+* Judah Rand
+* Kingdon Barrett
+* Mark S
+* Markus Reiter
+* Mathieu Dallaire
+* Mike Beaumont
+* Nick Meyer
+* Sheogorath
+* Sven Pfennig
+* Tobias Bradtke
+
+### Changes
+<details><summary>49 commits</summary>
+<p>
+
+* [`d33d428`](https://github.com/siderolabs/extensions/commit/d33d428dbf0df0cc6845174c7a607c61556d05ee) feat: add `uinput` driver extension
+* [`4563de5`](https://github.com/siderolabs/extensions/commit/4563de58b26e1a9d6990e590e2afaf26602306d2) feat: bump dependencies
+* [`e753a74`](https://github.com/siderolabs/extensions/commit/e753a74ee12a1715e9d6da7ef253cb255fe40038) chore: add MAINTAINERS file
+* [`bb94c9d`](https://github.com/siderolabs/extensions/commit/bb94c9d65a46caf2f2d03e191dab677d45f976f4) fix(stargz): set default root path
+* [`a5a6365`](https://github.com/siderolabs/extensions/commit/a5a636538dfccbef0dfd536511a81cf24a26199a) chore: add missing license
+* [`5f4947e`](https://github.com/siderolabs/extensions/commit/5f4947e28adedceb45ee610a456ad8b83cbe3240) docs: fix link to kspp page
+* [`03337d7`](https://github.com/siderolabs/extensions/commit/03337d706dd6148bd7e0a0350c43031b78ff58c1) chore: bump deps
+* [`cac285c`](https://github.com/siderolabs/extensions/commit/cac285cbd24e086af09df99a0b602538b70afd3a) chore: bump deps
+* [`d6c324d`](https://github.com/siderolabs/extensions/commit/d6c324dc1f65cd2f0ffa25f6b7e24991923fc1c2) chore: bump deps
+* [`37f2297`](https://github.com/siderolabs/extensions/commit/37f2297e6bdcc8fdc1eb5efcf166dfd4534bf261) feat: support lts and production nvidia modules
+* [`6e6f029`](https://github.com/siderolabs/extensions/commit/6e6f0293e138ebc1d3e4a15106614a46d386488c) docs: update README and release notes
+* [`26c505d`](https://github.com/siderolabs/extensions/commit/26c505db8cd83dd5aa7534440b7f467a6b4fa58e) feat: add crun container-runtime extension
+* [`c002fba`](https://github.com/siderolabs/extensions/commit/c002fbaf4853f433b4b86598311e74e2c87a4974) feat(mei): add extension to provide Intel Management Engine drivers
+* [`ab77645`](https://github.com/siderolabs/extensions/commit/ab77645a00cb074e2b52338540bca9a0cca72a6f) fix: update CRI config parts for containerd config v3
+* [`c536209`](https://github.com/siderolabs/extensions/commit/c536209ef820ab59b5a653fa451027f82c433352) feat(gvisor): add new runtime class with kvm support
+* [`b48d3a6`](https://github.com/siderolabs/extensions/commit/b48d3a65e6e9f57d0a54a58a1edbc8a735d900c8) chore: update extensions validator
+* [`807f599`](https://github.com/siderolabs/extensions/commit/807f59946ce986089fb2664eca31639ec6531302) release(v1.8.0-alpha.1): prepare release
+* [`d6773dd`](https://github.com/siderolabs/extensions/commit/d6773dd25aba4f101c2f49b251ea0a67ba242869) chore: bump deps
+* [`86511df`](https://github.com/siderolabs/extensions/commit/86511dff5bea2964987bd750c31ddba3bf3e214a) chore: update spin extension to v0.15.0
+* [`5334e89`](https://github.com/siderolabs/extensions/commit/5334e89374e6fb0766e25b0e702647908f4abfc0) fix: glibc search paths for nvidia
+* [`3197e22`](https://github.com/siderolabs/extensions/commit/3197e22a3121f71dde52a78792f67962696496b9) docs: improve `nut-client` docs
+* [`f0b6082`](https://github.com/siderolabs/extensions/commit/f0b6082466dc78a309d1e9a7d8525497d714d4d4) chore: bump tailscale to v1.68.1
+* [`8e946d6`](https://github.com/siderolabs/extensions/commit/8e946d688f52e689fa447bc0daecf09fe84623b0) fix: tgtd mount propagation
+* [`5904e12`](https://github.com/siderolabs/extensions/commit/5904e12cec3312c4808e9c65c94a6c555d17caa3) chore: add cache paths for go builds
+* [`b840088`](https://github.com/siderolabs/extensions/commit/b84008881c27a419e8153aa4d8332a5a59717734) chore: drop `/proc` mounts
+* [`3526f45`](https://github.com/siderolabs/extensions/commit/3526f4507a568bc2d6101ab1d15c9b29ddea47eb) fix: zfs extensions with nvidia
+* [`13f56fc`](https://github.com/siderolabs/extensions/commit/13f56fcac088dc8ba61198e15c633781d2e6ee20) chore: rename talos-vmtoolsd -> vmtoolsd-guest-agent
+* [`5e92a6c`](https://github.com/siderolabs/extensions/commit/5e92a6cb93f14fbef5230816b98d45f6366ab020) chore: use fedora mirror for glibc
+* [`4ed9ee5`](https://github.com/siderolabs/extensions/commit/4ed9ee584987bf47e20246680081d589b664a413) fix: zfs-tools libtirpc path
+* [`cce3b41`](https://github.com/siderolabs/extensions/commit/cce3b415e07a471d53d41b188a7c325ccc6a4d27) fix: gvisor-debug extension
+* [`d07caf7`](https://github.com/siderolabs/extensions/commit/d07caf7eed782732f09427f863d23e0dffe9c034) chore: add extensions validator
+* [`d1a0ce8`](https://github.com/siderolabs/extensions/commit/d1a0ce88c4e25e63cbe6e9664c621b75dea505bd) feat: include nsenter when building util-linux binaries
+* [`8abfa20`](https://github.com/siderolabs/extensions/commit/8abfa2085a1737b32a61ee7c6d20e93de3dd3d94) chore(ci): drop drone
+* [`7f39bce`](https://github.com/siderolabs/extensions/commit/7f39bceabb076b9157cb19c335956f51d5ad6849) feat: update Linux firmware to 20240513
+* [`44a6ab1`](https://github.com/siderolabs/extensions/commit/44a6ab1ec6fdf97c1902e92c330fc75bb8e52a93) feat: update Intel u-code to 20240514
+* [`d6f0b54`](https://github.com/siderolabs/extensions/commit/d6f0b546612bb9a3cf5fc0d1689d59a8308b1259) chore: update spin extension to v0.14.1
+* [`01808ff`](https://github.com/siderolabs/extensions/commit/01808ff2feef6d4bd29bfde10dca102219d5b2f7) feat: update mdadm to 4.3
+* [`2f97116`](https://github.com/siderolabs/extensions/commit/2f97116a50ee6b8cb6f1dd44f53a3db031a35711) feat: update dependencies
+* [`dffe8b9`](https://github.com/siderolabs/extensions/commit/dffe8b9546a4ca20640c3754460b457814db16f2) fix: extension name in manifests
+* [`d21bc48`](https://github.com/siderolabs/extensions/commit/d21bc482678c030957cff4ada882afcd372f8ab5) feat: update zfs extension to v2.2.4
+* [`80c5113`](https://github.com/siderolabs/extensions/commit/80c5113abfabdd868a069410bcd86cdeec790b48) release(v1.8.0-alpha.0): prepare release
+* [`dd85754`](https://github.com/siderolabs/extensions/commit/dd8575455e1aaf2eff31f0217bffc15d9d6450d3) fix: rekres the repo after pkgs bump
+* [`d589ad0`](https://github.com/siderolabs/extensions/commit/d589ad0d7955a3437063dcaabc21d9b68816eff1) release(v1.8.0-alpha.0): prepare release
+* [`882b4ac`](https://github.com/siderolabs/extensions/commit/882b4ac9f59d0daf4e5bbd5d15ae80861a778de3) fix: version in util-linux manifest
+* [`4df073a`](https://github.com/siderolabs/extensions/commit/4df073ab7f5cc5d037a466e048144b57d655e408) chore(ci): only build amd64 for extensions e2e
+* [`69fe96c`](https://github.com/siderolabs/extensions/commit/69fe96ccc330ac84bcbc265a4a95bd35cfe0df2a) docs: improve ExtensionServiceConfig docs
+* [`8672c3b`](https://github.com/siderolabs/extensions/commit/8672c3baf51f36a9e796b0532db0f1159847cf4d) chore: update pkgs version to the latest
+* [`76d3797`](https://github.com/siderolabs/extensions/commit/76d3797fedad56cbe1c0a9ba85328ac9f545ce35) docs: update Spin README.md
+* [`213ef32`](https://github.com/siderolabs/extensions/commit/213ef326c12bcf0a97f8fd29caa46ff40c96a310) feat: add spin wasm runtime
+</p>
+</details>
+
+### Changes since v1.8.0-alpha.1
+<details><summary>15 commits</summary>
+<p>
+
+* [`d33d428`](https://github.com/siderolabs/extensions/commit/d33d428dbf0df0cc6845174c7a607c61556d05ee) feat: add `uinput` driver extension
+* [`4563de5`](https://github.com/siderolabs/extensions/commit/4563de58b26e1a9d6990e590e2afaf26602306d2) feat: bump dependencies
+* [`e753a74`](https://github.com/siderolabs/extensions/commit/e753a74ee12a1715e9d6da7ef253cb255fe40038) chore: add MAINTAINERS file
+* [`bb94c9d`](https://github.com/siderolabs/extensions/commit/bb94c9d65a46caf2f2d03e191dab677d45f976f4) fix(stargz): set default root path
+* [`a5a6365`](https://github.com/siderolabs/extensions/commit/a5a636538dfccbef0dfd536511a81cf24a26199a) chore: add missing license
+* [`5f4947e`](https://github.com/siderolabs/extensions/commit/5f4947e28adedceb45ee610a456ad8b83cbe3240) docs: fix link to kspp page
+* [`03337d7`](https://github.com/siderolabs/extensions/commit/03337d706dd6148bd7e0a0350c43031b78ff58c1) chore: bump deps
+* [`cac285c`](https://github.com/siderolabs/extensions/commit/cac285cbd24e086af09df99a0b602538b70afd3a) chore: bump deps
+* [`d6c324d`](https://github.com/siderolabs/extensions/commit/d6c324dc1f65cd2f0ffa25f6b7e24991923fc1c2) chore: bump deps
+* [`37f2297`](https://github.com/siderolabs/extensions/commit/37f2297e6bdcc8fdc1eb5efcf166dfd4534bf261) feat: support lts and production nvidia modules
+* [`6e6f029`](https://github.com/siderolabs/extensions/commit/6e6f0293e138ebc1d3e4a15106614a46d386488c) docs: update README and release notes
+* [`26c505d`](https://github.com/siderolabs/extensions/commit/26c505db8cd83dd5aa7534440b7f467a6b4fa58e) feat: add crun container-runtime extension
+* [`c002fba`](https://github.com/siderolabs/extensions/commit/c002fbaf4853f433b4b86598311e74e2c87a4974) feat(mei): add extension to provide Intel Management Engine drivers
+* [`ab77645`](https://github.com/siderolabs/extensions/commit/ab77645a00cb074e2b52338540bca9a0cca72a6f) fix: update CRI config parts for containerd config v3
+* [`c536209`](https://github.com/siderolabs/extensions/commit/c536209ef820ab59b5a653fa451027f82c433352) feat(gvisor): add new runtime class with kvm support
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.7.0](https://github.com/siderolabs/extensions/releases/tag/v1.7.0)
+
 ## [Talos System Extensions 1.8.0-alpha.1](https://github.com/siderolabs/extensions/releases/tag/v1.8.0-alpha.1) (2024-07-08)
 
 Welcome to the v1.8.0-alpha.1 release of Talos System Extensions!  
