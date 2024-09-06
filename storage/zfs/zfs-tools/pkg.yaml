@@ -11,8 +11,8 @@ steps:
   - sources:
       - url: https://github.com/openzfs/zfs/releases/download/zfs-{{ .ZFS_DRIVER_VERSION }}/zfs-{{ .ZFS_DRIVER_VERSION }}.tar.gz
         destination: zfs.tar.gz
-        sha256: 9790905f7683d41759418e1ef3432828c31116654ff040e91356ff1c21c31ec0
-        sha512: 1d17e30573d594fb5c9ea77cde104616dca362fed7530296816d1b55173594f66170fcfb23ab57c27074f85b79d3eb557b4ee9a1c420e507b2434a7902d8dcc1
+        sha256: c92e02103ac5dd77bf01d7209eabdca55c7b3356aa747bb2357ec4222652a2a7
+        sha512: c217a3397b67d7239bc30bc492d58fff96bb29c9cf73e390d1787a4fb787cb297557e594a926453fed11faaab80363d40853af271f8ee18ce9a317dfde4c6745
     env:
       ARCH: {{ if eq .ARCH "aarch64"}}arm64{{ else if eq .ARCH "x86_64" }}x86_64{{ else }}unsupported{{ end }}
     prepare:
