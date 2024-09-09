@@ -4,7 +4,7 @@ metadata:
   version: "$VERSION"
   author: Andrei Kvapil, Aenix
   description: |
-    This system extension provides kernel module driver for ZFS built against a specific Talos version.
+    This system extension provides the ZFS kernel module, the ZFS utilities, and a service to import all ZFS pools on start and unmount all pools on stop.
   compatibility:
     talos:
       version: ">= v1.6.0"

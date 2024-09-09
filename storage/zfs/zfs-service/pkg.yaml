@@ -1,0 +1,21 @@
+name: zfs-service
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - cachePaths:
+      - /.cache/go-build
+      - /go/pkg
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        cp -r /pkg/* .
+        CGO_ENABLED=0 go build -ldflags "-s -w" -trimpath -o zfs-service main.go
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/zfs-service
+        cp zfs-service /rootfs/usr/local/lib/containers/zfs-service/
+finalize:
+  - from: /rootfs
+    to: /rootfs

@@ -9,19 +9,18 @@ dependencies:
   - stage: libtirpc-zfs
   - stage: zlib-zfs
   - stage: zfs-tools
+  - stage: zfs-service
 steps:
   - prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
   - install:
       - |
-        mkdir -p /rootfs/lib/modules /rootfs/usr/local/lib/containers/zpool-importer
-
-        cp -R /lib/modules/* /rootfs/lib/modules
+        mkdir -p /rootfs/lib/modules
+        cp -R /lib/modules/* /rootfs/lib/modules/
       - |
         mkdir -p /rootfs/usr/local/etc/containers
-
-        cp /pkg/zpool-importer.yaml /rootfs/usr/local/etc/containers/zpool-importer.yaml
+        cp /pkg/zfs-service.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs

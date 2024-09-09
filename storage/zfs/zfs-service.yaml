@@ -1,15 +1,10 @@
-name: zpool-importer
+name: zfs-service
 depends:
   - service: udevd
   - service: cri
   - path: /dev/zfs
 container:
-  security:
-    rootfsPropagation: shared
-  entrypoint: /usr/local/sbin/zpool
-  args:
-    - import
-    - -fa
+  entrypoint: /zfs-service
   mounts:
     # ld-musl-x86_64.so.1
     - source: /lib
@@ -44,6 +39,13 @@ container:
         - rshared
         - rbind
         - rw
+    - source: /run
+      destination: /run
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
     - source: /var
       destination: /var
       type: bind
@@ -51,4 +53,6 @@ container:
         - rshared
         - rbind
         - rw
+  security:
+    rootfsPropagation: shared
 restart: untilSuccess
