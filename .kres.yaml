@@ -60,7 +60,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.8.0
+        defaultValue: v1.8.0-4-g736ecae
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
@@ -162,3 +162,7 @@ spec:
           cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
             cosign sign --yes $$image; \
         done
+---
+kind: common.Repository
+spec:
+  conformMaximumOfOneCommit: false
