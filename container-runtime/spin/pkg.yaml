@@ -24,6 +24,9 @@ steps:
         mkdir -p /rootfs/usr/local/bin
 
         tar xf containerd-shim-spin.tar.gz -C /rootfs/usr/local/bin
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/spin.part /rootfs/etc/cri/conf.d/spin.part
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -35,5 +38,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/spin.part
-    to: /rootfs/etc/cri/conf.d/spin.part

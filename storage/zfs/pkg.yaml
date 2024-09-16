@@ -18,6 +18,10 @@ steps:
         mkdir -p /rootfs/lib/modules /rootfs/usr/local/lib/containers/zpool-importer
 
         cp -R /lib/modules/* /rootfs/lib/modules
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers
+
+        cp /pkg/zpool-importer.yaml /rootfs/usr/local/lib/containers/zpool-importer.yaml
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -29,5 +33,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/zpool-importer.yaml
-    to: /rootfs/usr/local/etc/containers/zpool-importer.yaml

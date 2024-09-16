@@ -20,10 +20,13 @@ steps:
         CGO_ENABLED=0 go build -o ./hello-world .
     install:
       - |
-        mkdir -p /rootfs/usr/local/etc/containers
         mkdir -p /rootfs/usr/local/lib/containers/hello-world
 
         cp -p /pkg/src/hello-world /rootfs/usr/local/lib/containers/hello-world/
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+
+        cp /pkg/hello-world.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -35,5 +38,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/hello-world.yaml
-    to: /rootfs/usr/local/etc/containers/

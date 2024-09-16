@@ -18,7 +18,9 @@ steps:
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     install:
       - |
-        mkdir -p /rootfs
+        mkdir -p /rootfs/usr/local/etc/containers
+
+        cp /pkg/nvidia-persistenced.yaml /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -28,7 +30,5 @@ steps:
 finalize:
   - from: /rootfs
     to: /rootfs
-  - from: /pkg/nvidia-persistenced.yaml
-    to: /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
   - from: /pkg/manifest.yaml
     to: /

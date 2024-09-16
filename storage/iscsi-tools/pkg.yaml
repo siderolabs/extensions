@@ -19,6 +19,11 @@ steps:
       # cleanup
       rm -rf /rootfs/usr/local/include
       rm -rf /rootfs/usr/share
+    - |
+      mkdir -p /rootfs/usr/local/etc/containers
+
+      cp /pkg/iscsid.yaml /rootfs/usr/local/etc/containers/iscsid.yaml
+      cp /pkg/tgtd.yaml /rootfs/usr/local/etc/containers/tgtd.yaml
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -26,10 +31,6 @@ steps:
         cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
         /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
 finalize:
-  - from: /pkg/iscsid.yaml
-    to: /rootfs/usr/local/etc/containers/iscsid.yaml
-  - from: /pkg/tgtd.yaml
-    to: /rootfs/usr/local/etc/containers/tgtd.yaml
   - from: /rootfs
     to: /rootfs
   - from: /pkg/manifest.yaml

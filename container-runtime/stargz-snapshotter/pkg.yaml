@@ -41,6 +41,15 @@ steps:
 
         cp ./out/ctr-remote /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
         chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/stargz-snapshotter.part /rootfs/etc/cri/conf.d/stargz-snapshotter.part
+
+        mkdir -p /rootfs/usr/local/etc/containerd-stargz-grpc
+        cp /pkg/config.toml /rootfs/usr/local/etc/containerd-stargz-grpc/config.toml
+
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/stargz-snapshotter.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -52,9 +61,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/stargz-snapshotter.part
-    to: /rootfs/etc/cri/conf.d/stargz-snapshotter.part
-  - from: /pkg/config.toml
-    to: /rootfs/usr/local/etc/containerd-stargz-grpc/config.toml
-  - from: /pkg/stargz-snapshotter.yaml
-    to: /rootfs/usr/local/etc/containers/
