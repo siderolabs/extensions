@@ -44,6 +44,11 @@ steps:
 
         cp ./bin/containerd-shim-runsc-v1 /rootfs/usr/local/bin/containerd-shim-runsc-v1
         chmod +x /rootfs/usr/local/bin/containerd-shim-runsc-v1
+
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+
+        cp /pkg/gvisor.part /pkg/runsc.toml /pkg/gvisor-kvm.part /pkg/runsc-kvm.toml /rootfs/etc/cri/conf.d/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -55,11 +60,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/gvisor.part
-    to: /rootfs/etc/cri/conf.d/gvisor.part
-  - from: /pkg/runsc.toml
-    to: /rootfs/etc/cri/conf.d/runsc.toml
-  - from: /pkg/gvisor-kvm.part
-    to: /rootfs/etc/cri/conf.d/gvisor-kvm.part
-  - from: /pkg/runsc-kvm.toml
-    to: /rootfs/etc/cri/conf.d/runsc-kvm.toml

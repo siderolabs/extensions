@@ -37,6 +37,9 @@ steps:
         cp -pr dist/tailscale /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
         cp -pr dist/tailscaled /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
         cp -pr dist/containerboot /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/tailscale.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -48,5 +51,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/tailscale.yaml
-    to: /rootfs/usr/local/etc/containers/

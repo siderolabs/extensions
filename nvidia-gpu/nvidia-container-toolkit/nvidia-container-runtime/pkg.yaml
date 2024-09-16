@@ -49,10 +49,12 @@ steps:
           ln -sv nvidia-container-runtime-wrapper /rootfs/usr/local/bin/$(basename $clean_file)
           cp $clean_file /rootfs/usr/local/bin/$(basename $clean_file).real
         done
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/nvidia-container-runtime.part /rootfs/etc/cri/conf.d/nvidia-container-runtime.part
+
+        mkdir -p /rootfs/usr/local/etc/nvidia-container-runtime
+        cp /pkg/nvidia-container-runtime.toml /rootfs/usr/local/etc/nvidia-container-runtime/config.toml
 finalize:
   - from: /rootfs
     to: /rootfs
-  - from: /pkg/nvidia-container-runtime.part
-    to: /rootfs/etc/cri/conf.d/nvidia-container-runtime.part
-  - from: /pkg/nvidia-container-runtime.toml
-    to: /rootfs/usr/local/etc/nvidia-container-runtime/config.toml

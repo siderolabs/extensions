@@ -63,6 +63,9 @@ steps:
         rmdir /rootfs/usr/local/share
         rmdir /rootfs/var/run
         rmdir /rootfs/var
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/qemu-guest-agent.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -74,5 +77,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/qemu-guest-agent.yaml
-    to: /rootfs/usr/local/etc/containers/

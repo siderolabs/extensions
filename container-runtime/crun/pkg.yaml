@@ -24,6 +24,10 @@ steps:
         mkdir -p /rootfs/usr/local/bin
         cp -av crun /rootfs/usr/local/bin/crun
         chmod +x /rootfs/usr/local/bin/crun
+
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/crun.part /rootfs/etc/cri/conf.d/crun.part
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -36,5 +40,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/crun.part
-    to: /rootfs/etc/cri/conf.d/crun.part
