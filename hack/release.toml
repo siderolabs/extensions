@@ -65,7 +65,7 @@ ecr-credential-provider: 1.31.0
 qemu-guest-agent: 9.1.0
 mdadm: 4.3
 Intel microcode: 20240910
-Linux firmware: 20240811
+Linux firmware: 20240909
 Spin: 0.15.1
 Gvisor: 20240729.0
 Wasmedge: v0.4.0
