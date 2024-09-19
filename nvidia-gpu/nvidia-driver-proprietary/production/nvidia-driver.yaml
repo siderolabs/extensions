@@ -1,0 +1,50 @@
+name: nvidia-driver
+container:
+  entrypoint: /nvidia-driver
+  mounts:
+    # device files
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # glibc dynamic linker
+    - source: /lib64
+      destination: /lib64
+      type: bind
+      options:
+        - bind
+        - ro
+    # glibc root, which includes the nvidia driver userspace components
+    - source: /usr/local/glibc
+      destination: /usr/local/glibc
+      type: bind
+      options:
+        - bind
+        - ro
+    # nvidia driver destination
+    - source: /run/nvidia
+      destination: /run/nvidia
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # service state file
+    - source: /var/run
+      destination: /var/run
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+  security:
+    rootfsPropagation: shared
+depends:
+  - service: cri
+  # we need to depend on udevd so that the nvidia device files are created
+  - service: udevd
+  - path: /sys/bus/pci/drivers/nvidia
+restart: always

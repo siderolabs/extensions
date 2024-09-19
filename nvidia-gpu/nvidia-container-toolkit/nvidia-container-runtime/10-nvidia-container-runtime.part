@@ -1,7 +1,0 @@
-[plugins."io.containerd.cri.v1.runtime".containerd.runtimes.nvidia]
-  privileged_without_host_devices = false
-  runtime_engine = ""
-  runtime_root = ""
-  runtime_type = "io.containerd.runc.v2"
-  [plugins."io.containerd.cri.v1.runtime".containerd.runtimes.nvidia.options]
-    BinaryName = "/usr/local/bin/nvidia-container-runtime"

@@ -1,0 +1,28 @@
+name: nvidia-driver-service
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /tmp/go
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+  - network: default
+    prepare:
+      - |
+        cp -r /pkg/* .
+      - |
+        go mod download
+  - network: none
+    build:
+      - |
+        CGO_ENABLED=0 go build -ldflags "-s -w" -trimpath -o nvidia-driver main.go
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/nvidia-driver
+        cp nvidia-driver /rootfs/usr/local/lib/containers/nvidia-driver/
+finalize:
+  - from: /rootfs
+    to: /rootfs

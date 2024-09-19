@@ -1,5 +1,0 @@
-# This will create the device nvidia device nodes
-ACTION=="add", DEVPATH=="/bus/pci/drivers/nvidia", RUN+="/usr/local/bin/nvidia-modprobe -c 0"
-
-# Create the device node for the nvidia-uvm module
-ACTION=="add", DEVPATH=="/module/nvidia_uvm", SUBSYSTEM=="module", RUN+="/usr/local/bin/nvidia-modprobe -c 0 -u"
