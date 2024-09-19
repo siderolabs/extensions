@@ -19,9 +19,9 @@ steps:
 
         cp -R /lib/modules/* /rootfs/lib/modules
       - |
-        mkdir -p /rootfs/usr/local/lib/containers
+        mkdir -p /rootfs/usr/local/etc/containers
 
-        cp /pkg/zpool-importer.yaml /rootfs/usr/local/lib/containers/zpool-importer.yaml
+        cp /pkg/zpool-importer.yaml /rootfs/usr/local/etc/containers/zpool-importer.yaml
     test:
       - |
         mkdir -p /extensions-validator-rootfs
