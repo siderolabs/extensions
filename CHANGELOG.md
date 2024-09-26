@@ -1,3 +1,37 @@
+## [Talos System Extensions 1.7.7](https://github.com/siderolabs/extensions/releases/tag/v1.7.7) (2024-09-26)
+
+Welcome to the v1.7.7 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.7/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Intel microcode: 20240910
+Linux firmware: 20240811
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`7d4f9e5`](https://github.com/siderolabs/extensions/commit/7d4f9e5cd3fa84cc266bda4f892914f48e62a11f) feat: update Intel u-code to 20240910
+* [`9ee5f4d`](https://github.com/siderolabs/extensions/commit/9ee5f4dc97f088ad1102980b070f96ed3abbbc35) feat: update pkgs to the latest
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.7.6](https://github.com/siderolabs/extensions/releases/tag/v1.7.6)
+
 ## [Talos System Extensions 1.7.6](https://github.com/siderolabs/extensions/releases/tag/v1.7.6) (2024-08-06)
 
 Welcome to the v1.7.6 release of Talos System Extensions!
