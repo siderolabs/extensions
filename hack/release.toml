@@ -6,75 +6,14 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.7.0"
+previous = "v1.8.0"
 
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
-    [notes.container-runtime-crun]
-        title = "CRUN Container Runtime"
-        description = """
-CRUN container runtime is now shipped as a Talos System Extension
-"""
-
-    [notes.container-runtime-gvisor]
-        title = "Gvisor Container Runtime"
-        description = """
-Gvisor now ships an additional runtime using `kvm` as the sandboxing mechanism.
-"""
-
-    [notes.intel-management-engine]
-        title = "Intel Management Engine"
-        description = """
-Intel Management Engine (IME) modules is now shipped as a Talos System Extension.
-"""
-
-    [notes.nvidia]
-        title = "NVIDIA Driver and Container Toolkit"
-        description = """
-The NVIDIA drivers and the container toolkits now ships an LTS and Production version as per https://docs.nvidia.com/datacenter/tesla/drivers/index.html#lifecycle.
-
-The new extensions are named below:
-
-* nvidia-container-toolkit-production
-* nvidia-container-toolkit-lts
-* nvidia-open-gpu-kernel-modules-production
-* nvidia-open-gpu-kernel-modules-lts
-* nonfree-kmod-nvidia-lts
-* nonfree-kmod-nvidia-production
-
-The extensions would ship the latest version of LTS/Production drivers available at the time of Talos release.
-
-Image Factory using an existing schematic id would upgrade the NVIDIA driver and container toolkit to the LTS version.
-
-If production version is required, the schematic id should be updated to the production version.
-"""
-
-[notes.updates]
-    title = "Component Updates"
-    description = """
-ZFS: 2.2.6
-DRBD: 9.2.11
-gasket: 5815ee3
-Tailscale: 1.70.0
-ecr-credential-provider: 1.31.0
-qemu-guest-agent: 9.1.0
-mdadm: 4.3
-Intel microcode: 20240910
-Linux firmware: 20240909
-Spin: 0.15.1
-Gvisor: 20240729.0
-Wasmedge: v0.4.0
-Kata Containers: 3.3.0
-NVIDIA container toolkit: v1.16.1
-iscsi-tools: v0.1.5
-vmtoolsd: v0.6.0
-util-linux-tools: 2.40.2
-"""
-
 
 [make_deps]
