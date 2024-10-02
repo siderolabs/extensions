@@ -1,0 +1,16 @@
+name: nvidia-open-gpu-kernel-modules-lts
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  # The pkgs version for a particular release of Talos as defined in
+  # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/nvidia-open-gpu-kernel-modules-lts-pkg:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - install:
+      - |
+        mkdir -p /rootfs/lib/modules
+        cp -R /lib/modules/* /rootfs/lib/modules
+finalize:
+  - from: /rootfs
+    to: /rootfs

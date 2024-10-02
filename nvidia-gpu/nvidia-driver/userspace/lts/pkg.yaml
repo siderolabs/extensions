@@ -1,0 +1,68 @@
+name: nvidia-driver-userspace-lts
+variant: scratch
+shell: /bin/bash
+install:
+  - bash
+dependencies:
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
+steps:
+  - sources:
+    # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://us.download.nvidia.com/tesla/{{ .NVIDIA_DRIVER_LTS_VERSION }}/NVIDIA-Linux-aarch64-{{ .NVIDIA_DRIVER_LTS_VERSION }}.run
+        destination: nvidia.tar.xz
+        sha256: af3f72f5e4906805987844636b87ad1132650d05116272824c76dcc3f816d8e9
+        sha512: bb305f1703557461b0a0a29066c304658d9684841104c6f4d9ff44f9db90fee14ae619cd2fe3242823a5fe3a69b168b8174b163740014b15cdef36db88ba2d96
+    # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://us.download.nvidia.com/tesla/{{ .NVIDIA_DRIVER_LTS_VERSION }}/NVIDIA-Linux-x86_64-{{ .NVIDIA_DRIVER_LTS_VERSION }}.run
+        destination: nvidia.tar.xz
+        sha256: c7bb0a0569c5347845479ed4e3e4d885c6ee3b8adf068c3401cdf754d5ba3d3b
+        sha512: 424950ef303ea39499e96f8c90c1e0c83aee12309779d4f335769ef554ad4f7c38e98f69c64b408adc85a7cf51ea600d85222792402b9c6b7941f1af066d2a33
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+      - |
+        # the nvidia installer validates these packages are installed
+        ln -s /bin/true /bin/modprobe
+        ln -s /bin/true /bin/rmmod
+        ln -s /bin/true /bin/lsmod
+        ln -s /bin/true /bin/depmod
+
+        chmod +x nvidia.run
+        ./nvidia.run --extract-only --target nvidia
+    install:
+      - |
+        ./nvidia/nvidia-installer \
+          --silent \
+          --x-prefix=/rootfs/usr/local/glibc/usr \
+          --opengl-prefix=/rootfs/usr/local/glibc/usr \
+          --utility-prefix=/rootfs/usr/local/glibc/usr \
+          --xdg-data-dir=/rootfs/usr/local/glibc/usr/share \
+          --documentation-prefix=/rootfs/usr/local/glibc/usr \
+          --application-profile-path=/rootfs/usr/local/glibc/usr/share/nvidia \
+          --log-file-name=/tmp/nvidia-installer.log \
+          --no-rpms \
+          --no-backup \
+          --no-recursion \
+          --no-kernel-modules \
+          --no-x-check \
+          --no-nouveau-check \
+          --no-distro-scripts \
+          --no-wine-files \
+          --no-kernel-module-source \
+          --no-check-for-alternate-installs \
+          --override-file-type-destination=FIRMWARE:/rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }} \
+          --no-systemd
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /etc/OpenCL
+    to: /rootfs/usr/local/glibc/etc/OpenCL
+  - from: /etc/vulkan
+    to: /rootfs/usr/local/glibc/etc/vulkan
+  - from: /usr/lib/nvidia
+    to: /rootfs/usr/local/glibc/usr/lib/nvidia
+  - from: /usr/share/egl
+    to: /rootfs/usr/local/glibc/usr/share/egl
+  - from: /usr/share/glvnd
+    to: /rootfs/usr/local/glibc/usr/share/glvnd
+  - from: /usr/share/nvidia
+    to: /rootfs/usr/local/glibc/usr/share/nvidia

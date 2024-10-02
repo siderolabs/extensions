@@ -3,19 +3,5 @@
 NVIDIA_DRIVER_LTS_VERSION: 535.183.06
 # renovate: datasource=github-releases extractVersion=^\d+\.(?<version>\d+\.\d+)$ depName=nvidia/open-gpu-kernel-modules
 NVIDIA_DRIVER_PRODUCTION_VERSION: 550.90.07
-# renovate: datasource=github-releases depName=nvidia/nvidia-container-toolkit
-CONTAINER_TOOLKIT_VERSION: v1.16.1
-CONTAINER_TOOLKIT_REF: a470818ba7d9166be282cd0039dd2fc9b0a34d73
-# renovate: datasource=github-releases depName=nvidia/libnvidia-container
-LIBNVIDIA_CONTAINER_VERSION: v1.16.1
-LIBNVIDIA_CONTAINER_REF: 4c2494f16573b585788a42e9c7bee76ecd48c73d
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
 WOLFI_BASE_REF: sha256:72c8bfed3266b2780243b144dc5151150015baf5a739edbbde53d154574f1607
-# renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ depName=https://sourceware.org/git/glibc.git
-GLIBC_VERSION: 2.40
-# renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp
-LIBSECCOMP_VERSION: 2.5.5
-# renovate: datasource=git-tags extractVersion=^libcap-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/libs/libcap/libcap.git
-LIBCAP_VERSION: 2.70
-# renovate: datasource=git-tags extractVersion=^elfutils-(?<version>.*)$ depName=git://sourceware.org/git/elfutils.git
-ELFUTILS_VERSION: 0.191

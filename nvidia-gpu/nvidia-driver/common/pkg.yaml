@@ -1,0 +1,13 @@
+name: nvidia-driver-common
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/modprobe.d
+        cp /pkg/files/nvidia.conf /rootfs/usr/local/lib/modprobe.d/nvidia.conf
+finalize:
+  - from: /rootfs
+    to: /rootfs

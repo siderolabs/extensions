@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: nvidia-driver-production
+  version: "$VERSION"
+  author: Jean-Francois Roy
+  description: |
+    This system extension provides the NVIDIA open-source GPU kernel modules and matching userspace
+    drivers, production version. It depends on the glibc extension.
+  compatibility:
+    talos:
+      version: ">= v1.9.0"
