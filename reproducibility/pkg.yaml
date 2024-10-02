@@ -23,6 +23,8 @@ dependencies:
   - stage: fuse3
   # gasket-driver can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: gasket-driver
+
+  - stage: glibc
   - stage: gvisor
   - stage: gvisor-debug
   - stage: hello-world-service
