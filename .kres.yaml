@@ -12,6 +12,7 @@ spec:
     - crun
     - drbd
     - ecr-credential-provider
+    - emulex-drivers
     - fuse3
     - gasket-driver
     - gvisor

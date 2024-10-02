@@ -20,6 +20,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | crun                                      | Henrik Gerdes       | [hegerdes](https://github.com/hegerdes)                              |
 | drbd                                      | Needs Maintainer    | NA                                                                   |
 | ecr-credential-provider                   | Florian Ströger     | [Preisschild](https://github.com/Preisschild)                        |
+| emulex-drivers                            | Sidero Labs         | NA                                                                   |
 | fuse3                                     | Sidero Labs         | NA                                                                   |
 | gasket-driver                             | Sidero Labs         | NA                                                                   |
 | gvisor                                    | Sidero Labs         | NA                                                                   |

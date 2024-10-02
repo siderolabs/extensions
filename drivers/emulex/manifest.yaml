@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: emulex-drivers
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides Emulex Fibre Channel Host Bus Adapter drivers.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"

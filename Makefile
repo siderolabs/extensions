@@ -63,6 +63,7 @@ TARGETS += chelsio-firmware
 TARGETS += crun
 TARGETS += drbd
 TARGETS += ecr-credential-provider
+TARGETS += emulex-drivers
 TARGETS += fuse3
 TARGETS += gasket-driver
 TARGETS += gvisor

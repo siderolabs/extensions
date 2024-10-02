@@ -1,0 +1,7 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/scsi/lpfc/lpfc.ko
+kernel/crypto/crct10dif_common.ko
+kernel/crypto/crct10dif_generic.ko
+kernel/lib/crc-t10dif.ko
