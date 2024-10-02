@@ -21,6 +21,7 @@ steps:
         patch -p1 < /pkg/patches/no-werror.patch
         patch -p1 < /pkg/patches/musl-125.patch
         patch -p1 < /pkg/patches/exit-gracefully-when-md-device-not-found.patch
+        patch -p1 < /pkg/patches/change-sysconfdir.patch
     build:
       - |
         mkdir -p /run/mdadm
@@ -35,6 +36,8 @@ steps:
         cp mdmon /rootfs/usr/local/sbin/mdmon
         cp /pkg/files/udev-md-raid-arrays.rules   /rootfs/usr/etc/udev/rules.d/63-md-raid-arrays.rules
         cp /pkg/files/udev-md-raid-assembly.rules /rootfs/usr/etc/udev/rules.d/64-md-raid-assembly.rules
+        mkdir /var/run/mdadm
+        touch /var/run/mdadm/mdadm.conf
     test:
       - |
         mkdir -p /extensions-validator-rootfs
