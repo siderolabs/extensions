@@ -16,7 +16,7 @@ jobs:
       - pkgs
     services:
       buildkitd:
-        image: moby/buildkit:v0.15.2
+        image: moby/buildkit:v0.16.0
         options: --privileged
         ports:
           - 1234:1234

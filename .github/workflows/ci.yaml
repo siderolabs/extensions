@@ -33,7 +33,7 @@ jobs:
       labels: ${{ steps.retrieve-pr-labels.outputs.result }}
     services:
       buildkitd:
-        image: moby/buildkit:v0.15.2
+        image: moby/buildkit:v0.16.0
         options: --privileged
         ports:
           - 1234:1234
@@ -143,7 +143,7 @@ jobs:
       - default
     services:
       buildkitd:
-        image: moby/buildkit:v0.15.2
+        image: moby/buildkit:v0.16.0
         options: --privileged
         ports:
           - 1234:1234
