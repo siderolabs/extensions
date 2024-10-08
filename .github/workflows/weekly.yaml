@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-08-29T14:13:04Z by kres b5ca957.
+# Generated on 2024-10-08T16:19:09Z by kres 34e72ac.
 
 name: weekly
 concurrency:
@@ -16,7 +16,7 @@ jobs:
       - pkgs
     services:
       buildkitd:
-        image: moby/buildkit:v0.15.2
+        image: moby/buildkit:v0.16.0
         options: --privileged
         ports:
           - 1234:1234
