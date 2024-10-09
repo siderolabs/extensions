@@ -1,0 +1,67 @@
+# © 2024 Nokia
+# Licensed under the Mozilla Public License 2.0
+# SPDX-License-Identifier: MPL-2.0
+name: lldpd
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+    - stage: base
+steps:
+  - sources:
+      - url: https://github.com/lldpd/lldpd/releases/download/{{ .LLDPD_VERSION }}/lldpd-{{ .LLDPD_VERSION }}.tar.gz
+        destination: lldpd.tar.gz
+        sha256: 38cd319aa02ab61d9a2ad130e22f906795ccca9ac73a0a0d9dac19ca99a8a870
+        sha512: c8734221767cd879c98ea3ee6fa80e1dce2f8470a97b0f757cfe7ef8fe2adaf878fdedcda896cf65e1af980634f2ab312588658fb85f89c6d5b6cc9d2da52045
+        # ref: https://git.alpinelinux.org/aports/tree/main/libc-dev
+        # https://wiki.musl-libc.org/faq.html#Q:-Why-is-%3Ccode%3Esys/queue.h%3C/code%3E-not-included
+      - url: https://git.alpinelinux.org/aports/plain/main/libc-dev/sys-queue.h?id=87f42de0e1c1c6d2b229edfc126a3d4191c835ed
+        sha256: c13407edd0e33be73cae72514cb234f8612e1c0e54401c9448daffd3a240158b
+        sha512: 2f0d5e6e4dc3350285cf17009265dddcbe12431c111868eea39bc8cb038ab7c1f2acacbb21735c4e9d4a1fd106a8fc0f8611ea33987d4faba37dde5ce6da0750
+        destination: sys-queue.h
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xf lldpd.tar.gz --strip-components=1
+
+        mkdir -p /usr/local/include/sys
+        cp sys-queue.h /usr/local/include/sys/queue.h
+      - |
+        ln -sf /toolchain/bin/env /usr/bin/env
+
+        export CFLAGS="${CFLAGS} -I/usr/local/include"
+
+        ./configure \
+                --prefix=/usr/local \
+                --libexecdir=/usr/local/lib/lldpd \
+                --datadir=/usr/local/share/lldpd \
+                --sysconfdir=/usr/local/etc/lldpd \
+                --enable-hardening \
+                --with-privsep-user=root \
+                --with-privsep-group=root \
+                --with-privsep-chroot=/opt/lldpd
+    build:
+      - |
+        make -j $(nproc) all
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/{etc/containers,lib/containers/lldpd/{etc,opt/lldpd}}
+
+        cp /pkg/lldpd.yaml /rootfs/usr/local/etc/containers/lldpd.yaml
+
+        cp /pkg/files/* /rootfs/usr/local/lib/containers/lldpd/etc
+
+        make DESTDIR=/rootfs/usr/local/lib/containers/lldpd install-exec
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

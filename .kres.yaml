@@ -22,6 +22,7 @@ spec:
     - intel-ucode
     - iscsi-tools
     - kata-containers
+    - lldpd
     - mdadm
     - mei
     - nut-client

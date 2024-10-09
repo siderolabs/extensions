@@ -35,6 +35,7 @@ dependencies:
   - stage: iscsi-tools
   # kata-containers can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
   # - stage: kata-containers
+  - stage: lldpd
   - stage: mdadm
   # mei can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: mei
