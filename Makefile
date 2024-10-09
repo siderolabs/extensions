@@ -73,6 +73,7 @@ TARGETS += intel-ice-firmware
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
 TARGETS += kata-containers
+TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
 TARGETS += nut-client

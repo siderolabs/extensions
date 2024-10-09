@@ -1,0 +1,54 @@
+#© 2024 Nokia
+#Licensed under the Mozilla Public License 2.0
+#SPDX-License-Identifier: MPL-2.0
+name: lldpd
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+container:
+  args:
+    - -d
+    - -u
+    - /var/run/lldpd/lldpd.socket
+    - -I
+    - eth*,enp*,ens*,eno*
+  entrypoint: /usr/local/sbin/lldpd
+  environment:
+  - PATH=/usr/local/sbin
+  mounts:
+    # release file
+    - source: /etc/os-release
+      destination: /etc/os-release
+      type: bind
+      options:
+        - bind
+        - ro
+    # libs
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # more libs
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro      
+    # lldpd socket
+    - source: /var/run/lldpd
+      destination: /var/run/lldpd
+      type: bind
+      options:
+      - bind
+      - rw
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+restart: always
