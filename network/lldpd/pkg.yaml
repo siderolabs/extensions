@@ -1,0 +1,67 @@
+#© 2024 Nokia
+#Licensed under the Mozilla Public License 2.0
+#SPDX-License-Identifier: MPL-2.0
+name: lldpd
+variant: alpine
+shell: /bin/bash
+dependencies:
+    - stage: base
+      from: /
+      to: /base-rootfs
+install:
+  - autoconf
+  - automake
+  - bash
+  - build-base
+  - bsd-compat-headers
+  - libtool
+  - linux-headers
+  - m4
+  - pkgconfig
+steps:
+  - sources:
+      - url: https://github.com/lldpd/lldpd/releases/download/{{ .LLDPD_VERSION }}/lldpd-{{ .LLDPD_VERSION }}.tar.gz
+        destination: lldpd.tar.gz
+        sha256: 38cd319aa02ab61d9a2ad130e22f906795ccca9ac73a0a0d9dac19ca99a8a870
+        sha512: c8734221767cd879c98ea3ee6fa80e1dce2f8470a97b0f757cfe7ef8fe2adaf878fdedcda896cf65e1af980634f2ab312588658fb85f89c6d5b6cc9d2da52045
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xf lldpd.tar.gz --strip-components=1
+      - |
+
+        ./autogen.sh
+
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+        ./configure \
+                --prefix=/usr/local \
+                --libexecdir=/usr/local/lib/lldpd \
+                --datadir=/usr/local/share/lldpd \
+                --sysconfdir=/usr/local/etc/lldpd \
+                --enable-hardening \
+                --with-privsep-user=root \
+                --with-privsep-group=root \
+                --with-privsep-chroot=/opt/lldpd
+    build:
+      - |
+        make -j $(nproc) all
+    install:
+      - |
+        make DESTDIR=/rootfs install-exec
+
+        containerRoot=/rootfs/usr/local/lib/containers/lldpd
+        mkdir -p "$containerRoot"/{etc,sbin,opt/lldpd}
+        mkdir -p "$containerRoot"/usr/local/{lldpd,sbin,share/lldpd,lib/lldpd,bin}
+        mv /rootfs/usr/local/lib/lib* "$containerRoot"/usr/local/lib/
+        cp /rootfs/usr/local/sbin/lldpcli "$containerRoot"/usr/local/sbin/lldpcli
+        cp /rootfs/usr/local/sbin/lldpctl "$containerRoot"/usr/local/sbin/lldpctl
+        cp /rootfs/usr/local/sbin/lldpd "$containerRoot"/usr/local/sbin/lldpd
+        cp /pkg/files/* "$containerRoot"/etc/
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/lldpd.yaml
+    to: /rootfs/usr/local/etc/containers/
