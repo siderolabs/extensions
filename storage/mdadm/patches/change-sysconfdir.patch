@@ -5,7 +5,7 @@
  PKG_CONFIG ?= pkg-config
  
 -SYSCONFDIR = /etc
-+SYSCONFDIR = /var/run/mdadm/
++SYSCONFDIR = /var/lib/mdadm/
  CONFFILE = $(SYSCONFDIR)/mdadm.conf
  CONFFILE2 = $(SYSCONFDIR)/mdadm/mdadm.conf
  MAILCMD =/usr/sbin/sendmail -t
