@@ -1,0 +1,41 @@
+name: pcirebind
+variant: alpine
+shell: /toolchain/bin/bash
+dependencies:
+  - image: ghcr.io/siderolabs/tools:v1.8.0-2-g7719230
+    runtime: false
+    to: /
+steps:
+  - env:
+      GOPATH: /go
+    cachePaths:
+      - /.cache/go-build
+      - /go/pkg
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        cd /pkg/src
+        CGO_ENABLED=0 go build -o ./pcirebind .
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/pcirebind
+
+        cp -p /pkg/src/pcirebind /rootfs/usr/local/lib/containers/pcirebind/
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+
+        cp /pkg/pcirebind.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
