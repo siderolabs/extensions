@@ -26,6 +26,7 @@ spec:
     - lldpd
     - mdadm
     - mei
+    - metal-agent
     - nut-client
     - nvidia-container-toolkit-lts
     - nvidia-container-toolkit-production
