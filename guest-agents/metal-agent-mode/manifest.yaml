@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: metal-agent-mode
+  version: "v0.1.0"
+  author: Sidero Labs
+  description: |
+    This system extension provides talos-metal-agent
+  compatibility:
+    talos:
+      version: ">= v1.8.0"

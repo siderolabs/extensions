@@ -33,6 +33,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | lldpd                                     | Nokia (Niklas Wik)  | [salkin](https://github.com/salkin)                                  |
 | mdadm                                     | Serge Logvinov      | [sergelogvinov](https://github.com/sergelogvinov)                    |
 | mei                                       | Nick Meyer          | [e3b0c442](https://github.com/e3b0c442)                              |
+| metal-agent-mode                          | Sidero Labs         | NA                                                                   |
 | nut-client                                | Sidero Labs         | NA                                                                   |
 | nvidia-container-toolkit-lts              | Sidero Labs         | NA                                                                   |
 | nivida-container-toolkit-production       | Sidero Labs         | NA                                                                   |

@@ -8,3 +8,10 @@ PCRE2_VERSION: 10.42
 XEN_GUEST_AGENT_VERSION: 0.4.0
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
 TALOS_VMTOOLSD_VERSION: v0.6.0
+# renovate: datasource=github-releases depName=siderolabs/talos-metal-agent
+TALOS_METAL_AGENT_VERSION: v0.1.0
+
+# renovate: datasource=github-releases extractVersion=^IPMITOOL_(?<version>.*)$ depName=ipmitool/ipmitool
+ipmitool_version: 1_8_19
+ipmitool_sha256: 48b010e7bcdf93e4e4b6e43c53c7f60aa6873d574cbd45a8d86fa7aaeebaff9c
+ipmitool_sha512: 2d91706e9feba4b2ce4808eca087b81b842c4292a5840830001919c06ec8babd8f8761b74bb9dcf8fbc7765f028a5b1a192a3c1b643f2adaa157fed6fb0d1ee3

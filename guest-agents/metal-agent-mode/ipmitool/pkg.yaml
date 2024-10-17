@@ -1,0 +1,54 @@
+name: ipmitool
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://github.com/ipmitool/ipmitool/archive/refs/tags/IPMITOOL_{{ .ipmitool_version }}.tar.gz
+        destination: ipmitool.tar.gz
+        sha256: "{{ .ipmitool_sha256 }}"
+        sha512: "{{ .ipmitool_sha512 }}"
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xzf ipmitool.tar.gz --strip-components=1
+        patch -p1 < /pkg/patches/iana-url.patch
+        mkdir -p /usr/bin && ln -sf /toolchain/bin/env /usr/bin/env
+
+        ./bootstrap
+
+        mkdir build
+        cd build
+
+        ../configure \
+          --prefix=/usr/local \
+          --enable-ipmishell \
+          --enable-intf-lan \
+          --enable-intf-lanplus \
+          --enable-intf-open \
+          --disable-intf-free \
+          --disable-intf-imb \
+          --disable-intf-lipmi \
+          --disable-intf-bmc \
+          --disable-internal-md5 \
+          --disable-intf-serial \
+          --disable-ipmishell
+    build:
+      - |
+        cd build
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        make install DESTDIR=/rootfs
+        # ipmitool downloads this file, so set a static timestamp
+        touch -ch -t $(date -d @${SOURCE_DATE_EPOCH} +%Y%m%d0000) /rootfs/usr/share/misc/enterprise-numbers
+        
+        rm -rf /rootfs/usr/local/share/doc
+        rm -rf /rootfs/usr/local/share/man
+finalize:
+  - from: /rootfs
+    to: /rootfs

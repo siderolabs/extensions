@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-10-02T11:50:28Z by kres 8be5fa7.
+# Generated on 2024-10-14T21:52:28Z by kres 34e72ac.
 
 # common variables
 
@@ -76,6 +76,7 @@ TARGETS += kata-containers
 TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
+TARGETS += metal-agent-mode
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit-lts
 TARGETS += nvidia-container-toolkit-production

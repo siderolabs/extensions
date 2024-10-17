@@ -1,0 +1,22 @@
+name: talos-metal-agent
+container:
+  entrypoint: ./talos-metal-agent
+  args: []
+  mounts:
+    - source: /system/run/machined/machine.sock
+      destination: /system/run/machined/machine.sock
+      type: bind
+      options:
+        - rshared
+        - rbind
+    - source: /dev/kmsg
+      destination: /dev/kmsg
+      type: bind
+      options:
+        - bind
+        - rw
+depends:
+  - path: /system/run/machined/machine.sock
+  - network:
+      - addresses
+restart: always
