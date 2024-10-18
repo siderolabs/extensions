@@ -17,8 +17,19 @@ See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configur
 [notes]
     [notes.lldpd]
         title = "LLDP"
-        description = """
+        description = """\
 lldpd is now available as a system extension.
+"""
+
+    [notes.updates]
+        title = "Component Updates"
+        description = """\
+Linux Firmware: 20241017
+Tailscale: 1.76.0
+crun: 1.17
+gvisor: 20241007.0
+spin: 0.16.0
+ecr-credential-provider: 1.31.1
 """
 
 [make_deps]
