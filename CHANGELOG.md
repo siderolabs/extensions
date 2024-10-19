@@ -1,3 +1,56 @@
+## [Talos System Extensions 1.9.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.9.0-alpha.0) (2024-10-18)
+
+Welcome to the v1.9.0-alpha.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### LLDP
+
+lldpd is now available as a system extension.
+
+
+### Component Updates
+
+Linux Firmware: 20241017
+Tailscale: 1.76.0
+crun: 1.17
+gvisor: 20241007.0
+spin: 0.16.0
+ecr-credential-provider: 1.31.1
+
+
+### Contributors
+
+* Andrey Smirnov
+* Dmitry Sharshakov
+* Niklas Wik
+* Noel Georgi
+
+### Changes
+<details><summary>8 commits</summary>
+<p>
+
+* [`862d0ac`](https://github.com/siderolabs/extensions/commit/862d0ac63d3a491c87283c9a7423f4d516e42b6f) feat: update dependencies
+* [`8a7635b`](https://github.com/siderolabs/extensions/commit/8a7635b2c9ce2cb02fd389192da3d1392ca37674) feat: introduce LLDPD extension service
+* [`6a184b8`](https://github.com/siderolabs/extensions/commit/6a184b8acc85237fa0e929277ad028ff576fe4b5) chore: update packages, prepare for v1.9
+* [`d474848`](https://github.com/siderolabs/extensions/commit/d4748485fd6d5e44650259fa42bb228fc5cfef12) fix: zfs extensions service yaml to proper path
+* [`bfaee18`](https://github.com/siderolabs/extensions/commit/bfaee18773163c35d8a8c91232fb22eaa0732619) feat: update pkgs/Linux firmware
+* [`11f48c5`](https://github.com/siderolabs/extensions/commit/11f48c567ff2d491f8dd27897befcdaf87d7c989) fix: image reproducibility with finalize
+* [`39d2f20`](https://github.com/siderolabs/extensions/commit/39d2f209d142bf88745aadae74df0830cd865ea4) feat: update Intel u-code to 20240910
+* [`8a80e47`](https://github.com/siderolabs/extensions/commit/8a80e47219eb20c4cff2a71995984bdd7fed59fc) fix: reproducibility tests
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.8.0](https://github.com/siderolabs/extensions/releases/tag/v1.8.0)
+
 ## [Talos System Extensions 1.8.0-alpha.2](https://github.com/siderolabs/extensions/releases/tag/v1.8.0-alpha.2) (2024-08-30)
 
 Welcome to the v1.8.0-alpha.2 release of Talos System Extensions!  
