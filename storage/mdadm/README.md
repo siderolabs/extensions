@@ -104,4 +104,9 @@ apk add e2fsprogs
 ls /dev/md127
 # format the software raid (example here is ext4)
 mkfs.ext4 /dev/md127
+# exit the container and restart talosctl
+exit
+talosctl reboot --nodes <ip of the nodes>
+# after the reboot check if the formatted device shows extfs value in DISCOVERED coloumn
+get discoveredvolumes | grep md127
 ```
