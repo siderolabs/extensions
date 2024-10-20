@@ -9,6 +9,6 @@ WASMEDGE_VERSION: v0.4.0
 # renovate: datasource=git-tags depName=https://github.com/spinkube/containerd-shim-spin.git
 SPIN_VERSION: v0.16.0
 # renovate: datasource=github-releases depName=kata-containers/kata-containers
-KATA_CONTAINERS_VERSION: 3.3.0
+KATA_CONTAINERS_VERSION: 3.9.0
 # renovate: datasource=github-releases depName=containers/crun
 CRUN_VERSION: 1.17
