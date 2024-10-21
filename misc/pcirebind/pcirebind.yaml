@@ -1,0 +1,10 @@
+name: pcirebind
+container:
+  entrypoint: ./pcirebind
+  security:
+    writeableRootfs: true
+    writeableSysfs: true
+    rootfsPropagation: shared
+depends:
+  - path: /sys/bus/pci/drivers/vfio-pci/bind
+restart: untilSuccess
