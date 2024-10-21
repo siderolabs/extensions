@@ -51,7 +51,7 @@ steps:
           -Dno_systemd=true \
           -Dprefix=/usr/local \
           -Discsi_sbindir=/usr/local/sbin \
-          -Drulesdir=/usr/local/etc/udev/rules.d \
+          -Drulesdir=/usr/lib/udev/rules.d \
           -Dc_args="$CFLAGS -I/usr/local/include -DNO_SYSTEMD -DGLOB_ONLYDIR=0" \
           output
 
