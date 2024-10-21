@@ -32,6 +32,7 @@ steps:
         ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
         ln -s /toolchain/bin/file /usr/bin/file
 
+        patch -p1 < /pkg/patches/login-scan-manual.patch
         patch -p1 < /pkg/patches/musl-fixes.patch
         patch -p1 < /pkg/patches/add-missing-headers.patch
         patch -p1 < /pkg/patches/dont-use-lib64.patch
