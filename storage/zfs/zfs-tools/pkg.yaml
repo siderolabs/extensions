@@ -23,7 +23,7 @@ steps:
         ./configure \
           --prefix=/usr/local \
           --with-udevdir=/usr/local/sbin \
-          --with-udevruledir=/usr/etc/udev/rules.d \
+          --with-udevruledir=/usr/lib/udev/rules.d \
           --with-config=user \
           --disable-code-coverage \
           --disable--sysvinit \
@@ -36,7 +36,7 @@ steps:
         make install-data DESTDIR=/rootfs
         rm -rf /rootfs/{etc,sbin,usr/{lib,local/share,share}}
         # remove the 69-vdev.rules, since it depends on `vdev_id` which is a shell script
-        rm -f /rootfs/usr/etc/udev/rules.d/69-vdev.rules
+        rm -f /rootfs/usr/lib/udev/rules.d/69-vdev.rules
         # if this file is present creating a vdev tries to executes it
         # since talos doesn't have a shell, this would fail
         # the default shipped file is a no-op, so safe to remove.

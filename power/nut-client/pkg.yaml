@@ -38,7 +38,7 @@ steps:
                 --with-drvpath=/usr/local/lib/nut \
                 --with-statepath=/var/run/nut \
                 --with-altpidpath=/var/run/nut \
-                --with-udev-dir=/usr/local/etc/udev \
+                --with-udev-dir=/usr/lib/udev \
                 --with-systemdsystemunitdir=no \
                 --with-systemdshutdowndir=no \
                 --with-systemdtmpfilesdir=no \

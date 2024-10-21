@@ -30,11 +30,11 @@ steps:
         make -j $(nproc) mdmon
     install:
       - |
-        mkdir -p /rootfs/usr/local/sbin /rootfs/usr/etc/udev/rules.d
+        mkdir -p /rootfs/usr/local/sbin /rootfs/usr/lib/udev/rules.d
         cp mdadm /rootfs/usr/local/sbin/mdadm
         cp mdmon /rootfs/usr/local/sbin/mdmon
-        cp /pkg/files/udev-md-raid-arrays.rules   /rootfs/usr/etc/udev/rules.d/63-md-raid-arrays.rules
-        cp /pkg/files/udev-md-raid-assembly.rules /rootfs/usr/etc/udev/rules.d/64-md-raid-assembly.rules
+        cp /pkg/files/udev-md-raid-arrays.rules   /rootfs/usr/lib/udev/rules.d/63-md-raid-arrays.rules
+        cp /pkg/files/udev-md-raid-assembly.rules /rootfs/usr/lib/udev/rules.d/64-md-raid-assembly.rules
     test:
       - |
         mkdir -p /extensions-validator-rootfs
