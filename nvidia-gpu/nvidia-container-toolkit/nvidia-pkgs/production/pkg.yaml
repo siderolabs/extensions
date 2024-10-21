@@ -87,10 +87,10 @@ steps:
 
         mkdir -p /rootfs/usr/local/lib/containers/nvidia-persistenced \
           /rootfs/usr/local/etc/containers \
-          /rootfs/usr/etc/udev/rules.d
+          /rootfs/usr/lib/udev/rules.d
 
         # copy udev rule
-        cp /pkg/files/15-nvidia-device.rules /rootfs/usr/etc/udev/rules.d
+        cp /pkg/files/15-nvidia-device.rules /rootfs/usr/lib/udev/rules.d
 finalize:
   - from: /rootfs
     to: /rootfs
