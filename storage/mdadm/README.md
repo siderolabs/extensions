@@ -62,9 +62,9 @@ Now you are ready to create a software raid.
 kubectl -n kube-system debug -it --profile sysadmin --image=alpine node/<node name>
 # you are now in the pod again
 # the following command will create the software raid
-chroot /host mdadm --create /dev/md/<some name> --raid-devices=<amount of devices> --metadata=1.2 --level=<raid level>  <all device paths>
+chroot /host -- mdadm --create /dev/md/<some name> --raid-devices=<amount of devices> --metadata=1.2 --level=<raid level>  <all device paths>
 # this is an example usage of the command
-# nsenter --mount=/proc/1/ns/mnt -- mdadm --create /dev/md/testmd --raid-devices=4 --metadata=1.2 --level=10  /dev/sda /dev/sdb /dev/sdc /dev/sdd
+# chroot /host -- mdadm --create /dev/md/testmd --raid-devices=4 --metadata=1.2 --level=10  /dev/sda /dev/sdb /dev/sdc /dev/sdd
 # after you can exit the container and restart the talos node again
 exit
 ```
@@ -124,5 +124,5 @@ mkfs.ext4 /dev/md127
 exit
 talosctl reboot --nodes <ip of the nodes>
 # after the reboot check if the formatted device shows extfs value in DISCOVERED coloumn
-get discoveredvolumes | grep md127
+talosctl get discoveredvolumes | grep md127
 ```
