@@ -1,3 +1,32 @@
+## [Talos System Extensions 1.8.2](https://github.com/siderolabs/extensions/releases/tag/v1.8.2) (2024-10-28)
+
+Welcome to the v1.8.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`442396f`](https://github.com/siderolabs/extensions/commit/442396ff197527bf13fdf5447ca0a3769133dbfe) fix: iscsi-tools extension
+* [`97427ac`](https://github.com/siderolabs/extensions/commit/97427ac0f361eaf6d5dcc74f63111a9028dd266c) feat: update PKGS
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.8.1](https://github.com/siderolabs/extensions/releases/tag/v1.8.1)
+
 ## [Talos System Extensions 1.8.1](https://github.com/siderolabs/extensions/releases/tag/v1.8.1) (2024-10-08)
 
 Welcome to the v1.8.1 release of Talos System Extensions!
