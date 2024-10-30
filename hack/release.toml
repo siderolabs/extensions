@@ -30,6 +30,7 @@ crun: 1.17
 gvisor: 20241007.0
 spin: 0.16.0
 ecr-credential-provider: 1.31.1
+Intel microcode: 20241029
 """
 
 [make_deps]
