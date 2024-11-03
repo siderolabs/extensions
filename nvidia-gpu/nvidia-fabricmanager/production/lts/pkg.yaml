@@ -35,8 +35,7 @@ steps:
         cp bin/nv-fabricmanager /rootfs/usr/local/bin/
         cp bin/nvswitch-audit /rootfs/usr/local/bin/
 
-        cp share/nvidia/nvswitch/dgx2_hgx2_topology /rootfs/usr/local/share/nvidia/nvswitch/
-        cp share/nvidia/nvswitch/dgxa100_hgxa100_topology /rootfs/usr/local/share/nvidia/nvswitch/
+        cp share/nvidia/nvswitch/* /rootfs/usr/local/share/nvidia/nvswitch/
 
         cp etc/fabricmanager.cfg  /rootfs/usr/local/share/nvidia/nvswitch/
 
