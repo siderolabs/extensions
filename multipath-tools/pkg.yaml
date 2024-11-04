@@ -1,0 +1,34 @@
+name: multipath-tools
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /go
+    cachePaths:
+      - /.cache/go-build
+      - /go/pkg
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        cd /pkg/src/go
+        CGO_ENABLED=0 go build -o ./start_multipath .
+    install:
+      - |
+        mkdir -p /rootfs/usr/local
+        cp -ar /pkg/src/rootfs/* /rootfs/usr/local
+        cp -ar /pkg/src/go/start_multipath /rootfs/usr/local/bin
+        mkdir -p /rootfs/usr/local/etc/containers
+        mkdir -p /rootfs/usr/local/lib/containers/multipath-tools
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/multipath-tools.yaml
+    to: /rootfs/usr/local/etc/containers/

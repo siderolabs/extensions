@@ -1,0 +1,58 @@
+name: multipath-tools
+container:
+  security:
+    rootfsPropagation: shared
+    maskedPaths: []
+    readonlyPaths: []
+    writeableSysfs: true
+  entrypoint: /usr/local/bin/start_multipath
+  args: []
+  mounts:
+    - source: /usr/local
+      destination: /usr/local
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /lib/modules
+      destination: /usr/local/lib/modules
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /proc
+      destination: /usr/local/proc
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /sys
+      destination: /usr/local/sys
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /dev
+      destination: /usr/local/dev
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /run
+      destination: /usr/local/run
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /tmp
+      destination: /usr/local/etc/multipath
+      type: bind
+      options:
+        - bind
+        - rw
+depends:
+  - network:
+    - addresses
+  - service: udevd
+  - path: /dev/mapper/control    
+restart: always

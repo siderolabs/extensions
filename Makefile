@@ -77,6 +77,7 @@ TARGETS += kata-containers
 TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
+TARGETS += multipath-tools
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit-lts
 TARGETS += nvidia-container-toolkit-production

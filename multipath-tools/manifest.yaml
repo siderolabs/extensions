@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: multipath-tools
+  version: "$VERSION"
+  author: Cision
+  description: |
+    This system extension provides multipath-tools for storage redundancy and reliability.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
