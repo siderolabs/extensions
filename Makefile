@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-10-30T12:38:48Z by kres 6d3cad4.
+# Generated on 2024-11-06T23:11:48Z by kres 1fc767a.
 
 # common variables
 
@@ -41,6 +41,7 @@ COMMON_ARGS += --provenance=false
 COMMON_ARGS += --progress=$(PROGRESS)
 COMMON_ARGS += --platform=$(PLATFORM)
 COMMON_ARGS += --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
+COMMON_ARGS += --build-arg=BUILDKIT_MULTI_PLATFORM=1
 COMMON_ARGS += --build-arg=TAG="$(TAG)"
 COMMON_ARGS += --build-arg=PKGS="$(PKGS)"
 COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
@@ -167,6 +168,15 @@ target-%:  ## Builds the specified target defined in the Pkgfile. The build resu
 
 local-%:  ## Builds the specified target defined in the Pkgfile using the local output type. The build result will be output to the specified local destination.
 	@$(MAKE) target-$* TARGET_ARGS="--output=type=local,dest=$(DEST) $(TARGET_ARGS)"
+	@PLATFORM=$(PLATFORM) ARTIFACTS=$(ARTIFACTS) bash -c '\
+	  for platform in $$(tr "," "\n" <<< "$$PLATFORM"); do \
+	    echo $$platform; \
+	    directory="$${platform//\//_}"; \
+	    if [[ -d "$$ARTIFACTS/$$directory" ]]; then \
+	      mv "$$ARTIFACTS/$$directory/"* $$ARTIFACTS; \
+	      rmdir "$$ARTIFACTS/$$directory/"; \
+	    fi; \
+	  done'
 
 docker-%:  ## Builds the specified target defined in the Pkgfile using the docker output type. The build result will be loaded into Docker.
 	@$(MAKE) target-$* TARGET_ARGS="$(TARGET_ARGS)"

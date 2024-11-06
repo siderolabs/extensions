@@ -105,15 +105,16 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 | Name                            | Image                                                                                                     | Description                                                    | Version Format     |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------ |
-| [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/talos-extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version` |
+| [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version` |
 
 ### Guest Agents
 
-| Name                                                       | Image                                                                                                                         | Description                                                            | Version Format     |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
-| [qemu-guest-agent](guest-agents/qemu-guest-agent/)         | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/qemu-guest-agent)         | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
-| [xe-guest-utilities](guest-agents/xe-guest-utilities/)     | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/talos-extensions/pkgs/container/xe-guest-utilities)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
-| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent/) | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/vmtoolsd-guest-agent) | [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd)         | `upstream version` |
+| Name                                                       | Image                                                                                                                   | Description                                                            | Version Format     |
+|------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|--------------------|
+| [metal-agent](guest-agents/metal-agent/)                   | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent)                   | [Talos Metal Agent](https://github.com/siderolabs/talos-metal-agent)   | `upstream version` |
+| [qemu-guest-agent](guest-agents/qemu-guest-agent/)         | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent)         | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
+| [xe-guest-utilities](guest-agents/xe-guest-utilities/)     | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/extensions/pkgs/container/xe-guest-utilities)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
+| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent/) | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd)         | `upstream version` |
 
 ### NVIDIA GPU
 

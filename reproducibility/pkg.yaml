@@ -39,6 +39,7 @@ dependencies:
   # - stage: kata-containers
   - stage: lldpd
   - stage: mdadm
+  - stage: metal-agent
   # mei can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: mei
   - stage: nut-client
