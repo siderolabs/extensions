@@ -1,3 +1,87 @@
+## [Talos System Extensions 1.9.0-alpha.2](https://github.com/siderolabs/extensions/releases/tag/v1.9.0-alpha.2) (2024-11-08)
+
+Welcome to the v1.9.0-alpha.2 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### LLDP
+
+lldpd is now available as a system extension.
+
+
+### Component Updates
+
+Linux Firmware: 20241017
+Tailscale: 1.76.0
+crun: 1.17
+gvisor: 20241007.0
+spin: 0.16.0
+ecr-credential-provider: 1.31.1
+Intel microcode: 20241029
+NVIDIA LTS: 535.216.01
+NVIDIA Production: 550.127.05
+
+
+### Contributors
+
+* Andrey Smirnov
+* Jean-Francois Roy
+* Tom Zaspel
+* Dmitry Sharshakov
+* Noel Georgi
+* Utku Ozdemir
+* Andrei Kvapil
+* Niklas Wik
+* Zackeus Bengtsson
+
+### Changes
+<details><summary>24 commits</summary>
+<p>
+
+* [`a32e15d`](https://github.com/siderolabs/extensions/commit/a32e15d80c96646d0ba38fec552f0020f087a76f) release(v1.9.0-alpha.1): prepare release
+* [`61c0dc4`](https://github.com/siderolabs/extensions/commit/61c0dc4e5140b8c12a7ec12e8952d27e01404249) feat: add zfs-service to zfs extension (unmount, encryption)
+* [`c08262d`](https://github.com/siderolabs/extensions/commit/c08262d8b2b005c3a4174522a956a3a36e3dcadf) feat: update gcc to 14.2, bump NVIDIA driver versions
+* [`e3012b8`](https://github.com/siderolabs/extensions/commit/e3012b8e6ca4b49351c5385d74e8e8119f7532fb) chore: add `metal-agent` into readme and reproducibility, rekres
+* [`e2a26c0`](https://github.com/siderolabs/extensions/commit/e2a26c0b1cd8b0801be95e810d2fb89eaa0b6777) feat: add extension `metal-agent`
+* [`966aaed`](https://github.com/siderolabs/extensions/commit/966aaed644ff7c4837e6c627b437d43ab78c3cc9) feat(fabricmanager): add all topology files
+* [`21c0137`](https://github.com/siderolabs/extensions/commit/21c01378aaebbd5c8b599f86007375be6886d4ec) chore: update wolfi-base
+* [`7dab4c8`](https://github.com/siderolabs/extensions/commit/7dab4c8751b6bb7289d312b657516c5e873789fb) feat: update Intel u-code to 20241029
+* [`6d5f49b`](https://github.com/siderolabs/extensions/commit/6d5f49b92c1a2aed4700ec21e57b2092c6904236) chore: move udev rules
+* [`b4311ac`](https://github.com/siderolabs/extensions/commit/b4311accd8750de1d84d380977816d34a23858a1) docs: zfs raid docs
+* [`76543d1`](https://github.com/siderolabs/extensions/commit/76543d1cb2813e6d7c64a6012fcc50bd2caab92c) docs: replace nsenter with chroot in README.md
+* [`f071725`](https://github.com/siderolabs/extensions/commit/f0717255a9f0c55eff1e214d8b370d99cf8103c0) docs: add steps to create mdadm software raid
+* [`544ebcf`](https://github.com/siderolabs/extensions/commit/544ebcfef798f97708cb09d33f6afe2dd8986171) fix: iscsi-tools extension
+* [`8e296ab`](https://github.com/siderolabs/extensions/commit/8e296ab29000e6550e7c516cd98c07e6e7f3750e) docs: fix Aenix company name
+* [`c7eb377`](https://github.com/siderolabs/extensions/commit/c7eb3771943eba55ec5fe61f7a31e6fce61d73d5) feat: glibc extension
+* [`4a66da5`](https://github.com/siderolabs/extensions/commit/4a66da5aa2f28bd71784e5312a6fbc91be4f09d7) release(v1.9.0-alpha.0): prepare release
+* [`862d0ac`](https://github.com/siderolabs/extensions/commit/862d0ac63d3a491c87283c9a7423f4d516e42b6f) feat: update dependencies
+* [`8a7635b`](https://github.com/siderolabs/extensions/commit/8a7635b2c9ce2cb02fd389192da3d1392ca37674) feat: introduce LLDPD extension service
+* [`6a184b8`](https://github.com/siderolabs/extensions/commit/6a184b8acc85237fa0e929277ad028ff576fe4b5) chore: update packages, prepare for v1.9
+* [`d474848`](https://github.com/siderolabs/extensions/commit/d4748485fd6d5e44650259fa42bb228fc5cfef12) fix: zfs extensions service yaml to proper path
+* [`bfaee18`](https://github.com/siderolabs/extensions/commit/bfaee18773163c35d8a8c91232fb22eaa0732619) feat: update pkgs/Linux firmware
+* [`11f48c5`](https://github.com/siderolabs/extensions/commit/11f48c567ff2d491f8dd27897befcdaf87d7c989) fix: image reproducibility with finalize
+* [`39d2f20`](https://github.com/siderolabs/extensions/commit/39d2f209d142bf88745aadae74df0830cd865ea4) feat: update Intel u-code to 20240910
+* [`8a80e47`](https://github.com/siderolabs/extensions/commit/8a80e47219eb20c4cff2a71995984bdd7fed59fc) fix: reproducibility tests
+</p>
+</details>
+
+### Changes since v1.9.0-alpha.1
+<details><summary>0 commit</summary>
+<p>
+
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.8.0](https://github.com/siderolabs/extensions/releases/tag/v1.8.0)
+
 ## [Talos System Extensions 1.9.0-alpha.1](https://github.com/siderolabs/extensions/releases/tag/v1.9.0-alpha.1) (2024-11-08)
 
 Welcome to the v1.9.0-alpha.1 release of Talos System Extensions!  
