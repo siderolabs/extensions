@@ -21,6 +21,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configur
         description = """\
 * Intel microcode: 20241029
 * Linux Firmware: 20241110
+* vmtoolsd-guest-agent: v0.6.1
 """
 
 [make_deps]
