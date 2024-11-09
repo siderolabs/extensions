@@ -33,6 +33,7 @@ ecr-credential-provider: 1.31.1
 Intel microcode: 20241029
 NVIDIA LTS: 535.216.01
 NVIDIA Production: 550.127.05
+vmtoolsd-guest-agent: v0.6.1
 """
 
 [make_deps]
