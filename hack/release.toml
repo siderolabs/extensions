@@ -24,7 +24,7 @@ lldpd is now available as a system extension.
     [notes.updates]
         title = "Component Updates"
         description = """\
-Linux Firmware: 20241017
+Linux Firmware: 20241110
 Tailscale: 1.76.0
 crun: 1.17
 gvisor: 20241007.0
