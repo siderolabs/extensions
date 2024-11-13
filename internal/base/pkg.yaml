@@ -4,7 +4,7 @@ shell: /toolchain/bin/bash
 dependencies:
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/base:{{ .BUILD_ARG_PKGS }}"
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/ca-certificates:{{ .BUILD_ARG_PKGS }}"
-  - image: ghcr.io/siderolabs/extensions-validator:399d8f0
+  - image: ghcr.io/siderolabs/extensions-validator:617ea3f
 finalize:
   - from: /
     to: /
