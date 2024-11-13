@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.8.2"
+previous = "v1.8.3"
 
 pre_release = false
 
@@ -19,9 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configur
     [notes.updates]
         title = "Component Updates"
         description = """\
-* Intel microcode: 20241029
-* Linux Firmware: 20241110
-* vmtoolsd-guest-agent: v0.6.1
+Intel microcode: 20241112
 """
 
 [make_deps]
