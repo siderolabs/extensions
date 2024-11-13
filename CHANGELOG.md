@@ -1,3 +1,44 @@
+## [Talos System Extensions 1.8.3](https://github.com/siderolabs/extensions/releases/tag/v1.8.3) (2024-11-13)
+
+Welcome to the v1.8.3 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+* Intel microcode: 20241029
+* Linux Firmware: 20241110
+* vmtoolsd-guest-agent: v0.6.1
+
+
+### Contributors
+
+* Andrey Smirnov
+* Jean-Francois Roy
+* Mihkel
+* Zackeus Bengtsson
+
+### Changes
+<details><summary>5 commits</summary>
+<p>
+
+* [`4577704`](https://github.com/siderolabs/extensions/commit/4577704851231f6504c88eb48eb6aaf2937540e7) chore: bump vmtoolsd version to v0.6.1
+* [`7f2e659`](https://github.com/siderolabs/extensions/commit/7f2e659009044545bb7de03b4204f03ace053a53) chore: update wolfi-base
+* [`63bc325`](https://github.com/siderolabs/extensions/commit/63bc325e4302968559e51c2d168ba4bebe643b5b) feat: update extensions for Linux firmware 20241110
+* [`62e6cc1`](https://github.com/siderolabs/extensions/commit/62e6cc1a5599c7facfa7abd56d0700ed1f8babc1) feat(fabricmanager): add all topology files
+* [`41aa11e`](https://github.com/siderolabs/extensions/commit/41aa11eb546d05b2e82910423bfefcdbfe506eb3) feat: update Intel u-code to 20241029
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.8.2](https://github.com/siderolabs/extensions/releases/tag/v1.8.2)
+
 ## [Talos System Extensions 1.8.2](https://github.com/siderolabs/extensions/releases/tag/v1.8.2) (2024-10-28)
 
 Welcome to the v1.8.2 release of Talos System Extensions!
