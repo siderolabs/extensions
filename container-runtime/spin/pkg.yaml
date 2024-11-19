@@ -8,13 +8,13 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/spinkube/containerd-shim-spin/releases/download/{{ .SPIN_VERSION }}/containerd-shim-spin-v2-linux-aarch64.tar.gz
         destination: containerd-shim-spin.tar.gz
-        sha256: d86ab14d87c24003641be3545aeff8ece2ccc5e5b676ee6dffa10659b12a6ec9
-        sha512: 51d601b5dfaa2e7d358eb4f1077641e74654a6de8964ad7230be08cbd3fa968f9ae77ed3300bb5a1dc12ddeae3a3b4f42d5f2ed4a09a0e4e674597ded708b092
+        sha256: a9f633e795091fe43701dacfa08faa00912083e79544644966c4d46b9b4dd2fa
+        sha512: 84f901f0410158363ae3ae74dccabcb5f31eb03491206a1cbf486d203e63445a9b0f31cb3dd2b342d4694bfe764c7e92aaad2884d32bed14af95218c0549fb59
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/spinkube/containerd-shim-spin/releases/download/{{ .SPIN_VERSION }}/containerd-shim-spin-v2-linux-x86_64.tar.gz
         destination: containerd-shim-spin.tar.gz
-        sha256: f1ff91cbd05edb59c19468d62c1b34189a38f985dc0e1bcb3e0c992db83ffcb4
-        sha512: 62634b0c1f753b010fadbcc2b969006074937a5ccb20027affcc860e3dc7c8c6ba2cf09359a0bd3443aebb99168ae148c09183fcd7541a1eab29a71dfb159cce
+        sha256: 4f9ff48e805a66a86b45a6c72c0052c1b877dbd442764302a22a9608c2e60bd1
+        sha512: 2bfcbb1b9a1ea1039f9d19274170f64809ab2f851a4f044f000ba552dcb659fd54310ce075e1d02c30eee82c81121c0d4d4c8a3c91db119bde78adfa5f52469b
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
@@ -24,6 +24,9 @@ steps:
         mkdir -p /rootfs/usr/local/bin
 
         tar xf containerd-shim-spin.tar.gz -C /rootfs/usr/local/bin
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/spin.part /rootfs/etc/cri/conf.d/spin.part
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -35,5 +38,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/spin.part
-    to: /rootfs/etc/cri/conf.d/spin.part

@@ -1,0 +1,2 @@
+VERSION: "{{ .TALOS_METAL_AGENT_VERSION }}"
+IMAGE_PREFIX: ghcr.io/siderolabs

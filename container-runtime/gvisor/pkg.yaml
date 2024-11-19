@@ -7,10 +7,10 @@ steps:
   - sources:
       # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
       # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
-      - url: https://github.com/google/gvisor/archive/dfeb44ecf5accd9039f5b31a988f6dc39e2bd557.tar.gz
+      - url: https://github.com/google/gvisor/archive/e8e35a6608f56c5b2c118b54bc92a93b74cb169f.tar.gz
         destination: gvisor.tar.gz
-        sha256: bf5ac3d0a9473ab2961ec2f1819b7ff665846ce8305d6bba2537938310e3a062
-        sha512: 42549911c63f203aa704ae7dea80f73364c812471d45b33f95a7769d4dbb26734669ba1f509c2f1804935e43f871b05d4054d9ea2ababaebfc1861b93e993d1c
+        sha256: 68e5877020f4b394f042d905ee761bbb596b6e8d4b5d7b71a262a6f9b74b6a43
+        sha512: ca4b698d28a35299971f6790fcaeef31f10e8560ec0c4fddfbe744596253e28911f8c25d93e6f0b9eecbd74a611c19023a214bf979f680d6089695235417caa1
     env:
       GOPATH: /go
     cachePaths:
@@ -44,6 +44,11 @@ steps:
 
         cp ./bin/containerd-shim-runsc-v1 /rootfs/usr/local/bin/containerd-shim-runsc-v1
         chmod +x /rootfs/usr/local/bin/containerd-shim-runsc-v1
+
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+
+        cp /pkg/gvisor.part /pkg/runsc.toml /pkg/gvisor-kvm.part /pkg/runsc-kvm.toml /rootfs/etc/cri/conf.d/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -55,7 +60,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/gvisor.part
-    to: /rootfs/etc/cri/conf.d/gvisor.part
-  - from: /pkg/runsc.toml
-    to: /rootfs/etc/cri/conf.d/runsc.toml

@@ -15,7 +15,6 @@ steps:
         tar -xzf open-isns.tar.gz --strip-components=1
 
       - |
-        cp /toolchain/share/automake-1.16/config.guess aclocal/
         autoreconf -fi
 
       - |

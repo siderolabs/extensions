@@ -42,6 +42,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 | Name                                                                 | Image                                                                                                                         | Description                                                                                                                        | Version Format     |
 | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| [crun](container-runtime/crun/)                                      | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun)                                       | [crun](https://github.com/containers/crun) container runtime                                                                       | `upstream version` |
 | [gvisor](container-runtime/gvisor/)                                  | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor)                                   | [gVisor](https://gvisor.dev/) container runtime                                                                                    | `upstream version` |
 | [stargz-snapshotter](container-runtime/stargz-snapshotter/)          | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter)           | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime                                           | `upstream version` |
 | [ecr-credential-provider](container-runtime/ecr-credential-provider) | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | [ECR Credential Provider](https://github.com/kubernetes/cloud-provider-aws/tree/master/cmd/ecr-credential-provider) kubelet plugin | `upstream version` |
@@ -69,22 +70,26 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------- |
 | [chelsio](drivers/chelsio/)          | [ghcr.io/siderolabs/chelsio-drivers](https://github.com/siderolabs/extensions/pkgs/container/chelsio-drivers)                               | Chelsio NIC drivers                  | `talos version`                                       |
 | [gasket](drivers/gasket/)            | [ghcr.io/siderolabs/gasket-driver](https://github.com/siderolabs/extensions/pkgs/container/gasket-driver)                                   | Driver for Google Coral PCIe devices | `gasket driver upstream short commit`-`talos version` |
+| [mei](drivers/mei/)                  | [ghcr.io/siderolabs/mei](https://github.com/siderolabs/extensions/pkgs/container/mei)                                                       | Driver for Intel Management Engine   | `talos version`                                       |
 | [nvidia](nvidia-gpu/nvidia-modules/) | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules) | NVIDIA OSS Driver                    | `nvidia driver upstream version`-`talos version`      |
 | [thunderbolt](drivers/thunderbolt/)  | [ghcr.io/siderolabs/thunderbolt](https://github.com/siderolabs/extensions/pkgs/container/thunderbolt)                                       | Thunderbolt drivers                  | `talos version`                                       |
+| [uinput](drivers/uinput/)            | [ghcr.io/siderolabs/uinput](https://github.com/siderolabs/extensions/pkgs/container/uinput)                                                 | uinput drivers                       | `talos version`                                       |
 | [usb-modem](drivers/usb-modem/)      | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers)                           | USB Modem drivers                    | `talos version`                                       |
 | [v4l-uvc](drivers/v4l-uvc/)          | [ghcr.io/siderolabs/v4l-uvc-drivers](https://github.com/siderolabs/extensions/pkgs/container/v4l-uvc-drivers)                               | USB Video Class (Webcam) drivers     | `talos version`                                       |
 
 ### Miscellaneous
 
-| Name                            | Image                                                                                                 | Description                 | Version Format  |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------- | --------------- |
-| [binfmt-misc](misc/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version` |
+| Name                            | Image                                                                                                 | Description                 | Version Format     |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------- | ------------------ |
+| [binfmt-misc](misc/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version`    |
+| [glibc](misc/glibc)             | [ghcr.io/siderolabs/glibc](https://github.com/siderolabs/extensions/pkgs/container/glibc)             | glibc                       | `upstream version` |
 
 ### Network
 
-| Name                            | Image                                                                                             | Description                        | Version Format     |
-| ------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------- | ------------------ |
-| [tailscale](network/tailscale/) | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | [Tailscale](https://tailscale.com) | `upstream version` |
+| Name                            | Image                                                                                             | Description                            | Version Format     |
+| ------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------------ |
+| [tailscale](network/tailscale/) | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | [Tailscale](https://tailscale.com)     | `upstream version` |
+| [lldpd](network/lldpd/)         | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd)         | [LLDP](https://github.com/lldpd/lldpd) | `upstream version` |
 
 ### Storage
 
@@ -100,15 +105,16 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 | Name                            | Image                                                                                                     | Description                                                    | Version Format     |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------ |
-| [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/talos-extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version` |
+| [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version` |
 
 ### Guest Agents
 
-| Name                                                       | Image                                                                                                                         | Description                                                            | Version Format     |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
-| [qemu-guest-agent](guest-agents/qemu-guest-agent/)         | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/qemu-guest-agent)         | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
-| [xe-guest-utilities](guest-agents/xe-guest-utilities/)     | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/talos-extensions/pkgs/container/xe-guest-utilities)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
-| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent/) | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/talos-extensions/pkgs/container/vmtoolsd-guest-agent) | [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd)         | `upstream version` |
+| Name                                                       | Image                                                                                                                   | Description                                                            | Version Format     |
+|------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|--------------------|
+| [metal-agent](guest-agents/metal-agent/)                   | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent)                   | [Talos Metal Agent](https://github.com/siderolabs/talos-metal-agent)   | `upstream version` |
+| [qemu-guest-agent](guest-agents/qemu-guest-agent/)         | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent)         | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
+| [xe-guest-utilities](guest-agents/xe-guest-utilities/)     | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/extensions/pkgs/container/xe-guest-utilities)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
+| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent/) | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd)         | `upstream version` |
 
 ### NVIDIA GPU
 
@@ -192,7 +198,7 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 - `/lib/firmware/`
 - `/lib/modules/`
 - `/lib64/ld-linux-x86-64.so.2`
-- `/usr/etc/udev/rules.d/`
+- `/usr/lib/udev/rules.d/`
 - `/usr/local/`
 - `/usr/share/glvnd/`
 - `/usr/share/egl/`

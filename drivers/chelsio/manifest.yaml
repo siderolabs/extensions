@@ -2,7 +2,7 @@ version: v1alpha1
 metadata:
   name: chelsio-drivers
   version: "$VERSION"
-  author: SideroLabs
+  author: Sidero Labs
   description: |
     This system extension provides Chelsio network drivers.
   compatibility:

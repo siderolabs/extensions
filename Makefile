@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-07-16T06:34:06Z by kres ac94478.
+# Generated on 2024-11-13T13:17:18Z by kres c0e2b63.
 
 # common variables
 
@@ -25,7 +25,7 @@ SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 # sync bldr image with pkgfile
 
-BLDR_RELEASE := v0.3.1
+BLDR_RELEASE := v0.3.2
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
 BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
@@ -41,6 +41,7 @@ COMMON_ARGS += --provenance=false
 COMMON_ARGS += --progress=$(PROGRESS)
 COMMON_ARGS += --platform=$(PLATFORM)
 COMMON_ARGS += --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
+COMMON_ARGS += --build-arg=BUILDKIT_MULTI_PLATFORM=1
 COMMON_ARGS += --build-arg=TAG="$(TAG)"
 COMMON_ARGS += --build-arg=PKGS="$(PKGS)"
 COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
@@ -48,7 +49,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.8.0-alpha.0-34-gce49757
+PKGS ?= v1.9.0-alpha.0-38-g6bdba41
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -60,11 +61,13 @@ TARGETS += bnx2-bnx2x
 TARGETS += btrfs
 TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
+TARGETS += crun
 TARGETS += drbd
 TARGETS += dvb-si2168-firmware
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
+TARGETS += glibc
 TARGETS += gvisor
 TARGETS += gvisor-debug
 TARGETS += hello-world-service
@@ -73,11 +76,17 @@ TARGETS += intel-ice-firmware
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
 TARGETS += kata-containers
+TARGETS += lldpd
 TARGETS += mdadm
+TARGETS += mei
+TARGETS += metal-agent
 TARGETS += nut-client
-TARGETS += nvidia-container-toolkit
-TARGETS += nvidia-fabricmanager
-TARGETS += nvidia-open-gpu-kernel-modules
+TARGETS += nvidia-container-toolkit-lts
+TARGETS += nvidia-container-toolkit-production
+TARGETS += nvidia-fabricmanager-lts
+TARGETS += nvidia-fabricmanager-production
+TARGETS += nvidia-open-gpu-kernel-modules-lts
+TARGETS += nvidia-open-gpu-kernel-modules-production
 TARGETS += qemu-guest-agent
 TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
@@ -85,6 +94,7 @@ TARGETS += spin
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
 TARGETS += thunderbolt
+TARGETS += uinput
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
 TARGETS += v4l-uvc-drivers
@@ -92,7 +102,8 @@ TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xen-guest-agent
 TARGETS += zfs
-NONFREE_TARGETS = nonfree-kmod-nvidia
+NONFREE_TARGETS = nonfree-kmod-nvidia-lts
+NONFREE_TARGETS += nonfree-kmod-nvidia-production
 
 # help menu
 
@@ -158,6 +169,15 @@ target-%:  ## Builds the specified target defined in the Pkgfile. The build resu
 
 local-%:  ## Builds the specified target defined in the Pkgfile using the local output type. The build result will be output to the specified local destination.
 	@$(MAKE) target-$* TARGET_ARGS="--output=type=local,dest=$(DEST) $(TARGET_ARGS)"
+	@PLATFORM=$(PLATFORM) DEST=$(DEST) bash -c '\
+	  for platform in $$(tr "," "\n" <<< "$$PLATFORM"); do \
+	    echo $$platform; \
+	    directory="$${platform//\//_}"; \
+	    if [[ -d "$$DEST/$$directory" ]]; then \
+	      mv "$$DEST/$$directory/"* $$DEST; \
+	      rmdir "$$DEST/$$directory/"; \
+	    fi; \
+	  done'
 
 docker-%:  ## Builds the specified target defined in the Pkgfile using the docker output type. The build result will be loaded into Docker.
 	@$(MAKE) target-$* TARGET_ARGS="$(TARGET_ARGS)"

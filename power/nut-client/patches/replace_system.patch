@@ -19,7 +19,7 @@
 +	const char *env[] = {NULL};
 +
 +	pid_t pid = 0;
-+	int sret = posix_spawn(&pid, cmd, NULL, NULL, argv, env);
++	int sret = posix_spawn(&pid, cmd, NULL, NULL, (char * const *)(argv), (char * const *)(env));
 +	if (sret != 0)
 +		return -1;
 +

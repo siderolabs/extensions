@@ -6,35 +6,34 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.7.0"
+previous = "v1.8.0"
 
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
-
-[notes.updates]
-    title = "Component Updates"
-    description = """
-ZFS: 2.2.4
-DRBD: 9.2.9
-gasket: 5815ee3
-Tailscale: 1.64.2
-ecr-credential-provider: 1.30.2
-qemu-guest-agent: 9.0.1
-mdadm: 4.3
-Intel microcode: 20240531
-Linux firmware: 20240513
-Spin: 1.5.0
-Gvisor: 20240624.0
-Wasmedge: v0.4.0
-Kata Containers: 3.6.0
-NVIDIA container toolkit: v1.15.0
-iscsi-tools: v0.1.5
+    [notes.lldpd]
+        title = "LLDP"
+        description = """\
+lldpd is now available as a system extension.
 """
 
+    [notes.updates]
+        title = "Component Updates"
+        description = """\
+Linux Firmware: 20241110
+Tailscale: 1.76.0
+crun: 1.17
+gvisor: 20241007.0
+spin: 0.16.0
+ecr-credential-provider: 1.31.1
+Intel microcode: 20241112
+NVIDIA LTS: 535.216.01
+NVIDIA Production: 550.127.05
+vmtoolsd-guest-agent: v0.6.1
+"""
 
 [make_deps]

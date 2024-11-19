@@ -27,8 +27,6 @@ steps:
         ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
         ln -s /toolchain/bin/file /usr/bin/file
 
-        cp /toolchain/share/automake-1.16/config.guess config.guess
-        cp /toolchain/lib/libstdc++* /lib
         autoreconf -if
 
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
@@ -40,7 +38,7 @@ steps:
                 --with-drvpath=/usr/local/lib/nut \
                 --with-statepath=/var/run/nut \
                 --with-altpidpath=/var/run/nut \
-                --with-udev-dir=/usr/local/etc/udev \
+                --with-udev-dir=/usr/lib/udev \
                 --with-systemdsystemunitdir=no \
                 --with-systemdshutdowndir=no \
                 --with-systemdtmpfilesdir=no \
@@ -82,6 +80,9 @@ steps:
         rm -rf /rootfs/usr/local/etc
         rm -rf /rootfs/usr/local/lib/nut
         rm -rf /rootfs/usr/local/sbin
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/nut-client.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -93,5 +94,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/nut-client.yaml
-    to: /rootfs/usr/local/etc/containers/

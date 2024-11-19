@@ -1,10 +1,12 @@
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-QEMU_VERSION: 9.0.1
+QEMU_VERSION: 9.1.0
 # renovate: datasource=git-tags depName=https://gitlab.gnome.org/GNOME/glib.git
-GLIB_VERSION: 2.81.0
+GLIB_VERSION: 2.82.0
 # renovate: datasource=github-releases extractVersion=^pcre2-(?<version>.*)$ depName=PCRE2Project/pcre2
 PCRE2_VERSION: 10.42
 # renovate: datasource=git-tags depName=https://gitlab.com/xen-project/xen-guest-agent.git
 XEN_GUEST_AGENT_VERSION: 0.4.0
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
-TALOS_VMTOOLSD_VERSION: v0.5.1
+TALOS_VMTOOLSD_VERSION: v0.6.1
+# renovate: datasource=github-releases depName=siderolabs/talos-metal-agent
+TALOS_METAL_AGENT_VERSION: v0.1.0-alpha.0

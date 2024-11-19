@@ -12,8 +12,8 @@ steps:
     sources:
       - url: https://github.com/tailscale/tailscale/archive/refs/tags/v{{ .TAILSCALE_VERSION }}.tar.gz
         destination: tailscale.tar.gz
-        sha256: 9d34bd153c485dd0d88d3d76f187b5032046c0807a411ca97f38c8039a9ac659
-        sha512: d512e051cc05507f75de07c75ffa9f91b5a6c340facf3c15797950668570319d2dbbc9fa078788cff261c964ef5da64d9a4b7c6d46591c07b63131c2f39f3add
+        sha256: eaec1fa9a882d877ce6e5fb6ef47b3387124321a8963c66c4c37319106b5c5c2
+        sha512: cfae501c42f67ca1c51b11ee6ac3c1715e224daf38ec35d2ad4be34da1f1f6aa62cd187dd4741214e4cabf6f356e05b32826033d21c15e4acbadbbbfd23dcdcf
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
@@ -37,6 +37,9 @@ steps:
         cp -pr dist/tailscale /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
         cp -pr dist/tailscaled /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
         cp -pr dist/containerboot /rootfs/usr/local/lib/containers/tailscale/usr/local/bin
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/tailscale.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
@@ -48,5 +51,3 @@ finalize:
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-  - from: /pkg/tailscale.yaml
-    to: /rootfs/usr/local/etc/containers/
