@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-11-13T13:17:18Z by kres c0e2b63.
+# Generated on 2024-11-19T09:18:52Z by kres a8af16d.
 
 # common variables
 
@@ -36,12 +36,13 @@ PLATFORM ?= linux/amd64,linux/arm64
 PROGRESS ?= auto
 PUSH ?= false
 CI_ARGS ?=
+BUILDKIT_MULTI_PLATFORM ?= 1
 COMMON_ARGS = --file=Pkgfile
 COMMON_ARGS += --provenance=false
 COMMON_ARGS += --progress=$(PROGRESS)
 COMMON_ARGS += --platform=$(PLATFORM)
 COMMON_ARGS += --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
-COMMON_ARGS += --build-arg=BUILDKIT_MULTI_PLATFORM=1
+COMMON_ARGS += --build-arg=BUILDKIT_MULTI_PLATFORM=$(BUILDKIT_MULTI_PLATFORM)
 COMMON_ARGS += --build-arg=TAG="$(TAG)"
 COMMON_ARGS += --build-arg=PKGS="$(PKGS)"
 COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
@@ -54,7 +55,7 @@ PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
 
-TARGETS = amdgpu-firmware
+TARGETS = amdgpu
 TARGETS += amd-ucode
 TARGETS += binfmt-misc
 TARGETS += bnx2-bnx2x
@@ -70,7 +71,7 @@ TARGETS += glibc
 TARGETS += gvisor
 TARGETS += gvisor-debug
 TARGETS += hello-world-service
-TARGETS += i915-ucode
+TARGETS += i915
 TARGETS += intel-ice-firmware
 TARGETS += intel-ucode
 TARGETS += iscsi-tools

@@ -1,0 +1,5 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/gpu/drm/amd/amdgpu/amdgpu.ko
+kernel/drivers/gpu/drm/amd/amdxcp/amdxcp.ko

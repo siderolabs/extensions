@@ -2,7 +2,7 @@
 kind: pkgfile.Build
 spec:
   targets:
-    - amdgpu-firmware
+    - amdgpu
     - amd-ucode
     - binfmt-misc
     - bnx2-bnx2x
@@ -18,7 +18,7 @@ spec:
     - gvisor
     - gvisor-debug
     - hello-world-service
-    - i915-ucode
+    - i915
     - intel-ice-firmware
     - intel-ucode
     - iscsi-tools

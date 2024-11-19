@@ -21,6 +21,14 @@ See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configur
 lldpd is now available as a system extension.
 """
 
+    [notes.drm]
+        title = "Direct Rendering Manager (DRM)"
+        description = """\
+New `i915` and `amdgpu` extensions are now available.
+This combines the previous `i915-ucode` and `amdgpu-firmware` extensions along with the matching kernel modules.
+Upgrades via Image Factory will automatically include the new extensions if previously `i915-ucode` or `amdgpu-firmware` were used.
+"""
+
     [notes.updates]
         title = "Component Updates"
         description = """\

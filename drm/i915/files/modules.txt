@@ -1,0 +1,4 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/gpu/drm/i915/i915.ko
