@@ -39,9 +39,10 @@ gvisor: 20241007.0
 spin: 0.16.0
 ecr-credential-provider: 1.31.1
 Intel microcode: 20241112
-NVIDIA LTS: 535.216.01
-NVIDIA Production: 550.127.05
+NVIDIA LTS: 535.216.03
+NVIDIA Production: 550.127.08
 vmtoolsd-guest-agent: v0.6.1
+DRBD: 9.2.12
 """
 
 [make_deps]
