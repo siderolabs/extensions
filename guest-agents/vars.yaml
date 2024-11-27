@@ -9,4 +9,4 @@ XEN_GUEST_AGENT_VERSION: 0.4.0
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
 TALOS_VMTOOLSD_VERSION: v0.6.1
 # renovate: datasource=github-releases depName=siderolabs/talos-metal-agent
-TALOS_METAL_AGENT_VERSION: v0.1.0-alpha.0
+TALOS_METAL_AGENT_VERSION: v0.1.0-alpha.2
