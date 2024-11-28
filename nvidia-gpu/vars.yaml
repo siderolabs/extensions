@@ -10,10 +10,10 @@ CONTAINER_TOOLKIT_REF: a470818ba7d9166be282cd0039dd2fc9b0a34d73
 LIBNVIDIA_CONTAINER_VERSION: v1.16.1
 LIBNVIDIA_CONTAINER_REF: 4c2494f16573b585788a42e9c7bee76ecd48c73d
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:0c1bf69476e3ca3d4763ca3067773e8796a1faecd56678a3b748cd90cfb9b9a5
+WOLFI_BASE_REF: sha256:8dd9ceace8b1574e550374e9c07c2baafa60cc96223c1314fac61bd2edb48c70
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp
 LIBSECCOMP_VERSION: 2.5.5
 # renovate: datasource=git-tags extractVersion=^libcap-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/libs/libcap/libcap.git
-LIBCAP_VERSION: 2.70
+LIBCAP_VERSION: 2.72
 # renovate: datasource=git-tags extractVersion=^elfutils-(?<version>.*)$ depName=git://sourceware.org/git/elfutils.git
-ELFUTILS_VERSION: 0.191
+ELFUTILS_VERSION: 0.192

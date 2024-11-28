@@ -4,17 +4,20 @@ shell: /bin/bash
 install:
   - build-base
   - bash
+  - patch
 dependencies:
   - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
   - sources:
       - url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .LIBCAP_VERSION }}.tar.xz
         destination: libcap.tar.xz
-        sha256: 23a6ef8aadaf1e3e875f633bb2d116cfef8952dba7bc7c569b13458e1952b30f
-        sha512: 4e0bf0efeccb654c409afe9727b2b53c1d4da8190d7a0a9848fc52550ff3e13502add3eacde04a68a5b7bec09e91df487f64c5746ba987f873236a9e53b3d4e8
+        sha256: 0274f5a15a5205f656d8f0169eef711dd29158ba8ad3b240618b342b2460175b
+        sha512: c0726bcd5e48395c6f4edd34f0fcaa21d7b2fe35dbc88824c0d86b42859dbe507f55c1ac7f7352e2aa56e3632b7aa9a098ca9cc730c82f942106d2786b10ba2c
     prepare:
       - |
         tar -xf libcap.tar.xz --strip-components=1
+      - |
+        patch -p1 < /pkg/patches/getdents.patch
     build:
       - |
         make prefix=/usr/local/glibc lib=lib -j $(nproc)
