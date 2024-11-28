@@ -41,7 +41,8 @@ ecr-credential-provider: 1.31.1
 stargz-snapshotter: 0.16.2
 Intel microcode: 20241112
 NVIDIA LTS: 535.216.03
-NVIDIA Production: 550.127.08
+NVIDIA Production: 550.127.08a
+nvidia-container-toolkit: v1.17.2
 vmtoolsd-guest-agent: v0.6.1
 DRBD: 9.2.12
 """
