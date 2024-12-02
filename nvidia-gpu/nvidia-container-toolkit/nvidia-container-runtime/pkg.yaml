@@ -12,8 +12,8 @@ steps:
   - sources:
       - url: https://github.com/NVIDIA/nvidia-container-toolkit/archive/refs/tags/{{ .CONTAINER_TOOLKIT_VERSION }}.tar.gz
         destination: container-toolkit.tar.gz
-        sha256: 38a193444e0342c0a2c0d3664403e2c341eb77f1461b3f9172fd93c04de82165
-        sha512: 691d4fc47ea60b730ec491b333aa8118bcfd62cdab20a42b84155c6a13484d920e758435b5029bbae4fbefce82352aa5764f1554992682f689c95615809fb83c
+        sha256: 2233415cae3476e24d0c15a13843f62471dbc36570450ce6c7a03c0aa45d326f
+        sha512: 1e6174f8988545f7e1946da82684a5d6f2589dd1ee8250830a9182fc388bae6b24f44a19ac0ce53aff1d445fef4e78efad70cd6ac8700c7f8985b91ab2537b37
     env:
       GIT_COMMIT: {{ substr 0 7 .CONTAINER_TOOLKIT_REF }} # build is using short sha
     prepare:

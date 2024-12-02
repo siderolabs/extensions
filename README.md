@@ -55,14 +55,19 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | Name                                               | Image                                                                                                               | Description                 | Version Format           |
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------ |
 | [amd-ucode](firmware/amd-ucode/)                   | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode)                   | AMD CPU microcode updates   | `linux firmware version` |
-| [amdgpu-firmware](firmware/amdgpu-firmware/)       | [ghcr.io/siderolabs/amdgpu-firmware](https://github.com/siderolabs/extensions/pkgs/container/amdgpu-firmware)       | AMD GPU firmware            | `linux firmware version` |
 | [bnx2-bnx2x](firmware/bnx2-bnx2x/)                 | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x)                 | Broadcom NetXtreme firmware | `linux firmware version` |
 | [chelsio-firmware](firmware/chelsio-firmware/)     | [ghcr.io/siderolabs/chelsio-firmware](https://github.com/siderolabs/extensions/pkgs/container/chelsio-firmware)     | Chelsio NIC firmware        | `linux firmware version` |
-| [i915-ucode](firmware/i915-ucode/)                 | [ghcr.io/siderolabs/i915-ucode](https://github.com/siderolabs/extensions/pkgs/container/i915-ucode)                 | Intel GPU firmware          | `linux firmware version` |
 | [intel-ice-firmware](firmware/intel-ice-firmware/) | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | Intel ICE NIC firmware      | `linux firmware version` |
 | [intel-ucode](firmware/intel-ucode/)               | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode)               | Intel CPU microcode updates | `upstream version`       |
 | [qlogic-firmware](firmware/qlogic-firmware/)       | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware)       | Qlogic firmware             | `linux firmware version` |
 | [realtek-firmware](firmware/realtek-firmware/)     | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware)     | Realtek firmware            | `linux firmware version` |
+
+### Direct Rendering Manager (DRM)
+
+| Name                  | Image                                                                                       | Description                    | Version Format                           |
+| --------------------- | ------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------------- |
+| [amdgpu](drm/amdgpu/) | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | AMD GPU firmware and drivers   | `linux firmware version`-`talos version` |
+| [i915](drm/i915/)     | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915)     | Intel GPU firmware and drivers | `linux firmware version`-`talos version` |
 
 ### Drivers
 
@@ -103,14 +108,14 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ### Power
 
-| Name                            | Image                                                                                                     | Description                                                    | Version Format     |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------ |
+| Name                            | Image                                                                                               | Description                                                    | Version Format     |
+| ------------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------ |
 | [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version` |
 
 ### Guest Agents
 
 | Name                                                       | Image                                                                                                                   | Description                                                            | Version Format     |
-|------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------|--------------------|
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
 | [metal-agent](guest-agents/metal-agent/)                   | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent)                   | [Talos Metal Agent](https://github.com/siderolabs/talos-metal-agent)   | `upstream version` |
 | [qemu-guest-agent](guest-agents/qemu-guest-agent/)         | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent)         | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
 | [xe-guest-utilities](guest-agents/xe-guest-utilities/)     | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/extensions/pkgs/container/xe-guest-utilities)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
