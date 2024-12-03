@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-12-10T14:07:06Z by kres 8183c20.
+# Generated on 2024-12-17T09:51:12Z by kres 318187b.
 
 # common variables
 
@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.9.0-6-gabba1d8
+PKGS ?= v1.9.0-12-g9576b97
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -64,6 +64,7 @@ TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
 TARGETS += crun
 TARGETS += drbd
+TARGETS += dvb-cx23885
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver

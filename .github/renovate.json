@@ -1,122 +1,24 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "description": "THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.\n\nGenerated on 2024-12-17T09:51:12Z by kres 318187b.\n\n",
+    "prHeader": "Update Request | Renovate Bot",
     "extends": [
+        ":dependencyDashboard",
+        ":gitSignOff",
         ":semanticCommitScopeDisabled",
         "schedule:earlyMondays"
     ],
-    "regexManagers": [
-        {
-            "fileMatch": [
-                "vars.yaml"
-            ],
-            "matchStrings": [
-                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:(\\s)?.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
-            ],
-            "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
-        },
-        {
-            "fileMatch": [
-                "Pkgfile"
-            ],
-            "matchStrings": [
-                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:\\s+.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:\\s.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
-            ],
-            "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}"
-        },
-        {
-            "fileMatch": [
-                "Pkgfile"
-            ],
-            "matchStrings": [
-                "ghcr.io\\/siderolabs\\/bldr:(?<currentValue>v.*)"
-            ],
-            "depNameTemplate": "siderolabs/bldr",
-            "datasourceTemplate": "github-tags",
-            "versioningTemplate": "semver"
-        },
-        {
-            "fileMatch": [
-                "Makefile"
-            ],
-            "matchStrings": [
-                "BLDR_RELEASE\\s+\\?=\\s+(?<currentValue>.*)\\n"
-            ],
-            "depNameTemplate": "siderolabs/bldr",
-            "datasourceTemplate": "github-tags",
-            "versioningTemplate": "semver"
-        }
-    ],
     "packageRules": [
         {
-            "matchPackageNames": [
-                "nvidia/open-gpu-kernel-modules",
-                "open-iscsi/open-isns",
-                "containers/crun",
-                "git://git.kernel.org/pub/scm/libs/libcap/libcap.git",
-                "git://sourceware.org/git/elfutils.git",
-                "git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git"
-            ],
-            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>\\d+)?$"
-        },
-        {
-            "matchPackageNames": [
-                "https://sourceware.org/git/glibc.git"
-            ],
-            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>[0-9]{1,3})?$"
-        },
-        {
-            "matchPackageNames": [
-                "google/gvisor",
-                "intel/Intel-Linux-Processor-Microcode-Data-Files"
-            ],
-            "versioning": "regex:^(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})\\.?(?<build>\\d+)?$"
-        },
-        {
-            "matchPackageNames": [
-                "git://linux-nfs.org/~steved/libtirpc"
-            ],
-            "versioning": "regex:^(?<major>\\d+)-(?<minor>\\d+)-?(?<patch>\\d+)?$"
-        },
-        {
-            "matchPackagePatterns": [
-                "*"
-            ],
-            "matchDatasources": [
-                "docker"
-            ],
-            "groupName": "container images"
-        },
-        {
-            "matchPackagePatterns": [
-                "*"
-            ],
-            "matchDatasources": [
-                "go",
-                "golang-version"
-            ],
-            "groupName": "go packages"
-        },
-        {
-            "matchPackagePatterns": [
-                "*"
-            ],
-            "matchDatasources": [
-                "npm"
-            ],
-            "groupName": "node packages"
-        },
-        {
-            "matchPackagePatterns": [
-                "*"
-            ],
-            "matchDatasources": [
-                "git-refs",
-                "git-tags",
-                "github-tags",
-                "github-releases"
-            ],
-            "groupName": "releases"
+            "groupName": "dependencies",
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ]
         }
     ],
-    "dependencyDashboard": true
+    "separateMajorMinor": false
 }
