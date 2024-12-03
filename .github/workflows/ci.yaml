@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-11-25T14:13:25Z by kres b9ed228.
+# Generated on 2024-12-10T13:30:19Z by kres 8183c20.
 
 name: default
 concurrency:
@@ -33,7 +33,7 @@ jobs:
       labels: ${{ steps.retrieve-pr-labels.outputs.result }}
     services:
       buildkitd:
-        image: moby/buildkit:v0.17.2
+        image: moby/buildkit:v0.18.1
         options: --privileged
         ports:
           - 1234:1234
@@ -143,7 +143,7 @@ jobs:
       - default
     services:
       buildkitd:
-        image: moby/buildkit:v0.17.2
+        image: moby/buildkit:v0.18.1
         options: --privileged
         ports:
           - 1234:1234

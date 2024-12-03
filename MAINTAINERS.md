@@ -10,7 +10,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 
 | Name                                      | Maintainer           | Github ID                                                            |
 | ----------------------------------------- | -------------------- | -------------------------------------------------------------------- |
-| amdgpu-firmware                           | Sidero Labs          | NA                                                                   |
+| amdgpu                                    | Sidero Labs          | NA                                                                   |
 | amd-ucode                                 | Sidero Labs          | NA                                                                   |
 | binfmt-misc                               | Serge Logvinov       | [sergelogvinov](https://github.com/sergelogvinov)                    |
 | bnx2-bnx2x                                | Sidero Labs          | NA                                                                   |
@@ -19,13 +19,14 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | chelsio-firmware                          | Sidero Labs          | NA                                                                   |
 | crun                                      | Henrik Gerdes        | [hegerdes](https://github.com/hegerdes)                              |
 | drbd                                      | Needs Maintainer     | NA                                                                   |
+| dvb-cx23885                               | Skyler Mäntysaari    | [samip5](https://github.com/samip5)                                  |
 | ecr-credential-provider                   | Florian Ströger      | [Preisschild](https://github.com/Preisschild)                        |
 | fuse3                                     | Sidero Labs          | NA                                                                   |
 | gasket-driver                             | Sidero Labs          | NA                                                                   |
 | gvisor                                    | Sidero Labs          | NA                                                                   |
 | gvisor-debug                              | Sidero Labs          | NA                                                                   |
 | hello-world-service                       | Sidero Labs          | NA                                                                   |
-| i915-ucode                                | Sidero Labs          | NA                                                                   |
+| i915                                      | Sidero Labs          | NA                                                                   |
 | intel-ice-firmware                        | Sidero Labs          | NA                                                                   |
 | intel-ucode                               | Sidero Labs          | NA                                                                   |
 | iscsi-tools                               | Sidero Labs          | NA                                                                   |
