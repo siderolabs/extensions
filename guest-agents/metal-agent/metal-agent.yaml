@@ -2,6 +2,8 @@ name: metal-agent
 container:
   entrypoint: ./talos-metal-agent
   args: []
+  environment:
+    - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   mounts:
     - source: /system/run/machined/machine.sock
       destination: /system/run/machined/machine.sock
