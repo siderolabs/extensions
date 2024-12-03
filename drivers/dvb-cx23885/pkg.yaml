@@ -1,0 +1,47 @@
+name: dvb-cx23885
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  # The pkgs version for a particular release of Talos as defined in
+  # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kernel:{{ .BUILD_ARG_PKGS }}"
+  - sources:
+      - url: https://github.com/OpenELEC/dvb-firmware/archive/refs/tags/{{ .LINUX_DVB_FIRMWARE }}.tar.gz
+        destination: dvb-firmware.tar.gz
+        sha256: cef3ce537d213e020af794cecf9de207e2882c375ceda39102eb6fa2580bad8d
+        sha512: 2372dba98083c76865f5f0f8101b1160888e03cdbe911dd08621e7b6f38e8a25ae5d56eefc21728bf65fd09ea613b53606df4021d3972b0bc9d2bd8b6cbe20a1
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xvf dvb-firmware.tar.gz
+        rm dvb-firmware.tar.gz
+  - install:
+      - |
+        export KERNELRELEASE=$(find /lib/modules -type d -name "*-talos" -exec basename {} \+)
+
+        mkdir -p /rootfs
+
+        xargs -a /pkg/files/modules.txt -I {} install -D /lib/modules/${KERNELRELEASE}/{} /rootfs/lib/modules/${KERNELRELEASE}/{}
+        depmod -b /rootfs ${KERNELRELEASE}
+      - |
+        mkdir -p /rootfs/lib/firmware
+        cp dvb-firmware-{{ .LINUX_DVB_FIRMWARE }}/firmware/dvb-demod-si2168-02.fw /rootfs/lib/firmware
+        cp dvb-firmware-{{ .LINUX_DVB_FIRMWARE }}/firmware/dvb-demod-si2168-b40-01.fw /rootfs/lib/firmware
+        cp dvb-firmware-{{ .LINUX_DVB_FIRMWARE }}/firmware/v4l-cx23885-avcore-01.fw /rootfs/lib/firmware
+  - test:
+      - |
+        # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
+        find /rootfs/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

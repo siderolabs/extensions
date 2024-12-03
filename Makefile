@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-11-28T16:58:10Z by kres 232fe63.
+# Generated on 2024-12-03T02:45:08Z by kres 232fe63.
 
 # common variables
 
@@ -13,7 +13,7 @@ IMAGE_TAG ?= $(TAG)
 OPERATING_SYSTEM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 GOARCH := $(shell uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')
 REGISTRY ?= ghcr.io
-USERNAME ?= siderolabs
+USERNAME ?= skyssolutions
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
 KRES_IMAGE ?= ghcr.io/siderolabs/kres:latest
 CONFORMANCE_IMAGE ?= ghcr.io/siderolabs/conform:latest
@@ -64,6 +64,7 @@ TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
 TARGETS += crun
 TARGETS += drbd
+TARGETS += dvb-cx23885
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
