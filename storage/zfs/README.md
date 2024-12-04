@@ -73,7 +73,7 @@ Next you have to create a pod which has privileged rights and prepare him for cr
 kubectl -n kube-system debug -it --profile sysadmin --image=alpine node/<node name>
 ```
 
-You are now in the container, install the required tools
+You are now in the container and ready to create the zfs raid.
 
 ### Create zfs raid
 
@@ -118,7 +118,7 @@ talosctl reboot --nodes <node>
 After your node is rebooted check if the mount exsists.
 
 ```bash
-talosctl get discoveredvolumes | grep <mount of zfs raid you specified (/var/...)>
+talosctl mounts | grep <mount of zfs raid you specified (/var/...)>
 ```
 
 You should see the mount.
