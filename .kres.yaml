@@ -11,6 +11,7 @@ spec:
     - chelsio-firmware
     - crun
     - drbd
+    - dvb-cx23885
     - ecr-credential-provider
     - fuse3
     - gasket-driver
