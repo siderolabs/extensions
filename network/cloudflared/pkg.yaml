@@ -1,0 +1,47 @@
+name: cloudflared
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/cloudflare/cloudflared/archive/refs/tags/{{ .CLOUDFLARED_VERSION }}.tar.gz
+        destination: cloudflared.tar.gz
+        sha256: 74794fbcdd7b71131799100d493cf70a8e126cb109f3d9e2abce55593df6a737
+        sha512: cd417fc8410537fd0e59799be750f18b13e5931a5785258833b518aa5f516a479e00af0bbceb9f6e03d7cc6f2da406a956f25f64a57f282de56d9f6c47b281a2
+    env:
+      GOPATH: /go
+    cachePaths:
+      - /.cache/go-build
+      - /go/pkg
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzvf cloudflared.tar.gz --strip-components=1
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+
+        make cloudflared VERSION="{{ .CLOUDFLARED_VERSION}}" DATE="{{ .BUILD_ARG_SOURCE_DATE_EPOCH }}"
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/cloudflared/usr/local/bin
+
+        mv cloudflared /rootfs/usr/local/lib/containers/cloudflared/usr/local/bin
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/cloudflared.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+      - |
+        [[ $(/rootfs/usr/local/lib/containers/cloudflared/usr/local/bin/cloudflared version) == *{{ .CLOUDFLARED_VERSION }}* ]]
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

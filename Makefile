@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-12-17T09:51:12Z by kres 318187b.
+# Generated on 2024-12-17T09:55:10Z by kres 318187b.
 
 # common variables
 
@@ -62,6 +62,7 @@ TARGETS += bnx2-bnx2x
 TARGETS += btrfs
 TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
+TARGETS += cloudflared
 TARGETS += crun
 TARGETS += drbd
 TARGETS += dvb-cx23885

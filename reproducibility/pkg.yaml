@@ -15,10 +15,14 @@ dependencies:
   # - stage: chelsio-drivers
   # chelsio-firmware can be ignored from reproducibility test since it's linux-firmware copied from pkgs
   # - stage: chelsio-firmware
+
+  - stage: cloudflared
+
   # drbd can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # crun can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
   # - stage: crun
   # - stage: drbd
+  # - stage: dvb-cx23885
   - stage: ecr-credential-provider
   - stage: fuse3
   # gasket-driver can be ignored from reproducibility test since it's kernel modules copied from pkgs

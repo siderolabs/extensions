@@ -17,6 +17,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | btrfs                                     | Enno Boland          | [Gottox](https://github.com/Gottox)                                  |
 | chelsio-drivers                           | Sidero Labs          | NA                                                                   |
 | chelsio-firmware                          | Sidero Labs          | NA                                                                   |
+| cloudflared                               | Maxime Nrb           | [maxnrb](https://github.com/maxnrb)                                  |
 | crun                                      | Henrik Gerdes        | [hegerdes](https://github.com/hegerdes)                              |
 | drbd                                      | Needs Maintainer     | NA                                                                   |
 | dvb-cx23885                               | Skyler Mäntysaari    | [samip5](https://github.com/samip5)                                  |
