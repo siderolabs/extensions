@@ -62,6 +62,7 @@ TARGETS += bnx2-bnx2x
 TARGETS += btrfs
 TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
+TARGETS += cloudflared
 TARGETS += crun
 TARGETS += drbd
 TARGETS += ecr-credential-provider
