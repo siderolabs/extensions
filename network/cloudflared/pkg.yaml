@@ -1,0 +1,42 @@
+name: cloudflared
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+    # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/cloudflare/cloudflared/releases/download/{{ .VERSION }}/cloudflared-linux-amd64
+        destination: cloudflared
+        sha256: 55d789465955ccfffcd61ba72807a2a4495002f7d9b7cc5eadcaa1f93c279d25
+        sha512: 1b63166bbd39f9d6233e437c2b18a5f9ad49a25f607ca6969115463e1e62a2877ae11b8693cc1a6385b066954a0c400d6a0a43c4cbc36764e4056ecb1d47ea5a
+    # {{ else if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/cloudflare/cloudflared/releases/download/{{ .VERSION }}/cloudflared-linux-arm64
+        destination: cloudflared
+        sha256: 84d1c367b48b91ece8b4f348a0fb0ff964d58840445d2d51ed3bfb92ea75d493
+        sha512: 26ab1391a5aadce729bfbdbe057048cd44a4d75c52b81d8c1ea81bc9e54941aa407ec11058a4adf451ffbe13f486b65d648544226b3a4c362a2933b4ca2e7847
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/cloudflared/usr/local/bin/
+        cp -pr cloudflared /rootfs/usr/local/lib/containers/cloudflared/usr/local/bin
+        chmod +x /rootfs/usr/local/lib/containers/cloudflared/usr/local/bin/cloudflared
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/cloudflared.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+      - |
+        [[ $(/rootfs/usr/local/lib/containers/cloudflared/usr/local/bin/cloudflared version) == *{{ .VERSION }}* ]]
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
