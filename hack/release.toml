@@ -27,6 +27,12 @@ lldpd is now available as a system extension.
 dvb drivers + firmware is now available as a system extension.
 """
 
+    [notes.cloudflared]
+        title = "Cloudflared"
+        description = """\
+Cloudflared is now available as a system extension.
+"""
+
     [notes.drm]
         title = "Direct Rendering Manager (DRM)"
         description = """\

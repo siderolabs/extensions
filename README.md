@@ -43,12 +43,12 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | Name                                                                 | Image                                                                                                                         | Description                                                                                                                        | Version Format     |
 | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | [crun](container-runtime/crun/)                                      | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun)                                       | [crun](https://github.com/containers/crun) container runtime                                                                       | `upstream version` |
-| [gvisor](container-runtime/gvisor/)                                  | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor)                                   | [gVisor](https://gvisor.dev/) container runtime                                                                                    | `upstream version` |
-| [stargz-snapshotter](container-runtime/stargz-snapshotter/)          | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter)           | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime                                           | `upstream version` |
 | [ecr-credential-provider](container-runtime/ecr-credential-provider) | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | [ECR Credential Provider](https://github.com/kubernetes/cloud-provider-aws/tree/master/cmd/ecr-credential-provider) kubelet plugin | `upstream version` |
-| [wasmedge](container-runtime/wasmedge)                               | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge)                               | [WasmEdge](https://github.com/containerd/runwasi) container runtime                                                                | `upstream_version` |
-| [spin](container-runtime/spin)                                       | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin)                                       | [Spin](https://github.com/spinkube/containerd-shim-spin) container runtime                                                         | `upstream_version` |
+| [gvisor](container-runtime/gvisor/)                                  | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor)                                   | [gVisor](https://gvisor.dev/) container runtime                                                                                    | `upstream version` |
 | [kata-containers](container-runtime/kata-containers)                 | [ghcr.io/siderolabs/kata-containers](https://github.com/siderolabs/extensions/pkgs/container/kata-containers)                 | [Kata Containers](https://github.com/kata-containers/kata-containers) container runtime                                            | `upstream version` |
+| [spin](container-runtime/spin)                                       | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin)                                       | [Spin](https://github.com/spinkube/containerd-shim-spin) container runtime                                                         | `upstream_version` |
+| [stargz-snapshotter](container-runtime/stargz-snapshotter/)          | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter)           | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime                                           | `upstream version` |
+| [wasmedge](container-runtime/wasmedge)                               | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge)                               | [WasmEdge](https://github.com/containerd/runwasi) container runtime                                                                | `upstream_version` |
 
 ### Firmware
 
@@ -96,20 +96,23 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ### Network
 
-| Name                            | Image                                                                                             | Description                            | Version Format     |
-| ------------------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------- | ------------------ |
-| [tailscale](network/tailscale/) | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | [Tailscale](https://tailscale.com)     | `upstream version` |
-| [lldpd](network/lldpd/)         | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd)         | [LLDP](https://github.com/lldpd/lldpd) | `upstream version` |
+| Name                                | Image                                                                                                 | Description                                               | Version Format     |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------ |
+| [cloudflared](network/cloudflared/) | [ghcr.io/siderolabs/cloudflared](https://github.com/siderolabs/extensions/pkgs/container/cloudflared) | [Cloudflared](https://github.com/cloudflare/cloudflared/) | `upstream version` |
+| [lldpd](network/lldpd/)             | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd)             | [LLDP](https://github.com/lldpd/lldpd)                    | `upstream version` |
+| [tailscale](network/tailscale/)     | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale)     | [Tailscale](https://tailscale.com)                        | `upstream version` |
+
 
 ### Storage
 
 | Name                                | Image                                                                                                 | Description            | Version Format                     |
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------- | ---------------------------------- |
+| [btrfs](storage/btrfs/)             | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs)             | BTRFS driver module    | `talos version`                    |
+| [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module     | `upstream version`-`talos version` |
 | [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools       | `v0.1.0`                           |
 | [mdadm](storage/mdadm/)             | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm)             | manage MD devices tool | `upstream version`                 |
-| [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module     | `upstream version`-`talos version` |
 | [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module      | `upstream version`-`talos version` |
-| [btrfs](storage/btrfs/)             | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs)             | BTRFS driver module    | `talos version`                    |
+
 
 ### Power
 
@@ -123,8 +126,8 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
 | [metal-agent](guest-agents/metal-agent/)                   | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent)                   | [Talos Metal Agent](https://github.com/siderolabs/talos-metal-agent)   | `upstream version` |
 | [qemu-guest-agent](guest-agents/qemu-guest-agent/)         | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent)         | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
-| [xe-guest-utilities](guest-agents/xe-guest-utilities/)     | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/extensions/pkgs/container/xe-guest-utilities)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
 | [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent/) | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd)         | `upstream version` |
+| [xe-guest-utilities](guest-agents/xe-guest-utilities/)     | [ghcr.io/siderolabs/xe-guest-utilities](https://github.com/siderolabs/extensions/pkgs/container/xe-guest-utilities)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
 
 ### NVIDIA GPU
 

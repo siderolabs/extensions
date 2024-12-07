@@ -9,6 +9,7 @@ spec:
     - btrfs
     - chelsio-drivers
     - chelsio-firmware
+    - cloudflared
     - crun
     - drbd
     - dvb-cx23885
