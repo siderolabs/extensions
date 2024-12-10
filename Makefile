@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-11-28T16:58:10Z by kres 232fe63.
+# Generated on 2024-12-10T13:30:19Z by kres 8183c20.
 
 # common variables
 
@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.9.0-alpha.0-52-g2abcd4b
+PKGS ?= v1.10.0-alpha.0-6-g1a55529
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -64,6 +64,7 @@ TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
 TARGETS += crun
 TARGETS += drbd
+TARGETS += dvb-cx23885
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
@@ -174,7 +175,7 @@ local-%:  ## Builds the specified target defined in the Pkgfile using the local 
 	    echo $$platform; \
 	    directory="$${platform//\//_}"; \
 	    if [[ -d "$$DEST/$$directory" ]]; then \
-	      mv "$$DEST/$$directory/"* $$DEST; \
+	      mv -f "$$DEST/$$directory/"* $$DEST; \
 	      rmdir "$$DEST/$$directory/"; \
 	    fi; \
 	  done'
