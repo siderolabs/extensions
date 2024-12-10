@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-12-02T15:31:43Z by kres 232fe63.
+# Generated on 2024-12-10T14:07:06Z by kres 8183c20.
 
 # common variables
 
@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.9.0-1-gb047e41
+PKGS ?= v1.9.0-6-gabba1d8
 PKGS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -174,7 +174,7 @@ local-%:  ## Builds the specified target defined in the Pkgfile using the local 
 	    echo $$platform; \
 	    directory="$${platform//\//_}"; \
 	    if [[ -d "$$DEST/$$directory" ]]; then \
-	      mv "$$DEST/$$directory/"* $$DEST; \
+	      mv -f "$$DEST/$$directory/"* $$DEST; \
 	      rmdir "$$DEST/$$directory/"; \
 	    fi; \
 	  done'
