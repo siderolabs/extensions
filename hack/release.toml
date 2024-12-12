@@ -57,6 +57,7 @@ NVIDIA Production: 550.127.08a
 nvidia-container-toolkit: v1.17.2
 vmtoolsd-guest-agent: v0.6.1
 DRBD: 9.2.12
+ZFS: 2.2.7
 """
 
 [make_deps]
