@@ -1,3 +1,36 @@
+## [Talos System Extensions 1.8.4](https://github.com/siderolabs/extensions/releases/tag/v1.8.4) (2024-12-12)
+
+Welcome to the v1.8.4 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.8/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Intel microcode: 20241112
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`eef1905`](https://github.com/siderolabs/extensions/commit/eef1905904d5507a9a4197b644e4d9f537825820) chore: update PKGS to match Talos 1.8.4
+* [`1424402`](https://github.com/siderolabs/extensions/commit/1424402bcb0cc35b3be4471d8e23122c3dcccc7c) feat: update Intel u-code to 20241112
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.8.3](https://github.com/siderolabs/extensions/releases/tag/v1.8.3)
+
 ## [Talos System Extensions 1.8.3](https://github.com/siderolabs/extensions/releases/tag/v1.8.3) (2024-11-13)
 
 Welcome to the v1.8.3 release of Talos System Extensions!
