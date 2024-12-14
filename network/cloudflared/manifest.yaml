@@ -1,7 +1,7 @@
 version: v1alpha1
 metadata:
   name: cloudflared
-  version: "$VERSION"
+  version: "$CLOUDFLARED_VERSION"
   author: Maxime Narbaud
   description: |
     Cloudflare Tunnel securely connects resources to Cloudflare without a public IP.
