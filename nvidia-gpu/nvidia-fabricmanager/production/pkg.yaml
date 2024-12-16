@@ -41,6 +41,7 @@ steps:
 
         cp /pkg/nvidia-fabricmanager.yaml /rootfs/usr/local/etc/containers/nvidia-fabricmanager.yaml
 
+        echo "FABRIC_NODE_CONFIG_FILE=/usr/local/share/nvidia/nvswitch/fabricmanager.cfg" >> /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg # fix for #511
         sed -i 's/DAEMONIZE=.*/DAEMONIZE=0/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
         sed -i 's/STATE_FILE_NAME=.*/STATE_FILE_NAME=\/var\/run\/nvidia-fabricmanager\/fabricmanager.state/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
         sed -i 's/TOPOLOGY_FILE_PATH=.*/TOPOLOGY_FILE_PATH=\/usr\/local\/share\/nvidia\/nvswitch/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg

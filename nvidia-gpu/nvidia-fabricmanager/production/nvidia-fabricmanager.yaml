@@ -59,15 +59,6 @@ container:
         - rshared
         - rbind
         - ro
-    # even though we set `TOPOLOGY_FILE_PATH=/usr/local/share/nvidia/nvswitch` in the config file,
-    # fabricmanager still tries to use /usr/share/nvidia/nvswitch
-    - source: /usr/local/share/nvidia/nvswitch
-      destination: /usr/share/nvidia/nvswitch
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - ro
     # binaries
     - source: /usr/local/bin
       destination: /usr/local/bin
