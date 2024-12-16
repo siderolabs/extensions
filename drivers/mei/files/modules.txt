@@ -1,6 +1,7 @@
 modules.order
 modules.builtin
 modules.builtin.modinfo
+kernel/drivers/misc/mei/gsc_proxy/mei_gsc_proxy.ko
 kernel/drivers/misc/mei/hdcp/mei_hdcp.ko
 kernel/drivers/misc/mei/pxp/mei_pxp.ko
 kernel/drivers/misc/mei/mei-gsc.ko
