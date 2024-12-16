@@ -1,12 +1,58 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "description": "THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.\n\nGenerated on 2024-12-17T09:57:25Z by kres 318187b.\n\n",
+    "description": "THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.\n\nGenerated on 2024-12-17T10:03:38Z by kres 318187b.\n\n",
     "prHeader": "Update Request | Renovate Bot",
     "extends": [
         ":dependencyDashboard",
         ":gitSignOff",
         ":semanticCommitScopeDisabled",
         "schedule:earlyMondays"
+    ],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
+            "fileMatch": [
+                "vars.yaml"
+            ],
+            "matchStrings": [
+                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:(\\s)?.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
+            ]
+        },
+        {
+            "customType": "regex",
+            "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
+            "fileMatch": [
+                "Pkgfile"
+            ],
+            "matchStrings": [
+                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:\\s+.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:\\s.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
+            ]
+        },
+        {
+            "customType": "regex",
+            "datasourceTemplate": "github-tags",
+            "depNameTemplate": "siderolabs/bldr",
+            "versioningTemplate": "semver",
+            "fileMatch": [
+                "Pkgfile"
+            ],
+            "matchStrings": [
+                "ghcr.io\\/siderolabs\\/bldr:(?<currentValue>v.*)"
+            ]
+        },
+        {
+            "customType": "regex",
+            "datasourceTemplate": "github-tags",
+            "depNameTemplate": "siderolabs/bldr",
+            "versioningTemplate": "semver",
+            "fileMatch": [
+                "Makefile"
+            ],
+            "matchStrings": [
+                "BLDR_RELEASE\\s+\\?=\\s+(?<currentValue>.*)\\n"
+            ]
+        }
     ],
     "packageRules": [
         {
@@ -17,6 +63,37 @@
                 "patch",
                 "pin",
                 "digest"
+            ]
+        },
+        {
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>\\d+)?$",
+            "matchPackageNames": [
+                "nvidia/open-gpu-kernel-modules",
+                "open-iscsi/open-isns",
+                "containers/crun",
+                "git://git.kernel.org/pub/scm/libs/libcap/libcap.git",
+                "git://sourceware.org/git/elfutils.git",
+                "git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git"
+            ]
+        },
+        {
+            "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.?(?<patch>[0-9]{1,3})?$",
+            "matchPackageNames": [
+                "https://sourceware.org/git/glibc.git"
+            ]
+        },
+        {
+            "versioning": "regex:^(?<major>\\d{4})(?<minor>\\d{2})(?<patch>\\d{2})\\.?(?<build>\\d+)?$",
+            "matchPackageNames": [
+                "google/gvisor",
+                "intel/Intel-Linux-Processor-Microcode-Data-Files",
+                "cloudflare/cloudflared"
+            ]
+        },
+        {
+            "versioning": "regex:^(?<major>\\d+)-(?<minor>\\d+)-?(?<patch>\\d+)?$",
+            "matchPackageNames": [
+                "git://linux-nfs.org/~steved/libtirpc"
             ]
         }
     ],
