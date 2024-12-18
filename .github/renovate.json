@@ -13,20 +13,10 @@
             "customType": "regex",
             "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
             "fileMatch": [
-                "vars.yaml"
-            ],
-            "matchStrings": [
-                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:(\\s)?.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
-            ]
-        },
-        {
-            "customType": "regex",
-            "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
-            "fileMatch": [
                 "Pkgfile"
             ],
             "matchStrings": [
-                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:\\s+.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:\\s.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
+                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:(\\s)?.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
             ]
         },
         {
@@ -43,14 +33,12 @@
         },
         {
             "customType": "regex",
-            "datasourceTemplate": "github-tags",
-            "depNameTemplate": "siderolabs/bldr",
-            "versioningTemplate": "semver",
+            "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
             "fileMatch": [
-                "Makefile"
+                "vars.yaml"
             ],
             "matchStrings": [
-                "BLDR_RELEASE\\s+\\?=\\s+(?<currentValue>.*)\\n"
+                "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:(\\s)?.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
             ]
         }
     ],
