@@ -3,7 +3,7 @@
 format: v1alpha2
 
 vars:
-  LINUX_FIRMWARE_VERSION: "20241110" # update this when updating PKGS_VERSION in Makefile
+  LINUX_FIRMWARE_VERSION: "20241210" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.2.12 # update this when updating PKGS_VERSION in Makefile
   ZFS_DRIVER_VERSION: 2.2.7 # update this when updating PKGS_VERSION in Makefile
   UTIL_LINUX_VERSION: 2.40.2 # update this when updating PKGS_VERSION in Makefile

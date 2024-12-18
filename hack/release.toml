@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.8.0"
+previous = "v1.9.0"
 
 pre_release = false
 
@@ -15,49 +15,11 @@ See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configur
 """
 
 [notes]
-    [notes.lldpd]
-        title = "LLDP"
-        description = """\
-lldpd is now available as a system extension.
-"""
-
-    [notes.dvb]
-        title = "dvb"
-        description = """\
-dvb drivers + firmware is now available as a system extension.
-"""
-
-    [notes.cloudflared]
-        title = "Cloudflared"
-        description = """\
-Cloudflared is now available as a system extension.
-"""
-
-    [notes.drm]
-        title = "Direct Rendering Manager (DRM)"
-        description = """\
-New `i915` and `amdgpu` extensions are now available.
-This combines the previous `i915-ucode` and `amdgpu-firmware` extensions along with the matching kernel modules.
-Upgrades via Image Factory will automatically include the new extensions if previously `i915-ucode` or `amdgpu-firmware` were used.
-"""
 
     [notes.updates]
         title = "Component Updates"
         description = """\
-Linux Firmware: 20241110
-Tailscale: 1.76.6
-crun: 1.18.2
-gvisor: 20241118.0
-spin: 0.17.0
-ecr-credential-provider: 1.31.1
-stargz-snapshotter: 0.16.2
-Intel microcode: 20241112
-NVIDIA LTS: 535.216.03
-NVIDIA Production: 550.127.08a
-nvidia-container-toolkit: v1.17.2
-vmtoolsd-guest-agent: v0.6.1
-DRBD: 9.2.12
-ZFS: 2.2.7
+Linux Firmware: 20241210
 """
 
 [make_deps]
