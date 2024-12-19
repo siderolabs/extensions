@@ -1,0 +1,25 @@
+version: v1alpha1
+metadata:
+  name: pcirebind
+  version: "$VERSION"
+  author: 46labs
+  description: |
+    This system extension provides a simple binary that can bind/unbind drivers from
+    PCI devices by writing to:
+      /sys/bus/pci/devices/<pci_bus_id>/driver_override
+      /sys/bus/pci/drivers/<driver_name>/unbind
+      /sys/bus/pci/drivers/<driver_name>/bind
+
+    This is accomplished using a system extension as the /sys/ filesystem is read-only
+    during normal operations.
+
+    The binary parses the kernel command line (/proc/cmdline) looking for embedded strings
+    like the following:
+      pcirebind.rebind=0000:04:00.0_ixgbe+vfio-pci
+
+    This example would attempt to unbind `ixgbe` from `0000:04:00.0` and then bind `vfio-pci`
+    to the device
+
+  compatibility:
+    talos:
+      version: ">= v1.8.0"
