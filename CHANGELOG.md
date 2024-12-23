@@ -1,3 +1,57 @@
+## [Talos System Extensions 1.10.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.10.0-alpha.0) (2024-12-23)
+
+Welcome to the v1.10.0-alpha.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20241210
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+* Maxime NARBAUD
+* Utku Ozdemir
+* Devin Buhl
+* Skyler Mäntysaari
+* Tom Zaspel
+* Will Glynn
+* Yevhen Kolomeiko
+
+### Changes
+<details><summary>14 commits</summary>
+<p>
+
+* [`1f8bd59`](https://github.com/siderolabs/extensions/commit/1f8bd594049748f125d6d9f8cb52438f58d2eeaf) docs: correct typo
+* [`01771bc`](https://github.com/siderolabs/extensions/commit/01771bc305edb2de05c83e80bae1bf5acccd25c6) chore: rekres to simplify `.kres.yaml` defaults
+* [`cc467e8`](https://github.com/siderolabs/extensions/commit/cc467e806a5c9eafdf264915eef3eb9bfae2f045) feat: update Linux firmware to 20241210
+* [`266346b`](https://github.com/siderolabs/extensions/commit/266346b7142d99670b9f0be2115e462f8490f7cb) chore: rekres for renovate changes
+* [`e2b1497`](https://github.com/siderolabs/extensions/commit/e2b149733ebb93023da96551bf286b1e44ac2d0f) fix: nvidia-fabricmanager production
+* [`b449434`](https://github.com/siderolabs/extensions/commit/b44943495bc79a1b32a9c232d6c8891a38bab808) fix: add gsc_proxy/mei_gsc_proxy to mei modules
+* [`434bd5f`](https://github.com/siderolabs/extensions/commit/434bd5fb78b7bd5b235bd8d3227a5e90bfdbfcd2) fix: use cloudflared release binaries
+* [`68c9650`](https://github.com/siderolabs/extensions/commit/68c9650d20da7217986ca91820589236e8c6e64d) chore: bump metal agent version
+* [`c7dcaaa`](https://github.com/siderolabs/extensions/commit/c7dcaaa6130a273aac2380a76fee241fb400704c) feat: update ZFS in extensions to 2.2.7
+* [`1dd6c36`](https://github.com/siderolabs/extensions/commit/1dd6c364b8aae54a891ef1b371417e4b6b263030) feat: add cloudflared system extension
+* [`43efd87`](https://github.com/siderolabs/extensions/commit/43efd87cb106fd9b062ef4ad4f7831eaf7b4fe09) docs: update README.md
+* [`ea263ae`](https://github.com/siderolabs/extensions/commit/ea263ae1601e4bf8361119bb68808ed680b2b30d) feat: add dvb-cx23885 extension
+* [`4462437`](https://github.com/siderolabs/extensions/commit/44624377575bfecc103dc10a691524a5e2f050d2) docs: replace last command to show the mount
+* [`778d80c`](https://github.com/siderolabs/extensions/commit/778d80cd9a9c2be343f5113af722619631334656) feat: set PATH variable in metal-agent
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.0](https://github.com/siderolabs/extensions/releases/tag/v1.9.0)
+
 ## [Talos System Extensions 1.9.0-alpha.3](https://github.com/siderolabs/extensions/releases/tag/v1.9.0-alpha.3) (2024-11-25)
 
 Welcome to the v1.9.0-alpha.3 release of Talos System Extensions!  
