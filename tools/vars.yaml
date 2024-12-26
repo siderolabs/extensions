@@ -1,0 +1,4 @@
+# renovate: datasource=github-releases depName=linux-nvme/libnvme
+LIBNVME_VERSION: v1.11.1
+# renovate: datasource=github-releases depName=linux-nvme/nvme-cli
+NVME_CLI_VERSION: v2.11

@@ -61,7 +61,9 @@
                 "containers/crun",
                 "git://git.kernel.org/pub/scm/libs/libcap/libcap.git",
                 "git://sourceware.org/git/elfutils.git",
-                "git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git"
+                "git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git",
+                "linux-nvme/libnvme",
+                "linux-nvme/nvme-cli"
             ]
         },
         {

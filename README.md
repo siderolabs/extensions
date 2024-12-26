@@ -72,7 +72,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 ### Drivers
 
 | Name                                 | Image                                                                                                                                       | Description                          | Version Format                                        |
-|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|-------------------------------------------------------|
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------- |
 | [chelsio](drivers/chelsio/)          | [ghcr.io/siderolabs/chelsio-drivers](https://github.com/siderolabs/extensions/pkgs/container/chelsio-drivers)                               | Chelsio NIC drivers                  | `talos version`                                       |
 | [gasket](drivers/gasket/)            | [ghcr.io/siderolabs/gasket-driver](https://github.com/siderolabs/extensions/pkgs/container/gasket-driver)                                   | Driver for Google Coral PCIe devices | `gasket driver upstream short commit`-`talos version` |
 | [mei](drivers/mei/)                  | [ghcr.io/siderolabs/mei](https://github.com/siderolabs/extensions/pkgs/container/mei)                                                       | Driver for Intel Management Engine   | `talos version`                                       |
@@ -142,6 +142,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | Name                                  | Description                               | Version Format     |
 | ------------------------------------- | ----------------------------------------- | ------------------ |
 | [util-linux-tools](tools/util-linux/) | Util Linux tools (`fstrim` and `nsenter`) | `upstream version` |
+| [nvme-cli](tools/nvme-cli/)           | NVMe command line interface               | `upstream version` |
 
 ## Building Extensions
 

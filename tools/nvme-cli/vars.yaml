@@ -1,0 +1,1 @@
+VERSION: "{{ .NVME_CLI_VERSION }}"

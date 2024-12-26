@@ -1,0 +1,59 @@
+name: nvme-cli
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libjson-c:{{ .BUILD_ARG_PKGS }}"
+  - stage: libnvme
+    from: /rootfs # build dependency
+  - stage: libnvme
+    from: /rootfs
+    to: /rootfs
+steps:
+  - sources:
+      - url: https://github.com/linux-nvme/nvme-cli/archive/refs/tags/{{ .NVME_CLI_VERSION }}.tar.gz
+        destination: nvme-cli.tar.gz
+        sha256: 5e4dc73dbb488c6b1e6ad1c78d0c62b624076fcb0c052bd9039674a1dbd6517b
+        sha512: 33de20ad990a3b87fef46fa486832edde41907223aa6b8a47606e605b360745fd7e2054226bf93a59b2a09c6bc04d0b684e4b3bb27c3fc0e6110c64a558cadc0
+    prepare:
+      - |
+        tar xf nvme-cli.tar.gz --strip-components=1
+
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig
+
+        mkdir -p /usr/bin
+        ln -s /toolchain/bin/env /usr/bin/env
+        ln -s /toolchain/bin/python3 /toolchain/bin/python
+        pip3 install ninja
+
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig
+
+        patch -p1 < /pkg/patches/locale.patch
+        patch -p1 < /pkg/patches/basename.patch
+
+        meson setup \
+          -Db_lto=true \
+          -Dudevrulesdir=/usr/lib/udev/rules.d \
+          -Djson-c=enabled \
+          .build
+      - |
+        sed -i 's#$VERSION#{{ .NVME_CLI_VERSION }}#' /pkg/manifest.yaml
+    build:
+      - |
+        meson compile -C .build
+    install:
+      - |
+        DESTDIR=/rootfs meson install -C .build
+        rm -rf /rootfs/usr/local/{include,lib/{dracut,systemd},share}
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

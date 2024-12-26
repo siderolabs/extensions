@@ -36,6 +36,7 @@ spec:
     - nvidia-fabricmanager-production
     - nvidia-open-gpu-kernel-modules-lts
     - nvidia-open-gpu-kernel-modules-production
+    - nvme-cli
     - qemu-guest-agent
     - qlogic-firmware
     - realtek-firmware
@@ -178,6 +179,8 @@ spec:
         - git://git.kernel.org/pub/scm/libs/libcap/libcap.git
         - git://sourceware.org/git/elfutils.git
         - git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
+        - linux-nvme/libnvme
+        - linux-nvme/nvme-cli
       versioning: 'regex:^(?<major>\d+)\.(?<minor>\d+)\.?(?<patch>\d+)?$'
     - matchPackageNames:
         - https://sourceware.org/git/glibc.git
