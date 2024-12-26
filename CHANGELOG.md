@@ -1,3 +1,37 @@
+## [Talos System Extensions 1.9.1](https://github.com/siderolabs/extensions/releases/tag/v1.9.1) (2024-12-26)
+
+Welcome to the v1.9.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20241210
+
+
+### Contributors
+
+* Andrey Smirnov
+* Will Glynn
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`5937853`](https://github.com/siderolabs/extensions/commit/59378538ccff498348aa2150b91d2a04b65c127a) docs: correct typo
+* [`7fbd7d2`](https://github.com/siderolabs/extensions/commit/7fbd7d2421830063edd7794a8143980d045a2797) feat: update Linux firmware to 20241210
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.0](https://github.com/siderolabs/extensions/releases/tag/v1.9.0)
+
 ## [Talos System Extensions 1.9.0](https://github.com/siderolabs/extensions/releases/tag/v1.9.0) (2024-12-17)
 
 Welcome to the v1.9.0 release of Talos System Extensions!
