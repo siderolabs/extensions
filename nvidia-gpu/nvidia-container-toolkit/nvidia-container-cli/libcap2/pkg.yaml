@@ -11,13 +11,11 @@ steps:
   - sources:
       - url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .LIBCAP_VERSION }}.tar.xz
         destination: libcap.tar.xz
-        sha256: 0274f5a15a5205f656d8f0169eef711dd29158ba8ad3b240618b342b2460175b
-        sha512: c0726bcd5e48395c6f4edd34f0fcaa21d7b2fe35dbc88824c0d86b42859dbe507f55c1ac7f7352e2aa56e3632b7aa9a098ca9cc730c82f942106d2786b10ba2c
+        sha256: 6405f6089cf4cdd8c271540cd990654d78dd0b1989b2d9bda20f933a75a795a5
+        sha512: 8ab72cf39bf029656b2a4a5972a0da4ab4b46a3d8a8da66d6cde925e06fe34df2fa5fc4d0b62c9cec4972b0b2678fdac6ef9421b6fb83c2a5bf869cf8d5fdb16
     prepare:
       - |
         tar -xf libcap.tar.xz --strip-components=1
-      - |
-        patch -p1 < /pkg/patches/getdents.patch
     build:
       - |
         make prefix=/usr/local/glibc lib=lib -j $(nproc)

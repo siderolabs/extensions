@@ -20,6 +20,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configur
         title = "Component Updates"
         description = """\
 Linux Firmware: 20241210
+stargz-snapshotter: 0.16.3
+ecr-credential-provider: 0.31.4
+wasm-edge: 0.5.0
+crun: 1.19.1
+qemu-guest-agent: 9.2.0
+Tailscale: 1.78.1
 """
 
 [make_deps]

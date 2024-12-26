@@ -8,41 +8,37 @@ steps:
   - sources:
       - url: https://github.com/open-iscsi/open-isns/archive/refs/tags/v{{ .OPEN_ISNS_VERSION }}.tar.gz
         destination: open-isns.tar.gz
-        sha256: 9611344733c0cdf14395f60880950ea4c3c7d6b765565b6493ad3e1afbe216de
-        sha512: f5ae8af89b85565181c2f6def9834d9dab0a15d5d9b28721cce116c5580173ed9adba219e1ede48988cb57f047578db4ece458c4a7db598412c7583e56393d2b
+        sha256: 47499f3ce87a832840884dcf3eedbec8c039f472fe921a5378e3b206a3fc1a32
+        sha512: 219dd4f7e0a8459f5acaf2036fc737b90604cdcfe78b5492d50e4826744923afe35c9c331b3e39aa7c9bb5ebb2c378c464dced204d51da46e2b7474c6ca94057
     prepare:
       - |
         tar -xzf open-isns.tar.gz --strip-components=1
-
       - |
-        autoreconf -fi
+        mkdir -p /usr/bin
 
-      - |
-        mkdir build
-        cd build
+        ln -s /toolchain/bin/env /usr/bin/env
+        ln -s /toolchain/bin/python3 /toolchain/bin/python
 
-        ../configure \
-          --prefix=/usr/local \
-          --sysconfdir=/usr/local/etc \
-          --mandir=/usr/local/share/man \
-          --infodir=/usr/local/share/info \
-          --enable-shared \
-          CFLAGS="$CFLAGS -Wno-error"
+        pip3 install ninja packaging
     build:
       - |
-        cd build
-        make -j $(nproc)
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+
+        meson setup \
+          -Dlibdir=lib \
+          -Dprefix=/usr/local \
+          _build
+
+        ninja -C _build
     install:
       - |
-        cd build
-        # open-isns libraries only needed
-        # make prefix=/usr/local etcdir=/usr/local/etc DESTDIR=/rootfs install
-        make prefix=/usr/local DESTDIR=/rootfs install_hdrs
-        make prefix=/usr/local DESTDIR=/rootfs install_lib
+        DESTDIR=/rootfs ninja -C _build install
 
         # cleanup
-        rm -rf /rootfs/usr/local/lib/systemd
-        rm -rf /rootfs/usr/local/lib/*.a
+        rm -rf /rootfs/var
+        rm -rf /rootfs/usr/local/sbin
+        rm -rf /rootfs/usr/local/etc
+        rm -rf /rootfs/usr/lib
         rm -rf /rootfs/usr/local/lib/pkgconfig
 finalize:
   - from: /rootfs
