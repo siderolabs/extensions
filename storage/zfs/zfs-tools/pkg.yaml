@@ -34,7 +34,7 @@ steps:
       - |
         make install-exec DESTDIR=/rootfs
         make install-data DESTDIR=/rootfs
-        rm -rf /rootfs/{etc,sbin,usr/{lib,local/share,share}}
+        rm -rf /rootfs/{etc,sbin,usr/{lib/dracut,local/share,share}}
         # remove the 69-vdev.rules, since it depends on `vdev_id` which is a shell script
         rm -f /rootfs/usr/lib/udev/rules.d/69-vdev.rules
         # if this file is present creating a vdev tries to executes it
