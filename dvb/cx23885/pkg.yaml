@@ -3,6 +3,7 @@ variant: scratch
 shell: /toolchain/bin/bash
 dependencies:
   - stage: base
+  - stage: v4l-uvc-drivers
   # The pkgs version for a particular release of Talos as defined in
   # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kernel:{{ .BUILD_ARG_PKGS }}"
@@ -28,6 +29,9 @@ steps:
 
         xargs -a /pkg/files/modules.txt -I {} install -D /lib/modules/${KERNELRELEASE}/{} /rootfs/lib/modules/${KERNELRELEASE}/{}
         depmod -b /rootfs ${KERNELRELEASE}
+      - |
+        mkdir -p /rootfs/usr/local/lib/modprobe.d
+        cp /pkg/files/dvb.conf /rootfs/usr/local/lib/modprobe.d/dvb-cx23885.conf
       - |
         mkdir -p /rootfs/lib/firmware
         cp dvb-firmware-{{ .LINUX_DVB_FIRMWARE }}/firmware/dvb-demod-si2168-02.fw /rootfs/lib/firmware
