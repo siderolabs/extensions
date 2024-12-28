@@ -1,3 +1,4 @@
+modules.dep
 modules.order
 modules.builtin
 modules.builtin.modinfo
