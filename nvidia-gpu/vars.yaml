@@ -4,13 +4,13 @@ NVIDIA_DRIVER_LTS_VERSION: 535.216.03
 # renovate: datasource=github-releases extractVersion=^\d+\.(?<version>\d+\.\d+)$ depName=nvidia/open-gpu-kernel-modules
 NVIDIA_DRIVER_PRODUCTION_VERSION: 550.127.08
 # renovate: datasource=github-releases depName=nvidia/nvidia-container-toolkit
-CONTAINER_TOOLKIT_VERSION: v1.17.2
-CONTAINER_TOOLKIT_REF: fa66e4cd562804509055e44a88f666673e6d27c0
+CONTAINER_TOOLKIT_VERSION: v1.17.3
+CONTAINER_TOOLKIT_REF: cb82e29c75d387992bf59eb6eadf5d96cb6d4747
 # renovate: datasource=github-releases depName=nvidia/libnvidia-container
 LIBNVIDIA_CONTAINER_VERSION: v1.17.2
 LIBNVIDIA_CONTAINER_REF: 63d366ee3b4183513c310ac557bf31b05b83328f
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:3b271f8bff9356a38aa23118ffdea3c0d659f39e207feedacf01bdea4b900871
+WOLFI_BASE_REF: sha256:8bf768ed267ce58d9fd6584c0b17c1c3fd30e9a85c913808627c4fccafb02a69
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp
 LIBSECCOMP_VERSION: 2.5.5
 # renovate: datasource=git-tags extractVersion=^libcap-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/libs/libcap/libcap.git
