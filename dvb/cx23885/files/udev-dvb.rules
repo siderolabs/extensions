@@ -1,0 +1,1 @@
+SUBSYSTEM=="dvb", GROUP="44", MODE="0660"
