@@ -6,8 +6,6 @@ dependencies:
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kmod:{{ .BUILD_ARG_PKGS }}"
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
-  - stage: open-isns
-    from: /rootfs
 steps:
   - sources:
       - url: https://github.com/open-iscsi/open-iscsi/archive/refs/tags/{{ .OPEN_ISCSI_VERSION }}.tar.gz
@@ -49,10 +47,11 @@ steps:
         meson setup \
           -Db_lto=true \
           -Dno_systemd=true \
+          -Disns=disabled \
+          -Dhomedir=/etc/iscsi \
           -Dprefix=/usr/local \
           -Discsi_sbindir=/usr/local/sbin \
           -Drulesdir=/usr/lib/udev/rules.d \
-          -Dc_args="$CFLAGS -I/usr/local/include -DNO_SYSTEMD -DGLOB_ONLYDIR=0" \
           output
 
         ninja -C output
@@ -62,11 +61,10 @@ steps:
         DESTDIR=/rootfs ninja -C output install
 
         # cleanup
-        # we generate a one time initiatorname.iscsi when the iscsid-wrapper starts.
-        rm -rf /rootfs/usr/local/{etc/iscsi/initiatorname.iscsi,share,include,pkgconfig}
-        rm -rf /rootfs/var/lib/iscsi
-
-        cp /pkg/files/passwd /rootfs/usr/local/etc/passwd
+        # we generate initiatorname.iscsi on talos side.
+        rm -rf /rootfs/etc
+        rm -rf /rootfs/usr/local/{etc,share,include,pkgconfig}
+        rm -rf /rootfs/var
 finalize:
   - from: /rootfs
     to: /rootfs

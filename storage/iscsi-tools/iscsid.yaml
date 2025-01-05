@@ -1,14 +1,16 @@
 name: iscsid
 depends:
   - service: cri
-  - service: ext-tgtd
   - network:
        - addresses
        - connectivity
        - hostname
        - etcfiles
+  - path: /etc/iscsi/initiatorname.iscsi
 container:
-  entrypoint: /usr/local/sbin/iscsid-wrapper
+  entrypoint: /usr/local/sbin/iscsid
+  args:
+    - -f
   security:
     maskedPaths: []
     readonlyPaths: []
@@ -41,25 +43,13 @@ container:
       options:
         - bind
         - ro
-    # persistent storage for iscsi
-    - source: /system/iscsi
+    # iscsi etc folder
+    - source: /etc/iscsi
       destination: /etc/iscsi
       type: bind
       options:
         - rshared
         - rbind
-        - rw
-    - source: /usr/local/etc/iscsi/iscsid.conf
-      destination: /etc/iscsi/iscsid.conf
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /usr/local/etc/passwd
-      destination: /etc/passwd
-      type: bind
-      options:
-        - bind
         - ro
     - source: /var/lib/iscsi
       destination: /var/lib/iscsi

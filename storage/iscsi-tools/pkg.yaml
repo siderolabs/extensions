@@ -5,14 +5,11 @@ dependencies:
   # `base` dependency is used for doing cleanups
   # not copied to rootfs
   - stage: base
-  - stage: open-isns
   - stage: open-iscsi
-  - stage: tgt
-  - stage: iscsid-wrapper
 steps:
   - install:
     - |
-      mkdir -p /rootfs/usr/local/lib/containers/{iscsid,tgtd}
+      mkdir -p /rootfs/usr/local/lib/containers/iscsid
 
       sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
 
@@ -23,7 +20,6 @@ steps:
       mkdir -p /rootfs/usr/local/etc/containers
 
       cp /pkg/iscsid.yaml /rootfs/usr/local/etc/containers/iscsid.yaml
-      cp /pkg/tgtd.yaml /rootfs/usr/local/etc/containers/tgtd.yaml
     test:
       - |
         mkdir -p /extensions-validator-rootfs
