@@ -26,7 +26,7 @@ steps:
         tar xf containerd-shim-spin.tar.gz -C /rootfs/usr/local/bin
       - |
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/spin.part /rootfs/etc/cri/conf.d/spin.part
+        cp /pkg/10-spin.part /rootfs/etc/cri/conf.d/10-spin.part
     test:
       - |
         mkdir -p /extensions-validator-rootfs

@@ -24,7 +24,7 @@ steps:
         mkdir -p /rootfs/usr/local/bin
         mkdir -p /rootfs/etc/cri/conf.d
 
-        cp /pkg/wasm.part /rootfs/etc/cri/conf.d/wasm.part
+        cp /pkg/10-wasm.part /rootfs/etc/cri/conf.d/10-wasm.part
 
         tar xf containerd-shim-wasmedge.tar.gz -C /rootfs/usr/local/bin
     test:

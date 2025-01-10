@@ -27,7 +27,7 @@ steps:
 
       - |
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/crun.part /rootfs/etc/cri/conf.d/crun.part
+        cp /pkg/10-crun.part /rootfs/etc/cri/conf.d/10-crun.part
     test:
       - |
         mkdir -p /extensions-validator-rootfs
