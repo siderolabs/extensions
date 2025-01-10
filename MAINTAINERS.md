@@ -59,4 +59,4 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | vmtoolsd-guest-agent                      | Robin Elfrink        | [robinelfrink](https://github.com/robinelfrink)                      |
 | wasmedge                                  | Sidero Labs          | NA                                                                   |
 | xen-guest-agent                           | Jerwin NJ            | [j3rwin](https://github.com/j3rwin)                                  |
-| zfs                                       | Andrei Kvapil, Aenix | [kvaps](https://github.com/kvaps), [donch](https://github.com/donch) |
+| zfs                                       | Aenix, Enix          | [kvaps](https://github.com/kvaps), [donch](https://github.com/donch) |

@@ -2,7 +2,7 @@ version: v1alpha1
 metadata:
   name: zfs
   version: "$VERSION"
-  author: Andrei Kvapil, Aenix
+  author: Aenix, Enix
   description: |
     This system extension provides the ZFS kernel module, the ZFS utilities, and a service to import all ZFS pools on start and unmount all pools on stop.
   compatibility:
