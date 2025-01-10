@@ -43,7 +43,7 @@ steps:
         chmod +x /rootfs/usr/local/lib/containers/stargz-snapshotter/ctr-remote
       - |
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/stargz-snapshotter.part /rootfs/etc/cri/conf.d/stargz-snapshotter.part
+        cp /pkg/10-stargz-snapshotter.part /rootfs/etc/cri/conf.d/10-stargz-snapshotter.part
 
         mkdir -p /rootfs/usr/local/etc/containerd-stargz-grpc
         cp /pkg/config.toml /rootfs/usr/local/etc/containerd-stargz-grpc/config.toml

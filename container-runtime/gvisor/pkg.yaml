@@ -48,7 +48,7 @@ steps:
       - |
         mkdir -p /rootfs/etc/cri/conf.d
 
-        cp /pkg/gvisor.part /pkg/runsc.toml /pkg/gvisor-kvm.part /pkg/runsc-kvm.toml /rootfs/etc/cri/conf.d/
+        cp /pkg/10-gvisor.part /pkg/runsc.toml /pkg/10-gvisor-kvm.part /pkg/runsc-kvm.toml /rootfs/etc/cri/conf.d/
     test:
       - |
         mkdir -p /extensions-validator-rootfs

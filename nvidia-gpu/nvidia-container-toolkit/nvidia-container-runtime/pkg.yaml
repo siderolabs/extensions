@@ -51,7 +51,7 @@ steps:
         done
       - |
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/nvidia-container-runtime.part /rootfs/etc/cri/conf.d/nvidia-container-runtime.part
+        cp /pkg/10-nvidia-container-runtime.part /rootfs/etc/cri/conf.d/10-nvidia-container-runtime.part
 
         mkdir -p /rootfs/usr/local/etc/nvidia-container-runtime
         cp /pkg/nvidia-container-runtime.toml /rootfs/usr/local/etc/nvidia-container-runtime/config.toml

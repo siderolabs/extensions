@@ -61,7 +61,7 @@ steps:
         cp containerd-shim-kata-v2 /rootfs/usr/local/bin/containerd-shim-kata-v2
       - |
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/kata-containers.part /rootfs/etc/cri/conf.d/kata-containers.part
+        cp /pkg/10-kata-containers.part /rootfs/etc/cri/conf.d/10-kata-containers.part
 
         mkdir -p /rootfs/usr/local/share/kata-containers
         cp /pkg/configuration.toml /rootfs/usr/local/share/kata-containers/configuration.toml

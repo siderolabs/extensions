@@ -10,7 +10,7 @@ steps:
     install:
       - |
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/gvisor-debug.part /rootfs/etc/cri/conf.d/gvisor-debug.part
+        cp /pkg/11-gvisor-debug.part /rootfs/etc/cri/conf.d/11-gvisor-debug.part
         cp /pkg/runsc.toml /rootfs/etc/cri/conf.d/runsc.toml
     test:
       - |
