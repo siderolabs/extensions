@@ -1,3 +1,45 @@
+## [Talos System Extensions 1.9.2](https://github.com/siderolabs/extensions/releases/tag/v1.9.2) (2025-01-16)
+
+Welcome to the v1.9.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+stargz-snapshotter: 0.16.3
+ecr-credential-provider: 0.31.4
+wasm-edge: 0.5.0
+crun: 1.19.1
+qemu-guest-agent: 9.2.0
+Tailscale: 1.78.1
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+* Skyler Mäntysaari
+
+### Changes
+<details><summary>4 commits</summary>
+<p>
+
+* [`74d08ac`](https://github.com/siderolabs/extensions/commit/74d08acc747234b58be6574257935ccaa7f8747e) fix: dvb extension as it was missing modules and dep on v4l-uvc-drivers
+* [`800cc9b`](https://github.com/siderolabs/extensions/commit/800cc9b504d8938e8b0e50af3be74c8aad277f2c) fix: unable to override runtime defaults
+* [`6b8b597`](https://github.com/siderolabs/extensions/commit/6b8b597238b863d74b2af94fd12d6ef5e663356d) fix: zfs udev rules installation
+* [`46d5636`](https://github.com/siderolabs/extensions/commit/46d563617496cc3af461f6276310a436ffc7bded) feat: update dependencies
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.1](https://github.com/siderolabs/extensions/releases/tag/v1.9.1)
+
 ## [Talos System Extensions 1.9.1](https://github.com/siderolabs/extensions/releases/tag/v1.9.1) (2024-12-26)
 
 Welcome to the v1.9.1 release of Talos System Extensions!
