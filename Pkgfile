@@ -3,10 +3,10 @@
 format: v1alpha2
 
 vars:
-  LINUX_FIRMWARE_VERSION: "20241210" # update this when updating PKGS_VERSION in Makefile
+  LINUX_FIRMWARE_VERSION: "20250109" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.2.12 # update this when updating PKGS_VERSION in Makefile
-  ZFS_DRIVER_VERSION: 2.2.7 # update this when updating PKGS_VERSION in Makefile
-  UTIL_LINUX_VERSION: 2.40.2 # update this when updating PKGS_VERSION in Makefile
+  ZFS_DRIVER_VERSION: 2.3.0 # update this when updating PKGS_VERSION in Makefile
+  UTIL_LINUX_VERSION: 2.40.4 # update this when updating PKGS_VERSION in Makefile
 
   # renovate: datasource=git-tags extractVersion=^libtiprc-(?<version>.*)$ depName=git://linux-nfs.org/~steved/libtirpc
   LIBTIRPC_VERSION: 1-3-3

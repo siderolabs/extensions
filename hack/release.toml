@@ -19,13 +19,18 @@ See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-Linux Firmware: 20241210
+Linux Firmware: 20250109
 stargz-snapshotter: 0.16.3
-ecr-credential-provider: 0.31.4
+ecr-credential-provider: 1.32.0
 wasm-edge: 0.5.0
 crun: 1.19.1
+spin: 0.18.0
 qemu-guest-agent: 9.2.0
 Tailscale: 1.78.1
+ZFS: 2.3.0
+NVIDIA LTS: 535.230.02
+NVIDIA Production: 550.144.03
+NVIDIA Container Toolkit: 1.17.3
 """
 
 [make_deps]

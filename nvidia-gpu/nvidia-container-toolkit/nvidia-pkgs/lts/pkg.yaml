@@ -13,13 +13,13 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvidia_driver/linux-sbsa/nvidia_driver-linux-sbsa-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
         destination: nvidia.tar.xz
-        sha256: bf4c22053068310b988a5ecb43e821c493ffce80b519c73623419ba2cb5d0c83
-        sha512: 257dc56d95e8a0a4f9e2d5f5e7a7cdefd017e5319e5d3144f9c1b31a6c47cbdf33252aa504658f20cd15684c8d9855d80efeae6c20f9dad60848ed9c34d5f423
+        sha256: 26f99e01a22f4c2e52f35789c286aa1efab6e0d91b447ebfef171a0b035f4a74
+        sha512: 0e4ee5e95120b5ee46f3ebee6725a312110b07aeace21455aed24af07750c8a3c974a13cd3bf7d3f4f83aae3ccf11e9a80eb26144f123447b793327bcf57cb8c
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvidia_driver/linux-x86_64/nvidia_driver-linux-x86_64-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
         destination: nvidia.tar.xz
-        sha256: 3aa05d8bdddd7a6f2cd461969895dd4ba9eb3e554a8bf1abeb860d84cc7b1d10
-        sha512: d6e8ea0d4348fe5e919ebd967c73f22236caae3aeb1f847685d1c801ed80b30661410b63363b6736ee034323eb812787e8bdedde15deb7c9ce05d92306cb5e2e
+        sha256: 4ead516e02073ebc8a46500a2e2023fb508b5c17f1c06e177b9b5b1f763ff4f5
+        sha512: 34b72f6163ebcca3186e22599ef4ac7b61ddee0cc51f78429fe731ae552a792e15e97b67fbbe709bb4f9dfd374e12cba7968bbcf4d7ae5da050125a1a1116a6e
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
