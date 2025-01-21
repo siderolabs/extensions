@@ -7,8 +7,8 @@ steps:
   - sources:
       - url: https://github.com/kubernetes/cloud-provider-aws/archive/refs/tags/{{ .VERSION }}.tar.gz
         destination: cloud-provider-aws.tar.gz
-        sha256: 3f66533a22b3b91d5f50c3c8fc6a1aea2428b9b5633b6726b3c44d71dd7f50a9
-        sha512: d66898e34f2a0d4504ace6bb685897a360a315fd81371fbb2db727e65b4207cd728d07a3313f34985a0a1af26865fbbdde310aa88ee4af77d6ab02c354a6f223
+        sha256: 0bd75a18faab15dae7a603e1d6b57691953f1b6427f6eaa4c14e9fbfc1a75348
+        sha512: e85b0c4a79f6c087147a5868520693f7cb98a471d5497dcda27a6e341e719868f5308ccf8d9781e601ff1b52f332a0447033a096c929e768553e937e154db25e
     env:
       GOPATH: /go
     cachePaths:

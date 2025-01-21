@@ -30,8 +30,8 @@ steps:
   - sources:
       - url: https://github.com/NVIDIA/libnvidia-container/archive/refs/tags/{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: d52d88bab8076cb751e58ad2b19730adb0aae734174fdc6c12243af6871f7d07
-        sha512: a791998012f681805b3cc0a3bd38abc958a523c3eaa13cab36be4e0242cfba095719d5f6fa59423453a81c3fc76c96a4bbfd2eea27d20e2ef2f9a03d3a447fd8
+        sha256: 9c28e729f1677b6ff9edb3f4dccff4f9827ffe13c04fbcffa41aabacbc0fdd54
+        sha512: 24293e369fea42ebe64163464f600808c0d18e8b4efeea12095de22e16d43837cb6441f46baf52e8c966810c76b0f5045737a96d173e2ecf8cd15fff37cd4c4f
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}

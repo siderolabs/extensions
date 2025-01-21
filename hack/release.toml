@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.9.1"
+previous = "v1.9.2"
 
 pre_release = false
 
@@ -19,12 +19,12 @@ See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configur
     [notes.updates]
         title = "Component Updates"
         description = """\
-stargz-snapshotter: 0.16.3
-ecr-credential-provider: 0.31.4
-wasm-edge: 0.5.0
-crun: 1.19.1
-qemu-guest-agent: 9.2.0
-Tailscale: 1.78.1
+Linux Firmware: 20250109
+ecr-credential-provider: 1.32.0
+spin: 0.18.0
+NVIDIA LTS: 535.230.02
+NVIDIA Production: 550.144.03
+NVIDIA Container Toolkit: 1.17.3
 """
 
 [make_deps]
