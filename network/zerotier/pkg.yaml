@@ -1,0 +1,50 @@
+name: zerotier
+variant: alpine
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+install:
+  - libstdc++
+steps:
+  - 
+    sources:
+      - url: https://github.com/zerotier/ZeroTierOne/archive/refs/tags/{{ .ZEROTIER_VERSION }}.tar.gz
+        destination: zerotier.tar.gz
+        sha256: c2f64339fccf5148a7af089b896678d655fbfccac52ddce7714314a59d7bddbb
+        sha512: 9d022afcf81543d6ee938219a3712da846fe895b0fd65cfd6ec8ed173f0e208516031b6d2303ab42fd21806d9ba5ff6fdb0d850a0cbb32b268d53accb093cdf5
+    env:
+      CXXFLAGS: '-Os -fstack-protector -std=c++17 -pthread'
+      LDFLAGS: '-static'
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzvf zerotier.tar.gz --strip-components=1
+    build:
+      - |
+        sed -i '2i #include <cmath>' ext/prometheus-cpp-lite-1.0/core/include/prometheus/text_serializer.h
+        make ONE_THREAD=1 ZT_SSO_SUPPORTED=0 STATIC=1 -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/zerotier/usr/local/bin/
+        cp -pr zerotier-one /rootfs/usr/local/lib/containers/zerotier/usr/local/bin/
+        chmod +x /rootfs/usr/local/lib/containers/zerotier/usr/local/bin/zerotier-*
+        cd /rootfs/usr/local/lib/containers/zerotier/usr/local/bin
+        ln -sf zerotier-one zerotier-cli
+        ln -sf zerotier-one zerotier-idtool
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers/zerotier/usr/local/etc/zerotier/state
+        cp /pkg/zerotier.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+      - |
+        [[ $(/rootfs/usr/local/lib/containers/zerotier/usr/local/bin/zerotier-cli -v) == *{{ .ZEROTIER_VERSION }}* ]]
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
