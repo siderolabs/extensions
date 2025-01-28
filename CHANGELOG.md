@@ -1,3 +1,40 @@
+## [Talos System Extensions 1.9.3](https://github.com/siderolabs/extensions/releases/tag/v1.9.3) (2025-01-28)
+
+Welcome to the v1.9.3 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20250109
+ecr-credential-provider: 1.32.0
+spin: 0.18.0
+NVIDIA LTS: 535.230.02
+NVIDIA Production: 550.144.03
+NVIDIA Container Toolkit: 1.17.3
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`23f03a0`](https://github.com/siderolabs/extensions/commit/23f03a0e359a5ff04ec2c9a4d189efe3a98795a0) feat: update dependencies
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.2](https://github.com/siderolabs/extensions/releases/tag/v1.9.2)
+
 ## [Talos System Extensions 1.9.2](https://github.com/siderolabs/extensions/releases/tag/v1.9.2) (2025-01-16)
 
 Welcome to the v1.9.2 release of Talos System Extensions!
