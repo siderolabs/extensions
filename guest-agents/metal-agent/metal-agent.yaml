@@ -18,8 +18,15 @@ container:
         - rshared
         - rbind
         - rw
+    - source: /etc/ssl/certs
+      destination: /etc/ssl/certs
+      type: bind
+      options:
+        - rbind
+        - ro
 depends:
   - path: /system/run/machined/machine.sock
+  - path: /etc/ssl/certs
   - network:
       - addresses
 restart: always

@@ -7,10 +7,6 @@ dependencies:
     from: /
     to: /rootfs/usr/local/lib/containers/metal-agent
 
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/ca-certificates:{{ .BUILD_ARG_PKGS }}"
-    from: /
-    to: /rootfs/usr/local/lib/containers/metal-agent
-
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
     from: /
     to: /rootfs/usr/local/lib/containers/metal-agent
