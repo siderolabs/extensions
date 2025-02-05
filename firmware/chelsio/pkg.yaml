@@ -1,6 +1,6 @@
 name: chelsio-firmware
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/linux-firmware:{{ .BUILD_ARG_PKGS }}"
@@ -10,9 +10,9 @@ steps:
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     install:
       - |
-        mkdir -p /rootfs/lib/firmware
-        cp -R -p /lib/firmware/cxgb3 /rootfs/lib/firmware
-        cp -R -p /lib/firmware/cxgb4 /rootfs/lib/firmware
+        mkdir -p /rootfs/usr/lib/firmware
+        cp -R -p /usr/lib/firmware/cxgb3 /rootfs/usr/lib/firmware
+        cp -R -p /usr/lib/firmware/cxgb4 /rootfs/usr/lib/firmware
     test:
       - |
         mkdir -p /extensions-validator-rootfs

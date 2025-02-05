@@ -5,7 +5,7 @@ GLIB_VERSION: 2.83.2
 # renovate: datasource=github-releases extractVersion=^pcre2-(?<version>.*)$ depName=PCRE2Project/pcre2
 PCRE2_VERSION: 10.42
 # renovate: datasource=git-tags depName=https://gitlab.com/xen-project/xen-guest-agent.git
-XEN_GUEST_AGENT_VERSION: 0.4.0
+XEN_GUEST_AGENT_VERSION: 5c274e651c29f92fc0c418fda486373b0f34f0da
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
 TALOS_VMTOOLSD_VERSION: v0.6.1
 # renovate: datasource=github-releases depName=siderolabs/talos-metal-agent

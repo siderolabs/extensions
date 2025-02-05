@@ -1,18 +1,23 @@
 name: nvidia-container-runtime-wrapper
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
 steps:
+  - env:
+      GOPATH: /tmp/go
   - cachePaths:
       - /.cache/go-build
-      - /go/pkg
+      - /tmp/go/pkg
+  - network: default
+    prepare:
+      - |
+        cp -r /pkg/* .
+      - |
+        go mod download
+  - network: none
     build:
     - |
-      export PATH=${PATH}:${TOOLCHAIN}/go/bin
-
-      cp -r /pkg/* .
-
       CGO_ENABLED=0 go build -o nvidia-container-runtime-wrapper main.go
     install:
     - |

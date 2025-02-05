@@ -1,6 +1,6 @@
 name: zfs
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
 # The pkgs version for a particular release of Talos as defined in
@@ -16,8 +16,8 @@ steps:
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
   - install:
       - |
-        mkdir -p /rootfs/lib/modules
-        cp -R /lib/modules/* /rootfs/lib/modules/
+        mkdir -p /rootfs/usr/lib/modules
+        cp -R /usr/lib/modules/* /rootfs/usr/lib/modules/
       - |
         mkdir -p /rootfs/usr/local/etc/containers
         cp /pkg/zfs-service.yaml /rootfs/usr/local/etc/containers/

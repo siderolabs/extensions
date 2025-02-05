@@ -1,6 +1,6 @@
 name: v4l-uvc-drivers
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   # The pkgs version for a particular release of Talos as defined in
@@ -12,16 +12,16 @@ steps:
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
   - install:
       - |
-        export KERNELRELEASE=$(find /lib/modules -type d -name "*-talos" -exec basename {} \+)
+        export KERNELRELEASE=$(find /usr/lib/modules -type d -name "*-talos" -exec basename {} \+)
 
         mkdir -p /rootfs
 
-        xargs -a /pkg/files/modules.txt -I {} install -D /lib/modules/${KERNELRELEASE}/{} /rootfs/lib/modules/${KERNELRELEASE}/{}
-        depmod -b /rootfs ${KERNELRELEASE}
+        xargs -a /pkg/files/modules.txt -I {} install -D /usr/lib/modules/${KERNELRELEASE}/{} /rootfs/usr/lib/modules/${KERNELRELEASE}/{}
+        depmod -b /rootfs/usr ${KERNELRELEASE}
   - test:
       - |
         # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
-        find /rootfs/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
+        find /rootfs/usr/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
       - |
         mkdir -p /extensions-validator-rootfs
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs

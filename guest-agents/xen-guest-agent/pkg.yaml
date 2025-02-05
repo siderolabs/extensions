@@ -17,14 +17,18 @@ steps:
       RUSTFLAGS: '-C target-feature=+crt-static'
   - sources:
       - url: https://gitlab.com/xen-project/xen-guest-agent/-/archive/{{ .XEN_GUEST_AGENT_VERSION }}/xen-guest-agent-{{ .XEN_GUEST_AGENT_VERSION }}.tar.gz
-        sha256: 492ba2022b4155b38443ddf34a5bdbb0d72966d0936aab8545b4a135fa69c990
-        sha512: 527611f1d0c4fec81ac44434304f426bb9ebe75ceeaac84a417397ec845da6a225514d6ff8b9dc03b5c27d4fa3b59a47fd1a64276fbf6b492664244796ef483c
+        sha256: c52f4781739e500e98a3298c9e44fe9bcbe1892c22aa6bb031d1a847123deaaa
+        sha512: 49bf15d7257f7fcb5ac919ca57e8c16bb6f8199684adef034bd1e7683dd9fb23a5604667fb75e27eadd02a2f9b130339409873b5720d7d3f5e4153feb5fa98ba
         destination: xe-guest-agent.tar.gz
+  - network: default
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
         tar -xzvf xe-guest-agent.tar.gz --strip-components=1
+      - |
+        cargo fetch --target {{ .ARCH }}-alpine-linux-musl
+  - network: none
     build:
       - cargo build --release -F static --target {{ .ARCH }}-alpine-linux-musl
     install:

@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MPL-2.0
 name: lldpd
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
     - stage: base
 steps:
@@ -29,8 +29,6 @@ steps:
         mkdir -p /usr/local/include/sys
         cp sys-queue.h /usr/local/include/sys/queue.h
       - |
-        ln -sf /toolchain/bin/env /usr/bin/env
-
         export CFLAGS="${CFLAGS} -I/usr/local/include"
 
         ./configure \

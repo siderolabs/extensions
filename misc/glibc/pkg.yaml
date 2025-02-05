@@ -52,9 +52,9 @@ steps:
 
         cp /pkg/ld.so.conf /rootfs/usr/local/glibc/etc/ld.so.conf
 
-        mkdir -p /rootfs/lib64 /rootfs/sbin
-        ln -s /usr/local/glibc/usr/lib/ld-linux-x86-64.so.2 /rootfs/lib64/ld-linux-x86-64.so.2
-        ln -s /usr/local/glibc/usr/sbin/ldconfig /rootfs/sbin/ldconfig
+        mkdir -p /rootfs/usr/lib /rootfs/usr/bin
+        ln -s /usr/local/glibc/usr/lib/ld-linux-x86-64.so.2 /rootfs/usr/lib/ld-linux-x86-64.so.2
+        ln -s /usr/local/glibc/usr/sbin/ldconfig /rootfs/usr/bin/ldconfig
 
         # cleanup
         rm -rf /rootfs/usr/local/glibc/include

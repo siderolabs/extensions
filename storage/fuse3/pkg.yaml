@@ -1,6 +1,6 @@
 name: fuse3
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
@@ -10,6 +10,7 @@ steps:
         destination: fuse.tar.gz
         sha256: f797055d9296b275e981f5f62d4e32e089614fc253d1ef2985851025b8a0ce87
         sha512: 3e8889863cd67dada67271f095f694dc9e5aaf2561fd1e2285aee95b5a54e692bb195ab8fce57fc2bdf08d0ea17b6d56ca4967b4e4371d639d6133907b2370d3
+  - network: default
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
@@ -17,8 +18,6 @@ steps:
         tar -xzf fuse.tar.gz --strip-components=1
 
         mkdir -p /usr/bin
-        ln -s /toolchain/bin/env /usr/bin/env
-        ln -s /toolchain/bin/python3 /toolchain/bin/python
         pip3 install ninja
 
         mkdir -p /rootfs/usr/local/etc
@@ -28,6 +27,7 @@ steps:
         mkdir _build
         meson setup _build
         meson configure -D useroot=false -D initscriptdir='' _build
+  - network: none
     build:
       - |
         ninja -C _build

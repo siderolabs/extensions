@@ -1,6 +1,6 @@
 name: nvidia-fabricmanager-lts
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
  - stage: base
 steps:

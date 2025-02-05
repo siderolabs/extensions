@@ -1,6 +1,6 @@
 name: intel-ucode
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
 steps:
@@ -16,8 +16,8 @@ steps:
         tar -xzf intel-ucode.tar.gz --strip-components=1
     install:
       - |
-        mkdir -p /rootfs/lib/firmware
-        cp -R -p intel-ucode /rootfs/lib/firmware
+        mkdir -p /rootfs/usr/lib/firmware
+        cp -R -p intel-ucode /rootfs/usr/lib/firmware
     test:
       - |
         mkdir -p /extensions-validator-rootfs

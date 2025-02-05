@@ -1,6 +1,6 @@
 name: open-iscsi
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kmod:{{ .BUILD_ARG_PKGS }}"
@@ -14,21 +14,10 @@ steps:
         sha512: 18b92d3e9a85d8de66734d95e9ca74a8acc5167a98830134c18ad5e226b29a00d358f952edfab67b643c454ec63c0a382c7ab7e7e76970f7574b46cea0d5c82d
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+  - network: default
     prepare:
       - |
-        mkdir -p /usr/bin \
-            && ln -sf /toolchain/bin/env /usr/bin/env \
-            && ln -sf /toolchain/bin/install /usr/bin/install \
-            && ln -s /toolchain/bin/python3 /toolchain/bin/python
-
         tar -xzf open-iscsi.tar.gz --strip-components=1
-
-        # Create symlinks for binaries required by libtoolize.
-        ln -s /toolchain/bin/sed /usr/bin/sed
-
-        # Create symlinks for files used when building.
-        ln -s /toolchain/bin/pkg-config /usr/bin/pkg-config
-        ln -s /toolchain/bin/file /usr/bin/file
 
         patch -p1 < /pkg/patches/login-scan-manual.patch
         patch -p1 < /pkg/patches/musl-fixes.patch
@@ -37,6 +26,7 @@ steps:
         patch -p1 < /pkg/patches/remove-werror.patch
 
         pip3 install ninja
+  - network: none
     build:
       - |
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig

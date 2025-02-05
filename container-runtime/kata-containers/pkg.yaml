@@ -1,6 +1,6 @@
 name: kata-containers
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
 steps:
@@ -21,10 +21,11 @@ steps:
         sha256: 6567498577888f29d186d14629e7e987e8afc49ab988c72e0bc80918fe99295a
         sha512: 54b989b1db27e56266d1e40b18d3c4f353a3f876dad358afecbba7fb7e1238da1f0856c73f627cbb24e36176f784e2a809bb1b7a990ad21644b06e7b43d64a68
     env:
-      GOPATH: /go
+      GOPATH: /tmp/go
     cachePaths:
       - /.cache/go-build
-      - /go/pkg
+      - /tmp/go/pkg
+  - network: default
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
@@ -34,9 +35,12 @@ steps:
       - |
         mkdir -p ${GOPATH}/src/github.com/kata-containers
         tar -xzf kata-containers.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/kata-containers
+      - |
+        cd ${GOPATH}/src/github.com/kata-containers/src/runtime
+        go mod download
+  - network: none
     build:
       - |
-        export PATH=${PATH}:${TOOLCHAIN}/go/bin
         cd ${GOPATH}/src/github.com/kata-containers
         PREFIX=/usr/local make -C src/runtime SKIP_GO_VERSION_CHECK=y containerd-shim-v2
     install:

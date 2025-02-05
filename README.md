@@ -209,9 +209,10 @@ The following restrictions are applied to the contents of the `rootfs` of the sy
 Any paths in the `rootfs` should be contained within the following hierarchies:
 
 - `/etc/cri/conf.d/`
-- `/lib/firmware/`
-- `/lib/modules/`
-- `/lib64/ld-linux-x86-64.so.2`
+- `/usr/lib/firmware/`
+- `/usr/lib/modules/`
+- `/usr/lib/ld-linux-x86-64.so.2`
+- `/usr/bin/ldconfig` (used by NVIDIA Container Toolkit)
 - `/usr/lib/udev/rules.d/`
 - `/usr/local/`
 - `/usr/share/glvnd/`

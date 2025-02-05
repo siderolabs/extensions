@@ -1,6 +1,6 @@
 name: nvidia-container-toolkit-production
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   - stage: nvidia-container-cli-production

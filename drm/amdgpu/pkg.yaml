@@ -1,6 +1,6 @@
 name: amdgpu
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   # The pkgs version for a particular release of Talos as defined in
@@ -16,16 +16,16 @@ steps:
   # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
   - install:
       - |
-        export KERNELRELEASE=$(find /lib/modules -type d -name "*-talos" -exec basename {} \+)
+        export KERNELRELEASE=$(find /usr/lib/modules -type d -name "*-talos" -exec basename {} \+)
 
-        xargs -a /pkg/files/modules.txt -I {} install -D /lib/modules/${KERNELRELEASE}/{} /rootfs/lib/modules/${KERNELRELEASE}/{}
+        xargs -a /pkg/files/modules.txt -I {} install -D /usr/lib/modules/${KERNELRELEASE}/{} /rootfs/usr/lib/modules/${KERNELRELEASE}/{}
       - |
-        mkdir -p /rootfs/lib/firmware
-        cp -R -p /lib/firmware/amdgpu /rootfs/lib/firmware
+        mkdir -p /rootfs/usr/lib/firmware
+        cp -R -p /usr/lib/firmware/amdgpu /rootfs/usr/lib/firmware
   - test:
       - |
         # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
-        find /rootfs/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
+        find /rootfs/usr/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
       - |
         mkdir -p /extensions-validator-rootfs
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs

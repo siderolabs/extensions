@@ -1,6 +1,6 @@
 name: stargz-snapshotter
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
 steps:
@@ -10,10 +10,11 @@ steps:
         sha256: 576f59d4375ac2cab24310d28e3ac98148c05dc6714649e1ec27e8d4fa8a9679
         sha512: 3a8226e29305f55e9244017cd3063e9ba9b8b4a79a404000677e0e99a84d1337b12a37f6d1b5539c9579f54b1c118fb0ce373eb402296a18d8e55474d549986a
     env:
-      GOPATH: /go
+      GOPATH: /tmp/go
     cachePaths:
       - /.cache/go-build
-      - /go/pkg
+      - /tmp/go/pkg
+  - network: default
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
@@ -21,9 +22,12 @@ steps:
         mkdir -p ${GOPATH}/src/github.com/containerd/stargz-snapshotter
 
         tar -xzf stargz-snapshotter.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/containerd/stargz-snapshotter
+      - |
+        cd ${GOPATH}/src/github.com/containerd/stargz-snapshotter/cmd
+        go mod download
+  - network: none
     build:
       - |
-        export PATH=${PATH}:${TOOLCHAIN}/go/bin
         cd ${GOPATH}/src/github.com/containerd/stargz-snapshotter
 
         make containerd-stargz-grpc

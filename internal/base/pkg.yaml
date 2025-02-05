@@ -1,10 +1,10 @@
 name: base
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/base:{{ .BUILD_ARG_PKGS }}"
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/ca-certificates:{{ .BUILD_ARG_PKGS }}"
-  - image: ghcr.io/siderolabs/extensions-validator:617ea3f
+  - image: ghcr.io/siderolabs/extensions-validator:7d4395d
 finalize:
   - from: /
     to: /

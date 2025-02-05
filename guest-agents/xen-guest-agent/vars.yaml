@@ -1,1 +1,3 @@
-VERSION: "{{ .XEN_GUEST_AGENT_VERSION }}"
+# VERSION: "{{ .XEN_GUEST_AGENT_VERSION }}"
+# FIXME: Replace once a building tag is available
+VERSION: "0.4.0-g5c274e6"

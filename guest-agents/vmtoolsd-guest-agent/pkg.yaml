@@ -1,5 +1,6 @@
 name: vmtoolsd-guest-agent
 variant: scratch
+shell: /bin/bash
 dependencies:
   - stage: base
   - image: {{ .BUILD_ARG_PKGS_PREFIX }}/talos-vmtoolsd:{{ .TALOS_VMTOOLSD_VERSION }}

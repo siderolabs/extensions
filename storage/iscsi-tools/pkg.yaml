@@ -1,6 +1,6 @@
 name: iscsi-tools
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   # `base` dependency is used for doing cleanups
   # not copied to rootfs

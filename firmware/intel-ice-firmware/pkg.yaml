@@ -1,6 +1,6 @@
 name: intel-ice-firmware
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/linux-firmware:{{ .BUILD_ARG_PKGS }}"
@@ -10,8 +10,8 @@ steps:
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     install:
       - |
-        mkdir -p /rootfs/lib/firmware/intel/ice/ddp
-        cp /lib/firmware/intel/ice/ddp/ice-*.pkg /rootfs/lib/firmware/intel/ice/ddp/ice.pkg
+        mkdir -p /rootfs/usr/lib/firmware/intel/ice/ddp
+        cp /usr/lib/firmware/intel/ice/ddp/ice-*.pkg /rootfs/usr/lib/firmware/intel/ice/ddp/ice.pkg
     test:
       - |
         mkdir -p /extensions-validator-rootfs

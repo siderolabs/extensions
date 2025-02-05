@@ -1,6 +1,6 @@
 name: libnvme
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
@@ -11,13 +11,12 @@ steps:
         destination: libnvme.tar.gz
         sha256: 6d5d8ba2cc4c94a61a994c9f7f25b3b26ef973fb5c0daa37729890903f37a1f1
         sha512: 8720f2907a3d13af44fb3deec883cd6eb247d5861c4459b5fe0e67ff9ecfb565462a5faf39d43e08b5284f3e8ca8e72d41b333984beaa45d3287b1a258f3e59d
+  - network: default
     prepare:
       - |
         tar xf libnvme.tar.gz --strip-components=1
 
         mkdir -p /usr/bin
-        ln -s /toolchain/bin/env /usr/bin/env
-        ln -s /toolchain/bin/python3 /toolchain/bin/python
         pip3 install ninja
 
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
@@ -27,6 +26,7 @@ steps:
           -Djson-c=enabled \
           -Dpython=disabled \
           .build
+  - network: none
     build:
       - |
         meson compile -C .build

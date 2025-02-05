@@ -1,6 +1,6 @@
 name: nvidia-container-toolkit-lts
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
   - stage: nvidia-container-cli-lts
@@ -19,7 +19,6 @@ steps:
     install:
       - |
         mkdir -p /rootfs/usr/local/etc/containers
-
         cp /pkg/nvidia-persistenced.yaml /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
     test:
       - |

@@ -1,6 +1,6 @@
 name: gvisor
 variant: scratch
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
 steps:
@@ -12,10 +12,11 @@ steps:
         sha256: 63419d6c5744f17f8f8229919ed2399e5e8d567735379b22f34acba2cfc8ab34
         sha512: 567f72bbf701176e394ca5ad6ba1be8432e56d8f48344dc9561dba668536ca3132c7f9b8a19485b9518d35783b32426318def14e7ca9cc7c682ab26f1db9e293
     env:
-      GOPATH: /go
+      GOPATH: /tmp/go
     cachePaths:
       - /.cache/go-build
-      - /go/pkg
+      - /tmp/go/pkg
+  - network: default
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
@@ -23,9 +24,12 @@ steps:
         mkdir -p ${GOPATH}/src/github.com/google/gvisor
 
         tar -xzf gvisor.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/google/gvisor
+      - |
+        cd ${GOPATH}/src/github.com/google/gvisor
+        go mod download
+  - network: none
     build:
       - |
-        export PATH=${PATH}:${TOOLCHAIN}/go/bin
         cd ${GOPATH}/src/github.com/google/gvisor
 
         mkdir ./bin

@@ -65,7 +65,7 @@ steps:
           --no-kernel-module-source \
           --no-check-for-alternate-installs \
           --override-file-type-destination=NVIDIA_MODPROBE:/rootfs/usr/local/bin \
-          --override-file-type-destination=FIRMWARE:/rootfs/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }} \
+          --override-file-type-destination=FIRMWARE:/rootfs/usr/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }} \
           --no-systemd
 
         # copy vulkan/OpenGL json files

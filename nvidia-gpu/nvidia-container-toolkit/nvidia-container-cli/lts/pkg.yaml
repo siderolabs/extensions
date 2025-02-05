@@ -46,12 +46,15 @@ steps:
       - |
         mkdir libnvidia-container
         tar -xzf  libnvidia-container.tar.gz --strip-components=1 -C libnvidia-container
+  # FIXME: make downloads nvidia-modprobe
+  - network: default
     build:
       - |
         cd libnvidia-container
 
         # LDLIBS=-L/usr/local/glibc/lib is set so that libnvidia-container-cli libs which are hardcoded as -llibname and not using pkg-config
         CPPFLAGS="-I/usr/local/glibc/include/tirpc" LDLIBS="-L/usr/local/glibc/lib -ltirpc -lelf -lseccomp" LDFLAGS='-Wl,--rpath=\$$ORIGIN/../glibc/\$$LIB' make
+  - network: none
     install:
       - |
         mkdir -p /rootfs
