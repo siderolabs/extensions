@@ -2,3 +2,7 @@
 LIBNVME_VERSION: v1.11.1
 # renovate: datasource=github-releases depName=linux-nvme/nvme-cli
 NVME_CLI_VERSION: v2.11
+# renovate: datasource=github-releases depName=sigstore/policy-tester
+SIGSTORE_POLICY_TESTER_VERSION: v0.12.0
+# renovate: datasource=github-releases depName=sigstore/policy-tester
+CONTAINERD_IMAGE_VERIFIER_SIGSTORE_VERSION: v0.2.0
