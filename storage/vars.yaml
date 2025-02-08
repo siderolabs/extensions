@@ -1,4 +1,4 @@
 # renovate: datasource=github-releases extractVersion=^fuse-(?<version>.*)$ depName=libfuse/libfuse
 FUSE3_VERSION: 3.16.2
 # renovate: datasource=git-tags extractVersion=^mdadm-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
-MDADM_VERSION: 4.3
+MDADM_VERSION: 4.4

@@ -4,15 +4,15 @@ NVIDIA_DRIVER_LTS_VERSION: 535.230.02
 # renovate: datasource=github-releases extractVersion=^\d+\.(?<version>\d+\.\d+)$ depName=nvidia/open-gpu-kernel-modules
 NVIDIA_DRIVER_PRODUCTION_VERSION: 550.144.03
 # renovate: datasource=github-releases depName=nvidia/nvidia-container-toolkit
-CONTAINER_TOOLKIT_VERSION: v1.17.3
-CONTAINER_TOOLKIT_REF: cb82e29c75d387992bf59eb6eadf5d96cb6d4747
+CONTAINER_TOOLKIT_VERSION: v1.17.4
+CONTAINER_TOOLKIT_REF: 9b69590c7428470a72f2ae05f826412976af1395
 # renovate: datasource=github-releases depName=nvidia/libnvidia-container
-LIBNVIDIA_CONTAINER_VERSION: v1.17.3
-LIBNVIDIA_CONTAINER_REF: cb82e29c75d387992bf59eb6eadf5d96cb6d4747
+LIBNVIDIA_CONTAINER_VERSION: v1.17.4
+LIBNVIDIA_CONTAINER_REF: f23e5e55ea27b3680aef363436d4bcf7659e0bfc
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:4f12c90f259bd273ed698660bc983053c5f4d2d2617beb0d481d4ec43d7cbbbd
+WOLFI_BASE_REF: sha256:1ec3327af43d7af231ffe475aff88d49dbb5e09af9f28610e6afbd2cb096e751
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp
-LIBSECCOMP_VERSION: 2.5.5
+LIBSECCOMP_VERSION: 2.6.0
 # renovate: datasource=git-tags extractVersion=^libcap-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/libs/libcap/libcap.git
 LIBCAP_VERSION: 2.73
 # renovate: datasource=git-tags extractVersion=^elfutils-(?<version>.*)$ depName=git://sourceware.org/git/elfutils.git
