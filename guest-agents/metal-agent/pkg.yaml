@@ -4,22 +4,6 @@ shell: /bin/bash
 dependencies:
   - stage: base
 
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
-    from: /
-    to: /rootfs/usr/local/lib/containers/metal-agent
-
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
-    from: /
-    to: /rootfs/usr/local/lib/containers/metal-agent
-
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
-    from: /
-    to: /rootfs/usr/local/lib/containers/metal-agent
-
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/ipmitool:{{ .BUILD_ARG_PKGS }}"
-    from: /
-    to: /rootfs/usr/local/lib/containers/metal-agent
-
   - image: "{{ .IMAGE_PREFIX }}/talos-metal-agent:{{ .VERSION }}"
     from: /
     to: /rootfs/usr/local/lib/containers/metal-agent
