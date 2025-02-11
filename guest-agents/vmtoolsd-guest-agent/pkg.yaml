@@ -1,5 +1,11 @@
 name: vmtoolsd-guest-agent
 variant: scratch
+# {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+# VMWare doesn't support arm64
+finalize:
+  - from: /
+    to: /
+# {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
 dependencies:
   - stage: base
   - image: {{ .BUILD_ARG_PKGS_PREFIX }}/talos-vmtoolsd:{{ .TALOS_VMTOOLSD_VERSION }}
@@ -12,3 +18,4 @@ steps:
 finalize:
   - from: /rootfs
     to: /
+# {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
