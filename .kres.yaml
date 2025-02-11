@@ -29,6 +29,7 @@ spec:
     - mdadm
     - mei
     - metal-agent
+    - nebula
     - nut-client
     - nvidia-container-toolkit-lts
     - nvidia-container-toolkit-production

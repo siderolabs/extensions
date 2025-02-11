@@ -34,4 +34,10 @@ NVIDIA Container Toolkit: 1.17.4
 Intel u-code: 20250211
 """
 
+    [notes.nebula]
+        title = "Nebula"
+        description = """\
+[Nebula](https://github.com/slackhq/nebula) is now supported as a system extension.
+"""
+
 [make_deps]

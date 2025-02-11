@@ -80,6 +80,7 @@ TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
 TARGETS += metal-agent
+TARGETS += nebula
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit-lts
 TARGETS += nvidia-container-toolkit-production
