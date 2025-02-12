@@ -19,6 +19,8 @@ See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configur
     [notes.updates]
         title = "Component Updates"
         description = """\
+vmtoolsd: v1.0.0
+Intel u-code: 20250211
 """
 
 [make_deps]
