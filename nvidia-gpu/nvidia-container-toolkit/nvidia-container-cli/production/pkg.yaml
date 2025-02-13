@@ -30,8 +30,8 @@ steps:
   - sources:
       - url: https://github.com/NVIDIA/libnvidia-container/archive/refs/tags/{{ .LIBNVIDIA_CONTAINER_VERSION }}.tar.gz
         destination: libnvidia-container.tar.gz
-        sha256: 9c28e729f1677b6ff9edb3f4dccff4f9827ffe13c04fbcffa41aabacbc0fdd54
-        sha512: 24293e369fea42ebe64163464f600808c0d18e8b4efeea12095de22e16d43837cb6441f46baf52e8c966810c76b0f5045737a96d173e2ecf8cd15fff37cd4c4f
+        sha256: {{ .LIBNVIDIA_CONTAINER_SHA256 }}
+        sha512: {{ .LIBNVIDIA_CONTAINER_SHA512 }}
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
       REVISION: {{ .LIBNVIDIA_CONTAINER_REF }}
@@ -46,6 +46,8 @@ steps:
       - |
         mkdir libnvidia-container
         tar -xzf  libnvidia-container.tar.gz --strip-components=1 -C libnvidia-container
+        cd libnvidia-container
+        patch -p1 < /pkg/patches/0001-Fix-building-with-Go-1.24.patch
   # FIXME: make downloads nvidia-modprobe
   - network: default
     build:

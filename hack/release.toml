@@ -30,7 +30,7 @@ Tailscale: 1.78.1
 ZFS: 2.3.0
 NVIDIA LTS: 535.230.02
 NVIDIA Production: 550.144.03
-NVIDIA Container Toolkit: 1.17.3
+NVIDIA Container Toolkit: 1.17.4
 Intel u-code: 20250211
 """
 

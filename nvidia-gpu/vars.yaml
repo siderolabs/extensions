@@ -4,11 +4,15 @@ NVIDIA_DRIVER_LTS_VERSION: 535.230.02
 # renovate: datasource=github-releases extractVersion=^\d+\.(?<version>\d+\.\d+)$ depName=nvidia/open-gpu-kernel-modules
 NVIDIA_DRIVER_PRODUCTION_VERSION: 550.144.03
 # renovate: datasource=github-releases depName=nvidia/nvidia-container-toolkit
-CONTAINER_TOOLKIT_VERSION: v1.17.3
-CONTAINER_TOOLKIT_REF: cb82e29c75d387992bf59eb6eadf5d96cb6d4747
-# renovate: datasource=github-releases depName=nvidia/libnvidia-container
-LIBNVIDIA_CONTAINER_VERSION: v1.17.3
-LIBNVIDIA_CONTAINER_REF: cb82e29c75d387992bf59eb6eadf5d96cb6d4747
+CONTAINER_TOOLKIT_VERSION: v1.17.4
+CONTAINER_TOOLKIT_REF: 9b69590c7428470a72f2ae05f826412976af1395
+CONTAINER_TOOLKIT_SHA256: f960b9ec55e479e591c6deb10166c9c73a0cefc01c10659af6eaf3f17d96fd8c
+CONTAINER_TOOLKIT_SHA512: ba79670cfc5e0abec388af858f2f7f1a153c5bc90f0b9540ffc6a095b8724f08c329742bc22cdc700299e063668bf574a7ac0bfa4c964763370c9b0500d5057c
+ # renovate: datasource=github-releases depName=nvidia/libnvidia-container
+LIBNVIDIA_CONTAINER_VERSION: v1.17.4
+LIBNVIDIA_CONTAINER_REF: f23e5e55ea27b3680aef363436d4bcf7659e0bfc
+LIBNVIDIA_CONTAINER_SHA256: dca982cb83a5937c4533e707dc8fb1070496dff989d71319b64e698519b3a0b9
+LIBNVIDIA_CONTAINER_SHA512: a5edb4eec8cc4a9bd221c3cbb14515656854700b1a6aef7b47147d96b67511d5cfcae38c740fd946452768da0f993edf6c656697cd01189de88b67a4ae00aae5
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
 WOLFI_BASE_REF: sha256:4f12c90f259bd273ed698660bc983053c5f4d2d2617beb0d481d4ec43d7cbbbd
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp
