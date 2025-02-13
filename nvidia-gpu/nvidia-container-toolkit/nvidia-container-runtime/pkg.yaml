@@ -4,7 +4,7 @@ shell: /bin/bash
 install:
   - build-base
   - bash
-  - go
+  - go-1.23
   - patch
 dependencies:
   - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
