@@ -1,3 +1,44 @@
+## [Talos System Extensions 1.9.4](https://github.com/siderolabs/extensions/releases/tag/v1.9.4) (2025-02-13)
+
+Welcome to the v1.9.4 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+vmtoolsd: v1.0.0
+Intel u-code: 20250211
+
+
+### Contributors
+
+* Andrey Smirnov
+* Utku Ozdemir
+* Jorik Jonker
+* Noel Georgi
+
+### Changes
+<details><summary>6 commits</summary>
+<p>
+
+* [`9ee2ba4`](https://github.com/siderolabs/extensions/commit/9ee2ba42f0bb6317444b727f98b107c1e0482401) fix: pin go version to 1.23 for nvidia tools
+* [`6b92401`](https://github.com/siderolabs/extensions/commit/6b92401f74f4045a431688aa71d91b38af940bee) feat: update Intel u-code to 20250211
+* [`b3679c5`](https://github.com/siderolabs/extensions/commit/b3679c5faeb906f6b3ab0985e3fd519bb581081f) feat: update talos-vmtoolsd to v1.0.0
+* [`246a446`](https://github.com/siderolabs/extensions/commit/246a44642023d58cd90c75d2fe43e8d7df2773e5) feat: bump metal agent to v0.1.2
+* [`2b9c24e`](https://github.com/siderolabs/extensions/commit/2b9c24e10a4e6f62e1d0c3f8d74ad0f3c0052c65) feat: mount host ca certs into metal agent
+* [`82c88c7`](https://github.com/siderolabs/extensions/commit/82c88c758866416effa40217af1c7a73d9695fde) chore: update pkgs to the latest 1.9
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.3](https://github.com/siderolabs/extensions/releases/tag/v1.9.3)
+
 ## [Talos System Extensions 1.9.3](https://github.com/siderolabs/extensions/releases/tag/v1.9.3) (2025-01-28)
 
 Welcome to the v1.9.3 release of Talos System Extensions!
