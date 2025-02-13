@@ -1,0 +1,50 @@
+name: nebula
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /tmp/go
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+    sources:
+      - url: https://github.com/slackhq/nebula/archive/refs/tags/v{{ .NEBULA_VERSION}}.tar.gz
+        destination: nebula.tar.gz
+        sha256: 5f7000e943cbe8cc7d7e2651ee2301121654fe1f51902f010ca908ac9ca0eede
+        sha512: efdbceb05e0aa3958f81e6915d94f08a18e979ecf7cdf52c3158750a4b6131a72f15f1cb67b6756f8520ec7b2e2a57a437212d5386373abe9545ba7709bacbb3
+  - network: default
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        mkdir nebula
+        tar -xzvf nebula.tar.gz --strip-components=1 -C nebula
+      - |
+        cd nebula
+        go mod download
+  - network: none
+    build:
+      - |
+        cd nebula
+        make bin
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/nebula/usr/local/bin/
+        cp -pr nebula/nebula /rootfs/usr/local/lib/containers/nebula/usr/local/bin
+        cp -pr nebula/nebula-cert /rootfs/usr/local/lib/containers/nebula/usr/local/bin
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/nebula.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
