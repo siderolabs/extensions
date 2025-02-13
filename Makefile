@@ -93,6 +93,7 @@ TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
 TARGETS += spin
 TARGETS += stargz-snapshotter
+TARGETS += containerd-image-verifier-sigstore
 TARGETS += tailscale
 TARGETS += thunderbolt
 TARGETS += uinput
