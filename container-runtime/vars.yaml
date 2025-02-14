@@ -1,14 +1,14 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20241118.0
+GVISOR_VERSION: 20250210.0
 # renovate: datasource=github-releases depName=containerd/stargz-snapshotter
 STARGZ_SNAPSHOTTER_VERSION: v0.16.3
 # renovate: datasource=github-releases depName=kubernetes/cloud-provider-aws
-CLOUD_PROVIDER_AWS_VERSION: v1.32.0
+CLOUD_PROVIDER_AWS_VERSION: v1.32.1
 # renovate: datasource=git-tags extractVersion=^containerd-shim-wasmedge\/(?<version>.*)$ depName=https://github.com/containerd/runwasi.git
 WASMEDGE_VERSION: v0.5.0
 # renovate: datasource=git-tags depName=https://github.com/spinkube/containerd-shim-spin.git
 SPIN_VERSION: v0.18.0
 # renovate: datasource=github-releases depName=kata-containers/kata-containers
-KATA_CONTAINERS_VERSION: 3.3.0
+KATA_CONTAINERS_VERSION: 3.13.0
 # renovate: datasource=github-releases depName=containers/crun
-CRUN_VERSION: 1.19.1
+CRUN_VERSION: 1.20
