@@ -1,0 +1,47 @@
+name: nebula
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/nebula
+  args: 
+    - -config 
+    - /usr/local/etc/nebula/config.yml 
+  environment:
+  - PATH=/sbin:/usr/local/bin
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  # libs
+  - source: /lib
+    destination: /lib
+    type: bind
+    options:
+      - bind
+      - ro
+  # more libs
+  - source: /usr/lib
+    destination: /usr/lib
+    type: bind
+    options:
+      - bind
+      - ro
+  - source: /sbin
+    destination: /sbin
+    type: bind
+    options:
+      - bind
+      - ro
+  ## Nebula needs to write to this to create the interfaces
+  - source: /dev/net/tun
+    destination: /dev/net/tun
+    type: bind
+    options:
+      - bind
+      - rw
+restart: always

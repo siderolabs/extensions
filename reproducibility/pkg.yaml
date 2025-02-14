@@ -69,6 +69,7 @@ dependencies:
   # - stage: spin
   - stage: stargz-snapshotter
   - stage: tailscale
+  - stage: nebula
   # thunderbolt can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: thunderbolt
   # uinput can be ignored from reproducibility test since it's kernel modules copied from pkgs

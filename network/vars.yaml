@@ -4,3 +4,5 @@ TAILSCALE_VERSION: 1.78.1
 LLDPD_VERSION: 1.0.19
 # renovate: datasource=github-releases depName=cloudflare/cloudflared
 CLOUDFLARED_VERSION: 2024.12.1
+# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=slackhq/nebula
+NEBULA_VERSION: 1.9.5
