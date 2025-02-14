@@ -19,7 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-Linux Firmware: 20250109
+Linux Firmware: 20250211
 stargz-snapshotter: 0.16.3
 ecr-credential-provider: 1.32.0
 wasm-edge: 0.5.0
