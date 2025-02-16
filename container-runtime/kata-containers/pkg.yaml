@@ -52,9 +52,6 @@ steps:
         cp ./opt/kata/bin/cloud-hypervisor /rootfs/usr/local/bin/cloud-hypervisor
         chmod +x /rootfs/usr/local/bin/cloud-hypervisor
 
-        cp ./opt/kata/bin/cloud-hypervisor /rootfs/usr/local/bin/cloud-hypervisor
-        chmod +x /rootfs/usr/local/bin/cloud-hypervisor
-
         cp ./opt/kata/libexec/virtiofsd /rootfs/usr/local/libexec/virtiofsd
         chmod +x /rootfs/usr/local/libexec/virtiofsd
 
