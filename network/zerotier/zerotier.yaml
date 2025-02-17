@@ -1,0 +1,54 @@
+name: zerotier
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/zerotier-one
+  args:
+    - /var/lib/zerotier-one
+  environment:
+  - PATH=/sbin:/usr/local/bin
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  # libs
+  - source: /lib
+    destination: /lib
+    type: bind
+    options:
+      - bind
+      - ro
+  # more libs
+  - source: /usr/lib
+    destination: /usr/lib
+    type: bind
+    options:
+      - bind
+      - ro
+  ## Required for zerotier. Ip addr and other commands
+  - source: /sbin
+    destination: /sbin
+    type: bind
+    options:
+      - bind
+      - ro
+  ## Zerotier needs to write to this to create the interfaces
+  - source: /dev/net/tun
+    destination: /dev/net/tun
+    type: bind
+    options:
+      - bind
+      - rw
+  ## Zerotier state.
+  - source: /var/lib/zerotier-one/
+    destination: /var/lib/zerotier-one/
+    type: bind
+    options:
+      - bind
+      - rw
+restart: always
