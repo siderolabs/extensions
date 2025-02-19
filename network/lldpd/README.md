@@ -18,7 +18,7 @@ kind: ExtensionServiceConfig
 name: lldpd
 configFiles:
   - content: |
-      configure lldpd portidsubtype ifname
+      configure lldp portidsubtype ifname
       unconfigure lldp management-addresses-advertisements
       unconfigure lldp capabilities-advertisements
       configure system description "Talos Node"
