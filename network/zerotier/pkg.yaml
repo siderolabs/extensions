@@ -1,9 +1,14 @@
 name: zerotier
 variant: alpine
-shell: /toolchain/bin/bash
+shell: /bin/bash
 dependencies:
   - stage: base
+    from: /
+    to: /base-rootfs
+  - stage: zerotier-wrapper
 install:
+  - build-base
+  - linux-headers
   - libstdc++
 steps:
   - 
@@ -28,10 +33,8 @@ steps:
       - |
         mkdir -p /rootfs/usr/local/lib/containers/zerotier/usr/local/bin/
         cp -pr zerotier-one /rootfs/usr/local/lib/containers/zerotier/usr/local/bin/
+        cp -pr /rootfs/usr/local/bin/zerotier-wrapper /rootfs/usr/local/lib/containers/zerotier/usr/local/bin/
         chmod +x /rootfs/usr/local/lib/containers/zerotier/usr/local/bin/zerotier-*
-        cd /rootfs/usr/local/lib/containers/zerotier/usr/local/bin
-        ln -sf zerotier-one zerotier-cli
-        ln -sf zerotier-one zerotier-idtool
       - |
         mkdir -p /rootfs/usr/local/etc/containers/zerotier/usr/local/etc/zerotier/state
         cp /pkg/zerotier.yaml /rootfs/usr/local/etc/containers/
@@ -40,9 +43,9 @@ steps:
         mkdir -p /extensions-validator-rootfs
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs
         cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
-        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+        /base-rootfs/extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
       - |
-        [[ $(/rootfs/usr/local/lib/containers/zerotier/usr/local/bin/zerotier-cli -v) == *{{ .ZEROTIER_VERSION }}* ]]
+        [[ $(/rootfs/usr/local/lib/containers/zerotier/usr/local/bin/zerotier-one -v) == *{{ .ZEROTIER_VERSION }}* ]]
 finalize:
   - from: /rootfs
     to: /rootfs
