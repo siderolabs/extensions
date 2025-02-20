@@ -12,7 +12,6 @@ steps:
         destination: qemu.tar.xz
         sha256: f859f0bc65e1f533d040bbe8c92bcfecee5af2c921a6687c652fb44d089bd894
         sha512: f92548623e4e31400c823a2d78417a8a4ecfccb07f3ee4883e2f2ad33054539d2a37d076dbc64df42c6c86c08fa7c2c975cd6e823aa14d5f20cef83348006813
-  - network: default
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
@@ -20,10 +19,6 @@ steps:
         tar -xf qemu.tar.xz --strip-components=1
         rm qemu.tar.xz
       - |
-        mkdir -p /usr/bin
-
-        pip3 install ninja
-
         extra_args=( )
 
         if [[ "${ARCH}" == aarch64 ]]; then
@@ -45,7 +40,6 @@ steps:
           --enable-guest-agent \
           --enable-stack-protector \
           "${extra_args[@]}"
-  - network: none
     build:
       - |
         make -j $(nproc) qemu-ga

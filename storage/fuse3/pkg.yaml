@@ -10,15 +10,11 @@ steps:
         destination: fuse.tar.gz
         sha256: f797055d9296b275e981f5f62d4e32e089614fc253d1ef2985851025b8a0ce87
         sha512: 3e8889863cd67dada67271f095f694dc9e5aaf2561fd1e2285aee95b5a54e692bb195ab8fce57fc2bdf08d0ea17b6d56ca4967b4e4371d639d6133907b2370d3
-  - network: default
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
         tar -xzf fuse.tar.gz --strip-components=1
-
-        mkdir -p /usr/bin
-        pip3 install ninja
 
         mkdir -p /rootfs/usr/local/etc
         mkdir -p /rootfs/usr/local/bin
@@ -27,13 +23,11 @@ steps:
         mkdir _build
         meson setup _build
         meson configure -D useroot=false -D initscriptdir='' _build
-  - network: none
     build:
       - |
         ninja -C _build
     install:
       - |
-
         DESTDIR=/rootfs ninja -C _build install
     test:
       - |
