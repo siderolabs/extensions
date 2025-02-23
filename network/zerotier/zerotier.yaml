@@ -12,13 +12,6 @@ container:
     writeableRootfs: false
     writeableSysfs: true
   mounts:
-  # Zerotier binaries
-  - source: /usr/local/lib/containers/zerotier/usr/local/bin
-    destination: /usr/local/bin
-    type: bind
-    options:
-      - bind
-      - ro
   # Zerotier needs to write to this to create the interfaces
   - source: /dev/net/tun
     destination: /dev/net/tun

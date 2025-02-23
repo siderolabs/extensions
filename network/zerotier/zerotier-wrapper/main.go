@@ -7,10 +7,8 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"os/signal"
-	"strconv"
+	"path/filepath"
 	"strings"
-	"time"
 
 	"golang.org/x/sys/unix"
 )
@@ -19,7 +17,6 @@ const (
 	zerotierPath    = "/var/lib/zerotier-one"
 	identityPath    = "/var/lib/zerotier-one/identity.secret"
 	identityPubPath = "/var/lib/zerotier-one/identity.public"
-	pidFile         = "/var/lib/zerotier-one/zerotier-one.pid"
 	zerotierBinPath = "/usr/local/bin/zerotier-one"
 )
 
@@ -38,50 +35,18 @@ func main() {
 	}
 	log.Printf("identity configured (source: %s)", identitySource)
 
-	// Cleanup any existing zerotier-one process.
-	if err := cleanupProcess(); err != nil {
-		log.Fatalf("process cleanup failed: %v", err)
-	}
-
-	// If ZEROTIER_NETWORK env var is set, join network using zerotier-one -q.
+	// If ZEROTIER_NETWORK env var is set, join the network.
 	if network := os.Getenv("ZEROTIER_NETWORK"); network != "" {
-		log.Printf("will join network %s after startup", network)
-		go func() {
-			time.Sleep(2 * time.Second)
-			if err := joinNetwork(network); err != nil {
-				log.Printf("failed to join network: %v", err)
-			} else {
-				log.Printf("joined network %s", network)
-			}
-		}()
+		log.Printf("joining network %s", network)
+		if err := joinNetwork(network); err != nil {
+			log.Fatalf("failed to join network: %v", err)
+		}
+		log.Printf("joined network %s", network)
 	}
 
 	// Start zerotier-one process.
-	cmd := exec.Command(zerotierBinPath, "-U", zerotierPath)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-
-	if err := cmd.Start(); err != nil {
-		log.Fatalf("error starting zerotier-one: %v", err)
-	}
-
-	// Write the PID file.
-	pidStr := strconv.Itoa(cmd.Process.Pid)
-	if err := os.WriteFile(pidFile, []byte(pidStr), 0644); err != nil {
-		log.Printf("failed to write PID file: %v", err)
-	}
-
-	// Forward termination signals to the zerotier-one process.
-	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, unix.SIGINT, unix.SIGTERM)
-	sig := <-ch
-	log.Printf("received signal %v, forwarding to zerotier-one process", sig)
-	if err := cmd.Process.Signal(sig); err != nil {
-		log.Fatalf("error sending signal to zerotier-one: %v", err)
-	}
-
-	if err := cmd.Wait(); err != nil {
-		log.Fatalf("zerotier-one exited with error: %v", err)
+	if err := unix.Exec(zerotierBinPath, []string{zerotierBinPath, "-U", zerotierPath}, os.Environ()); err != nil {
+		log.Fatalf("error executing zerotier-one: %v", err)
 	}
 }
 
@@ -173,60 +138,26 @@ func writeIdentity(identity string) error {
 	return nil
 }
 
-// cleanupProcess checks for an existing PID file; if found, it kills the process and removes the file.
-func cleanupProcess() error {
-	if _, err := os.Stat(pidFile); err == nil {
-		pid, err := getProcessId()
-		if err != nil {
-			return fmt.Errorf("error reading pid file: %w", err)
-		}
-		if err := killProcess(pid); err != nil {
-			return fmt.Errorf("error killing process: %w", err)
-		}
-		if err := os.Remove(pidFile); err != nil {
-			return fmt.Errorf("error removing pid file: %w", err)
-		}
-		log.Printf("cleaned up existing process (PID %d)", pid)
-	} else if !errors.Is(err, os.ErrNotExist) {
-		return fmt.Errorf("failed to stat pid file: %w", err)
-	} else {
-		log.Printf("no PID file found, no existing process to clean up")
-	}
-	return nil
-}
-
-func getProcessId() (int, error) {
-	pidData, err := os.ReadFile(pidFile)
-	if err != nil {
-		return 0, err
-	}
-	pidData = bytes.TrimRight(pidData, "\n")
-	pid, err := strconv.Atoi(string(pidData))
-	if err != nil {
-		return 0, err
-	}
-	return pid, nil
-}
-
-func killProcess(pid int) error {
-	p, err := os.FindProcess(pid)
-	if err != nil {
-		return err
-	}
-	if err := p.Kill(); err != nil && !errors.Is(err, os.ErrProcessDone) {
-		return err
-	}
-	return nil
-}
-
-// joinNetwork uses "zerotier-one -q join <network>" to join the specified network.
+// joinNetwork creates a config file for the relevant network if it doesn't already exist.
+// This is typically done while the service is running via `zerotier-one -q join <network>`,
+// however this just creates an empty file with the network name, so we do that instead.
 func joinNetwork(network string) error {
-	log.Printf("attempting to join network %s", network)
-	cmd := exec.Command(zerotierBinPath, "-q", "join", network)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("join network failed: %w", err)
+	networkConfDir := filepath.Join(zerotierPath, "networks.d")
+	if err := os.MkdirAll(networkConfDir, 0755); err != nil {
+		return fmt.Errorf("failed to create networks.d directory: %w", err)
 	}
+	networkConfFile := filepath.Join(networkConfDir, network+".conf")
+
+	file, err := os.OpenFile(networkConfFile, os.O_WRONLY|os.O_CREATE|os.O_EXCL, 0644)
+	if err != nil {
+		if os.IsExist(err) {
+			log.Printf("network configuration file %s already exists", networkConfFile)
+			return nil
+		}
+		return fmt.Errorf("failed to create network conf file: %w", err)
+	}
+	defer file.Close()
+
+	log.Printf("created network configuration file %s", networkConfFile)
 	return nil
 }
