@@ -7,8 +7,8 @@ steps:
   - sources:
       - url: https://github.com/containerd/stargz-snapshotter/archive/refs/tags/{{ .STARGZ_SNAPSHOTTER_VERSION }}.tar.gz
         destination: stargz-snapshotter.tar.gz
-        sha256: 576f59d4375ac2cab24310d28e3ac98148c05dc6714649e1ec27e8d4fa8a9679
-        sha512: 3a8226e29305f55e9244017cd3063e9ba9b8b4a79a404000677e0e99a84d1337b12a37f6d1b5539c9579f54b1c118fb0ce373eb402296a18d8e55474d549986a
+        sha256: {{ .STARGZ_SNAPSHOTTER_SHA256 }}
+        sha512: {{ .STARGZ_SNAPSHOTTER_SHA512 }}
     env:
       GOPATH: /tmp/go
     cachePaths:

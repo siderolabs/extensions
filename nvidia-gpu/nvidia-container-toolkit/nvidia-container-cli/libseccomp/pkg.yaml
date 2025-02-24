@@ -11,8 +11,8 @@ steps:
   - sources:
       - url: https://github.com/seccomp/libseccomp/releases/download/v{{ .LIBSECCOMP_VERSION }}/libseccomp-{{ .LIBSECCOMP_VERSION }}.tar.gz
         destination: libseccomp.tar.gz
-        sha256: 248a2c8a4d9b9858aa6baf52712c34afefcf9c9e94b76dce02c1c9aa25fb3375
-        sha512: f630e7a7e53a21b7ccb4d3e7b37616b89aeceba916677c8e3032830411d77a14c2d74dcf594cd193b1acc11f52595072e28316dc44300e54083d5d7b314a38da
+        sha256: {{ .LIBSECCOMP_SHA256 }}
+        sha512: {{ .LIBSECCOMP_SHA512 }}
     prepare:
       - |
         tar -xzf libseccomp.tar.gz --strip-components=1

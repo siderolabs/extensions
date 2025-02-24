@@ -8,18 +8,18 @@ steps:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-arm64.tar.xz
         destination: kata-static.tar.xz
-        sha256: 5437f0162e08154260c58642f433d8a9154fb6d443ca2c1ddee675154ec88c9d
-        sha512: 000cf484bd9a9a8500fcbed024b69c4337457bc3e054f6bc2bf6ca6258d8cd78c403d540729a97361ea2f0ca49de13d37078ec0e3ca6c6330003474bf5090e77
+        sha256: {{ .KATA_CONTAINERS_STATIC_ARM64_SHA256 }}
+        sha512: {{ .KATA_CONTAINERS_STATIC_ARM64_SHA512 }}
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.xz
         destination: kata-static.tar.xz
-        sha256: 72e29c7b3ee325e0049bf694bbb843ed07c3eb0a05d89c2b3a1635241e4bafe8
-        sha512: b7ff426d4ea44053b7028bae32b3aa2a94d000c5e2bdd361ac0f144988f52e86d61eccc73bf3a6fc888b5d6c6f8db44c9a8ca0fa651bb27a7ab95818144d3b9e
+        sha256: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA256 }}
+        sha512: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA512 }}
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/kata-containers/kata-containers/archive/refs/tags/{{ .KATA_CONTAINERS_VERSION }}.tar.gz
         destination: kata-containers.tar.gz
-        sha256: 6567498577888f29d186d14629e7e987e8afc49ab988c72e0bc80918fe99295a
-        sha512: 54b989b1db27e56266d1e40b18d3c4f353a3f876dad358afecbba7fb7e1238da1f0856c73f627cbb24e36176f784e2a809bb1b7a990ad21644b06e7b43d64a68
+        sha256: {{ .KATA_CONTAINERS_SHA256 }}
+        sha512: {{ .KATA_CONTAINERS_SHA512 }}
     env:
       GOPATH: /tmp/go
     cachePaths:

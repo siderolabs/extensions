@@ -3,24 +3,19 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kmod:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
 steps:
   - sources:
       - url: https://github.com/open-iscsi/open-iscsi/archive/refs/tags/{{ .OPEN_ISCSI_VERSION }}.tar.gz
         destination: open-iscsi.tar.gz
-        sha256: 12c19f65f9136b87ac11bf5bbe5eb3e23de4e7f1ee07eecda830da53a2316113
-        sha512: 18b92d3e9a85d8de66734d95e9ca74a8acc5167a98830134c18ad5e226b29a00d358f952edfab67b643c454ec63c0a382c7ab7e7e76970f7574b46cea0d5c82d
+        sha256: {{ .OPEN_ISCSI_SHA256 }}
+        sha512: {{ .OPEN_ISCSI_SHA512 }}
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
     prepare:
       - |
         tar -xzf open-iscsi.tar.gz --strip-components=1
 
-        patch -p1 < /pkg/patches/login-scan-manual.patch
         patch -p1 < /pkg/patches/musl-fixes.patch
-        patch -p1 < /pkg/patches/add-missing-headers.patch
         patch -p1 < /pkg/patches/dont-use-lib64.patch
         patch -p1 < /pkg/patches/remove-werror.patch
     build:

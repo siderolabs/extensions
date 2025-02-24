@@ -21,17 +21,22 @@ See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configu
         description = """\
 Linux Firmware: 20250211
 stargz-snapshotter: 0.16.3
-ecr-credential-provider: 1.32.0
+ecr-credential-provider: 1.32.1
 wasm-edge: 0.5.0
-crun: 1.19.1
 spin: 0.18.0
-qemu-guest-agent: 9.2.0
-Tailscale: 1.78.1
+qemu-guest-agent: 9.2.2
+Tailscale: 1.80.3
 ZFS: 2.3.0
 NVIDIA LTS: 535.230.02
 NVIDIA Production: 550.144.03
 NVIDIA Container Toolkit: 1.17.4
 Intel u-code: 20250211
+Gvisor: 20250224.0
+Kata-containers: 3.14.0
+crun: 1.20
+Glibc: 2.41
+libseccomp: 2.6.0
+Open-iSCSI: 2.1.11
 """
 
     [notes.nebula]

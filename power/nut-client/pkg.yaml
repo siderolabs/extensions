@@ -3,14 +3,12 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
 steps:
   - sources:
       - url: https://github.com/networkupstools/nut/releases/download/v{{ .NUT_VERSION }}/nut-{{ .NUT_VERSION }}.tar.gz
         destination: nut.tar.gz
-        sha256: e4b4b0cbe7dd39ba9097be7f7d787bb2fffbe35df64dff53b5fe393d659c597d
-        sha512: b6f8f22318e4a4fcb8073a63132b1cb083952c665191b82a7d6765a61b859575a4b0c2ba84ed17cfb8c88d34179876d64520dd2f75f02fe8707b406da2c0821c
+        sha256: {{ .NUT_SHA256 }}
+        sha512: {{ .NUT_SHA512 }}
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml

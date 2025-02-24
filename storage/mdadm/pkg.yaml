@@ -4,13 +4,12 @@ shell: /bin/bash
 dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
 steps:
   - sources:
       - url: http://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-{{ .MDADM_VERSION }}.tar.gz
         destination: mdadm.tar.gz
-        sha256: 61a1c22477555364dea1862df7c3b4e8b9a53ee733bad320a45fda27dd0ed44f
-        sha512: a77af2b371ed27b7bd89b7991302282f0fc77999eb93d7959446fc4b1c28388582d08ff0abfc470a9f9a8c8036acb0158edc44d9a8d406f807ca28111bf74459
+        sha256: {{ .MDADM_SHA256 }}
+        sha512: {{ .MDADM_SHA512 }}
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml

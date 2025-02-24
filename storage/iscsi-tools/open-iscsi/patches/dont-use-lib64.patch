@@ -1,10 +1,10 @@
 # https://git.alpinelinux.org/aports/plain/main/open-iscsi/dont-use-lib64.patch?h=3.15-stable
 diff --git a/libopeniscsiusr/Makefile b/libopeniscsiusr/Makefile
-index bf7c96c..eb9da59 100644
+index 0d215fc..5a52bbc 100644
 --- a/libopeniscsiusr/Makefile
 +++ b/libopeniscsiusr/Makefile
-@@ -13,8 +13,8 @@ prefix ?= /usr
- INSTALL ?= install
+@@ -17,8 +17,8 @@ SBINDIR ?= $(exec_prefix)/sbin
+ DBROOT ?= $(etcdir)/iscsi
  
  ifndef LIB_DIR
 -	ifeq ($(shell test -d /lib64 && echo 1),1)

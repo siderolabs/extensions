@@ -1,11 +1,19 @@
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-QEMU_VERSION: 9.2.0
+QEMU_VERSION: 9.2.2
+QEMU_SHA256: 752eaeeb772923a73d536b231e05bcc09c9b1f51690a41ad9973d900e4ec9fbf
+QEMU_SHA512: b010876da9f91da01dbb9e06705a1358d5f062d0fdd4ad5c8cd8ce3fd43adcefcf72a61216eb8d415281f6607b945ce1cfb6b5fc5692ada9163e8f05b7fb5533
 # renovate: datasource=git-tags depName=https://gitlab.gnome.org/GNOME/glib.git
 GLIB_VERSION: 2.83.2
+GLIB_SHA256: 8428d672c8485636d940f03ce8dcdc174f9b3892ac8b2eea76dd281af6a6e937
+GLIB_SHA512: 1686ef719122d2b3e8bcc569ba1e125cde51fbe645811e1eb7ddd49e300ff834eed712bb619bba13629f23ad5f801fdc2d37e3103b5150ad3cb7ff9d1168d902
 # renovate: datasource=github-releases extractVersion=^pcre2-(?<version>.*)$ depName=PCRE2Project/pcre2
 PCRE2_VERSION: 10.42
+PCRE2_SHA256: 8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840
+PCRE2_SHA512: 72fbde87fecec3aa4b47225dd919ea1d55e97f2cbcf02aba26e5a0d3b1ffb58c25a80a9ef069eb99f9cf4e41ba9604ad06a7ec159870e1e875d86820e12256d3
 # renovate: datasource=git-tags depName=https://gitlab.com/xen-project/xen-guest-agent.git
 XEN_GUEST_AGENT_VERSION: 5c274e651c29f92fc0c418fda486373b0f34f0da
+XEN_GUEST_AGENT_SHA256: c52f4781739e500e98a3298c9e44fe9bcbe1892c22aa6bb031d1a847123deaaa
+XEN_GUEST_AGENT_SHA512: 49bf15d7257f7fcb5ac919ca57e8c16bb6f8199684adef034bd1e7683dd9fb23a5604667fb75e27eadd02a2f9b130339409873b5720d7d3f5e4153feb5fa98ba
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
 TALOS_VMTOOLSD_VERSION: v1.0.0
 # renovate: datasource=github-releases depName=siderolabs/talos-metal-agent

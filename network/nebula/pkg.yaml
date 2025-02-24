@@ -12,8 +12,8 @@ steps:
     sources:
       - url: https://github.com/slackhq/nebula/archive/refs/tags/v{{ .NEBULA_VERSION}}.tar.gz
         destination: nebula.tar.gz
-        sha256: 5f7000e943cbe8cc7d7e2651ee2301121654fe1f51902f010ca908ac9ca0eede
-        sha512: efdbceb05e0aa3958f81e6915d94f08a18e979ecf7cdf52c3158750a4b6131a72f15f1cb67b6756f8520ec7b2e2a57a437212d5386373abe9545ba7709bacbb3
+        sha256: {{ .NEBULA_SHA256 }}
+        sha512: {{ .NEBULA_SHA512 }}
   - network: default
     prepare:
       - |
