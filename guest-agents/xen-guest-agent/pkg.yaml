@@ -17,8 +17,8 @@ steps:
       RUSTFLAGS: '-C target-feature=+crt-static'
   - sources:
       - url: https://gitlab.com/xen-project/xen-guest-agent/-/archive/{{ .XEN_GUEST_AGENT_VERSION }}/xen-guest-agent-{{ .XEN_GUEST_AGENT_VERSION }}.tar.gz
-        sha256: c52f4781739e500e98a3298c9e44fe9bcbe1892c22aa6bb031d1a847123deaaa
-        sha512: 49bf15d7257f7fcb5ac919ca57e8c16bb6f8199684adef034bd1e7683dd9fb23a5604667fb75e27eadd02a2f9b130339409873b5720d7d3f5e4153feb5fa98ba
+        sha256: {{ .XEN_GUEST_AGENT_SHA256 }}
+        sha512: {{ .XEN_GUEST_AGENT_SHA512 }}
         destination: xe-guest-agent.tar.gz
   - network: default
     prepare:

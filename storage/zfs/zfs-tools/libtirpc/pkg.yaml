@@ -8,8 +8,8 @@ steps:
   - sources:
       - url: https://src.fedoraproject.org/lookaside/extras/libtirpc/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2/sha512/df0781a74ff9ded2d3c4f5eb7e05496b9f58eac8060c02c68331dc14c4a00304dcd19f46836f5756fe0d9d27095fd463d42dd696fcdff891516711b7d63deabe/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2
         destination: libtirpc.tar.bz2
-        sha256: 6474e98851d9f6f33871957ddee9714fdcd9d8a5ee9abb5a98d63ea2e60e12f3
-        sha512: df0781a74ff9ded2d3c4f5eb7e05496b9f58eac8060c02c68331dc14c4a00304dcd19f46836f5756fe0d9d27095fd463d42dd696fcdff891516711b7d63deabe
+        sha256: {{ .LIBTIRPC_SHA256 }}
+        sha512: {{ .LIBTIRPC_SHA512 }}
         # ref: https://git.alpinelinux.org/aports/tree/main/libc-dev
         # https://wiki.musl-libc.org/faq.html#Q:-Why-is-%3Ccode%3Esys/queue.h%3C/code%3E-not-included
       - url: https://git.alpinelinux.org/aports/plain/main/libc-dev/sys-queue.h?id=87f42de0e1c1c6d2b229edfc126a3d4191c835ed
