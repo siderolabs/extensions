@@ -11,8 +11,8 @@ steps:
   - sources:
       - url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .LIBCAP_VERSION }}.tar.xz
         destination: libcap.tar.xz
-        sha256: 6405f6089cf4cdd8c271540cd990654d78dd0b1989b2d9bda20f933a75a795a5
-        sha512: 8ab72cf39bf029656b2a4a5972a0da4ab4b46a3d8a8da66d6cde925e06fe34df2fa5fc4d0b62c9cec4972b0b2678fdac6ef9421b6fb83c2a5bf869cf8d5fdb16
+        sha256: {{ .LIBCAP_SHA256 }}
+        sha512: {{ .LIBCAP_SHA512 }}
     prepare:
       - |
         tar -xf libcap.tar.xz --strip-components=1

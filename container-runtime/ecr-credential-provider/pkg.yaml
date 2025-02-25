@@ -5,10 +5,10 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      - url: https://github.com/kubernetes/cloud-provider-aws/archive/refs/tags/{{ .VERSION }}.tar.gz
+      - url: https://github.com/kubernetes/cloud-provider-aws/archive/refs/tags/{{ .CLOUD_PROVIDER_AWS_VERSION }}.tar.gz
         destination: cloud-provider-aws.tar.gz
-        sha256: 0bd75a18faab15dae7a603e1d6b57691953f1b6427f6eaa4c14e9fbfc1a75348
-        sha512: e85b0c4a79f6c087147a5868520693f7cb98a471d5497dcda27a6e341e719868f5308ccf8d9781e601ff1b52f332a0447033a096c929e768553e937e154db25e
+        sha256: {{ .CLOUD_PROVIDER_AWS_SHA256 }}
+        sha512: {{ .CLOUD_PROVIDER_AWS_SHA512 }}
     env:
       GOPATH: /tmp/go
     cachePaths:

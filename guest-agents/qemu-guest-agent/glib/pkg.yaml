@@ -3,14 +3,13 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
   - stage: pcre2
 steps:
   - sources:
       - url: https://download.gnome.org/sources/glib/{{ regexReplaceAll ".\\d+$" .GLIB_VERSION "${1}" }}/glib-{{ .GLIB_VERSION }}.tar.xz
         destination: glib.tar.xz
-        sha256: 8428d672c8485636d940f03ce8dcdc174f9b3892ac8b2eea76dd281af6a6e937
-        sha512: 1686ef719122d2b3e8bcc569ba1e125cde51fbe645811e1eb7ddd49e300ff834eed712bb619bba13629f23ad5f801fdc2d37e3103b5150ad3cb7ff9d1168d902
+        sha256: {{ .GLIB_SHA256 }}
+        sha512: {{ .GLIB_SHA512 }}
     prepare:
       - |
         tar -xf glib.tar.xz --strip-components=1

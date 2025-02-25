@@ -1,13 +1,13 @@
 Author: Felix Lechner <felix.lechner@lease-up.com>
 Description: Exit gracefully when md device not found (Closes: #970329).
 
-diff -Naurp mdadm.orig/Monitor.c mdadm/Monitor.c
---- mdadm.orig/Monitor.c
-+++ mdadm/Monitor.c
-@@ -554,8 +554,14 @@ static int check_array(struct state *st,
+diff -Naurp mdadm.orig/mdmonitor.c mdadm/mdmonitor.c
+--- mdadm.orig/mdmonitor.c	2024-11-09 12:52:12.929661827 +0100
++++ mdadm/mdmonitor.c	2024-11-09 12:54:35.666987182 +0100
+@@ -761,8 +761,14 @@ static int check_array(struct state *st,
  	if (fd < 0)
  		goto disappeared;
-
+ 
 -	if (st->devnm[0] == 0)
 -		snprintf(st->devnm, MD_NAME_MAX, "%s", fd2devnm(fd));
 +	if (st->devnm[0] == 0) {
@@ -18,6 +18,6 @@ diff -Naurp mdadm.orig/Monitor.c mdadm/Monitor.c
 +		}
 +		snprintf(st->devnm, MD_NAME_MAX, "%s", found);
 +	}
-
+ 
  	for (mse2 = mdstat; mse2; mse2 = mse2->next)
  		if (strcmp(mse2->devnm, st->devnm) == 0) {

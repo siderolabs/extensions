@@ -5,17 +5,17 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://github.com/cloudflare/cloudflared/releases/download/{{ .CLOUDFLARED_VERSION }}/cloudflared-linux-amd64
-        destination: cloudflared
-        sha256: b868cfffc393dd9f1c5ae79812353c2ff73cfa95da4c3dcb0ec98ce55d13943d
-        sha512: 1361fc70ceaa072e76beffe838d9721bc2b468f40794d99241771464d65db009662f1609b953ce0856302cccabbb82cd6cbff9f42d3bd10e83b5322cd72dd0b0
-      # {{ else if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://github.com/cloudflare/cloudflared/releases/download/{{ .CLOUDFLARED_VERSION }}/cloudflared-linux-arm64
         destination: cloudflared
-        sha256: 0642e5e6e793b955969a1bad2a4bfe8b810e4761feefda40c4d02888948212d4
-        sha512: 8bc0d88e36aeff5b4fa5a946fe1ff8e7565065d58790405afe829b7aa99488ef48a5b71762e161c050cba67e25327dbb7dbcb37707a6d36c91d814898585314d
-    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        sha256: {{ .CLOUDFLARED_ARM64_SHA256 }}
+        sha512: {{ .CLOUDFLARED_ARM64_SHA512 }}
+      # {{ else if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/cloudflare/cloudflared/releases/download/{{ .CLOUDFLARED_VERSION }}/cloudflared-linux-amd64
+        destination: cloudflared
+        sha256: {{ .CLOUDFLARED_AMD64_SHA256 }}
+        sha512: {{ .CLOUDFLARED_AMD64_SHA512 }}
+      # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
         sed -i 's#$CLOUDFLARED_VERSION#{{ .CLOUDFLARED_VERSION }}#' /pkg/manifest.yaml

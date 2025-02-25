@@ -11,8 +11,8 @@ steps:
   - sources:
       - url: https://github.com/OpenELEC/dvb-firmware/archive/refs/tags/{{ .LINUX_DVB_FIRMWARE }}.tar.gz
         destination: dvb-firmware.tar.gz
-        sha256: cef3ce537d213e020af794cecf9de207e2882c375ceda39102eb6fa2580bad8d
-        sha512: 2372dba98083c76865f5f0f8101b1160888e03cdbe911dd08621e7b6f38e8a25ae5d56eefc21728bf65fd09ea613b53606df4021d3972b0bc9d2bd8b6cbe20a1
+        sha256: {{ .LINUX_DVB_FIRMWARE_SHA256 }}
+        sha512: {{ .LINUX_DVB_FIRMWARE_SHA512 }}
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml

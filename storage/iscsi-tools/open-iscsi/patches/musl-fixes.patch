@@ -1,16 +1,15 @@
 # https://git.alpinelinux.org/aports/plain/main/open-iscsi/musl-fixes.patch?h=3.15-stable
 --- a/usr/iscsiadm.c	2016-09-29 20:33:24.000000000 +0200
 +++ b/usr/iscsiadm.c	2017-01-08 03:03:20.648496369 +0100
-@@ -3263,7 +3263,8 @@
- 	int packet_size=32, ping_count=1, ping_interval=0;
+@@ -3653,6 +3653,7 @@ main(int argc, char **argv)
  	int do_discover = 0, sub_mode = -1;
  	int portal_type = -1;
-	int timeout = ISCSID_REQ_TIMEOUT;
+ 	int timeout = ISCSID_REQ_TIMEOUT;
 +	int argerror = 0;
  	struct sigaction sa_old;
  	struct sigaction sa_new;
- 	struct list_head ifaces;
-@@ -3426,6 +3427,11 @@
+ 	LIST_HEAD(ifaces);
+@@ -3846,6 +3847,11 @@ main(int argc, char **argv)
  			break;
  		case 'h':
  			usage(0);
@@ -22,7 +21,7 @@
  		}
  
  		if (name && value) {
-@@ -3441,8 +3446,7 @@
+@@ -3861,8 +3867,7 @@ main(int argc, char **argv)
  		}
  	}
  
@@ -30,5 +29,5 @@
 -		log_error("unrecognized character '%c'", optopt);
 +	if (argerror) {
  		rc = ISCSI_ERR_INVAL;
- 		goto free_ifaces;
+ 		goto out;
  	}
