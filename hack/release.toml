@@ -40,4 +40,10 @@ Intel u-code: 20250211
 [Nebula](https://github.com/slackhq/nebula) is now supported as a system extension.
 """
 
+    [notes.nfsd]
+        title = "NFS Server"
+        description = """\
+The NFS server (nfds) as a kernel module is now supported as a system extension.
+"""
+
 [make_deps]

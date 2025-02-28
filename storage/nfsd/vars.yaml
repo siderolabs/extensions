@@ -1,0 +1,2 @@
+# the first part is the driver version and the second the talos version for which the module is built against
+VERSION: "{{ .BUILD_ARG_TAG }}"

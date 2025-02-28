@@ -30,6 +30,7 @@ spec:
     - mei
     - metal-agent
     - nebula
+    - nfsd
     - nut-client
     - nvidia-container-toolkit-lts
     - nvidia-container-toolkit-production
@@ -69,7 +70,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.10.0-alpha.0-49-g347ad26
+        defaultValue: v1.10.0-alpha.0-50-g023f092
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
