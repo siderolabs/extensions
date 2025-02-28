@@ -83,6 +83,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [v4l-uvc](drivers/v4l-uvc/)          | [ghcr.io/siderolabs/v4l-uvc-drivers](https://github.com/siderolabs/extensions/pkgs/container/v4l-uvc-drivers)                               | USB Video Class (Webcam) drivers     | `talos version`                                       |
 
 ### Digital Video Broadcasting (DVB)
+
 | Name                            | Image                                                                                                 | Description                                                  | Version Format  |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | --------------- |
 | [dvb-cx23885](dvb/dvb-cx23885/) | [ghcr.io/siderolabs/dvb-cx23885](https://github.com/siderolabs/extensions/pkgs/container/dvb-cx23885) | DVB kernel modules + firmware for Hauppage WinTV-quadHD PCIe | `talos version` |
@@ -103,7 +104,6 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [lldpd](network/lldpd/)             | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd)             | [LLDP](https://github.com/lldpd/lldpd)                    | `upstream version` |
 | [tailscale](network/tailscale/)     | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale)     | [Tailscale](https://tailscale.com)                        | `upstream version` |
 
-
 ### Storage
 
 | Name                                | Image                                                                                                 | Description            | Version Format                     |
@@ -112,8 +112,8 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module     | `upstream version`-`talos version` |
 | [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools       | `v0.1.0`                           |
 | [mdadm](storage/mdadm/)             | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm)             | manage MD devices tool | `upstream version`                 |
+| [nfsd](storage/nfsd/)               | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd)               | nfsd kernel module     | `talos version`                 |
 | [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module      | `upstream version`-`talos version` |
-
 
 ### Power
 
