@@ -62,13 +62,19 @@ spec:
     - TAG
     - PKGS
     - PKGS_PREFIX
+    - TOOLS
+    - TOOLS_PREFIX
   makefile:
     extraVariables:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.10.0-alpha.0-40-ge1f11f0
+        defaultValue: v1.10.0-alpha.0-47-g6fb00b4
       - name: PKGS_PREFIX
+        defaultValue: ghcr.io/siderolabs
+      - name: TOOLS
+        defaultValue: v1.10.0-alpha.0-18-gfcee25b
+      - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
 ---
