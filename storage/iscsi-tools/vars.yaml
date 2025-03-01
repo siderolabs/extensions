@@ -1,3 +1,3 @@
 VERSION: v0.2.0
 # renovate: datasource=github-tags depName=open-iscsi/open-iscsi
-OPEN_ISCSI_VERSION: 2.1.10
+OPEN_ISCSI_VERSION: 2.1.11
