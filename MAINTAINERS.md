@@ -42,6 +42,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | nivida-container-toolkit-production       | Sidero Labs        | NA                                                                   |
 | nvidia-fabricmanager-lts                  | Sidero Labs        | NA                                                                   |
 | nvidia-fabricmanager-production           | Sidero Labs        | NA                                                                   |
+| nvidia-l4t                                | Michał Małyska     | [mmalyska](https://github.com/mmalyska)                              |
 | nvidia-open-gpu-kernel-modules-lts        | Sidero Labs        | NA                                                                   |
 | nvidia-open-gpu-kernel-modules-production | Sidero Labs        | NA                                                                   |
 | nvme-cli                                  | Sidelo Labs        | NA                                                                   |
