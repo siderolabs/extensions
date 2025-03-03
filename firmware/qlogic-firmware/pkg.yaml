@@ -12,6 +12,7 @@ steps:
       - |
         mkdir -p /rootfs/usr/lib/firmware
         cp -R -p /usr/lib/firmware/qed /rootfs/usr/lib/firmware
+        cp -R -p /usr/lib/firmware/ql*_fw.bin /rootfs/usr/lib/firmware
     test:
       - |
         mkdir -p /extensions-validator-rootfs
