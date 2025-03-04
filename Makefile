@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-12-11T12:22:20Z by kres 4b09af7.
+# Generated on 2025-12-12T14:23:48Z by kres 4b09af7.
 
 # common variables
 
@@ -52,7 +52,7 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-alpha.0-7-gae53351
+PKGS ?= v1.13.0-alpha.0-8-gb7dd7f6
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.13.0-alpha.0-1-ge283ec8
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -92,6 +92,7 @@ TARGETS += kata-containers
 TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
+TARGETS += mellanox-mstflint
 TARGETS += metal-agent
 TARGETS += multipath-tools
 TARGETS += nebula

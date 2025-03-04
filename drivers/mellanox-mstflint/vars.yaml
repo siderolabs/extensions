@@ -1,0 +1,3 @@
+# update when pkgs version is updated
+VERSION: "{{ .MELLANOX_MSFTFLINT_VERSION }}-{{ .BUILD_ARG_TAG }}"
+TIER: "contrib"

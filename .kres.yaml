@@ -34,6 +34,7 @@ spec:
     - lldpd
     - mdadm
     - mei
+    - mellanox-mstflint
     - metal-agent
     - multipath-tools
     - nebula
@@ -93,7 +94,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.13.0-alpha.0-7-gae53351
+        defaultValue: v1.13.0-alpha.0-8-gb7dd7f6
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
