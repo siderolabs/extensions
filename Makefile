@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-12-15T08:21:13Z by kres 4b09af7.
+# Generated on 2025-12-15T08:23:05Z by kres 4b09af7.
 
 # common variables
 
@@ -91,6 +91,7 @@ TARGETS += kata-containers
 TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
+TARGETS += mellanox-mstflint
 TARGETS += metal-agent
 TARGETS += multipath-tools
 TARGETS += nebula

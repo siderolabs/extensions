@@ -33,6 +33,7 @@ spec:
     - lldpd
     - mdadm
     - mei
+    - mellanox-mstflint
     - metal-agent
     - multipath-tools
     - nebula
