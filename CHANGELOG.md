@@ -1,3 +1,131 @@
+## [Talos System Extensions 1.10.0-alpha.2](https://github.com/siderolabs/extensions/releases/tag/v1.10.0-alpha.2) (2025-03-05)
+
+Welcome to the v1.10.0-alpha.2 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Nebula
+
+[Nebula](https://github.com/slackhq/nebula) is now supported as a system extension.
+
+
+### Component Updates
+
+Linux Firmware: 20250211
+stargz-snapshotter: 0.16.3
+ecr-credential-provider: 1.32.0
+wasm-edge: 0.5.0
+crun: 1.19.1
+spin: 0.18.0
+qemu-guest-agent: 9.2.0
+Tailscale: 1.78.1
+ZFS: 2.3.0
+NVIDIA LTS: 535.230.02
+NVIDIA Production: 550.144.03
+NVIDIA Container Toolkit: 1.17.4
+Intel u-code: 20250211
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Dmitry Sharshakov
+* Utku Ozdemir
+* Maxime NARBAUD
+* Skyler Mäntysaari
+* David Donchez
+* Devin Buhl
+* Dmitrii Sharshakov
+* Jorik Jonker
+* Tom Zaspel
+* Will Glynn
+* Yevhen Kolomeiko
+* iamawacko
+* inceabdullah
+* 千橘 雫霞
+
+### Changes
+<details><summary>41 commits</summary>
+<p>
+
+* [`390ed7f`](https://github.com/siderolabs/extensions/commit/390ed7f8b523613a792367ce9421641a598fcba7) feat: sync kernel version for Talos v1.10.0-alpha.2
+* [`e974d6e`](https://github.com/siderolabs/extensions/commit/e974d6e1fcd28b064c37c4c2bec6c3cc8159f6c2) feat: update qlogic firmware for qla2xxx
+* [`745e012`](https://github.com/siderolabs/extensions/commit/745e012937fe3e90f8725b9685fb164de3a74969) feat: use tools image from `tools`
+* [`8732ec1`](https://github.com/siderolabs/extensions/commit/8732ec1ccfa7631f9500c0b8264ef9648823a776) feat: use reproducibly built Python packages
+* [`c6b6c61`](https://github.com/siderolabs/extensions/commit/c6b6c615098ae7252ad2feef1fee67796f9831be) feat: add Nebula extension to Talos
+* [`f5c4efa`](https://github.com/siderolabs/extensions/commit/f5c4efaefc3e15dbe7e864e5a1b9bb20dcb25771) docs: correct typo in lldpd extension
+* [`bf4027a`](https://github.com/siderolabs/extensions/commit/bf4027a724747f742dd09109fbf33712b9e6557b) chore: remove duplicate commands
+* [`c95a427`](https://github.com/siderolabs/extensions/commit/c95a427e54125ec89cc69594dfc93f50a6850fa9) chore: update pkgs
+* [`aa141a6`](https://github.com/siderolabs/extensions/commit/aa141a6a7539c99c3f3f3c7116644167033fa1f7) fix: use proper stub for vmtoolsd on arm64
+* [`8591d3c`](https://github.com/siderolabs/extensions/commit/8591d3c8ba44435ed81568b92e3ed69717b304bd) fix: update NVIDIA runtime and make its CLI build with current Go
+* [`4e31964`](https://github.com/siderolabs/extensions/commit/4e3196407529985a8dd0f956df365181adc416d6) feat: update Intel u-code to 20250211
+* [`fd5b270`](https://github.com/siderolabs/extensions/commit/fd5b2700fea4262f98601c9f16d94cac957b50bb) feat: update talos-vmtoolsd to v1.0.0
+* [`e12c495`](https://github.com/siderolabs/extensions/commit/e12c4959281b94154c944d42643e6a70d093cc8e) chore: update Linux to 6.12.13
+* [`8a17f71`](https://github.com/siderolabs/extensions/commit/8a17f71183c1b6f5347f7fdadfee077209ede48e) feat: bump metal agent to v0.1.2
+* [`5cd226e`](https://github.com/siderolabs/extensions/commit/5cd226e3eaef65e9ec8cc902a1ec4f3d4b26f8b1) chore: build with new toolchain
+* [`95ddb77`](https://github.com/siderolabs/extensions/commit/95ddb770e659786bf1b6f7ff4c2de233b6ea7f57) feat: mount host ca certs into metal agent
+* [`ad72efd`](https://github.com/siderolabs/extensions/commit/ad72efd0cb6845017d018a9242c9ca5056142edf) release(v1.10.0-alpha.1): prepare release
+* [`c21e5c4`](https://github.com/siderolabs/extensions/commit/c21e5c4af46bc0dd303e944e207c44dd759773e6) chore: bump pkgs to the latest
+* [`70da875`](https://github.com/siderolabs/extensions/commit/70da87510b61ad1a29f22cbdb19dcc30d36e1f91) feat: update dependencies
+* [`b1a7dd6`](https://github.com/siderolabs/extensions/commit/b1a7dd670e9b7455b956b98811795c532151e4ec) feat: add nvme cli
+* [`4a2e536`](https://github.com/siderolabs/extensions/commit/4a2e5368d4e7db340d2fcb81e0ba38c871489f3a) feat: rework iscsi-tools
+* [`ec5e273`](https://github.com/siderolabs/extensions/commit/ec5e273f1aca1dc43ea20c603b82fc904e4bc207) fix: add both Aenix and Enix in MAINTAINERS file
+* [`1d51d1d`](https://github.com/siderolabs/extensions/commit/1d51d1d8a4d757d74ed6050d8e323ce251e5dddf) fix: dvb extension as it was missing modules and dep on v4l-uvc-drivers
+* [`9c92bda`](https://github.com/siderolabs/extensions/commit/9c92bda95b12c7c00a585778423c8ec8129465c5) fix: unable to override runtime defaults
+* [`db466d1`](https://github.com/siderolabs/extensions/commit/db466d1025443ee0b92aa3410b1b20050f64ada9) fix: zfs udev rules installation
+* [`e5544b5`](https://github.com/siderolabs/extensions/commit/e5544b5363d5a23c72ecfea2ee3cbff6d7e5dba4) feat: update dependencies
+* [`796c40f`](https://github.com/siderolabs/extensions/commit/796c40ff2203cbf1a26b6b12a31c54cf3256dee9) release(v1.10.0-alpha.0): prepare release
+* [`1f8bd59`](https://github.com/siderolabs/extensions/commit/1f8bd594049748f125d6d9f8cb52438f58d2eeaf) docs: correct typo
+* [`01771bc`](https://github.com/siderolabs/extensions/commit/01771bc305edb2de05c83e80bae1bf5acccd25c6) chore: rekres to simplify `.kres.yaml` defaults
+* [`cc467e8`](https://github.com/siderolabs/extensions/commit/cc467e806a5c9eafdf264915eef3eb9bfae2f045) feat: update Linux firmware to 20241210
+* [`266346b`](https://github.com/siderolabs/extensions/commit/266346b7142d99670b9f0be2115e462f8490f7cb) chore: rekres for renovate changes
+* [`e2b1497`](https://github.com/siderolabs/extensions/commit/e2b149733ebb93023da96551bf286b1e44ac2d0f) fix: nvidia-fabricmanager production
+* [`b449434`](https://github.com/siderolabs/extensions/commit/b44943495bc79a1b32a9c232d6c8891a38bab808) fix: add gsc_proxy/mei_gsc_proxy to mei modules
+* [`434bd5f`](https://github.com/siderolabs/extensions/commit/434bd5fb78b7bd5b235bd8d3227a5e90bfdbfcd2) fix: use cloudflared release binaries
+* [`68c9650`](https://github.com/siderolabs/extensions/commit/68c9650d20da7217986ca91820589236e8c6e64d) chore: bump metal agent version
+* [`c7dcaaa`](https://github.com/siderolabs/extensions/commit/c7dcaaa6130a273aac2380a76fee241fb400704c) feat: update ZFS in extensions to 2.2.7
+* [`1dd6c36`](https://github.com/siderolabs/extensions/commit/1dd6c364b8aae54a891ef1b371417e4b6b263030) feat: add cloudflared system extension
+* [`43efd87`](https://github.com/siderolabs/extensions/commit/43efd87cb106fd9b062ef4ad4f7831eaf7b4fe09) docs: update README.md
+* [`ea263ae`](https://github.com/siderolabs/extensions/commit/ea263ae1601e4bf8361119bb68808ed680b2b30d) feat: add dvb-cx23885 extension
+* [`4462437`](https://github.com/siderolabs/extensions/commit/44624377575bfecc103dc10a691524a5e2f050d2) docs: replace last command to show the mount
+* [`778d80c`](https://github.com/siderolabs/extensions/commit/778d80cd9a9c2be343f5113af722619631334656) feat: set PATH variable in metal-agent
+</p>
+</details>
+
+### Changes since v1.10.0-alpha.1
+<details><summary>16 commits</summary>
+<p>
+
+* [`390ed7f`](https://github.com/siderolabs/extensions/commit/390ed7f8b523613a792367ce9421641a598fcba7) feat: sync kernel version for Talos v1.10.0-alpha.2
+* [`e974d6e`](https://github.com/siderolabs/extensions/commit/e974d6e1fcd28b064c37c4c2bec6c3cc8159f6c2) feat: update qlogic firmware for qla2xxx
+* [`745e012`](https://github.com/siderolabs/extensions/commit/745e012937fe3e90f8725b9685fb164de3a74969) feat: use tools image from `tools`
+* [`8732ec1`](https://github.com/siderolabs/extensions/commit/8732ec1ccfa7631f9500c0b8264ef9648823a776) feat: use reproducibly built Python packages
+* [`c6b6c61`](https://github.com/siderolabs/extensions/commit/c6b6c615098ae7252ad2feef1fee67796f9831be) feat: add Nebula extension to Talos
+* [`f5c4efa`](https://github.com/siderolabs/extensions/commit/f5c4efaefc3e15dbe7e864e5a1b9bb20dcb25771) docs: correct typo in lldpd extension
+* [`bf4027a`](https://github.com/siderolabs/extensions/commit/bf4027a724747f742dd09109fbf33712b9e6557b) chore: remove duplicate commands
+* [`c95a427`](https://github.com/siderolabs/extensions/commit/c95a427e54125ec89cc69594dfc93f50a6850fa9) chore: update pkgs
+* [`aa141a6`](https://github.com/siderolabs/extensions/commit/aa141a6a7539c99c3f3f3c7116644167033fa1f7) fix: use proper stub for vmtoolsd on arm64
+* [`8591d3c`](https://github.com/siderolabs/extensions/commit/8591d3c8ba44435ed81568b92e3ed69717b304bd) fix: update NVIDIA runtime and make its CLI build with current Go
+* [`4e31964`](https://github.com/siderolabs/extensions/commit/4e3196407529985a8dd0f956df365181adc416d6) feat: update Intel u-code to 20250211
+* [`fd5b270`](https://github.com/siderolabs/extensions/commit/fd5b2700fea4262f98601c9f16d94cac957b50bb) feat: update talos-vmtoolsd to v1.0.0
+* [`e12c495`](https://github.com/siderolabs/extensions/commit/e12c4959281b94154c944d42643e6a70d093cc8e) chore: update Linux to 6.12.13
+* [`8a17f71`](https://github.com/siderolabs/extensions/commit/8a17f71183c1b6f5347f7fdadfee077209ede48e) feat: bump metal agent to v0.1.2
+* [`5cd226e`](https://github.com/siderolabs/extensions/commit/5cd226e3eaef65e9ec8cc902a1ec4f3d4b26f8b1) chore: build with new toolchain
+* [`95ddb77`](https://github.com/siderolabs/extensions/commit/95ddb770e659786bf1b6f7ff4c2de233b6ea7f57) feat: mount host ca certs into metal agent
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.0](https://github.com/siderolabs/extensions/releases/tag/v1.9.0)
+
 ## [Talos System Extensions 1.10.0-alpha.1](https://github.com/siderolabs/extensions/releases/tag/v1.10.0-alpha.1) (2025-01-31)
 
 Welcome to the v1.10.0-alpha.1 release of Talos System Extensions!  
