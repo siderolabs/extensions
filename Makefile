@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-05T16:36:46Z by kres e2c7efe.
+# Generated on 2025-03-12T08:58:48Z by kres ec5ec04.
 
 # common variables
 
@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.10.0-alpha.0-52-g1d84473
+PKGS ?= v1.10.0-alpha.0-54-ga4ac508
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.10.0-alpha.0-19-g87acb27
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -94,6 +94,7 @@ TARGETS += nvidia-fabricmanager-production
 TARGETS += nvidia-open-gpu-kernel-modules-lts
 TARGETS += nvidia-open-gpu-kernel-modules-production
 TARGETS += nvme-cli
+TARGETS += panfrost
 TARGETS += qemu-guest-agent
 TARGETS += qlogic-firmware
 TARGETS += realtek-firmware

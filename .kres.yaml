@@ -39,6 +39,7 @@ spec:
     - nvidia-open-gpu-kernel-modules-lts
     - nvidia-open-gpu-kernel-modules-production
     - nvme-cli
+    - panfrost
     - qemu-guest-agent
     - qlogic-firmware
     - realtek-firmware
@@ -70,7 +71,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.10.0-alpha.0-52-g1d84473
+        defaultValue: v1.10.0-alpha.0-54-ga4ac508
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS

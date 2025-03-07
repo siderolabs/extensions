@@ -64,10 +64,11 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ### Direct Rendering Manager (DRM)
 
-| Name                  | Image                                                                                       | Description                    | Version Format                           |
-| --------------------- | ------------------------------------------------------------------------------------------- | ------------------------------ | ---------------------------------------- |
-| [amdgpu](drm/amdgpu/) | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | AMD GPU firmware and drivers   | `linux firmware version`-`talos version` |
-| [i915](drm/i915/)     | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915)     | Intel GPU firmware and drivers | `linux firmware version`-`talos version` |
+| Name                     | Image                                                                                           | Description                       | Version Format                           |
+| ------------------------ | ----------------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------------------- |
+| [amdgpu](drm/amdgpu/)    | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu)     | AMD GPU firmware and drivers      | `linux firmware version`-`talos version` |
+| [i915](drm/i915/)        | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915)         | Intel GPU firmware and drivers    | `linux firmware version`-`talos version` |
+| [panfrost](drm/panfrost) | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | Panfrost GPU firmware and drivers | `linux firmware version`-`talos version` |
 
 ### Drivers
 
@@ -112,7 +113,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module     | `upstream version`-`talos version` |
 | [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools       | `v0.1.0`                           |
 | [mdadm](storage/mdadm/)             | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm)             | manage MD devices tool | `upstream version`                 |
-| [nfsd](storage/nfsd/)               | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd)               | nfsd kernel module     | `talos version`                 |
+| [nfsd](storage/nfsd/)               | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd)               | nfsd kernel module     | `talos version`                    |
 | [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module      | `upstream version`-`talos version` |
 
 ### Power
