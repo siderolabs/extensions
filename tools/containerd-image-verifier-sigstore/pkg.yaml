@@ -1,0 +1,73 @@
+name: containerd-image-verifier-sigstore
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/sigstore/policy-controller/archive/refs/tags/{{ .SIGSTORE_POLICY_TESTER_VERSION }}.tar.gz
+        destination: sigstore-policy-controller.tar.gz
+        sha256: f0a3545341b426a77452f58be10f01d194e157e8232bf512967fd36984dd096e
+        sha512: fb542d15b0b269e505888e41ba7af456e489d7592dca459b193e02ab59cbadd64c9bdcf23ef0323143f8c0905c2aecafad705bd56a31905f3e63dd311d022be1
+      - url: https://github.com/BobyMCbobs/containerd-image-verifier-sigstore/archive/refs/tags/{{ .CONTAINERD_IMAGE_VERIFIER_SIGSTORE_VERSION }}.tar.gz
+        destination: containerd-image-verifier-sigstore.tar.gz
+        sha256: aaa04e076733dcc08a20d7636be588846dfbf371f55fb23e82d3c0440779972c
+        sha512: cf62552a2842536fd07337eb7cdfb36afa6c795c99cb4eebdcaef0251848f4db2a763af21731d81af9fb6b46ccd4d604ca37c8ef7eaaad0d017722bb66cd2a4e
+    env:
+      GOPATH: /go
+    cachePaths:
+      - /.cache/go-build
+      - /go/pkg
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        mkdir -p ${GOPATH}/src/github.com/sigstore/policy-controller
+
+        tar -xzf sigstore-policy-controller.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/sigstore/policy-controller
+      - |
+        mkdir -p ${GOPATH}/src/github.com/BobyMCbobs/containerd-image-verifier-sigstore
+
+        tar -xzf containerd-image-verifier-sigstore.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/BobyMCbobs/containerd-image-verifier-sigstore
+    build:
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        cd ${GOPATH}/src/github.com/sigstore/policy-controller
+
+        mkdir ./bin
+
+        CGO_ENABLED=0 go build -o ./bin/sigstore-policy-tester ./cmd/tester
+      - |
+        export PATH=${PATH}:${TOOLCHAIN}/go/bin
+        cd ${GOPATH}/src/github.com/BobyMCbobs/containerd-image-verifier-sigstore
+
+        mkdir ./bin
+
+        CGO_ENABLED=0 go build -ldflags="-X 'main.DefaultPolicyDirPath=/var/local/etc/containers/sigstore/'" -o ./bin/containerd-image-verifier-sigstore .
+    install:
+      - |
+        cd ${GOPATH}/src/github.com/sigstore/policy-controller
+        mkdir -p /rootfs/usr/local/bin/
+        cp -av bin/sigstore-policy-tester /rootfs/usr/local/bin/
+
+      - |
+        cd ${GOPATH}/src/github.com/BobyMCbobs/containerd-image-verifier-sigstore
+        mkdir -p /rootfs/usr/local/bin/containerd-image-verifier/
+        cp -av bin/containerd-image-verifier-sigstore /rootfs/usr/local/bin/containerd-image-verifier/
+
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+
+        cp /pkg/10-containerd-image-verifier.part /rootfs/etc/cri/conf.d/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
