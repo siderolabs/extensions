@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-05T16:36:46Z by kres e2c7efe.
+# Generated on 2025-03-07T10:01:40Z by kres d88db2f.
 
 name: default
 concurrency:
@@ -31,15 +31,6 @@ jobs:
     if: (!startsWith(github.head_ref, 'renovate/') && !startsWith(github.head_ref, 'dependabot/'))
     outputs:
       labels: ${{ steps.retrieve-pr-labels.outputs.result }}
-    services:
-      buildkitd:
-        image: moby/buildkit:v0.20.0
-        options: --privileged
-        ports:
-          - 1234:1234
-        volumes:
-          - /var/lib/buildkit/${{ github.repository }}:/var/lib/buildkit
-          - /usr/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml
     steps:
       - name: gather-system-info
         id: system-info
@@ -79,7 +70,7 @@ jobs:
             - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
               platforms: linux/arm64
           driver: remote
-          endpoint: tcp://127.0.0.1:1234
+          endpoint: tcp://buildkit-amd64.ci.svc.cluster.local:1234
       - name: Build
         if: github.event_name == 'pull_request'
         run: |
@@ -141,15 +132,6 @@ jobs:
     if: contains(fromJSON(needs.default.outputs.labels), 'integration/reproducibility')
     needs:
       - default
-    services:
-      buildkitd:
-        image: moby/buildkit:v0.20.0
-        options: --privileged
-        ports:
-          - 1234:1234
-        volumes:
-          - /var/lib/buildkit/${{ github.repository }}:/var/lib/buildkit
-          - /usr/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml
     steps:
       - name: gather-system-info
         id: system-info
@@ -189,7 +171,7 @@ jobs:
             - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
               platforms: linux/arm64
           driver: remote
-          endpoint: tcp://127.0.0.1:1234
+          endpoint: tcp://buildkit-amd64.ci.svc.cluster.local:1234
       - name: reproducibility-test
         run: |
           make reproducibility-test
