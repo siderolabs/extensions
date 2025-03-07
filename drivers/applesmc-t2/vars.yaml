@@ -1,0 +1,1 @@
+VERSION: "{{ .BUILD_ARG_TAG }}"
