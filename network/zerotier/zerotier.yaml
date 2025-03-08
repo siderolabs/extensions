@@ -1,0 +1,29 @@
+name: zerotier
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/zerotier-wrapper
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  # Zerotier needs to write to this to create the interfaces
+  - source: /dev/net/tun
+    destination: /dev/net/tun
+    type: bind
+    options:
+      - bind
+      - rw
+  # Zerotier state
+  - source: /var/lib/zerotier-one
+    destination: /var/lib/zerotier-one
+    type: bind
+    options:
+      - bind
+      - rw
+restart: always
