@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: nvidia-l4t
+  version: "$VERSION"
+  author: Michał Małyska
+  description: |
+    This system extension provides nvidia open source driver kernel modules build for Jetson Orin platform
+  compatibility:
+    talos:
+      version: ">= v1.9.0"

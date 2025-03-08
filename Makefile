@@ -91,6 +91,7 @@ TARGETS += nvidia-container-toolkit-lts
 TARGETS += nvidia-container-toolkit-production
 TARGETS += nvidia-fabricmanager-lts
 TARGETS += nvidia-fabricmanager-production
+TARGETS += nvidia-l4t
 TARGETS += nvidia-open-gpu-kernel-modules-lts
 TARGETS += nvidia-open-gpu-kernel-modules-production
 TARGETS += nvme-cli
