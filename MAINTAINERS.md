@@ -51,6 +51,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | qemu-guest-agent                          | Markus Reiter      | [reitermarkus](https://github.com/reitermarkus)                      |
 | qlogic-firmware                           | Sidero Labs        | NA                                                                   |
 | realtek-firmware                          | Sidero Labs        | NA                                                                   |
+| revpi-firmware                            | Martin Schuessler  | [c0ffee](https://github.com/c0ffee)                                  |
 | spin                                      | Sven Pfennig       | [0xE282B0](https://github.com/0xE282B0)                              |
 | stargz-snapshotter                        | Sidero Labs        | NA                                                                   |
 | tailscale                                 | Beau Trepp         | [btrepp](https://github.com/btrepp)                                  |

@@ -43,6 +43,7 @@ spec:
     - qemu-guest-agent
     - qlogic-firmware
     - realtek-firmware
+    - revpi-firmware
     - spin
     - stargz-snapshotter
     - tailscale
