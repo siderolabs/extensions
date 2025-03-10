@@ -59,6 +59,7 @@ TOOLS_PREFIX ?= ghcr.io/siderolabs
 
 TARGETS = amdgpu
 TARGETS += amd-ucode
+TARGETS += applesmc-t2
 TARGETS += binfmt-misc
 TARGETS += bnx2-bnx2x
 TARGETS += btrfs
