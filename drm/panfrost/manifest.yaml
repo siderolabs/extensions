@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: panfrost
+  version: "$VERSION"
+  author: Adam Cirillo
+  description: |
+    This system extension provides ARM Mali Midgard & Bifrost firmware binaries and kernel modules.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
