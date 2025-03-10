@@ -6,17 +6,19 @@ dependencies:
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
 steps:
   - sources:
-      - url: http://deb.debian.org/debian/pool/main/m/mdadm/mdadm_{{ .MDADM_VERSION }}.orig.tar.xz
-        destination: mdadm.tar.xz
+      - url: http://www.kernel.org/pub/linux/utils/raid/mdadm/mdadm-{{ .MDADM_VERSION }}.tar.gz
+        destination: mdadm.tar.gz
         sha256: {{ .MDADM_SHA256 }}
         sha512: {{ .MDADM_SHA512 }}
     prepare:
       - |
         sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
-        tar -xf mdadm.tar.xz --strip-components=1
+        tar -xzf mdadm.tar.gz --strip-components=1
       - |
+        patch -p1 < /pkg/patches/mdadm-include-sysmacros.patch
         patch -p1 < /pkg/patches/no-werror.patch
+        patch -p1 < /pkg/patches/musl-125.patch
         patch -p1 < /pkg/patches/exit-gracefully-when-md-device-not-found.patch
     build:
       - |
