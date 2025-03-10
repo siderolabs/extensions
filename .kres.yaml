@@ -36,6 +36,7 @@ spec:
     - nvidia-container-toolkit-production
     - nvidia-fabricmanager-lts
     - nvidia-fabricmanager-production
+    - nvidia-l4t
     - nvidia-open-gpu-kernel-modules-lts
     - nvidia-open-gpu-kernel-modules-production
     - nvme-cli
