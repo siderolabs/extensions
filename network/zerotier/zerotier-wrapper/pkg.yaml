@@ -1,0 +1,29 @@
+name: zerotier-wrapper
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /tmp/go
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+  - network: default
+    prepare:
+      - |
+        cp -r /pkg/* .
+      - |
+        go mod download
+  - network: none
+    build:
+    - |
+      CGO_ENABLED=0 go build -o zerotier-wrapper main.go
+    install:
+    - |
+      mkdir -p /rootfs/usr/local/bin
+
+      cp zerotier-wrapper /rootfs/usr/local/bin/zerotier-wrapper
+finalize:
+  - from: /rootfs
+    to: /rootfs

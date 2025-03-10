@@ -108,6 +108,7 @@ TARGETS += v4l-uvc-drivers
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xen-guest-agent
+TARGETS += zerotier
 TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia-lts
 NONFREE_TARGETS += nonfree-kmod-nvidia-production
@@ -254,4 +255,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-
