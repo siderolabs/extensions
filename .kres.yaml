@@ -49,6 +49,7 @@ spec:
     - uinput
     - usb-modem-drivers
     - util-linux-tools
+    - v3d
     - v4l-uvc-drivers
     - vmtoolsd-guest-agent
     - wasmedge

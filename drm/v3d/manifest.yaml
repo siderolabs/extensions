@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: v3d
+  version: "$VERSION"
+  author: Gluo NV
+  description: |
+    This system extension provides kernel module driver for V3D for Broadcom VideoCore VI GPU support built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.9.0"

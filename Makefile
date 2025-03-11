@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-05T16:36:46Z by kres e2c7efe.
+# Generated on 2025-03-11T07:07:22Z by kres ec5ec04.
 
 # common variables
 
@@ -104,6 +104,7 @@ TARGETS += thunderbolt
 TARGETS += uinput
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
+TARGETS += v3d
 TARGETS += v4l-uvc-drivers
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
