@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-12-26T11:55:21Z by kres fcff05e.
+# Generated on 2025-03-11T16:32:14Z by kres ec5ec04.
 
 name: weekly
 concurrency:
@@ -14,15 +14,6 @@ jobs:
     runs-on:
       - self-hosted
       - pkgs
-    services:
-      buildkitd:
-        image: moby/buildkit:v0.18.2
-        options: --privileged
-        ports:
-          - 1234:1234
-        volumes:
-          - /var/lib/buildkit/${{ github.repository }}:/var/lib/buildkit
-          - /usr/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml
     steps:
       - name: gather-system-info
         id: system-info
@@ -62,7 +53,7 @@ jobs:
             - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
               platforms: linux/arm64
           driver: remote
-          endpoint: tcp://127.0.0.1:1234
+          endpoint: tcp://buildkit-amd64.ci.svc.cluster.local:1234
       - name: reproducibility-test
         run: |
           make reproducibility-test
