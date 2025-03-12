@@ -1,3 +1,36 @@
+## [Talos System Extensions 1.9.5](https://github.com/siderolabs/extensions/releases/tag/v1.9.5) (2025-03-12)
+
+Welcome to the v1.9.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20250211
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`e87ec97`](https://github.com/siderolabs/extensions/commit/e87ec97c0f8b8e3a4b8181a9316d95c8e8316a6f) feat: update qlogic firmware for qla2xxx
+* [`335fc7a`](https://github.com/siderolabs/extensions/commit/335fc7a1661e8f47ccd285cdeb94f5a45a947205) feat: update pkgs
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.4](https://github.com/siderolabs/extensions/releases/tag/v1.9.4)
+
 ## [Talos System Extensions 1.9.4](https://github.com/siderolabs/extensions/releases/tag/v1.9.4) (2025-02-13)
 
 Welcome to the v1.9.4 release of Talos System Extensions!
