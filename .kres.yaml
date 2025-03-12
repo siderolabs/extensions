@@ -54,6 +54,7 @@ spec:
     - vmtoolsd-guest-agent
     - wasmedge
     - xen-guest-agent
+    - zerotier
     - zfs
   additionalTargets:
     nonfree:

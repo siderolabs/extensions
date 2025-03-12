@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-12T08:58:48Z by kres ec5ec04.
+# Generated on 2025-03-12T09:26:10Z by kres ec5ec04.
 
 # common variables
 
@@ -109,6 +109,7 @@ TARGETS += v4l-uvc-drivers
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xen-guest-agent
+TARGETS += zerotier
 TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia-lts
 NONFREE_TARGETS += nonfree-kmod-nvidia-production

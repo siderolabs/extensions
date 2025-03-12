@@ -104,6 +104,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [nebula](network/nebula/)           | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula)           | [Nebula](https://github.com/slackhq/nebula)               | `upstream version` |
 | [lldpd](network/lldpd/)             | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd)             | [LLDP](https://github.com/lldpd/lldpd)                    | `upstream version` |
 | [tailscale](network/tailscale/)     | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale)     | [Tailscale](https://tailscale.com)                        | `upstream version` |
+| [zerotier](network/zerotier/)       | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier)       | [ZeroTier](https://zerotier.com)                          | `upstream version` |
 
 ### Storage
 

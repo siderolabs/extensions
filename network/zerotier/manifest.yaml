@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: zerotier
+  version: "$VERSION"
+  author: Hive Technologies
+  description: |
+    Connect your Talos cluster into a zerotier network
+  compatibility:
+    talos:
+      version: ">= v1.8.0"
