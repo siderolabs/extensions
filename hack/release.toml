@@ -51,4 +51,10 @@ Open-iSCSI: 2.1.11
 The NFS server (nfds) as a kernel module is now supported as a system extension.
 """
 
+    [notes.ctr]
+        title = "ctr"
+        description = """\
+The containerd CLI (ctr) is now supported as a system extension.
+"""
+
 [make_deps]
