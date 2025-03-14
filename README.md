@@ -146,6 +146,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | ------------------------------------- | ----------------------------------------- | ------------------ |
 | [util-linux-tools](tools/util-linux/) | Util Linux tools (`fstrim` and `nsenter`) | `upstream version` |
 | [nvme-cli](tools/nvme-cli/)           | NVMe command line interface               | `upstream version` |
+| [ctr](tools/ctr/)                     | `ctr` command line tool                   | `upstream version` |
 
 ## Building Extensions
 
