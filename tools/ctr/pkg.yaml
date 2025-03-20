@@ -1,0 +1,36 @@
+name: ctr
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+  # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    - url: https://github.com/containerd/containerd/releases/download/v{{ .VERSION }}/containerd-static-{{ .VERSION }}-linux-arm64.tar.gz
+      destination: containerd-static.tar.gz
+      sha256: "{{ .CTR_ARM64_SHA256 }}"
+      sha512: "{{ .CTR_ARM64_SHA512 }}"
+  # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    - url: https://github.com/containerd/containerd/releases/download/v{{ .VERSION }}/containerd-static-{{ .VERSION }}-linux-amd64.tar.gz
+      destination: containerd-static.tar.gz
+      sha256: "{{ .CTR_AMD64_SHA256 }}"
+      sha512: "{{ .CTR_AMD64_SHA512 }}"
+  # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+    - sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    - tar xvf containerd-static.tar.gz bin/ctr
+    install:
+    - |
+      mkdir -p /rootfs/usr/local/bin
+      cp bin/ctr /rootfs/usr/local/bin/ctr
+    test:
+    - |
+      mkdir -p /extensions-validator-rootfs
+      cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+      cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+      /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

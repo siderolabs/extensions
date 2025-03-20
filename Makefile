@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-12T09:26:10Z by kres ec5ec04.
+# Generated on 2025-03-14T18:04:12Z by kres ec5ec04.
 
 # common variables
 
@@ -66,6 +66,7 @@ TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
 TARGETS += cloudflared
 TARGETS += crun
+TARGETS += ctr
 TARGETS += drbd
 TARGETS += dvb-cx23885
 TARGETS += ecr-credential-provider
