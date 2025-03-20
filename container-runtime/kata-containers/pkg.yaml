@@ -49,13 +49,10 @@ steps:
 
         mkdir -p /rootfs/usr/local/{bin,libexec,share/kata-containers}
 
-        cp ./opt/kata/bin/cloud-hypervisor /rootfs/usr/local/bin/cloud-hypervisor
-        chmod +x /rootfs/usr/local/bin/cloud-hypervisor
+        cp ./opt/kata/bin/cloud-hypervisor /rootfs/usr/local/bin/
+        cp ./opt/kata/libexec/virtiofsd /rootfs/usr/local/libexec/
 
-        cp ./opt/kata/libexec/virtiofsd /rootfs/usr/local/libexec/virtiofsd
-        chmod +x /rootfs/usr/local/libexec/virtiofsd
-
-        cp ./opt/kata/share/kata-containers/kata-containers-initrd.img /rootfs/usr/local/share/kata-containers/kata-containers-initrd.img
+        cp ./opt/kata/share/kata-containers/kata-containers.img /rootfs/usr/local/share/kata-containers/kata-containers.img
         cp ./opt/kata/share/kata-containers/vmlinux.container /rootfs/usr/local/share/kata-containers/vmlinux.container
       - |
         cd ${GOPATH}/src/github.com/kata-containers/src/runtime
@@ -65,7 +62,7 @@ steps:
         cp /pkg/10-kata-containers.part /rootfs/etc/cri/conf.d/10-kata-containers.part
 
         mkdir -p /rootfs/usr/local/share/kata-containers
-        cp /pkg/configuration.toml /rootfs/usr/local/share/kata-containers/configuration.toml
+        cp /pkg/configuration.toml /rootfs/usr/local/share/kata-containers/
     test:
       - |
         mkdir -p /extensions-validator-rootfs

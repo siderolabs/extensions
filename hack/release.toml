@@ -32,7 +32,7 @@ NVIDIA Production: 550.144.03
 NVIDIA Container Toolkit: 1.17.4
 Intel u-code: 20250211
 Gvisor: 20250224.0
-Kata-containers: 3.14.0
+Kata Containers: 3.15.0
 crun: 1.20
 Glibc: 2.41
 libseccomp: 2.6.0
