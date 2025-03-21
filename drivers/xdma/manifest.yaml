@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: xdma-driver
+  version: "$VERSION"
+  author: Nikolai Shields
+  description: |
+    Xilinx DMA Driver
+  compatibility:
+    talos:
+      version: ">= v1.2.0"
