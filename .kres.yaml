@@ -57,6 +57,7 @@ spec:
     - vc4
     - vmtoolsd-guest-agent
     - wasmedge
+    - xdma-driver
     - xen-guest-agent
     - zerotier
     - zfs
@@ -76,7 +77,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.10.0-alpha.0-71-ge9a260a
+        defaultValue: v1.10.0-alpha.0-72-g7d7323b
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS

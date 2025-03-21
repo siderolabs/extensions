@@ -6,10 +6,11 @@ If you are interested in becoming a maintainer, please reach out to the current 
 
 If the field is marked as `Needs Maintainer`, it means that the package is currently unmaintained. If you are interested in maintaining the package, please reach out to the current maintainers/create a GitHub issue.
 
-# Maintainers
+## Maintainers
 
 | Name                                      | Maintainer         | Github ID                                                            |
 | ----------------------------------------- | ------------------ | -------------------------------------------------------------------- |
+| amazon-ena                                | Sidero Labs        | NA                                                                   |
 | amdgpu                                    | Sidero Labs        | NA                                                                   |
 | amd-ucode                                 | Sidero Labs        | NA                                                                   |
 | binfmt-misc                               | Serge Logvinov     | [sergelogvinov](https://github.com/sergelogvinov)                    |
@@ -63,6 +64,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | vc4                                       | Jorn Vanthienen    | [Jorn Vanthienen](https://github.com/jvanthienen-gluo)               |
 | vmtoolsd-guest-agent                      | Robin Elfrink      | [robinelfrink](https://github.com/robinelfrink)                      |
 | wasmedge                                  | Sidero Labs        | NA                                                                   |
+| xdma-driver                               | Nikolai Shields    | [nikolaishields](https://github.com/nikolaishields)                  |
 | xen-guest-agent                           | Jerwin NJ          | [j3rwin](https://github.com/j3rwin)                                  |
 | zerotier                                  | rob-htl            | [rob-htl](https://github.com/rob-htl)                                |
 | zfs                                       | Aenix, Enix        | [kvaps](https://github.com/kvaps), [donch](https://github.com/donch) |

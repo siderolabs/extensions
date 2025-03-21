@@ -69,4 +69,10 @@ The Amazon Elastic Network Adapter (ENA) driver is now supported as a system ext
 The Broadcom VideoCore GPU kernel modules (vc4) are now supported as a system extension.
 """
 
+    [notes.xdma]
+        title = "Xilinx PCIe DMA"
+        description = """\
+The Xilinx PCIe DMA kernel module (xdma-driver) is now supported as a system extension.
+"""
+
 [make_deps]

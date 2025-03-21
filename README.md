@@ -84,6 +84,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [uinput](drivers/uinput/)            | [ghcr.io/siderolabs/uinput](https://github.com/siderolabs/extensions/pkgs/container/uinput)                                                 | uinput drivers                       | `talos version`                                       |
 | [usb-modem](drivers/usb-modem/)      | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers)                           | USB Modem drivers                    | `talos version`                                       |
 | [v4l-uvc](drivers/v4l-uvc/)          | [ghcr.io/siderolabs/v4l-uvc-drivers](https://github.com/siderolabs/extensions/pkgs/container/v4l-uvc-drivers)                               | USB Video Class (Webcam) drivers     | `talos version`                                       |
+| [xdma-driver](drivers/xdma-driver/)  | [ghcr.io/siderolabs/xdma-driver](https://github.com/siderolabs/extensions/pkgs/container/xdma-driver)                                       | Xilinx PCIe DMA                      | `upstream-talos version`                                       |
 
 ### Digital Video Broadcasting (DVB)
 

@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-31T09:46:13Z by kres d903dae.
+# Generated on 2025-04-01T08:20:01Z by kres d903dae.
 
 # common variables
 
@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.10.0-alpha.0-71-ge9a260a
+PKGS ?= v1.10.0-alpha.0-72-g7d7323b
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.10.0-alpha.0-23-g6d456ca
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -112,6 +112,7 @@ TARGETS += v4l-uvc-drivers
 TARGETS += vc4
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
+TARGETS += xdma-driver
 TARGETS += xen-guest-agent
 TARGETS += zerotier
 TARGETS += zfs

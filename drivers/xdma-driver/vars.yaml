@@ -1,0 +1,2 @@
+# update when pkgs version is updated
+VERSION: "aefa9a1-{{ .BUILD_ARG_TAG }}"

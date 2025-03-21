@@ -1,0 +1,24 @@
+name: xdma-driver
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  # The pkgs version for a particular release of Talos as defined in
+  # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/xdma-driver-pkg:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+  - install:
+      - |
+        mkdir -p /rootfs/usr/lib/modules
+
+        cp -R /usr/lib/modules/* /rootfs/usr/lib/modules
+  - test:
+      - |
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
