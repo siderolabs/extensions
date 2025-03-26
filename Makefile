@@ -72,6 +72,7 @@ TARGETS += dvb-cx23885
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
+TARGETS += xdma-driver
 TARGETS += glibc
 TARGETS += gvisor
 TARGETS += gvisor-debug
