@@ -57,4 +57,10 @@ The NFS server (nfds) as a kernel module is now supported as a system extension.
 The containerd CLI (ctr) is now supported as a system extension.
 """
 
+    [notes.ena]
+        title = "Amazon ENA"
+        description = """\
+The Amazon Elastic Network Adapter (ENA) driver is now supported as a system extension.
+"""
+
 [make_deps]

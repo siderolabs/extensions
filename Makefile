@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-26T20:28:56Z by kres d903dae.
+# Generated on 2025-03-31T15:56:51Z by kres d903dae.
 
 # common variables
 
@@ -50,14 +50,15 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.10.0-alpha.0-69-g665f782
+PKGS ?= v1.10.0-alpha.0-71-ge9a260a
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.10.0-alpha.0-23-g6d456ca
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
 
-TARGETS = amdgpu
+TARGETS = amazon-ena
+TARGETS += amdgpu
 TARGETS += amd-ucode
 TARGETS += binfmt-misc
 TARGETS += bnx2-bnx2x

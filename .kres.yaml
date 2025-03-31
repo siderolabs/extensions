@@ -2,6 +2,7 @@
 kind: pkgfile.Build
 spec:
   targets:
+    - amazon-ena
     - amdgpu
     - amd-ucode
     - binfmt-misc
@@ -74,7 +75,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.10.0-alpha.0-69-g665f782
+        defaultValue: v1.10.0-alpha.0-71-ge9a260a
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS

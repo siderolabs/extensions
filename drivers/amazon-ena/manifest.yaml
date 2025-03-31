@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: amazon-ena
+  version: "$VERSION"
+  author: Sidero Labs
+  description: |
+    This system extension provides Amazon ENA kernel modules built against a specific Talos version.
+    ENA is a networking interface designed to make good use of modern CPU features and system architectures.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
