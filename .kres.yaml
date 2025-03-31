@@ -54,6 +54,7 @@ spec:
     - usb-modem-drivers
     - util-linux-tools
     - v4l-uvc-drivers
+    - vc4
     - vmtoolsd-guest-agent
     - wasmedge
     - xen-guest-agent

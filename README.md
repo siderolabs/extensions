@@ -69,6 +69,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [amdgpu](drm/amdgpu/)    | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu)     | AMD GPU firmware and drivers      | `linux firmware version`-`talos version` |
 | [i915](drm/i915/)        | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915)         | Intel GPU firmware and drivers    | `linux firmware version`-`talos version` |
 | [panfrost](drm/panfrost) | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | Panfrost GPU firmware and drivers | `linux firmware version`-`talos version` |
+| [vc4](drm/vc4) | [ghcr.io/siderolabs/vc4](https://github.com/siderolabs/extensions/pkgs/container/vc4) | Broadcom VideoCore GPU drivers | `talos version` |
 
 ### Drivers
 

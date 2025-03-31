@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-03-31T15:56:51Z by kres d903dae.
+# Generated on 2025-03-31T09:46:13Z by kres d903dae.
 
 # common variables
 
@@ -109,6 +109,7 @@ TARGETS += uinput
 TARGETS += usb-modem-drivers
 TARGETS += util-linux-tools
 TARGETS += v4l-uvc-drivers
+TARGETS += vc4
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xen-guest-agent

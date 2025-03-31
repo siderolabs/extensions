@@ -63,4 +63,10 @@ The containerd CLI (ctr) is now supported as a system extension.
 The Amazon Elastic Network Adapter (ENA) driver is now supported as a system extension.
 """
 
+    [notes.vc4]
+        title = "vc4"
+        description = """\
+The Broadcom VideoCore GPU kernel modules (vc4) are now supported as a system extension.
+"""
+
 [make_deps]

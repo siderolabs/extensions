@@ -1,0 +1,12 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/gpu/drm/v3d/v3d.ko
+kernel/drivers/gpu/drm/vc4/vc4.ko
+kernel/sound/soundcore.ko
+kernel/sound/core/snd.ko
+kernel/sound/core/snd-timer.ko
+kernel/sound/core/snd-pcm.ko
+kernel/sound/core/snd-pcm-dmaengine.ko
+kernel/sound/soc/snd-soc-core.ko
+kernel/sound/soc/codecs/snd-soc-hdmi-codec.ko

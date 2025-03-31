@@ -60,6 +60,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | usb-modem-drivers                         | Sidero Labs        | NA                                                                   |
 | util-linux-tools                          | Sidero Labs        | NA                                                                   |
 | v4l-uvc-drivers                           | Jacob McSwain      | [USA-RedDragon](https://github.com/USA-RedDragon)                    |
+| vc4                                       | Jorn Vanthienen    | [Jorn Vanthienen](https://github.com/jvanthienen-gluo)               |
 | vmtoolsd-guest-agent                      | Robin Elfrink      | [robinelfrink](https://github.com/robinelfrink)                      |
 | wasmedge                                  | Sidero Labs        | NA                                                                   |
 | xen-guest-agent                           | Jerwin NJ          | [j3rwin](https://github.com/j3rwin)                                  |
