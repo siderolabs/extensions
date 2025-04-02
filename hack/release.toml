@@ -27,6 +27,7 @@ spin: 0.18.0
 qemu-guest-agent: 9.2.2
 Tailscale: 1.80.3
 ZFS: 2.3.1
+DRBD: 9.2.13
 NVIDIA LTS: 535.230.02
 NVIDIA Production: 570.124.06
 NVIDIA Container Toolkit: 1.17.4
