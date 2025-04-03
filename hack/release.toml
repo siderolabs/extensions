@@ -23,18 +23,19 @@ Linux Firmware: 20250311
 stargz-snapshotter: 0.16.3
 ecr-credential-provider: 1.32.1
 wasm-edge: 0.5.0
-spin: 0.18.0
-qemu-guest-agent: 9.2.2
-Tailscale: 1.80.3
+spin: 0.19.0
+qemu-guest-agent: 9.2.3
+fuse3: 3.17.1
+Tailscale: 1.82.0
 ZFS: 2.3.1
 DRBD: 9.2.13
 NVIDIA LTS: 535.230.02
 NVIDIA Production: 570.124.06
-NVIDIA Container Toolkit: 1.17.4
+NVIDIA Container Toolkit: 1.17.5
 Intel u-code: 20250211
-Gvisor: 20250319.0
+Gvisor: 20250331.0
 Kata Containers: 3.15.0
-crun: 1.20
+crun: 1.21
 Glibc: 2.41
 libseccomp: 2.6.0
 Open-iSCSI: 2.1.11

@@ -21,7 +21,7 @@ steps:
 
         mkdir _build
         meson setup _build
-        meson configure -D useroot=false -D initscriptdir='' _build
+        meson configure -D useroot=false -D initscriptdir='' -D examples=false -D tests=false _build
     build:
       - |
         ninja -C _build
