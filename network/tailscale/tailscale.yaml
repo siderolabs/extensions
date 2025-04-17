@@ -59,4 +59,10 @@ container:
     options:
       - bind
       - rw
+  - source: /etc/ssl/certs
+    destination: /etc/ssl/certs
+    type: bind
+    options:
+      - rbind
+      - ro
 restart: always
