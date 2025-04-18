@@ -33,4 +33,10 @@ Linux firmware: 20250509
 [Youki](https://github.com/youki-dev/youki) is now supported as a container runtime.
 """
 
+    [notes.tenstorrent]
+        title = "Tenstorrent drivers"
+        description = """\
+[Tennstorrent](https://github.com/tenstorrent/tt-kmd) driver is now supported as an extension.
+"""
+
 [make_deps]

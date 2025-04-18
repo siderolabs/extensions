@@ -12,8 +12,8 @@
         {
             "customType": "regex",
             "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
-            "fileMatch": [
-                "Pkgfile"
+            "managerFilePatterns": [
+                "/Pkgfile/"
             ],
             "matchStrings": [
                 "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:(\\s)?.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"
@@ -24,8 +24,8 @@
             "datasourceTemplate": "github-tags",
             "depNameTemplate": "siderolabs/bldr",
             "versioningTemplate": "semver",
-            "fileMatch": [
-                "Pkgfile"
+            "managerFilePatterns": [
+                "/Pkgfile/"
             ],
             "matchStrings": [
                 "ghcr.io\\/siderolabs\\/bldr:(?<currentValue>v.*)"
@@ -34,8 +34,8 @@
         {
             "customType": "regex",
             "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}semver{{/if}}",
-            "fileMatch": [
-                "vars.yaml"
+            "managerFilePatterns": [
+                "/vars.yaml/"
             ],
             "matchStrings": [
                 "# renovate: datasource=(?<datasource>.*?)(?:\\s+extractVersion=(?<extractVersion>.+?))?(?:\\s+versioning=(?<versioning>.+?))?\\s+depName=(?<depName>.+?)?\\s(?:.*_(?:version|VERSION):\\s+(?<currentValue>.*))?(?:(\\s)?.*_(?:ref|REF):\\s+(?<currentDigest>.*))?"

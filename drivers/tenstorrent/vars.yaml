@@ -1,0 +1,2 @@
+# update when pkgs version is updated
+VERSION: "{{ .TENSTORRENT_VERSION }}"

@@ -49,6 +49,7 @@ spec:
     - spin
     - stargz-snapshotter
     - tailscale
+    - tenstorrent
     - thunderbolt
     - uinput
     - usb-modem-drivers
@@ -78,7 +79,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.11.0-alpha.0-13-g1567cb6
+        defaultValue: v1.11.0-alpha.0-20-g0f74b9b
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS

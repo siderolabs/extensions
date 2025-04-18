@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-05-16T09:04:38Z by kres 5ad3e5f.
+# Generated on 2025-05-22T08:50:33Z by kres 9f64b0d.
 
 # common variables
 
@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.11.0-alpha.0-13-g1567cb6
+PKGS ?= v1.11.0-alpha.0-20-g0f74b9b
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.11.0-alpha.0-1-ge35234b
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -104,6 +104,7 @@ TARGETS += revpi-firmware
 TARGETS += spin
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
+TARGETS += tenstorrent
 TARGETS += thunderbolt
 TARGETS += uinput
 TARGETS += usb-modem-drivers
