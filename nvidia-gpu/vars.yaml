@@ -30,13 +30,13 @@ LIBNVIDIA_CONTAINER_REF: f23e5e55ea27b3680aef363436d4bcf7659e0bfc
 LIBNVIDIA_CONTAINER_SHA256: 50903ef115908fe50ed199a4ae05d4e94bba7ab4ac8300ad46345ea8ee0149ba
 LIBNVIDIA_CONTAINER_SHA512: 79080dc1cce853c37ddd7d5e9e09a5670884f8cf9f0e070d3e7bb1c921a14ba1defb28ec0c14829d1f848ab0aa5b16ccb0d7d9a0ceda068c1bb0c0f2420c3c3f
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:de8e5bd83625801da1ff756f648abd4c65fd9da43fcdb30f67ac78ba86170ca8
+WOLFI_BASE_REF: sha256:8c1c57686e99628612da1efadaabf245ca57b962c7b3a432f5937e5fe07a5d97
 # renovate: datasource=github-tags extractVersion=^v(?<version>.*)$ depName=seccomp/libseccomp
 LIBSECCOMP_VERSION: 2.6.0
 LIBSECCOMP_SHA256: 83b6085232d1588c379dc9b9cae47bb37407cf262e6e74993c61ba72d2a784dc
 LIBSECCOMP_SHA512: 9039478656d9b670af2ff4cb67b6b1fa315821e59d2f82ba6247e988859ddc7e3d15fea159eccca161bf2890828bb62aa6ab4d6b7ff55f27a9d6bd9532eeee1b
 # renovate: datasource=git-tags extractVersion=^libcap-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/libs/libcap/libcap.git
-LIBCAP_VERSION: 2.75
+LIBCAP_VERSION: 2.76
 LIBCAP_SHA256: de4e7e064c9ba451d5234dd46e897d7c71c96a9ebf9a0c445bc04f4742d83632
 LIBCAP_SHA512: 229e9b62a1d54024107cbf321fffcb152c0071154554a3fcee6e09e19cc47fd1fd862575135a4fc589b79a043f760bf40d26ea9fd58638f26e809533c017d65f
 # renovate: datasource=git-tags extractVersion=^elfutils-(?<version>.*)$ depName=git://sourceware.org/git/elfutils.git
