@@ -208,3 +208,7 @@ spec:
     - matchPackageNames:
         - git://linux-nfs.org/~steved/libtirpc
       versioning: 'regex:^(?<major>\d+)-(?<minor>\d+)-?(?<patch>\d+)?$'
+---
+kind: common.Repository
+spec:
+  conformMaximumOfOneCommit: false
