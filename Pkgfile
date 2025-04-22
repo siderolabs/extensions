@@ -3,7 +3,7 @@
 format: v1alpha2
 
 vars:
-  CONTAINERD_VERSION: v2.0.4 # update this when updating PKGS_VERSION in Makefile
+  CONTAINERD_VERSION: v2.0.5 # update this when updating PKGS_VERSION in Makefile
   LINUX_FIRMWARE_VERSION: "20250410" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.2.13 # update this when updating PKGS_VERSION in Makefile
   ZFS_DRIVER_VERSION: 2.3.1 # update this when updating PKGS_VERSION in Makefile
