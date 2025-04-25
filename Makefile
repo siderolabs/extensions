@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.11.0-alpha.0
+PKGS ?= v1.11.0-alpha.0-2-gcb108a5
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.10.0
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -60,6 +60,7 @@ TOOLS_PREFIX ?= ghcr.io/siderolabs
 TARGETS = amazon-ena
 TARGETS += amdgpu
 TARGETS += amd-ucode
+TARGETS += bcache
 TARGETS += binfmt-misc
 TARGETS += bnx2-bnx2x
 TARGETS += btrfs
