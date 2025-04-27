@@ -49,6 +49,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [spin](container-runtime/spin)                                       | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin)                                       | [Spin](https://github.com/spinkube/containerd-shim-spin) container runtime                                                         | `upstream_version` |
 | [stargz-snapshotter](container-runtime/stargz-snapshotter/)          | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter)           | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime                                           | `upstream version` |
 | [wasmedge](container-runtime/wasmedge)                               | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge)                               | [WasmEdge](https://github.com/containerd/runwasi) container runtime                                                                | `upstream_version` |
+| [youki](container-runtime/youki)                                     | [ghcr.io/siderolabs/youki](https://github.com/siderolabs/extensions/pkgs/container/youki)                                     | [Youki](https://github.com/youki-dev/youki) container runtime                                                                      | `upstream_version` |
 
 ### Firmware
 

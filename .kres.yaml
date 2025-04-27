@@ -59,6 +59,7 @@ spec:
     - wasmedge
     - xdma-driver
     - xen-guest-agent
+    - youki
     - zerotier
     - zfs
   additionalTargets:

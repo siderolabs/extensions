@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-04-22T12:48:11Z by kres fd5cab0.
+# Generated on 2025-04-29T05:06:35Z by kres fd5cab0.
 
 # common variables
 
@@ -114,6 +114,7 @@ TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xdma-driver
 TARGETS += xen-guest-agent
+TARGETS += youki
 TARGETS += zerotier
 TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia-lts

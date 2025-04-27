@@ -1,0 +1,1 @@
+VERSION: "{{ .YOUKI_VERSION }}"

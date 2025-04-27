@@ -1,0 +1,5 @@
+[plugins."io.containerd.cri.v1.runtime".containerd.runtimes.youki]
+  runtime_type = "io.containerd.runc.v2"
+
+[plugins."io.containerd.cri.v1.runtime".containerd.runtimes.youki.options]
+  BinaryName = "/usr/local/bin/youki"

@@ -77,4 +77,10 @@ The Broadcom VideoCore GPU kernel modules (vc4) are now supported as a system ex
 The Xilinx PCIe DMA kernel module (xdma-driver) is now supported as a system extension.
 """
 
+    [notes.youki]
+        title = "Youki Container Runtime"
+        description = """\
+[Youki](https://github.com/youki-dev/youki) is now supported as a container runtime.
+"""
+
 [make_deps]
