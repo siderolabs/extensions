@@ -59,6 +59,7 @@ spec:
     - wasmedge
     - xdma-driver
     - xen-guest-agent
+    - youki
     - zerotier
     - zfs
   additionalTargets:
@@ -77,11 +78,11 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.10.0-5-g48dba3e
+        defaultValue: v1.10.0-8-g13e9f09
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
-        defaultValue: v1.10.0
+        defaultValue: v1.10.0-1-g67d3f5a
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true

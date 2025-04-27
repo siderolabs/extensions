@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: youki
+  version: "$VERSION"
+  author: 0xBrandon
+  description: |
+    This system extension provides youki using containerd's runtime handler.
+  compatibility:
+    talos:
+      version: ">= v1.9.0"

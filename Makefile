@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-04-28T11:58:18Z by kres fd5cab0.
+# Generated on 2025-05-05T11:57:15Z by kres 1a0156b.
 
 # common variables
 
@@ -50,9 +50,9 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.10.0-5-g48dba3e
+PKGS ?= v1.10.0-8-g13e9f09
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.10.0
+TOOLS ?= v1.10.0-1-g67d3f5a
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -114,6 +114,7 @@ TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xdma-driver
 TARGETS += xen-guest-agent
+TARGETS += youki
 TARGETS += zerotier
 TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia-lts
