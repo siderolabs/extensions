@@ -1,0 +1,20 @@
+#! /bin/bash
+set -euo pipefail
+
+export GCP_CLOUD_AUDIENCE;GCP_CLOUD_AUDIENCE="$(buildkite-agent secret get GCP_CLOUD_AUDIENCE)"
+export GCP_CLOUD_SERVICE_ACCOUNT;GCP_CLOUD_SERVICE_ACCOUNT="$(buildkite-agent secret get GCP_CLOUD_SERVICE_ACCOUNT)"
+
+# needed to pull groq's hermit-packages
+export HERMIT_GITHUB_TOKEN;HERMIT_GITHUB_TOKEN="$(groqkite gh token)"
+
+#
+# Talos Build Config
+#
+
+export PLATFORM="linux/amd64"
+export REGISTRY="us-west1-docker.pkg.dev/prj-c-cloud-dcinfra-bc27"
+export USERNAME="talos"
+
+# Latest build from https://github.com/groq/siderolabs-pkgs
+export PKGS="3df70fe"
+export PKGS_PREFIX="$REGISTRY/$USERNAME"

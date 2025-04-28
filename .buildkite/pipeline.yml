@@ -1,0 +1,26 @@
+common_plugins:
+  hermit: &hermit
+    elastic/hermit#v1.0.2
+  gcp: &gcp_auth
+    gcp-workload-identity-federation#v1.4.0:
+      audience: $GCP_CLOUD_AUDIENCE
+      service-account: $GCP_CLOUD_SERVICE_ACCOUNT
+  gcr: &gcr_auth
+    planetscale/docker-login-gcr#v0.0.1:
+      registries: [ "us-docker.pkg.dev", "us-west1-docker.pkg.dev" ]
+
+steps:
+  - group: "CI"
+    key: "ci"
+    # Build must be triggered by a valid tag (e.g., v1.9.5-groq1). This is because extensions-validator uses the tag to generate a version, but when 
+    # TAG is a git SHA, the version is incompatible with the following validation:
+    # https://github.com/siderolabs/extensions-validator/blob/7d4395d34c8275b8a1c98707e85cf08b381d4d63/cmd/extensions-validator/cmd/validate.go#L31
+    if: build.tag != null
+    steps:
+      - id: "build"
+        label: "Build"
+        commands: "make stargz-snapshotter PUSH=true"
+        plugins:
+          - *hermit
+          - *gcp_auth
+          - *gcr_auth
