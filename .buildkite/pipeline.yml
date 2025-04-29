@@ -19,7 +19,7 @@ steps:
     steps:
       - id: "build"
         label: "Build"
-        commands: "make stargz-snapshotter PUSH=true"
+        commands: "make stargz-snapshotter fuse3 PUSH=true"
         plugins:
           - *hermit
           - *gcp_auth
