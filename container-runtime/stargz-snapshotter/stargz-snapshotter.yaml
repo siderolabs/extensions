@@ -8,7 +8,7 @@ container:
   args:
     - --address=/var/run/containerd-stargz-grpc/containerd-stargz-grpc.sock
     - --root=/var/lib/containerd/io.containerd.snapshotter.v1.stargz
-    - --log-level=debug
+    - --log-level=trace
   security:
     rootfsPropagation: shared
   mounts:
