@@ -1,3 +1,46 @@
+## [Talos System Extensions 1.11.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.11.0-alpha.0) (2025-05-01)
+
+Welcome to the v1.11.0-alpha.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+
+
+### Youki Container Runtime
+
+[Youki](https://github.com/youki-dev/youki) is now supported as a container runtime.
+
+
+### Contributors
+
+* Andrey Smirnov
+* 0xBrandon
+* Andrew Rynhard
+
+### Changes
+<details><summary>5 commits</summary>
+<p>
+
+* [`0fa2a42`](https://github.com/siderolabs/extensions/commit/0fa2a428f05907ad285bf6f0ac934216e7a3bf87) chore: prepare for 1.11.0-alpha.0 release
+* [`08108ca`](https://github.com/siderolabs/extensions/commit/08108cabd4a7fb8947fba460009de6bdf9ee44e3) feat: add youki container runtime extension
+* [`e45c086`](https://github.com/siderolabs/extensions/commit/e45c086757e6c9b39fccc6024ee48783956f0285) fix: build of tirpc
+* [`6c7422b`](https://github.com/siderolabs/extensions/commit/6c7422b87573bc3919a75bc4dafe71d6bdf06a62) feat: update pkgs
+* [`5bf5413`](https://github.com/siderolabs/extensions/commit/5bf5413437d0d3df0dc368b39a9292793f37d698) fix: add SSL mount to Tailscale
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.10.0](https://github.com/siderolabs/extensions/releases/tag/v1.10.0)
+
 ## [Talos System Extensions 1.10.0-alpha.3](https://github.com/siderolabs/extensions/releases/tag/v1.10.0-alpha.3) (2025-03-24)
 
 Welcome to the v1.10.0-alpha.3 release of Talos System Extensions!  
