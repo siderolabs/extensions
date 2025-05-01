@@ -12,12 +12,6 @@ steps:
         destination: lldpd.tar.gz
         sha256: {{ .LLDPD_SHA256 }}
         sha512: {{ .LLDPD_SHA512 }}
-        # ref: https://git.alpinelinux.org/aports/tree/main/libc-dev
-        # https://wiki.musl-libc.org/faq.html#Q:-Why-is-%3Ccode%3Esys/queue.h%3C/code%3E-not-included
-      - url: https://git.alpinelinux.org/aports/plain/main/libc-dev/sys-queue.h?id=87f42de0e1c1c6d2b229edfc126a3d4191c835ed
-        sha256: c13407edd0e33be73cae72514cb234f8612e1c0e54401c9448daffd3a240158b
-        sha512: 2f0d5e6e4dc3350285cf17009265dddcbe12431c111868eea39bc8cb038ab7c1f2acacbb21735c4e9d4a1fd106a8fc0f8611ea33987d4faba37dde5ce6da0750
-        destination: sys-queue.h
     env:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
     prepare:
@@ -27,7 +21,7 @@ steps:
         tar -xf lldpd.tar.gz --strip-components=1
 
         mkdir -p /usr/local/include/sys
-        cp sys-queue.h /usr/local/include/sys/queue.h
+        cp /pkg/patches/sys-queue.h /usr/local/include/sys/queue.h
       - |
         export CFLAGS="${CFLAGS} -I/usr/local/include"
 
