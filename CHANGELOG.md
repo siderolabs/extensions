@@ -1,3 +1,40 @@
+## [Talos System Extensions 1.9.6](https://github.com/siderolabs/extensions/releases/tag/v1.9.6) (2025-05-05)
+
+Welcome to the v1.9.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.9/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20250410
+DRBD: 9.2.13
+
+
+### Contributors
+
+* Andrey Smirnov
+* Andrew Rynhard
+
+### Changes
+<details><summary>4 commits</summary>
+<p>
+
+* [`8c36e29`](https://github.com/siderolabs/extensions/commit/8c36e291bd90c072e0df589af70f1ff43ba69e96) fix: lldpd build
+* [`885a9fc`](https://github.com/siderolabs/extensions/commit/885a9fcd797dcef4c410de47f03d9ffbd5dcdd34) fix: build of tirpc
+* [`bd9a34b`](https://github.com/siderolabs/extensions/commit/bd9a34bd900f7ba49e78a0c65a23c6b86473dcd6) fix: add SSL mount to Tailscale
+* [`9748457`](https://github.com/siderolabs/extensions/commit/9748457f49a63b2371568a3ecc4d7b2dde7f079e) feat: update pkgs
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.9.5](https://github.com/siderolabs/extensions/releases/tag/v1.9.5)
+
 ## [Talos System Extensions 1.9.5](https://github.com/siderolabs/extensions/releases/tag/v1.9.5) (2025-03-12)
 
 Welcome to the v1.9.5 release of Talos System Extensions!
