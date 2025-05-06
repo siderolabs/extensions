@@ -1,42 +1,23 @@
-name: hailort-driver
+name: hailort
 variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: kernel-build
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/hailort-pkg:{{ .VERSION }}"
 steps:
-  - sources:
-      - url: https://github.com/hailo-ai/hailort-drivers/archive/refs/tags/v4.21.0.tar.gz
-        destination: hailort-driver.tar.gz
-        sha256: "624468126c1e5609475389271b3d2878cb6e7e40df9e85bad95be464a3e11be3"
-        sha512: "857f56f1788a05a666051c232bdfe4ad01bc22587cc83ef1e14079a71ab0083aefa98253d40999880c3570b774baf7ac585ccd7618ba7f28a056b7bc07c1701c"
-    env:
-      ARCH: {{ if eq .ARCH "aarch64"}}arm64{{ else if eq .ARCH "x86_64" }}x86_64{{ else }}unsupported{{ end }}
-    prepare:
+  - prepare:
       - |
-        tar xf hailort-driver.tar.gz --strip-components=1
-        rm hailort-driver.tar.gz
-    build:
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+  - install:
       - |
-        cd linux/pcie
-        make all
+        mkdir -p /rootfs/usr/lib/modules
+        mkdir -p /rootfs/etc/udev/rules.d
 
-    install:
       - |
-        cd linux/pcie
-
-        mkdir -p /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)
-        cp /src/modules.order /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/
-        cp /src/modules.builtin /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/
-        cp /src/modules.builtin.modinfo /rootfs/usr/lib/modules/$(cat /src/include/config/kernel.release)/
-
-        make -C /src M=$(pwd) modules_install INSTALL_MOD_PATH=/rootfs/usr INSTALL_MOD_DIR=kernel/drivers/misc INSTALL_MOD_STRIP=1
-    test:
-      - |
-        # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
-        find /rootfs/usr/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
-      - |
-        fhs-validator /rootfs
+        cp -R /usr/lib/modules/* /rootfs/usr/lib/modules/
+        cp -R /etc/udev/rules.d/* /rootfs/etc/udev/rules.d/
 finalize:
   - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
     to: /

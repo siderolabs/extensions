@@ -21,6 +21,7 @@ spec:
     - glibc
     - gvisor
     - gvisor-debug
+    - hailort
     - hello-world-service
     - i915
     - intel-ice-firmware

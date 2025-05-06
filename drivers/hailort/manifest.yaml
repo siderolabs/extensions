@@ -1,8 +1,8 @@
 version: v1alpha1
 metadata:
-  name: hailort-driver
+  name: hailort
   version: "$VERSION"
-  author: Michael Robbins
+  author: hailo.ai team
   description: |
     This system extension provides the HailoRT driver kernel module built against a specific Talos version.
     This driver is required for PCIe and M.2 Hailo accelerators. There is 1 kernel module "hailo_pci" required
