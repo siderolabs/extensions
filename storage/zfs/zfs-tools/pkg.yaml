@@ -18,6 +18,8 @@ steps:
     prepare:
       - |
         tar -xf zfs.tar.gz --strip-components=1
+      - |
+        patch -p1 < /pkg/patches/tests-fix-S_IFMT-undeclared-at-statx.c.patch
     build:
       - |
         ./configure \
@@ -26,7 +28,6 @@ steps:
           --with-udevruledir=/usr/lib/udev/rules.d \
           --with-config=user \
           --disable-code-coverage \
-          --disable--sysvinit \
           --disable-systemd
 
         make -j $(nproc)
