@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.9.0"
+previous = "v1.10.0"
 
 pre_release = false
 
@@ -15,67 +15,6 @@ See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configu
 """
 
 [notes]
-
-    [notes.updates]
-        title = "Component Updates"
-        description = """\
-Linux Firmware: 20250410
-stargz-snapshotter: 0.16.3
-ecr-credential-provider: 1.32.2
-wasm-edge: 0.5.0
-spin: 0.19.0
-qemu-guest-agent: 9.2.3
-fuse3: 3.17.1
-Tailscale: 1.82.0
-ZFS: 2.3.1
-DRBD: 9.2.13
-NVIDIA LTS: 535.230.02
-NVIDIA Production: 570.124.06
-NVIDIA Container Toolkit: 1.17.5
-Intel u-code: 20250211
-Gvisor: 20250331.0
-Kata Containers: 3.15.0
-crun: 1.21
-Glibc: 2.41
-libseccomp: 2.6.0
-Open-iSCSI: 2.1.11
-"""
-
-    [notes.nebula]
-        title = "Nebula"
-        description = """\
-[Nebula](https://github.com/slackhq/nebula) is now supported as a system extension.
-"""
-
-    [notes.nfsd]
-        title = "NFS Server"
-        description = """\
-The NFS server (nfds) as a kernel module is now supported as a system extension.
-"""
-
-    [notes.ctr]
-        title = "ctr"
-        description = """\
-The containerd CLI (ctr) is now supported as a system extension.
-"""
-
-    [notes.ena]
-        title = "Amazon ENA"
-        description = """\
-The Amazon Elastic Network Adapter (ENA) driver is now supported as a system extension.
-"""
-
-    [notes.vc4]
-        title = "vc4"
-        description = """\
-The Broadcom VideoCore GPU kernel modules (vc4) are now supported as a system extension.
-"""
-
-    [notes.xdma]
-        title = "Xilinx PCIe DMA"
-        description = """\
-The Xilinx PCIe DMA kernel module (xdma-driver) is now supported as a system extension.
-"""
 
     [notes.youki]
         title = "Youki Container Runtime"

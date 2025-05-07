@@ -1,3 +1,37 @@
+## [Talos System Extensions 1.10.1](https://github.com/siderolabs/extensions/releases/tag/v1.10.1) (2025-05-07)
+
+Welcome to the v1.10.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Youki Container Runtime
+
+[Youki](https://github.com/youki-dev/youki) is now supported as a container runtime.
+
+
+### Contributors
+
+* 0xBrandon
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`6615ade`](https://github.com/siderolabs/extensions/commit/6615ade8f8bc2a09e6941a75f036953314f49668) fix: lldpd build
+* [`9eec099`](https://github.com/siderolabs/extensions/commit/9eec099ba1535bb54873a8fb8514c7e06961ebc3) feat: add youki container runtime extension
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.10.0](https://github.com/siderolabs/extensions/releases/tag/v1.10.0)
+
 ## [Talos System Extensions 1.10.0](https://github.com/siderolabs/extensions/releases/tag/v1.10.0) (2025-04-30)
 
 Welcome to the v1.10.0 release of Talos System Extensions!
