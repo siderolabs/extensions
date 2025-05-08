@@ -1,7 +1,7 @@
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-QEMU_VERSION: 9.2.3
-QEMU_SHA256: baed494270c361bf69816acc84512e3efed71c7a23f76691642b80bc3de7693e
-QEMU_SHA512: 941a4337a115c65de2fca042932efb31886114f4300226fcf55f04c2c5471bd2b5ce220c4b17e01c3679bd55ba08a1aa7ce399de15e3e5f28c17da52030b139e
+QEMU_VERSION: 10.0.0
+QEMU_SHA256: 22c075601fdcf8c7b2671a839ebdcef1d4f2973eb6735254fd2e1bd0f30b3896
+QEMU_SHA512: 2215458ed8be3ab0b0032fe2a96e79183f5fc2da323d927018412ea3d980b022a07ba87d4f446229eaaa7d1b19a577d438dbcaa3af3bd537c7720b56734a2d8b
 # renovate: datasource=git-tags depName=https://gitlab.gnome.org/GNOME/glib.git
 GLIB_VERSION: 2.84.1
 GLIB_SHA256: 2b4bc2ec49611a5fc35f86aca855f2ed0196e69e53092bab6bb73396bf30789a

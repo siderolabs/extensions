@@ -1,13 +1,13 @@
 --- a/clients/upsmon.c	2022-04-23 04:56:06.000000000 -0700
 +++ b/clients/upsmon.c	2022-09-04 13:21:28.072170502 -0700
 @@ -26,6 +26,7 @@
- #include <sys/socket.h>
- #include <unistd.h>
- #include <fcntl.h>
-+#include <spawn.h>
- #else
- #include <wincompat.h>
- #endif
+ # include <sys/socket.h>
+ # include <unistd.h>
+ # include <fcntl.h>
++# include <spawn.h>
+ #else	/* WIN32 */
+ # include "wincompat.h"
+ #endif	/* WIN32 */
 @@ -1874,6 +1875,22 @@
  static void runparent(int fd)
  	__attribute__((noreturn));
