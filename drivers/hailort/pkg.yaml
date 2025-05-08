@@ -1,0 +1,23 @@
+name: hailort
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/hailort-pkg:{{ .VERSION }}"
+steps:
+  - prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+  - install:
+      - |
+        mkdir -p /rootfs/usr/lib/modules
+        mkdir -p /rootfs/etc/udev/rules.d
+
+      - |
+        cp -R /usr/lib/modules/* /rootfs/usr/lib/modules/
+        cp -R /etc/udev/rules.d/* /rootfs/etc/udev/rules.d/
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

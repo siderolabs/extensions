@@ -76,6 +76,7 @@ TARGETS += gasket-driver
 TARGETS += glibc
 TARGETS += gvisor
 TARGETS += gvisor-debug
+TARGETS += hailort
 TARGETS += hello-world-service
 TARGETS += i915
 TARGETS += intel-ice-firmware
