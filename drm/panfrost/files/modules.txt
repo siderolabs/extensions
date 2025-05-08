@@ -1,5 +1,6 @@
 modules.order
 modules.builtin
 modules.builtin.modinfo
+kernel/drivers/gpu/drm/drm_gpuvm.ko
 kernel/drivers/gpu/drm/panfrost/panfrost.ko
-
+kernel/drivers/gpu/drm/panthor/panthor.ko

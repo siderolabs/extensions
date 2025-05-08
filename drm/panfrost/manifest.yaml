@@ -4,7 +4,7 @@ metadata:
   version: "$VERSION"
   author: Adam Cirillo
   description: |
-    This system extension provides ARM Mali Midgard & Bifrost firmware binaries and kernel modules.
+    This system extension provides ARM Mali Midgard, Bifrost, and Valhall firmware binaries and kernel modules.
   compatibility:
     talos:
       version: ">= v1.0.0"
