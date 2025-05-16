@@ -1,3 +1,42 @@
+## [Talos System Extensions 1.10.2](https://github.com/siderolabs/extensions/releases/tag/v1.10.2) (2025-05-16)
+
+Welcome to the v1.10.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ZFS: 2.3.2
+gvisor: 20250505
+Kata containers: 3.16.0
+Tailscale: 1.82.5
+NVIDIA LTS: 535.247.01
+NVIDIA Production: 570.133.20
+NVIDIA Container Toolkit: 1.17.6
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`1c249ac`](https://github.com/siderolabs/extensions/commit/1c249acbeec166ac5e38b912e63071094344f5c5) feat: backport updates from 1.11
+* [`375bf41`](https://github.com/siderolabs/extensions/commit/375bf41fc1d7cc3fd378a5ecab3215a0d61f6ff9) feat: update for new pkgs, ZFS 2.3.2
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.10.1](https://github.com/siderolabs/extensions/releases/tag/v1.10.1)
+
 ## [Talos System Extensions 1.10.1](https://github.com/siderolabs/extensions/releases/tag/v1.10.1) (2025-05-07)
 
 Welcome to the v1.10.1 release of Talos System Extensions!
