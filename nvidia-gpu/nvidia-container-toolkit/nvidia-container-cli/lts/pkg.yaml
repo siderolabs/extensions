@@ -46,8 +46,6 @@ steps:
       - |
         mkdir libnvidia-container
         tar -xzf  libnvidia-container.tar.gz --strip-components=1 -C libnvidia-container
-        cd libnvidia-container
-        patch -p1 < /pkg/patches/0001-Fix-building-with-Go-1.24.patch
   # FIXME: make downloads nvidia-modprobe
   - network: default
     build:
