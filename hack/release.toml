@@ -23,7 +23,8 @@ ZFS: 2.3.2
 qemu-guest-agent: 10.0.0
 fuse: 3.17.2
 nut: 2.8.3
-Tailscale: 1.82.5        
+Tailscale: 1.82.5
+Linux firmware: 20250509  
 """
 
     [notes.youki]
