@@ -28,7 +28,7 @@ steps:
   - network: none
     build:
       - |
-        go build \
+        CGO_ENABLED=0 go build \
           -C ${GOPATH}/src/k8s.io/cloud-provider-aws \
           -o ./dist/ecr-credential-provider \
           -ldflags "-s -w \
