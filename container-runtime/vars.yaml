@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20250505.0
+GVISOR_VERSION: 20250512.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
 GVISOR_REV: 39ed1f5ac29cb9a2d99d41502de53b8f0e2d19b6
@@ -14,7 +14,7 @@ CLOUD_PROVIDER_AWS_VERSION: v1.33.0
 CLOUD_PROVIDER_AWS_SHA256: 3603348939385f03601aef40e7266aa4f2c561d21161cd27af34db835b14cbd5
 CLOUD_PROVIDER_AWS_SHA512: 8ad66c67b68b2f51e814094b53574f1a2ab9c91f2e08e99e7175acb5a82049f6a4922edf52ba1474d62035a4f25aaebc0c26c4a32c839cc2e7fbf6f5951cca9b
 # renovate: datasource=git-tags extractVersion=^containerd-shim-wasmedge\/(?<version>.*)$ depName=https://github.com/containerd/runwasi.git
-WASMEDGE_VERSION: v0.5.0
+WASMEDGE_VERSION: v0.6.0
 WASMEDGE_ARM64_SHA256: d969b781531571ed7b2c5bc5e9ec22321e942567753892a9e042e6db882df944
 WASMEDGE_ARM64_SHA512: 27a4e2af61f4893de468e38086e3cc3fef9d5b5aae193136e4a443ed1657e21f591455198bd402ca24a079fe92ea4d2c658d4d02093dedff0655ffdcf5484203
 WASMEDGE_AMD64_SHA256: 84388d24c87be93e1e32ef15ff776b9cb17a8bf57374c0faca0a994508347de3
@@ -26,7 +26,7 @@ SPIN_ARM64_SHA512: 901d437c1c887c3aa290405173492c30b53ee16b46481f2bc1da18c7e0faa
 SPIN_AMD64_SHA256: c2e33ad0390ed0c87d1ab6a05be5572b21b98254906ce6c18fdc902e900f5de1
 SPIN_AMD64_SHA512: 74a50c2454c0c5fee85f7e9e8c48052ad5d30a623efad541dcf1b17b5fd66df58c03af364bf3d7e86c7297feaa17afd327274fe0be4eb9100b856d7f856b70ec
 # renovate: datasource=github-releases depName=kata-containers/kata-containers
-KATA_CONTAINERS_VERSION: 3.16.0
+KATA_CONTAINERS_VERSION: 3.17.0
 KATA_CONTAINERS_SHA256: 8f31f67fcb9b484e07cf7677fcca5e373326e3027462683073ae73c39ed375d8
 KATA_CONTAINERS_SHA512: 17aca02195fa1ed55efcb5f31b50a7efe61c9f870ca0404ce3eb1b5494a9a71bd07509c840e90ae62798648c9ce96d7fb4ce770f0bf54ac9daad7e0f140cbecd
 KATA_CONTAINERS_STATIC_ARM64_SHA256: 161875f74282015a5f4d86ca9d06f4e47626402eddaf5cccd288a5a3e82d87e0
