@@ -17,4 +17,4 @@ XEN_GUEST_AGENT_SHA512: 49bf15d7257f7fcb5ac919ca57e8c16bb6f8199684adef034bd1e768
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
 TALOS_VMTOOLSD_VERSION: v1.0.0
 # renovate: datasource=github-releases depName=siderolabs/talos-metal-agent
-TALOS_METAL_AGENT_VERSION: v0.1.2
+TALOS_METAL_AGENT_VERSION: v0.1.3
