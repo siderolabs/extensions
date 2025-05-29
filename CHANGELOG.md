@@ -1,3 +1,39 @@
+## [Talos System Extensions 1.10.3](https://github.com/siderolabs/extensions/releases/tag/v1.10.3) (2025-05-29)
+
+Welcome to the v1.10.3 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux firmware: 20250509
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+
+### Changes
+<details><summary>4 commits</summary>
+<p>
+
+* [`ebab1aa`](https://github.com/siderolabs/extensions/commit/ebab1aa39f1a63857d630ed5eef0be03e530db8c) fix: nebula extension spec
+* [`7f1656d`](https://github.com/siderolabs/extensions/commit/7f1656d229f7a6e82833161446baa6d686796be7) fix: tailscale static builds
+* [`8d47c8a`](https://github.com/siderolabs/extensions/commit/8d47c8a78f871af553a318375dad84f073dd3a1c) fix: staticallty link ecr-credential-provider
+* [`c391c6e`](https://github.com/siderolabs/extensions/commit/c391c6e410acb00fbb9f53510d8d3028fbbc2fce) feat: update Linux firmware to 20250509
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.10.2](https://github.com/siderolabs/extensions/releases/tag/v1.10.2)
+
 ## [Talos System Extensions 1.10.2](https://github.com/siderolabs/extensions/releases/tag/v1.10.2) (2025-05-16)
 
 Welcome to the v1.10.2 release of Talos System Extensions!
