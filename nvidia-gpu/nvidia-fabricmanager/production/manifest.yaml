@@ -4,7 +4,7 @@ metadata:
   version: "$VERSION"
   author: Sidero Labs
   description: |
-    This system extension provides the Nvidia fabricmanager for GPU's that need NVLink support.
+    This system extension provides the NVIDIA fabricmanager for GPU's that need NVLink support.
   compatibility:
     talos:
       version: ">= v1.2.0"
