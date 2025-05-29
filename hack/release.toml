@@ -19,6 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
+Intel u-code: 20250512
 """
 
 [make_deps]
