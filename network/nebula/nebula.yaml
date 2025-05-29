@@ -8,17 +8,18 @@ depends:
   - configuration: true
 container:
   entrypoint: /usr/local/bin/nebula
-  args: 
-    - -config 
-    - /usr/local/etc/nebula/config.yml 
+  args:
+    - -config
+    - /usr/local/etc/nebula/config.yml
   security:
     writeableRootfs: false
     writeableSysfs: true
-  ## Nebula needs to write to this to create the interfaces
-  - source: /dev/net/tun
-    destination: /dev/net/tun
-    type: bind
-    options:
-      - bind
-      - rw
+  mounts:
+    ## Nebula needs to write to this to create the interfaces
+    - source: /dev/net/tun
+      destination: /dev/net/tun
+      type: bind
+      options:
+        - bind
+        - rw
 restart: always
