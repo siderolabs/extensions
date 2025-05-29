@@ -26,6 +26,7 @@ nut: 2.8.3
 Tailscale: 1.82.5
 Linux firmware: 20250509
 metal-agent: 0.1.3
+Intel u-code: 20250512
 """
 
     [notes.youki]
