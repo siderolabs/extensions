@@ -9,7 +9,10 @@ dependencies:
   # so any stage depending on nvidia-pkgs will have the updated cache
   - stage: glibc
 steps:
-  - sources:
+  - env:
+      CC: gcc-14
+      CXX: g++-14
+    sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvidia_driver/linux-sbsa/nvidia_driver-linux-sbsa-{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }}-archive.tar.xz
         destination: nvidia.tar.xz

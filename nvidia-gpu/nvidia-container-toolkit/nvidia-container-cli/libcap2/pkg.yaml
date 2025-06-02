@@ -3,12 +3,16 @@ variant: scratch
 shell: /bin/bash
 install:
   - build-base
+  - gcc-14
   - bash
   - patch
 dependencies:
   - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
-  - sources:
+  - env:
+      CC: gcc-14
+      CXX: g++-14
+    sources:
       - url: https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-{{ .LIBCAP_VERSION }}.tar.xz
         destination: libcap.tar.xz
         sha256: {{ .LIBCAP_SHA256 }}

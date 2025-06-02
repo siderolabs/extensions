@@ -3,6 +3,7 @@ variant: scratch
 shell: /bin/bash
 install:
   - build-base
+  - gcc-14
   - bash
   - go
   - patch
@@ -15,6 +16,8 @@ steps:
         sha256: {{ .CONTAINER_TOOLKIT_SHA256 }}
         sha512: {{ .CONTAINER_TOOLKIT_SHA512 }}
     env:
+      CC: gcc-14
+      CXX: g++-14
       GIT_COMMIT: {{ substr 0 7 .CONTAINER_TOOLKIT_REF }} # build is using short sha
     prepare:
       - |

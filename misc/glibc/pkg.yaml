@@ -3,6 +3,7 @@ variant: scratch
 shell: /bin/bash
 install:
   - build-base
+  - gcc-14
   - bash
   - gawk
   - bison
@@ -10,7 +11,10 @@ install:
 dependencies:
   - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
-  - sources:
+  - env:
+      CC: gcc-14
+      CXX: g++-14
+    sources:
       - url: https://src.fedoraproject.org/lookaside/pkgs/glibc/glibc-{{ .GLIBC_VERSION }}-8-g1e0e33e1b1.tar.xz/sha512/449e3d4f6b59bfde2175c5d1be71447b084e0b12b176518b65fd9b0ac8430766b25416a173fe3efd47462bc1719d59a051e7eed9544e0fba9165dd86f69ee0b9/glibc-{{ .GLIBC_VERSION }}-8-g1e0e33e1b1.tar.xz
         destination: glibc.tar.xz
         sha256: {{ .GLIBC_SHA256 }}

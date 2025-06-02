@@ -3,11 +3,15 @@ variant: scratch
 shell: /bin/bash
 install:
   - build-base
+  - gcc-14
   - bash
 dependencies:
   - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
 steps:
-  - sources:
+  - env:
+      CC: gcc-14
+      CXX: g++-14
+    sources:
       - url: https://zlib.net/fossils/zlib-{{ .ZLIB_VERSION }}.tar.gz
         destination: zlib.tar.gz
         sha256: {{ .ZLIB_SHA256 }}
