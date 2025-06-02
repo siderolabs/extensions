@@ -24,16 +24,12 @@ steps:
         mkdir build
         cd build
 
-        echo "libc_cv_slibdir=/usr/local/glibc/usr/lib64" > config.cache
         ../configure \
           --prefix=/usr/local/glibc \
-          --bindir=/usr/local/glibc/usr/bin \
-          --sbindir=/usr/local/glibc/usr/sbin \
-          --libdir=/usr/local/glibc/usr/lib64 \
-          --libexecdir=/usr/local/glibc/usr/libexec \
-          --enable-stack-protector=strong \
-          --disable-werror \
-          --cache-file=config.cache
+          --libdir=/usr/local/glibc/usr/lib \
+          --libexecdir=/usr/local/glibc/usr/lib \
+          --enable-stack-protection=strong \
+          --disable-werror
     build:
       - |
         cd build
@@ -43,25 +39,24 @@ steps:
         mkdir -p \
           /rootfs/usr/local/glibc/usr/bin \
           /rootfs/usr/local/glibc/usr/lib \
-          /rootfs/usr/local/glibc/usr/lib64 \
-          /rootfs/usr/local/glibc/usr/libexec \
+          /rootfs/usr/local/glibc/usr/lib32 \
           /rootfs/usr/local/glibc/usr/sbin
-        ln -s usr/bin /rootfs/usr/local/glibc/bin
-        ln -s usr/lib /rootfs/usr/local/glibc/lib
-        ln -s usr/lib64 /rootfs/usr/local/glibc/lib64
-        ln -s usr/sbin /rootfs/usr/local/glibc/sbin
+        ln -s usr/bin/ /rootfs/usr/local/glibc/bin
+        ln -s usr/lib/ /rootfs/usr/local/glibc/lib
+        ln -s usr/lib/ /rootfs/usr/local/glibc/lib64
+        ln -s usr/sbin/ /rootfs/usr/local/glibc/sbin
+        ln -s lib/ /rootfs/usr/local/glibc/usr/lib64
 
         cd build
         make install DESTDIR=/rootfs
 
         cp /pkg/ld.so.conf /rootfs/usr/local/glibc/etc/ld.so.conf
 
-        # Talos has /lib{64} -> /usr/lib, /{s}bin -> /usr/bin.
-        # Need to make '/sbin/ldconfig' and '/lib64/ld-linux-x86-64.so.2' work for compatibility.
         mkdir -p /rootfs/usr/lib /rootfs/usr/bin
-        ln -s /usr/local/glibc/usr/lib64/ld-linux-x86-64.so.2 /rootfs/usr/lib/ld-linux-x86-64.so.2
+        ln -s /usr/local/glibc/usr/lib/ld-linux-x86-64.so.2 /rootfs/usr/lib/ld-linux-x86-64.so.2
         ln -s /usr/local/glibc/usr/sbin/ldconfig /rootfs/usr/bin/ldconfig
 
+        # cleanup
         rm -rf /rootfs/usr/local/glibc/include
         rm -rf /rootfs/usr/local/glibc/share
         rm -rf /rootfs/usr/local/glibc/var
