@@ -3,6 +3,7 @@ variant: scratch
 shell: /bin/bash
 install:
   - build-base
+  - gcc-14
   - bash
   - m4
 dependencies:
@@ -10,7 +11,10 @@ dependencies:
   - stage: zlib
     from: /rootfs
 steps:
-  - sources:
+  - env:
+      CC: gcc-14
+      CXX: g++-14
+    sources:
       - url: https://sourceware.org/elfutils/ftp/{{ .ELFUTILS_VERSION }}/elfutils-{{ .ELFUTILS_VERSION }}.tar.bz2
         destination: elfutils.tar.bz2
         sha256: {{ .ELFUTILS_SHA256 }}
