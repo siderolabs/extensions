@@ -1,11 +1,11 @@
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-QEMU_VERSION: 10.0.0
-QEMU_SHA256: 22c075601fdcf8c7b2671a839ebdcef1d4f2973eb6735254fd2e1bd0f30b3896
-QEMU_SHA512: 2215458ed8be3ab0b0032fe2a96e79183f5fc2da323d927018412ea3d980b022a07ba87d4f446229eaaa7d1b19a577d438dbcaa3af3bd537c7720b56734a2d8b
+QEMU_VERSION: 10.0.2
+QEMU_SHA256: ef786f2398cb5184600f69aef4d5d691efd44576a3cff4126d38d4c6fec87759
+QEMU_SHA512: 7fda582c3845ea663aa5eda21bb38ebcfb6c25bccf8944ea6cdf8b5be6946b5a874b36674a7f5db3e325abb9cca0dd9bc0727837fdceb71a8c947d96169a9b20
 # renovate: datasource=git-tags depName=https://gitlab.gnome.org/GNOME/glib.git
-GLIB_VERSION: 2.84.1
-GLIB_SHA256: 2b4bc2ec49611a5fc35f86aca855f2ed0196e69e53092bab6bb73396bf30789a
-GLIB_SHA512: ee7f38a4726fd72e41ddb75c4933c7b1bb30935bb2fddc84902d0627a836af512534195132cc02e3d15f168fefc816576181a8d6e436472b582191437b79a456
+GLIB_VERSION: 2.85.1
+GLIB_SHA256: 97cfb0466ae41fca4fa2a57a15440bee15b54ae76a12fb3cbff11df947240e48
+GLIB_SHA512: c08dd4f8c87b4dde98a6529e136b935db459bcdf3be22ed76c6bcb6e93d374740c15899c0645cec363c72fb0d508b6365bb5f5aaa7b36b67f13748cfcd0b55ce
 # renovate: datasource=github-releases extractVersion=^pcre2-(?<version>.*)$ depName=PCRE2Project/pcre2
 PCRE2_VERSION: 10.42
 PCRE2_SHA256: 8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840
