@@ -19,7 +19,11 @@ See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
+qemu-guest-agent: 10.0.2
+Tailscale: 1.84.0
 Intel u-code: 20250512
+wasmedge: 0.6.0
+Kata containers: 3.17.0
 """
 
 [make_deps]
