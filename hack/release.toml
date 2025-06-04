@@ -29,6 +29,9 @@ metal-agent: 0.1.3
 Intel u-code: 20250512
 wasmedge: 0.6.0
 Kata containers: 3.17.0
+NVIDIA LTS: 535.247.01
+NVIDIA Production: 570.140.08
+NVIDIA Container Toolkit: 1.17.8
 """
 
     [notes.youki]
