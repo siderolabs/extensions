@@ -1,3 +1,117 @@
+## [Talos System Extensions 1.11.0-alpha.1](https://github.com/siderolabs/extensions/releases/tag/v1.11.0-alpha.1) (2025-06-05)
+
+Welcome to the v1.11.0-alpha.1 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Tenstorrent drivers
+
+[Tennstorrent](https://github.com/tenstorrent/tt-kmd) driver is now supported as an extension.
+
+
+### Component Updates
+
+ZFS: 2.3.2
+qemu-guest-agent: 10.0.2
+fuse: 3.17.2
+nut: 2.8.3
+Tailscale: 1.84.0
+Linux firmware: 20250509
+metal-agent: 0.1.3
+Intel u-code: 20250512
+wasmedge: 0.6.0
+Kata containers: 3.17.0
+NVIDIA LTS: 535.247.01
+NVIDIA Production: 570.140.08
+NVIDIA Container Toolkit: 1.17.8
+
+
+### Youki Container Runtime
+
+[Youki](https://github.com/youki-dev/youki) is now supported as a container runtime.
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Marco Mihai Condrache
+* 0xBrandon
+* Andrew Rynhard
+* Jean-Francois Roy
+* Justin Garrison
+* Utku Ozdemir
+
+### Changes
+<details><summary>26 commits</summary>
+<p>
+
+* [`c26f543`](https://github.com/siderolabs/extensions/commit/c26f543bbd3313c58c14664f3da88eee657fe76e) fix: glib version
+* [`29c809b`](https://github.com/siderolabs/extensions/commit/29c809b0a1eef9c8584931176079dbe282e3fb56) feat: udpate NVIDIA extensions
+* [`76bba6d`](https://github.com/siderolabs/extensions/commit/76bba6d7c3f2ee00544198fb7b99dd50a20e3253) feat: bump dependencies
+* [`f9b5bf6`](https://github.com/siderolabs/extensions/commit/f9b5bf630d74c172b05335de792ac95228c5683c) fix: nvidia builds
+* [`5de8e28`](https://github.com/siderolabs/extensions/commit/5de8e28e8029ea2bf961b703289582de59eca0f1) fix: revert "fix(glibc): use lib64 for better compatibility"
+* [`f161267`](https://github.com/siderolabs/extensions/commit/f1612673e2c3c3a97b155d39205a4ef95d2a286e) feat: update Intel u-code to 20250512
+* [`1efc06b`](https://github.com/siderolabs/extensions/commit/1efc06bf0e22817e336ceb16c5328b204653c357) fix: nebula extension spec
+* [`d668b07`](https://github.com/siderolabs/extensions/commit/d668b07d64ffc21268dfc1b98b60985d38e08203) fix(glibc): use lib64 for better compatibility
+* [`30eb717`](https://github.com/siderolabs/extensions/commit/30eb717bb6ed4e546a1e794414d8e409778880cf) chore: bump metal-agent version to v0.1.3
+* [`21b44b1`](https://github.com/siderolabs/extensions/commit/21b44b1559c008ac297201d5f22225fa45cb4834) fix: tailscale static builds
+* [`5f1070a`](https://github.com/siderolabs/extensions/commit/5f1070a846d10145cf308ae576af3713e9fa3242) fix: staticallty link ecr-credential-provider
+* [`40a0b65`](https://github.com/siderolabs/extensions/commit/40a0b65c86dc1b993ac7a73a6eaf45d8e7c361d8) feat: add tenstorrent extension
+* [`3df6924`](https://github.com/siderolabs/extensions/commit/3df6924544fccac275e08cb75724e4eb0b47fbc4) feat: update Linux firmware to 20250509
+* [`ac5ad5d`](https://github.com/siderolabs/extensions/commit/ac5ad5d76e1ac731a191a59a34dcedd6c8297b2b) feat: update pkgs with containerd 2.1.0
+* [`29ce902`](https://github.com/siderolabs/extensions/commit/29ce902bdc66a295196b3349dd416d74b3bf588f) chore: update pkgs and zstd module
+* [`9b311a0`](https://github.com/siderolabs/extensions/commit/9b311a06373a397153d1904ce7d411f25845c1a6) feat(panfrost): add kernel drivers
+* [`f632ef9`](https://github.com/siderolabs/extensions/commit/f632ef9687bf352b1ffb051d4072fdebf20a10ed) feat: bump dependencies
+* [`643c853`](https://github.com/siderolabs/extensions/commit/643c853bbfac1b735d8861eb00d5550a75514a07) fix(panfrost): add mali firmware
+* [`e908223`](https://github.com/siderolabs/extensions/commit/e90822373e0a4a1e854f328352e0919c92798501) feat: update for new pkgs, ZFS 2.3.2
+* [`bcc1d6e`](https://github.com/siderolabs/extensions/commit/bcc1d6e0cbfcc9045d525db4917c10041ad122b9) fix: lldpd build
+* [`573ed8c`](https://github.com/siderolabs/extensions/commit/573ed8c3812ff648906194b6d4f5f7cb48b90c8b) release(v1.11.0-alpha.0): prepare release
+* [`0fa2a42`](https://github.com/siderolabs/extensions/commit/0fa2a428f05907ad285bf6f0ac934216e7a3bf87) chore: prepare for 1.11.0-alpha.0 release
+* [`08108ca`](https://github.com/siderolabs/extensions/commit/08108cabd4a7fb8947fba460009de6bdf9ee44e3) feat: add youki container runtime extension
+* [`e45c086`](https://github.com/siderolabs/extensions/commit/e45c086757e6c9b39fccc6024ee48783956f0285) fix: build of tirpc
+* [`6c7422b`](https://github.com/siderolabs/extensions/commit/6c7422b87573bc3919a75bc4dafe71d6bdf06a62) feat: update pkgs
+* [`5bf5413`](https://github.com/siderolabs/extensions/commit/5bf5413437d0d3df0dc368b39a9292793f37d698) fix: add SSL mount to Tailscale
+</p>
+</details>
+
+### Changes since v1.11.0-alpha.0
+<details><summary>20 commits</summary>
+<p>
+
+* [`c26f543`](https://github.com/siderolabs/extensions/commit/c26f543bbd3313c58c14664f3da88eee657fe76e) fix: glib version
+* [`29c809b`](https://github.com/siderolabs/extensions/commit/29c809b0a1eef9c8584931176079dbe282e3fb56) feat: udpate NVIDIA extensions
+* [`76bba6d`](https://github.com/siderolabs/extensions/commit/76bba6d7c3f2ee00544198fb7b99dd50a20e3253) feat: bump dependencies
+* [`f9b5bf6`](https://github.com/siderolabs/extensions/commit/f9b5bf630d74c172b05335de792ac95228c5683c) fix: nvidia builds
+* [`5de8e28`](https://github.com/siderolabs/extensions/commit/5de8e28e8029ea2bf961b703289582de59eca0f1) fix: revert "fix(glibc): use lib64 for better compatibility"
+* [`f161267`](https://github.com/siderolabs/extensions/commit/f1612673e2c3c3a97b155d39205a4ef95d2a286e) feat: update Intel u-code to 20250512
+* [`1efc06b`](https://github.com/siderolabs/extensions/commit/1efc06bf0e22817e336ceb16c5328b204653c357) fix: nebula extension spec
+* [`d668b07`](https://github.com/siderolabs/extensions/commit/d668b07d64ffc21268dfc1b98b60985d38e08203) fix(glibc): use lib64 for better compatibility
+* [`30eb717`](https://github.com/siderolabs/extensions/commit/30eb717bb6ed4e546a1e794414d8e409778880cf) chore: bump metal-agent version to v0.1.3
+* [`21b44b1`](https://github.com/siderolabs/extensions/commit/21b44b1559c008ac297201d5f22225fa45cb4834) fix: tailscale static builds
+* [`5f1070a`](https://github.com/siderolabs/extensions/commit/5f1070a846d10145cf308ae576af3713e9fa3242) fix: staticallty link ecr-credential-provider
+* [`40a0b65`](https://github.com/siderolabs/extensions/commit/40a0b65c86dc1b993ac7a73a6eaf45d8e7c361d8) feat: add tenstorrent extension
+* [`3df6924`](https://github.com/siderolabs/extensions/commit/3df6924544fccac275e08cb75724e4eb0b47fbc4) feat: update Linux firmware to 20250509
+* [`ac5ad5d`](https://github.com/siderolabs/extensions/commit/ac5ad5d76e1ac731a191a59a34dcedd6c8297b2b) feat: update pkgs with containerd 2.1.0
+* [`29ce902`](https://github.com/siderolabs/extensions/commit/29ce902bdc66a295196b3349dd416d74b3bf588f) chore: update pkgs and zstd module
+* [`9b311a0`](https://github.com/siderolabs/extensions/commit/9b311a06373a397153d1904ce7d411f25845c1a6) feat(panfrost): add kernel drivers
+* [`f632ef9`](https://github.com/siderolabs/extensions/commit/f632ef9687bf352b1ffb051d4072fdebf20a10ed) feat: bump dependencies
+* [`643c853`](https://github.com/siderolabs/extensions/commit/643c853bbfac1b735d8861eb00d5550a75514a07) fix(panfrost): add mali firmware
+* [`e908223`](https://github.com/siderolabs/extensions/commit/e90822373e0a4a1e854f328352e0919c92798501) feat: update for new pkgs, ZFS 2.3.2
+* [`bcc1d6e`](https://github.com/siderolabs/extensions/commit/bcc1d6e0cbfcc9045d525db4917c10041ad122b9) fix: lldpd build
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.10.0](https://github.com/siderolabs/extensions/releases/tag/v1.10.0)
+
 ## [Talos System Extensions 1.11.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.11.0-alpha.0) (2025-05-01)
 
 Welcome to the v1.11.0-alpha.0 release of Talos System Extensions!  
