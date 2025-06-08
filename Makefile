@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-06-04T09:48:52Z by kres fc6afbe.
+# Generated on 2025-06-08T13:34:39Z by kres 5f6eb2a.
 
 # common variables
 
@@ -50,9 +50,9 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.11.0-alpha.0-32-g79bfa9e
+PKGS ?= v1.11.0-alpha.0-33-g9fbe2b4
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.11.0-alpha.0-2-gaf3fd64
+TOOLS ?= v1.11.0-alpha.0-3-g1dfd14b
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
