@@ -1,3 +1,48 @@
+## [Talos System Extensions 1.10.4](https://github.com/siderolabs/extensions/releases/tag/v1.10.4) (2025-06-11)
+
+Welcome to the v1.10.4 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+qemu-guest-agent: 10.0.2
+Tailscale: 1.84.0
+Intel u-code: 20250512
+wasmedge: 0.6.0
+Kata containers: 3.17.0
+NVIDIA LTS: 535.247.01
+NVIDIA Production: 570.140.08
+NVIDIA Container Toolkit: 1.17.8
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+
+### Changes
+<details><summary>6 commits</summary>
+<p>
+
+* [`3cfcd29`](https://github.com/siderolabs/extensions/commit/3cfcd29560984f588bb55e860514bf4e7775f1a6) fix: glib version
+* [`f956896`](https://github.com/siderolabs/extensions/commit/f956896a31c9627ddb828ba062bbe53afbd3ef95) feat: udpate NVIDIA extensions
+* [`1fd26aa`](https://github.com/siderolabs/extensions/commit/1fd26aab2e2fb413e2129b230e0e2f8df0046c59) feat: bump dependencies
+* [`ccf5d35`](https://github.com/siderolabs/extensions/commit/ccf5d353e5a95e9c0c034fcdb9c9ba094556b1dc) fix: nvidia builds
+* [`3bb1647`](https://github.com/siderolabs/extensions/commit/3bb164700b8f9c961d3b76b3342589ae84dd6329) feat: update Intel u-code to 20250512
+* [`b669453`](https://github.com/siderolabs/extensions/commit/b66945338dbf540135e76de4f6993a3957ab34bb) chore: update pkgs/tools
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.10.3](https://github.com/siderolabs/extensions/releases/tag/v1.10.3)
+
 ## [Talos System Extensions 1.10.3](https://github.com/siderolabs/extensions/releases/tag/v1.10.3) (2025-05-29)
 
 Welcome to the v1.10.3 release of Talos System Extensions!
