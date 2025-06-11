@@ -21,6 +21,7 @@ spec:
     - glibc
     - gvisor
     - gvisor-debug
+    - hailort
     - hello-world-service
     - i915
     - intel-ice-firmware
@@ -79,7 +80,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.11.0-alpha.0-33-g9fbe2b4
+        defaultValue: v1.11.0-alpha.0-39-gc613abd
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
