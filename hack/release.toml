@@ -46,4 +46,10 @@ NVIDIA Container Toolkit: 1.17.8
 [Tennstorrent](https://github.com/tenstorrent/tt-kmd) driver is now supported as an extension.
 """
 
+    [notes.hailort]
+        title = "HailoRT drivers"
+        description = """\
+[HailoRT](https://github.com/hailo-ai/hailort-drivers) driver is now supported as an extension.
+"""
+
 [make_deps]
