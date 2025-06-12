@@ -1,0 +1,55 @@
+name: nvidia-fabricmanager-wrapper
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
+install:
+  - bash
+  - build-base
+  - gcc-14
+  - cmake
+  - ninja
+  - python3
+  - libnl3-dev
+  - go-1.24
+steps:
+  - sources:
+      - url: https://github.com/linux-rdma/rdma-core/releases/download/v{{ .RDMA_CORE_VERSION }}/rdma-core-{{ .RDMA_CORE_VERSION }}.tar.gz
+        destination: rdma-core.tar.gz
+        sha256: {{ .RDMA_CORE_SHA256 }}
+        sha512: {{ .RDMA_CORE_SHA512 }}
+  - env:
+      CC: gcc-14
+      CXX: g++-14
+      GOPATH: /tmp/go
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+  - network: default
+    prepare:
+      - |
+        mkdir rdma-core
+        tar -xzf rdma-core.tar.gz --strip-components=1 -C rdma-core
+      - |
+        cp -r /pkg/* .
+      - |
+        go mod download
+  - network: none
+    build:
+      - |
+        cd rdma-core
+        cmake -GNinja \
+            -DENABLE_STATIC=1 \
+            -DNO_MAN_PAGES=1 \
+            -DNO_PYVERBS=1 \
+            -DCMAKE_BUILD_TYPE=Release
+        ninja lib/statics/libibumad.a
+      - |
+        CGO_ENABLED=1 go build -o nvidia-fabricmanager-wrapper nvidia-fabricmanager-wrapper
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/bin
+        cp nvidia-fabricmanager-wrapper /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/bin/
+finalize:
+  - from: /rootfs
+    to: /rootfs
