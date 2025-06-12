@@ -5,4 +5,5 @@ use (
 	./examples/hello-world-service/src
 	./nvidia-gpu/nvidia-container-toolkit/nvidia-container-runtime-wrapper
 	./nvidia-gpu/nvidia-container-toolkit/nvidia-persistenced-wrapper
+	./nvidia-gpu/nvidia-fabricmanager/nvidia-fabricmanager-wrapper
 )

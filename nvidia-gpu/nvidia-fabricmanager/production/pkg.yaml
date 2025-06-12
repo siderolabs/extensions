@@ -2,7 +2,9 @@ name: nvidia-fabricmanager-production
 variant: scratch
 shell: /bin/bash
 dependencies:
- - stage: base
+  - stage: base
+  - stage: nvidia-fabricmanager-gcc-runtime
+  - stage: nvidia-fabricmanager-wrapper
 steps:
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
@@ -10,40 +12,69 @@ steps:
         destination: fabricmanager.tar.xz
         sha256: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_ARM64_SHA256 }}
         sha512: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_ARM64_SHA512 }}
+      - url: https://developer.download.nvidia.com/compute/cuda/redist/nvlsm/linux-sbsa/nvlsm-linux-sbsa-{{ .NVIDIA_NVLSM_PRODUCTION_VERSION }}-archive.tar.xz
+        destination: nvlsm.tar.xz
+        sha256: {{ .NVIDIA_NVLSM_PRODUCTION_ARM64_SHA256 }}
+        sha512: {{ .NVIDIA_NVLSM_PRODUCTION_ARM64_SHA512 }}
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }}-archive.tar.xz
         destination: fabricmanager.tar.xz
         sha256: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_AMD64_SHA256 }}
         sha512: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_AMD64_SHA512 }}
+      - url: https://developer.download.nvidia.com/compute/cuda/redist/nvlsm/linux-x86_64/nvlsm-linux-x86_64-{{ .NVIDIA_NVLSM_PRODUCTION_VERSION }}-archive.tar.xz
+        destination: nvlsm.tar.xz
+        sha256: {{ .NVIDIA_NVLSM_PRODUCTION_AMD64_SHA256 }}
+        sha512: {{ .NVIDIA_NVLSM_PRODUCTION_AMD64_SHA512 }}
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
-        tar -xf fabricmanager.tar.xz --strip-components=1
+        mkdir fm sm
+        tar -xf fabricmanager.tar.xz --strip-components=1 -C fm
+        tar -xf nvlsm.tar.xz --strip-components=1 -C sm
     install:
       - |
-        mkdir -p /rootfs/usr/local/bin \
-          /rootfs/usr/local/lib \
-          /rootfs/usr/local/share/nvidia/nvswitch \
-          /rootfs/usr/local/lib/containers/nvidia-fabricmanager \
-          /rootfs/usr/local/etc/containers
+        mkdir -p /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/bin \
+                 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/lib \
+                 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch \
+                 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/sbin \
+                 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/lib \
+                 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvlsm
+      # nvlsm
+      - |
+        cp sm/sbin/nvlsm /rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/sbin/
 
-        cp lib/libnvfm.so.1 /rootfs/usr/local/lib/libnvfm.so.1
-        ln -s libnvfm.so.1 /rootfs/usr/local/lib/libnvfm.so
+        cp sm/lib/libgrpc_mgr.so /rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/lib/
 
-        cp bin/nv-fabricmanager /rootfs/usr/local/bin/
-        cp bin/nvswitch-audit /rootfs/usr/local/bin/
+        cp sm/share/nvidia/nvlsm/device_configuration.conf \
+           sm/share/nvidia/nvlsm/grpc_mgr.conf \
+           sm/share/nvidia/nvlsm/nvlsm.conf \
+           /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvlsm/
+      # fabricmanager
+      - |
+        cp fm/bin/nv-fabricmanager \
+           fm/bin/nvswitch-audit \
+           /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/bin/
 
-        cp share/nvidia/nvswitch/* /rootfs/usr/local/share/nvidia/nvswitch/
+        cp fm/lib/libnvfm.so.1 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/lib/
+        ln -s libnvfm.so.1 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/lib/libnvfm.so
 
-        cp etc/fabricmanager.cfg  /rootfs/usr/local/share/nvidia/nvswitch/
+        cp fm/share/nvidia/nvswitch/* \
+           fm/etc/fabricmanager.cfg  \
+           /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/
 
+        sed -i 's/DAEMONIZE=.*/DAEMONIZE=0/g' /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
+        sed -i 's/LOG_FILE_NAME=.*/LOG_FILE_NAME=/g' /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
+        sed -i 's#STATE_FILE_NAME=.*#STATE_FILE_NAME=/var/run/fabricmanager.state#g' /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
+
+        if grep -q '^DATABASE_PATH=' /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
+        then
+          sed -i 's#DATABASE_PATH=.*#DATABASE_PATH=/var/run#g' /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
+        else
+          echo -e '\nDATABASE_PATH=/var/run\n' >>/rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
+        fi
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
         cp /pkg/nvidia-fabricmanager.yaml /rootfs/usr/local/etc/containers/nvidia-fabricmanager.yaml
-
-        echo "FABRIC_NODE_CONFIG_FILE=/usr/local/share/nvidia/nvswitch/fabricmanager.cfg" >> /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg # fix for #511
-        sed -i 's/DAEMONIZE=.*/DAEMONIZE=0/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
-        sed -i 's/STATE_FILE_NAME=.*/STATE_FILE_NAME=\/var\/run\/nvidia-fabricmanager\/fabricmanager.state/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
-        sed -i 's/TOPOLOGY_FILE_PATH=.*/TOPOLOGY_FILE_PATH=\/usr\/local\/share\/nvidia\/nvswitch/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
-        sed -i 's/DATABASE_PATH=.*/DATABASE_PATH=\/usr\/local\/share\/nvidia\/nvswitch/g' /rootfs/usr/local/share/nvidia/nvswitch/fabricmanager.cfg
     test:
       - |
         mkdir -p /extensions-validator-rootfs
