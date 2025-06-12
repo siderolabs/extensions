@@ -32,6 +32,7 @@ Kata containers: 3.17.0
 NVIDIA LTS: 535.247.01
 NVIDIA Production: 570.140.08
 NVIDIA Container Toolkit: 1.17.8
+vmtoolsd: 1.1.0
 """
 
     [notes.youki]
