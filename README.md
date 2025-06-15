@@ -92,6 +92,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | Name                            | Image                                                                                                 | Description                                                  | Version Format  |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | --------------- |
 | [dvb-cx23885](dvb/dvb-cx23885/) | [ghcr.io/siderolabs/dvb-cx23885](https://github.com/siderolabs/extensions/pkgs/container/dvb-cx23885) | DVB kernel modules + firmware for Hauppage WinTV-quadHD PCIe | `talos version` |
+| [dvb-m88ds3103](dvb/dvb-m88ds3103/) | [ghcr.io/siderolabs/dvb-m88ds3103](https://github.com/siderolabs/extensions/pkgs/container/dvb-m88ds3103) | DVB firmware for DVBSky S952 PCIe          | `upstream version` |
 
 ### Miscellaneous
 
