@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-06-08T13:34:39Z by kres 5f6eb2a.
+# Generated on 2025-06-15T15:55:58Z by kres 5128bc1.
 
 # common variables
 
@@ -70,6 +70,7 @@ TARGETS += crun
 TARGETS += ctr
 TARGETS += drbd
 TARGETS += dvb-cx23885
+TARGETS += dvb-m88ds3103
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
