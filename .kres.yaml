@@ -15,6 +15,7 @@ spec:
     - ctr
     - drbd
     - dvb-cx23885
+    - dvb-m88ds3103
     - ecr-credential-provider
     - fuse3
     - gasket-driver

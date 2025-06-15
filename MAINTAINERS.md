@@ -22,6 +22,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | crun                                      | Henrik Gerdes      | [hegerdes](https://github.com/hegerdes)                              |
 | drbd                                      | Needs Maintainer   | NA                                                                   |
 | dvb-cx23885                               | Skyler Mäntysaari  | [samip5](https://github.com/samip5)                                  |
+| dvb-m88ds3103                             | Yehia Amer         | [yehia2amer](https://github.com/yehia2amer)                          |
 | ecr-credential-provider                   | Florian Ströger    | [Preisschild](https://github.com/Preisschild)                        |
 | fuse3                                     | Sidero Labs        | NA                                                                   |
 | gasket-driver                             | Sidero Labs        | NA                                                                   |

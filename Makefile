@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-06-27T18:52:46Z by kres 5128bc1.
+# Generated on 2025-07-01T06:55:28Z by kres 5128bc1.
 
 # common variables
 
@@ -70,6 +70,7 @@ TARGETS += crun
 TARGETS += ctr
 TARGETS += drbd
 TARGETS += dvb-cx23885
+TARGETS += dvb-m88ds3103
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
@@ -265,3 +266,4 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
+
