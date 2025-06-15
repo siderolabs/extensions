@@ -25,6 +25,10 @@ steps:
       - |
         mkdir -p /rootfs/usr/lib/firmware
         cp dvb-demod-m88ds3103.fw /rootfs/usr/lib/firmware/dvb-demod-m88ds3103.fw
+
+        # Create modprobe.d directory and cx23885.conf for IR support
+        mkdir -p /rootfs/etc/modprobe.d
+        echo "options cx23885 enable_885_ir=1" > /rootfs/etc/modprobe.d/cx23885.conf
     test:
       - |
         mkdir -p /extensions-validator-rootfs
