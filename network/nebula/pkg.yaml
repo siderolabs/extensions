@@ -10,7 +10,7 @@ steps:
       - /.cache/go-build
       - /tmp/go/pkg
     sources:
-      - url: https://github.com/slackhq/nebula/archive/refs/tags/v{{ .NEBULA_VERSION}}.tar.gz
+      - url: https://github.com/slackhq/nebula/archive/refs/tags/v{{ .NEBULA_VERSION }}.tar.gz
         destination: nebula.tar.gz
         sha256: {{ .NEBULA_SHA256 }}
         sha512: {{ .NEBULA_SHA512 }}
