@@ -1,0 +1,12 @@
+name: cloudflared
+depends:
+  - service: cri
+  - network:
+      - addresses
+      - connectivity
+      - etcfiles
+      - hostname
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/newt
+restart: always

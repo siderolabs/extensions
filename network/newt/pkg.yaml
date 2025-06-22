@@ -1,0 +1,42 @@
+name: newt
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/fosrl/newt/releases/download/{{ .NEWT_VERSION }}/newt_linux_arm64
+        destination: newt
+        sha256: {{ .NEWT_ARM64_SHA256 }}
+        sha512: {{ .NEWT_ARM64_SHA512 }}
+      # {{ else if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/fosrl/newt/releases/download/{{ .NEWT_VERSION }}/newt_linux_amd64
+        destination: newt
+        sha256: {{ .NEWT_AMD64_SHA256 }}
+        sha512: {{ .NEWT_AMD64_SHA512 }}
+      # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    prepare:
+      - |
+        sed -i 's#$NEWT_VERSION#{{ .NEWT_VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/newt/usr/local/bin
+        mv newt /rootfs/usr/local/lib/containers/newt/usr/local/bin
+        chmod +x /rootfs/usr/local/lib/containers/newt/usr/local/bin/newt
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/newt.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+      - |
+        [[ $(/rootfs/usr/local/lib/containers/newt/usr/local/bin/newt --version) == *{{ .NEWT_VERSION }}* ]]
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

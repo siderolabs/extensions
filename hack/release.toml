@@ -33,6 +33,7 @@ NVIDIA LTS: 535.247.01
 NVIDIA Production: 570.140.08
 NVIDIA Container Toolkit: 1.17.8
 vmtoolsd: 1.1.0
+newt: 1.2.1
 """
 
     [notes.youki]
@@ -45,6 +46,12 @@ vmtoolsd: 1.1.0
         title = "Tenstorrent drivers"
         description = """\
 [Tennstorrent](https://github.com/tenstorrent/tt-kmd) driver is now supported as an extension.
+"""
+
+    [notes.newt]
+        title = "Newt client"
+        description = """\
+        [Newt](https://github.com/fosrl/newt) client is now supported as an extension.
 """
 
 [make_deps]

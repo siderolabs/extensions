@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: newt
+  version: "$NEWT_VERSION"
+  author: Fossorial
+  description: |
+    Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin.
+    By using Newt, you don't need to manage complex WireGuard tunnels and NATing.
+    More info: https://github.com/fosrl/newt
+  compatibility:
+    talos:
+      version: ">= v1.5.0"
