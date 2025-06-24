@@ -1,4 +1,4 @@
-name: cloudflared
+name: newt
 depends:
   - service: cri
   - network:
