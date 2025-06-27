@@ -1,10 +1,7 @@
 # https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf
 name: nvidia-fabricmanager
 container:
-  entrypoint: /usr/local/bin/nv-fabricmanager
-  args:
-   - --config
-   - /usr/local/share/nvidia/nvswitch/fabricmanager.cfg
+  entrypoint: /usr/bin/nvidia-fabricmanager-wrapper
   mounts:
     # device files
     - source: /dev
@@ -28,44 +25,40 @@ container:
       options:
         - bind
         - ro
-    # nvidia libraries
-    - source: /usr/local/lib
-      destination: /usr/local/lib
-      type: bind
-      options:
-        - bind
-        - ro
     # service state file
+    # * nvlsm:
+    #   - pid file that can't be disabled
+    #   - unix socket /var/run/nvidia-fabricmanager/fm_sm_ipc.socket
+    #     can't be changed, path is hardcoded into fabricmanager
+    # * fabricmanager
+    #   - state file
+    #   - database files
     - source: /var/run/nvidia-fabricmanager
-      destination: /var/run/nvidia-fabricmanager
+      destination: /var/run
       type: bind
       options:
         - rshared
         - rbind
         - rw
-    # log files
-    - source: /var/log
+    # service cache file
+    # * nvlsm: database files
+    - source: /var/cache/nvidia-fabricmanager
+      destination: /var/cache
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # service log files
+    # * nvlsm:
+    #   - mandatory dump files hardcoded to /var/log/<file>, so /var/log must be writable
+    - source: /var/log/nvidia-fabricmanager
       destination: /var/log
       type: bind
       options:
         - rshared
         - rbind
         - rw
-    # fabric topology files
-    - source: /usr/local/share/nvidia/nvswitch
-      destination: /usr/local/share/nvidia/nvswitch
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - ro
-    # binaries
-    - source: /usr/local/bin
-      destination: /usr/local/bin
-      type: bind
-      options:
-        - bind
-        - ro
 depends:
   - service: cri
   # we need to depend on udevd so that the nvidia device files are created
