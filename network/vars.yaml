@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=tailscale/tailscale
-TAILSCALE_VERSION: 1.84.0
+TAILSCALE_VERSION: 1.84.2
 TAILSCALE_SHA256: cbb0eb69643a30a10d583bb68fff09720c23c39d6109f3f6390b34aed77db47b
 TAILSCALE_SHA512: eea19a922899002c13936daf4a76c600fb4cd4c0305b13794bb767717bdc4d098a48a1ab81eaf515f93ec850adf469f624f1a37701338573173e84ac4b629b0e
 # renovate: datasource=github-releases depName=lldpd/lldpd
