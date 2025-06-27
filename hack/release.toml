@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.10.3"
+previous = "v1.10.4"
 
 pre_release = false
 
@@ -19,14 +19,9 @@ See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-qemu-guest-agent: 10.0.2
-Tailscale: 1.84.0
-Intel u-code: 20250512
-wasmedge: 0.6.0
-Kata containers: 3.17.0
-NVIDIA LTS: 535.247.01
-NVIDIA Production: 570.140.08
-NVIDIA Container Toolkit: 1.17.8
+ZFS: 2.3.3
+DRBD: 9.2.14
+Linux firmware: 20250613
 """
 
 [make_deps]
