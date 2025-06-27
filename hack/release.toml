@@ -19,12 +19,13 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-ZFS: 2.3.2
+ZFS: 2.3.3
+DRBD: 9.2.14
 qemu-guest-agent: 10.0.2
 fuse: 3.17.2
 nut: 2.8.3
 Tailscale: 1.84.0
-Linux firmware: 20250509
+Linux firmware: 20250613
 metal-agent: 0.1.3
 Intel u-code: 20250512
 wasmedge: 0.6.0
