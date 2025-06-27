@@ -21,13 +21,12 @@ steps:
 
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/local/lib/pkgconfig
 
-        patch -p1 < /pkg/patches/locale.patch
-        patch -p1 < /pkg/patches/basename.patch
-
         meson setup \
           -Db_lto=true \
           -Dudevrulesdir=/usr/lib/udev/rules.d \
           -Djson-c=enabled \
+          -Ddocs=false \
+          -Dsysconfdir=/etc \
           .build
       - |
         sed -i 's#$VERSION#{{ .NVME_CLI_VERSION }}#' /pkg/manifest.yaml
@@ -37,7 +36,7 @@ steps:
     install:
       - |
         DESTDIR=/rootfs meson install -C .build
-        rm -rf /rootfs/usr/local/{include,lib/{dracut,systemd},share}
+        rm -rf /rootfs/{etc/nvme/discovery.conf,usr/local/{include,lib/{dracut,systemd},share}}
     test:
       - |
         mkdir -p /extensions-validator-rootfs
