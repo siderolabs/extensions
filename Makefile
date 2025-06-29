@@ -88,6 +88,7 @@ TARGETS += mdadm
 TARGETS += mei
 TARGETS += metal-agent
 TARGETS += nebula
+TARGETS += newt
 TARGETS += nfsd
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit-lts
@@ -264,4 +265,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-

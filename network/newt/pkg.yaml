@@ -1,0 +1,54 @@
+name: newt
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /tmp/go
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+    sources:
+      - url: https://github.com/fosrl/newt/archive/refs/tags/{{ .NEWT_VERSION }}.tar.gz
+        destination: newt.tar.gz
+        sha256: {{ .NEWT_SHA256 }}
+        sha512: {{ .NEWT_SHA512 }}
+  - network: default
+    prepare:
+      - |
+        sed -i 's#$NEWT_VERSION#{{ .NEWT_VERSION }}#' /pkg/manifest.yaml
+      - |
+        mkdir newt
+        tar -xzvf newt.tar.gz --strip-components=1 -C newt
+      - | # https://github.com/fosrl/newt?tab=readme-ov-file#binary
+        cd newt
+        if [ -f main.go ]; then
+          sed -i 's/Newt version replaceme/Newt version '"{{ .NEWT_VERSION }}"'/' main.go
+          echo "Updated main.go with version {{ .NEWT_VERSION }}"
+        else
+          echo "main.go not found"
+        fi
+        make local
+  - network: none
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/newt/usr/local/bin
+        cp -p newt/newt /rootfs/usr/local/lib/containers/newt/usr/local/bin/
+        chmod +x /rootfs/usr/local/lib/containers/newt/usr/local/bin/newt
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/newt.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+      - |
+        [[ $(/rootfs/usr/local/lib/containers/newt/usr/local/bin/newt --version) == *{{ .NEWT_VERSION }}* ]]
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
