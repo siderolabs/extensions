@@ -32,8 +32,8 @@ spec:
     - mei
     - metal-agent
     - nebula
-    - nfsd
     - newt
+    - nfsd
     - nut-client
     - nvidia-container-toolkit-lts
     - nvidia-container-toolkit-production
