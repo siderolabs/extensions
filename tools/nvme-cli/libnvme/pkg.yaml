@@ -16,10 +16,13 @@ steps:
 
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
+        patch -p1 < /pkg/patches/rm-internal-include.patch
+
         meson setup \
           -Db_lto=true \
           -Djson-c=enabled \
           -Dpython=disabled \
+          -Dsysconfdir=/etc \
           .build
     build:
       - |
