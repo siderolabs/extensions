@@ -1,3 +1,37 @@
+## [Talos System Extensions 1.10.5](https://github.com/siderolabs/extensions/releases/tag/v1.10.5) (2025-07-03)
+
+Welcome to the v1.10.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ZFS: 2.3.3
+DRBD: 9.2.14
+Linux firmware: 20250613
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`6b4605a`](https://github.com/siderolabs/extensions/commit/6b4605a092b7315a3a1d7dca0474219be260d3e5) feat: update dependencies via pkgs
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.10.4](https://github.com/siderolabs/extensions/releases/tag/v1.10.4)
+
 ## [Talos System Extensions 1.10.4](https://github.com/siderolabs/extensions/releases/tag/v1.10.4) (2025-06-11)
 
 Welcome to the v1.10.4 release of Talos System Extensions!
