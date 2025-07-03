@@ -62,3 +62,11 @@ newt: 1.2.1
 """
 
 [make_deps]
+
+    [make_deps.tools]
+        variable = "TOOLS"
+        repository = "github.com/siderolabs/tools"
+
+    [make_deps.pkgs]
+        variable = "PKGS"
+        repository = "github.com/siderolabs/pkgs"
