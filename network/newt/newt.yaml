@@ -9,4 +9,12 @@ depends:
   - configuration: true
 container:
   entrypoint: /usr/local/bin/newt
+  mounts:
+  # Mount CA root certificates as the endpoints will be signed by Let's Encrypt
+  - source: /etc/ssl/certs
+    destination: /etc/ssl/certs
+    type: bind
+    options:
+      - rbind
+      - ro
 restart: always
