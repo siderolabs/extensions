@@ -1,0 +1,32 @@
+name: libevent
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/libevent/libevent/releases/download/release-{{ .LIBEVENT_VERSION }}-stable/libevent-{{ .LIBEVENT_VERSION }}-stable.tar.gz
+        destination: libevent.tar.gz
+        sha256: {{ .LIBEVENT_SHA256 }}
+        sha512: {{ .LIBEVENT_SHA512 }}
+    prepare:
+      - |
+        tar -xf libevent.tar.gz --strip-components=1
+        mkdir build
+        cd build
+
+        ../configure \
+            --prefix=/usr/local
+    build:
+      - |
+        cd build
+        make -j $(nproc)
+    install:
+      - |
+        cd build
+        make DESTDIR=/rootfs install
+        # we only need the libs and headers, remove everything else
+        find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+finalize:
+  - from: /rootfs
+    to: /rootfs

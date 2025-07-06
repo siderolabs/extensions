@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: nfsrahead
+  version: "$VERSION"
+  author: Steve Kreitzer
+  description: |
+    This system extension provides nfsrahead, a tool to configure the readahead for NFS mounts.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"

@@ -36,6 +36,7 @@ spec:
     - nebula
     - newt
     - nfsd
+    - nfsrahead
     - nut-client
     - nvidia-container-toolkit-lts
     - nvidia-container-toolkit-production

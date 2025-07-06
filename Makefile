@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-07-09T12:23:21Z by kres 1700045.
+# Generated on 2025-07-10T15:57:51Z by kres 1700045.
 
 # common variables
 
@@ -91,6 +91,7 @@ TARGETS += metal-agent
 TARGETS += nebula
 TARGETS += newt
 TARGETS += nfsd
+TARGETS += nfsrahead
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit-lts
 TARGETS += nvidia-container-toolkit-production

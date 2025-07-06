@@ -1,0 +1,52 @@
+name: nfsrahead
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libtirpc-zfs
+    from: /rootfs
+  - stage: libevent
+    from: /rootfs
+  - stage: sqlite
+    from: /rootfs
+steps:
+  - sources:
+      - url: https://mirrors.edge.kernel.org/pub/linux/utils/nfs-utils/{{ .NFS_UTILS_VERSION | replace "-" "." }}/nfs-utils-{{ .NFS_UTILS_VERSION | replace "-" "." }}.tar.xz
+        destination: nfs-utils.tar.xz
+        sha256: {{ .NFS_UTILS_SHA256 }}
+        sha512: {{ .NFS_UTILS_SHA512 }}
+    env:
+      PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
+    prepare:
+      - |
+        tar -xf nfs-utils.tar.xz --strip-components=1
+
+        mkdir -p /usr/local/include/sys
+        cp /pkg/patches/sys-queue.h /usr/local/include/sys/queue.h
+
+        ./configure \
+          --disable-gss \
+          --disable-ipv6 \
+          --disable-mount \
+          --disable-nfsdcld \
+          --disable-nfsdctl \
+          --disable-nfsv4 \
+          --disable-nfsv41 \
+          --disable-uuid \
+          --enable-junction=no \
+          --with-nfsconfig=/usr/local/etc/nfsrahead/nfs.conf \
+          --with-rpcgen=internal
+    build:
+      - |
+        make CFLAGS="-D_LARGEFILE64_SOURCE" -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/etc/nfsrahead
+        cp /pkg/files/nfs.conf /rootfs/usr/local/etc/nfsrahead/nfs.conf
+        cd tools/nfsrahead
+        make install DESTDIR=/rootfs
+
+        rm -rf /rootfs/usr/share
+finalize:
+  - from: /rootfs
+    to: /rootfs
