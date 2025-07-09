@@ -24,17 +24,21 @@ DRBD: 9.2.14
 qemu-guest-agent: 10.0.2
 fuse: 3.17.2
 nut: 2.8.3
-Tailscale: 1.84.0
-Linux firmware: 20250613
+Tailscale: 1.84.2
+Linux firmware: 20250708
 metal-agent: 0.1.3
 Intel u-code: 20250512
 wasmedge: 0.6.0
-Kata containers: 3.17.0
+Kata containers: 3.18.0
 NVIDIA LTS: 535.247.01
 NVIDIA Production: 570.140.08
 NVIDIA Container Toolkit: 1.17.8
 vmtoolsd: 1.1.0
 newt: 1.2.1
+Amazon ENA: 2.15.0
+gVisor: 20250625.0
+Spin: v0.20.0
+crun: 1.22
 """
 
     [notes.youki]
