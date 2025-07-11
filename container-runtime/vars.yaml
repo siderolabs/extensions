@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20250625.0
+GVISOR_VERSION: 20250707.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
 GVISOR_REV: 3887f881a20a07c5eb1f85b4e0f46141370ded3f
