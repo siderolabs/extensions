@@ -23,6 +23,8 @@ steps:
 
         mkdir -p /usr/local/include/sys
         cp /pkg/patches/sys-queue.h /usr/local/include/sys/queue.h
+      - |
+        export CFLAGS="${CFLAGS} -I/usr/local/include"
 
         ./configure \
           --disable-gss \
@@ -38,14 +40,13 @@ steps:
           --with-rpcgen=internal
     build:
       - |
-        make CFLAGS="-D_LARGEFILE64_SOURCE" -j $(nproc)
+        make -C support/nfs
+        make -C tools/nfsrahead
     install:
       - |
         mkdir -p /rootfs/usr/local/etc/nfsrahead
         cp /pkg/files/nfs.conf /rootfs/usr/local/etc/nfsrahead/nfs.conf
-        cd tools/nfsrahead
-        make install DESTDIR=/rootfs
-
+        make -C tools/nfsrahead DESTDIR=/rootfs install
         rm -rf /rootfs/usr/share
 finalize:
   - from: /rootfs

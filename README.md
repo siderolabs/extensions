@@ -121,6 +121,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 | [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools       | `v0.1.0`                           |
 | [mdadm](storage/mdadm/)             | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm)             | manage MD devices tool | `upstream version`                 |
 | [nfsd](storage/nfsd/)               | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd)               | nfsd kernel module     | `talos version`                    |
+| [nfsrahead](storage/nfsrahead/)     | [ghcr.io/siderolabs/nfsrahead](https://github.com/siderolabs/extensions/pkgs/container/nfsrahead)          | NFS read-ahead tool    | `upstream version`                 |
 | [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module      | `upstream version`-`talos version` |
 
 ### Power
