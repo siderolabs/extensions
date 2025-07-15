@@ -42,6 +42,13 @@ steps:
       - |
         mkdir -p /rootfs/usr/local/etc/containers
         cp /pkg/tailscale.yaml /rootfs/usr/local/etc/containers/
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/tailscale.spdx.json
+      version: {{ .TAILSCALE_VERSION }}
+      cpes:
+        - cpe:2.3:a:tailscale:tailscale:{{ .TAILSCALE_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - BSD-3-Clause
     test:
       - |
         mkdir -p /extensions-validator-rootfs

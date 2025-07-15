@@ -1,8 +1,7 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-11-27T11:10:30Z by kres 232fe63.
+# Generated on 2025-07-15T16:36:07Z by kres b869533.
 
-name: slack-notify
 "on":
   workflow_run:
     workflows:
@@ -10,6 +9,7 @@ name: slack-notify
       - weekly
     types:
       - completed
+name: slack-notify
 jobs:
   slack-notify:
     runs-on:
