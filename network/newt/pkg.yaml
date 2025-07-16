@@ -24,7 +24,7 @@ steps:
       - | # https://github.com/fosrl/newt?tab=readme-ov-file#binary
         cd newt
         if [ -f main.go ]; then
-          sed -i 's/Newt version replaceme/Newt version '"{{ .NEWT_VERSION }}"'/' main.go
+          sed -i 's/version_replaceme/'"{{ .NEWT_VERSION }}"'/' main.go
           echo "Updated main.go with version {{ .NEWT_VERSION }}"
         else
           echo "main.go not found"

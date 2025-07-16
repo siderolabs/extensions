@@ -1,18 +1,18 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20250625.0
+GVISOR_VERSION: 20250707.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
-GVISOR_REV: 3887f881a20a07c5eb1f85b4e0f46141370ded3f
-GVISOR_SHA256: 9dfb2ebda483abbf94bb8c3fe6cafd409ff196192aa5c350cb79fb94913aad0f
-GVISOR_SHA512: 35352dfbf12401d62c3724680a81119edea35529d7ceb30ea3b496d1bae89bbea21915abe2deea4fbd2ea1526727542f4551b21c9d33fc5d6fbc20a254c14daa
+GVISOR_REV: af8a1a4e46f267caaa03a9e1bc5883cc6776f3d3
+GVISOR_SHA256: 23cb5adc8b53880e9d71d96c74e35453523fb53f6dda80cafadd0e7d34d962d4
+GVISOR_SHA512: 2c18df377280d0866861c6c8f33e7c9503f19201091e92cbb1413ec517e0d29277ccffc673c10e2011eb8f6b433c5f0189eec3f7862e8ebe6b89c9a06012f2ce
 # renovate: datasource=github-releases depName=containerd/stargz-snapshotter
 STARGZ_SNAPSHOTTER_VERSION: v0.16.3
 STARGZ_SNAPSHOTTER_SHA256: 576f59d4375ac2cab24310d28e3ac98148c05dc6714649e1ec27e8d4fa8a9679
 STARGZ_SNAPSHOTTER_SHA512: 3a8226e29305f55e9244017cd3063e9ba9b8b4a79a404000677e0e99a84d1337b12a37f6d1b5539c9579f54b1c118fb0ce373eb402296a18d8e55474d549986a
 # renovate: datasource=github-releases depName=kubernetes/cloud-provider-aws
-CLOUD_PROVIDER_AWS_VERSION: v1.33.0
-CLOUD_PROVIDER_AWS_SHA256: 3603348939385f03601aef40e7266aa4f2c561d21161cd27af34db835b14cbd5
-CLOUD_PROVIDER_AWS_SHA512: 8ad66c67b68b2f51e814094b53574f1a2ab9c91f2e08e99e7175acb5a82049f6a4922edf52ba1474d62035a4f25aaebc0c26c4a32c839cc2e7fbf6f5951cca9b
+CLOUD_PROVIDER_AWS_VERSION: v1.33.1
+CLOUD_PROVIDER_AWS_SHA256: bac0c4757fceebdfcf1dfaaf5dd2bdc5e8a8b0b0171b997baca149a61c053e1b
+CLOUD_PROVIDER_AWS_SHA512: 80a4a224ed3131266303df4d6e7bf31d705e82f505cbb607717cec631504e69eba3d78bf92b84709c4812413732478c0bfc3d4db1566dd521aec2679c4ea6762
 # renovate: datasource=git-tags extractVersion=^containerd-shim-wasmedge\/(?<version>.*)$ depName=https://github.com/containerd/runwasi.git
 WASMEDGE_VERSION: v0.6.0
 WASMEDGE_ARM64_SHA256: b331a20e7b831da13721eea6b031e5ea79f295480777274b1593e5d612021110
