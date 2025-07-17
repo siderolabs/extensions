@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20250707.0
+GVISOR_VERSION: 20250715.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
 GVISOR_REV: af8a1a4e46f267caaa03a9e1bc5883cc6776f3d3
@@ -40,7 +40,7 @@ CRUN_ARM64_SHA512: 86fa88a794c520ff07adde892e613fc1b5b4e0d55114b33bb88b9b4fe63a5
 CRUN_AMD64_SHA256: 2f873d32bde0f3c135b271d974a3d9d77e97c3cd65f8a0354137559abd947925
 CRUN_AMD64_SHA512: 413969eab53b2aa417e06bba19c1369272eb16bc40a3261430ff1d4782c18d6388736ff2865cccacdd1cd06977e8caae2c55ea3b97e8518be2f328ba7f93d878
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=youki-dev/youki
-YOUKI_VERSION: 0.5.3
+YOUKI_VERSION: 0.5.4
 YOUKI_ARM64_SHA256: 237346a6b5ee8e500465a605bdb888dbe3b96278468b00e421a49eeb4fd3a239
 YOUKI_ARM64_SHA512: 994956035364e90eadb7917def454e8c33460f6dfeeebc9864d301fb865d671acf7cfa35a72ed1bfbcd2eca96f593cd45727ef6196534b40175ffb19628a7292
 YOUKI_AMD64_SHA256: 087ae98517bc6033ed48a2a8b3eb71b63b2b612e065639893d7ce02fb53aec02
