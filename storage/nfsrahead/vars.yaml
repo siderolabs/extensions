@@ -1,1 +1,1 @@
-VERSION: {{ .NFS_UTILS_VERSION }}
+VERSION: {{ .NFS_UTILS_VERSION  | replace "-" "." }}
