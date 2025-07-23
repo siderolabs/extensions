@@ -1,0 +1,2 @@
+# This will authorize Thunderbolt devices on system boot
+ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{authorized}=="0", ATTR{authorized}="1"
