@@ -57,6 +57,13 @@ steps:
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs
         cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
         /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/gvisor.spdx.json
+      version: {{ .GVISOR_VERSION }}
+      cpes:
+        - cpe:2.3:a:google:gvisor:{{ .GVISOR_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - Apache-2.0
 finalize:
   - from: /rootfs
     to: /rootfs
