@@ -29,28 +29,29 @@ steps:
         export CFLAGS="${CFLAGS} -I/usr/local/include"
 
         ./configure \
-          --disable-gss \
-          --disable-ipv6 \
-          --disable-mount \
-          --disable-nfsdcld \
-          --disable-nfsdctl \
-          --disable-nfsv4 \
-          --disable-nfsv41 \
-          --disable-uuid \
-          --enable-junction=no \
-          --with-nfsconfig=/usr/local/etc/nfsrahead/nfs.conf \
-          --with-rpcgen=internal \
-          --prefix=/usr/local
+            --disable-gss \
+            --disable-ipv6 \
+            --disable-mount \
+            --disable-nfsdcld \
+            --disable-nfsdctl \
+            --disable-nfsv4 \
+            --disable-nfsv41 \
+            --disable-uuid \
+            --enable-junction=no \
+            --with-nfsconfig=/usr/local/etc/nfsrahead/nfs.conf \
+            --with-rpcgen=internal \
+            --prefix=/usr/local
     build:
       - |
+        make clean
         make -C support/nfs
         make -C tools/nfsrahead
     install:
       - |
         mkdir -p /rootfs/usr/local/etc/nfsrahead
         cp /pkg/files/nfs.conf /rootfs/usr/local/etc/nfsrahead/nfs.conf
-        make -C tools/nfsrahead DESTDIR=/rootfs install
-        rm -rf /rootfs/usr/share
+        make DESTDIR=/rootfs install -C tools/nfsrahead
+        rm -rf /rootfs/usr/local/share
     test:
       - |
         mkdir -p /extensions-validator-rootfs
