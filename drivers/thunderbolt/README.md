@@ -66,3 +66,7 @@ You can also verify everything in dmesg:
  SUBSYSTEM=thunderbolt
  DEVICE=+thunderbolt:1-1
 ```
+
+## Security Warning
+
+This extension automatically authorizes all Thunderbolt devices during system boot, which poses potential security risks. Use at your own discretion.
