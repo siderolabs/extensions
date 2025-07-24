@@ -35,9 +35,15 @@ steps:
         /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
       - |
         [[ $(/rootfs/usr/local/lib/containers/cloudflared/usr/local/bin/cloudflared version) == *{{ .CLOUDFLARED_VERSION }}* ]]
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/cloudflared.spdx.json
+      version: {{ .CLOUDFLARED_VERSION }}
+      cpes:
+        - cpe:2.3:a:cloudflare:cloudflared:{{ .CLOUDFLARED_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - Apache-2.0
 finalize:
   - from: /rootfs
     to: /rootfs
   - from: /pkg/manifest.yaml
     to: /
-    

@@ -47,6 +47,11 @@ steps:
         /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
       - |
         [[ $(/rootfs/usr/local/lib/containers/newt/usr/local/bin/newt --version) == *{{ .NEWT_VERSION }}* ]]
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/newt.spdx.json
+      version: {{ .NEWT_VERSION }}
+      licenses:
+        - AGPL-3.0
 finalize:
   - from: /rootfs
     to: /rootfs

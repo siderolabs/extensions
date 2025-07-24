@@ -64,6 +64,13 @@ steps:
         rm -rf /rootfs/usr/local/glibc/include
         rm -rf /rootfs/usr/local/glibc/share
         rm -rf /rootfs/usr/local/glibc/var
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/glibc.spdx.json
+      version: {{ .GLIBC_VERSION }}
+      cpes:
+        - cpe:2.3:a:gnu:glibc:{{ .GLIBC_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - LGPL-2.1-or-later
 finalize:
   - from: /rootfs
     to: /rootfs
