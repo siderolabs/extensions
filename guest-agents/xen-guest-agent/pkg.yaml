@@ -46,6 +46,11 @@ steps:
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs
         cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
         /base-rootfs/extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/xen-guest-agent.spdx.json
+      version: {{ .XEN_GUEST_AGENT_VERSION }}
+      licenses:
+        - AGPL-3.0
 finalize:
   - from: /rootfs
     to: /rootfs

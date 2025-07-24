@@ -40,6 +40,13 @@ steps:
         /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
       - |
         [[ $(/rootfs/usr/local/lib/containers/zerotier/usr/local/bin/zerotier-one -v) == *{{ .ZEROTIER_VERSION }}* ]]
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/zerotier.spdx.json
+      version: {{ .ZEROTIER_VERSION }}
+      cpes:
+        - cpe:2.3:a:zerotier:zerotierone:{{ .ZEROTIER_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - BUSL-1.1
 finalize:
   - from: /rootfs
     to: /rootfs
