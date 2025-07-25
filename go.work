@@ -1,6 +1,7 @@
-go 1.23.0
+go 1.24.5
 
 use (
+	./internal/grype-scan
 	./examples/hello-world-service/src
 	./nvidia-gpu/nvidia-container-toolkit/nvidia-container-runtime-wrapper
 	./nvidia-gpu/nvidia-container-toolkit/nvidia-persistenced-wrapper
