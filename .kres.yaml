@@ -113,7 +113,7 @@ spec:
       toplevel: true
     - name: sign-images
       toplevel: true
-    - name: extensions-info
+    - name: grype-scan
       toplevel: true
 ---
 kind: custom.Step
@@ -189,6 +189,39 @@ spec:
           cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
             cosign sign --yes $$image; \
         done
+---
+kind: custom.Step
+name: grype-scan
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    script:
+      - "@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan"
+      # - "@$(MAKE) target-$@ TARGET_ARGS=\"--build-arg=GRYPE_EXTRA_ARGS='--fail-on=negligible'\""
+  ghaction:
+    enabled: true
+    cronOnly: true
+    jobs:
+      - name: grype-scan
+        runnerLabels:
+          - pkgs
+        triggerLabels:
+        - integration/grype
+        crons:
+          - '30 7 * * *'
+        artifacts:
+          enabled: true
+          skipArtifactDownload: true
+          additional:
+            - name: results
+              paths:
+                - _out/grype-scan/linux_amd64/combined.spdx.json
+                - _out/grype-scan/linux_amd64/grype-scan.log
+                - _out/grype-scan/linux_arm64/combined.spdx.json
+                - _out/grype-scan/linux_arm64/grype-scan.log
+              retentionDays: "180"
+              always: true
 ---
 kind: common.Renovate
 spec:

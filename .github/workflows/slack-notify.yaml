@@ -1,12 +1,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-07-15T16:36:07Z by kres b869533.
+# Generated on 2025-07-25T13:20:07Z by kres a3d02c0.
 
 "on":
   workflow_run:
     workflows:
       - default
       - weekly
+      - grype-scan-cron
     types:
       - completed
 name: slack-notify

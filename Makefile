@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-07-17T17:08:14Z by kres b869533.
+# Generated on 2025-07-30T05:49:57Z by kres dd1ed6f.
 
 # common variables
 
@@ -248,6 +248,10 @@ sign-images:
 	  cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
 	    cosign sign --yes $$image; \
 	done
+
+.PHONY: grype-scan
+grype-scan:
+	@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan
 
 .PHONY: rekres
 rekres:

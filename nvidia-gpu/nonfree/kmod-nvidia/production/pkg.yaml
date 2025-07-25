@@ -18,6 +18,9 @@ steps:
         cp /pkg/files/nvidia.conf /rootfs/usr/local/lib/modprobe.d/nvidia.conf
 
         cp -R /usr/lib/modules/* /rootfs/usr/lib/modules
+
+        mkdir -p /rootfs/usr/local/share/spdx
+        cp -R /usr/share/spdx/kmod-nvidia-production.spdx.json /rootfs/usr/local/share/spdx
     test:
       - |
         mkdir -p /extensions-validator-rootfs
