@@ -1,3 +1,57 @@
+## [Talos System Extensions 1.10.6](https://github.com/siderolabs/extensions/releases/tag/v1.10.6) (2025-07-31)
+
+Welcome to the v1.10.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux firmware: 20250708
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`2722b2e`](https://github.com/siderolabs/extensions/commit/2722b2e04711f37e721c5ec511238472f7343b69) chore: add tools/pkgs in the release notes
+* [`e63055e`](https://github.com/siderolabs/extensions/commit/e63055ebacad5c4edc23020384263b7be717ad7f) feat: update pkg, bump Linux firmware
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>5 commits</summary>
+<p>
+
+* [`2e6dd0a`](https://github.com/siderolabs/pkgs/commit/2e6dd0a3b624b816824cc08716ec90a4f2322d31) feat: update Linux to 6.12.40
+* [`3657b7d`](https://github.com/siderolabs/pkgs/commit/3657b7d755532a411f24c40c723f4e8456f0898d) feat: update Linux to 6.12.38
+* [`a8e77ff`](https://github.com/siderolabs/pkgs/commit/a8e77ffa5b52b40b36d8767cf9ffb401a1575aa7) feat: enable AMD encrypted memory
+* [`8dd783f`](https://github.com/siderolabs/pkgs/commit/8dd783fcf6b4120761dca1236697904e6c76cd4c) feat: update Linux to 6.12.36 and firmware
+* [`7e49fce`](https://github.com/siderolabs/pkgs/commit/7e49fce6cbb55497c4954878907006ba0f5bf1ad) feat: update tools and toolchain
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`31fd099`](https://github.com/siderolabs/tools/commit/31fd099ca3272a75b5402c413b168c2ca7e8270d) feat: update Go to 1.24.5
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.10.0-24-g28fa97d -> v1.10.0-29-g2e6dd0a
+* **github.com/siderolabs/tools**  v1.10.0-4-g9d54ed4 -> v1.10.0-5-g31fd099
+
+Previous release can be found at [v1.10.5](https://github.com/siderolabs/extensions/releases/tag/v1.10.5)
+
 ## [Talos System Extensions 1.10.5](https://github.com/siderolabs/extensions/releases/tag/v1.10.5) (2025-07-03)
 
 Welcome to the v1.10.5 release of Talos System Extensions!
