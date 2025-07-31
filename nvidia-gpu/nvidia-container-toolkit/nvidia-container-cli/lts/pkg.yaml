@@ -68,6 +68,13 @@ steps:
 
         # run ldconfig to update the cache
         /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/nvidia-container-cli.spdx.json
+      version: {{ .LIBNVIDIA_CONTAINER_VERSION }}
+      licenses:
+        - Apache-2.0
+        - GPL-3.0
+        - LGPL-3.0
 finalize:
   - from: /rootfs
     to: /rootfs

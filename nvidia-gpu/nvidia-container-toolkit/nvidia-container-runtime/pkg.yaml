@@ -58,6 +58,13 @@ steps:
 
         mkdir -p /rootfs/usr/local/etc/nvidia-container-runtime
         cp /pkg/nvidia-container-runtime.toml /rootfs/usr/local/etc/nvidia-container-runtime/config.toml
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/nvidia-container-runtime.spdx.json
+      version: {{ .CONTAINER_TOOLKIT_VERSION }}
+      cpes:
+        - cpe:2.3:a:nvidia:nvidia_container_toolkit:{{ .CONTAINER_TOOLKIT_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - Apache-2.0
 finalize:
   - from: /rootfs
     to: /rootfs

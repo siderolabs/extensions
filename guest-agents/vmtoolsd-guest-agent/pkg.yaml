@@ -3,13 +3,18 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - image: {{ .BUILD_ARG_PKGS_PREFIX }}/talos-vmtoolsd:{{ .TALOS_VMTOOLSD_VERSION }}
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/talos-vmtoolsd:{{ .TALOS_VMTOOLSD_VERSION }}"
     from: /
     to: /rootfs
 steps:
   - test:
       - |
         /extensions-validator validate --rootfs=/rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/vmtoolsd-guest-agent.spdx.json
+      version: {{ .TALOS_VMTOOLSD_VERSION }}
+      licenses:
+        - Apache-2.0
 finalize:
   - from: /rootfs
     to: /

@@ -30,6 +30,11 @@ steps:
     install:
       - |
         DESTDIR=/rootfs meson install -C .build
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libnvme.spdx.json
+      version: {{ .LIBNVME_VERSION }}
+      licenses:
+        - LGPL-2.1
 finalize:
   - from: /rootfs
     to: /rootfs
