@@ -27,6 +27,13 @@ steps:
         make DESTDIR=/rootfs install
         # we only need the libs and headers, remove everything else
         find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libevent.spdx.json
+      version: {{ .LIBEVENT_VERSION }}
+      cpes:
+        - cpe:2.3:a:libevent_project:libevent:{{ .LIBEVENT_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - BSD-3-Clause
 finalize:
   - from: /rootfs
     to: /rootfs

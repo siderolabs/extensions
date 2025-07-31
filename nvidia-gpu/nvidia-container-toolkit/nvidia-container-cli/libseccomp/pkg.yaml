@@ -36,6 +36,13 @@ steps:
         make install DESTDIR=/rootfs
          # we only need the libs and headers, remove everything else
         find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libseccomp.spdx.json
+      version: {{ .LIBSECCOMP_VERSION }}
+      cpes:
+        - cpe:2.3:a:libseccomp_project:libseccomp:{{ .LIBSECCOMP_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - LGPL-2.1
 finalize:
   - from: /rootfs
     to: /rootfs

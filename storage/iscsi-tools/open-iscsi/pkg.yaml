@@ -46,6 +46,13 @@ steps:
         rm -rf /rootfs/etc
         rm -rf /rootfs/usr/local/{etc,share,include,pkgconfig}
         rm -rf /rootfs/var
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/open-iscsi.spdx.json
+      version: {{ .OPEN_ISCSI_VERSION }}
+      cpes:
+        - cpe:2.3:a:open-iscsi_project:open-iscsi:{{ .OPEN_ISCSI_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - GPL-2.0
 finalize:
   - from: /rootfs
     to: /rootfs

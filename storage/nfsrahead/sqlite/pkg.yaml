@@ -27,6 +27,12 @@ steps:
         make DESTDIR=/rootfs install
         # we only need the libs and headers, remove everything else
         find /rootfs/usr/local/ -type d \( -name bin -o -name sbin -o -name share \) -prune -exec rm -rf {} \;
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/sqlite.spdx.json
+      version: {{ .SQLITE_VERSION }}
+      cpes:
+        - cpe:2.3:a:sqlite:sqlite:{{ .SQLITE_VERSION }}:*:*:*:*:*:*:*
+      licenses: [] # explicit empty, sqlite is Public Domain
 finalize:
   - from: /rootfs
     to: /rootfs
