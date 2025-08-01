@@ -40,13 +40,6 @@ steps:
         # since talos doesn't have a shell, this would fail
         # the default shipped file is a no-op, so safe to remove.
         rm -f /rootfs/usr/local/libexec/zfs/zfs_prepare_disk
-    sbom:
-      outputPath: /rootfs/usr/local/share/spdx/zfs-tools.spdx.json
-      version: {{ .ZFS_DRIVER_VERSION }}
-      cpes:
-        - cpe:2.3:a:openzfs:openzfs:{{ .ZFS_DRIVER_VERSION }}:*:*:*:*:*:*:*
-      licenses:
-        - CDDL-1.0
 finalize:
   - from: /rootfs
     to: /rootfs
