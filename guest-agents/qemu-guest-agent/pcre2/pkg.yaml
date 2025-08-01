@@ -27,7 +27,7 @@ steps:
       outputPath: /rootfs/usr/local/share/spdx/pcre2.spdx.json
       version: {{ .PCRE2_VERSION }}
       cpes:
-        - cpe:2.3:a:pcre:pcre2:{{ .CONTAINER_TOOLKIT_VERSION }}:*:*:*:*:*:*:*
+        - cpe:2.3:a:pcre:pcre2:{{ .PCRE2_VERSION }}:*:*:*:*:*:*:*
       licenses:
         - BSD-2-Clause
 finalize:
