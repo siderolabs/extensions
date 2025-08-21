@@ -19,6 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
+talos-vmtoolsd: 1.3.0
 """
 
 

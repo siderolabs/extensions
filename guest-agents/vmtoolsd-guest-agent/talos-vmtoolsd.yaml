@@ -1,0 +1,19 @@
+name: talos-vmtoolsd
+container:
+  entrypoint: ./talos-vmtoolsd
+  args:
+    - vmtoolsd
+    - --use-machined
+  mounts:
+    - source: /system/run/machined/machine.sock
+      destination: /system/run/machined/machine.sock
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+depends:
+  - path: /system/run/machined/machine.sock
+  - network:
+    - addresses
+restart: always
