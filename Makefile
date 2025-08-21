@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-26T09:14:44Z by kres 6262116.
+# Generated on 2025-08-26T16:58:07Z by kres 6262116.
 
 # common variables
 
@@ -25,7 +25,7 @@ SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 # sync bldr image with pkgfile
 
-BLDR_RELEASE := v0.5.1
+BLDR_RELEASE := v0.5.2
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
 BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
@@ -222,6 +222,15 @@ deps.png:  ## Generates a dependency graph of the Pkgfile.
 extensions: internal/extensions/descriptions.yaml
 	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
 
+.PHONY: extensions-catalog
+extensions-catalog: $(ARTIFACTS)/bldr
+	@$(ARTIFACTS)/bldr dump --build-arg TAG=VERSION --template hack/catalog.template > $(ARTIFACTS)/catalog.md 2>/dev/null
+	@lead='^<!-- ### BEGIN GENERATED CONTENT -->$$'; tail='^<!-- ### END GENERATED CONTENT -->$$'; sed -i -e "/$$lead/,/$$tail/{ /$$lead/{p; r $(ARTIFACTS)/catalog.md" -e "}; /$$tail/p; d }" README.md
+
+.PHONY: check-dirty
+check-dirty:
+	@if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
+
 .PHONY: extensions-metadata
 extensions-metadata: $(ARTIFACTS)/bldr
 	@rm -f _out/extensions-metadata
@@ -271,4 +280,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-

@@ -1,1 +1,2 @@
 VERSION: "{{ .NEWT_VERSION }}"
+TIER: "contrib"

@@ -19,8 +19,6 @@ steps:
     prepare:
       - |
         tar -xf fabricmanager.tar.xz --strip-components=1
-
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     install:
       - |
         mkdir -p /rootfs/usr/local/bin \

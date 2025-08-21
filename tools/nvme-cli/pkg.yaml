@@ -28,8 +28,6 @@ steps:
           -Ddocs=false \
           -Dsysconfdir=/etc \
           .build
-      - |
-        sed -i 's#$VERSION#{{ .NVME_CLI_VERSION }}#' /pkg/manifest.yaml
     build:
       - |
         meson compile -C .build

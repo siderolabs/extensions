@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: gasket-driver
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides google gasket driver kernel modules built against a specific Talos version.
+    This driver is required for PCIe and M.2 Google Coral accelerators. There are 2 kernel modules ("gasket"
+    and "apex") required to enable this driver.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"

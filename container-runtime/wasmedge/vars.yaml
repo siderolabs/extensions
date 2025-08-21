@@ -1,1 +1,2 @@
 VERSION: "{{ .WASMEDGE_VERSION }}"
+TIER: "extra"

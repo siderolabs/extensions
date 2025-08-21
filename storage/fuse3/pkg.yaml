@@ -11,8 +11,6 @@ steps:
         sha512: {{ .FUSE3_SHA512 }}
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xzf fuse.tar.gz --strip-components=1
 
         mkdir -p /rootfs/usr/local/etc

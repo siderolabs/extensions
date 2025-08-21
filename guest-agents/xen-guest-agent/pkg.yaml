@@ -23,8 +23,6 @@ steps:
   - network: default
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xzvf xe-guest-agent.tar.gz --strip-components=1
       - |
         cargo fetch --target {{ .ARCH }}-alpine-linux-musl

@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: nvidia-open-gpu-kernel-modules-production
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides nvidia open source driver kernel modules built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"

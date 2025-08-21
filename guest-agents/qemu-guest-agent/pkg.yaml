@@ -13,8 +13,6 @@ steps:
         sha512: {{ .QEMU_SHA512 }}
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xf qemu.tar.xz --strip-components=1
         rm qemu.tar.xz
       - |

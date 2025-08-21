@@ -16,8 +16,6 @@ steps:
       LDFLAGS: '-static'
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xzvf zerotier.tar.gz --strip-components=1
     build:
       - |

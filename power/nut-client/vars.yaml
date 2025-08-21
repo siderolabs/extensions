@@ -1,1 +1,2 @@
 VERSION: "{{ .NUT_VERSION }}"
+TIER: "contrib"

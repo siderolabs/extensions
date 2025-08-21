@@ -1,1 +1,2 @@
 VERSION: "{{ .CRUN_VERSION }}"
+TIER: "extra"

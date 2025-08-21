@@ -1,1 +1,2 @@
 VERSION: "{{ .GVISOR_VERSION }}"
+TIER: "core"

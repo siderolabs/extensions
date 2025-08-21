@@ -17,8 +17,6 @@ steps:
   - network: default
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         mkdir -p ${GOPATH}/src/k8s.io/cloud-provider-aws
 
         tar -xzf cloud-provider-aws.tar.gz --strip-components=1 -C ${GOPATH}/src/k8s.io/cloud-provider-aws

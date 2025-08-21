@@ -9,8 +9,6 @@ dependencies:
 steps:
   - prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-
         mkdir -p /rootfs
   # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
   - install:

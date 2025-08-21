@@ -38,122 +38,153 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ## Extension Catalog
 
+### Official Extension Tiers
+
+Talos Linux provides a number of official system extensions, which are split into the following
+tiers based on support level:
+
+| Tier | :green_square: core | :yellow_square: extra | :white_large_square: contrib |
+| --- | --- | --- | --- |
+| Description | Extensions fully supported by Sidero Labs | Some level of support, might vary per extension | Supported by the community |
+| Supported by Sidero Labs | 🟢 | ✔️ (best effort) | ❌ |
+| Support Channel | GitHub [Issues](https://github.com/siderolabs/extensions/issues), [Discussions](https://github.com/siderolabs/extensions/discussions), [Sidero Labs commercial support](https://www.siderolabs.com/support/) | GitHub [Issues](https://github.com/siderolabs/extensions/issues) and [Discussions](https://github.com/siderolabs/extensions/discussions) | GitHub [Discussions in “contrib” section](https://github.com/siderolabs/extensions/discussions/categories/contrib) |
+| Updates managed by Sidero Labs | 🟢 | 🟢 | ✔️ (best effort) |
+| Documentation | 🟢 | ✔️ (best effort) | ❌ |
+| Automated tests | 🟢 (or no automated tests required, e.g. firmware) | ✔️ (best effort) | ❌ |
+| SBOMs | 🟢 (or not required, e.g. firmware) | ✔️ (best effort) | ❌ (community might provide some, but not required) |
+| CVE Scan | 🟢 | ✔️ (scan is done, but CVEs don’t block the release) | ❌ |
+| Compatibility/Build issues | 🟢 | ✔️ (best effort) | ❌ (extension will be disabled if it fails to build) |
+
+<!-- ### BEGIN GENERATED CONTENT -->
 ### Container Runtimes
 
-| Name                                                                 | Image                                                                                                                         | Description                                                                                                                        | Version Format     |
-| -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| [crun](container-runtime/crun/)                                      | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun)                                       | [crun](https://github.com/containers/crun) container runtime                                                                       | `upstream version` |
-| [ecr-credential-provider](container-runtime/ecr-credential-provider) | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | [ECR Credential Provider](https://github.com/kubernetes/cloud-provider-aws/tree/master/cmd/ecr-credential-provider) kubelet plugin | `upstream version` |
-| [gvisor](container-runtime/gvisor/)                                  | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor)                                   | [gVisor](https://gvisor.dev/) container runtime                                                                                    | `upstream version` |
-| [kata-containers](container-runtime/kata-containers)                 | [ghcr.io/siderolabs/kata-containers](https://github.com/siderolabs/extensions/pkgs/container/kata-containers)                 | [Kata Containers](https://github.com/kata-containers/kata-containers) container runtime                                            | `upstream version` |
-| [spin](container-runtime/spin)                                       | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin)                                       | [Spin](https://github.com/spinkube/containerd-shim-spin) container runtime                                                         | `upstream_version` |
-| [stargz-snapshotter](container-runtime/stargz-snapshotter/)          | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter)           | [Stargz Snapshotter](https://github.com/containerd/stargz-snapshotter) container runtime                                           | `upstream version` |
-| [wasmedge](container-runtime/wasmedge)                               | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge)                               | [WasmEdge](https://github.com/containerd/runwasi) container runtime                                                                | `upstream_version` |
-| [youki](container-runtime/youki)                                     | [ghcr.io/siderolabs/youki](https://github.com/siderolabs/extensions/pkgs/container/youki)                                     | [Youki](https://github.com/youki-dev/youki) container runtime                                                                      | `upstream_version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.22` |  This system extension provides crun using containerd's runtime handler. |
+| [ecr-credential-provider](container-runtime/ecr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | `v1.33.1` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against AWS' Elastic Container Registry and pull images. |
+| [gvisor](container-runtime/gvisor) | :green_square: core | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | `20250707.0` |  This system extension provides gVisor using containerd's runtime handler. |
+| [gvisor-debug](container-runtime/gvisor-debug) | :yellow_square: extra | [ghcr.io/siderolabs/gvisor-debug](https://github.com/siderolabs/extensions/pkgs/container/gvisor-debug) | `v1.0.0` |  This system extension enables gVisor debug logging. |
+| [kata-containers](container-runtime/kata-containers) | :yellow_square: extra | [ghcr.io/siderolabs/kata-containers](https://github.com/siderolabs/extensions/pkgs/container/kata-containers) | `3.18.0` |  This system extension provides kata-container using containerd's runtime handler. |
+| [spin](container-runtime/spin) | :yellow_square: extra | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin) | `v0.20.0` |  This system extension provides support for spin runtime (WebAssembly) containers. |
+| [stargz-snapshotter](container-runtime/stargz-snapshotter) | :green_square: core | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter) | `v0.16.3` |  This system extension provides Stargz Snapshotter using containerd's runtime handler. |
+| [wasmedge](container-runtime/wasmedge) | :yellow_square: extra | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge) | `v0.6.0` |  This system extension provides support for WasmEdge runtime (WebAssembly) containers. |
+| [youki](container-runtime/youki) | :white_large_square: contrib | [ghcr.io/siderolabs/youki](https://github.com/siderolabs/extensions/pkgs/container/youki) | `0.5.3` |  This system extension provides youki using containerd's runtime handler. |
 
 ### Firmware
 
-| Name                                               | Image                                                                                                               | Description                 | Version Format           |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------ |
-| [amd-ucode](firmware/amd-ucode/)                   | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode)                   | AMD CPU microcode updates   | `linux firmware version` |
-| [bnx2-bnx2x](firmware/bnx2-bnx2x/)                 | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x)                 | Broadcom NetXtreme firmware | `linux firmware version` |
-| [chelsio-firmware](firmware/chelsio-firmware/)     | [ghcr.io/siderolabs/chelsio-firmware](https://github.com/siderolabs/extensions/pkgs/container/chelsio-firmware)     | Chelsio NIC firmware        | `linux firmware version` |
-| [intel-ice-firmware](firmware/intel-ice-firmware/) | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | Intel ICE NIC firmware      | `linux firmware version` |
-| [intel-ucode](firmware/intel-ucode/)               | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode)               | Intel CPU microcode updates | `upstream version`       |
-| [qlogic-firmware](firmware/qlogic-firmware/)       | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware)       | Qlogic firmware             | `linux firmware version` |
-| [realtek-firmware](firmware/realtek-firmware/)     | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware)     | Realtek firmware            | `linux firmware version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [amd-ucode](firmware/amd-ucode) | :green_square: core | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode) | `20250808` |  This system extension provides AMD microcode binaries. |
+| [bnx2-bnx2x](firmware/bnx2-bnx2x) | :green_square: core | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x) | `20250808` | This system extension provides bnx2 and bnx2x binaries. |
+| [chelsio-firmware](firmware/chelsio) | :white_large_square: contrib | [ghcr.io/siderolabs/chelsio-firmware](https://github.com/siderolabs/extensions/pkgs/container/chelsio-firmware) | `20250808` |  This system extension provides Chelsio NIC firmware binaries. |
+| [intel-ice-firmware](firmware/intel-ice-firmware) | :green_square: core | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | `20250808` |  This system extension provides Intel Ice firmware binaries. |
+| [intel-ucode](firmware/intel-ucode) | :green_square: core | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | `20250812` |  This system extension provides Intel microcode binaries. |
+| [qlogic-firmware](firmware/qlogic-firmware) | :green_square: core | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware) | `20250808` |  This system extension provides firmware for QLogic devices. |
+| [realtek-firmware](firmware/realtek-firmware) | :green_square: core | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware) | `20250808` |  This system extension provides realtek firmware binaries. |
+| [revpi-firmware](firmware/revpi-firmware) | :white_large_square: contrib | [ghcr.io/siderolabs/revpi-firmware](https://github.com/siderolabs/extensions/pkgs/container/revpi-firmware) | `v1.0.0` |  This system extension provides tools e.g. udev rules for the RevolutionPi platform. |
 
 ### Direct Rendering Manager (DRM)
 
-| Name                     | Image                                                                                           | Description                       | Version Format                           |
-| ------------------------ | ----------------------------------------------------------------------------------------------- | --------------------------------- | ---------------------------------------- |
-| [amdgpu](drm/amdgpu/)    | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu)     | AMD GPU firmware and drivers      | `linux firmware version`-`talos version` |
-| [i915](drm/i915/)        | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915)         | Intel GPU firmware and drivers    | `linux firmware version`-`talos version` |
-| [panfrost](drm/panfrost) | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | Panfrost GPU firmware and drivers | `linux firmware version`-`talos version` |
-| [vc4](drm/vc4) | [ghcr.io/siderolabs/vc4](https://github.com/siderolabs/extensions/pkgs/container/vc4) | Broadcom VideoCore GPU drivers | `talos version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [amdgpu](drm/amdgpu) | :green_square: core | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | `20250808-VERSION` |  This system extension provides AMDGPU firmware binaries and kernel modules. |
+| [i915](drm/i915) | :green_square: core | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915) | `20250808-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
+| [panfrost](drm/panfrost) | :white_large_square: contrib | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | `20250808-VERSION` |  This system extension provides ARM Mali Midgard, Bifrost, and Valhall firmware binaries and kernel modules. |
+| [vc4](drm/vc4) | :yellow_square: extra | [ghcr.io/siderolabs/vc4](https://github.com/siderolabs/extensions/pkgs/container/vc4) | `VERSION` |  This system extension provides kernel modules for Broadcom VideoCore GPU. |
 
 ### Drivers
 
-| Name                                 | Image                                                                                                                                       | Description                          | Version Format                                        |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------- |
-| [amazon-ena](drivers/amazon-ena/)    | [ghcr.io/siderolabs/amazon-ena](https://github.com/siderolabs/extensions/pkgs/container/amazon-ena)                                         | Amazon ENA driver                    | `upstream-talos version`                                       |
-| [chelsio](drivers/chelsio/)          | [ghcr.io/siderolabs/chelsio-drivers](https://github.com/siderolabs/extensions/pkgs/container/chelsio-drivers)                               | Chelsio NIC drivers                  | `talos version`                                       |
-| [gasket](drivers/gasket/)            | [ghcr.io/siderolabs/gasket-driver](https://github.com/siderolabs/extensions/pkgs/container/gasket-driver)                                   | Driver for Google Coral PCIe devices | `gasket driver upstream short commit`-`talos version` |
-| [mei](drivers/mei/)                  | [ghcr.io/siderolabs/mei](https://github.com/siderolabs/extensions/pkgs/container/mei)                                                       | Driver for Intel Management Engine   | `talos version`                                       |
-| [nvidia](nvidia-gpu/nvidia-modules/) | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules) | NVIDIA OSS Driver                    | `nvidia driver upstream version`-`talos version`      |
-| [thunderbolt](drivers/thunderbolt/)  | [ghcr.io/siderolabs/thunderbolt](https://github.com/siderolabs/extensions/pkgs/container/thunderbolt)                                       | Thunderbolt drivers                  | `talos version`                                       |
-| [uinput](drivers/uinput/)            | [ghcr.io/siderolabs/uinput](https://github.com/siderolabs/extensions/pkgs/container/uinput)                                                 | uinput drivers                       | `talos version`                                       |
-| [usb-modem](drivers/usb-modem/)      | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers)                           | USB Modem drivers                    | `talos version`                                       |
-| [v4l-uvc](drivers/v4l-uvc/)          | [ghcr.io/siderolabs/v4l-uvc-drivers](https://github.com/siderolabs/extensions/pkgs/container/v4l-uvc-drivers)                               | USB Video Class (Webcam) drivers     | `talos version`                                       |
-| [xdma-driver](drivers/xdma-driver/)  | [ghcr.io/siderolabs/xdma-driver](https://github.com/siderolabs/extensions/pkgs/container/xdma-driver)                                       | Xilinx PCIe DMA                      | `upstream-talos version`                                       |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [amazon-ena](drivers/amazon-ena) | :green_square: core | [ghcr.io/siderolabs/amazon-ena](https://github.com/siderolabs/extensions/pkgs/container/amazon-ena) | `2.15.0-VERSION` |  This system extension provides Amazon ENA kernel modules built against a specific Talos version. ENA is a networking interface designed to make good use of modern CPU features and system architectures. |
+| [chelsio-drivers](drivers/chelsio) | :yellow_square: extra | [ghcr.io/siderolabs/chelsio-drivers](https://github.com/siderolabs/extensions/pkgs/container/chelsio-drivers) | `VERSION` |  This system extension provides Chelsio network drivers. |
+| [gasket-driver](drivers/gasket) | :yellow_square: extra | [ghcr.io/siderolabs/gasket-driver](https://github.com/siderolabs/extensions/pkgs/container/gasket-driver) | `5815ee3-VERSION` |  This system extension provides google gasket driver kernel modules built against a specific Talos version. This driver is required for PCIe and M.2 Google Coral accelerators. There are 2 kernel modules ("gasket" and "apex") required to enable this driver. |
+| [hailort](drivers/hailort) | :yellow_square: extra | [ghcr.io/siderolabs/hailort](https://github.com/siderolabs/extensions/pkgs/container/hailort) | `4.21.0` |  Driver for HailoRT family of AI hardware (eg. Hailo-8L) and is required for PCIe and M.2 Hailo accelerators. |
+| [mei](drivers/mei) | :green_square: core | [ghcr.io/siderolabs/mei](https://github.com/siderolabs/extensions/pkgs/container/mei) | `VERSION` |  This system extension provides Intel Management Engine drivers kernel modules built against a specific Talos version. This driver enables the Intel Management Engine, a prerequisite for Intel Arc discrete GPUs. |
+| [tenstorrent](drivers/tenstorrent) | :yellow_square: extra | [ghcr.io/siderolabs/tenstorrent](https://github.com/siderolabs/extensions/pkgs/container/tenstorrent) | `1.34` |  Driver for Tenstorrent AI processing hardware |
+| [thunderbolt](drivers/thunderbolt) | :yellow_square: extra | [ghcr.io/siderolabs/thunderbolt](https://github.com/siderolabs/extensions/pkgs/container/thunderbolt) | `VERSION` |  This system extension provides Thunderbolt/USB4 drivers kernel modules built against a specific Talos version. It enables support for Thunderbolt/USB4 devices, including those used for networking. WARNING: This extension automatically authorizes all Thunderbolt devices during system boot, which poses potential security risks. Use at your own discretion. |
+| [uinput](drivers/uinput) | :yellow_square: extra | [ghcr.io/siderolabs/uinput](https://github.com/siderolabs/extensions/pkgs/container/uinput) | `VERSION` |  This system extension provides the uinput kernel module built against a specific Talos version. This kernel module makes it possible to emulate input devices from userspace. By writing to /dev/uinput (or /dev/input/uinput) device, a process can create a virtual input device with specific capabilities. Once this virtual device is created, the process can send events through it, that will be delivered to userspace and in-kernel consumers. |
+| [usb-modem-drivers](drivers/usb-modem) | :yellow_square: extra | [ghcr.io/siderolabs/usb-modem-drivers](https://github.com/siderolabs/extensions/pkgs/container/usb-modem-drivers) | `VERSION` |  This system extension provides USB modem drivers kernel modules built against a specific Talos version. This driver is required for USB modems to function. This extension includes all the drivers needed to operate any USB modem under Linux, but your device might not require all of them. Read your device's docs to learn which drivers you need, or just enable them all as a starting point. |
+| [v4l-uvc-drivers](drivers/v4l-uvc) | :yellow_square: extra | [ghcr.io/siderolabs/v4l-uvc-drivers](https://github.com/siderolabs/extensions/pkgs/container/v4l-uvc-drivers) | `VERSION` |  This system extension provides the Video4Linux kernel modules required for USB Video Class devices built against a specific Talos version. This driver enables Video4Linux devices such as webcams. |
+| [xdma-driver](drivers/xdma-driver) | :yellow_square: extra | [ghcr.io/siderolabs/xdma-driver](https://github.com/siderolabs/extensions/pkgs/container/xdma-driver) | `aefa9a1-VERSION` |  Xilinx DMA Driver |
 
 ### Digital Video Broadcasting (DVB)
 
-| Name                            | Image                                                                                                 | Description                                                  | Version Format  |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | --------------- |
-| [dvb-cx23885](dvb/dvb-cx23885/) | [ghcr.io/siderolabs/dvb-cx23885](https://github.com/siderolabs/extensions/pkgs/container/dvb-cx23885) | DVB kernel modules + firmware for Hauppage WinTV-quadHD PCIe | `talos version` |
-| [dvb-m88ds3103](dvb/dvb-m88ds3103/) | [ghcr.io/siderolabs/dvb-m88ds3103](https://github.com/siderolabs/extensions/pkgs/container/dvb-m88ds3103) | DVB firmware for DVBSky S952 PCIe          | `upstream version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [dvb-cx23885](dvb/cx23885) | :white_large_square: contrib | [ghcr.io/siderolabs/dvb-cx23885](https://github.com/siderolabs/extensions/pkgs/container/dvb-cx23885) | `VERSION` |  This system extension provides the dvb kernel modules required for Hauppage WinTV-quadHD PCIe tuner built against a specific Talos version. Includes the firmware required. |
+| [dvb-m88ds3103](dvb/dvb-m88ds3103) | :white_large_square: contrib | [ghcr.io/siderolabs/dvb-m88ds3103](https://github.com/siderolabs/extensions/pkgs/container/dvb-m88ds3103) | `VERSION` |  This system extension provides the dvb-demod-m88ds3103.fw firmware for DVB-S/S2 PCIe cards like DVBSky S952. It is intended to be used as a dependency on existing DVB driver extension dvb-cx23885 that provides the necessary kernel modules. |
 
 ### Miscellaneous
 
-| Name                            | Image                                                                                                 | Description                 | Version Format     |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------- | ------------------ |
-| [binfmt-misc](misc/binfmt-misc) | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | Miscellaneous Binary Format | `talos version`    |
-| [glibc](misc/glibc)             | [ghcr.io/siderolabs/glibc](https://github.com/siderolabs/extensions/pkgs/container/glibc)             | glibc                       | `upstream version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [binfmt-misc](misc/binfmt-misc) | :yellow_square: extra | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | `VERSION` |  This system extension provides kernel module driver for binfmt-misc built against a specific Talos version. |
+| [glibc](misc/glibc) | :green_square: core | [ghcr.io/siderolabs/glibc](https://github.com/siderolabs/extensions/pkgs/container/glibc) | `2.41` | This system extension provides glibc. |
 
 ### Network
 
-| Name                                | Image                                                                                                 | Description                                               | Version Format     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------ |
-| [cloudflared](network/cloudflared/) | [ghcr.io/siderolabs/cloudflared](https://github.com/siderolabs/extensions/pkgs/container/cloudflared) | [Cloudflared](https://github.com/cloudflare/cloudflared/) | `upstream version` |
-| [newt](network/newt/) | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | [Cloudflared](https://github.com/fosrl/newt/) | `upstream version` |
-| [nebula](network/nebula/)           | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula)           | [Nebula](https://github.com/slackhq/nebula)               | `upstream version` |
-| [lldpd](network/lldpd/)             | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd)             | [LLDP](https://github.com/lldpd/lldpd)                    | `upstream version` |
-| [tailscale](network/tailscale/)     | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale)     | [Tailscale](https://tailscale.com)                        | `upstream version` |
-| [zerotier](network/zerotier/)       | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier)       | [ZeroTier](https://zerotier.com)                          | `upstream version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [cloudflared](network/cloudflared) | :white_large_square: contrib | [ghcr.io/siderolabs/cloudflared](https://github.com/siderolabs/extensions/pkgs/container/cloudflared) | `2024.12.1` |  Cloudflare Tunnel securely connects resources to Cloudflare without a public IP. A lightweight daemon (cloudflared) creates outbound-only connections to Cloudflare, allowing safe access to services like HTTP, SSH, remote desktops, and other protocols. More info: https://github.com/cloudflare/cloudflared/ |
+| [lldpd](network/lldpd) | :yellow_square: extra | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd) | `1.0.19` |  LLDP adds a LLDP discovery service to Talos. LLDP cli can be used to interface with the daemon. |
+| [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.5` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
+| [newt](network/newt) | :white_large_square: contrib | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | `1.3.2` |  Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin. By using Newt, you don't need to manage complex WireGuard tunnels and NATing. More info: https://github.com/fosrl/newt |
+| [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.84.2` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
+| [zerotier](network/zerotier) | :white_large_square: contrib | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier) | `1.14.2` |  Connect your Talos cluster into a zerotier network |
 
 ### Storage
 
-| Name                                | Image                                                                                                 | Description            | Version Format                     |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------- | ---------------------------------- |
-| [btrfs](storage/btrfs/)             | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs)             | BTRFS driver module    | `talos version`                    |
-| [drbd](storage/drbd/)               | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd)               | DRBD driver module     | `upstream version`-`talos version` |
-| [iscsi-tools](storage/iscsi-tools/) | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | Open iSCSI tools       | `v0.1.0`                           |
-| [mdadm](storage/mdadm/)             | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm)             | manage MD devices tool | `upstream version`                 |
-| [nfsd](storage/nfsd/)               | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd)               | nfsd kernel module     | `talos version`                    |
-| [nfsrahead](storage/nfsrahead/)     | [ghcr.io/siderolabs/nfsrahead](https://github.com/siderolabs/extensions/pkgs/container/nfsrahead)          | NFS read-ahead tool    | `upstream version`                 |
-| [zfs](storage/zfs/)                 | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs)                 | ZFS driver module      | `upstream version`-`talos version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [btrfs](storage/btrfs) | :yellow_square: extra | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs) | `VERSION` |  This system extension provides kernel module driver for BTRFS built against a specific Talos version. |
+| [drbd](storage/drbd) | :yellow_square: extra | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd) | `9.2.14-VERSION` |  This system extension provides kernel module driver for DRBD built against a specific Talos version. |
+| [fuse3](storage/fuse3) | :green_square: core | [ghcr.io/siderolabs/fuse3](https://github.com/siderolabs/extensions/pkgs/container/fuse3) | `3.17.2` |  This system extension provides fuse3 functionality. |
+| [iscsi-tools](storage/iscsi-tools) | :green_square: core | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | `v0.2.0` |  This system extension provides iscsi-tools. |
+| [mdadm](storage/mdadm) | :white_large_square: contrib | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm) | `v4.3` |  This system extension provides mdadm binary. |
+| [nfsd](storage/nfsd) | :yellow_square: extra | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd) | `VERSION` |  This system extension provides kernel module driver for NFSD built against a specific Talos version. |
+| [nfsrahead](storage/nfsrahead) | :white_large_square: contrib | [ghcr.io/siderolabs/nfsrahead](https://github.com/siderolabs/extensions/pkgs/container/nfsrahead) | `2.8.3` |  This system extension provides nfsrahead, a tool to configure the readahead for NFS mounts. |
+| [zfs](storage/zfs) | :yellow_square: extra | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs) | `2.3.3-VERSION` |  This system extension provides the ZFS kernel module, the ZFS utilities, and a service to import all ZFS pools on start and unmount all pools on stop. |
 
 ### Power
 
-| Name                            | Image                                                                                               | Description                                                    | Version Format     |
-| ------------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------ |
-| [nut-client](power/nut-client/) | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/extensions/pkgs/container/nut-client) | [Network UPS Tools](https://networkupstools.org) upsmon client | `upstream version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [nut-client](power/nut-client) | :white_large_square: contrib | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/extensions/pkgs/container/nut-client) | `2.8.3` |  This system extension provides the network-ups-tools upsmon service. |
 
 ### Guest Agents
 
-| Name                                                       | Image                                                                                                                   | Description                                                            | Version Format     |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------ |
-| [metal-agent](guest-agents/metal-agent/)                   | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent)                   | [Talos Metal Agent](https://github.com/siderolabs/talos-metal-agent)   | `upstream version` |
-| [qemu-guest-agent](guest-agents/qemu-guest-agent/)         | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent)         | [QEMU Guest Agent](https://wiki.qemu.org/Features/GuestAgent)          | `upstream version` |
-| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent/) | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | [talos-vmtoolsd](https://github.com/siderolabs/talos-vmtoolsd)         | `upstream version` |
-| [xen-guest-agent](guest-agents/xen-guest-agent/)     | [ghcr.io/siderolabs/xen-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/xen-guest-agent)     | [xe-guest-utilities](https://github.com/xenserver/xe-guest-utilitiest) | `upstream version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [glib](guest-agents/qemu-guest-agent/glib) | :yellow_square: extra | [ghcr.io/siderolabs/glib](https://github.com/siderolabs/extensions/pkgs/container/glib) | `10.0.2` | |
+| [metal-agent](guest-agents/metal-agent) | :green_square: core | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent) | `v0.1.3` |  This system extension provides talos-metal-agent |
+| [pcre2](guest-agents/qemu-guest-agent/pcre2) | :yellow_square: extra | [ghcr.io/siderolabs/pcre2](https://github.com/siderolabs/extensions/pkgs/container/pcre2) | `10.0.2` | |
+| [qemu-guest-agent](guest-agents/qemu-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent) | `10.0.2` |  This system extension provides the QEMU Guest Agent service. |
+| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | `v1.1.0` |  This system extension provides talos-vmtoolsd |
+| [xen-guest-agent](guest-agents/xen-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/xen-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/xen-guest-agent) | `0.4.0-g5c274e6` |  xen-guest-agent communicates information and metrics with the Xen host. |
 
 ### NVIDIA GPU
 
-| Name                                                             | Description                                                                                                                        | Version Format                     |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| [nvidia-container-toolkit](nvidia-gpu/nvidia-container-toolkit/) | Tools to run [NVIDIA GPU workloads](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/overview.html) in containers | `driver version`-`toolkit version` |
-| [nvidia-fabricmanager](nvidia-gpu/nvidia-fabricmanager/)         | [NVIDIA fabric manager](https://docs.nvidia.com/datacenter/tesla/pdf/fabric-manager-user-guide.pdf) support for GPU workloads      | `driver version`                   |
-| [nvidia-open-gpu-kernel-modules](nvidia-gpu/nvidia-modules/)     | NVIDIA driver kernel modules                                                                                                       | `driver version`-`talos version`   |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [nonfree-kmod-nvidia-lts](nvidia-gpu/nonfree/kmod-nvidia/lts) | :green_square: core | [ghcr.io/siderolabs/nonfree-kmod-nvidia-lts](https://github.com/siderolabs/extensions/pkgs/container/nonfree-kmod-nvidia-lts) | `580.65.06-VERSION` |  This system extension provides nvidia proprietary kernel modules built against a specific Talos version. |
+| [nonfree-kmod-nvidia-production](nvidia-gpu/nonfree/kmod-nvidia/production) | :green_square: core | [ghcr.io/siderolabs/nonfree-kmod-nvidia-production](https://github.com/siderolabs/extensions/pkgs/container/nonfree-kmod-nvidia-production) | `570.172.08-VERSION` |  This system extension provides nvidia proprietary kernel modules built against a specific Talos version. |
+| [nvidia-container-toolkit-lts](nvidia-gpu/nvidia-container-toolkit/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-container-toolkit-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-container-toolkit-lts) | `580.65.06-v1.17.8` |  This system extension provides nvidia runtime and it's dependencies using NVIDIA's runtime handler. |
+| [nvidia-container-toolkit-production](nvidia-gpu/nvidia-container-toolkit/production) | :green_square: core | [ghcr.io/siderolabs/nvidia-container-toolkit-production](https://github.com/siderolabs/extensions/pkgs/container/nvidia-container-toolkit-production) | `570.172.08-v1.17.8` |  This system extension provides nvidia runtime and it's dependencies using NVIDIA's runtime handler. |
+| [nvidia-fabricmanager-lts](nvidia-gpu/nvidia-fabricmanager/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-fabricmanager-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-fabricmanager-lts) | `580.65.06` |  This system extension provides the Nvidia fabricmanager for GPU's that need NVLink support. |
+| [nvidia-fabricmanager-production](nvidia-gpu/nvidia-fabricmanager/production) | :green_square: core | [ghcr.io/siderolabs/nvidia-fabricmanager-production](https://github.com/siderolabs/extensions/pkgs/container/nvidia-fabricmanager-production) | `570.172.08` |  This system extension provides the Nvidia fabricmanager for GPU's that need NVLink support. |
+| [nvidia-open-gpu-kernel-modules-lts](nvidia-gpu/nvidia-modules/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules-lts) | `580.65.06-VERSION` |  This system extension provides nvidia open source driver kernel modules built against a specific Talos version. |
+| [nvidia-open-gpu-kernel-modules-production](nvidia-gpu/nvidia-modules/production) | :green_square: core | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules-production](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules-production) | `570.172.08-VERSION` |  This system extension provides nvidia open source driver kernel modules built against a specific Talos version. |
 
-#### Tools
+### Tools
 
-| Name                                  | Description                               | Version Format     |
-| ------------------------------------- | ----------------------------------------- | ------------------ |
-| [util-linux-tools](tools/util-linux/) | Util Linux tools (`fstrim` and `nsenter`) | `upstream version` |
-| [nvme-cli](tools/nvme-cli/)           | NVMe command line interface               | `upstream version` |
-| [ctr](tools/ctr/)                     | `ctr` command line tool                   | `upstream version` |
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [ctr](tools/ctr) | :green_square: core | [ghcr.io/siderolabs/ctr](https://github.com/siderolabs/extensions/pkgs/container/ctr) | `v2.1.4` |  This extension provides ctr containerd helper binary |
+| [nvme-cli](tools/nvme-cli) | :white_large_square: contrib | [ghcr.io/siderolabs/nvme-cli](https://github.com/siderolabs/extensions/pkgs/container/nvme-cli) | `v2.14` |  This system extension provides the NVMe command line interface. |
+| [util-linux-tools](tools/util-linux) | :white_large_square: contrib | [ghcr.io/siderolabs/util-linux-tools](https://github.com/siderolabs/extensions/pkgs/container/util-linux-tools) | `2.41.1` |  This system extension provides a minimal util-linux package. |
+
+<!-- ### END GENERATED CONTENT -->
 
 ## Building Extensions
 
