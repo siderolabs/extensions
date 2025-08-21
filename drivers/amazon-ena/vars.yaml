@@ -1,1 +1,2 @@
 VERSION: "{{ .ENA_VERSION }}-{{ .BUILD_ARG_TAG }}"
+TIER: "core"

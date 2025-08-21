@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: nvidia-fabricmanager-production
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides the Nvidia fabricmanager for GPU's that need NVLink support.
+  compatibility:
+    talos:
+      version: ">= v1.2.0"

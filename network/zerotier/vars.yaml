@@ -1,1 +1,2 @@
 VERSION: "{{ .ZEROTIER_VERSION }}"
+TIER: "contrib"

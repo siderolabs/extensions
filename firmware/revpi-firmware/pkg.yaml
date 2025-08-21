@@ -12,7 +12,6 @@ steps:
 - network: default
   prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
         cd /pkg/src
         go mod download
   build:

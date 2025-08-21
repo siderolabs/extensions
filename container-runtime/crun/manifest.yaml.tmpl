@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: crun
+  version: "{{ .VERSION }}"
+  author: Henrik Gerdes
+  description: |
+    [{{ .TIER }}] This system extension provides crun using containerd's runtime handler.
+  compatibility:
+    talos:
+      version: ">= v1.8.0"

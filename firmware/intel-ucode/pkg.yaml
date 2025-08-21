@@ -11,8 +11,6 @@ steps:
         sha512: {{ .INTEL_UCODE_SHA512 }}
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xzf intel-ucode.tar.gz --strip-components=1
     install:
       - |

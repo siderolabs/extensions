@@ -1,1 +1,2 @@
 VERSION: "{{ .LINUX_FIRMWARE_VERSION }}"
+TIER: "core"

@@ -5,10 +5,7 @@ dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/linux-firmware:{{ .BUILD_ARG_PKGS }}"
 steps:
-  - prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-    install:
+  - install:
       - |
         mkdir -p /rootfs/usr/lib/firmware
         cp -R -p /usr/lib/firmware/qed /rootfs/usr/lib/firmware

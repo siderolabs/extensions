@@ -1,2 +1,0 @@
-# the first part is the driver version and the second the talos version for which the module is built against
-VERSION: "5.8-1.1.2.1-{{ .BUILD_ARG_TAG }}"

@@ -1,1 +1,2 @@
 VERSION: "{{ .FUSE3_VERSION }}"
+TIER: "core"

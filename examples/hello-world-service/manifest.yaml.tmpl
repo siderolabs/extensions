@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: hello-world-service
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides an example Talos extension service.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"

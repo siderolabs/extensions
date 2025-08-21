@@ -13,10 +13,7 @@ dependencies:
   - stage: nvidia-container-runtime-wrapper
   - stage: nvidia-persistenced-wrapper
 steps:
-  - prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-    install:
+  - install:
       - |
         mkdir -p /rootfs/usr/local/etc/containers
         cp /pkg/nvidia-persistenced.yaml /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml

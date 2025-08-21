@@ -21,8 +21,6 @@ steps:
         sha512: {{ .GLIBC_SHA512 }}
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xf glibc.tar.xz --strip-components=1
 
         mkdir build
