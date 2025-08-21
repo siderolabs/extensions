@@ -11,9 +11,6 @@ dependencies:
   - stage: zfs-tools
   - stage: zfs-service
 steps:
-  - prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
   - install:
       - |
         mkdir -p /rootfs/usr/lib/modules

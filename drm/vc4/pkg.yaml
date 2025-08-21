@@ -10,8 +10,6 @@ dependencies:
 steps:
   - prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-
         mkdir -p /rootfs
   - install:
       - |
@@ -40,8 +38,6 @@ dependencies:
   - stage: base
 steps:
   - prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
         mkdir /rootfs
 finalize:

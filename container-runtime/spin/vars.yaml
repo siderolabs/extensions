@@ -1,1 +1,2 @@
 VERSION: "{{ .SPIN_VERSION }}"
+TIER: "extra"

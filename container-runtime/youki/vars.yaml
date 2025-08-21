@@ -1,1 +1,2 @@
 VERSION: "{{ .YOUKI_VERSION }}"
+TIER: "contrib"

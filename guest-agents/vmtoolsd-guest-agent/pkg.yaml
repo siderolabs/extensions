@@ -9,6 +9,7 @@ dependencies:
 steps:
   - test:
       - |
+        cp /pkg/manifest.yaml /rootfs/manifest.yaml
         /extensions-validator validate --rootfs=/rootfs --pkg-name="${PKG_NAME}"
     sbom:
       outputPath: /rootfs/usr/local/share/spdx/vmtoolsd-guest-agent.spdx.json
@@ -17,4 +18,6 @@ steps:
         - Apache-2.0
 finalize:
   - from: /rootfs
+    to: /
+  - from: /pkg/manifest.yaml
     to: /

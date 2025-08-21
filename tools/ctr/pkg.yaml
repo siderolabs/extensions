@@ -5,9 +5,7 @@ dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/containerd:{{ .BUILD_ARG_PKGS }}"
 steps:
-  - prepare:
-    - sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-    install:
+  - install:
     - |
       mkdir -p /rootfs/usr/local/bin
       cp /usr/bin/ctr /rootfs/usr/local/bin

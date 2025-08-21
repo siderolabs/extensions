@@ -16,8 +16,6 @@ steps:
       SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xf lldpd.tar.gz --strip-components=1
 
         mkdir -p /usr/local/include/sys

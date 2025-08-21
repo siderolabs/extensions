@@ -1,0 +1,14 @@
+version: v1alpha1
+metadata:
+  name: uinput
+  version: "{{ .VERSION }}"
+  author: Judah Rand
+  description: |
+    [{{ .TIER }}] This system extension provides the uinput kernel module built against a specific Talos version.
+    This kernel module makes it possible to emulate input devices from userspace. By writing to
+    /dev/uinput (or /dev/input/uinput) device, a process can create a virtual input device with
+    specific capabilities. Once this virtual device is created, the process can send events through it,
+    that will be delivered to userspace and in-kernel consumers.
+  compatibility:
+    talos:
+      version: ">= v1.4.5"

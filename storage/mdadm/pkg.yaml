@@ -12,8 +12,6 @@ steps:
         sha512: {{ .MDADM_SHA512 }}
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xzf mdadm.tar.gz --strip-components=1
       - |
         patch -p1 < /pkg/patches/mdadm-include-sysmacros.patch

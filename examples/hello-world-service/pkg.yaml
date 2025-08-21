@@ -9,9 +9,6 @@ steps:
     cachePaths:
       - /.cache/go-build
       - /tmp/go/pkg
-    prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     build:
       - |
         cd /pkg/src

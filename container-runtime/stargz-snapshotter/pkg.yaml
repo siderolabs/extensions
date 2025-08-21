@@ -17,8 +17,6 @@ steps:
   - network: default
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         mkdir -p ${GOPATH}/src/github.com/containerd/stargz-snapshotter
 
         tar -xzf stargz-snapshotter.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/containerd/stargz-snapshotter

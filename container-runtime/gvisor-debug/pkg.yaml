@@ -4,10 +4,7 @@ shell: /bin/bash
 dependencies:
   - stage: base
 steps:
-  - prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-    install:
+  - install:
       - |
         mkdir -p /rootfs/etc/cri/conf.d
         cp /pkg/11-gvisor-debug.part /rootfs/etc/cri/conf.d/11-gvisor-debug.part

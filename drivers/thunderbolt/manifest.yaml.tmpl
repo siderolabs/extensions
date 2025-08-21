@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: thunderbolt
+  version: "{{ .VERSION}}"
+  author: Igor Rzegocki
+  description: |
+    [{{ .TIER }}] This system extension provides Thunderbolt/USB4 drivers kernel modules built against a specific Talos version.
+    It enables support for Thunderbolt/USB4 devices, including those used for networking.
+    WARNING: This extension automatically authorizes all Thunderbolt devices during system boot, which poses potential security risks. Use at your own discretion.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"

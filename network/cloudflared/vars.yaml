@@ -1,1 +1,2 @@
 VERSION: "{{ .CLOUDFLARED_VERSION }}"
+TIER: "contrib"

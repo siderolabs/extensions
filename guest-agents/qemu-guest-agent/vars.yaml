@@ -1,1 +1,2 @@
 VERSION: "{{ .QEMU_VERSION }}"
+TIER: "extra"

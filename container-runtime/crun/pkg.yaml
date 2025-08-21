@@ -16,9 +16,6 @@ steps:
         sha256: {{ .CRUN_AMD64_SHA256 }}
         sha512: {{ .CRUN_AMD64_SHA512 }}
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-    prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
     install:
       - |
         mkdir -p /rootfs/usr/local/bin

@@ -1,1 +1,2 @@
 VERSION: "{{ .NVIDIA_DRIVER_LTS_VERSION }}"
+TIER: "core"

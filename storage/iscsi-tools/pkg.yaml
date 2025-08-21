@@ -11,8 +11,6 @@ steps:
     - |
       mkdir -p /rootfs/usr/local/lib/containers/iscsid
 
-      sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-
       # cleanup
       rm -rf /rootfs/usr/local/include
       rm -rf /rootfs/usr/share

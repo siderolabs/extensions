@@ -1,1 +1,2 @@
 VERSION: "{{ .CONTAINERD_VERSION }}"
+TIER: "core"
