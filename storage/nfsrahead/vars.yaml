@@ -1,1 +1,2 @@
 VERSION: {{ .NFS_UTILS_VERSION  | replace "-" "." }}
+TIER: "contrib"

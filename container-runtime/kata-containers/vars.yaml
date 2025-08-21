@@ -1,1 +1,2 @@
 VERSION: "{{ .KATA_CONTAINERS_VERSION }}"
+TIER: "extra"

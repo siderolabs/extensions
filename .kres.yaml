@@ -101,9 +101,11 @@ spec:
 kind: auto.CustomSteps
 spec:
   steps:
-    - name: check-dirty
-      toplevel: true
     - name: extensions
+      toplevel: true
+    - name: extensions-catalog
+      toplevel: true
+    - name: check-dirty
       toplevel: true
     - name: extensions-metadata
       toplevel: true
@@ -132,6 +134,35 @@ spec:
     condition: except-pull-request
     environment:
       PUSH: true
+---
+kind: custom.Step
+name: extensions-catalog
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    depends:
+      - $(ARTIFACTS)/bldr
+    script:
+      - |
+        @$(ARTIFACTS)/bldr dump --build-arg TAG=VERSION --template hack/catalog.template > $(ARTIFACTS)/catalog.md 2>/dev/null
+        @lead='^<!-- ### BEGIN GENERATED CONTENT -->$$'; tail='^<!-- ### END GENERATED CONTENT -->$$'; sed -i -e "/$$lead/,/$$tail/{ /$$lead/{p; r $(ARTIFACTS)/catalog.md" -e "}; /$$tail/p; d }" README.md
+  ghaction:
+    enabled: true
+    condition: on-pull-request
+---
+kind: custom.Step
+name: check-dirty
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    script:
+      - |
+        @if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
+  ghaction:
+    enabled: true
+    condition: on-pull-request
 ---
 kind: custom.Step
 name: extensions-metadata

@@ -1,1 +1,2 @@
 VERSION: "{{ .TAILSCALE_VERSION }}"
+TIER: "extra"

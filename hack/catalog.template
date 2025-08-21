@@ -1,0 +1,58 @@
+{{ define "description" }}
+{{- range .TemplatedFiles -}}
+{{- if eq .Path "manifest.yaml" -}}
+{{- $manifest := .Content | toString | mustFromYAML  -}}
+{{- $description := index $manifest "metadata" "description" | replace "\n" " " -}}
+{{- regexReplaceAll "\\[\\w+\\]" $description "" -}}
+{{ end -}}
+{{ end -}}
+{{ end -}}
+
+{{ define "extension-list" }}
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+{{- $tiers := (dict "core" ":green_square:" "extra" ":yellow_square:" "contrib" ":white_large_square:") }}
+{{ range .Pkgs -}}
+{{ if hasPrefix $.BaseDir .Pkg.BaseDir -}}
+{{ if not .Pkg.Context.INTERNAL_PACKAGE -}}
+| [{{ .Pkg.Name }}]({{ .Pkg.BaseDir }}) | {{ index $tiers .Pkg.Context.TIER }} {{ .Pkg.Context.TIER }} | [ghcr.io/siderolabs/{{ .Pkg.Name }}](https://github.com/siderolabs/extensions/pkgs/container/{{ .Pkg.Name }}) | `{{ .Pkg.Context.VERSION }}` | {{ template "description" .Pkg -}} |
+{{ end }}
+{{- end }}
+{{- end }}
+{{ end -}}
+
+### Container Runtimes
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "container-runtime/") -}}
+
+### Firmware
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "firmware/") -}}
+
+### Direct Rendering Manager (DRM)
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "drm/") -}}
+
+### Drivers
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "drivers/") -}}
+
+### Digital Video Broadcasting (DVB)
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "dvb/") -}}
+
+### Miscellaneous
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "misc/") -}}
+
+### Network
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "network/") -}}
+
+### Storage
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "storage/") -}}
+
+### Power
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "power/") -}}
+
+### Guest Agents
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "guest-agents/") -}}
+
+### NVIDIA GPU
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "nvidia-gpu/") -}}
+
+### Tools
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "tools/") -}}

@@ -17,8 +17,6 @@ steps:
   - network: default
     prepare:
       - |
-        sed -i 's#$NEWT_VERSION#{{ .NEWT_VERSION }}#' /pkg/manifest.yaml
-      - |
         mkdir newt
         tar -xzvf newt.tar.gz --strip-components=1 -C newt
       - | # https://github.com/fosrl/newt?tab=readme-ov-file#binary

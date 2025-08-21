@@ -1,1 +1,2 @@
 VERSION: "{{ .TALOS_VMTOOLSD_VERSION }}"
+TIER: "extra"

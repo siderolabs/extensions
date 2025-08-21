@@ -1,9 +1,0 @@
-version: v1alpha1
-metadata:
-  name: ctr
-  version: "$VERSION"
-  author: Tomasz Jonak
-  description: "This extension provides ctr containerd helper binary"
-  compatibility:
-    talos:
-      version: ">= v1.0.0"

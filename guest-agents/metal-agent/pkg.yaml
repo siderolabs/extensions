@@ -8,10 +8,7 @@ dependencies:
     from: /
     to: /rootfs/usr/local/lib/containers/metal-agent
 steps:
-  - prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-    install:
+  - install:
       - |
         mkdir -p /rootfs/usr/local/etc/containers
 

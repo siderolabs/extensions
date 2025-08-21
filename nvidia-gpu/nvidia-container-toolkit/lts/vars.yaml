@@ -1,2 +1,3 @@
 # the first part is the driver version and the second the container-toolkit version
 VERSION: "{{ .NVIDIA_DRIVER_LTS_VERSION }}-{{ .CONTAINER_TOOLKIT_VERSION }}"
+TIER: "core"

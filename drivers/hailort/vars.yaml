@@ -1,1 +1,2 @@
 VERSION: "{{ .HAILORT_VERSION }}"
+TIER: "extra"

@@ -11,8 +11,6 @@ steps:
         sha512: {{ .NUT_SHA512 }}
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xf nut.tar.gz --strip-components=1
       - |
         # no shell for you

@@ -19,8 +19,6 @@ steps:
       PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         tar -xf nfs-utils.tar.xz --strip-components=1
 
         mkdir -p /usr/local/include/sys

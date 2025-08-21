@@ -16,8 +16,6 @@ steps:
         sha512: 6db7c7e18a630cc0ac665f7baededb08b8ab475ef0d93590b01c4c165aef9165f9d8e0014d65b5f39a2f71e859d8865074e6143045b31ee5814f88239df4595d
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-
         mkdir -p /rootfs
     install:
       - |
@@ -43,8 +41,6 @@ dependencies:
   - stage: base
 steps:
   - prepare:
-      - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
       - |
         mkdir /rootfs
 finalize:

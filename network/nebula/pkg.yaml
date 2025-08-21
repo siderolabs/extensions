@@ -17,8 +17,6 @@ steps:
   - network: default
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         mkdir nebula
         tar -xzvf nebula.tar.gz --strip-components=1 -C nebula
       - |

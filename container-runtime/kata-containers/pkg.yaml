@@ -28,8 +28,6 @@ steps:
   - network: default
     prepare:
       - |
-        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
-      - |
         mkdir -p kata-static
         tar xf kata-static.tar.xz -C kata-static
       - |

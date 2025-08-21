@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-28T15:25:09Z by kres 784fa1f.
+# Generated on 2025-08-28T15:27:08Z by kres 784fa1f.
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -115,6 +115,14 @@ jobs:
           PUSH: "true"
         run: |
           make extensions
+      - name: extensions-catalog
+        if: github.event_name == 'pull_request'
+        run: |
+          make extensions-catalog
+      - name: check-dirty
+        if: github.event_name == 'pull_request'
+        run: |
+          make check-dirty
       - name: release-notes
         if: startsWith(github.ref, 'refs/tags/')
         run: |

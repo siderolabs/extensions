@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: qemu-guest-agent
+  version: "{{ .VERSION }}"
+  author: Markus Reiter
+  description: |
+    [{{ .TIER }}] This system extension provides the QEMU Guest Agent service.
+  compatibility:
+    talos:
+      version: ">= v1.5.0"

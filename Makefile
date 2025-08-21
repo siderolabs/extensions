@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-28T15:25:09Z by kres 784fa1f.
+# Generated on 2025-08-28T15:27:08Z by kres 784fa1f.
 
 # common variables
 
@@ -221,6 +221,15 @@ deps.png:  ## Generates a dependency graph of the Pkgfile.
 .PHONY: extensions
 extensions: internal/extensions/descriptions.yaml
 	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
+
+.PHONY: extensions-catalog
+extensions-catalog: $(ARTIFACTS)/bldr
+	@$(ARTIFACTS)/bldr dump --build-arg TAG=VERSION --template hack/catalog.template > $(ARTIFACTS)/catalog.md 2>/dev/null
+	@lead='^<!-- ### BEGIN GENERATED CONTENT -->$$'; tail='^<!-- ### END GENERATED CONTENT -->$$'; sed -i -e "/$$lead/,/$$tail/{ /$$lead/{p; r $(ARTIFACTS)/catalog.md" -e "}; /$$tail/p; d }" README.md
+
+.PHONY: check-dirty
+check-dirty:
+	@if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
 
 .PHONY: extensions-metadata
 extensions-metadata: $(ARTIFACTS)/bldr
