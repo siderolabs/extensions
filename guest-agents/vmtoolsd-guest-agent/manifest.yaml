@@ -4,7 +4,7 @@ metadata:
   version: "$VERSION"
   author: Brandon Nason
   description: |
-    A stub for the VMWare Tools on arm64 (unavailable on arm64).
+    This system extension provides talos-vmtoolsd
   compatibility:
     talos:
       version: ">= v1.4.0"
