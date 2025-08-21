@@ -5,12 +5,23 @@ dependencies:
   - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/talos-vmtoolsd:{{ .TALOS_VMTOOLSD_VERSION }}"
     from: /
-    to: /rootfs
+    to: /upstream
 steps:
+  - install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/talos-vmtoolsd/
+
+        cp /upstream/talos-vmtoolsd /rootfs/usr/local/lib/containers/talos-vmtoolsd/talos-vmtoolsd
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+
+        cp /pkg/talos-vmtoolsd.yaml /rootfs/usr/local/etc/containers/
   - test:
       - |
-        cp /pkg/manifest.yaml /rootfs/manifest.yaml
-        /extensions-validator validate --rootfs=/rootfs --pkg-name="${PKG_NAME}"
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
     sbom:
       outputPath: /rootfs/usr/local/share/spdx/vmtoolsd-guest-agent.spdx.json
       version: {{ .TALOS_VMTOOLSD_VERSION }}
@@ -18,6 +29,6 @@ steps:
         - Apache-2.0
 finalize:
   - from: /rootfs
-    to: /
+    to: /rootfs
   - from: /pkg/manifest.yaml
     to: /

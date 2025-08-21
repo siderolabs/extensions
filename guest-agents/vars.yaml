@@ -15,6 +15,6 @@ XEN_GUEST_AGENT_VERSION: 5c274e651c29f92fc0c418fda486373b0f34f0da
 XEN_GUEST_AGENT_SHA256: c52f4781739e500e98a3298c9e44fe9bcbe1892c22aa6bb031d1a847123deaaa
 XEN_GUEST_AGENT_SHA512: 49bf15d7257f7fcb5ac919ca57e8c16bb6f8199684adef034bd1e7683dd9fb23a5604667fb75e27eadd02a2f9b130339409873b5720d7d3f5e4153feb5fa98ba
 # renovate: datasource=github-releases depName=siderolabs/talos-vmtoolsd
-TALOS_VMTOOLSD_VERSION: v1.1.0
+TALOS_VMTOOLSD_VERSION: v1.3.0
 # renovate: datasource=github-releases depName=siderolabs/talos-metal-agent
 TALOS_METAL_AGENT_VERSION: v0.1.3
