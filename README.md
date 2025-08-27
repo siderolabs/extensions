@@ -263,4 +263,4 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 
 ## Dependency Diagram
 
-![Dependency Diagram](/deps.png)
+![Dependency Diagram](/deps.svg)
