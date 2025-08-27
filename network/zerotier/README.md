@@ -42,6 +42,7 @@ The extension can be configured through environment variables:
 
 - `ZEROTIER_NETWORK`: The network ID to join (required)
 - `ZEROTIER_IDENTITY_SECRET`: Optional pre-existing identity to use (format: "address:0:public:private")
+- `ZEROTIER_PLANET`: Optional pre-existing planet file encoded in base64
 
 ### Using an existing identity
 
@@ -58,3 +59,20 @@ environment:
 ```
 
 If no identity is provided, a new one will be generated automatically. (You may need to authorize this node in your Zerotier network according to your network policies before it will recieve an IP address).
+
+### Using an custom planet file
+
+If you want to specify custom planet file from a hosted planet, you can specify an custom planet:
+
+```yaml
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: zerotier
+environment:
+  - ZEROTIER_NETWORK=<your network id>
+  - ZEROTIER_IDENTITY_SECRET=<identity string>
+  - ZEROTIER_PLANET=<base64 encoded planet file>
+```
+
+If no planet is provided, the public planet file from ZeroTier will be used.
