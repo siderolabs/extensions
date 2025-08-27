@@ -1,16 +1,16 @@
 # Talos Linux System Extensions
 
-This repo serves as a central place for publishing supported extensions to Talos Linux.
-Extensions allow for additional functionality on top of the default Talos Linux capabilities.
+This repo serves as a central place for publishing extensions to Talos Linux.
+Extensions enable additional functionality beyond the default Talos Linux capabilities.
 Things like gVisor, GPU support, etc. are good candidates for extensions.
 
 ## Using Extensions
 
 Extensions in this repo are published as container images.
-These images can be added to the the Talos Linux [boot asset](https://www.talos.dev/latest/talos-guides/install/boot-assets/) to produce a final boot asset containing a base Talos `initramfs` and
+These images can be added to Talos Linux [boot asset](https://www.talos.dev/latest/talos-guides/install/boot-assets/) to produce a final boot asset containing a base Talos `initramfs` and
 a set of [system extensions](https://www.talos.dev/latest/talos-guides/configuration/system-extensions/) appended to it.
 
-The extension image is composed of a `manifest.yaml` file that provides information and compatibility information, as well as a `rootfs` that contains things like compiled binaries that are bind mounted into the system.
+The extension image is composed of a `manifest.yaml` file that provides information and compatibility information, as well as a `rootfs` that contains things like compiled binaries that are bind-mounted into the system.
 
 ## Installing Extensions
 
@@ -40,7 +40,7 @@ cosign verify --certificate-identity-regexp '@siderolabs\.com$' --certificate-oi
 
 ### Official Extension Tiers
 
-Talos Linux provides a number of official system extensions, which are split into the following
+Talos Linux provides several official system extensions, which are split into the following
 tiers based on support level:
 
 | Tier | :green_square: core | :yellow_square: extra | :white_large_square: contrib |
@@ -189,11 +189,11 @@ tiers based on support level:
 ## Building Extensions
 
 In the current form, building extensions requires the use of our [bldr](https://github.com/siderolabs/bldr) tool.
-It is highly recommended to take a look at an existing extensions as a template for building your own.
+It is highly recommended to take a look at an existing extension as a template for building your own.
 The rough flow should look like the following:
 
 - Create a `manifest.yaml` file that contains information about your system extension. See instructions below for this file.
-- Create a `pkg.yaml` file that details the full flow of downloading, building, installing your application.
+- Create a `pkg.yaml` file that details the full flow of downloading, building, and installing your application.
 - Once you have these, add your extension to the `TARGETS` list in the `Makefile`.
 - You can now build your extension using make like `make <extension-name> PLATFORM=linux/amd64`
 - If you wish to output the contents of the image and validate your install, you can issue `make local-<extension-name> PLATFORM=linux/amd64 DEST=_out`. The contents will then be present in the `_out` directory.
