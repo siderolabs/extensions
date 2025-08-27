@@ -6,6 +6,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/base64"
 	"errors"
 	"fmt"
 	"log"
@@ -20,6 +21,7 @@ import (
 const (
 	zerotierPath    = "/var/lib/zerotier-one"
 	identityPath    = "/var/lib/zerotier-one/identity.secret"
+	planetPath      = "/var/lib/zerotier-one/planet"
 	identityPubPath = "/var/lib/zerotier-one/identity.public"
 	zerotierBinPath = "/usr/local/bin/zerotier-one"
 )
@@ -38,6 +40,18 @@ func main() {
 		log.Fatalf("identity configuration failed: %v", err)
 	}
 	log.Printf("identity configured (source: %s)", identitySource)
+
+	// If ZEROTIER_PLANET env var is set, set the planet file.
+	if planet := os.Getenv("ZEROTIER_PLANET"); planet != "" {
+		planet, err := base64.StdEncoding.DecodeString(planet)
+		if err != nil {
+			log.Fatalf("failed to decode base64 planet from environment: %v", err)
+		}
+		if err := os.WriteFile(planetPath, planet, 0o644); err != nil {
+			log.Fatalf("failed to write planet file: %v", err)
+		}
+		log.Printf("custom planet file loaded")
+	}
 
 	// If ZEROTIER_NETWORK env var is set, join the network.
 	if network := os.Getenv("ZEROTIER_NETWORK"); network != "" {
