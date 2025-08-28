@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-18T12:27:25Z by kres 8d5a3f6.
+# Generated on 2025-08-28T15:25:09Z by kres 784fa1f.
 
 # common variables
 
@@ -25,7 +25,7 @@ SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 # sync bldr image with pkgfile
 
-BLDR_RELEASE := v0.5.1
+BLDR_RELEASE := v0.5.2
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
 BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
@@ -50,7 +50,7 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.11.0-11-g3bb9cc9
+PKGS ?= v1.11.0-13-ge68ff4a
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.11.0-1-g330f478
 TOOLS_PREFIX ?= ghcr.io/siderolabs
