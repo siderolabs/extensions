@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-26T16:58:07Z by kres 6262116.
+# Generated on 2025-08-29T11:51:29Z by kres 784fa1f.
 
 # common variables
 
@@ -50,9 +50,9 @@ COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.12.0-alpha.0-13-g2cfb920
+PKGS ?= v1.12.0-alpha.0-14-g2447e11
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.12.0-alpha.0-3-gedafd5f
+TOOLS ?= v1.12.0-alpha.0-5-g7c659e9
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -280,3 +280,4 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
+
