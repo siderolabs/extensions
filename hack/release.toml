@@ -31,7 +31,7 @@ Intel u-code: 20250812
 wasmedge: 0.6.0
 Kata containers: 3.18.0
 NVIDIA LTS: 535.247.01
-NVIDIA Production: 570.158.01
+NVIDIA Production: 570.172.08
 NVIDIA Container Toolkit: 1.17.8
 vmtoolsd: 1.1.0
 newt: 1.2.1
