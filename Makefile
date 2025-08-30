@@ -214,9 +214,9 @@ $(ARTIFACTS)/bldr: $(ARTIFACTS)  ## Downloads bldr binary.
 	@curl -sSL https://github.com/siderolabs/bldr/releases/download/$(BLDR_RELEASE)/bldr-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/bldr
 	@chmod +x $(ARTIFACTS)/bldr
 
-.PHONY: deps.png
-deps.png:  ## Generates a dependency graph of the Pkgfile.
-	@$(BLDR) graph | dot -Tpng -o deps.png
+.PHONY: deps.svg  $(ARTIFACTS)/bldr
+deps.svg:  ## Generates a dependency graph of the Pkgfile.
+	@$(ARTIFACTS)/bldr graph | dot -Tsvg -o deps.svg
 
 .PHONY: extensions
 extensions: internal/extensions/descriptions.yaml
