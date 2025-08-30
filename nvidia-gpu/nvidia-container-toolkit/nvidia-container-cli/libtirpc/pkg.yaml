@@ -14,7 +14,7 @@ steps:
       CC: gcc-14
       CXX: g++-14
     sources:
-      - url: https://src.fedoraproject.org/lookaside/extras/libtirpc/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2/sha512/df0781a74ff9ded2d3c4f5eb7e05496b9f58eac8060c02c68331dc14c4a00304dcd19f46836f5756fe0d9d27095fd463d42dd696fcdff891516711b7d63deabe/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2
+      - url: https://src.fedoraproject.org/lookaside/extras/libtirpc/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2/sha512/{{ .LIBTIRPC_SHA512 }}/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2
         destination: libtirpc.tar.bz2
         sha256: {{ .LIBTIRPC_SHA256 }}
         sha512: {{ .LIBTIRPC_SHA512 }}
