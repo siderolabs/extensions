@@ -21,6 +21,16 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
         description = """\
 NVIDIA LTS: 580.65.06
 NVIDIA Production: 570.172.08
+crun: 1.23.1
+kata-containers: 3.20.0
+spin: 0.21.0
+stargz-snapshotter: 0.17.0
+youki: 0.5.5
+nebula: 1.9.6
+newt: 1.4.4
+tailscale: 1.86.2
+fuse3: 3.17.4
+nut-client: 2.8.4
 """
 
 [make_deps]
