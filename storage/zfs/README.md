@@ -122,3 +122,22 @@ talosctl mounts | grep <mount of zfs raid you specified (/var/...)>
 ```
 
 You should see the mount.
+
+## Use existing pools
+
+If you have existing pools, they will be automatically detected and used.
+
+However, you may need to enter a debug shell and modify the pool configuration in order for them to work with Talos.
+Turn off Samba and NFS share settings.
+In addition, some SELinux pool policies are currently incompatible with Talos. If you see errors like this:
+```bash
+node_name: kern: warning: [2025-09-03T00:34:28.924235026Z]: SELinux: Unable to set superblock options before the security server is initialized
+```
+You can resolve this by modifying the ZFS pool settings to disable SELinux on the volume:
+```bash
+kubectl -n kube-system debug -it --profile sysadmin --image=alpine node/<node name>
+chroot /host zfs set context=none fscontext=none defcontext=none rootcontext=none pool_name
+chroot /host zfs set context=none fscontext=none defcontext=none rootcontext=none pool_name/child_dataset_name
+# Review the settings to make sure they were changed correctly
+chroot /host zfs get all
+```
