@@ -60,15 +60,15 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.22` |  This system extension provides crun using containerd's runtime handler. |
+| [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.23.1` |  This system extension provides crun using containerd's runtime handler. |
 | [ecr-credential-provider](container-runtime/ecr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | `v1.33.1` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against AWS' Elastic Container Registry and pull images. |
 | [gvisor](container-runtime/gvisor) | :green_square: core | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | `20250707.0` |  This system extension provides gVisor using containerd's runtime handler. |
 | [gvisor-debug](container-runtime/gvisor-debug) | :yellow_square: extra | [ghcr.io/siderolabs/gvisor-debug](https://github.com/siderolabs/extensions/pkgs/container/gvisor-debug) | `v1.0.0` |  This system extension enables gVisor debug logging. |
-| [kata-containers](container-runtime/kata-containers) | :yellow_square: extra | [ghcr.io/siderolabs/kata-containers](https://github.com/siderolabs/extensions/pkgs/container/kata-containers) | `3.18.0` |  This system extension provides kata-container using containerd's runtime handler. |
-| [spin](container-runtime/spin) | :yellow_square: extra | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin) | `v0.20.0` |  This system extension provides support for spin runtime (WebAssembly) containers. |
-| [stargz-snapshotter](container-runtime/stargz-snapshotter) | :green_square: core | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter) | `v0.16.3` |  This system extension provides Stargz Snapshotter using containerd's runtime handler. |
+| [kata-containers](container-runtime/kata-containers) | :yellow_square: extra | [ghcr.io/siderolabs/kata-containers](https://github.com/siderolabs/extensions/pkgs/container/kata-containers) | `3.20.0` |  This system extension provides kata-container using containerd's runtime handler. |
+| [spin](container-runtime/spin) | :yellow_square: extra | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin) | `v0.21.0` |  This system extension provides support for spin runtime (WebAssembly) containers. |
+| [stargz-snapshotter](container-runtime/stargz-snapshotter) | :green_square: core | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter) | `v0.17.0` |  This system extension provides Stargz Snapshotter using containerd's runtime handler. |
 | [wasmedge](container-runtime/wasmedge) | :yellow_square: extra | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge) | `v0.6.0` |  This system extension provides support for WasmEdge runtime (WebAssembly) containers. |
-| [youki](container-runtime/youki) | :white_large_square: contrib | [ghcr.io/siderolabs/youki](https://github.com/siderolabs/extensions/pkgs/container/youki) | `0.5.3` |  This system extension provides youki using containerd's runtime handler. |
+| [youki](container-runtime/youki) | :white_large_square: contrib | [ghcr.io/siderolabs/youki](https://github.com/siderolabs/extensions/pkgs/container/youki) | `0.5.5` |  This system extension provides youki using containerd's runtime handler. |
 
 ### Firmware
 
@@ -128,9 +128,9 @@ tiers based on support level:
 | ---- | ---- | ----- | ------- | ----------- |
 | [cloudflared](network/cloudflared) | :white_large_square: contrib | [ghcr.io/siderolabs/cloudflared](https://github.com/siderolabs/extensions/pkgs/container/cloudflared) | `2024.12.1` |  Cloudflare Tunnel securely connects resources to Cloudflare without a public IP. A lightweight daemon (cloudflared) creates outbound-only connections to Cloudflare, allowing safe access to services like HTTP, SSH, remote desktops, and other protocols. More info: https://github.com/cloudflare/cloudflared/ |
 | [lldpd](network/lldpd) | :yellow_square: extra | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd) | `1.0.19` |  LLDP adds a LLDP discovery service to Talos. LLDP cli can be used to interface with the daemon. |
-| [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.5` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
-| [newt](network/newt) | :white_large_square: contrib | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | `1.3.2` |  Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin. By using Newt, you don't need to manage complex WireGuard tunnels and NATing. More info: https://github.com/fosrl/newt |
-| [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.84.2` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
+| [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.6` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
+| [newt](network/newt) | :white_large_square: contrib | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | `1.4.4` |  Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin. By using Newt, you don't need to manage complex WireGuard tunnels and NATing. More info: https://github.com/fosrl/newt |
+| [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.86.2` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
 | [zerotier](network/zerotier) | :white_large_square: contrib | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier) | `1.14.2` |  Connect your Talos cluster into a zerotier network |
 
 ### Storage
@@ -139,7 +139,7 @@ tiers based on support level:
 | ---- | ---- | ----- | ------- | ----------- |
 | [btrfs](storage/btrfs) | :yellow_square: extra | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs) | `VERSION` |  This system extension provides kernel module driver for BTRFS built against a specific Talos version. |
 | [drbd](storage/drbd) | :yellow_square: extra | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd) | `9.2.14-VERSION` |  This system extension provides kernel module driver for DRBD built against a specific Talos version. |
-| [fuse3](storage/fuse3) | :green_square: core | [ghcr.io/siderolabs/fuse3](https://github.com/siderolabs/extensions/pkgs/container/fuse3) | `3.17.2` |  This system extension provides fuse3 functionality. |
+| [fuse3](storage/fuse3) | :green_square: core | [ghcr.io/siderolabs/fuse3](https://github.com/siderolabs/extensions/pkgs/container/fuse3) | `3.17.4` |  This system extension provides fuse3 functionality. |
 | [iscsi-tools](storage/iscsi-tools) | :green_square: core | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | `v0.2.0` |  This system extension provides iscsi-tools. |
 | [mdadm](storage/mdadm) | :white_large_square: contrib | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm) | `v4.3` |  This system extension provides mdadm binary. |
 | [nfsd](storage/nfsd) | :yellow_square: extra | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd) | `VERSION` |  This system extension provides kernel module driver for NFSD built against a specific Talos version. |
@@ -150,7 +150,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [nut-client](power/nut-client) | :white_large_square: contrib | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/extensions/pkgs/container/nut-client) | `2.8.3` |  This system extension provides the network-ups-tools upsmon service. |
+| [nut-client](power/nut-client) | :white_large_square: contrib | [ghcr.io/siderolabs/nut-client](https://github.com/siderolabs/extensions/pkgs/container/nut-client) | `2.8.4` |  This system extension provides the network-ups-tools upsmon service. |
 
 ### Guest Agents
 
