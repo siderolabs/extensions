@@ -891,10 +891,12 @@ github.com/docopt/docopt-go v0.0.0-20180111231733-ee0de3bc6815/go.mod h1:WwZ+bS3
 github.com/dsnet/compress v0.0.2-0.20230904184137-39efe44ab707 h1:2tV76y6Q9BB+NEBasnqvs7e49aEBFI8ejC89PSnWH+4=
 github.com/dsnet/compress v0.0.2-0.20230904184137-39efe44ab707/go.mod h1:qssHWj60/X5sZFNxpG4HBPDHVqxNm4DfnCKgrbZOT+s=
 github.com/dsnet/golib v0.0.0-20171103203638-1ea166775780/go.mod h1:Lj+Z9rebOhdfkVLjJ8T6VcRQv3SXugXy999NBtR9aFY=
+github.com/dsseng/grype v0.95.1-0.20250710124245-9b7e8e23d161/go.mod h1:r00SpDeaLS4r8CbMSSOgcIOixkA/aU/ak1GQcacVIlk=
 github.com/dsseng/grype v0.96.1-0.20250718094733-2197792a3b26 h1:Pgz4mR5Q5S1EkJXBoKSMY5r8/CgquO62lBcaG3y0SyE=
 github.com/dsseng/grype v0.96.1-0.20250718094733-2197792a3b26/go.mod h1:C4G3Bo5V7fH11xAGdjhRrroYLkw+fmXWpQyuggqVuiM=
 github.com/dsseng/syft v1.26.2-0.20250703101014-f39c35d156d9 h1:oG9Q5NQkAJ5F+yHL7oNH1U1xH7KtZn96Th2Pg4CoyD8=
 github.com/dsseng/syft v1.26.2-0.20250703101014-f39c35d156d9/go.mod h1:jGpfAy5lRvOUrOxWAfbbu9t3TK8VwJpAAJHz6HFQofw=
+github.com/dsseng/syft v1.28.0/go.mod h1:jGpfAy5lRvOUrOxWAfbbu9t3TK8VwJpAAJHz6HFQofw=
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
 github.com/dustin/go-humanize v1.0.1/go.mod h1:Mu1zIs6XwVuF/gI1OepvI0qD18qycQx+mFykh5fBlto=
