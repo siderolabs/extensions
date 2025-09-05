@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-30T17:43:14Z by kres 784fa1f.
+# Generated on 2025-09-05T15:04:00Z by kres cc45611.
 
 # common variables
 
@@ -25,7 +25,7 @@ SOURCE_DATE_EPOCH := $(shell git log $(INITIAL_COMMIT_SHA) --pretty=%ct)
 
 # sync bldr image with pkgfile
 
-BLDR_RELEASE := v0.5.2
+BLDR_RELEASE := v0.5.3
 BLDR_IMAGE := ghcr.io/siderolabs/bldr:$(BLDR_RELEASE)
 BLDR := docker run --rm --user $(shell id -u):$(shell id -g) --volume $(PWD):/src --entrypoint=/bldr $(BLDR_IMAGE) --root=/src
 
@@ -36,21 +36,22 @@ PLATFORM ?= linux/amd64,linux/arm64
 PROGRESS ?= auto
 PUSH ?= false
 CI_ARGS ?=
+BUILD_ARGS = --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
+BUILD_ARGS += --build-arg=TAG="$(TAG)"
+BUILD_ARGS += --build-arg=PKGS="$(PKGS)"
+BUILD_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
+BUILD_ARGS += --build-arg=TOOLS="$(TOOLS)"
+BUILD_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
 COMMON_ARGS = --file=Pkgfile
 COMMON_ARGS += --provenance=false
 COMMON_ARGS += --progress=$(PROGRESS)
 COMMON_ARGS += --platform=$(PLATFORM)
-COMMON_ARGS += --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
-COMMON_ARGS += --build-arg=TAG="$(TAG)"
-COMMON_ARGS += --build-arg=PKGS="$(PKGS)"
-COMMON_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
-COMMON_ARGS += --build-arg=TOOLS="$(TOOLS)"
-COMMON_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
+COMMON_ARGS += $(BUILD_ARGS)
 
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.11.0-15-g2ac857a
+PKGS ?= v1.11.0-18-g1a25681
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.11.0-2-g8556c73
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -214,9 +215,10 @@ $(ARTIFACTS)/bldr: $(ARTIFACTS)  ## Downloads bldr binary.
 	@curl -sSL https://github.com/siderolabs/bldr/releases/download/$(BLDR_RELEASE)/bldr-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/bldr
 	@chmod +x $(ARTIFACTS)/bldr
 
-.PHONY: deps.png
-deps.png:  ## Generates a dependency graph of the Pkgfile.
-	@$(BLDR) graph | dot -Tpng -o deps.png
+.PHONY: deps.svg
+deps.svg:  ## Generates a dependency graph of the Pkgfile.
+	@rm -f deps.png
+	@$(BLDR) graph $(BUILD_ARGS) | dot -Tsvg -o deps.svg
 
 .PHONY: extensions
 extensions: internal/extensions/descriptions.yaml

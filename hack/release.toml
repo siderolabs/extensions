@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.10.0"
+previous = "v1.11.0"
 
 pre_release = false
 
@@ -19,52 +19,8 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-ZFS: 2.3.3
-DRBD: 9.2.14
-qemu-guest-agent: 10.0.2
-fuse: 3.17.2
-nut: 2.8.3
-Tailscale: 1.84.2
-Linux firmware: 20250808
-metal-agent: 0.1.3
-Intel u-code: 20250812
-wasmedge: 0.6.0
-Kata containers: 3.18.0
-NVIDIA LTS: 535.247.01
-NVIDIA Production: 570.172.08
-NVIDIA Container Toolkit: 1.17.8
-vmtoolsd: 1.1.0
-newt: 1.2.1
-Amazon ENA: 2.15.0
-gVisor: 20250707.0
-Spin: v0.20.0
-crun: 1.22
-ecr-credential-helper: 1.33.1
 """
 
-    [notes.youki]
-        title = "Youki Container Runtime"
-        description = """\
-[Youki](https://github.com/youki-dev/youki) is now supported as a container runtime.
-"""
-
-    [notes.tenstorrent]
-        title = "Tenstorrent drivers"
-        description = """\
-[Tennstorrent](https://github.com/tenstorrent/tt-kmd) driver is now supported as an extension.
-"""
-
-    [notes.hailort]
-        title = "HailoRT drivers"
-        description = """\
-[HailoRT](https://github.com/hailo-ai/hailort-drivers) driver is now supported as an extension.
-"""
-
-    [notes.newt]
-        title = "Newt client"
-        description = """\
-        [Newt](https://github.com/fosrl/newt) client is now supported as an extension.
-"""
 
 [make_deps]
 
