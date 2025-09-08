@@ -1,0 +1,44 @@
+name: libncurses
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://ftp.gnu.org/gnu/ncurses/ncurses-{{ .LIBNCURSES_VERSION }}.tar.gz
+        destination: libncurses.tar.gz
+        sha256: {{ .LIBNCURSES_SHA256 }}
+        sha512: {{ .LIBNCURSES_SHA512 }}
+    prepare:
+      - |
+          tar xf libncurses.tar.gz --strip-components=1
+          mkdir build
+          cd build
+          ../configure --prefix=/usr \
+                      --mandir=/usr/share/man \
+                      --with-shared \
+                      --without-debug \
+                      --with-normal \
+                      --without-cxx-binding \
+                      --enable-pc-files \
+                      --with-pkg-config-libdir=/usr/lib/pkgconfig \
+                      --enable-widec \
+                      --with-termlib=tinfo
+    build:
+      - |
+          make -C build -j $(nproc)
+    install:
+      - |
+          make -C build DESTDIR=/rootfs install
+          rm -rf /rootfs/usr/share/man
+    test:
+      - |
+          fhs-validator /rootfs
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libncurses.spdx.json
+      version: {{ .LIBNCURSES_VERSION }}
+      licenses:
+        - MIT
+finalize:
+  - from: /rootfs
+    to: /

@@ -1,0 +1,36 @@
+name: libmd
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://libbsd.freedesktop.org/releases/libmd-{{ .LIBMD_VERSION }}.tar.xz
+        destination: libmd.tar.gz
+        sha256: {{ .LIBMD_SHA256 }}
+        sha512: {{ .LIBMD_SHA512 }}
+    prepare:
+      - |
+          tar xf libmd.tar.gz --strip-components=1
+          autoreconf -fvi
+          mkdir build
+          cd build
+          ../configure --prefix=/usr --enable-static --enable-shared
+    build:
+      - |
+          make -C build -j $(nproc)
+    install:
+      - |
+          make -C build DESTDIR=/rootfs install
+          rm -rf /rootfs/usr/share/man
+    test:
+      - |
+          fhs-validator /rootfs
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libmd.spdx.json
+      version: {{ .LIBMD_VERSION }}
+      licenses:
+        - BSD-3-Clause
+finalize:
+  - from: /rootfs
+    to: /

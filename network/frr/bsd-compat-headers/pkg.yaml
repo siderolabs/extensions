@@ -1,0 +1,21 @@
+name: bsd-compat-headers
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - install:
+      - |
+          install -Dm644 -t /rootfs/usr/include/sys /pkg/{cdefs,queue,tree}.h
+    test:
+      - |
+          fhs-validator /rootfs
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/bsd-compat-headers.spdx.json
+      version: 0.0.0
+      licenses:
+        - BSD-2-Clause
+        - BSD-3-Clause
+finalize:
+  - from: /rootfs
+    to: /

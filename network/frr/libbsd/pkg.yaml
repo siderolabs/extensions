@@ -1,0 +1,37 @@
+name: libbsd
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libmd
+steps:
+  - sources:
+      - url: https://libbsd.freedesktop.org/releases/libbsd-{{ .LIBBSD_VERSION }}.tar.xz
+        destination: libbsd.tar.gz
+        sha256: {{ .LIBBSD_SHA256 }}
+        sha512: {{ .LIBBSD_SHA512 }}
+    prepare:
+      - |
+          tar xf libbsd.tar.gz --strip-components=1
+          autoreconf -fvi
+          mkdir build
+          cd build
+          ../configure --prefix=/usr --enable-static --enable-shared
+    build:
+      - |
+          make -C build -j $(nproc)
+    install:
+      - |
+          make -C build DESTDIR=/rootfs install
+          rm -rf /rootfs/usr/share/man
+    test:
+      - |
+          fhs-validator /rootfs
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libbsd.spdx.json
+      version: {{ .LIBBSD_VERSION }}
+      licenses:
+        - BSD-3-Clause
+finalize:
+  - from: /rootfs
+    to: /

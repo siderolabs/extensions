@@ -1,0 +1,36 @@
+name: libreadline
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libncurses
+steps:
+  - sources:
+      - url: https://ftpmirror.gnu.org/readline/readline-{{ .LIBREADLINE_VERSION }}.tar.gz
+        destination: libreadline.tar.gz
+        sha256: {{ .LIBREADLINE_SHA256 }}
+        sha512: {{ .LIBREADLINE_SHA512 }}
+    prepare:
+      - |
+          tar xf libreadline.tar.gz --strip-components=1
+          mkdir build
+          cd build
+          ../configure --prefix=/usr --enable-static --enable-shared
+    build:
+      - |
+          make -C build -j $(nproc)
+    install:
+      - |
+          make -C build DESTDIR=/rootfs install
+          rm -rf /rootfs/usr/share/{man,info,doc}
+    test:
+      - |
+          fhs-validator /rootfs
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libreadline.spdx.json
+      version: {{ .LIBREADLINE_VERSION }}
+      licenses:
+        - GPL-3.0-or-later
+finalize:
+  - from: /rootfs
+    to: /

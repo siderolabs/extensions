@@ -1,0 +1,38 @@
+name: frr
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+container:
+  args:
+    - start
+  entrypoint: /usr/lib/frr/frrinit.sh
+  mounts:
+    # libs
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # more libs
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # frr socket
+    - source: /var/run/frr
+      destination: /var/run/frr
+      type: bind
+      options:
+      - bind
+      - rw
+  security:
+    writeableRootfs: false
+    writeableSysfs: false
+restart: always
