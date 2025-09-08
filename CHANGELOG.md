@@ -1,3 +1,50 @@
+## [Talos System Extensions 1.11.1](https://github.com/siderolabs/extensions/releases/tag/v1.11.1) (2025-09-08)
+
+Welcome to the v1.11.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+talos-vmtoolsd: 1.3.0
+
+
+### Contributors
+
+* Andrey Smirnov
+* Hugo Meyronneinc
+* Jorik Jonker
+* Sammy ETUR
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`50ff053`](https://github.com/siderolabs/extensions/commit/50ff0531deea6bcdf6e6442f7b93d91036a1e9b5) feat: zerotier - add possible custom planet file
+* [`6fa5a62`](https://github.com/siderolabs/extensions/commit/6fa5a627c4a4fa22bc5ef5dcdf9bbc7d024d8262) chore: refactor manifest for talos-vmtoolsd
+* [`b2c6531`](https://github.com/siderolabs/extensions/commit/b2c6531a8b61d63202bab7c06a6f59c7b94238e9) chore: sync pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>3 commits</summary>
+<p>
+
+* [`1a25681`](https://github.com/siderolabs/pkgs/commit/1a25681589e3ff788a02b3c7f69cd728cd85f9eb) feat: enable ublk support
+* [`95f0be4`](https://github.com/siderolabs/pkgs/commit/95f0be4ea210cb873568e1313f1cfc69500afbbc) fix: enable memcg v1
+* [`e1c333c`](https://github.com/siderolabs/pkgs/commit/e1c333cfd95deebaedfd9eed87daf8b728767001) feat: update Linux to 6.12.45
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.11.0-15-g2ac857a -> v1.11.0-18-g1a25681
+
+Previous release can be found at [v1.11.0](https://github.com/siderolabs/extensions/releases/tag/v1.11.0)
+
 ## [Talos System Extensions 1.11.0](https://github.com/siderolabs/extensions/releases/tag/v1.11.0) (2025-09-01)
 
 Welcome to the v1.11.0 release of Talos System Extensions!
