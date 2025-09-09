@@ -60,6 +60,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | tailscale                                 | Beau Trepp         | [btrepp](https://github.com/btrepp)                                  |
 | thunderbolt                               | Igor Rzegocki      | [ajgon](https://github.com/ajgon)                                    |
 | uinput                                    | Judah Rand         | [judahrand](https://github.com/judahrand)                            |
+| usb-audio-drivers                         | Breland Miley      | [mindstorms6](https://github.com/mindstorms6)                        |
 | usb-modem-drivers                         | Sidero Labs        | NA                                                                   |
 | util-linux-tools                          | Sidero Labs        | NA                                                                   |
 | v4l-uvc-drivers                           | Jacob McSwain      | [USA-RedDragon](https://github.com/USA-RedDragon)                    |

@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: usb-audio-drivers
+  version: "{{ .VERSION }}"
+  author: mindstorms6
+  description: |
+    [{{ .TIER }}] This system extension provides ALSA USB Audio kernel modules built against a specific Talos version.
+    This enables USB audio interfaces (class-compliant sound cards, headsets, DACs) on Talos Linux.
+  compatibility:
+    talos:
+      version: ">= v1.10.0"

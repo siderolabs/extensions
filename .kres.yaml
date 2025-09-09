@@ -58,6 +58,7 @@ spec:
     - thunderbolt
     - uinput
     - usb-modem-drivers
+    - usb-audio-drivers
     - util-linux-tools
     - v4l-uvc-drivers
     - vc4
