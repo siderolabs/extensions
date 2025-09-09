@@ -1,0 +1,2 @@
+VERSION: "{{ .BESZEL_VERSION }}"
+TIER: "extra"

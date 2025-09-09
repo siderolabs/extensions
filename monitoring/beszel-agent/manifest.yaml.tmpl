@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: beszel-agent
+  version: "{{ .VERSION }}"
+  author: VirtualM2000
+  description: |
+    [{{ .TIER }}] Beszel Agent Monitor
+  ## The compatibility section is "optional" but highly recommended to specify a Talos version that
+  ## has been tested and known working for this extension.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"

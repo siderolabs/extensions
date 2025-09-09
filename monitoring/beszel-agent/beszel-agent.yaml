@@ -1,0 +1,21 @@
+name: beszel-agent
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+    - hostname
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/beszel-agent
+  mounts:
+    # Device files.
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always
