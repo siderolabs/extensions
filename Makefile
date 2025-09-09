@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-09-05T15:58:35Z by kres cc45611.
+# Generated on 2025-09-08T15:13:26Z by kres cc45611.
 
 # common variables
 
@@ -13,7 +13,7 @@ IMAGE_TAG ?= $(TAG)
 OPERATING_SYSTEM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 GOARCH := $(shell uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')
 REGISTRY ?= ghcr.io
-USERNAME ?= siderolabs
+USERNAME ?= virtualm2000
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
 KRES_IMAGE ?= ghcr.io/siderolabs/kres:latest
 CONFORMANCE_IMAGE ?= ghcr.io/siderolabs/conform:latest
@@ -61,6 +61,7 @@ TOOLS_PREFIX ?= ghcr.io/siderolabs
 TARGETS = amazon-ena
 TARGETS += amdgpu
 TARGETS += amd-ucode
+TARGETS += beszel-agent
 TARGETS += binfmt-misc
 TARGETS += bnx2-bnx2x
 TARGETS += btrfs
