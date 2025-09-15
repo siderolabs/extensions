@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-26T16:58:07Z by kres 6262116.
+# Generated on 2025-09-15T16:43:11Z by kres 7918c5d-dirty.
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -26,8 +26,7 @@ jobs:
       packages: write
       pull-requests: read
     runs-on:
-      - self-hosted
-      - pkgs
+      group: pkgs
     if: (!startsWith(github.head_ref, 'renovate/') && !startsWith(github.head_ref, 'dependabot/'))
     outputs:
       labels: ${{ steps.retrieve-pr-labels.outputs.result }}
@@ -135,8 +134,7 @@ jobs:
           draft: "true"
   grype-scan:
     runs-on:
-      - self-hosted
-      - pkgs
+      group: pkgs
     if: contains(fromJSON(needs.default.outputs.labels), 'integration/grype')
     needs:
       - default
@@ -194,8 +192,7 @@ jobs:
           retention-days: "180"
   reproducibility:
     runs-on:
-      - self-hosted
-      - pkgs
+      group: pkgs
     if: contains(fromJSON(needs.default.outputs.labels), 'integration/reproducibility')
     needs:
       - default

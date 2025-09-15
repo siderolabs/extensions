@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-08-07T15:53:10Z by kres 7f1d58a.
+# Generated on 2025-09-15T16:41:51Z by kres 7918c5d-dirty.
 
 "on":
   workflow_run:
@@ -15,8 +15,7 @@ name: slack-notify-failure
 jobs:
   slack-notify:
     runs-on:
-      - self-hosted
-      - generic
+      group: generic
     if: github.event.workflow_run.conclusion == 'failure' && github.event.workflow_run.event != 'pull_request'
     steps:
       - name: Slack Notify

@@ -60,8 +60,8 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.23.1` |  This system extension provides crun using containerd's runtime handler. |
-| [ecr-credential-provider](container-runtime/ecr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | `v1.33.1` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against AWS' Elastic Container Registry and pull images. |
+| [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.24` |  This system extension provides crun using containerd's runtime handler. |
+| [ecr-credential-provider](container-runtime/ecr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | `v1.34.0` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against AWS' Elastic Container Registry and pull images. |
 | [gvisor](container-runtime/gvisor) | :green_square: core | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | `20250707.0` |  This system extension provides gVisor using containerd's runtime handler. |
 | [gvisor-debug](container-runtime/gvisor-debug) | :yellow_square: extra | [ghcr.io/siderolabs/gvisor-debug](https://github.com/siderolabs/extensions/pkgs/container/gvisor-debug) | `v1.0.0` |  This system extension enables gVisor debug logging. |
 | [kata-containers](container-runtime/kata-containers) | :yellow_square: extra | [ghcr.io/siderolabs/kata-containers](https://github.com/siderolabs/extensions/pkgs/container/kata-containers) | `3.20.0` |  This system extension provides kata-container using containerd's runtime handler. |
@@ -127,11 +127,11 @@ tiers based on support level:
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
 | [cloudflared](network/cloudflared) | :white_large_square: contrib | [ghcr.io/siderolabs/cloudflared](https://github.com/siderolabs/extensions/pkgs/container/cloudflared) | `2024.12.1` |  Cloudflare Tunnel securely connects resources to Cloudflare without a public IP. A lightweight daemon (cloudflared) creates outbound-only connections to Cloudflare, allowing safe access to services like HTTP, SSH, remote desktops, and other protocols. More info: https://github.com/cloudflare/cloudflared/ |
-| [lldpd](network/lldpd) | :yellow_square: extra | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd) | `1.0.19` |  LLDP adds a LLDP discovery service to Talos. LLDP cli can be used to interface with the daemon. |
+| [lldpd](network/lldpd) | :yellow_square: extra | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd) | `1.0.20` |  LLDP adds a LLDP discovery service to Talos. LLDP cli can be used to interface with the daemon. |
 | [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.6` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
 | [newt](network/newt) | :white_large_square: contrib | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | `1.4.4` |  Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin. By using Newt, you don't need to manage complex WireGuard tunnels and NATing. More info: https://github.com/fosrl/newt |
-| [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.86.2` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
-| [zerotier](network/zerotier) | :white_large_square: contrib | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier) | `1.14.2` |  Connect your Talos cluster into a zerotier network |
+| [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.88.1` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
+| [zerotier](network/zerotier) | :white_large_square: contrib | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier) | `1.16.0` |  Connect your Talos cluster into a zerotier network |
 
 ### Storage
 
