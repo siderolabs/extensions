@@ -34,6 +34,7 @@ tailscale: 1.88.1
 zerotier: 1.16.0
 fuse3: 3.17.4
 nut-client: 2.8.4
+talos-vmtoolsd: 1.4.0
 """
 
 [make_deps]
