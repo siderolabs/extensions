@@ -1,16 +1,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-09-24T11:32:33Z by kres fdbc9fc.
+# Generated on 2025-09-18T12:49:25Z by kres ce14887.
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 "on":
   schedule:
-    - cron: 30 1 * * 1
-name: weekly
+    - cron: 30 7 * * *
+name: grype-scan-cron
 jobs:
-  reproducibility:
+  default:
     runs-on:
       group: pkgs
     steps:
@@ -48,11 +48,20 @@ jobs:
         id: setup-buildx
         uses: docker/setup-buildx-action@v3
         with:
-          append: |
-            - endpoint: tcp://buildkit-arm64.ci.svc.cluster.local:1234
-              platforms: linux/arm64
           driver: remote
           endpoint: tcp://buildkit-amd64.ci.svc.cluster.local:1234
-      - name: reproducibility-test
+        timeout-minutes: 10
+      - name: grype-scan
         run: |
-          make reproducibility-test
+          make grype-scan
+      - name: save-results-artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: results-grype-scan
+          path: |-
+            _out/grype-scan/linux_amd64/combined.spdx.json
+            _out/grype-scan/linux_amd64/grype-scan.log
+            _out/grype-scan/linux_arm64/combined.spdx.json
+            _out/grype-scan/linux_arm64/grype-scan.log
+          retention-days: "180"

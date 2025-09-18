@@ -158,7 +158,7 @@ tiers based on support level:
 | ---- | ---- | ----- | ------- | ----------- |
 | [metal-agent](guest-agents/metal-agent) | :green_square: core | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent) | `v0.1.3` |  This system extension provides talos-metal-agent |
 | [qemu-guest-agent](guest-agents/qemu-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent) | `10.0.2` |  This system extension provides the QEMU Guest Agent service. |
-| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | `v1.3.0` |  This system extension provides talos-vmtoolsd |
+| [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | `v1.4.0` |  This system extension provides talos-vmtoolsd |
 | [xen-guest-agent](guest-agents/xen-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/xen-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/xen-guest-agent) | `0.4.0-g5c274e6` |  xen-guest-agent communicates information and metrics with the Xen host. |
 
 ### NVIDIA GPU
