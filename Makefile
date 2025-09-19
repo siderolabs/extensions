@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-09-19T12:21:34Z by kres 065ec4c.
+# Generated on 2025-09-22T13:58:11Z by kres fdbc9fc.
 
 # common variables
 
@@ -90,6 +90,7 @@ TARGETS += mdadm
 TARGETS += mei
 TARGETS += metal-agent
 TARGETS += nebula
+TARGETS += netbird
 TARGETS += newt
 TARGETS += nfsd
 TARGETS += nfsrahead

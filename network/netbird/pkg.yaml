@@ -1,0 +1,58 @@
+name: netbird
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - env:
+      GOPATH: /tmp/go
+      CGO_ENABLED: 0
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+    sources:
+      - url: https://github.com/netbirdio/netbird/archive/refs/tags/v{{ .NETBIRD_VERSION }}.tar.gz
+        destination: netbird.tar.gz
+        sha256: {{ .NETBIRD_SHA256 }}
+        sha512: {{ .NETBIRD_SHA512 }}
+  - network: default
+    prepare:
+      - |
+        tar -xzvf netbird.tar.gz
+      - |
+        cd netbird-{{ .NETBIRD_VERSION }}
+        sed -i 's/development/{{ .NETBIRD_VERSION }}/' version/version.go 
+        cd client
+        go mod download 
+  - network: none
+    build:
+      - |
+        cd netbird-{{ .NETBIRD_VERSION }}
+        go build -o netbird ./client
+    install:
+      - |
+        cd netbird-{{ .NETBIRD_VERSION }}
+        mkdir -p /rootfs/usr/local/lib/containers/netbird/usr/local/bin/
+        cp -p netbird /rootfs/usr/local/lib/containers/netbird/usr/local/bin/
+        chmod +x -R /rootfs/usr/local/lib/containers/netbird/usr/local/bin/
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/netbird.yaml /rootfs/usr/local/etc/containers/
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/netbird.spdx.json
+      version: {{ .NETBIRD_VERSION }}
+      cpes:
+        - cpe:2.3:a:netbird:netbird:{{ .NETBIRD_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - BSD-3-Clause
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
