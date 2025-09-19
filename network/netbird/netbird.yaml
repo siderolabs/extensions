@@ -1,0 +1,34 @@
+name: netbird
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+    - hostname
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/netbird
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+  - source: /dev/net/tun
+    destination: /dev/net/tun
+    type: bind
+    options:
+      - bind
+      - rw
+  - source: /var/lib/netbird
+    destination: /var/lib/netbird
+    type: bind
+    options:
+      - bind
+      - rw
+  - source: /var/log/netbird
+    destination: /var/log/netbird
+    type: bind
+    options:
+      - bind
+      - rw
+restart: always

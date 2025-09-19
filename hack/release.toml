@@ -29,6 +29,7 @@ stargz-snapshotter: 0.17.0
 youki: 0.5.5
 lldpd: 1.0.20
 nebula: 1.9.6
+netbird: 0.57.1
 newt: 1.4.4
 tailscale: 1.88.1
 zerotier: 1.16.0
