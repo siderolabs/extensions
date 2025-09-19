@@ -34,6 +34,7 @@ spec:
     - mei
     - metal-agent
     - nebula
+    - netbird
     - newt
     - nfsd
     - nfsrahead

@@ -1,0 +1,2 @@
+VERSION: "{{ .NETBIRD_VERSION }}"
+TIER: "contrib"
