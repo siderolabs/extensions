@@ -1,0 +1,11 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/sound/soundcore.ko
+kernel/sound/core/snd.ko
+kernel/sound/core/snd-pcm.ko
+kernel/sound/core/snd-timer.ko
+kernel/sound/core/snd-rawmidi.ko
+kernel/sound/core/snd-hwdep.ko
+kernel/sound/usb/snd-usb-audio.ko
+kernel/sound/usb/snd-usbmidi-lib.ko
