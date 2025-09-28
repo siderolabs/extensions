@@ -1,4 +1,4 @@
-# Tailscale
+# Netbird
 
 Adds https://netbird.io network interfaces as system extensions.
 This means you can access your talos nodes from machines you have configured
@@ -19,6 +19,19 @@ kind: ExtensionServiceConfig
 name: netbird
 environment:
   - NB_SETUP_KEYS=<peer setup key>
+```
+
+or if you are selfhosting it with something like :
+
+```yaml
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: netbird
+environment:
+  - NB_SETUP_KEYS=<peer setup key>
+  - NB_MANAGEMENT_URL=https://netbird.selfhosted:443
+  - NB_ADMIN_URL=https://netbird.selfhosted:443
 ```
 
 Then apply the patch to your node's MachineConfigs
