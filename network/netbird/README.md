@@ -1,4 +1,4 @@
-# Tailscale
+# Netbird
 
 Adds https://netbird.io network interfaces as system extensions.
 This means you can access your talos nodes from machines you have configured
