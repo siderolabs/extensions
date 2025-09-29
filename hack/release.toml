@@ -22,17 +22,19 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
 NVIDIA LTS: 580.82.07
 NVIDIA Production: 570.172.08
 crun: 1.24
+gvisor: 20250820.0
 ecr-credential-provider: 1.34.0
-kata-containers: 3.20.0
+kata-containers: 3.21.0
 spin: 0.21.0
 stargz-snapshotter: 0.17.0
 youki: 0.5.5
 lldpd: 1.0.20
 nebula: 1.9.6
-netbird: 0.57.1
-newt: 1.4.4
-tailscale: 1.88.1
+netbird: 0.58.2
+newt: 1.5.0
+tailscale: 1.88.3
 zerotier: 1.16.0
+drbd: 9.2.15
 fuse3: 3.17.4
 nut-client: 2.8.4
 talos-vmtoolsd: 1.4.0

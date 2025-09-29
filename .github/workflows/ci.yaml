@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-09-18T12:49:25Z by kres ce14887.
+# Generated on 2025-09-29T17:48:35Z by kres 301c24d.
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -128,7 +128,7 @@ jobs:
           make release-notes
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: crazy-max/ghaction-github-release@v2
+        uses: softprops/action-gh-release@v2
         with:
           body_path: _out/RELEASE_NOTES.md
           draft: "true"

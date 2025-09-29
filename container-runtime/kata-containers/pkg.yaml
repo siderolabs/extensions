@@ -6,13 +6,13 @@ dependencies:
 steps:
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-arm64.tar.xz
-        destination: kata-static.tar.xz
+      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-arm64.tar.zst
+        destination: kata-static.tar.zst
         sha256: {{ .KATA_CONTAINERS_STATIC_ARM64_SHA256 }}
         sha512: {{ .KATA_CONTAINERS_STATIC_ARM64_SHA512 }}
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.xz
-        destination: kata-static.tar.xz
+      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.zst
+        destination: kata-static.tar.zst
         sha256: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA256 }}
         sha512: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA512 }}
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
@@ -29,7 +29,7 @@ steps:
     prepare:
       - |
         mkdir -p kata-static
-        tar xf kata-static.tar.xz -C kata-static
+        tar xf kata-static.tar.zst -C kata-static
       - |
         mkdir -p ${GOPATH}/src/github.com/kata-containers
         tar -xzf kata-containers.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/kata-containers
