@@ -1,6 +1,6 @@
 name: netbird
-variant: alpine
-shell: /bin/sh
+variant: scratch
+shell: /bin/bash
 dependencies:
   - stage: base
 steps:
@@ -21,7 +21,7 @@ steps:
         tar -xzvf netbird.tar.gz
       - |
         cd netbird-{{ .NETBIRD_VERSION }}
-        sed -i 's/development/{{ .NETBIRD_VERSION }}/' version/version.go 
+        sed -i 's/development/{{ .NETBIRD_VERSION }}/' version/version.go
         cd client
         go mod download
   - network: none
