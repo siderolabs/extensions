@@ -12,7 +12,6 @@ container:
   args:
     - "up"
     - "--foreground-mode"
-    - "|| ls /usr/local/bin"
   environment:
     - NB_DAEMON_ADDR=unix:///var/run/netbird/netbird.sock
     - NB_LOG_FILE=console,/var/log/netbird/client.log
@@ -20,7 +19,7 @@ container:
     - USER=talos
     - NB_CONFIG=/var/run/netbird/config.json
     - HOME=/var/run/netbird
-    - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
   security:
     writeableRootfs: false
     writeableSysfs: true
