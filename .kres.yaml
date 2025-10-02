@@ -230,7 +230,7 @@ spec:
     enabled: true
     phony: true
     script:
-      - "@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan"
+      - "@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan PLATFORM=linux/amd64"
       # - "@$(MAKE) target-$@ TARGET_ARGS=\"--build-arg=GRYPE_EXTRA_ARGS='--fail-on=negligible'\""
   ghaction:
     enabled: true
@@ -248,10 +248,7 @@ spec:
           additional:
             - name: results
               paths:
-                - _out/grype-scan/linux_amd64/combined.spdx.json
-                - _out/grype-scan/linux_amd64/grype-scan.log
-                - _out/grype-scan/linux_arm64/combined.spdx.json
-                - _out/grype-scan/linux_arm64/grype-scan.log
+                - _out/grype-scan/**
               retentionDays: "180"
               always: true
 ---

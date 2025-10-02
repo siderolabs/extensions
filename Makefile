@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-09-29T17:48:35Z by kres 301c24d.
+# Generated on 2025-10-02T16:11:40Z by kres bc281a9.
 
 # common variables
 
@@ -268,7 +268,7 @@ sign-images:
 
 .PHONY: grype-scan
 grype-scan:
-	@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan
+	@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan PLATFORM=linux/amd64
 
 .PHONY: rekres
 rekres:

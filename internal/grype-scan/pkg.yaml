@@ -4,71 +4,27 @@ shell: /bin/bash
 dependencies:
   - stage: base
   - stage: glibc
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: stargz-snapshotter
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: crun
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: youki
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: gvisor
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: spin
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: kata-containers
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: wasmedge
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: ecr-credential-provider
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: lldpd
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: nebula
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: newt
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: tailscale
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: cloudflared
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: zerotier
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: metal-agent
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: qemu-guest-agent
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: xen-guest-agent
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: fuse3
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: iscsi-tools
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: nonfree-kmod-nvidia-lts
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
   - stage: nonfree-kmod-nvidia-production
-    from: /rootfs/usr/local/share/spdx
-    to: /usr/local/share/spdx
 steps:
   - env:
       SYFT_FORMAT_PRETTY: 1
@@ -91,15 +47,15 @@ steps:
       - /root/.cache/grype/db
     build:
       - |
-        mkdir -p /rootfs
+        mkdir -p /results
         cd /pkg
 
         go tool -modfile=go.mod \
         github.com/anchore/syft/cmd/syft \
-        scan --from dir /usr/local/share/spdx \
+        scan --from dir /rootfs/usr/local/share/spdx \
         --select-catalogers "+sbom-cataloger" \
         --source-name "Talos extensions" --source-version {{ .BUILD_ARG_TAG }} \
-        -o spdx-json > /rootfs/combined.spdx.json
+        -o spdx-json > /results/combined.spdx.json
   - network: default
     cachePaths:
       - /.cache/go-build
@@ -107,11 +63,11 @@ steps:
       - /root/.cache/grype/db
     build:
       - |
-        mkdir -p /rootfs
+        mkdir -p /results
         cd /pkg
 
         GRYPE_COMMAND_ARGS=(
-          "sbom:/rootfs/combined.spdx.json"
+          "sbom:/results/combined.spdx.json"
           "-vv"
         )
 
@@ -121,7 +77,7 @@ steps:
 
         go tool -modfile=go.mod \
         github.com/anchore/grype/cmd/grype \
-        "${GRYPE_COMMAND_ARGS[@]}" 2>&1 | tee /rootfs/grype-scan.log
+        "${GRYPE_COMMAND_ARGS[@]}" 2>&1 | tee /results/grype-scan.log
 finalize:
-  - from: /rootfs
+  - from: /results
     to: /

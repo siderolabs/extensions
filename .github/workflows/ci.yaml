@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-09-29T17:48:35Z by kres 301c24d.
+# Generated on 2025-10-02T16:11:40Z by kres bc281a9.
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -184,11 +184,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: results-grype-scan
-          path: |-
-            _out/grype-scan/linux_amd64/combined.spdx.json
-            _out/grype-scan/linux_amd64/grype-scan.log
-            _out/grype-scan/linux_arm64/combined.spdx.json
-            _out/grype-scan/linux_arm64/grype-scan.log
+          path: _out/grype-scan/**
           retention-days: "180"
   reproducibility:
     runs-on:
