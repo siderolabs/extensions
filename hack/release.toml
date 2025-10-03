@@ -20,7 +20,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
         title = "Component Updates"
         description = """\
 NVIDIA LTS: 580.82.07
-NVIDIA Production: 570.172.08
+NVIDIA Production: 570.195.03
 crun: 1.24
 gvisor: 20250820.0
 ecr-credential-provider: 1.34.0
@@ -38,6 +38,8 @@ drbd: 9.2.15
 fuse3: 3.17.4
 nut-client: 2.8.4
 talos-vmtoolsd: 1.4.0
+hailort: 4.23.0
+zfs: 2.4.0-rc2
 """
 
 [make_deps]
