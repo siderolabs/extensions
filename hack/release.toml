@@ -19,7 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-NVIDIA LTS: 580.82.07
+NVIDIA LTS: 580.95.05
 NVIDIA Production: 570.195.03
 crun: 1.24
 gvisor: 20250820.0
