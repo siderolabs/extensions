@@ -1,0 +1,4 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/gpu/drm/xe/xe.ko

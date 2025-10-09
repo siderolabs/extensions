@@ -91,6 +91,7 @@ tiers based on support level:
 | [i915](drm/i915) | :green_square: core | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915) | `20251011-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
 | [panfrost](drm/panfrost) | :white_large_square: contrib | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | `20251011-VERSION` |  This system extension provides ARM Mali Midgard, Bifrost, and Valhall firmware binaries and kernel modules. |
 | [vc4](drm/vc4) | :yellow_square: extra | [ghcr.io/siderolabs/vc4](https://github.com/siderolabs/extensions/pkgs/container/vc4) | `VERSION` |  This system extension provides kernel modules for Broadcom VideoCore GPU. |
+| [xe](drm/xe) | :green_square: core | [ghcr.io/siderolabs/xe](https://github.com/siderolabs/extensions/pkgs/container/xe) | `20251011-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
 
 ### Drivers
 

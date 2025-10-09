@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-10-13T11:20:45Z by kres 063080a.
+# Generated on 2025-10-14T15:32:52Z by kres 063080a.
 
 # common variables
 
@@ -51,9 +51,9 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.12.0-alpha.0-38-gf62ebca
+PKGS ?= v1.12.0-alpha.0-41-g661e578
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.12.0-alpha.0-14-g916b464
+TOOLS ?= v1.12.0-alpha.0-15-ge62d613
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 
 # targets defines all the available targets
@@ -121,6 +121,7 @@ TARGETS += vc4
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xdma-driver
+TARGETS += xe
 TARGETS += xen-guest-agent
 TARGETS += youki
 TARGETS += zerotier
