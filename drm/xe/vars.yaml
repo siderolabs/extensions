@@ -1,0 +1,2 @@
+VERSION: "{{ .LINUX_FIRMWARE_VERSION }}-{{ .BUILD_ARG_TAG }}"
+TIER: "core"

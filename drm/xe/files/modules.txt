@@ -1,0 +1,6 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/gpu/drm/drm_gpuvm.ko
+kernel/drivers/gpu/drm/drm_gpusvm_helper.ko
+kernel/drivers/gpu/drm/xe/xe.ko

@@ -65,6 +65,7 @@ spec:
     - vmtoolsd-guest-agent
     - wasmedge
     - xdma-driver
+    - xe
     - xen-guest-agent
     - youki
     - zerotier

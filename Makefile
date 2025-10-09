@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-10-03T12:46:35Z by kres bc281a9.
+# Generated on 2025-10-09T18:45:02Z by kres 063080a.
 
 # common variables
 
@@ -121,6 +121,7 @@ TARGETS += vc4
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
 TARGETS += xdma-driver
+TARGETS += xe
 TARGETS += xen-guest-agent
 TARGETS += youki
 TARGETS += zerotier
