@@ -9,6 +9,17 @@ depends:
   - configuration: true
 container:
   entrypoint: /usr/local/bin/netbird
+  args:
+    - "up"
+    - "--foreground-mode"
+  environment:
+    - NB_DAEMON_ADDR=unix:///var/run/netbird/netbird.sock
+    - NB_LOG_FILE=console,/var/log/netbird/client.log
+    - NB_DISABLE_PROFILES=true
+    - USER=talos
+    - NB_CONFIG=/var/run/netbird/config.json
+    - HOME=/var/run/netbird
+    - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
   security:
     writeableRootfs: false
     writeableSysfs: true
@@ -31,4 +42,22 @@ container:
     options:
       - bind
       - rw
+  - source: /var/run/netbird
+    destination: /var/run/netbird
+    type: bind
+    options:
+      - bind
+      - rw
+  - source: /etc/ssl/certs
+    destination: /etc/ssl/certs
+    type: bind
+    options:
+      - rbind
+      - ro
+  - source: /etc/os-release
+    destination: /etc/os-release
+    type: bind
+    options:
+      - bind
+      - ro
 restart: always
