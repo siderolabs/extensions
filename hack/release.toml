@@ -22,24 +22,28 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
 NVIDIA LTS: 580.95.05
 NVIDIA Production: 570.195.03
 crun: 1.24
-gvisor: 20250820.0
+drbd: 9.2.15
 ecr-credential-provider: 1.34.0
+fuse3: 3.17.4
+glibc: 2.42
+gvisor: 20251006.0
+hailort: 4.23.0
 kata-containers: 3.21.0
+lldpd: 1.0.20
+nebula: 1.9.7
+netbird: 0.58.2
+newt: 1.5.2
+nut-client: 2.8.4
+qemu: 10.1.1
 spin: 0.21.0
 stargz-snapshotter: 0.17.0
-youki: 0.5.5
-lldpd: 1.0.20
-nebula: 1.9.6
-netbird: 0.58.2
-newt: 1.5.0
 tailscale: 1.88.3
-zerotier: 1.16.0
-drbd: 9.2.15
-fuse3: 3.17.4
-nut-client: 2.8.4
 talos-vmtoolsd: 1.4.0
-hailort: 4.23.0
+youki: 0.5.5
+zerotier: 1.16.0
 zfs: 2.4.0-rc2
+
+wolfi-base: sha256:815b27b8a70713c70404e44a718eddd52ea6f4a2bfad5f56455b52cd2789a9b2
 """
 
 [make_deps]

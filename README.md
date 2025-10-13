@@ -62,7 +62,7 @@ tiers based on support level:
 | ---- | ---- | ----- | ------- | ----------- |
 | [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.24` |  This system extension provides crun using containerd's runtime handler. |
 | [ecr-credential-provider](container-runtime/ecr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | `v1.34.0` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against AWS' Elastic Container Registry and pull images. |
-| [gvisor](container-runtime/gvisor) | :green_square: core | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | `20250820.0` |  This system extension provides gVisor using containerd's runtime handler. |
+| [gvisor](container-runtime/gvisor) | :green_square: core | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | `20251006.0` |  This system extension provides gVisor using containerd's runtime handler. |
 | [gvisor-debug](container-runtime/gvisor-debug) | :yellow_square: extra | [ghcr.io/siderolabs/gvisor-debug](https://github.com/siderolabs/extensions/pkgs/container/gvisor-debug) | `v1.0.0` |  This system extension enables gVisor debug logging. |
 | [kata-containers](container-runtime/kata-containers) | :yellow_square: extra | [ghcr.io/siderolabs/kata-containers](https://github.com/siderolabs/extensions/pkgs/container/kata-containers) | `3.21.0` |  This system extension provides kata-container using containerd's runtime handler. |
 | [spin](container-runtime/spin) | :yellow_square: extra | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin) | `v0.21.0` |  This system extension provides support for spin runtime (WebAssembly) containers. |
@@ -121,7 +121,7 @@ tiers based on support level:
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
 | [binfmt-misc](misc/binfmt-misc) | :yellow_square: extra | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | `VERSION` |  This system extension provides kernel module driver for binfmt-misc built against a specific Talos version. |
-| [glibc](misc/glibc) | :green_square: core | [ghcr.io/siderolabs/glibc](https://github.com/siderolabs/extensions/pkgs/container/glibc) | `2.41` | This system extension provides glibc. |
+| [glibc](misc/glibc) | :green_square: core | [ghcr.io/siderolabs/glibc](https://github.com/siderolabs/extensions/pkgs/container/glibc) | `2.42` | This system extension provides glibc. |
 
 ### Network
 
@@ -129,9 +129,9 @@ tiers based on support level:
 | ---- | ---- | ----- | ------- | ----------- |
 | [cloudflared](network/cloudflared) | :white_large_square: contrib | [ghcr.io/siderolabs/cloudflared](https://github.com/siderolabs/extensions/pkgs/container/cloudflared) | `2024.12.1` |  Cloudflare Tunnel securely connects resources to Cloudflare without a public IP. A lightweight daemon (cloudflared) creates outbound-only connections to Cloudflare, allowing safe access to services like HTTP, SSH, remote desktops, and other protocols. More info: https://github.com/cloudflare/cloudflared/ |
 | [lldpd](network/lldpd) | :yellow_square: extra | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd) | `1.0.20` |  LLDP adds a LLDP discovery service to Talos. LLDP cli can be used to interface with the daemon. |
-| [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.6` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
+| [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.7` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
 | [netbird](network/netbird) | :white_large_square: contrib | [ghcr.io/siderolabs/netbird](https://github.com/siderolabs/extensions/pkgs/container/netbird) | `0.58.2` |  NetBird combines a WireGuard®-based overlay network with Zero Trust Network Access, providing a unified open source platform for reliable and secure connectivity. |
-| [newt](network/newt) | :white_large_square: contrib | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | `1.5.0` |  Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin. By using Newt, you don't need to manage complex WireGuard tunnels and NATing. More info: https://github.com/fosrl/newt |
+| [newt](network/newt) | :white_large_square: contrib | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | `1.5.2` |  Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin. By using Newt, you don't need to manage complex WireGuard tunnels and NATing. More info: https://github.com/fosrl/newt |
 | [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.88.3` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
 | [zerotier](network/zerotier) | :white_large_square: contrib | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier) | `1.16.0` |  Connect your Talos cluster into a zerotier network |
 
@@ -159,7 +159,7 @@ tiers based on support level:
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
 | [metal-agent](guest-agents/metal-agent) | :green_square: core | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent) | `v0.1.3` |  This system extension provides talos-metal-agent |
-| [qemu-guest-agent](guest-agents/qemu-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent) | `10.1.0` |  This system extension provides the QEMU Guest Agent service. |
+| [qemu-guest-agent](guest-agents/qemu-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent) | `10.1.1` |  This system extension provides the QEMU Guest Agent service. |
 | [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | `v1.4.0` |  This system extension provides talos-vmtoolsd |
 | [xen-guest-agent](guest-agents/xen-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/xen-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/xen-guest-agent) | `0.4.0-g5c274e6` |  xen-guest-agent communicates information and metrics with the Xen host. |
 
