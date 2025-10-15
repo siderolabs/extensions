@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.11.1"
+previous = "v1.11.2"
 
 pre_release = false
 
@@ -19,21 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-crun: 1.24
-ecr-credential-provider: 1.34.0
-kata-containers: 3.20.0
-spin: 0.21.0
-stargz-snapshotter: 0.17.0
-youki: 0.5.5
-lldpd: 1.0.20
-nebula: 1.9.6
-newt: 1.4.4
-tailscale: 1.88.1
-zerotier: 1.16.0
-fuse3: 3.17.4
-nut-client: 2.8.4
-talos-vmtoolsd: 1.4.0
-linux-firmware: 20250917
+linux-firmware: 20251011
 """
 
 
