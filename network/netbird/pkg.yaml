@@ -21,19 +21,22 @@ steps:
         tar -xzvf netbird.tar.gz
       - |
         cd netbird-{{ .NETBIRD_VERSION }}
-        sed -i 's/development/{{ .NETBIRD_VERSION }}/' version/version.go 
+        sed -i 's/development/{{ .NETBIRD_VERSION }}/' version/version.go
         cd client
-        go mod download 
+        go mod download
   - network: none
     build:
       - |
         cd netbird-{{ .NETBIRD_VERSION }}
         go build -o netbird ./client
+        cd /pkg/src
+        go build -o ./uname .
     install:
       - |
         cd netbird-{{ .NETBIRD_VERSION }}
         mkdir -p /rootfs/usr/local/lib/containers/netbird/usr/local/bin/
         cp -p netbird /rootfs/usr/local/lib/containers/netbird/usr/local/bin/
+        cp -p /pkg/src/uname /rootfs/usr/local/lib/containers/netbird/usr/local/bin/
         chmod +x -R /rootfs/usr/local/lib/containers/netbird/usr/local/bin/
       - |
         mkdir -p /rootfs/usr/local/etc/containers
