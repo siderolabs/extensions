@@ -1,0 +1,29 @@
+# Fix "Unrecognized service" / "Name does not resolve" error in sm-notify
+#
+# Problem: sm-notify calls getaddrinfo() with empty string "" for service
+# parameter while using AI_NUMERICSERV flag. Musl libc (Alpine/Talos) rejects
+# this - it requires either NULL or a valid numeric string.
+#
+# Solution: When srcport is NULL, use "0" instead of "". This is valid with
+# AI_NUMERICSERV and will be assigned a random privileged port by bindresvport().
+
+diff --git a/utils/statd/sm-notify.c b/utils/statd/sm-notify.c
+index ed82b8f2..64fc7f18 100644
+--- a/utils/statd/sm-notify.c
++++ b/utils/statd/sm-notify.c
+@@ -368,11 +368,11 @@ smn_bind_address(const char *srcaddr, const char *srcport)
+ 	if (srcaddr == NULL)
+ 		hint.ai_flags |= AI_PASSIVE;
+
+-	/* Do not allow "node" and "service" parameters both to be NULL */
++	/* When srcport is NULL, pass "0" to specify port 0 */
+ 	if (srcport == NULL)
+-		error = getaddrinfo(srcaddr, "", &hint, &ai);
+-	else
+-		error = getaddrinfo(srcaddr, srcport, &hint, &ai);
++		srcport = "0";
++
++	error = getaddrinfo(srcaddr, srcport, &hint, &ai);
+ 	if (error != 0) {
+ 		xlog(L_ERROR,
+ 			"Invalid bind address or port for RPC socket: %s",

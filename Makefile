@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-10-30T03:39:23Z by kres cd5a938.
+# Generated on 2025-11-04T11:21:40Z by kres cd5a938.
 
 # common variables
 
@@ -93,6 +93,7 @@ TARGETS += metal-agent
 TARGETS += nebula
 TARGETS += netbird
 TARGETS += newt
+TARGETS += nfs-utils
 TARGETS += nfsd
 TARGETS += nfsrahead
 TARGETS += nut-client

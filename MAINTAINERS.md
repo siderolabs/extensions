@@ -40,6 +40,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | metal-agent                               | Sidero Labs        | NA                                                                   |
 | nebula                                    | s e                | [iamwacko](https://github.com/iamwacko)                              |
 | netbird                                   | Łukasz Szczepański | [l-szczepanski-speednet](https://github.com/l-szczepanski-speednet)  |
+| nfs-utils                                 | Clément Nussbaumer | [clementnuss](https://github.com/clementnuss)                        |
 | nut-client                                | Sidero Labs        | NA                                                                   |
 | nvidia-container-toolkit-lts              | Sidero Labs        | NA                                                                   |
 | nivida-container-toolkit-production       | Sidero Labs        | NA                                                                   |

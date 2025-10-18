@@ -1,0 +1,50 @@
+name: rpcbind
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libtirpc-zfs
+    from: /rootfs
+steps:
+  - sources:
+      - url: https://sourceforge.net/projects/rpcbind/files/rpcbind/{{ .RPCBIND_VERSION }}/rpcbind-{{ .RPCBIND_VERSION }}.tar.bz2/download
+        destination: rpcbind.tar.bz2
+        sha256: {{ .RPCBIND_SHA256 }}
+        sha512: {{ .RPCBIND_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xjf rpcbind.tar.bz2 --strip-components=1
+    build:
+      - |
+        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+        export CFLAGS="${CFLAGS} -I/usr/local/include"
+        export LDFLAGS="${LDFLAGS} -L/usr/local/lib"
+
+        ./configure \
+          --prefix=/usr/local \
+          --bindir=/usr/local/sbin \
+          --sbindir=/usr/local/sbin \
+          --with-rpcuser=nobody \
+          --without-systemdsystemunitdir \
+          --enable-warmstarts
+
+        make
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/sbin
+        make DESTDIR=/rootfs install
+
+        # cleanup
+        rm -rf /rootfs/usr/local/share
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/rpcbind.spdx.json
+      version: {{ .RPCBIND_VERSION }}
+      cpes:
+        - cpe:2.3:a:rpcbind_project:rpcbind:{{ .RPCBIND_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - BSD-3-Clause
+finalize:
+  - from: /rootfs
+    to: /rootfs

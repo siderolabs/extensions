@@ -1,0 +1,21 @@
+# Separate --no-syslog flag from debug logging in rpc.statd
+#
+# Problem: The --no-syslog (-d) flag both disables syslog AND automatically
+# enables ALL debug logging. In containers, we need stderr logging without
+# debug verbosity flooding the logs.
+#
+# Solution: Remove the automatic xlog_config(D_ALL, 1) when using --no-syslog.
+# Debug can still be enabled via /etc/nfs.conf or SIGUSR1 signal.
+
+diff --git a/utils/statd/statd.c b/utils/statd/statd.c
+index a469a67a..645d4b98 100644
+--- a/utils/statd/statd.c
++++ b/utils/statd/statd.c
+@@ -439,7 +439,6 @@ int main (int argc, char **argv)
+ 	if (run_mode & MODE_LOG_STDERR) {
+ 		xlog_syslog(0);
+ 		xlog_stderr(1);
+-		xlog_config(D_ALL, 1);
+ 	} else {
+ 		xlog_syslog(1);
+ 		xlog_stderr(0);

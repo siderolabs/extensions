@@ -1,0 +1,75 @@
+name: nfs-utils-statd
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libtirpc-zfs
+    from: /rootfs
+  - stage: rpcsvc-proto
+    from: /rootfs
+  - stage: libxml2
+    from: /rootfs
+  - stage: libevent
+    from: /rootfs
+  - stage: sqlite
+    from: /rootfs
+steps:
+  - sources:
+      - url: https://www.kernel.org/pub/linux/utils/nfs-utils/{{ .NFS_UTILS_VERSION }}/nfs-utils-{{ .NFS_UTILS_VERSION }}.tar.xz
+        destination: nfs-utils.tar.xz
+        sha256: {{ .NFS_UTILS_SHA256 }}
+        sha512: {{ .NFS_UTILS_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xJf nfs-utils.tar.xz --strip-components=1
+      - |
+        # Apply patches
+        patch -p1 < /pkg/rpc-statd-create-directories.patch
+        patch -p1 < /pkg/rpc-statd-separate-debug-from-stderr.patch
+        patch -p1 < /pkg/sm-notify-fix-unrecognized-service.patch
+    build:
+      - |
+        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+        export CFLAGS="${CFLAGS} -I/usr/local/include"
+        export LDFLAGS="${LDFLAGS} -L/usr/local/lib"
+
+        ./configure \
+          --prefix=/usr/local \
+          --sbindir=/usr/local/sbin \
+          --disable-nfsv4 \
+          --disable-nfsv41 \
+          --disable-gss \
+          --disable-svcgss \
+          --disable-kprefix \
+          --disable-nfsdctl \
+          --without-tcp-wrappers \
+          --with-rpcgen=/usr/local/bin/rpcgen \
+          --with-statedir=/var/lib/nfs \
+          --with-statdpath=/var/lib/nfs/statd
+      - |
+        make -C support/nsm
+        make -C support/misc
+        make -C support/nfs
+        make -C utils/statd
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/sbin
+        mkdir -p /rootfs/var/lib/nfs/statd
+
+        # Install only rpc.statd and sm-notify from the built directories
+        make DESTDIR=/rootfs install -C utils/statd
+
+        # cleanup
+        rm -rf /rootfs/usr/local/share
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/nfs-utils-statd.spdx.json
+      version: {{ .NFS_UTILS_VERSION }}
+      cpes:
+        - cpe:2.3:a:nfs:nfs-utils:{{ .NFS_UTILS_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - GPL-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs

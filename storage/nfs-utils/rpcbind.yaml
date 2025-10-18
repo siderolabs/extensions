@@ -1,0 +1,69 @@
+name: rpcbind
+depends:
+  - service: cri
+  - network:
+      - addresses
+      - connectivity
+      - hostname
+      - etcfiles
+container:
+  entrypoint: /usr/local/sbin/rpcbind
+  args:
+    - -f
+    - -w
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+  mounts:
+    # syslog socket for logging
+    - source: /dev/log
+      destination: /dev/log
+      type: bind
+      options:
+        - bind
+        - rw
+    # ld-musl-x86_64.so.1
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # libc.so and other libs
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # libtirpc and other custom libs
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # rpcbind binary
+    - source: /usr/local/sbin
+      destination: /usr/local/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    # rpcbind state directory
+    - source: /run/rpcbind
+      destination: /run/rpcbind
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # For warmstart
+    - source: /var/lib/rpcbind
+      destination: /var/lib/rpcbind
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always

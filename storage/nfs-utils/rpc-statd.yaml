@@ -1,0 +1,70 @@
+name: rpc-statd
+depends:
+  - service: cri
+  - service: ext-rpcbind
+  - network:
+      - addresses
+      - connectivity
+      - hostname
+      - etcfiles
+container:
+  entrypoint: /usr/local/sbin/rpc.statd
+  args:
+    - --foreground
+    - --no-syslog
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+  mounts:
+    # ld-musl-x86_64.so.1
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # libc.so and other libs
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # libtirpc and other custom libs
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # rpc.statd and sm-notify binaries
+    - source: /usr/local/sbin
+      destination: /usr/local/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    # sm-notify expected at /usr/sbin/sm-notify
+    - source: /usr/local/sbin
+      destination: /usr/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    # statd state directory
+    - source: /var/lib/nfs/statd
+      destination: /var/lib/nfs/statd
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # For rpcbind communication
+    - source: /run/rpcbind
+      destination: /run/rpcbind
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always

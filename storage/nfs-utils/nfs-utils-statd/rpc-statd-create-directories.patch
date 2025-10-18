@@ -1,0 +1,65 @@
+# Automatically create sm and sm.bak directories for rpc.statd
+#
+# Problem: rpc.statd requires sm/ and sm.bak/ directories in /var/lib/nfs/statd/
+# to exist before starting. In containerized environments like Talos Linux, these
+# aren't created by package managers, causing startup failures.
+#
+# Solution: Add nsm_ensure_directory() helper to automatically create these
+# directories with mode 0755 during startup if they don't exist.
+
+diff --git a/support/nsm/file.c b/support/nsm/file.c
+index 5ec801c3..e09c1aaa 100644
+--- a/support/nsm/file.c
++++ b/support/nsm/file.c
+@@ -382,6 +382,38 @@ prune_bounding_set(void)
+ }
+ #endif /* HAVE_SYS_CAPABILITY_H */
+
++/*
++ * nsm_ensure_directory - create directory if it doesn't exist
++ * @dirname: name of directory to create (relative to current dir)
++ *
++ * Returns true if successful or directory already exists, false on error.
++ */
++static _Bool
++nsm_ensure_directory(const char *dirname)
++{
++	struct stat st;
++
++	if (lstat(dirname, &st) == 0) {
++		if (S_ISDIR(st.st_mode))
++			return true;
++		xlog(L_ERROR, "%s exists but is not a directory", dirname);
++		return false;
++	}
++
++	if (errno != ENOENT) {
++		xlog(L_ERROR, "Failed to stat %s: %m", dirname);
++		return false;
++	}
++
++	if (mkdir(dirname, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH) == -1) {
++		xlog(L_ERROR, "Failed to create directory %s: %m", dirname);
++		return false;
++	}
++
++	xlog(L_NOTICE, "Created directory %s", dirname);
++	return true;
++}
++
+ /**
+  * nsm_drop_privileges - drop root privileges
+  * @pidfd: file descriptor of a pid file
+@@ -403,6 +435,12 @@ nsm_drop_privileges(const int pidfd)
+ 		return false;
+ 	}
+
++	/* Ensure sm and sm.bak directories exist */
++	if (!nsm_ensure_directory(NSM_MONITOR_DIR))
++		return false;
++	if (!nsm_ensure_directory(NSM_NOTIFY_DIR))
++		return false;
++
+ 	if (lstat(NSM_MONITOR_DIR, &st) == -1) {
+ 		xlog(L_ERROR, "Failed to stat %s/%s: %m", nsm_base_dirname, NSM_MONITOR_DIR);
+ 		return false;

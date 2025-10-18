@@ -1,0 +1,15 @@
+version: v1alpha1
+metadata:
+  name: nfs-utils
+  version: "{{ .VERSION }}"
+  author: PostFinance
+  description: |
+    [{{ .TIER }}] This system extension provides rpcbind and rpc.statd for NFSv3 file locking support.
+
+    rpcbind is a server that converts RPC program numbers into universal addresses.
+    rpc.statd is the NSM (Network Status Monitor) service daemon that notifies NFS peers of restarts.
+
+    These services are required for NFSv3 mounts with file locking support.
+  compatibility:
+    talos:
+      version: ">= v1.1.0"
