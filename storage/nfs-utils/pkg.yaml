@@ -3,7 +3,7 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: libtirpc-nfs
+  - stage: libtirpc-zfs
     from: /rootfs
   - stage: rpcbind
     from: /rootfs
