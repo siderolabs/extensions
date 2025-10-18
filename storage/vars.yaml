@@ -3,7 +3,7 @@ FUSE3_VERSION: 3.17.4
 FUSE3_SHA256: df9e40ae927b73dc702d0bce7925c0c618af47ad0b13204fbf2be66e54d8528b
 FUSE3_SHA512: 5451b374ceadb4cb5a8f0c396f1111932ec63984b80dfad7a76258c026b4e8e5ab4a563bb4a9e272d7fa62a5f452113885d4c3ea080a9f56b6aeb85d50c01010
 # renovate: datasource=git-tags extractVersion=^mdadm-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
-MDADM_VERSION: 4.3
+MDADM_VERSION: 4.4
 MDADM_SHA256: 61a1c22477555364dea1862df7c3b4e8b9a53ee733bad320a45fda27dd0ed44f
 MDADM_SHA512: a77af2b371ed27b7bd89b7991302282f0fc77999eb93d7959446fc4b1c28388582d08ff0abfc470a9f9a8c8036acb0158edc44d9a8d406f807ca28111bf74459
 # renovate: datasource=git-tags extractVersion=^nfs-utils-(?<version>.*)$ depName=git://linux-nfs.org/~steved/nfs-utils
