@@ -94,6 +94,7 @@ TARGETS += netbird
 TARGETS += newt
 TARGETS += nfsd
 TARGETS += nfsrahead
+TARGETS += nfs-utils
 TARGETS += nut-client
 TARGETS += nvidia-container-toolkit-lts
 TARGETS += nvidia-container-toolkit-production

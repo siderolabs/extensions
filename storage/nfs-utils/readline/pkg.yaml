@@ -1,0 +1,31 @@
+name: readline
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://ftp.gnu.org/gnu/readline/readline-{{ .READLINE_VERSION }}.tar.gz
+        destination: readline.tar.gz
+        sha256: {{ .READLINE_SHA256 }}
+        sha512: {{ .READLINE_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xzf readline.tar.gz --strip-components=1
+    build:
+      - |
+        ./configure \
+          --prefix=/usr/local
+
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs
+
+        make install DESTDIR=/rootfs
+        rm -rf /rootfs/usr/local/share/{man,info,doc}
+finalize:
+  - from: /rootfs
+    to: /rootfs

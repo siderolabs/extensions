@@ -1,0 +1,33 @@
+name: libxml2
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://download.gnome.org/sources/libxml2/2.13/libxml2-{{ .LIBXML2_VERSION }}.tar.xz
+        destination: libxml2.tar.xz
+        sha256: {{ .LIBXML2_SHA256 }}
+        sha512: {{ .LIBXML2_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xJf libxml2.tar.xz --strip-components=1
+    build:
+      - |
+        ./configure \
+          --prefix=/usr/local \
+          --without-python \
+          --disable-static
+
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs
+
+        make install DESTDIR=/rootfs
+        rm -rf /rootfs/usr/local/share/{doc,gtk-doc,man}
+finalize:
+  - from: /rootfs
+    to: /rootfs

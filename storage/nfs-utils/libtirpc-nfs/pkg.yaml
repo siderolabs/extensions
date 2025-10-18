@@ -1,0 +1,43 @@
+name: libtirpc-nfs
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://src.fedoraproject.org/lookaside/extras/libtirpc/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2/sha512/{{ .LIBTIRPC_SHA512 }}/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2
+        destination: libtirpc.tar.bz2
+        sha256: {{ .LIBTIRPC_SHA256 }}
+        sha512: {{ .LIBTIRPC_SHA512 }}
+    prepare:
+      - |
+        tar -xf libtirpc.tar.bz2 --strip-components=1
+
+        mkdir -p /usr/local/include/sys
+        cp /pkg/patches/sys-queue.h /usr/local/include/sys/queue.h
+
+        export CFLAGS="${CFLAGS} -I/usr/local/include"
+
+        ./configure \
+          --prefix=/usr/local \
+          --disable-gssapi \
+          --enable-rpcdb
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs
+
+        make install DESTDIR=/rootfs
+
+        # Install sys/queue.h for dependencies that need it
+        mkdir -p /rootfs/usr/local/include/sys
+        cp /pkg/patches/sys-queue.h /rootfs/usr/local/include/sys/queue.h
+
+        # Keep rpcgen for building dependencies
+        # Don't remove it like we do with man pages
+        rm -rf /rootfs/usr/local/share/man
+finalize:
+  - from: /rootfs
+    to: /rootfs
