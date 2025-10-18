@@ -1,5 +1,5 @@
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:c15643c480330cc703bc100378c97b51dbc7c6480ab335b926945f2d24ed878b
+WOLFI_BASE_REF: sha256:9608820b6ea4da8bcf16989dac37a280f8f1fa0022efc45b5ed4b1ac1f634a79
 
 VERSION: {{ .GLIBC_VERSION }}
 
