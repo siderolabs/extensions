@@ -213,13 +213,12 @@ spec:
   makefile:
     enabled: true
     phony: true
+    variables:
+      - name: IMAGE_SIGNER_IMAGE
+        defaultValue: ghcr.io/siderolabs/image-signer:latest
     script:
       - |
-        @for image in $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF)); do \
-          echo '==>' $$image; \
-          cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
-            cosign sign --yes $$image; \
-        done
+        @docker run --pull=always --rm --net=host $(IMAGE_SIGNER_IMAGE) sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
 ---
 kind: custom.Step
 name: grype-scan

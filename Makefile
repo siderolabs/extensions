@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-10-15T10:59:01Z by kres d315fc0.
+# Generated on 2025-11-05T10:27:17Z by kres cd5a938.
 
 # common variables
 
@@ -55,6 +55,7 @@ PKGS ?= v1.11.0-26-gc316374
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.11.0-4-g05ee846
 TOOLS_PREFIX ?= ghcr.io/siderolabs
+IMAGE_SIGNER_IMAGE ?= ghcr.io/siderolabs/image-signer:latest
 
 # targets defines all the available targets
 
@@ -258,11 +259,7 @@ internal/extensions/descriptions.yaml: internal/extensions/image-digests
 
 .PHONY: sign-images
 sign-images:
-	@for image in $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF)); do \
-	  echo '==>' $$image; \
-	  cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
-	    cosign sign --yes $$image; \
-	done
+	@docker run --pull=always --rm --net=host $(IMAGE_SIGNER_IMAGE) sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
 
 .PHONY: rekres
 rekres:
