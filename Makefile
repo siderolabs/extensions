@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-10-14T15:32:52Z by kres 063080a.
+# Generated on 2025-10-20T14:33:12Z by kres 46e133d.
 
 # common variables
 
@@ -55,6 +55,7 @@ PKGS ?= v1.12.0-alpha.0-41-g661e578
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.12.0-alpha.0-15-ge62d613
 TOOLS_PREFIX ?= ghcr.io/siderolabs
+IMAGE_SIGNER_IMAGE ?= ghcr.io/siderolabs/image-signer:latest
 
 # targets defines all the available targets
 
@@ -261,11 +262,7 @@ internal/extensions/descriptions.yaml: internal/extensions/image-digests
 
 .PHONY: sign-images
 sign-images:
-	@for image in $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF)); do \
-	  echo '==>' $$image; \
-	  cosign verify $$image --certificate-identity-regexp '@siderolabs\.com$$' --certificate-oidc-issuer https://accounts.google.com || \
-	    cosign sign --yes $$image; \
-	done
+	@docker run --pull=always --rm --net=host $(IMAGE_SIGNER_IMAGE) sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
 
 .PHONY: grype-scan
 grype-scan:
