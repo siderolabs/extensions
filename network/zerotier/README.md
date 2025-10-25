@@ -40,7 +40,7 @@ mynode        runtime     ExtensionServiceConfig   zerotier   1
 
 The extension can be configured through environment variables:
 
-- `ZEROTIER_NETWORK`: The network ID to join (required)
+- `ZEROTIER_NETWORK`: The network ID to join (required, you can also specify multiple network by separting them with ",")
 - `ZEROTIER_IDENTITY_SECRET`: Optional pre-existing identity to use (format: "address:0:public:private")
 - `ZEROTIER_PLANET`: Optional pre-existing planet file encoded in base64
 
@@ -56,6 +56,19 @@ name: zerotier
 environment:
   - ZEROTIER_NETWORK=<your network id>
   - ZEROTIER_IDENTITY_SECRET=<identity string>
+```
+
+### Join multiple network
+
+If you want to join multiple zerotier network, you can use the following format:
+
+```yaml
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: zerotier
+environment:
+  - ZEROTIER_NETWORK=<your network id 1>,<your network id 2>,<your network id 3>
 ```
 
 If no identity is provided, a new one will be generated automatically. (You may need to authorize this node in your Zerotier network according to your network policies before it will recieve an IP address).
