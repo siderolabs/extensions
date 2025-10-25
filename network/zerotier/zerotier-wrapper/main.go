@@ -55,11 +55,13 @@ func main() {
 
 	// If ZEROTIER_NETWORK env var is set, join the network.
 	if network := os.Getenv("ZEROTIER_NETWORK"); network != "" {
-		log.Printf("joining network %s", network)
-		if err := joinNetwork(network); err != nil {
-			log.Fatalf("failed to join network: %v", err)
+		for _, network := range strings.Split(network, ",") {
+			log.Printf("joining network %s", network)
+			if err := joinNetwork(network); err != nil {
+				log.Fatalf("failed to join network: %v", err)
+			}
+			log.Printf("joined network %s", network)
 		}
-		log.Printf("joined network %s", network)
 	}
 
 	// Start zerotier-one process.
