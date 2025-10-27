@@ -16,8 +16,6 @@ steps:
       - |
         patch -p1 < /pkg/patches/mdadm-include-sysmacros.patch
         patch -p1 < /pkg/patches/no-werror.patch
-        patch -p1 < /pkg/patches/musl-125.patch
-        patch -p1 < /pkg/patches/exit-gracefully-when-md-device-not-found.patch
     build:
       - |
         mkdir -p /run/mdadm

@@ -4,7 +4,7 @@ format: v1alpha2
 
 vars:
   CONTAINERD_VERSION: v2.1.4 # update this when updating PKGS_VERSION in Makefile
-  LINUX_FIRMWARE_VERSION: "20251011" # update this when updating PKGS_VERSION in Makefile
+  LINUX_FIRMWARE_VERSION: "20251021" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.2.15 # update this when updating PKGS_VERSION in Makefile
   ZFS_DRIVER_VERSION: 2.4.0-rc2 # update this when updating PKGS_VERSION in Makefile
   ZFS_TOOLS_SHA256: 6b5b821e03520034b49f965acb198ff4f37661195689326a1c05a4782389987f
@@ -13,7 +13,7 @@ vars:
   UTIL_LINUX_SHA256: 6062a1d89b571a61932e6fc0211f36060c4183568b81ee866cf363bce9f6583e
   UTIL_LINUX_SHA512: 696c87e7cf185acc9b4b969ddade6155ea2945ae494eaecfd7b1f35d9607166cb09be79878fb793dd31b4d4dcac8c9be4be76af3886185db7ae8b58c303fb0cf
   ENA_VERSION: 2.15.0 # update this when updating PKGS_VERSION in Makefile
-  TENSTORRENT_VERSION: 1.34 # update this when updating PKGS_VERSION in Makefile
+  TENSTORRENT_VERSION: 2.4.1 # update this when updating PKGS_VERSION in Makefile
   HAILORT_VERSION: 4.23.0 # update this when updating PKGS_VERSION in Makefile
 
   # renovate: datasource=git-tags extractVersion=^libtiprc-(?<version>.*)$ depName=git://linux-nfs.org/~steved/libtirpc
