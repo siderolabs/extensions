@@ -7,8 +7,6 @@ dependencies:
     from: /rootfs
   - stage: rpcsvc-proto
     from: /rootfs
-  - stage: readline
-    from: /rootfs
   - stage: libxml2
     from: /rootfs
   - stage: libevent
@@ -40,6 +38,7 @@ steps:
           --disable-gss \
           --disable-svcgss \
           --disable-kprefix \
+          --disable-nfsdctl \
           --without-tcp-wrappers \
           --with-rpcgen=/usr/local/bin/rpcgen \
           --with-statedir=/var/lib/nfs \
