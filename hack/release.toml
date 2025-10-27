@@ -31,6 +31,7 @@ gvisor: 20251006.0
 hailort: 4.23.0
 kata-containers: 3.21.0
 lldpd: 1.0.20
+cloudflared: 2025.10.0
 nebula: 1.9.7
 netbird: 0.59.7
 newt: 1.5.2

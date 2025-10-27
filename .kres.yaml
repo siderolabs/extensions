@@ -264,6 +264,7 @@ spec:
         - git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
         - linux-nvme/libnvme
         - linux-nvme/nvme-cli
+        - cloudflare/cloudflared
       versioning: 'regex:^(?<major>\d+)\.(?<minor>\d+)\.?(?<patch>\d+)?$'
     - matchPackageNames:
         - https://sourceware.org/git/glibc.git
@@ -271,7 +272,6 @@ spec:
     - matchPackageNames:
         - google/gvisor
         - intel/Intel-Linux-Processor-Microcode-Data-Files
-        - cloudflare/cloudflared
       versioning: 'regex:^(?<major>\d{4})(?<minor>\d{2})(?<patch>\d{2})\.?(?<build>\d+)?$'
     - matchPackageNames:
         - git://linux-nfs.org/~steved/libtirpc
