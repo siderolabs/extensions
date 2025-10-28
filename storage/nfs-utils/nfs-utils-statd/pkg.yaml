@@ -24,6 +24,9 @@ steps:
     prepare:
       - |
         tar -xJf nfs-utils.tar.xz --strip-components=1
+      - |
+        # Apply patch to create sm and sm.bak directories automatically
+        patch -p1 < /pkg/rpc-statd-create-directories.patch
     build:
       - |
         export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
