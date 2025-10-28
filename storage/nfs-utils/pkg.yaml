@@ -21,8 +21,18 @@ steps:
       cp -r /usr/local/sbin/* /rootfs/usr/local/sbin/
       cp -r /usr/local/lib/* /rootfs/usr/local/lib/
     - |
-      mkdir -p /rootfs/usr/local/lib/containers/rpcbind
-      mkdir -p /rootfs/usr/local/lib/containers/rpc-statd
+      # Create container rootfs for each service
+      mkdir -p /rootfs/usr/local/lib/containers/rpcbind/etc
+      mkdir -p /rootfs/usr/local/lib/containers/rpc-statd/etc
+
+      # Copy config files to container rootfs
+      cp /pkg/files/netconfig /rootfs/usr/local/lib/containers/rpcbind/etc/netconfig
+      cp /pkg/files/services /rootfs/usr/local/lib/containers/rpcbind/etc/services
+      cp /pkg/files/passwd /rootfs/usr/local/lib/containers/rpcbind/etc/passwd
+
+      cp /pkg/files/netconfig /rootfs/usr/local/lib/containers/rpc-statd/etc/netconfig
+      cp /pkg/files/services /rootfs/usr/local/lib/containers/rpc-statd/etc/services
+      cp /pkg/files/passwd /rootfs/usr/local/lib/containers/rpc-statd/etc/passwd
 
       # cleanup
       rm -rf /rootfs/usr/local/include
@@ -32,9 +42,6 @@ steps:
 
       cp /pkg/rpcbind.yaml /rootfs/usr/local/etc/containers/rpcbind.yaml
       cp /pkg/rpc-statd.yaml /rootfs/usr/local/etc/containers/rpc-statd.yaml
-      cp /pkg/files/netconfig /rootfs/usr/local/etc/netconfig
-      cp /pkg/files/services /rootfs/usr/local/etc/services
-      cp /pkg/files/passwd /rootfs/usr/local/etc/passwd
     test:
       - |
         mkdir -p /extensions-validator-rootfs

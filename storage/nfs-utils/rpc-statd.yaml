@@ -16,34 +16,6 @@ container:
     maskedPaths: []
     readonlyPaths: []
   mounts:
-    # netconfig file required by libtirpc
-    - source: /usr/local/etc/netconfig
-      destination: /etc/netconfig
-      type: bind
-      options:
-        - bind
-        - ro
-    # services file for port lookups
-    - source: /usr/local/etc/services
-      destination: /etc/services
-      type: bind
-      options:
-        - bind
-        - ro
-    # passwd file for user lookup
-    - source: /usr/local/etc/passwd
-      destination: /etc/passwd
-      type: bind
-      options:
-        - bind
-        - ro
-    # syslog socket for logging
-    - source: /dev/log
-      destination: /dev/log
-      type: bind
-      options:
-        - bind
-        - rw
     # ld-musl-x86_64.so.1
     - source: /lib
       destination: /lib
@@ -82,22 +54,6 @@ container:
     # statd state directory
     - source: /var/lib/nfs/statd
       destination: /var/lib/nfs/statd
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
-    # statd state directory
-    - source: /var/lib/nfs/statd/sm
-      destination: /var/lib/nfs/statd/sm
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
-    # statd state directory
-    - source: /var/lib/nfs/statd/sm.bak
-      destination: /var/lib/nfs/statd/sm.bak
       type: bind
       options:
         - rshared
