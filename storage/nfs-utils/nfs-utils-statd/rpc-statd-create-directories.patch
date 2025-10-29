@@ -34,7 +34,7 @@ index 5ec801c3..e09c1aaa 100644
 +		return false;
 +	}
 +
-+	xlog(D_GENERAL, "Created directory %s", dirname);
++	xlog(L_NOTICE, "Created directory %s", dirname);
 +	return true;
 +}
 +
