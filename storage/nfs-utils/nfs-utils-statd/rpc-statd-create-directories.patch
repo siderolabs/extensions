@@ -1,3 +1,12 @@
+# Automatically create sm and sm.bak directories for rpc.statd
+#
+# Problem: rpc.statd requires sm/ and sm.bak/ directories in /var/lib/nfs/statd/
+# to exist before starting. In containerized environments like Talos Linux, these
+# aren't created by package managers, causing startup failures.
+#
+# Solution: Add nsm_ensure_directory() helper to automatically create these
+# directories with mode 0755 during startup if they don't exist.
+
 diff --git a/support/nsm/file.c b/support/nsm/file.c
 index 5ec801c3..e09c1aaa 100644
 --- a/support/nsm/file.c

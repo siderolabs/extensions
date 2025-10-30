@@ -28,6 +28,7 @@ steps:
         # Apply patches
         patch -p1 < /pkg/rpc-statd-create-directories.patch
         patch -p1 < /pkg/rpc-statd-separate-debug-from-stderr.patch
+        patch -p1 < /pkg/sm-notify-fix-unrecognized-service.patch
     build:
       - |
         export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
