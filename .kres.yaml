@@ -36,6 +36,7 @@ spec:
     - nebula
     - netbird
     - newt
+    - nfs-utils
     - nfsd
     - nfsrahead
     - nut-client
