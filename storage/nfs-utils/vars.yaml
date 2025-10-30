@@ -1,0 +1,23 @@
+VERSION: v0.1.1
+
+# renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://gitlab.gnome.org/GNOME/libxml2.git
+LIBXML2_VERSION: 2.13.5
+LIBXML2_SHA256: 74fc163217a3964257d3be39af943e08861263c4231f9ef5b496b6f6d4c7b2b6
+LIBXML2_SHA512: acaecd4e3e95136d1c621f9e5f33976ebca87dfbf83859459e339597c3c57fbc47508a7de16af7fbf0e7e7c59fd6f9a82b2e732e1dd12efd79d666bac64ecf4e
+
+# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=thkukuk/rpcsvc-proto
+RPCSVC_PROTO_VERSION: 1.4.4
+RPCSVC_PROTO_SHA256: 81c3aa27edb5d8a18ef027081ebb984234d5b5860c65bd99d4ac8f03145a558b
+RPCSVC_PROTO_SHA512: 0138ac8fb2d8de3cb56f661bd1b6435fa0a35d3bd12c5cb7081c9ae1701e3620f47fe3dd002263db456655b61316749768e9a1a44325a1a6a542beae364a0393
+
+# renovate: datasource=git-tags extractVersion=^rpcbind-((?<major>\d+)_(?<minor>\d+)_(?<patch>\d+))?$ depName=git://linux-nfs.org/~steved/rpcbind.git
+RPCBIND_VERSION: 1.2.8
+RPCBIND_SHA256: 964132c389918e8964d7334936b6dd10ef025b300c6b29e693ba0f29550e3de5
+RPCBIND_SHA512: 66f3955a67c4d0142ec635614ceafbc9bdbea985f2edaeec903f17efaf3c2e98f6483e8e6b7f1358cf8d2c1c877b281d153a3bf1b6748b6d259ae7ad1465ee71
+
+# renovate: datasource=git-tags extractVersion=^nfs-utils-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/rw/nfs-utils.git
+NFS_UTILS_VERSION: 2.8.4
+NFS_UTILS_SHA256: 11c4cc598a434d7d340bad3e072a373ba1dcc2c49f855d44b202222b78ecdbf5
+NFS_UTILS_SHA512: 2b547b2dfd96672a4867a2d385e58309a242c8fab457f7e48f79c3f362f652d1f81ea356ac5c56837cf2e6c2754fd02b499f75d044251090a161d4c28dd9ca32
+
+TIER: "contrib"

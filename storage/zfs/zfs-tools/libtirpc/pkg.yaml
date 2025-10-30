@@ -30,6 +30,9 @@ steps:
       - |
         mkdir -p /rootfs
 
+        mkdir -p /rootfs/usr/local/include/sys
+        cp /pkg/patches/sys-queue.h /rootfs/usr/local/include/sys/queue.h
+
         make install DESTDIR=/rootfs
         rm -rf /rootfs/usr/local/share/man
 finalize:

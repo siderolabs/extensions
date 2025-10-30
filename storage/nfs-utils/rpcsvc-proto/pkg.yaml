@@ -1,0 +1,31 @@
+name: rpcsvc-proto
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/thkukuk/rpcsvc-proto/releases/download/v{{ .RPCSVC_PROTO_VERSION }}/rpcsvc-proto-{{ .RPCSVC_PROTO_VERSION }}.tar.xz
+        destination: rpcsvc-proto.tar.xz
+        sha256: {{ .RPCSVC_PROTO_SHA256 }}
+        sha512: {{ .RPCSVC_PROTO_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xJf rpcsvc-proto.tar.xz --strip-components=1
+    build:
+      - |
+        ./configure \
+          --prefix=/usr/local
+
+        make -j $(nproc)
+    install:
+      - |
+        mkdir -p /rootfs
+
+        make install DESTDIR=/rootfs
+        rm -rf /rootfs/usr/local/share/man
+finalize:
+  - from: /rootfs
+    to: /rootfs

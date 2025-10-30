@@ -1,0 +1,61 @@
+name: nfs-utils
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libtirpc-zfs
+    from: /rootfs
+  - stage: rpcbind
+    from: /rootfs
+  - stage: nfs-utils-statd
+    from: /rootfs
+steps:
+  - install:
+    - |
+      # Copy binaries and libraries from dependencies
+      mkdir -p /rootfs/usr/local/sbin
+      mkdir -p /rootfs/usr/local/bin
+      mkdir -p /rootfs/usr/local/lib
+
+      # Dependencies are copied to / by bldr, copy them to /rootfs
+      cp -r /usr/local/sbin/* /rootfs/usr/local/sbin/
+      cp -r /usr/local/lib/* /rootfs/usr/local/lib/
+    - |
+      # Create container rootfs for each service
+      mkdir -p /rootfs/usr/local/lib/containers/rpcbind/etc
+      mkdir -p /rootfs/usr/local/lib/containers/rpc-statd/etc
+
+      # Copy config files to container rootfs
+      cp /pkg/files/netconfig /rootfs/usr/local/lib/containers/rpcbind/etc/netconfig
+      cp /pkg/files/services /rootfs/usr/local/lib/containers/rpcbind/etc/services
+      cp /pkg/files/passwd /rootfs/usr/local/lib/containers/rpcbind/etc/passwd
+
+      cp /pkg/files/netconfig /rootfs/usr/local/lib/containers/rpc-statd/etc/netconfig
+      cp /pkg/files/services /rootfs/usr/local/lib/containers/rpc-statd/etc/services
+      cp /pkg/files/passwd /rootfs/usr/local/lib/containers/rpc-statd/etc/passwd
+
+      # cleanup
+      rm -rf /rootfs/usr/local/include
+      rm -rf /rootfs/usr/share
+    - |
+      mkdir -p /rootfs/usr/local/etc/containers
+
+      cp /pkg/rpcbind.yaml /rootfs/usr/local/etc/containers/rpcbind.yaml
+      cp /pkg/rpc-statd.yaml /rootfs/usr/local/etc/containers/rpc-statd.yaml
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/nfs-utils.spdx.json
+      version: {{ .VERSION }}
+      licenses:
+        - BSD-3-Clause
+        - GPL-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
