@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-10-27T13:21:29Z by kres 46e133d.
+# Generated on 2025-10-30T03:39:23Z by kres cd5a938.
 
 # common variables
 
@@ -55,7 +55,7 @@ PKGS ?= v1.12.0-alpha.0-45-gda97c36
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.12.0-alpha.0-16-ga08cc1f
 TOOLS_PREFIX ?= ghcr.io/siderolabs
-IMAGE_SIGNER_IMAGE ?= ghcr.io/siderolabs/image-signer:latest
+IMAGE_SIGNER_RELEASE ?= v0.1.1
 
 # targets defines all the available targets
 
@@ -260,9 +260,14 @@ internal/extensions/descriptions.yaml: internal/extensions/image-digests
 	  crane export $$image - | tar x -O --occurrence=1 manifest.yaml | yq -r ". += {\"$$image\": {\"author\": .metadata.author, \"description\": .metadata.description}} | del(.metadata, .version)" - >> internal/extensions/descriptions.yaml; \
 	done
 
+.PHONY: $(ARTIFACTS)/image-signer
+$(ARTIFACTS)/image-signer:
+	@curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(IMAGE_SIGNER_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
+	@chmod +x $(ARTIFACTS)/image-signer
+
 .PHONY: sign-images
-sign-images:
-	@docker run --pull=always --rm --net=host $(IMAGE_SIGNER_IMAGE) sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
+sign-images: $(ARTIFACTS)/image-signer
+	@$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
 
 .PHONY: grype-scan
 grype-scan:

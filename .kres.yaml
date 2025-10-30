@@ -116,6 +116,8 @@ spec:
       toplevel: true
     - name: internal/extensions/descriptions.yaml
       toplevel: true
+    - name: $(ARTIFACTS)/image-signer
+      toplevel: true
     - name: sign-images
       toplevel: true
     - name: grype-scan
@@ -211,17 +213,30 @@ spec:
         done
 ---
 kind: custom.Step
-name: sign-images
+name: $(ARTIFACTS)/image-signer
 spec:
   makefile:
     enabled: true
     phony: true
     variables:
-      - name: IMAGE_SIGNER_IMAGE
-        defaultValue: ghcr.io/siderolabs/image-signer:latest
+      - name: IMAGE_SIGNER_RELEASE
+        defaultValue: v0.1.1
     script:
       - |
-        @docker run --pull=always --rm --net=host $(IMAGE_SIGNER_IMAGE) sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
+        @curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(IMAGE_SIGNER_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
+        @chmod +x $(ARTIFACTS)/image-signer
+---
+kind: custom.Step
+name: sign-images
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    depends:
+      - $(ARTIFACTS)/image-signer
+    script:
+      - |
+        @$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
 ---
 kind: custom.Step
 name: grype-scan
