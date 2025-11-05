@@ -1,3 +1,46 @@
+## [Talos System Extensions 1.11.4](https://github.com/siderolabs/extensions/releases/tag/v1.11.4) (2025-11-05)
+
+Welcome to the v1.11.4 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+linux-firmware: 20251021
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Noel Georgi
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`6c14359`](https://github.com/siderolabs/extensions/commit/6c143590dff7ee878ec818ff2572939fa5458cf7) chore: update dependencies
+* [`f80f2d3`](https://github.com/siderolabs/extensions/commit/f80f2d36b069fbcf05bfa884bae2d41135ed6fec) feat: use `image-signer`
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>2 commits</summary>
+<p>
+
+* [`81fd82c`](https://github.com/siderolabs/pkgs/commit/81fd82c8b7bcfccc7b8c337699150e52e7c880ea) chore: update dependencies
+* [`b98d490`](https://github.com/siderolabs/pkgs/commit/b98d4908f6024ef771ae18dea46ec62871bfe787) feat: update linux-firmware
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.11.0-26-gc316374 -> v1.11.0-28-g81fd82c
+
+Previous release can be found at [v1.11.3](https://github.com/siderolabs/extensions/releases/tag/v1.11.3)
+
 ## [Talos System Extensions 1.11.3](https://github.com/siderolabs/extensions/releases/tag/v1.11.3) (2025-10-15)
 
 Welcome to the v1.11.3 release of Talos System Extensions!
