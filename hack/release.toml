@@ -19,9 +19,10 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
+Amazon ENA: 2.16.0
 NVIDIA LTS: 580.95.05
 NVIDIA Production: 570.195.03
-NVIDIA Container Toolkit: 1.17.9
+NVIDIA Container Toolkit: 1.18.0
 crun: 1.24
 drbd: 9.2.15
 ecr-credential-provider: 1.34.1
@@ -29,26 +30,26 @@ fuse3: 3.17.4
 glibc: 2.42
 gvisor: 20251020.0
 hailort: 4.23.0
-kata-containers: 3.21.0
+kata-containers: 3.22.0
 lldpd: 1.0.20
-cloudflared: 2025.10.0
+cloudflared: 2025.10.1
 nebula: 1.9.7
-netbird: 0.59.8
-newt: 1.5.2
+netbird: 0.59.11
+newt: 1.6.0
 nut-client: 2.8.4
 qemu: 10.1.2
-spin: 0.21.0
+spin: 0.22.0
 stargz-snapshotter: 0.18.0
-tailscale: 1.90.2
+tailscale: 1.90.6
 talos-vmtoolsd: 1.4.0
 youki: 0.5.6
 zerotier: 1.16.0
 zfs: 2.4.0-rc2
 linux-firmware: 20251021
-tenstorrent: 2.4.1
+tenstorrent: 2.5.0
 mdadm: 4.4
 
-wolfi-base: sha256:815b27b8a70713c70404e44a718eddd52ea6f4a2bfad5f56455b52cd2789a9b2
+wolfi-base: sha256:9b359e55a1d5dcdcab3c0534a5184386ebaa2661f8e24bc27355bc6bdcd7e843
 """
 
 [make_deps]
