@@ -1,3 +1,43 @@
+## [Talos System Extensions 1.11.5](https://github.com/siderolabs/extensions/releases/tag/v1.11.5) (2025-11-06)
+
+Welcome to the v1.11.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ctr: 2.1.5
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`2f760ee`](https://github.com/siderolabs/extensions/commit/2f760ee15d7b3eb090b666b4e52f56355785bcea) feat: update pkgs with containerd 2.1.5
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>1 commit</summary>
+<p>
+
+* [`aee690b`](https://github.com/siderolabs/pkgs/commit/aee690b2e5f23010a4ac99016cedc9211601810f) feat: update containerd to 2.1.5
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.11.0-28-g81fd82c -> v1.11.0-29-gaee690b
+
+Previous release can be found at [v1.11.4](https://github.com/siderolabs/extensions/releases/tag/v1.11.4)
+
 ## [Talos System Extensions 1.11.4](https://github.com/siderolabs/extensions/releases/tag/v1.11.4) (2025-11-05)
 
 Welcome to the v1.11.4 release of Talos System Extensions!
