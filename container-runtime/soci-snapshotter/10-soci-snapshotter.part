@@ -1,0 +1,8 @@
+[proxy_plugins]
+  [proxy_plugins.soci]
+    type = "snapshot"
+    address = "/var/run/soci-snapshotter/soci-snapshotter-grpc.sock"
+
+[plugins."io.containerd.cri.v1.images"]
+  snapshotter = "soci"
+  disable_snapshot_annotations = false

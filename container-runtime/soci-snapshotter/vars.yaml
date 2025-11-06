@@ -1,0 +1,2 @@
+VERSION: "{{ .SOCI_SNAPSHOTTER_VERSION }}"
+TIER: "extra"

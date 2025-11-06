@@ -1,0 +1,71 @@
+name: soci-snapshotter
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/awslabs/soci-snapshotter/archive/refs/tags/{{ .SOCI_SNAPSHOTTER_VERSION }}.tar.gz
+        destination: soci-snapshotter.tar.gz
+        sha256: {{ .SOCI_SNAPSHOTTER_SHA256 }}
+        sha512: {{ .SOCI_SNAPSHOTTER_SHA512 }}
+    env:
+      GOPATH: /tmp/go
+      VERSION: {{ .SOCI_SNAPSHOTTER_VERSION }}
+      REVISION: {{ .SOCI_SNAPSHOTTER_REV }}
+    cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+  - network: default
+    prepare:
+      - |
+        mkdir -p ${GOPATH}/src/github.com/awslabs/soci-snapshotter
+
+        tar -xzf soci-snapshotter.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/awslabs/soci-snapshotter
+      - |
+        cd ${GOPATH}/src/github.com/awslabs/soci-snapshotter/cmd
+        go mod download
+  - network: none
+    build:
+      - |
+        cd ${GOPATH}/src/github.com/awslabs/soci-snapshotter
+
+        make soci-snapshotter-grpc
+        make soci
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+        mkdir -p /rootfs/usr/local/lib/containers/soci-snapshotter
+
+        cd ${GOPATH}/src/github.com/awslabs/soci-snapshotter
+        
+        cp ./out/soci-snapshotter-grpc /rootfs/usr/local/lib/containers/soci-snapshotter/soci-snapshotter-grpc
+        chmod +x /rootfs/usr/local/lib/containers/soci-snapshotter/soci-snapshotter-grpc
+
+        cp ./out/soci /rootfs/usr/local/lib/containers/soci-snapshotter/soci
+        chmod +x /rootfs/usr/local/lib/containers/soci-snapshotter/soci
+
+        mkdir -p /rootfs/usr/local/lib/containers/soci-snapshotter/etc/soci-snapshotter-grpc/ 
+        cp /pkg/config.toml /rootfs/usr/local/lib/containers/soci-snapshotter/etc/soci-snapshotter-grpc/config.toml
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/10-soci-snapshotter.part /rootfs/etc/cri/conf.d/10-soci-snapshotter.part
+
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/soci-snapshotter.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/soci-snapshotter.spdx.json
+      version: {{ .SOCI_SNAPSHOTTER_VERSION }}
+      licenses:
+        - Apache-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

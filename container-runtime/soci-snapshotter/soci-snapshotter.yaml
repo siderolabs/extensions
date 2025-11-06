@@ -1,0 +1,33 @@
+name: soci-snapshotter
+depends:
+  - service: cri
+restart: always
+container:
+  entrypoint: ./soci-snapshotter-grpc
+  args:
+    - -log-level=debug
+    - -address=/var/run/soci-snapshotter/soci-snapshotter-grpc.sock
+    - -root=/var/lib/containerd/io.containerd.snapshotter.v1.soci
+  security:
+    rootfsPropagation: shared
+  mounts:
+    - source: /var
+      destination: /var
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /run
+      destination: /run
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /etc/ssl/certs
+      destination: /etc/ssl/certs
+      type: bind
+      options:
+        - rbind
+        - ro

@@ -1,0 +1,7 @@
+# SOCI Snapshotter configuration
+
+# Enable use of the SOCI snapshotter as a proxy ImageService so it can pull
+# images from private registries.
+[cri_keychain]
+enable_keychain = true
+image_service_path = "/var/run/containerd/containerd.sock"
