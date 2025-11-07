@@ -1,0 +1,16 @@
+name: nvidia-gdrdrv-device
+depends:
+  - service: cri
+container:
+  entrypoint: /nvidia-gdrdrv-device
+  mounts:
+    - destination: /dev
+      type: bind
+      source: /dev
+      options:
+        - rshared
+        - rbind
+        - rw
+  security:
+    rootfsPropagation: shared
+restart: untilSuccess

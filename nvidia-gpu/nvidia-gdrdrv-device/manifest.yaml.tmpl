@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: nvidia-gdrdrv-device
+  version: "{{ .VERSION }}"
+  author: Nicole Hubbard
+  description: |
+    [{{ .TIER }}] This system extension provides NVIDIA GPUDirect RDMA (gdrcopy) device file.
+    The gdrdrv kernel module enables low-latency GPU memory access for RDMA operations.
+  compatibility:
+    talos:
+      version: ">= v1.10.0"
