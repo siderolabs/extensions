@@ -3,7 +3,7 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - image: "{{ .BUILD_ARG_TOOLS_PREFIX }}/tools:{{ .BUILD_ARG_TOOLS }}"
-  - image: ghcr.io/siderolabs/extensions-validator:fe85801
+  - image: ghcr.io/siderolabs/extensions-validator:52d35f8
 finalize:
   - from: /
     to: /

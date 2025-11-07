@@ -122,7 +122,7 @@ tiers based on support level:
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
 | [binfmt-misc](misc/binfmt-misc) | :yellow_square: extra | [ghcr.io/siderolabs/binfmt-misc](https://github.com/siderolabs/extensions/pkgs/container/binfmt-misc) | `VERSION` |  This system extension provides kernel module driver for binfmt-misc built against a specific Talos version. |
-| [glibc](misc/glibc) | :green_square: core | [ghcr.io/siderolabs/glibc](https://github.com/siderolabs/extensions/pkgs/container/glibc) | `2.42` | This system extension provides glibc. |
+| [glibc](misc/glibc) | :green_square: core | [ghcr.io/siderolabs/glibc](https://github.com/siderolabs/extensions/pkgs/container/glibc) | `2.41` | This system extension provides glibc. |
 
 ### Network
 

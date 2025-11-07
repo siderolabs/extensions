@@ -14,8 +14,10 @@ steps:
   - env:
       CC: gcc-14
       CXX: g++-14
+      LD_LINUX_X86_64: ld-linux-x86-64.so.2
+      LD_LINUX_AARCH64: ld-linux-aarch64.so.1
     sources:
-      - url: https://src.fedoraproject.org/lookaside/pkgs/glibc/glibc-{{ .GLIBC_VERSION }}-8-g1e0e33e1b1.tar.xz/sha512/449e3d4f6b59bfde2175c5d1be71447b084e0b12b176518b65fd9b0ac8430766b25416a173fe3efd47462bc1719d59a051e7eed9544e0fba9165dd86f69ee0b9/glibc-{{ .GLIBC_VERSION }}-8-g1e0e33e1b1.tar.xz
+      - url: https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/glibc_{{ .GLIBC_VERSION }}.orig.tar.xz
         destination: glibc.tar.xz
         sha256: {{ .GLIBC_SHA256 }}
         sha512: {{ .GLIBC_SHA512 }}
@@ -54,8 +56,12 @@ steps:
 
         cp /pkg/ld.so.conf /rootfs/usr/local/glibc/etc/ld.so.conf
 
+        ARCH_UPPER="${ARCH^^}"
+        LD_LINUX_PATH="LD_LINUX_${ARCH_UPPER}"
+        export LD_LINUX_PATH="${!LD_LINUX_PATH}"
+
         mkdir -p /rootfs/usr/lib /rootfs/usr/bin
-        ln -s /usr/local/glibc/usr/lib/ld-linux-x86-64.so.2 /rootfs/usr/lib/ld-linux-x86-64.so.2
+        ln -s /usr/local/glibc/usr/lib/${LD_LINUX_PATH} /rootfs/usr/lib/${LD_LINUX_PATH}
         ln -s /usr/local/glibc/usr/sbin/ldconfig /rootfs/usr/bin/ldconfig
 
         # cleanup

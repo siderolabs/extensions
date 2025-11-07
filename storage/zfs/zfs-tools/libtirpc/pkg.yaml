@@ -6,13 +6,15 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      - url: https://src.fedoraproject.org/lookaside/extras/libtirpc/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2/sha512/{{ .LIBTIRPC_SHA512 }}/libtirpc-{{ .LIBTIRPC_VERSION | replace "-" "." }}.tar.bz2
-        destination: libtirpc.tar.bz2
+      - url: https://archive.ubuntu.com/ubuntu/pool/main/libt/libtirpc/libtirpc_{{ .LIBTIRPC_VERSION | replace "-" "." }}+ds.orig.tar.gz
+        destination: libtirpc.tar.gz
         sha256: {{ .LIBTIRPC_SHA256 }}
         sha512: {{ .LIBTIRPC_SHA512 }}
     prepare:
       - |
-        tar -xf libtirpc.tar.bz2 --strip-components=1
+        tar -xf libtirpc.tar.gz --strip-components=1
+
+        patch -p1 < /pkg/patches/gcc15.patch
 
         mkdir -p /usr/local/include/sys
         cp /pkg/patches/sys-queue.h /usr/local/include/sys/queue.h
