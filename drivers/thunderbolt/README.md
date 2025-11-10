@@ -70,3 +70,11 @@ You can also verify everything in dmesg:
 ## Security Warning
 
 This extension automatically authorizes all Thunderbolt devices during system boot, which poses potential security risks. Use at your own discretion.
+
+## Power Management
+
+This extension automatically disabled power savings on all Thunderbolt ports, if you would like to re-enable that use the following udev rule in your machineconfig.
+
+```
+ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{power/control}="auto"
+```

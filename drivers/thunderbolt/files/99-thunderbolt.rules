@@ -1,2 +1,2 @@
-# This will authorize Thunderbolt devices on system boot
-ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{authorized}=="0", ATTR{authorized}="1"
+# This will authorize and disable power management for Thunderbolt devices on system boot 
+ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{authorized}=="0", ATTR{authorized}="1", ATTR{power/control}="on"
