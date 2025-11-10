@@ -1,0 +1,13 @@
+version: v1alpha1
+metadata:
+  name: realtek-r8127
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides the Realtek RTL8127 10GbE ethernet driver kernel module.
+    This driver is required for NVIDIA DGX Spark and other systems with Realtek RTL8127 10 Gigabit Ethernet controllers (PCI ID 10ec:8127).
+    The module is built with full PTP (Precision Time Protocol) and RSS (Receive Side Scaling) support.
+  compatibility:
+    talos:
+      version: ">= v1.9.0"
+
