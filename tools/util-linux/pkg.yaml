@@ -26,6 +26,7 @@ steps:
             --disable-all-programs \
             --enable-libmount \
             --enable-libblkid \
+            --enable-blkid \
             --enable-nsenter \
             --enable-fstrim \
     build:

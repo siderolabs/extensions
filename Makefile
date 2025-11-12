@@ -90,6 +90,7 @@ TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
 TARGETS += metal-agent
+TARGETS += multipath-tools
 TARGETS += nebula
 TARGETS += netbird
 TARGETS += newt
@@ -116,6 +117,7 @@ TARGETS += stargz-snapshotter
 TARGETS += tailscale
 TARGETS += tenstorrent
 TARGETS += thunderbolt
+TARGETS += trident-iscsi-tools
 TARGETS += uinput
 TARGETS += usb-modem-drivers
 TARGETS += usb-audio-drivers
@@ -294,4 +296,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-

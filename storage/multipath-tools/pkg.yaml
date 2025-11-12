@@ -1,0 +1,68 @@
+name: multipath-tools
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libjson-c:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/lvm2:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/liburcu:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libaio:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://github.com/opensvc/multipath-tools/archive/refs/tags/{{ .MULTIPATH_TOOLS_VERSION }}.tar.gz
+        destination: multipath-tools.tar.gz
+        sha256: {{ .MULTIPATH_TOOLS_SHA256 }}
+        sha512: {{ .MULTIPATH_TOOLS_SHA512 }}
+    env:
+      PKG_CONFIG_PATH: /usr/lib/pkgconfig
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzf multipath-tools.tar.gz --strip-components=1
+    build:
+      - |
+        make -j $(nproc) prefix="/usr/local" \
+          sysconfdir="/etc" \
+          configdir="/etc/multipath/conf.d" \
+          mandir="/usr/share/man" \
+          infodir="/usr/share/info" \
+          statedir="/etc/multipath" \
+          etc_prefix="" \
+          LIB=lib \
+          SYSTEMD=""
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/multipathd/ /rootfs/usr/local/lib/
+        cp /usr/lib/libgcc_s.so.1 /rootfs/usr/local/lib/
+        make prefix="/usr/local" DESTDIR=/rootfs LIB=lib install
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/multipathd.yaml /rootfs/usr/local/etc/containers/
+      # Remove kernel module loading config
+      - |
+        rm /rootfs/usr/lib/modules-load.d/multipath.conf
+        rmdir /rootfs/usr/lib/modules-load.d
+      # Remove unnecessary docs and includes
+      - |
+        rm -rf /rootfs/usr/local/share
+        rm -rf /rootfs/usr/local/include
+      # This file tries to create a tmpfs mount at `/var/run/multipath`.
+      - |
+        rm /rootfs/usr/lib/tmpfiles.d/multipath.conf
+        rmdir /rootfs/usr/lib/tmpfiles.d
+      # # Removed but might be needed by other users of multipath-tools
+      - |
+        rm /rootfs/usr/lib/udev/kpartx_id
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
