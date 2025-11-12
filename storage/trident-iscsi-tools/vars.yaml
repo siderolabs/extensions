@@ -1,0 +1,8 @@
+VERSION: v0.0.1
+
+# renovate: datasource=github-tags extractVersion=^r(?<version>.*)$ depName=doug-gilbert/lsscsi
+LSSCSI_VERSION: 0.32
+LSSCSI_SHA256: 0a800e9e94dca2ab702d65d72777ae8cae078e3d74d0bcbed64ba0849e8029a1
+LSSCSI_SHA512: 96cb87be53eae9fa3a7defa0065f4dee8ccc23805a9ed1dc93d101c5e0610b78765b61449bf6ce58c13de8aae8400e4ac6a60ad64f840d092b9d7293106c5145
+
+TIER: "contrib"

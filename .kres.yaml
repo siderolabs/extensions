@@ -33,6 +33,7 @@ spec:
     - mdadm
     - mei
     - metal-agent
+    - multipath-tools
     - nebula
     - netbird
     - newt
@@ -59,6 +60,7 @@ spec:
     - tailscale
     - tenstorrent
     - thunderbolt
+    - trident-iscsi-tools
     - uinput
     - usb-modem-drivers
     - usb-audio-drivers

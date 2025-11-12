@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: trident-iscsi-tools
+  version: "{{ .VERSION }}"
+  author: Institute for Networks and Security (INS) at OST
+  description: |
+    [{{ .TIER }}] This system extension provides the tools and binaries used by the NetApp Trident CSI for iSCSI. It contains lsscsi, ls, free, pgrep, cat and dd.
+  compatibility:
+    talos:
+      version: ">= v1.9.0"
