@@ -1,0 +1,55 @@
+name: multipathd
+container:
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+    writeableRootfs: true
+  entrypoint: /usr/local/sbin/multipathd
+  args:
+    - -d
+    - -s
+  mounts:
+    # ld-musl-x86_64.so.1
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # libs
+    - source: /usr/local/lib/
+      destination: /usr/local/lib/
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/sbin
+      destination: /usr/local/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    # /dev/mapper and multipath disk
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /sys
+      destination: /sys
+      type: bind
+      options:
+        - bind
+        - rw
+depends:
+  - network:
+      - addresses
+      - connectivity
+      - hostname
+      - etcfiles
+  - service: udevd
+  - path: /dev/mapper/control
+  - service: cri
+  # - configuration: true
+restart: always

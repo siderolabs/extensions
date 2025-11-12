@@ -1,0 +1,8 @@
+VERSION: v0.0.1
+
+# renovate: datasource=github-releases extractVersion=^multipath-tools (?<version>.*)$ depName=opensvc/multipath-tools
+MULTIPATH_TOOLS_VERSION: 0.13.0
+MULTIPATH_TOOLS_SHA256: ed0bf455d5886d642875c302f7cf0362ca29cd2ab8dbc42e50cca9bd5855640b
+MULTIPATH_TOOLS_SHA512: 75c84524ee27590b8b751ea500898a44e5ac3d58d55be6bcab919d0d423049db3a4466fcb9135705cf63ba074416973bb651255063269e9f682f11d21ba57e59
+
+TIER: "contrib"
