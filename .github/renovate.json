@@ -97,6 +97,12 @@
             "matchPackageNames": [
                 "git://linux-nfs.org/~steved/libtirpc"
             ]
+        },
+        {
+            "versioning": "regex:^(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?$",
+            "matchPackageNames": [
+                "systemd/systemd"
+            ]
         }
     ],
     "separateMajorMinor": false

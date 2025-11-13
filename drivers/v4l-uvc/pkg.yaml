@@ -7,14 +7,21 @@ dependencies:
   # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kernel:{{ .BUILD_ARG_PKGS }}"
 steps:
+  - sources:
+      - url: https://raw.githubusercontent.com/systemd/systemd/refs/tags/v{{ .SYSTEMD_VERSION }}/rules.d/60-persistent-v4l.rules
+        destination: 60-persistent-v4l.rules
+        sha256: {{ .SYSTEMD_SHA256 }}
+        sha512: {{ .SYSTEMD_SHA512 }}
   - install:
       - |
         export KERNELRELEASE=$(find /usr/lib/modules -type d -name "*-talos" -exec basename {} \+)
 
         mkdir -p /rootfs
+         mkdir -p /rootfs/usr/lib/udev/rules.d/
 
         xargs -a /pkg/files/modules.txt -I {} install -D /usr/lib/modules/${KERNELRELEASE}/{} /rootfs/usr/lib/modules/${KERNELRELEASE}/{}
         depmod -b /rootfs/usr ${KERNELRELEASE}
+        cp 60-persistent-v4l.rules /rootfs/usr/lib/udev/rules.d/
   - test:
       - |
         # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping

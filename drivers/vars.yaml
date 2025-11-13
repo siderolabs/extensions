@@ -1,0 +1,4 @@
+# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=systemd/systemd
+SYSTEMD_VERSION: 258.2
+SYSTEMD_SHA256: d5a6c72c7c3a50e251f74c15672a47f63674aa12eda64086a7daffa49c4c55f8
+SYSTEMD_SHA512: b9f6f98200cddb0747f87cc552693afd84588e55758fb0f9ade110ca388770e0311f116a71d9d7a132ade6c6825fc2b1d8d2554514634b27a4266d65159c1bb2
