@@ -53,7 +53,6 @@ spec:
     - qlogic-firmware
     - realtek-firmware
     - revpi-firmware
-    - soci-snapshotter
     - spin
     - stargz-snapshotter
     - tailscale

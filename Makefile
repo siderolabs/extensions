@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-11-12T17:46:46Z by kres 911d166.
+# Generated on 2025-11-14T09:20:25Z by kres e1d6dac.
 
 # common variables
 
@@ -110,7 +110,6 @@ TARGETS += qemu-guest-agent
 TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
 TARGETS += revpi-firmware
-TARGETS += soci-snapshotter
 TARGETS += spin
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
