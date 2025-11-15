@@ -30,8 +30,8 @@ steps:
       - |
         cd ${GOPATH}/src/github.com/awslabs/soci-snapshotter
 
-        make soci-snapshotter-grpc
-        make soci
+        make soci-snapshotter-grpc STATIC=1
+        make soci STATIC=1
     install:
       - |
         mkdir -p /rootfs/usr/local/bin
