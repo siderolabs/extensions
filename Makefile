@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-11-14T09:20:25Z by kres e1d6dac.
+# Generated on 2025-11-15T05:31:19Z by kres e1d6dac.
 
 # common variables
 
@@ -105,6 +105,7 @@ TARGETS += nvidia-gdrdrv-device
 TARGETS += nvidia-open-gpu-kernel-modules-lts
 TARGETS += nvidia-open-gpu-kernel-modules-production
 TARGETS += nvme-cli
+TARGETS += soci-snapshotter
 TARGETS += panfrost
 TARGETS += qemu-guest-agent
 TARGETS += qlogic-firmware

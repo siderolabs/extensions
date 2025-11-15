@@ -48,6 +48,7 @@ spec:
     - nvidia-open-gpu-kernel-modules-lts
     - nvidia-open-gpu-kernel-modules-production
     - nvme-cli
+    - soci-snapshotter
     - panfrost
     - qemu-guest-agent
     - qlogic-firmware
