@@ -78,11 +78,11 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.10.0-34-g88700c7
+        defaultValue: v1.10.0-37-g71b336d
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
-        defaultValue: v1.10.0-6-g306d9d9
+        defaultValue: v1.10.0-7-g39357c8
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
@@ -209,7 +209,3 @@ spec:
     - matchPackageNames:
         - git://linux-nfs.org/~steved/libtirpc
       versioning: 'regex:^(?<major>\d+)-(?<minor>\d+)-?(?<patch>\d+)?$'
----
-kind: common.Repository
-spec:
-  conformMaximumOfOneCommit: false
