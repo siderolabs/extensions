@@ -1,3 +1,57 @@
+## [Talos System Extensions 1.10.8](https://github.com/siderolabs/extensions/releases/tag/v1.10.8) (2025-11-18)
+
+Welcome to the v1.10.8 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.10/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux firmware: 20251111
+Intel microcode: 20251111
+ctr: v2.0.7
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`1578bcd`](https://github.com/siderolabs/extensions/commit/1578bcdb2c55856c1bf28432ebc6d16354ed9cd6) feat: backports for 1.10
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>3 commits</summary>
+<p>
+
+* [`71b336d`](https://github.com/siderolabs/pkgs/commit/71b336d7799d1838169468ed3288ac8a8df5ef37) fix: enable memcg v1
+* [`14ee6ad`](https://github.com/siderolabs/pkgs/commit/14ee6ad507066aa74d390c90e1c838d48ed2a28e) feat: bump linux-firmware
+* [`457015d`](https://github.com/siderolabs/pkgs/commit/457015d5bc9b26fb70102d0227e13d4d094b8996) feat: backports for 1.10
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`39357c8`](https://github.com/siderolabs/tools/commit/39357c8ce3497de181c825307c687dba7e94225e) feat: backports for 1.10
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.10.0-34-g88700c7 -> v1.10.0-37-g71b336d
+* **github.com/siderolabs/tools**  v1.10.0-6-g306d9d9 -> v1.10.0-7-g39357c8
+
+Previous release can be found at [v1.10.7](https://github.com/siderolabs/extensions/releases/tag/v1.10.7)
+
 ## [Talos System Extensions 1.10.7](https://github.com/siderolabs/extensions/releases/tag/v1.10.7) (2025-08-26)
 
 Welcome to the v1.10.7 release of Talos System Extensions!
