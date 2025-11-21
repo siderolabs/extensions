@@ -1,0 +1,46 @@
+name: trident-iscsi-tools
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: "https://sg.danny.cz/scsi/lsscsi-{{ .LSSCSI_VERSION }}.tar.gz"
+        destination: lsscsi.tar.gz
+        sha256: {{ .LSSCSI_SHA256 }}
+        sha512: {{ .LSSCSI_SHA512 }}
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+      - |
+        tar -xzf lsscsi.tar.gz --strip-components=1
+    build:
+      - |
+        ./configure --prefix=/usr/local --exec-prefix=/usr/local
+        # make -j $(nproc) DESTDIR=/rootfs
+    install:
+      - |
+        make DESTDIR=/rootfs install
+      # Remove man pages and info pages to save space
+      - |
+        rm -rf /rootfs/usr/local/share
+      - |
+        mkdir -p /rootfs/usr/local/bin
+        mkdir -p /rootfs/usr/local/sbin
+        cp /usr/bin/ls /rootfs/usr/local/bin
+        cp /usr/bin/free /rootfs/usr/local/bin
+        cp /usr/bin/pgrep /rootfs/usr/local/bin
+        cp /usr/bin/cat /rootfs/usr/local/bin
+        cp /usr/bin/dd /rootfs/usr/local/bin
+        cp /usr/sbin/blockdev /rootfs/usr/local/sbin
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
