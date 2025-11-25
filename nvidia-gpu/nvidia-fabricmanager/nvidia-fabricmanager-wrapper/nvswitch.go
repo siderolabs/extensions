@@ -12,6 +12,8 @@ import "C"
 import (
 	"bytes"
 	"encoding/binary"
+	"errors"
+	"log"
 	"os"
 	"path"
 	"unsafe"
@@ -56,51 +58,124 @@ func findLpfDevices() (devices []string) {
 		}
 
 		if bytes.Contains(vpd, []byte("SMDL=SW_MNG")) {
+			log.Printf("nvidia-fabricmanager-wrapper: infiniband: found NVSwitch LPF device: %s\n", device.Name())
 			devices = append(devices, device.Name())
 		}
 	}
 	return
 }
 
-func findNvswitchMgmtPorts() (ports []NVSwitchMgmtPort) {
+/*
+Replication of the logic found in script "nvidia-fabricmanager-start.sh" from the FabricManager package:
+
+	for each LPF device:
+		for each LPF device port:
+			skip port if the IsSMDisabled bit is set
+			read the port GUID
+			configure FM and SM to use that port
+			stop looking for a management port
+
+Unlike the upstream algorithm, we'll continue scanning all ports after a first management port is found to generate
+useful log messages for bug reports.
+*/
+func findNvswitchMgmtPort() (err error, port *NVSwitchMgmtPort) {
 	lpfDevs := findLpfDevices()
 	if len(lpfDevs) == 0 {
-		return
+		return errors.New("no NVSwitch LPF device found"), nil
 	}
 
 	if C.umad_init() < 0 {
-		return
+		return errors.New("failed to initialize libibumad"), nil
 	}
+	defer C.umad_done()
 
-	for _, lpf := range lpfDevs {
-		const maxPorts = 16
-		var portGUIDs [maxPorts]C.__be64
+	for _, device := range lpfDevs {
+		// device name as a C string to use with libibumad
+		cDeviceName := C.CString(device)
+		defer C.free(unsafe.Pointer(cDeviceName))
 
 		/*
-			$ man 3 umad_get_ca_portguids
+		 * get IB device attributes
+		 */
 
-			On success, umad_get_ca_portguids() returns a non-negative value equal to the number of port GUIDs actually
-			filled. Not all filled entries may be valid. Invalid entries will be 0. For example, on a CA node with only
-			one port, this function returns a value of 2. In this case, the value at index 0 will be invalid as it is
-			reserved for switches. On failure, a negative value is returned.
-		*/
-		numPort := C.umad_get_ca_portguids(C.CString(lpf), &portGUIDs[0], maxPorts)
+		caPtr := (*C.struct_umad_ca)(C.malloc(C.sizeof_struct_umad_ca))
+		defer C.free(unsafe.Pointer(caPtr))
 
-		for i := range int(numPort) {
-			var guid uint64
+		if C.umad_get_ca(cDeviceName, caPtr) < 0 {
+			log.Printf("nvidia-fabricmanager-wrapper: infiniband: failed to get interface attributes device=%s\n", device)
+			continue
+		}
 
-			// convert kernel __be64 to uint64
-			buf := bytes.NewReader((*[8]byte)(unsafe.Pointer(&portGUIDs[i]))[:])
-			if err := binary.Read(buf, binary.BigEndian, &guid); err != nil {
+		numPorts := int(caPtr.numports)
+		log.Printf("nvidia-fabricmanager-wrapper: infiniband: successful read of interface attributes device=%s"+
+			" numPorts=%d\n", device, numPorts)
+
+		/*
+		 * iterate over device ports
+		 */
+
+		portPtr := (*C.struct_umad_port)(C.malloc(C.sizeof_struct_umad_port))
+		defer C.free(unsafe.Pointer(portPtr))
+
+		// index 0 is not a valid port per IB specifications
+		for portIdx := 1; portIdx <= numPorts; portIdx++ {
+			if C.umad_get_port(cDeviceName, C.int(portIdx), portPtr) < 0 {
+				log.Printf("nvidia-fabricmanager-wrapper: infiniband: failed to get port attributes device=%s port=%d\n",
+					device, portIdx)
 				continue
 			}
 
-			if guid != 0 {
-				ports = append(ports, NVSwitchMgmtPort{lpf, guid})
+			// read port GUID, we have to convert kernel __be64 to uint64
+			var portGUID uint64
+			buf := bytes.NewReader((*[8]byte)(unsafe.Pointer(&portPtr.port_guid))[:])
+			if err := binary.Read(buf, binary.BigEndian, &portGUID); err != nil {
+				log.Printf("nvidia-fabricmanager-wrapper: infiniband: failed to convert port GUID endianness device=%s port=%d\n",
+					device, portIdx)
+				continue
+			}
+
+			// read port capabilities
+			const IsSMDisabledMask = 0x00000400
+			var capMask uint32
+			buf = bytes.NewReader((*[4]byte)(unsafe.Pointer(&portPtr.capmask))[:])
+			if err := binary.Read(buf, binary.BigEndian, &capMask); err != nil {
+				log.Printf("nvidia-fabricmanager-wrapper: infiniband: failed to convert port capmask endianness device=%s port=%d\n",
+					device, portIdx)
+				continue
+			}
+			isSMDisabled := (capMask & IsSMDisabledMask) != 0
+
+			// read port state
+			portState := uint32(portPtr.state)
+			portStateStr := "Unknown"
+			switch portState {
+			case 1:
+				portStateStr = "Down"
+			case 2:
+				portStateStr = "Init"
+			case 4:
+				portStateStr = "Active"
+			}
+
+			log.Printf("nvidia-fabricmanager-wrapper: infiniband: successful read of port attributes device=%s port=%d"+
+				" guid=0x%x capabilities=0x%x isSMDisabled=%t state=%s\n", device, portIdx, portGUID, capMask, isSMDisabled,
+				portStateStr)
+
+			// still looking for a management port
+			if port == nil {
+				// evaluate candidate port
+				if portGUID != 0 && isSMDisabled == false {
+					port = &NVSwitchMgmtPort{device, portGUID}
+					log.Printf("nvidia-fabricmanager-wrapper: infiniband: selected NVSwitch management port device=%s guid=0x%x\n", device, portGUID)
+
+				}
 			}
 		}
 	}
 
-	C.umad_done()
+	if port == nil {
+		return errors.New("failed to find a NVSwitch management port"), nil
+	}
+
 	return
 }

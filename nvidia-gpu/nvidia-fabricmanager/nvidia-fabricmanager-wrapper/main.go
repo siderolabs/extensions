@@ -109,16 +109,12 @@ func main() {
 		gracefulShutdown()
 	}()
 
-	nvswitchPorts := findNvswitchMgmtPorts()
-	for _, port := range nvswitchPorts {
-		log.Printf("nvidia-fabricmanager-wrapper: found NVSwitch LPF: device=%s guid=0x%x\n", port.IBDevice, port.PortGUID)
-	}
-
 	fmSmMgmtPortGUID := ""
-	if len(nvswitchPorts) > 0 {
-		fmSmMgmtPortGUID = fmt.Sprintf("0x%x", nvswitchPorts[0].PortGUID)
+	if err, nvswitchPort := findNvswitchMgmtPort(); err == nil {
+		fmSmMgmtPortGUID = fmt.Sprintf("0x%x", nvswitchPort.PortGUID)
 		log.Printf("nvidia-fabricmanager-wrapper: using NVSwitch management port GUID: %s\n", fmSmMgmtPortGUID)
 	} else {
+		log.Printf("nvidia-fabricmanager-wrapper: NVSwitch management disabled: %v\n", err)
 		log.Println("nvidia-fabricmanager-wrapper: No InfiniBand NVSwitch detected. On Blackwell HGX baseboards and newer",
 			"with NVLink 5.0+, please load kernel module 'ib_umad' for NVLSM to run along FabricManager. Otherwise it will",
 			"fail to start with error NV_WARN_NOTHING_TO_DO, and GPU workloads will report CUDA_ERROR_SYSTEM_NOT_READY.")
