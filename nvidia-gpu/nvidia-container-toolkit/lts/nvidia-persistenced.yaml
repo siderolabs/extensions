@@ -19,6 +19,13 @@ container:
         - bind
         - ro
     # shared libraries
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # shared libraries
     - source: /usr/local/glibc
       destination: /usr/local/glibc
       type: bind
