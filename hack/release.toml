@@ -24,8 +24,8 @@ NVIDIA LTS: 580.95.05
 NVIDIA Production: 570.195.03
 NVIDIA Container Toolkit: 1.18.0
 ctr: 2.1.5
-crun: 1.25
-drbd: 9.2.15
+crun: 1.25.1
+drbd: 9.2.16
 ecr-credential-provider: 1.34.1
 fuse3: 3.17.4
 glibc: 2.42
@@ -41,7 +41,7 @@ nut-client: 2.8.4
 qemu: 10.1.2
 spin: 0.22.0
 stargz-snapshotter: 0.18.1
-tailscale: 1.90.6
+tailscale: 1.90.9
 talos-vmtoolsd: 1.4.0
 youki: 0.5.7
 zerotier: 1.16.0
@@ -51,7 +51,7 @@ tenstorrent: 2.5.0
 mdadm: 4.4
 Intel u-code: 20251111
 
-wolfi-base: sha256:77891a12dc762228955294f2207ee1cbd2b127f18dc7c7458203116288dce828
+wolfi-base: sha256:42012fa027adc864efbb7cf68d9fc575ea45fe1b9fb0d16602e00438ce3901b1
 """
 
 [make_deps]
