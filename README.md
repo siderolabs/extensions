@@ -60,7 +60,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.25` |  This system extension provides crun using containerd's runtime handler. |
+| [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.25.1` |  This system extension provides crun using containerd's runtime handler. |
 | [ecr-credential-provider](container-runtime/ecr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | `v1.34.1` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against AWS' Elastic Container Registry and pull images. |
 | [gvisor](container-runtime/gvisor) | :green_square: core | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | `20251103.0` |  This system extension provides gVisor using containerd's runtime handler. |
 | [gvisor-debug](container-runtime/gvisor-debug) | :yellow_square: extra | [ghcr.io/siderolabs/gvisor-debug](https://github.com/siderolabs/extensions/pkgs/container/gvisor-debug) | `v1.0.0` |  This system extension enables gVisor debug logging. |
@@ -75,24 +75,24 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [amd-ucode](firmware/amd-ucode) | :green_square: core | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode) | `20251111` |  This system extension provides AMD microcode binaries. |
-| [bnx2-bnx2x](firmware/bnx2-bnx2x) | :green_square: core | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x) | `20251111` | This system extension provides bnx2 and bnx2x binaries. |
-| [chelsio-firmware](firmware/chelsio) | :white_large_square: contrib | [ghcr.io/siderolabs/chelsio-firmware](https://github.com/siderolabs/extensions/pkgs/container/chelsio-firmware) | `20251111` |  This system extension provides Chelsio NIC firmware binaries. |
-| [intel-ice-firmware](firmware/intel-ice-firmware) | :green_square: core | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | `20251111` |  This system extension provides Intel Ice firmware binaries. |
+| [amd-ucode](firmware/amd-ucode) | :green_square: core | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode) | `20251125` |  This system extension provides AMD microcode binaries. |
+| [bnx2-bnx2x](firmware/bnx2-bnx2x) | :green_square: core | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x) | `20251125` | This system extension provides bnx2 and bnx2x binaries. |
+| [chelsio-firmware](firmware/chelsio) | :white_large_square: contrib | [ghcr.io/siderolabs/chelsio-firmware](https://github.com/siderolabs/extensions/pkgs/container/chelsio-firmware) | `20251125` |  This system extension provides Chelsio NIC firmware binaries. |
+| [intel-ice-firmware](firmware/intel-ice-firmware) | :green_square: core | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | `20251125` |  This system extension provides Intel Ice firmware binaries. |
 | [intel-ucode](firmware/intel-ucode) | :green_square: core | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | `20251111` |  This system extension provides Intel microcode binaries. |
-| [qlogic-firmware](firmware/qlogic-firmware) | :green_square: core | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware) | `20251111` |  This system extension provides firmware for QLogic devices. |
-| [realtek-firmware](firmware/realtek-firmware) | :green_square: core | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware) | `20251111` |  This system extension provides realtek firmware binaries. |
+| [qlogic-firmware](firmware/qlogic-firmware) | :green_square: core | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware) | `20251125` |  This system extension provides firmware for QLogic devices. |
+| [realtek-firmware](firmware/realtek-firmware) | :green_square: core | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware) | `20251125` |  This system extension provides realtek firmware binaries. |
 | [revpi-firmware](firmware/revpi-firmware) | :white_large_square: contrib | [ghcr.io/siderolabs/revpi-firmware](https://github.com/siderolabs/extensions/pkgs/container/revpi-firmware) | `v1.0.0` |  This system extension provides tools e.g. udev rules for the RevolutionPi platform. |
 
 ### Direct Rendering Manager (DRM)
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [amdgpu](drm/amdgpu) | :green_square: core | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | `20251111-VERSION` |  This system extension provides AMDGPU firmware binaries and kernel modules. |
-| [i915](drm/i915) | :green_square: core | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915) | `20251111-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
-| [panfrost](drm/panfrost) | :white_large_square: contrib | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | `20251111-VERSION` |  This system extension provides ARM Mali Midgard, Bifrost, and Valhall firmware binaries and kernel modules. |
+| [amdgpu](drm/amdgpu) | :green_square: core | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | `20251125-VERSION` |  This system extension provides AMDGPU firmware binaries and kernel modules. |
+| [i915](drm/i915) | :green_square: core | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915) | `20251125-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
+| [panfrost](drm/panfrost) | :white_large_square: contrib | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | `20251125-VERSION` |  This system extension provides ARM Mali Midgard, Bifrost, and Valhall firmware binaries and kernel modules. |
 | [vc4](drm/vc4) | :yellow_square: extra | [ghcr.io/siderolabs/vc4](https://github.com/siderolabs/extensions/pkgs/container/vc4) | `VERSION` |  This system extension provides kernel modules for Broadcom VideoCore GPU. |
-| [xe](drm/xe) | :green_square: core | [ghcr.io/siderolabs/xe](https://github.com/siderolabs/extensions/pkgs/container/xe) | `20251111-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
+| [xe](drm/xe) | :green_square: core | [ghcr.io/siderolabs/xe](https://github.com/siderolabs/extensions/pkgs/container/xe) | `20251125-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
 
 ### Drivers
 
@@ -134,7 +134,7 @@ tiers based on support level:
 | [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.7` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
 | [netbird](network/netbird) | :white_large_square: contrib | [ghcr.io/siderolabs/netbird](https://github.com/siderolabs/extensions/pkgs/container/netbird) | `0.59.12` |  NetBird combines a WireGuard®-based overlay network with Zero Trust Network Access, providing a unified open source platform for reliable and secure connectivity. |
 | [newt](network/newt) | :white_large_square: contrib | [ghcr.io/siderolabs/newt](https://github.com/siderolabs/extensions/pkgs/container/newt) | `1.6.0` |  Newt is a fully user space WireGuard tunnel client and TCP/UDP proxy, designed to securely expose private resources controlled by Pangolin. By using Newt, you don't need to manage complex WireGuard tunnels and NATing. More info: https://github.com/fosrl/newt |
-| [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.90.6` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
+| [tailscale](network/tailscale) | :yellow_square: extra | [ghcr.io/siderolabs/tailscale](https://github.com/siderolabs/extensions/pkgs/container/tailscale) | `1.90.9` |  Tailscale connects your team's devices and development environments for easy access to remote resources. |
 | [zerotier](network/zerotier) | :white_large_square: contrib | [ghcr.io/siderolabs/zerotier](https://github.com/siderolabs/extensions/pkgs/container/zerotier) | `1.16.0` |  Connect your Talos cluster into a zerotier network |
 
 ### Storage
@@ -142,7 +142,7 @@ tiers based on support level:
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
 | [btrfs](storage/btrfs) | :yellow_square: extra | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs) | `VERSION` |  This system extension provides kernel module driver for BTRFS built against a specific Talos version. |
-| [drbd](storage/drbd) | :yellow_square: extra | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd) | `9.2.15-VERSION` |  This system extension provides kernel module driver for DRBD built against a specific Talos version. |
+| [drbd](storage/drbd) | :yellow_square: extra | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd) | `9.2.16-VERSION` |  This system extension provides kernel module driver for DRBD built against a specific Talos version. |
 | [fuse3](storage/fuse3) | :green_square: core | [ghcr.io/siderolabs/fuse3](https://github.com/siderolabs/extensions/pkgs/container/fuse3) | `3.17.4` |  This system extension provides fuse3 functionality. |
 | [iscsi-tools](storage/iscsi-tools) | :green_square: core | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | `v0.2.0` |  This system extension provides iscsi-tools. |
 | [mdadm](storage/mdadm) | :white_large_square: contrib | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm) | `v4.4` |  This system extension provides mdadm binary. |
