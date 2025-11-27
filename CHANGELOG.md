@@ -17,7 +17,6 @@ crun: 1.24
 drbd: 9.2.15
 ecr-credential-provider: 1.34.1
 fuse3: 3.17.4
-glibc: 2.42
 gvisor: 20251020.0
 hailort: 4.23.0
 kata-containers: 3.21.0
@@ -3506,4 +3505,3 @@ System extensions are compatible with Talos v1.0.x.
 ### Dependency Changes
 
 This release has no dependency changes
-
