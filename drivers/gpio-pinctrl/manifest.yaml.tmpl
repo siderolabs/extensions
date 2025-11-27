@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: gpio-pinctrl
+  version: "{{ .VERSION }}"
+  author: autops
+  description: |
+    [{{ .TIER }}] Intel Apollo Lake GPIO/Pinctrl drivers.
+    Provides pinctrl-intel and pinctrl-broxton kernel modules for GPIO access
+    on Intel Apollo Lake platforms (INT3452 ACPI device).
+  compatibility:
+    talos:
+      version: ">= v1.11.0"

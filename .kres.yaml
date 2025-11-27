@@ -19,6 +19,7 @@ spec:
     - ecr-credential-provider
     - fuse3
     - gasket-driver
+    - gpio-pinctrl
     - glibc
     - gvisor
     - gvisor-debug
