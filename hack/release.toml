@@ -20,7 +20,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
         title = "Component Updates"
         description = """\
 Amazon ENA: 2.16.0
-NVIDIA LTS: 580.95.05
+NVIDIA LTS: 580.105.08
 NVIDIA Production: 570.195.03
 NVIDIA Container Toolkit: 1.18.0
 ctr: 2.1.5
