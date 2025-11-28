@@ -20,6 +20,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
         title = "Component Updates"
         description = """\
 ctr: 2.2.0
+NVIDIA LTS: 580.105.08
 """
 
 [make_deps]
