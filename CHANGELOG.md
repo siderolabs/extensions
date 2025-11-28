@@ -1,3 +1,100 @@
+## [Talos System Extensions 1.12.0-beta.1](https://github.com/siderolabs/extensions/releases/tag/v1.12.0-beta.1) (2025-11-28)
+
+Welcome to the v1.12.0-beta.1 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Amazon ENA: 2.16.0
+NVIDIA LTS: 580.95.05
+NVIDIA Production: 570.195.03
+NVIDIA Container Toolkit: 1.18.0
+ctr: 2.1.5
+crun: 1.25.1
+drbd: 9.2.16
+ecr-credential-provider: 1.34.1
+fuse3: 3.17.4
+glibc: 2.42
+gvisor: 20251103.0
+hailort: 4.23.0
+kata-containers: 3.22.0
+lldpd: 1.0.20
+cloudflared: 2025.11.1
+nebula: 1.9.7
+netbird: 0.59.12
+newt: 1.6.0
+nut-client: 2.8.4
+qemu: 10.1.2
+spin: 0.22.0
+stargz-snapshotter: 0.18.1
+tailscale: 1.90.9
+talos-vmtoolsd: 1.4.0
+youki: 0.5.7
+zerotier: 1.16.0
+zfs: 2.4.0-rc2
+linux-firmware: 20251111
+tenstorrent: 2.5.0
+mdadm: 4.4
+Intel u-code: 20251111
+
+wolfi-base: sha256:42012fa027adc864efbb7cf68d9fc575ea45fe1b9fb0d16602e00438ce3901b1
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Noel Georgi
+* Birger Johan Nordølum
+* Jan Untersander
+* Thibault VINCENT
+
+### Changes
+<details><summary>7 commits</summary>
+<p>
+
+* [`48b5578`](https://github.com/siderolabs/extensions/commit/48b55783f2d53670b3c027e7cac828282bb6e692) fix: update pkgs version and rekres
+* [`22be374`](https://github.com/siderolabs/extensions/commit/22be3741f38b18a486b2645267ec224fd0c08396) fix: remove tar file
+* [`6d51d7c`](https://github.com/siderolabs/extensions/commit/6d51d7c38ba36d67f5ba04c93c8c3e310a39a5f9) feat: add multipath-tools and trident-iscsi-tools
+* [`38f5276`](https://github.com/siderolabs/extensions/commit/38f527601f7d40cbf9d8b1458c918512154ad8b7) chore: update backportable dependencies
+* [`c3e3c94`](https://github.com/siderolabs/extensions/commit/c3e3c94b2605d3dc2962e346ea8ab47d67933698) fix: nvidia persistenced on arm64
+* [`2ef67df`](https://github.com/siderolabs/extensions/commit/2ef67df073bba8dd1cbe8cea4e12911ea6466576) fix(nvidia-fabricmanager): ignore interfaces with isSMDisabled flag set
+* [`b309119`](https://github.com/siderolabs/extensions/commit/b309119b78c626645df6ff6a3920fc0a96c2e328) fix: soci snapshotter build
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>6 commits</summary>
+<p>
+
+* [`cd63cf9`](https://github.com/siderolabs/pkgs/commit/cd63cf95ae8e7ffccdb9ffb6a161aa5eb18cae19) fix: regenerate configs
+* [`ce742ba`](https://github.com/siderolabs/pkgs/commit/ce742bac034b36650d12a3660a79d7f2bd8b9655) fix: add missing kernel config entries
+* [`ac40721`](https://github.com/siderolabs/pkgs/commit/ac40721c90acb4efbe150e561f89ec19e2ab4f14) chore: update dependencies
+* [`e653477`](https://github.com/siderolabs/pkgs/commit/e653477bf6aa0bb662a8a2c9f58d7ecac5bfa797) feat: enable gpio-fan module
+* [`60c9013`](https://github.com/siderolabs/pkgs/commit/60c9013cca45d26da5d0f777364a78d0c5713d9a) chore: use ubuntu mirrors
+* [`6ad371f`](https://github.com/siderolabs/pkgs/commit/6ad371f69503b1ca7fc39835143435c5ce011cf7) feat: update dependencies
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`188885e`](https://github.com/siderolabs/tools/commit/188885e6b3b85a2d56fd41f20db06a835ab7cce3) feat: update dependencies
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0 -> v1.12.0-6-gcd63cf9
+* **github.com/siderolabs/tools**  v1.12.0 -> v1.12.0-1-g188885e
+
+Previous release can be found at [v1.12.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.12.0-beta.0)
+
 ## [Talos System Extensions 1.12.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.12.0-beta.0) (2025-11-14)
 
 Welcome to the v1.12.0-beta.0 release of Talos System Extensions!  
