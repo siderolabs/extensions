@@ -19,6 +19,7 @@ spec:
     - ecr-credential-provider
     - fuse3
     - gasket-driver
+    - gpio-pinctrl
     - glibc
     - gvisor
     - gvisor-debug
@@ -91,7 +92,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.13.0-alpha.0-1-g4a31ff7
+        defaultValue: v1.13.0-alpha.0-2-gc41127b
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS

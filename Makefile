@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-11-28T13:46:31Z by kres e1d6dac.
+# Generated on 2025-12-01T08:53:05Z by kres e1d6dac.
 
 # common variables
 
@@ -51,7 +51,7 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-alpha.0
+PKGS ?= v1.13.0-alpha.0-2-gc41127b
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.13.0-alpha.0
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -76,6 +76,7 @@ TARGETS += dvb-m88ds3103
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
+TARGETS += gpio-pinctrl
 TARGETS += glibc
 TARGETS += gvisor
 TARGETS += gvisor-debug
