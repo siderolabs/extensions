@@ -1,9 +1,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2024-08-29T14:13:04Z by kres b5ca957.
+# Generated on 2025-11-25T14:31:25Z by kres e1d6dac.
 
 *
 !CHANGELOG.md
 !MAINTAINERS.md
 !README.md
+!gpio-extension-implementation.md
 !pkg.yaml
