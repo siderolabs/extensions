@@ -1,0 +1,78 @@
+# YubiHSM Connector - HTTP-to-USB bridge for YubiHSM 2 devices
+#
+# This extension requires CGO because yubihsm-connector uses libusb for USB communication.
+# Since Talos doesn't include libusb, we build it from source in a separate stage.
+# The libusb stage builds with musl libc (via siderolabs/tools base) for Talos compatibility.
+name: yubihsm-connector
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libusb  # Provides libusb-1.0 headers and shared library for CGO build
+steps:
+  - env:
+      GOPATH: /tmp/go
+      CGO_ENABLED: "1"
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+  - sources:
+      - url: https://github.com/Yubico/yubihsm-connector/archive/refs/tags/{{ .YUBIHSM_CONNECTOR_VERSION }}.tar.gz
+        destination: yubihsm-connector.tar.gz
+        sha256: {{ .YUBIHSM_CONNECTOR_SHA256 }}
+        sha512: {{ .YUBIHSM_CONNECTOR_SHA512 }}
+  - network: default
+    prepare:
+      - |
+        mkdir yubihsm-connector
+        tar -xzf yubihsm-connector.tar.gz --strip-components=1 -C yubihsm-connector
+      - |
+        cd yubihsm-connector
+        go mod download
+  - network: none
+    build:
+      - |
+        cd yubihsm-connector
+        # Generate version.go from VERSION file
+        go generate
+        # PKG_CONFIG_PATH must point to where libusb stage installed its .pc file
+        # This allows CGO to find libusb headers and link flags
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+        # Build with CGO for libusb USB access; strip debug symbols with -s -w
+        CGO_ENABLED=1 go build -ldflags "-s -w" -o ../yubihsm-connector-bin .
+    install:
+      # Install binary to container rootfs
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/yubihsm-connector/usr/local/bin
+        cp yubihsm-connector-bin /rootfs/usr/local/lib/containers/yubihsm-connector/usr/local/bin/yubihsm-connector
+      # Bundle libusb shared library - Talos doesn't include libusb, so we must ship it
+      # The container mounts /usr/local/lib to access this at runtime
+      - |
+        mkdir -p /rootfs/usr/local/lib
+        cp /usr/lib/libusb-1.0.so* /rootfs/usr/local/lib/
+      # Install container service definition
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/yubihsm-connector.yaml /rootfs/usr/local/etc/containers/
+      # Install default configuration (can be overridden via ExtensionServiceConfig)
+      - |
+        mkdir -p /rootfs/usr/local/etc/yubihsm-connector
+        cp /pkg/files/yubihsm-connector-config.yaml /rootfs/usr/local/etc/yubihsm-connector/yubihsm-connector.yaml
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/yubihsm-connector.spdx.json
+      version: {{ .YUBIHSM_CONNECTOR_VERSION }}
+      cpes:
+        - cpe:2.3:a:yubico:yubihsm-connector:{{ .YUBIHSM_CONNECTOR_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - Apache-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

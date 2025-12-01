@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: yubihsm-connector
+  version: "{{ .VERSION }}"
+  author: Charles Sullivan
+  description: |
+    [{{ .TIER }}] YubiHSM Connector - HTTP-to-USB bridge for YubiHSM 2 hardware security modules.
+    Enables applications to communicate with YubiHSM devices via HTTP API on localhost:12345.
+  compatibility:
+    talos:
+      version: ">= v1.10.0"

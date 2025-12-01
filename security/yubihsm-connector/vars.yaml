@@ -1,0 +1,2 @@
+VERSION: "{{ .YUBIHSM_CONNECTOR_VERSION }}"
+TIER: "contrib"

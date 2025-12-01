@@ -191,6 +191,12 @@ tiers based on support level:
 | [nvme-cli](tools/nvme-cli) | :white_large_square: contrib | [ghcr.io/siderolabs/nvme-cli](https://github.com/siderolabs/extensions/pkgs/container/nvme-cli) | `v2.14` |  This system extension provides the NVMe command line interface. |
 | [util-linux-tools](tools/util-linux) | :white_large_square: contrib | [ghcr.io/siderolabs/util-linux-tools](https://github.com/siderolabs/extensions/pkgs/container/util-linux-tools) | `2.41.2` |  This system extension provides a minimal util-linux package. |
 
+### Security
+
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [yubihsm-connector](security/yubihsm-connector) | :white_large_square: contrib | [ghcr.io/siderolabs/yubihsm-connector](https://github.com/siderolabs/extensions/pkgs/container/yubihsm-connector) | `3.0.5` |  YubiHSM Connector - HTTP-to-USB bridge for YubiHSM 2 hardware security modules. Enables applications to communicate with YubiHSM devices via HTTP API on localhost:12345. |
+
 <!-- ### END GENERATED CONTENT -->
 
 ## Building Extensions

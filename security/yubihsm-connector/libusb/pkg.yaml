@@ -1,0 +1,32 @@
+# libusb build stage for yubihsm-connector
+# Built with musl libc (from siderolabs/tools base) for Talos compatibility
+# udev is disabled since we don't need hotplug detection in this context
+name: libusb
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base  # Provides musl-based build environment
+steps:
+  - sources:
+      - url: https://github.com/libusb/libusb/releases/download/v{{ .LIBUSB_VERSION }}/libusb-{{ .LIBUSB_VERSION }}.tar.bz2
+        destination: libusb.tar.bz2
+        sha256: {{ .LIBUSB_SHA256 }}
+        sha512: {{ .LIBUSB_SHA512 }}
+    prepare:
+      - |
+        tar -xf libusb.tar.bz2 --strip-components=1
+        rm libusb.tar.bz2
+    build:
+      - |
+        ./configure \
+          --prefix=/usr \
+          --enable-static \
+          --enable-shared \
+          --disable-udev
+        make -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs install
+finalize:
+  - from: /rootfs
+    to: /

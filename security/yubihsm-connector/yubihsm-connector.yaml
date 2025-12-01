@@ -1,0 +1,56 @@
+# YubiHSM Connector container service definition
+# Provides HTTP API on localhost:12345 for YubiHSM 2 USB device access
+name: yubihsm-connector
+depends:
+  - service: cri
+  - service: udevd  # Required for USB device detection
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+container:
+  entrypoint: /usr/local/bin/yubihsm-connector
+  args:
+    - -c
+    - /usr/local/etc/yubihsm-connector/yubihsm-connector.yaml
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+    writeableRootfs: false
+  mounts:
+    # musl libc dynamic linker (ld-musl-x86_64.so.1)
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # System libraries from Talos host (libc, libpthread, etc.)
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # Bundled libusb - not available on Talos host, shipped with this extension
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # USB device access - rw required for YubiHSM USB communication
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - bind
+        - rw
+    # Configuration directory (can be overridden via ExtensionServiceConfig)
+    - source: /usr/local/etc/yubihsm-connector
+      destination: /usr/local/etc/yubihsm-connector
+      type: bind
+      options:
+        - bind
+        - ro
+restart: always

@@ -56,3 +56,6 @@
 
 ### Tools
 {{ template "extension-list" (dict "Pkgs" . "BaseDir" "tools/") -}}
+
+### Security
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "security/") -}}

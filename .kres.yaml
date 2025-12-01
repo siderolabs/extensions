@@ -74,6 +74,7 @@ spec:
     - xe
     - xen-guest-agent
     - youki
+    - yubihsm-connector
     - zerotier
     - zfs
   additionalTargets:

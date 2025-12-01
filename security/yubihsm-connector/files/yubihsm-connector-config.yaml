@@ -1,0 +1,15 @@
+# YubiHSM Connector default configuration
+# Can be overridden via ExtensionServiceConfig
+
+# Listening address - defaults to localhost only for security
+listen: "127.0.0.1:12345"
+
+# Log to syslog
+syslog: "false"
+
+# Optional: Specify device serial if multiple YubiHSMs connected
+# serial: ""
+
+# Optional: TLS certificate for HTTPS
+# cert: "/path/to/cert.pem"
+# key: "/path/to/key.pem"

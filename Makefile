@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-12-01T08:53:05Z by kres e1d6dac.
+# Generated on 2025-12-01T17:35:09Z by kres a1a34ff.
 
 # common variables
 
@@ -131,6 +131,7 @@ TARGETS += xdma-driver
 TARGETS += xe
 TARGETS += xen-guest-agent
 TARGETS += youki
+TARGETS += yubihsm-connector
 TARGETS += zerotier
 TARGETS += zfs
 NONFREE_TARGETS = nonfree-kmod-nvidia-lts
