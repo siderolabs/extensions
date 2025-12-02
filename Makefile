@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-12-03T14:28:50Z by kres 571923f.
+# Generated on 2025-12-04T12:12:14Z by kres 571923f.
 
 # common variables
 
@@ -63,6 +63,7 @@ TARGETS = amazon-ena
 TARGETS += amdgpu
 TARGETS += amd-ucode
 TARGETS += binfmt-misc
+TARGETS += bird2
 TARGETS += bnx2-bnx2x
 TARGETS += btrfs
 TARGETS += chelsio-drivers

@@ -1,0 +1,53 @@
+# © 2025 DE-CIX
+# Licensed under the Mozilla Public License 2.0
+# SPDX-License-Identifier: MPL-2.0
+name: bird2
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: "https://bird.network.cz/download/bird-{{ .BIRD2_VERSION }}.tar.gz"
+        destination: bird2.tar.gz
+        sha256: "{{ .BIRD2_SHA256 }}"
+        sha512: "{{ .BIRD2_SHA512 }}"
+    env:
+      SOURCE_DATE_EPOCH: "{{ .BUILD_ARG_SOURCE_DATE_EPOCH }}"
+    prepare:
+      - |
+        tar -xf bird2.tar.gz --strip-components=1
+
+      - |
+        export CFLAGS="${CFLAGS} -I/usr/local/include -static"
+        export LDFLAGS="${LDFLAGS} -static"
+
+        ./configure --disable-client --prefix=/usr/local
+    build:
+      - |
+        make -j $(nproc) all
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/{etc/containers,lib/containers/bird2}
+        cp /pkg/bird2.yaml /rootfs/usr/local/etc/containers/bird2.yaml
+
+        make DESTDIR=/rootfs/usr/local/lib/containers/bird2 install
+        rm /rootfs/usr/local/lib/containers/bird2/usr/local/etc/bird.conf
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/bird2.spdx.json
+      version: "{{ .VERSION }}"
+      cpes:
+        - "cpe:2.3:a:bird_project:bird:{{ .VERSION }}:*:*:*:*:*:*:*"
+      licenses:
+        - GPL-2.0-or-later
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

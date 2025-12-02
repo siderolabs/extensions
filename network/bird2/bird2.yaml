@@ -1,0 +1,26 @@
+# © 2025 DE-CIX
+# Licensed under the Mozilla Public License 2.0
+# SPDX-License-Identifier: MPL-2.0
+name: bird2
+depends:
+  - service: cri
+  - network:
+      - addresses
+      - etcfiles
+      - hostname
+  - configuration: true
+container:
+  entrypoint: /usr/local/sbin/bird
+  args:
+    - -f
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+    - source: /var/run/bird
+      destination: /usr/local/var/run
+      type: bind
+      options:
+        - bind
+        - rw
+restart: always

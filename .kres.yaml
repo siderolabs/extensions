@@ -6,6 +6,7 @@ spec:
     - amdgpu
     - amd-ucode
     - binfmt-misc
+    - bird2
     - bnx2-bnx2x
     - btrfs
     - chelsio-drivers
@@ -300,3 +301,6 @@ spec:
     - matchPackageNames:
         - systemd/systemd
       versioning: 'regex:^(?<major>\d+)\.?(?<minor>\d+)?\.?(?<patch>\d+)?$'
+    - matchPackageNames:
+        - https://gitlab.nic.cz/labs/bird.git
+      allowedVersions: "< 3.0.0"
