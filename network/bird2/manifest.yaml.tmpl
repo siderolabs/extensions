@@ -1,0 +1,14 @@
+# © 2025 DE-CIX
+# Licensed under the Mozilla Public License 2.0
+# SPDX-License-Identifier: MPL-2.0
+version: v1alpha1
+metadata:
+  name: bird2
+  version: "{{ .VERSION }}"
+  author: Matthias Riegler
+  description: |
+    [{{ .TIER }}] bird2 routing daemon for Talos. bird2cl can be used to interface with the daemon (lightweight CLI only!).
+    More info: https://bird.network.cz/
+  compatibility:
+    talos:
+      version: ">= v1.11.0"
