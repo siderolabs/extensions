@@ -130,6 +130,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
+| [bird2](network/bird2) | :white_large_square: contrib | [ghcr.io/siderolabs/bird2](https://github.com/siderolabs/extensions/pkgs/container/bird2) | `2.17.1` |  bird2 routing daemon for Talos. bird2cl can be used to interface with the daemon (lightweight CLI only!). More info: https://bird.network.cz/ |
 | [cloudflared](network/cloudflared) | :white_large_square: contrib | [ghcr.io/siderolabs/cloudflared](https://github.com/siderolabs/extensions/pkgs/container/cloudflared) | `2025.11.1` |  Cloudflare Tunnel securely connects resources to Cloudflare without a public IP. A lightweight daemon (cloudflared) creates outbound-only connections to Cloudflare, allowing safe access to services like HTTP, SSH, remote desktops, and other protocols. More info: https://github.com/cloudflare/cloudflared/ |
 | [lldpd](network/lldpd) | :yellow_square: extra | [ghcr.io/siderolabs/lldpd](https://github.com/siderolabs/extensions/pkgs/container/lldpd) | `1.0.20` |  LLDP adds a LLDP discovery service to Talos. LLDP cli can be used to interface with the daemon. |
 | [nebula](network/nebula) | :white_large_square: contrib | [ghcr.io/siderolabs/nebula](https://github.com/siderolabs/extensions/pkgs/container/nebula) | `1.9.7` |  A scalable overlay networking tool with a focus on performance, simplicity and security |
