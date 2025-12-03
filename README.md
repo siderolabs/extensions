@@ -152,7 +152,7 @@ tiers based on support level:
 | [nfsd](storage/nfsd) | :yellow_square: extra | [ghcr.io/siderolabs/nfsd](https://github.com/siderolabs/extensions/pkgs/container/nfsd) | `VERSION` |  This system extension provides kernel module driver for NFSD built against a specific Talos version. |
 | [nfsrahead](storage/nfsrahead) | :white_large_square: contrib | [ghcr.io/siderolabs/nfsrahead](https://github.com/siderolabs/extensions/pkgs/container/nfsrahead) | `2.8.3` |  This system extension provides nfsrahead, a tool to configure the readahead for NFS mounts. |
 | [trident-iscsi-tools](storage/trident-iscsi-tools) | :white_large_square: contrib | [ghcr.io/siderolabs/trident-iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/trident-iscsi-tools) | `v0.0.1` |  This system extension provides the tools and binaries used by the NetApp Trident CSI for iSCSI. It contains lsscsi, ls, free, pgrep, cat and dd. |
-| [zfs](storage/zfs) | :yellow_square: extra | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs) | `2.4.0-rc2-VERSION` |  This system extension provides the ZFS kernel module, the ZFS utilities, and a service to import all ZFS pools on start and unmount all pools on stop. |
+| [zfs](storage/zfs) | :yellow_square: extra | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs) | `2.4.0-rc4-VERSION` |  This system extension provides the ZFS kernel module, the ZFS utilities, and a service to import all ZFS pools on start and unmount all pools on stop. |
 
 ### Power
 

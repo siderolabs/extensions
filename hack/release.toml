@@ -45,7 +45,7 @@ tailscale: 1.90.9
 talos-vmtoolsd: 1.4.0
 youki: 0.5.7
 zerotier: 1.16.0
-zfs: 2.4.0-rc2
+zfs: 2.4.0-rc4
 linux-firmware: 20251111
 tenstorrent: 2.5.0
 mdadm: 4.4
