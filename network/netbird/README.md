@@ -29,7 +29,7 @@ apiVersion: v1alpha1
 kind: ExtensionServiceConfig
 name: netbird
 environment:
-  - NB_SETUP_KEYS=<peer setup key>
+  - NB_SETUP_KEY=<peer setup key>
   - NB_MANAGEMENT_URL=https://netbird.selfhosted:443
   - NB_ADMIN_URL=https://netbird.selfhosted:443
 ```
