@@ -1,6 +1,7 @@
 modules.order
 modules.builtin
 modules.builtin.modinfo
+kernel/drivers/media/mc/mc.ko
 kernel/sound/soundcore.ko
 kernel/sound/core/snd.ko
 kernel/sound/core/snd-pcm.ko
