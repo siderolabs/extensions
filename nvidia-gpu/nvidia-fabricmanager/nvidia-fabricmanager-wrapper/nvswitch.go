@@ -105,6 +105,7 @@ func findNvswitchMgmtPort() (err error, port *NVSwitchMgmtPort) {
 			log.Printf("nvidia-fabricmanager-wrapper: infiniband: failed to get interface attributes device=%s\n", device)
 			continue
 		}
+		defer C.umad_release_ca(caPtr)
 
 		numPorts := int(caPtr.numports)
 		log.Printf("nvidia-fabricmanager-wrapper: infiniband: successful read of interface attributes device=%s"+
@@ -124,6 +125,7 @@ func findNvswitchMgmtPort() (err error, port *NVSwitchMgmtPort) {
 					device, portIdx)
 				continue
 			}
+			defer C.umad_release_port(portPtr)
 
 			// read port GUID, we have to convert kernel __be64 to uint64
 			var portGUID uint64
