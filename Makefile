@@ -116,6 +116,7 @@ TARGETS += realtek-firmware
 TARGETS += revpi-firmware
 TARGETS += spin
 TARGETS += stargz-snapshotter
+TARGETS += containerd-image-verifier-sigstore
 TARGETS += tailscale
 TARGETS += tenstorrent
 TARGETS += thunderbolt
