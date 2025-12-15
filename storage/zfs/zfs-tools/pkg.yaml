@@ -18,7 +18,11 @@ steps:
     prepare:
       - |
         tar -xf zfs.tar.gz --strip-components=1
+      - |
+        patch -p1 < /pkg/patches/statx.patch
     build:
+      - |
+        autoreconf -vfi
       - |
         ./configure \
           --prefix=/usr/local \
