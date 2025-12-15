@@ -46,10 +46,10 @@ talos-vmtoolsd: 1.4.0
 youki: 0.5.7
 zerotier: 1.16.0
 zfs: 2.4.0-rc5
-linux-firmware: 20251111
+linux-firmware: 20251125
 tenstorrent: 2.5.0
 mdadm: 4.4
-Intel u-code: 20251111
+Intel u-code: 20251125
 
 wolfi-base: sha256:42012fa027adc864efbb7cf68d9fc575ea45fe1b9fb0d16602e00438ce3901b1
 """
