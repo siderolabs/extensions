@@ -1,3 +1,60 @@
+## [Talos System Extensions 1.11.6](https://github.com/siderolabs/extensions/releases/tag/v1.11.6) (2025-12-16)
+
+Welcome to the v1.11.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+DRBD: 9.2.16
+Linux Firmware: 20251125
+ZFS: 2.3.5
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`e821829`](https://github.com/siderolabs/extensions/commit/e8218298f523f56f78ad7888789911a6e557c4da) feat: update pkgs and tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>7 commits</summary>
+<p>
+
+* [`49ee0fe`](https://github.com/siderolabs/pkgs/commit/49ee0fe369de56c4d996fcb9fdf62e3dae74cdcd) feat: update Linux to 6.12.62
+* [`6b4375a`](https://github.com/siderolabs/pkgs/commit/6b4375a1d49630d2aae652aacab19bede2bd24e6) feat: update ZFS to 2.3.5
+* [`bde7611`](https://github.com/siderolabs/pkgs/commit/bde761182901cb224f112de8d677d39e279e9015) feat: update runc to v1.3.4
+* [`80c85fe`](https://github.com/siderolabs/pkgs/commit/80c85feb3b54f3ed63937f2667bd21c9cacb1429) feat: update Linux firmware to 20251125
+* [`5faab65`](https://github.com/siderolabs/pkgs/commit/5faab65bbdb74ff7b4786ded3e7cce193bdb17a0) feat: update DRBD to 9.2.16
+* [`8fdd59b`](https://github.com/siderolabs/pkgs/commit/8fdd59bf1a5badb91b07694cc0f6002c1575d5ac) feat: update CNI to 1.9.0
+* [`b458aab`](https://github.com/siderolabs/pkgs/commit/b458aab6448b246a0c67375e9d8c8e6eefa1b52b) feat: update Go to 1.24.11
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`7f05320`](https://github.com/siderolabs/tools/commit/7f053202d77fc0e5dd83e1dc12182d8addc84b17) feat: update Go to 1.24.11
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.11.0-29-gaee690b -> v1.11.0-36-g49ee0fe
+* **github.com/siderolabs/tools**  v1.11.0-4-g05ee846 -> v1.11.0-5-g7f05320
+
+Previous release can be found at [v1.11.5](https://github.com/siderolabs/extensions/releases/tag/v1.11.5)
+
 ## [Talos System Extensions 1.11.5](https://github.com/siderolabs/extensions/releases/tag/v1.11.5) (2025-11-06)
 
 Welcome to the v1.11.5 release of Talos System Extensions!
