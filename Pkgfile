@@ -12,7 +12,7 @@ vars:
   UTIL_LINUX_VERSION: 2.41.2 # update this when updating TOOLS in Makefile
   UTIL_LINUX_SHA256: 6062a1d89b571a61932e6fc0211f36060c4183568b81ee866cf363bce9f6583e
   UTIL_LINUX_SHA512: 696c87e7cf185acc9b4b969ddade6155ea2945ae494eaecfd7b1f35d9607166cb09be79878fb793dd31b4d4dcac8c9be4be76af3886185db7ae8b58c303fb0cf
-  ENA_VERSION: 2.16.0 # update this when updating PKGS_VERSION in Makefile
+  ENA_VERSION: 2.16.1 # update this when updating PKGS_VERSION in Makefile
   TENSTORRENT_VERSION: 2.5.0 # update this when updating PKGS_VERSION in Makefile
   HAILORT_VERSION: 4.23.0 # update this when updating PKGS_VERSION in Makefile
   MELLANOX_MSFTFLINT_VERSION: 4.31.0-1 # update this when updating PKGS_VERSION in Makefile
