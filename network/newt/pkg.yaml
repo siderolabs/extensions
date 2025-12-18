@@ -32,7 +32,7 @@ steps:
     install:
       - |
         mkdir -p /rootfs/usr/local/lib/containers/newt/usr/local/bin
-        cp -p newt/newt /rootfs/usr/local/lib/containers/newt/usr/local/bin/
+        cp -p ./newt/bin/newt /rootfs/usr/local/lib/containers/newt/usr/local/bin/
         chmod +x /rootfs/usr/local/lib/containers/newt/usr/local/bin/newt
       - |
         mkdir -p /rootfs/usr/local/etc/containers
