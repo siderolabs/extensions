@@ -1,7 +1,7 @@
 # renovate: datasource=github-releases extractVersion=^fuse-(?<version>.*)$ depName=libfuse/libfuse
-FUSE3_VERSION: 3.17.4
-FUSE3_SHA256: df9e40ae927b73dc702d0bce7925c0c618af47ad0b13204fbf2be66e54d8528b
-FUSE3_SHA512: 5451b374ceadb4cb5a8f0c396f1111932ec63984b80dfad7a76258c026b4e8e5ab4a563bb4a9e272d7fa62a5f452113885d4c3ea080a9f56b6aeb85d50c01010
+FUSE3_VERSION: 3.18.1
+FUSE3_SHA256: dd395c88f29c7540bbdd0b830260ab8092ccb241bb6e66f603643f715fb9322c
+FUSE3_SHA512: 02a6ed591e3a634893ab9a621ccc3b745abda06c5da5a4f2a7cc5a1740ddf8199c841f987bcbc8958fc134c2d773055a06cf25aeb6ef55204a4598b99371cb0b
 # renovate: datasource=git-tags extractVersion=^mdadm-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
 MDADM_VERSION: 4.4
 MDADM_SHA256: f4386dcd97d804ab92d5785515443da6a49d4a4ec56ef5ad28aa9cea4d774742
