@@ -94,11 +94,11 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.13.0-alpha.0-17-g1f66513
+        defaultValue: v1.13.0-alpha.0-24-g972f44d
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
-        defaultValue: v1.13.0-alpha.0-4-gb67c1a1
+        defaultValue: v1.13.0-alpha.0-6-g896f8b9
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
