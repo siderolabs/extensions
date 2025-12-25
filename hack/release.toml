@@ -11,7 +11,7 @@ previous = "v1.12.0"
 pre_release = true
 
 preface = """\
-See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
 """
 
 [notes]
