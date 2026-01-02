@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: aws-iam-authenticator
+  version: "{{ .VERSION }}"
+  author: Fábio Matavelli
+  description: |
+    [{{ .TIER }}] This system extension provides aws-iam-authenticator init process to generate certificates and kubeconfig for AWS IAM authentication with Kubernetes.
+  compatibility:
+    talos:
+      version: ">= v1.11.0"

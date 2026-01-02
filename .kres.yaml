@@ -5,6 +5,7 @@ spec:
     - amazon-ena
     - amdgpu
     - amd-ucode
+    - aws-iam-authenticator
     - binfmt-misc
     - bird2
     - bnx2-bnx2x

@@ -1,0 +1,24 @@
+name: aws-iam-authenticator
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+  - time: true
+container:
+  entrypoint: ./init
+  environment:
+  - PATH=/sbin:/usr/local/bin
+  security:
+    writeableRootfs: true
+mounts:
+  - destination: /usr/local/lib/aws-iam-authenticator
+    type: bind
+    source: /usr/local/lib/aws-iam-authenticator
+    options:
+      - rbind
+      - rshared
+      - rw
+restart: never

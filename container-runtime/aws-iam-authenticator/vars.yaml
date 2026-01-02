@@ -1,0 +1,2 @@
+VERSION: "{{ .AWS_IAM_AUTHENTICATOR_VERSION }}"
+TIER: "contrib"
