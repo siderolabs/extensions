@@ -105,7 +105,6 @@
             ]
         },
         {
-            "allowedVersions": "< 3.0.0",
             "matchPackageNames": [
                 "https://gitlab.nic.cz/labs/bird.git"
             ]

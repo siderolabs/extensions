@@ -1,0 +1,52 @@
+name: aws-iam-authenticator
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      # {{ if eq .ARCH "arm64" }}
+      - url: https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v{{ .AWS_IAM_AUTHENTICATOR_VERSION }}/aws-iam-authenticator_{{ .AWS_IAM_AUTHENTICATOR_VERSION }}_linux_arm64
+        destination: aws-iam-authenticator
+        sha256: {{ .AWS_IAM_AUTHENTICATOR_ARM64_SHA256 }}
+        sha512: {{ .AWS_IAM_AUTHENTICATOR_ARM64_SHA512 }}
+      # {{ else }}
+      - url: https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v{{ .AWS_IAM_AUTHENTICATOR_VERSION }}/aws-iam-authenticator_{{ .AWS_IAM_AUTHENTICATOR_VERSION }}_linux_amd64
+        destination: aws-iam-authenticator
+        sha256: {{ .AWS_IAM_AUTHENTICATOR_AMD64_SHA256 }}
+        sha512: {{ .AWS_IAM_AUTHENTICATOR_AMD64_SHA512 }}
+      # {{ end }}
+    env:
+      GOPATH: /go
+    build:
+      - |
+        cd /pkg/src
+        CGO_ENABLED=0 go build -o ./aws-iam-authenticator-init .
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/aws-iam-authenticator
+
+        cp -p /pkg/src/aws-iam-authenticator-init /rootfs/usr/local/lib/containers/aws-iam-authenticator/init
+      - |
+        mkdir -p /rootfs/usr/local/bin
+        mv -v aws-iam-authenticator /rootfs/usr/local/bin
+        chmod +x /rootfs/usr/local/bin/aws-iam-authenticator
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/aws-iam-authenticator.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/aws-iam-authenticator.spdx.json
+      version: {{ .AWS_IAM_AUTHENTICATOR_VERSION }}
+      licenses:
+        - Apache-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
