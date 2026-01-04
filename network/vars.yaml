@@ -21,11 +21,11 @@ ZEROTIER_VERSION: 1.16.0
 ZEROTIER_SHA256: aa9de313d365bf0efb3871aaa56f2d323a08f46df47b627c4eff4f4203fa7fc5
 ZEROTIER_SHA512: 158ab83059ea1dcdfab073429404d6e9ef812c40e4be6b718c48e4eb9f7a9ab45f71ffdd9cf9179e6b5864a302201cbf96ee1441659ebf8a8293de57dc13a2b7
 # renovate: datasource=github-releases depName=fosrl/newt
-NEWT_VERSION: 1.8.0
+NEWT_VERSION: 1.8.1
 NEWT_SHA256: b1cfcb6e5c27cfaf0f4acfba856eca3a54f69a143d5373d94cb53649e8440acc
 NEWT_SHA512: cd682deaeeb7ddadea9d5429a656534bb061ed3e543a9d6fb8d43705214c200c9bc211b11b9123534fad79d47de51bb49f5f207817c0ad40e258c140804de040
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=netbirdio/netbird
-NETBIRD_VERSION: 0.60.9
+NETBIRD_VERSION: 0.61.2
 NETBIRD_SHA256: 0140c6ee7abf0e399cc56f59ebbfd74c759db4a5dee10662501b1cc7063ed50d
 NETBIRD_SHA512: 0f6ed8d328692098dd14a49c618e0e90626f1aa3ffb2427858d17162a86b66b884b6a89b91dac56e89ee94a2283f04b797aa850344f10701b410390cb2da4865
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://gitlab.nic.cz/labs/bird.git
