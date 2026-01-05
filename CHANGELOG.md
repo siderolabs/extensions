@@ -1,3 +1,60 @@
+## [Talos System Extensions 1.12.1](https://github.com/siderolabs/extensions/releases/tag/v1.12.1) (2026-01-05)
+
+Welcome to the v1.12.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+crun: 1.26
+ecr-credential-provider: 1.35.0
+netbird: 0.60.9
+newt: 1.8.0
+fuse3: 3.18.1
+qemu-guest-agent: 10.2.0
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Andrey Smirnov
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`e2c8afc`](https://github.com/siderolabs/extensions/commit/e2c8afcd1054e072d58ac000c4b1e66539aba79f) chore: run rekres and update dependencies
+* [`a652200`](https://github.com/siderolabs/extensions/commit/a65220090501348bf9ed772b9286049f25278f42) feat: update dependencies
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>2 commits</summary>
+<p>
+
+* [`90ff196`](https://github.com/siderolabs/pkgs/commit/90ff1965cdb2ab54d8e826f3673324cd1b5c94da) chore: run rekres and update dependencies
+* [`2b30517`](https://github.com/siderolabs/pkgs/commit/2b3051775ca0d7531f65b81572e391a96b4a2c04) feat: update Linux to 6.18.2
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`5df8bae`](https://github.com/siderolabs/tools/commit/5df8baedd100b6f117f664f383944daaf3371804) chore: run rekres and update dependencies
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-23-ge0b78b8 -> v1.12.0-25-g90ff196
+* **github.com/siderolabs/tools**  v1.12.0-2-g7d57df0 -> v1.12.0-3-g5df8bae
+
+Previous release can be found at [v1.12.0](https://github.com/siderolabs/extensions/releases/tag/v1.12.0)
+
 ## [Talos System Extensions 1.12.0](https://github.com/siderolabs/extensions/releases/tag/v1.12.0) (2025-12-19)
 
 Welcome to the v1.12.0 release of Talos System Extensions!
