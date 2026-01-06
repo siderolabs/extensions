@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2025-12-24T16:04:12Z by kres 26be706.
+# Generated on 2026-01-12T17:30:42Z by kres 0e8da31.
 
 # common variables
 
@@ -37,6 +37,7 @@ PLATFORM ?= linux/amd64,linux/arm64
 PROGRESS ?= auto
 PUSH ?= false
 CI_ARGS ?=
+WITH_BUILD_DEBUG ?=
 BUILD_ARGS = --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
 BUILD_ARGS += --build-arg=TAG="$(TAG)"
 BUILD_ARGS += --build-arg=PKGS="$(PKGS)"
@@ -52,7 +53,7 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-alpha.0-24-g972f44d
+PKGS ?= v1.13.0-alpha.0-31-gc61b466
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.13.0-alpha.0-6-g896f8b9
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -116,6 +117,7 @@ TARGETS += qemu-guest-agent
 TARGETS += qlogic-firmware
 TARGETS += realtek-firmware
 TARGETS += revpi-firmware
+TARGETS += rockchip-rknn
 TARGETS += spin
 TARGETS += stargz-snapshotter
 TARGETS += tailscale
@@ -188,6 +190,10 @@ The registry and username can be overridden by exporting REGISTRY, and USERNAME
 respectively.
 
 endef
+
+ifneq (, $(filter $(WITH_BUILD_DEBUG), t true TRUE y yes 1))
+BUILD := BUILDX_EXPERIMENTAL=1 docker buildx debug --invoke /bin/sh --on error build
+endif
 
 all: $(TARGETS)  ## Builds all targets defined.
 
