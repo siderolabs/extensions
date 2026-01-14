@@ -25,6 +25,7 @@ netbird: 0.60.9
 newt: 1.8.0
 fuse3: 3.18.1
 qemu-guest-agent: 10.2.0
+Linux Firmware: 20260110
 """
 
 [make_deps]
