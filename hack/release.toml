@@ -20,6 +20,8 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
         title = "Component Updates"
         description = """\
 Linux Firmware: 20260110
+NVIDIA LTS: 580.126.09
+NVIDIA Production: 570.211.01
 """
 
 [make_deps]
