@@ -20,12 +20,15 @@ See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configu
         title = "Component Updates"
         description = """\
 crun: 1.26
+ctr: 2.2.1
 ecr-credential-provider: 1.35.0
 netbird: 0.60.9
 newt: 1.8.0
 fuse3: 3.18.1
 qemu-guest-agent: 10.2.0
 Linux Firmware: 20260110
+NVIDIA LTS: 580.126.09
+NVIDIA Production: 570.211.01
 """
 
 [make_deps]
