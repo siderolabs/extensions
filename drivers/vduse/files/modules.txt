@@ -1,0 +1,6 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/vdpa/vdpa.ko
+kernel/drivers/vdpa/vdpa_user/vduse.ko
+kernel/drivers/virtio/virtio_vdpa.ko

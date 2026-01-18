@@ -129,6 +129,7 @@ TARGETS += usb-modem-drivers
 TARGETS += usb-audio-drivers
 TARGETS += util-linux-tools
 TARGETS += v4l-uvc-drivers
+TARGETS += vduse
 TARGETS += vc4
 TARGETS += vmtoolsd-guest-agent
 TARGETS += wasmedge
