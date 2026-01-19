@@ -1,0 +1,21 @@
+version: v1alpha1
+metadata:
+  name: vduse
+  version: "{{ .VERSION }}"
+  author: Dmitry
+  description: |
+    [{{ .TIER }}] This system extension provides VDUSE (vDPA Device in Userspace) kernel modules
+    for Talos Linux. VDUSE enables userspace programs to implement virtio block devices with
+    better performance than NBD. This is particularly useful for distributed storage systems
+    like Vitastor that need efficient block device attachment in Kubernetes CSI drivers.
+
+    VDUSE provides:
+    - Better performance than NBD (1 memory copy instead of 2)
+    - No timeout issues like NBD
+    - Process restart capability without losing the device
+    - No device number limits
+
+    Required kernel modules: vduse, vdpa, virtio-vdpa, vhost, vhost_iotlb
+  compatibility:
+    talos:
+      version: ">= v1.8.0"
