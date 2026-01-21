@@ -1,3 +1,64 @@
+## [Talos System Extensions 1.12.2](https://github.com/siderolabs/extensions/releases/tag/v1.12.2) (2026-01-21)
+
+Welcome to the v1.12.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20260110
+NVIDIA LTS: 580.126.09
+NVIDIA Production: 570.211.01
+
+
+### Contributors
+
+* Andrey Smirnov
+* Andras BALI
+* Dmitrii Sharshakov
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`a37060f`](https://github.com/siderolabs/extensions/commit/a37060f0663546f6bd05a619d0307e0095d360a7) fix: bring back gpio-pinctrl
+* [`1138653`](https://github.com/siderolabs/extensions/commit/113865364603981f0a7e750dcab2437cc551469e) feat: bump NVIDIA production/LTS drivers
+* [`8c5a8bb`](https://github.com/siderolabs/extensions/commit/8c5a8bb09199fef8798b586dc1792048725a81aa) feat: update pkgs/tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>7 commits</summary>
+<p>
+
+* [`4f8efaf`](https://github.com/siderolabs/pkgs/commit/4f8efafbae293c2b53c196990b773024d13ca6a5) fix: enable pinctrl for Raspberry Pi 5
+* [`3a36a01`](https://github.com/siderolabs/pkgs/commit/3a36a01a80f0b611d237b6f4afaed6767ca44f4d) feat: update NVIDIA LTS and production driver versions
+* [`d364d04`](https://github.com/siderolabs/pkgs/commit/d364d04e36354684762251504f97c35606db01a8) feat: update Linux to 6.18.5
+* [`a3d6cc4`](https://github.com/siderolabs/pkgs/commit/a3d6cc481781b2619debe7f3300f3111f712e8d6) feat: update Linux firmware to 20260110
+* [`40fa324`](https://github.com/siderolabs/pkgs/commit/40fa324fa262dacba146ca4c7bf4ea10b31958a8) feat: enable IT87 hwmon module
+* [`8b8f314`](https://github.com/siderolabs/pkgs/commit/8b8f3149aa337ee377fa7724c7b28bbec9f9250e) feat: enable IPV6_MROUTE
+* [`3571127`](https://github.com/siderolabs/pkgs/commit/357112785127fdcac76e4f64b9bbd646ded04a95) feat: update Go to 1.25.6
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`31959f4`](https://github.com/siderolabs/tools/commit/31959f432338f80579dc0565a40133b83976c65f) feat: update Go to 1.25.6
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-25-g90ff196 -> v1.12.0-32-g4f8efaf
+* **github.com/siderolabs/tools**  v1.12.0-3-g5df8bae -> v1.12.0-4-g31959f4
+
+Previous release can be found at [v1.12.1](https://github.com/siderolabs/extensions/releases/tag/v1.12.1)
+
 ## [Talos System Extensions 1.12.1](https://github.com/siderolabs/extensions/releases/tag/v1.12.1) (2026-01-05)
 
 Welcome to the v1.12.1 release of Talos System Extensions!
