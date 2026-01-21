@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-01-20T19:15:31Z by kres 1ffefb6.
+# Generated on 2026-01-21T09:14:50Z by kres 1ffefb6.
 
 # common variables
 
@@ -80,6 +80,7 @@ TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
 TARGETS += glibc
+TARGETS += gpio-pinctrl
 TARGETS += gvisor
 TARGETS += gvisor-debug
 TARGETS += hailort

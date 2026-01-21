@@ -21,6 +21,7 @@ spec:
     - fuse3
     - gasket-driver
     - glibc
+    - gpio-pinctrl
     - gvisor
     - gvisor-debug
     - hailort
