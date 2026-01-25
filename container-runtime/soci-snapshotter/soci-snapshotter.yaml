@@ -3,6 +3,8 @@ depends:
   - service: cri
 restart: always
 container:
+  environment:
+    - PATH=/usr/local/bin
   entrypoint: ./soci-snapshotter-grpc
   args:
     - -log-level=debug
@@ -30,4 +32,31 @@ container:
       type: bind
       options:
         - rbind
+        - ro
+    # lazy loading mode requires `/dev/fuse` to be mounted
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # mounts to access `fusermount3` binary
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/bin
+      destination: /usr/local/bin
+      type: bind
+      options:
+        - bind
         - ro
