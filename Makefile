@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-01-23T14:32:41Z by kres 1ffefb6.
+# Generated on 2026-01-26T07:05:06Z by kres 1ffefb6.
 
 # common variables
 
@@ -53,9 +53,9 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-alpha.0-39-g15a3cdf
+PKGS ?= v1.13.0-alpha.0-41-gda7ab57
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.13.0-alpha.0-8-g98c699e
+TOOLS ?= v1.13.0-alpha.0-10-g721ad07
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 IMAGE_SIGNER_RELEASE ?= v0.1.1
 
@@ -111,6 +111,7 @@ TARGETS += nvidia-gdrdrv-device
 TARGETS += nvidia-open-gpu-kernel-modules-lts
 TARGETS += nvidia-open-gpu-kernel-modules-production
 TARGETS += nvme-cli
+TARGETS += px-fuse
 TARGETS += soci-snapshotter
 TARGETS += panfrost
 TARGETS += qemu-guest-agent
