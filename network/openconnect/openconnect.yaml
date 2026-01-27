@@ -1,0 +1,65 @@
+name: openconnect
+depends:
+  - service: cri
+  - network:
+    - addresses
+    - connectivity
+    - etcfiles
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/openconnect-wrapper
+  environment:
+    - PATH=/sbin:/usr/local/bin
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+    # TUN device for VPN tunnel interface
+    - source: /dev/net/tun
+      destination: /dev/net/tun
+      type: bind
+      options:
+        - bind
+        - rw
+    # State directory for persistent data
+    - source: /var/lib/openconnect
+      destination: /var/lib/openconnect
+      type: bind
+      options:
+        - bind
+        - rw
+    # PID and socket files
+    - source: /var/run/openconnect
+      destination: /var/run/openconnect
+      type: bind
+      options:
+        - bind
+        - rw
+    # SSL certificates for server verification
+    - source: /etc/ssl/certs
+      destination: /etc/ssl/certs
+      type: bind
+      options:
+        - rbind
+        - ro
+    # ip command for route management
+    - source: /sbin
+      destination: /sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    # Required libraries
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+restart: always
