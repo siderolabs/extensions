@@ -42,6 +42,13 @@ container:
       options:
         - bind
         - rw
+    # udev database for device enumeration
+    - source: /run/udev
+      destination: /run/udev
+      type: bind
+      options:
+        - bind
+        - ro
 depends:
   - network:
       - addresses
