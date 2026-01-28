@@ -1,0 +1,2 @@
+VERSION: "{{ .OPENCONNECT_VERSION }}"
+TIER: "contrib"

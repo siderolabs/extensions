@@ -1,0 +1,81 @@
+name: openconnect
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: openconnect-wrapper
+steps:
+  - sources:
+      - url: https://www.infradead.org/openconnect/download/openconnect-{{ .OPENCONNECT_VERSION }}.tar.gz
+        destination: openconnect.tar.gz
+        sha256: "{{ .OPENCONNECT_SHA256 }}"
+        sha512: "{{ .OPENCONNECT_SHA512 }}"
+    env:
+      SOURCE_DATE_EPOCH: "{{ .BUILD_ARG_SOURCE_DATE_EPOCH }}"
+      PKG_CONFIG_PATH: /usr/lib/pkgconfig
+    prepare:
+      - |
+        tar -xzf openconnect.tar.gz --strip-components=1
+      - |
+        ./configure \
+          --prefix=/usr/local \
+          --with-openssl \
+          --without-gnutls \
+          --without-gssapi \
+          --without-libproxy \
+          --without-stoken \
+          --without-libpskc \
+          --without-libpcsclite \
+          --disable-nls
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        containerRoot=/rootfs/usr/local/lib/containers/openconnect
+        mkdir -p "$containerRoot/usr/local/bin"
+        mkdir -p "$containerRoot/usr/local/lib"
+        mkdir -p "$containerRoot/etc/vpnc"
+
+        # Install openconnect binary
+        cp -p openconnect "$containerRoot/usr/local/bin/"
+        cp -p /rootfs/usr/local/bin/openconnect-wrapper "$containerRoot/usr/local/bin/"
+        chmod +x "$containerRoot/usr/local/bin/"*
+
+        # Install the openconnect library
+        make DESTDIR=/rootfs install-exec
+        cp -a /rootfs/usr/local/lib/libopenconnect* "$containerRoot/usr/local/lib/" 2>/dev/null || true
+
+        # Copy vpnc-script for route/DNS management
+        cp -p vpnc-script "$containerRoot/etc/vpnc/"
+        chmod +x "$containerRoot/etc/vpnc/vpnc-script"
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/openconnect.yaml /rootfs/usr/local/etc/containers/
+
+        # Cleanup intermediate files
+        rm -rf /rootfs/usr/local/bin/openconnect
+        rm -rf /rootfs/usr/local/include
+        rm -rf /rootfs/usr/local/lib/libopenconnect*
+        rm -rf /rootfs/usr/local/lib/pkgconfig
+        rm -rf /rootfs/usr/local/sbin
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+      - |
+        /rootfs/usr/local/lib/containers/openconnect/usr/local/bin/openconnect --version
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/openconnect.spdx.json
+      version: "{{ .OPENCONNECT_VERSION }}"
+      cpes:
+        - "cpe:2.3:a:infradead:openconnect:{{ .OPENCONNECT_VERSION }}:*:*:*:*:*:*:*"
+      licenses:
+        - LGPL-2.1-only
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
