@@ -44,6 +44,7 @@ BUILD_ARGS += --build-arg=PKGS="$(PKGS)"
 BUILD_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 BUILD_ARGS += --build-arg=TOOLS="$(TOOLS)"
 BUILD_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
+BUILD_ARGS += --build-arg=TEST_STAGE="$(TEST_STAGE)"
 COMMON_ARGS = --file=Pkgfile
 COMMON_ARGS += --provenance=false
 COMMON_ARGS += --progress=$(PROGRESS)
@@ -58,6 +59,7 @@ PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.13.0-alpha.0-10-g721ad07
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 IMAGE_SIGNER_RELEASE ?= v0.1.1
+TEST_STAGE ?=
 
 # targets defines all the available targets
 
@@ -217,6 +219,12 @@ docker-%:  ## Builds the specified target defined in the Pkgfile using the docke
 reproducibility-test:  ## Builds the reproducibility test target
 	@$(MAKE) reproducibility-test-local-reproducibility
 
+test-%:
+	@$(MAKE) docker-test-extension TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:v0.1.0 --push=$(PUSH)" TEST_STAGE=$*
+	@docker pull $(REGISTRY)/$(USERNAME)/$@:v0.1.0
+	@orb debug $(REGISTRY)/$(USERNAME)/$@:v0.1.0
+	@docker image rm -f $(REGISTRY)/$(USERNAME)/$@:v0.1.0
+
 reproducibility-test-local-%:  ## Builds the specified target defined in the Pkgfile using the local output type with and without cahce. The build result will be output to the specified local destination
 	@rm -rf $(ARTIFACTS)/build-a $(ARTIFACTS)/build-b
 	@$(MAKE) local-$* DEST=$(ARTIFACTS)/build-a
@@ -307,4 +315,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-

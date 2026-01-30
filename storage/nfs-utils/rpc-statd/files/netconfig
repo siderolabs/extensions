@@ -1,0 +1,7 @@
+udp        tpi_clts      v     inet     udp     -       -
+tcp        tpi_cots_ord  v     inet     tcp     -       -
+udp6       tpi_clts      v     inet6    udp     -       -
+tcp6       tpi_cots_ord  v     inet6    tcp     -       -
+rawip      tpi_raw       -     inet      -      -       -
+local      tpi_cots_ord  -     loopback  -      -       -
+unix       tpi_cots_ord  -     loopback  -      -       -

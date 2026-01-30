@@ -3,6 +3,15 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+    from: /
+    to: /rootfs/usr/local/lib/containers/nut-client
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/nut-client/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/nut-client/usr/lib
 steps:
   - sources:
       - url: https://github.com/networkupstools/nut/releases/download/v{{ .NUT_VERSION }}/nut-{{ .NUT_VERSION }}.tar.gz
@@ -21,11 +30,9 @@ steps:
 
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
         ./configure \
-                --prefix=/usr/local \
-                --libexecdir=/usr/local/lib/nut \
-                --datadir=/usr/local/share/nut \
+                --prefix=/usr/local/lib/containers/nut-client \
+                --libexecdir=/usr/local/lib/containers/nut-client/libexec \
                 --sysconfdir=/usr/local/etc/nut \
-                --with-drvpath=/usr/local/lib/nut \
                 --with-statepath=/var/run/nut \
                 --with-altpidpath=/var/run/nut \
                 --with-udev-dir=/usr/lib/udev \
@@ -56,20 +63,10 @@ steps:
       - |
         make DESTDIR=/rootfs install-exec
 
-        containerRoot=/rootfs/usr/local/lib/containers/nut-client
-        mkdir -p "$containerRoot"/{etc,sbin,usr/local/lib}
-        cp /rootfs/usr/local/sbin/upsmon "$containerRoot/upsmon"
-        mv /rootfs/usr/local/lib/lib* "$containerRoot/usr/local/lib/"
-        cp /pkg/files/* "$containerRoot/etc/"
-
-        # TODO replace /usr/bin/wall with either a wrapper for printk or a
-        # Go cmd to log to Talos Events
+        install -m 600 /pkg/files/* /rootfs/usr/local/lib/containers/nut-client/etc/
 
         # cleanup
-        rm -rf /rootfs/usr/local/bin
-        rm -rf /rootfs/usr/local/etc
-        rm -rf /rootfs/usr/local/lib/nut
-        rm -rf /rootfs/usr/local/sbin
+        rm -rf /rootfs/usr/local/lib/containers/nut-client/etc/*.sample
       - |
         mkdir -p /rootfs/usr/local/etc/containers
         cp /pkg/nut-client.yaml /rootfs/usr/local/etc/containers/
