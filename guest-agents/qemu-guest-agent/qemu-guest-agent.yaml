@@ -5,19 +5,6 @@ depends:
 container:
   entrypoint: ./qemu-ga
   mounts:
-    # Shared libraries.
-    - source: /lib
-      destination: /lib
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /usr/lib
-      destination: /usr/lib
-      type: bind
-      options:
-        - bind
-        - ro
     # State files.
     - source: /system/run/qemu-guest-agent
       destination: /var/run

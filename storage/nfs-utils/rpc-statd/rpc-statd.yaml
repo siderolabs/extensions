@@ -1,0 +1,35 @@
+name: rpc-statd
+depends:
+  - service: cri
+  - service: ext-rpcbind
+  - network:
+      - addresses
+      - connectivity
+      - hostname
+      - etcfiles
+container:
+  entrypoint: /sbin/rpc.statd
+  args:
+    - --foreground
+    - --no-syslog
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+  mounts:
+    # statd state directory
+    - source: /var/lib/nfs/statd
+      destination: /var/lib/nfs/statd
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # For rpcbind communication
+    - source: /run/rpcbind
+      destination: /run/rpcbind
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always

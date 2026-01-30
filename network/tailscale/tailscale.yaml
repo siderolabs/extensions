@@ -17,27 +17,6 @@ container:
     writeableRootfs: false
     writeableSysfs: true
   mounts:
-  # libs
-  - source: /lib
-    destination: /lib
-    type: bind
-    options:
-      - bind
-      - ro
-  # more libs
-  - source: /usr/lib
-    destination: /usr/lib
-    type: bind
-    options:
-      - bind
-      - ro
-  ## Required for tailscale. Ip addr and other commands
-  - source: /sbin
-    destination: /sbin
-    type: bind
-    options:
-      - bind
-      - ro
   ## Tailscale needs to write to this to create the interfaces
   - source: /dev/net/tun
     destination: /dev/net/tun

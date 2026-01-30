@@ -1,5 +1,5 @@
 
-name: libtirpc
+name: libtirpc-glibc
 variant: scratch
 shell: /bin/bash
 install:

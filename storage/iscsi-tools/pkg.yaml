@@ -2,30 +2,67 @@ name: iscsi-tools
 variant: scratch
 shell: /bin/bash
 dependencies:
-  # `base` dependency is used for doing cleanups
-  # not copied to rootfs
   - stage: base
-  - stage: open-iscsi
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+    from: /
+    to: /rootfs/usr/local/lib/containers/iscsi-tools
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/iscsi-tools/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kmod:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/iscsi-tools/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/iscsi-tools/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/util-linux:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/iscsi-tools/usr/lib
 steps:
-  - install:
-    - |
-      mkdir -p /rootfs/usr/local/lib/containers/iscsid
-
-      # cleanup
-      rm -rf /rootfs/usr/local/include
-      rm -rf /rootfs/usr/share
-    - |
-      mkdir -p /rootfs/usr/local/etc/containers
-
-      cp /pkg/iscsid.yaml /rootfs/usr/local/etc/containers/iscsid.yaml
-    test:
+  - sources:
+      - url: https://github.com/open-iscsi/open-iscsi/archive/refs/tags/{{ .OPEN_ISCSI_VERSION }}.tar.gz
+        destination: open-iscsi.tar.gz
+        sha256: {{ .OPEN_ISCSI_SHA256 }}
+        sha512: {{ .OPEN_ISCSI_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
       - |
-        mkdir -p /extensions-validator-rootfs
-        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
-        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
-        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+        tar -xzf open-iscsi.tar.gz --strip-components=1
+
+        patch -p1 < /pkg/patches/musl-fixes.patch
+        patch -p1 < /pkg/patches/dont-use-lib64.patch
+        patch -p1 < /pkg/patches/remove-werror.patch
+    build:
+      - |
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
+
+        mkdir -p output
+
+        LDFLAGS="$LDFLAGS -L/usr/local/lib" \
+        meson setup \
+          -Db_lto=true \
+          -Dno_systemd=true \
+          -Disns=disabled \
+          -Dhomedir=/etc/iscsi \
+          -Dprefix=/usr/local/lib/containers/iscsi-tools \
+          -Discsi_sbindir=/usr/local/lib/containers/iscsi-tools/sbin \
+          -Drulesdir=/usr/lib/udev/rules.d \
+          output
+
+        ninja -C output
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/etc
+        DESTDIR=/rootfs ninja -C output install
+
+        # cleanup
+        # we generate initiatorname.iscsi on talos side.
+        rm -rf /rootfs/usr/local/lib/containers/iscsi-tools/etc
+        rm -rf /rootfs/usr/local/lib/containers/iscsi-tools/{etc,share,include,pkgconfig}
+        rm -rf /rootfs/usr/local/lib/containers/iscsi-tools/var
     sbom:
-      outputPath: /rootfs/usr/local/share/spdx/iscsi-tools.spdx.json
+      outputPath: /rootfs/usr/local/share/spdx/open-iscsi.spdx.json
       version: {{ .OPEN_ISCSI_VERSION }}
       cpes:
         - cpe:2.3:a:open-iscsi_project:open-iscsi:{{ .OPEN_ISCSI_VERSION }}:*:*:*:*:*:*:*
@@ -34,5 +71,3 @@ steps:
 finalize:
   - from: /rootfs
     to: /rootfs
-  - from: /pkg/manifest.yaml
-    to: /

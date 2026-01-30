@@ -1,9 +1,21 @@
-name: nfs-utils-statd
+name: rpc-statd
 variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: libtirpc-zfs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+    from: /
+    to: /rootfs/usr/local/lib/containers/rpc-statd
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/rpc-statd/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libcap:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/rpc-statd/usr/lib
+  - stage: libtirpc
+    from: /rootfs/usr/local/lib
+    to: /rootfs/usr/local/lib/containers/rpc-statd/usr/lib
+  - stage: libtirpc
     from: /rootfs
   - stage: rpcsvc-proto
     from: /rootfs
@@ -36,10 +48,11 @@ steps:
         export LDFLAGS="${LDFLAGS} -L/usr/local/lib"
 
         ./configure \
-          --prefix=/usr/local \
-          --sbindir=/usr/local/sbin \
+          --prefix=/usr/local/lib/containers/rpc-statd \
+          --sbindir=/usr/local/lib/containers/rpc-statd/sbin \
           --disable-nfsv4 \
           --disable-nfsv41 \
+          --disable-nfsdcld \
           --disable-gss \
           --disable-svcgss \
           --disable-kprefix \
@@ -49,22 +62,27 @@ steps:
           --with-statedir=/var/lib/nfs \
           --with-statdpath=/var/lib/nfs/statd
       - |
-        make -C support/nsm
-        make -C support/misc
-        make -C support/nfs
-        make -C utils/statd
+        make -C support/nsm -j $(nproc)
+        make -C support/misc -j $(nproc)
+        make -C support/nfs -j $(nproc)
+        make -C utils/statd -j $(nproc)
     install:
       - |
-        mkdir -p /rootfs/usr/local/sbin
-        mkdir -p /rootfs/var/lib/nfs/statd
-
         # Install only rpc.statd and sm-notify from the built directories
         make DESTDIR=/rootfs install -C utils/statd
 
         # cleanup
-        rm -rf /rootfs/usr/local/share
+        rm -rf /rootfs/usr/local/lib/containers/rpc-statd/share
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/rpc-statd/etc
+
+        cp /pkg/files/* /rootfs/usr/local/lib/containers/rpc-statd/etc/
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+
+        cp /pkg/rpc-statd.yaml /rootfs/usr/local/etc/containers/rpc-statd.yaml
     sbom:
-      outputPath: /rootfs/usr/local/share/spdx/nfs-utils-statd.spdx.json
+      outputPath: /rootfs/usr/local/share/spdx/nfs-utils.spdx.json
       version: {{ .NFS_UTILS_VERSION }}
       cpes:
         - cpe:2.3:a:nfs:nfs-utils:{{ .NFS_UTILS_VERSION }}:*:*:*:*:*:*:*

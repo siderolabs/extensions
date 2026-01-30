@@ -1,0 +1,12 @@
+name: test-extension
+variant: scratch
+shell: /bin/bash
+{{ if ne .BUILD_ARG_TEST_STAGE "" }}
+dependencies:
+    - stage: "{{ .BUILD_ARG_TEST_STAGE }}"
+      from: "/rootfs/usr/local/lib/containers/{{ .BUILD_ARG_TEST_STAGE }}"
+      to: /
+{{ end }}
+finalize:
+  - from: /
+    to: /

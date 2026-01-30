@@ -1,5 +1,5 @@
 
-name: libtirpc-zfs
+name: libtirpc
 variant: scratch
 shell: /bin/bash
 dependencies:

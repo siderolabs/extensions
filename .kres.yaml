@@ -91,6 +91,7 @@ spec:
     - PKGS_PREFIX
     - TOOLS
     - TOOLS_PREFIX
+    - TEST_STAGE
   makefile:
     extraVariables:
       - name: EXTENSIONS_IMAGE_REF
@@ -131,6 +132,8 @@ spec:
     - name: sign-images
       toplevel: true
     - name: grype-scan
+      toplevel: true
+    - name: test-%
       toplevel: true
 ---
 kind: custom.Step
@@ -276,6 +279,18 @@ spec:
                 - _out/grype-scan/**
               retentionDays: "180"
               always: true
+---
+kind: custom.Step
+name: test-%
+spec:
+  makefile:
+    enabled: true
+    script:
+      - |
+        @$(MAKE) docker-test-extension TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:v0 --push=$(PUSH)" TEST_STAGE=$*
+        @docker pull $(REGISTRY)/$(USERNAME)/$@:v0
+        @orb debug $(REGISTRY)/$(USERNAME)/$@:v0
+        @docker image rm -f $(REGISTRY)/$(USERNAME)/$@:v0
 ---
 kind: common.Renovate
 spec:

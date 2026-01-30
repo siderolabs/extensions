@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-02-11T13:10:35Z by kres f3ab59e.
+# Generated on 2026-02-18T16:03:30Z by kres 6458cfd.
 
 # common variables
 
@@ -44,6 +44,7 @@ BUILD_ARGS += --build-arg=PKGS="$(PKGS)"
 BUILD_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 BUILD_ARGS += --build-arg=TOOLS="$(TOOLS)"
 BUILD_ARGS += --build-arg=TOOLS_PREFIX="$(TOOLS_PREFIX)"
+BUILD_ARGS += --build-arg=TEST_STAGE="$(TEST_STAGE)"
 COMMON_ARGS = --file=Pkgfile
 COMMON_ARGS += --provenance=false
 COMMON_ARGS += --progress=$(PROGRESS)
@@ -288,6 +289,12 @@ sign-images: $(ARTIFACTS)/image-signer
 .PHONY: grype-scan
 grype-scan:
 	@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan PLATFORM=linux/amd64
+
+test-%:
+	@$(MAKE) docker-test-extension TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:v0 --push=$(PUSH)" TEST_STAGE=$*
+	@docker pull $(REGISTRY)/$(USERNAME)/$@:v0
+	@orb debug $(REGISTRY)/$(USERNAME)/$@:v0
+	@docker image rm -f $(REGISTRY)/$(USERNAME)/$@:v0
 
 .PHONY: rekres
 rekres:

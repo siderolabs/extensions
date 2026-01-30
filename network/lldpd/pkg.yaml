@@ -6,6 +6,15 @@ variant: scratch
 shell: /bin/bash
 dependencies:
     - stage: base
+    - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+      from: /
+      to: /rootfs/usr/local/lib/containers/lldpd
+    - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
+      from: /usr/lib
+      to: /rootfs/usr/local/lib/containers/lldpd/usr/lib
+    - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libcap:{{ .BUILD_ARG_PKGS }}"
+      from: /usr/lib
+      to: /rootfs/usr/local/lib/containers/lldpd/usr/lib
 steps:
   - sources:
       - url: https://github.com/lldpd/lldpd/releases/download/{{ .LLDPD_VERSION }}/lldpd-{{ .LLDPD_VERSION }}.tar.gz

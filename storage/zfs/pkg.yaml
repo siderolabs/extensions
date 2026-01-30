@@ -6,7 +6,7 @@ dependencies:
 # The pkgs version for a particular release of Talos as defined in
 # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/zfs-pkg:{{ .BUILD_ARG_PKGS }}"
-  - stage: libtirpc-zfs
+  - stage: libtirpc
   - stage: zlib-zfs
   - stage: zfs-tools
   - stage: zfs-service

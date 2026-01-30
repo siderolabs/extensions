@@ -3,6 +3,21 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+    from: /
+    to: /rootfs/usr/local/lib/containers/tailscale
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/tailscale/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libmnl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/tailscale/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libnftnl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/tailscale/usr/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/iptables:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/tailscale/usr/lib
 steps:
   - env:
       GOPATH: /tmp/go
