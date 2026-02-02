@@ -37,6 +37,7 @@ cloudflared: 2026.1.1
 nebula: 1.10.2
 tailscale: 1.92.5
 vmtoolsd-guest-agent: 1.5.0
+metal-agent: 0.1.4
 """
 
 [make_deps]
