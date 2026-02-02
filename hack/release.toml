@@ -21,21 +21,24 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
         description = """\
 crun: 1.26
 ecr-credential-provider: 1.35.0
-netbird: 0.64.0
-newt: 1.8.1
+netbird: 0.64.4
+newt: 1.9.0
 fuse3: 3.18.1
 qemu-guest-agent: 10.2.0
 Linux Firmware: 20260110
 NVIDIA LTS: 580.126.09
 NVIDIA Production: 570.211.01
+libnvidia-container: v1.18.2
+nvidia-container-toolkit: v1.18.2
 DRBD: 9.3.0
-gvisor: 202601112.0
+gvisor: 20260126.0
 Kata containers: 3.25.0
 stargz-snapshotter: 0.18.2
-cloudflared: 2026.1.1
+cloudflared: 2026.1.2
 nebula: 1.10.2
-tailscale: 1.92.5
+tailscale: 1.94.
 vmtoolsd-guest-agent: 1.5.0
+wolfi-base: 17ab0709456ce1a2aedd85e95f72e58d73133bb70c33ae945a4d4b2424e984f1
 """
 
 [make_deps]
