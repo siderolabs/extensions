@@ -11,6 +11,7 @@ steps:
         sha512: {{ .STARGZ_SNAPSHOTTER_SHA512 }}
     env:
       GOPATH: /tmp/go
+      CGO_ENABLED: "0"
     cachePaths:
       - /.cache/go-build
       - /tmp/go/pkg
@@ -33,8 +34,7 @@ steps:
         make ctr-remote
     install:
       - |
-        mkdir -p /rootfs/usr/local/bin
-        mkdir -p /rootfs/usr/local/lib/containers/stargz-snapshotter
+        mkdir -p /rootfs/usr/local/lib/containers/stargz-snapshotter/etc
 
         cd ${GOPATH}/src/github.com/containerd/stargz-snapshotter
 
@@ -47,8 +47,7 @@ steps:
         mkdir -p /rootfs/etc/cri/conf.d
         cp /pkg/10-stargz-snapshotter.part /rootfs/etc/cri/conf.d/10-stargz-snapshotter.part
 
-        mkdir -p /rootfs/usr/local/etc/containerd-stargz-grpc
-        cp /pkg/config.toml /rootfs/usr/local/etc/containerd-stargz-grpc/config.toml
+        cp /pkg/config.toml /rootfs/usr/local/lib/containers/stargz-snapshotter/etc/config.toml
 
         mkdir -p /rootfs/usr/local/etc/containers
         cp /pkg/stargz-snapshotter.yaml /rootfs/usr/local/etc/containers/

@@ -8,23 +8,10 @@ depends:
   - path: /system/run/machined/machine.sock
   - configuration: true
 container:
-  entrypoint: ./upsmon
+  entrypoint: /sbin/upsmon
   args:
     - -F
   mounts:
-    # Shared libraries.
-    - source: /lib
-      destination: /lib
-      type: bind
-      options:
-        - bind
-        - ro
-    - source: /usr/lib
-      destination: /usr/lib
-      type: bind
-      options:
-        - bind
-        - ro
     # `/sbin/init` talks to `machined`.
     - source: /system/run/machined/machine.sock
       destination: /system/run/machined/machine.sock

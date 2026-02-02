@@ -25,7 +25,7 @@ dependencies:
     from: /rootfs
   - stage: zlib
     from: /rootfs
-  - stage: libtirpc
+  - stage: libtirpc-glibc
     from: /rootfs
 steps:
   - sources:

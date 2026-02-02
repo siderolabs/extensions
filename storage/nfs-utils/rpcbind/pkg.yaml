@@ -3,7 +3,16 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: libtirpc-zfs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+    from: /
+    to: /rootfs/usr/local/lib/containers/rpcbind
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/rpcbind/usr/lib
+  - stage: libtirpc
+    from: /rootfs/usr/local/lib
+    to: /rootfs/usr/local/lib/containers/rpcbind/usr/lib
+  - stage: libtirpc
     from: /rootfs
 steps:
   - sources:
@@ -23,21 +32,28 @@ steps:
         export LDFLAGS="${LDFLAGS} -L/usr/local/lib"
 
         ./configure \
-          --prefix=/usr/local \
-          --bindir=/usr/local/sbin \
-          --sbindir=/usr/local/sbin \
+          --prefix=/usr/local/lib/containers/rpcbind \
+          --bindir=/usr/local/lib/containers/rpcbind/sbin \
+          --sbindir=/usr/local/lib/containers/rpcbind/sbin \
           --with-rpcuser=nobody \
           --without-systemdsystemunitdir \
           --enable-warmstarts
 
-        make
+        make -j $(nproc)
     install:
       - |
-        mkdir -p /rootfs/usr/local/sbin
         make DESTDIR=/rootfs install
 
         # cleanup
-        rm -rf /rootfs/usr/local/share
+        rm -rf /rootfs/usr/local/lib/containers/rpcbind/share
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/rpcbind/etc
+
+        cp /pkg/files/* /rootfs/usr/local/lib/containers/rpcbind/etc/
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+
+        cp /pkg/rpcbind.yaml /rootfs/usr/local/etc/containers/rpcbind.yaml
     sbom:
       outputPath: /rootfs/usr/local/share/spdx/rpcbind.spdx.json
       version: {{ .RPCBIND_VERSION }}
