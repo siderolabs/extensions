@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-02-02T14:58:54Z by kres dc032d7.
+# Generated on 2026-02-03T08:10:13Z by kres dc032d7.
 
 # common variables
 
@@ -57,7 +57,7 @@ PKGS ?= v1.13.0-alpha.0-44-gdc737a6
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.13.0-alpha.0-12-gca26e1c
 TOOLS_PREFIX ?= ghcr.io/siderolabs
-IMAGE_SIGNER_RELEASE ?= v0.1.1
+IMAGE_SIGNER_RELEASE ?= v0.2.0
 
 # targets defines all the available targets
 
