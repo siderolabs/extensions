@@ -1,3 +1,88 @@
+## [Talos System Extensions 1.12.3](https://github.com/siderolabs/extensions/releases/tag/v1.12.3) (2026-02-06)
+
+Welcome to the v1.12.3 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+crun: 1.26
+ctr: 2.2.1
+glibc: 2.43
+ecr-credential-provider: 1.35.0
+netbird: 0.64.4
+newt: 1.9.0
+fuse3: 3.18.1
+qemu-guest-agent: 10.2.0
+Linux Firmware: 20260110
+NVIDIA LTS: 580.126.09
+NVIDIA Production: 570.211.01
+libnvidia-container: v1.18.2
+nvidia-container-toolkit: v1.18.2
+DRBD: 9.3.0
+gvisor: 20260126.0
+Kata containers: 3.25.0
+stargz-snapshotter: 0.18.2
+cloudflared: 2026.1.2
+nebula: 1.10.2
+tailscale: 1.94.1
+vmtoolsd-guest-agent: 1.5.0
+wolfi-base: 417d791afa234c538bca977fe0f44011d2381e60a9fde44c938bd17b9cc38f66
+metal-agent: 0.1.4
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Andrey Smirnov
+* Gregor Gruener
+* Jonathan Senecal
+* Michal Baumgartner
+* Utku Ozdemir
+
+### Changes
+<details><summary>7 commits</summary>
+<p>
+
+* [`18d554a`](https://github.com/siderolabs/extensions/commit/18d554aa7d34ad0dd93c8d8b21ed173e2b940513) feat: update glibc to 2.43
+* [`4e1b99c`](https://github.com/siderolabs/extensions/commit/4e1b99c661025986955292277c54e7bfa0d0e899) feat: support SOCI snapshotter's lazy loading mode
+* [`938de97`](https://github.com/siderolabs/extensions/commit/938de9768fa3d3241bb081ad53affdd0b9938208) chore: update deps
+* [`b4ee0b2`](https://github.com/siderolabs/extensions/commit/b4ee0b207832c37e6cd32602f10f7e7c7b642e76) chore: bump metal-agent version to v0.1.4
+* [`8623340`](https://github.com/siderolabs/extensions/commit/862334040429457ba85d19b2b6e7cc56dc271966) chore: update backportable dependencies
+* [`735664b`](https://github.com/siderolabs/extensions/commit/735664b2fb2620ae65fbb3a65743834c0e9de58a) fix(multipath-tools): add /run/udev mount for device enumeration
+* [`a814927`](https://github.com/siderolabs/extensions/commit/a814927158ed288d2f72d0b95709e7066feb80e8) feat: update dependencies
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>3 commits</summary>
+<p>
+
+* [`15d5d78`](https://github.com/siderolabs/pkgs/commit/15d5d78c8979da873aedc3e6577617429b9e3cba) chore: update deps
+* [`4469bd7`](https://github.com/siderolabs/pkgs/commit/4469bd7cf5de0475568113987188eee63a085891) chore: update kernel
+* [`51108e5`](https://github.com/siderolabs/pkgs/commit/51108e5356109db4cd348878335abe7931e6ed81) feat: enable dm-integrity
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>2 commits</summary>
+<p>
+
+* [`dc37e09`](https://github.com/siderolabs/tools/commit/dc37e094634d67dd164d9cb4c0abb96bb9cea123) chore: update deps
+* [`36fb49a`](https://github.com/siderolabs/tools/commit/36fb49a3b4077d0d798307fa2e31688b8d0f6db9) feat: update OpenSSL to 3.6.1
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-32-g4f8efaf -> v1.12.0-35-g15d5d78
+* **github.com/siderolabs/tools**  v1.12.0-4-g31959f4 -> v1.12.0-6-gdc37e09
+
+Previous release can be found at [v1.12.2](https://github.com/siderolabs/extensions/releases/tag/v1.12.2)
+
 ## [Talos System Extensions 1.12.2](https://github.com/siderolabs/extensions/releases/tag/v1.12.2) (2026-01-21)
 
 Welcome to the v1.12.2 release of Talos System Extensions!
