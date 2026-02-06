@@ -20,6 +20,8 @@ See [Talos Linux documentation](https://www.talos.dev/v1.11/talos-guides/configu
         title = "Component Updates"
         description = """\
 crun: 1.26
+ctr: 2.2.1
+glibc: 2.43
 ecr-credential-provider: 1.35.0
 netbird: 0.64.4
 newt: 1.9.0
@@ -36,9 +38,9 @@ Kata containers: 3.25.0
 stargz-snapshotter: 0.18.2
 cloudflared: 2026.1.2
 nebula: 1.10.2
-tailscale: 1.94.
+tailscale: 1.94.1
 vmtoolsd-guest-agent: 1.5.0
-wolfi-base: 17ab0709456ce1a2aedd85e95f72e58d73133bb70c33ae945a4d4b2424e984f1
+wolfi-base: 417d791afa234c538bca977fe0f44011d2381e60a9fde44c938bd17b9cc38f66
 metal-agent: 0.1.4
 """
 
