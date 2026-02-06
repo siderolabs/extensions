@@ -17,7 +17,7 @@ steps:
       LD_LINUX_X86_64: ld-linux-x86-64.so.2
       LD_LINUX_AARCH64: ld-linux-aarch64.so.1
     sources:
-      - url: https://archive.ubuntu.com/ubuntu/pool/main/g/glibc/glibc_{{ .GLIBC_VERSION }}.orig.tar.xz
+      - url: https://ftpmirror.gnu.org/gnu/glibc/glibc-{{ .GLIBC_VERSION }}.tar.xz
         destination: glibc.tar.xz
         sha256: {{ .GLIBC_SHA256 }}
         sha512: {{ .GLIBC_SHA512 }}
