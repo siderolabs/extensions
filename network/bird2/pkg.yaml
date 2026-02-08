@@ -8,7 +8,7 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      - url: "https://bird.network.cz/download/bird-{{ .BIRD2_VERSION }}.tar.gz"
+      - url: "https://gitlab.nic.cz/labs/bird/-/archive/v{{ .BIRD2_VERSION }}/bird-v{{ .BIRD2_VERSION }}.tar.gz"
         destination: bird2.tar.gz
         sha256: "{{ .BIRD2_SHA256 }}"
         sha512: "{{ .BIRD2_SHA512 }}"
@@ -19,6 +19,8 @@ steps:
         tar -xf bird2.tar.gz --strip-components=1
 
       - |
+        autoreconf -fi
+
         export CFLAGS="${CFLAGS} -I/usr/local/include -static"
         export LDFLAGS="${LDFLAGS} -static"
 
