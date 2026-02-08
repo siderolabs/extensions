@@ -19,6 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
+bird2: 2.18
 crun: 1.26
 ctr: 2.2.1
 glibc: 2.43
