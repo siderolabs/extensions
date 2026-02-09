@@ -1,0 +1,128 @@
+name: frr
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libjson-c:{{ .BUILD_ARG_PKGS }}"
+  - stage: libyang
+
+steps:
+  - sources:
+      - url: "https://github.com/FRRouting/frr/archive/refs/tags/frr-{{ .FRR_VERSION }}.tar.gz"
+        destination: frr.tar.gz
+        sha256: "{{ .FRR_SHA256 }}"
+        sha512: "{{ .FRR_SHA512 }}"
+    env:
+      SOURCE_DATE_EPOCH: "{{ .BUILD_ARG_SOURCE_DATE_EPOCH }}"
+    prepare:
+      - |
+        tar -xf frr.tar.gz --strip-components=1
+
+        # musl doesn't ship sys/queue.h; use FRR's bundled copy
+        mkdir -p /usr/include/sys
+        cp lib/freebsd-queue.h /usr/include/sys/queue.h
+      - |
+        ./bootstrap.sh
+      - |
+        ldconfig 2>/dev/null || true
+
+        # -DVTYSH: workaround for FRRouting/frr#15752 (build fails without it even with --disable-vtysh)
+        export CFLAGS="${CFLAGS} -I/usr/local/include -DVTYSH"
+        export LDFLAGS="${LDFLAGS} -L/usr/lib -L/usr/lib64 -Wl,-rpath,/usr/local/lib"
+        export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib64/pkgconfig
+
+        # Only build: mgmtd, zebra, staticd, bgpd, bfdd. Review on FRR version bumps.
+        ./configure \
+          --prefix=/usr/local \
+          --sysconfdir=/usr/local/etc \
+          --localstatedir=/var \
+          --enable-user=root \
+          --enable-group=root \
+          --enable-multipath=64 \
+          --disable-vtysh \
+          --disable-doc \
+          --disable-protobuf \
+          --disable-grpc \
+          --disable-snmp \
+          --enable-shared \
+          --disable-static \
+          --disable-ospfd \
+          --disable-ospf6d \
+          --disable-ripd \
+          --disable-ripngd \
+          --disable-isisd \
+          --disable-pimd \
+          --disable-pim6d \
+          --disable-ldpd \
+          --disable-nhrpd \
+          --disable-babeld \
+          --disable-eigrpd \
+          --disable-pbrd \
+          --disable-fabricd \
+          --disable-pathd \
+          --disable-vrrpd \
+          --disable-watchfrr
+    build:
+      - |
+        export LD_LIBRARY_PATH=/usr/lib:/usr/lib64
+
+        make -j $(nproc)
+    install:
+      - |
+        container_root=/rootfs/usr/local/lib/containers/frr
+
+        make DESTDIR="${container_root}" install
+
+        # Bundle shared libraries not available on Talos host.
+        # Libraries may reside in /usr/lib, /usr/lib64, or /usr/local/lib depending on the build.
+        for lib in libyang libjson-c libpcre2-8 libatomic; do
+          cp -L /usr/{lib,lib64,local/lib}/${lib}.so* "${container_root}/usr/local/lib/" 2>/dev/null || true
+          ls "${container_root}/usr/local/lib/${lib}.so" >/dev/null || { echo "FATAL: ${lib}.so not bundled" >&2; exit 1; }
+        done
+
+        # Pre-create empty config files as bind-mount targets for ExtensionServiceConfig.
+        # FRR shared root is bind-mounted read-only into each daemon container at /usr/local,
+        # so these files must exist before runc tries to create mount points.
+        mkdir -p "${container_root}/usr/local/etc/frr"
+        for daemon in mgmtd zebra staticd bgpd bfdd; do
+          touch "${container_root}/usr/local/etc/frr/${daemon}.conf"
+        done
+
+        # Minimal /etc/passwd and /etc/group — FRR calls getpwnam("root") at startup
+        mkdir -p "${container_root}/etc"
+        echo "root:x:0:0:root:/root:/bin/sh" > "${container_root}/etc/passwd"
+        echo "root:x:0:" > "${container_root}/etc/group"
+
+        # Each daemon runs as a separate Talos extension service.
+        # Create minimal per-daemon container roots; FRR binaries are bind-mounted from the shared "frr" root.
+        for f in /pkg/frr-*.yaml; do
+          svc="$(basename "${f}" .yaml)"
+          svc_root="/rootfs/usr/local/lib/containers/${svc}"
+          mkdir -p "${svc_root}/etc" "${svc_root}/usr/local/etc/frr"
+          echo "root:x:0:0:root:/root:/bin/sh" > "${svc_root}/etc/passwd"
+          echo "root:x:0:" > "${svc_root}/etc/group"
+        done
+
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        for f in /pkg/frr-*.yaml; do
+          cp "${f}" "/rootfs/usr/local/etc/containers/$(basename "${f}")"
+        done
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/frr.spdx.json
+      version: "{{ .VERSION }}"
+      cpes:
+        - "cpe:2.3:a:frrouting:frr:{{ .VERSION }}:*:*:*:*:*:*:*"
+      licenses:
+        - GPL-2.0-or-later
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

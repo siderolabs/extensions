@@ -19,6 +19,7 @@ spec:
     - dvb-m88ds3103
     - ecr-credential-provider
     - fuse3
+    - frr
     - gasket-driver
     - gpio-pinctrl
     - glibc

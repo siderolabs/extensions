@@ -1,0 +1,30 @@
+name: libyang
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: "https://github.com/CESNET/libyang/archive/refs/tags/v{{ .FRR_LIBYANG_VERSION }}.tar.gz"
+        destination: libyang.tar.gz
+        sha256: {{ .FRR_LIBYANG_SHA256 }}
+        sha512: {{ .FRR_LIBYANG_SHA512 }}
+    prepare:
+      - |
+        tar -xf libyang.tar.gz --strip-components=1
+        rm libyang.tar.gz
+    build:
+      - |
+        mkdir build && cd build
+
+        cmake .. \
+          -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+          -DBUILD_SHARED_LIBS=ON \
+          -DENABLE_TESTS=OFF \
+          -DENABLE_VALGRIND_TESTS=OFF
+        make -j $(nproc)
+        make DESTDIR=/rootfs install
+finalize:
+  - from: /rootfs
+    to: /

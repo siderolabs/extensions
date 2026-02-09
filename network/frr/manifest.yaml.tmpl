@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: frr
+  version: "{{ .VERSION }}"
+  author: Max Makarov
+  description: |
+    [{{ .TIER }}] FRR (Free Range Routing) suite for Talos. Provides BGP, OSPF, IS-IS, static routing, and more.
+    More info: https://frrouting.org/
+  compatibility:
+    talos:
+      version: ">= v1.11.0"

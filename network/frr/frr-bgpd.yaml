@@ -1,0 +1,51 @@
+name: frr-bgpd
+depends:
+  - service: ext-frr-zebra
+container:
+  entrypoint: /usr/local/sbin/bgpd
+  args:
+    - --log
+    - stdout
+    - -A
+    - "127.0.0.1"
+  security:
+    writeableRootfs: false
+    writeableSysfs: false
+  mounts:
+    - source: /usr/local/lib/containers/frr/usr/local
+      destination: /usr/local
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /var/lib/frr
+      destination: /var/lib/frr
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /var/run/frr
+      destination: /var/run/frr
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /var/tmp/frr
+      destination: /var/tmp/frr
+      type: bind
+      options:
+        - bind
+        - rw
+restart: always

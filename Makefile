@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-02-06T06:59:43Z by kres dc032d7.
+# Generated on 2026-02-10T09:11:19Z by kres f3ab59e.
 
 # common variables
 
@@ -78,6 +78,7 @@ TARGETS += dvb-cx23885
 TARGETS += dvb-m88ds3103
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
+TARGETS += frr
 TARGETS += gasket-driver
 TARGETS += gpio-pinctrl
 TARGETS += glibc
