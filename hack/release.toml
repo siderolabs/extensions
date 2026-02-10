@@ -29,7 +29,7 @@ newt: 1.9.0
 fuse3: 3.18.1
 qemu-guest-agent: 10.2.0
 Linux Firmware: 20260110
-NVIDIA LTS: 580.126.09
+NVIDIA LTS: 580.126.16
 NVIDIA Production: 570.211.01
 libnvidia-container: v1.18.2
 nvidia-container-toolkit: v1.18.2
