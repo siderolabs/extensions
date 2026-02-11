@@ -26,6 +26,7 @@ gvisor: 20260202.0
 cloudflared: 2026.2.0
 nebula: 1.10.3
 Kata containers: 3.26.0
+Intel ucode: 20260210
 wolfi-base: 1c56f3ceb1c9929611a1cc7ab7a5fde1ec5df87add282029cd1596b8eae5af67
 """
 
