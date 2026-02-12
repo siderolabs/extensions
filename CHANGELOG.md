@@ -1,3 +1,60 @@
+## [Talos System Extensions 1.12.4](https://github.com/siderolabs/extensions/releases/tag/v1.12.4) (2026-02-12)
+
+Welcome to the v1.12.4 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+bird2: 2.18
+NVIDIA LTS: 580.126.16
+netbird: 0.64.5
+gvisor: 20260202.0
+cloudflared: 2026.2.0
+nebula: 1.10.3
+Kata containers: 3.26.0
+Intel ucode: 20260210
+wolfi-base: 1c56f3ceb1c9929611a1cc7ab7a5fde1ec5df87add282029cd1596b8eae5af67
+
+
+### Contributors
+
+* Andrey Smirnov
+* Fritz Schaal
+* Max Makarov
+
+### Changes
+<details><summary>5 commits</summary>
+<p>
+
+* [`40c3688`](https://github.com/siderolabs/extensions/commit/40c3688aa32cb1cb3b6c5eae4548f2ace9c92fa1) feat: update Intel ucode to 20260210
+* [`75c308f`](https://github.com/siderolabs/extensions/commit/75c308f6c50c891734ef3b4c2020b0c4f3d59daf) feat: update backportable dependencies
+* [`5e62f87`](https://github.com/siderolabs/extensions/commit/5e62f872aa365a63f122b1771c090964390b43ff) feat: update NVIDIA LTS to 580.126.16
+* [`5da4ab1`](https://github.com/siderolabs/extensions/commit/5da4ab11f5f6e3e4db13e116a0b2f6a20dea33f8) feat: update bird2 to 2.18
+* [`0cc5091`](https://github.com/siderolabs/extensions/commit/0cc50919a83fe5864631b075209c090dc59ba4ce) feat: update pkgs to for Talos v1.12.4
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>4 commits</summary>
+<p>
+
+* [`b1fc4c6`](https://github.com/siderolabs/pkgs/commit/b1fc4c63dec888ea44aa0d5e0ede878d385e599e) feat: update NVIDIA LTS to 580.126.16
+* [`f7a8163`](https://github.com/siderolabs/pkgs/commit/f7a81634d8214520a3f895bb0b0954d1af56e6f8) feat: update Linux to 6.18.9
+* [`32290ff`](https://github.com/siderolabs/pkgs/commit/32290ff9007bf9e0f959ddb0f5bbe00adf3266d2) feat: enable ip6_gre
+* [`da46073`](https://github.com/siderolabs/pkgs/commit/da460730c1980c178416cd7b20e6d1954ea2a673) feat: enable NFT_BRIDGE config
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.12.0-35-g15d5d78 -> v1.12.0-39-gb1fc4c6
+
+Previous release can be found at [v1.12.3](https://github.com/siderolabs/extensions/releases/tag/v1.12.3)
+
 ## [Talos System Extensions 1.12.3](https://github.com/siderolabs/extensions/releases/tag/v1.12.3) (2026-02-06)
 
 Welcome to the v1.12.3 release of Talos System Extensions!
