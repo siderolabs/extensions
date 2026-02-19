@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-02-19T12:38:18Z by kres 6458cfd.
+# Generated on 2026-02-19T10:56:32Z by kres 6458cfd.
 
 # common variables
 
@@ -88,6 +88,7 @@ TARGETS += hailort
 TARGETS += hello-world-service
 TARGETS += i915
 TARGETS += intel-ice-firmware
+TARGETS += intel-npu
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
 TARGETS += kata-containers

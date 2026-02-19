@@ -28,6 +28,7 @@ spec:
     - hello-world-service
     - i915
     - intel-ice-firmware
+    - intel-npu
     - intel-ucode
     - iscsi-tools
     - kata-containers
