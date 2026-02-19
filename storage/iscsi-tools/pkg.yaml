@@ -58,9 +58,13 @@ steps:
 
         # cleanup
         # we generate initiatorname.iscsi on talos side.
-        rm -rf /rootfs/usr/local/lib/containers/iscsi-tools/etc
-        rm -rf /rootfs/usr/local/lib/containers/iscsi-tools/{etc,share,include,pkgconfig}
-        rm -rf /rootfs/usr/local/lib/containers/iscsi-tools/var
+        rm -rf /rootfs/{etc,var}
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
     sbom:
       outputPath: /rootfs/usr/local/share/spdx/open-iscsi.spdx.json
       version: {{ .OPEN_ISCSI_VERSION }}
@@ -71,3 +75,5 @@ steps:
 finalize:
   - from: /rootfs
     to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
