@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-02-18T16:03:30Z by kres 6458cfd.
+# Generated on 2026-02-19T12:38:18Z by kres 6458cfd.
 
 # common variables
 
@@ -54,9 +54,9 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-alpha.0-50-g9013985
+PKGS ?= v1.13.0-alpha.0-53-gc0c8bc5
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.13.0-alpha.0-13-gdecb988
+TOOLS ?= v1.13.0-alpha.0-16-g9de9770
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 IMAGE_SIGNER_RELEASE ?= v0.2.0
 
@@ -98,7 +98,6 @@ TARGETS += mellanox-mstflint
 TARGETS += metal-agent
 TARGETS += multipath-tools
 TARGETS += nebula
-TARGETS += netbird
 TARGETS += newt
 TARGETS += nfs-utils
 TARGETS += nfsd

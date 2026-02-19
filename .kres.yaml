@@ -38,7 +38,8 @@ spec:
     - metal-agent
     - multipath-tools
     - nebula
-    - netbird
+    # disabled until https://github.com/netbirdio/netbird/issues/5290 is addressed
+    # - netbird
     - newt
     - nfs-utils
     - nfsd
@@ -97,11 +98,11 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.13.0-alpha.0-50-g9013985
+        defaultValue: v1.13.0-alpha.0-53-gc0c8bc5
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
-        defaultValue: v1.13.0-alpha.0-13-gdecb988
+        defaultValue: v1.13.0-alpha.0-16-g9de9770
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
   useBldrPkgTagResolver: true
