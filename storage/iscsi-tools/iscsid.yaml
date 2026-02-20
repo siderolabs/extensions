@@ -16,6 +16,12 @@ container:
     readonlyPaths: []
     writeableSysfs: true
   mounts:
+    - source: /etc/iscsi/initiatorname.iscsi
+      destination: /etc/iscsi/initiatorname.iscsi
+      type: bind
+      options:
+        - bind
+        - ro
     - source: /var/lib/iscsi
       destination: /var/lib/iscsi
       type: bind
