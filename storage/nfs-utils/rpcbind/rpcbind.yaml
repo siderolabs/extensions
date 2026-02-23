@@ -7,7 +7,7 @@ depends:
       - hostname
       - etcfiles
 container:
-  entrypoint: /usr/local/sbin/rpcbind
+  entrypoint: /sbin/rpcbind
   args:
     - -f
     - -w

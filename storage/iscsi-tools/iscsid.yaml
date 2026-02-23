@@ -8,7 +8,7 @@ depends:
        - etcfiles
   - path: /etc/iscsi/initiatorname.iscsi
 container:
-  entrypoint: /sbin/iscsid
+  entrypoint: /usr/local/sbin/iscsid
   args:
     - -f
   security:

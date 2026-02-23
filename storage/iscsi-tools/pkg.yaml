@@ -46,7 +46,7 @@ steps:
           -Disns=disabled \
           -Dhomedir=/etc/iscsi \
           -Dprefix=/usr/local/lib/containers/iscsid \
-          -Discsi_sbindir=/usr/local/lib/containers/iscsid/sbin \
+          -Discsi_sbindir=/usr/local/lib/containers/iscsid/usr/local/sbin \
           -Drulesdir=/usr/lib/udev/rules.d \
           output
 
