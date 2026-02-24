@@ -19,15 +19,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
-bird2: 2.18
-NVIDIA LTS: 580.126.16
-netbird: 0.64.5
-gvisor: 20260202.0
-cloudflared: 2026.2.0
-nebula: 1.10.3
-Kata containers: 3.26.0
-Intel ucode: 20260210
-wolfi-base: 1c56f3ceb1c9929611a1cc7ab7a5fde1ec5df87add282029cd1596b8eae5af67
+Linux Firmware: 20260221
 """
 
 [make_deps]
