@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: containerd-image-verifier-sigstore
+  version: "$VERSION"
+  author: Caleb Woodbine
+  description: |
+    Verify images signed with Sigstore against ClusterImagePolicy declarations
+  compatibility:
+    talos:
+      version: ">= v1.9.0"
