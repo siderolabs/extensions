@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20260202.0
+GVISOR_VERSION: 20260223.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
 GVISOR_REV: 0bd9aedd142c213b4c718156e1e1c6e68c91a17c
@@ -25,7 +25,7 @@ WASMEDGE_ARM64_SHA512: e3ba594c82231da3583d5c7e64d342d147883a8248905e39d3f75ce7e
 WASMEDGE_AMD64_SHA256: a41256af75bb587dfa6ab7d5d8ebe92e18ea281406c563266dd96f99fb60b073
 WASMEDGE_AMD64_SHA512: bd3624d3568e7d3ca44a3257bbdf60965af5b525150c38c4cf6183adba26da026b11cb7634db6ddd8e4f6375a94af2420cf11db332ea7f3bd9b42cdddb16938f
 # renovate: datasource=git-tags depName=https://github.com/spinkube/containerd-shim-spin.git
-SPIN_VERSION: v0.22.0
+SPIN_VERSION: v0.23.0
 SPIN_ARM64_SHA256: 5fde86c310b8b8ef4c1b19a04eece203f4c308f6fb42bfae3babd99d4c04006b
 SPIN_ARM64_SHA512: cd3dae66c9415758812f142721a3405a45ede487352d46ffcfcfd515a886e29c7b7f3ec4b3a21a939a3168c01a4f52217533972963b668d11851d85f3689c643
 SPIN_AMD64_SHA256: adeb94339c673f09cffe8c45c04f9b18d410f9375d1570b6d1939758b507d257
@@ -45,7 +45,7 @@ CRUN_ARM64_SHA512: 8e2b8aadf1db66d6bdab8304226c3643f165c5824ab2b88d1831e941dd59b
 CRUN_AMD64_SHA256: 59daae0d6126c1f5ec592a54f0e19b201da3b3c3df2b164b18b2bd40e6d8bcce
 CRUN_AMD64_SHA512: 5d29f3d7cdc30ca195b7c2b615dc10705495a3c8c9b3079a63c4dd1f48e8bb529b50a415350e5a27f6ca405c94a01216de83188968f79c71d5b20cec69b2806f
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=youki-dev/youki
-YOUKI_VERSION: 0.5.7
+YOUKI_VERSION: 0.6.0
 YOUKI_ARM64_SHA256: b3002d9d39b04f797e783745f92cffec9e0caa464254be98aa0b4dfc184f0233
 YOUKI_ARM64_SHA512: 569883c18923c533e2b697b367757cde3f4a71b41a33b0b83b2b6c189f2ddb399cfeafbd4e7c7f219150987309fb529260f29b579abf14b52fb0e416217d9638
 YOUKI_AMD64_SHA256: a9003472a6e959f345db8e48371a335ab98fae53a5e71a4339b5fe54f0691f60
