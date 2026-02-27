@@ -9,14 +9,14 @@ This extension provides FRR for BGP routing on Talos hosts, with built-in MetalL
 1. **FRR (Free Range Routing)** for BGP routing on Talos hosts
 2. **MetalLB VRF integration** with a veth pair for Kubernetes LoadBalancer IP advertisement
 3. **Private IPv6 point-to-point connection** (`fd00::/8`) between FRR and MetalLB speaker
-4. **Dynamic configuration** via Jinja2 template (`frr.conf.j2`) rendered using `j2cli`
-5. **Interface discovery** from MAC addresses specified in `FE_MACS` environment variable
+4. **Dynamic configuration** via Jinja2 template (`frr.conf.j2`) rendered using `jinja2-cli`
+5. **Interface discovery** from MAC addresses specified in `FE_MACS` or ports from `FE_PORT_NAMES` environment variable
 
 ### Architecture
 
 - **FRR runs in host network namespace** and manages both:
   - Fabric-facing BGP peering (eBGP with leaf switches via physical interfaces)
-  - MetalLB-facing BGP peering (iBGP-style in VRF `metallb`)
+  - MetalLB-facing BGP peering (eBGP with node local MetalLB BGP speaker in VRF `metallb`)
 
 - **MetalLB speaker** runs with `hostNetwork: true`, connects to FRR via a veth pair:
   - `veth-metallb` interface: in **host namespace** - MetalLB speaker binds here
@@ -35,7 +35,7 @@ This extension provides FRR for BGP routing on Talos hosts, with built-in MetalL
 ### Startup Script Responsibilities
 
 1. **Validate mandatory environment variables** (`NODE_IP`, `ASN_LOCAL`, and either `FE_MACS` or `FE_PORT_NAMES`)
-2. **Resolve interface names** from MAC addresses in `FE_MACS` (CSV format)
+2. **Resolve interface names** from MAC addresses in `FE_MACS` or port in `FE_PORT_NAMES` (CSV format)
 3. **Auto-detect MTU** from first fabric interface (if `INTERFACE_MTU` not set)
 4. **Create VRF `metallb`** with configurable routing table ID (default: 88)
 5. **Create veth pair**:
