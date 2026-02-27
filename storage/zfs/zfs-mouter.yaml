@@ -1,0 +1,63 @@
+name: zfs-mounter
+depends:
+  - service: udevd
+  - service: cri
+  - service: ext-zpool-importer
+  - service: ext-zfs-key-loader
+  - path: /dev/zfs
+container:
+  security:
+    rootfsPropagation: shared
+  entrypoint: /usr/local/sbin/zfs
+  args:
+    - mount
+    - -a
+  mounts:
+    # ld-musl-x86_64.so.1
+    - source: /lib
+      destination: /lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # libcrypto.so and libc.so
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/sbin
+      destination: /usr/local/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /proc
+      destination: /proc
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /var
+      destination: /var
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: untilSuccess
