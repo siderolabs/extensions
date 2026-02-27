@@ -78,6 +78,7 @@ TARGETS += drbd
 TARGETS += dvb-cx23885
 TARGETS += dvb-m88ds3103
 TARGETS += ecr-credential-provider
+TARGETS += frr
 TARGETS += fuse3
 TARGETS += gasket-driver
 TARGETS += gpio-pinctrl
