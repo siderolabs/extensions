@@ -25,6 +25,7 @@ machine:
       - name: ax88179_178a
       - name: cdc_ether
       - name: cdc_ncm
+      - name: ipheth
       - name: net1080
       - name: cdc_subset
       - name: zaurus
