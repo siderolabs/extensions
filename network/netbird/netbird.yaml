@@ -17,7 +17,7 @@ container:
     - NB_LOG_FILE=console,/var/log/netbird/client.log
     - NB_DISABLE_PROFILES=true
     - USER=talos
-    - NB_CONFIG=/var/run/netbird/config.json
+    - NB_CONFIG=/var/lib/netbird/config.json
     - HOME=/var/run/netbird
     - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
   security:
