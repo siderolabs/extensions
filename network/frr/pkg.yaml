@@ -1,0 +1,58 @@
+# © 2026 Nokia
+# Licensed under the Mozilla Public License 2.0
+# SPDX-License-Identifier: MPL-2.0
+name: frr
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "quay.io/frrouting/frr:{{ .FRR_VERSION }}"
+steps:
+  - env:
+      SOURCE_DATE_EPOCH: "{{ .BUILD_ARG_SOURCE_DATE_EPOCH }}"
+    network: default
+    prepare:
+      - apk add --no-cache jinja2-cli
+    install:
+      - |
+        # Create container rootfs structure
+        mkdir -p /rootfs/usr/local/{etc/containers,lib/containers/frr}
+
+        # Copy FRR filesystem components (we're running inside FRR image context)
+        # Include /var and /etc to get all FRR required directories
+        cp -a /bin /rootfs/usr/local/lib/containers/frr/
+        cp -a /lib /rootfs/usr/local/lib/containers/frr/
+        cp -a /usr /rootfs/usr/local/lib/containers/frr/
+        cp -a /sbin /rootfs/usr/local/lib/containers/frr/ 2>/dev/null || true
+        cp -a /var /rootfs/usr/local/lib/containers/frr/
+        cp -a /etc /rootfs/usr/local/lib/containers/frr/
+
+        # Copy our files (overwrite FRR defaults)
+        cp /pkg/files/frr-startup.sh /rootfs/usr/local/lib/containers/frr/usr/local/bin/
+        chmod +x /rootfs/usr/local/lib/containers/frr/usr/local/bin/frr-startup.sh
+        cp /pkg/files/frr-wrapper.sh /rootfs/usr/local/lib/containers/frr/usr/local/bin/
+        chmod +x /rootfs/usr/local/lib/containers/frr/usr/local/bin/frr-wrapper.sh
+
+        cp /pkg/files/frr.conf.j2 /rootfs/usr/local/lib/containers/frr/etc/frr/
+        cp /pkg/files/daemons /rootfs/usr/local/lib/containers/frr/etc/frr/
+
+        # Copy service definition
+        cp /pkg/frr.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/frr.spdx.json
+      version: "{{ .VERSION }}"
+      cpes:
+        - "cpe:2.3:a:frrouting:frr:{{ .VERSION }}:*:*:*:*:*:*:*"
+      licenses:
+        - GPL-2.0-or-later
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

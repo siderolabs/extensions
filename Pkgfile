@@ -30,6 +30,8 @@ vars:
   LINUX_DVB_FIRMWARE: 0.0.51
   LINUX_DVB_FIRMWARE_SHA256: cef3ce537d213e020af794cecf9de207e2882c375ceda39102eb6fa2580bad8d
   LINUX_DVB_FIRMWARE_SHA512: 2372dba98083c76865f5f0f8101b1160888e03cdbe911dd08621e7b6f38e8a25ae5d56eefc21728bf65fd09ea613b53606df4021d3972b0bc9d2bd8b6cbe20a1
+  # renovate: datasource=docker depName=quay.io/frrouting/frr
+  FRR_VERSION: "10.5.1"
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions

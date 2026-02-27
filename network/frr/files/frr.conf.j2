@@ -1,0 +1,84 @@
+{# FRR Configuration Template for Talos #}
+{# Variables: ports, NODE_IP, ASN_LOCAL, ASN_VRF_METALLB,         #}
+{#            ASN_METALLB_SPEAKER, VRF_METALLB, PEER_IP_FRR,      #}
+{#            PEER_IP_METALLB, ENABLE_BFD, FRR_PROFILE             #}
+frr defaults {{FRR_PROFILE}}
+log syslog
+!
+{%- for n in ports %}
+interface {{n}}
+ ipv6 nd ra-interval 10
+ no ipv6 nd suppress-ra
+!
+{%- endfor %}
+
+ipv6 prefix-list only-host-prefixes seq 10 permit ::/0 ge 128
+!
+ip prefix-list denyall seq 10 deny 0.0.0.0/0
+ip prefix-list out-filter seq 10 permit 0.0.0.0/0 ge 24
+ip prefix-list out-filter seq 11 deny 0.0.0.0/0
+!
+route-map out-map permit 10
+ match ip address prefix-list out-filter
+exit
+!
+route-map denymap permit 1
+ match ip address prefix-list denyall
+!
+route-map SETSRC permit 10
+ set src {{NODE_IP}}
+!
+route-map loopbacks permit 10
+ match interface lo
+!
+route-map loopbacks permit 20
+ match interface dummy0
+!
+route-map loopbacks permit 30
+ match interface dummy1
+!
+
+router bgp {{ASN_VRF_METALLB}} vrf {{VRF_METALLB}}
+ bgp router-id {{NODE_IP}}
+ no bgp ebgp-requires-policy
+ neighbor METALLB peer-group
+ neighbor METALLB remote-as {{ASN_METALLB_SPEAKER}}
+ neighbor METALLB passive
+ neighbor {{PEER_IP_METALLB}} peer-group METALLB
+ !
+ address-family ipv4 unicast
+  neighbor METALLB route-map denymap out
+ exit-address-family
+!
+
+router bgp {{ASN_LOCAL}}
+ bgp router-id {{NODE_IP}}
+ no bgp ebgp-requires-policy
+ bgp bestpath as-path multipath-relax
+ neighbor FABRIC peer-group
+ neighbor FABRIC remote-as external
+{%- if ENABLE_BFD == "true" %}
+ neighbor FABRIC bfd
+{%- endif %}
+ neighbor FABRIC timers 1 3
+{%- for n in ports %}
+ neighbor {{n}} interface v6only peer-group FABRIC
+{%- endfor %}
+ !
+ address-family ipv4 unicast
+  redistribute connected route-map loopbacks
+  neighbor FABRIC soft-reconfiguration inbound
+  neighbor FABRIC route-map out-map out
+  import vrf {{VRF_METALLB}}
+ exit-address-family
+ !
+ address-family ipv6 unicast
+  neighbor FABRIC activate
+  neighbor FABRIC prefix-list only-host-prefixes out
+ exit-address-family
+!
+ip protocol bgp route-map SETSRC
+!
+line vty
+!
+
