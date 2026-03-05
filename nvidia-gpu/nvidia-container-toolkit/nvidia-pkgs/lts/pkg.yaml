@@ -59,8 +59,15 @@ steps:
         ./nvidia-installer --silent \
           --opengl-prefix=/rootfs/usr/local \
           --utility-prefix=/rootfs/usr/local \
-          --utility-libdir=glibc/lib \
+          --utility-libdir=glibc/usr/lib \
           --documentation-prefix=/rootfs/usr/local \
+          --glvnd-egl-config-path=/rootfs/usr/share/glvnd/egl_vendor.d \
+          --egl-external-platform-config-path=/rootfs/usr/share/egl/egl_external_platform.d \
+          --x-prefix=/rootfs/usr/local \
+          --x-library-path=glibc/usr/lib \
+          --x-module-path=/rootfs/usr/local/glibc/usr/lib/xorg/modules \
+          --gbm-backend-dir=glibc/usr/lib/gbm \
+          --opengl-libdir=glibc/usr/lib \
           --no-rpms \
           --no-kernel-modules \
           --log-file-name=/tmp/nvidia-installer.log \
@@ -68,24 +75,16 @@ steps:
           --no-wine-files \
           --no-kernel-module-source \
           --no-check-for-alternate-installs \
+          --override-file-type-destination=OPENGL_DATA:/rootfs/usr/local/share/nvidia \
+          --override-file-type-destination=VULKAN_ICD_JSON:/rootfs/etc/vulkan/icd.d \
+          --override-file-type-destination=VULKANSC_ICD_JSON:/rootfs/etc/vulkansc/icd.d \
           --override-file-type-destination=NVIDIA_MODPROBE:/rootfs/usr/local/bin \
           --override-file-type-destination=FIRMWARE:/rootfs/usr/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_LTS_VERSION }} \
           --no-systemd \
           # {{ if eq .ARCH "x86_64" }}--no-install-compat32-libs{{ end }}
 
-        # copy vulkan/OpenGL json files
-        mkdir -p /rootfs/{etc/vulkan,usr/share/{glvnd,egl}}
-
-        cp -r /usr/share/glvnd/* /rootfs/usr/share/glvnd
-        cp -r /usr/share/egl/* /rootfs/usr/share/egl
-        cp -r /etc/vulkan/* /rootfs/etc/vulkan
-
-        # mv over files from /usr/local/lib -> /usr/local/glibc/lib
-        mv /rootfs/usr/local/lib/* /rootfs/usr/local/glibc/lib/
-
-        # copy xorg files
-        mkdir -p /rootfs/usr/local/glibc/lib/nvidia/xorg
-        find /usr/lib/xorg/modules -type f -exec cp {} /rootfs/usr/local/glibc/lib/nvidia/xorg \;
+        # TODO: should we allow this in extension spec, cdi doesn't seem to check this files
+        # --override-file-type-destination=CUDA_ICD:/rootfs/etc/OpenCL/vendors \
 
         # run ldconfig to update the cache
         /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs

@@ -3,20 +3,16 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: nvidia-container-cli-lts
-  - stage: elfutils
-  - stage: zlib
-  - stage: libcap
-  - stage: libseccomp
-  - stage: libtirpc-glibc
+  - stage: nvidia-pkgs-lts
   - stage: nvidia-container-runtime
-  - stage: nvidia-container-runtime-wrapper
   - stage: nvidia-persistenced-wrapper
 steps:
   - install:
       - |
         mkdir -p /rootfs/usr/local/etc/containers
+        mkdir -p /rootfs/usr/local/lib/containers/nvidia-cdi-gen
         cp /pkg/nvidia-persistenced.yaml /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
+        cp /pkg/nvidia-cdi-gen.yaml /rootfs/usr/local/etc/containers/nvidia-cdi-gen.yaml
     test:
       - |
         mkdir -p /extensions-validator-rootfs

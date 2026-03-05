@@ -23,9 +23,6 @@ steps:
       - |
         mkdir -p container-toolkit
         tar -xzf container-toolkit.tar.gz --strip-components=1 -C container-toolkit
-
-        cd container-toolkit
-        patch -p0 < /pkg/patches/ldcache_path.patch
     build:
       - |
         cd container-toolkit
@@ -37,27 +34,10 @@ steps:
 
         cd container-toolkit
 
-        # let's copy all built binaries suffixing them with .real
-        # the wrapper binary will call the real binary with the same name
-        for file in $(find . -maxdepth 1 -type f -executable); do
-          clean_file=$(basename $file)
-
-          # oci-nvidia-hook is a shell script calling nvidia-container-runtime-hook
-          if [[ $clean_file == "oci-nvidia-hook" ]]; then
-            ln -sv nvidia-container-runtime-hook /rootfs/usr/local/bin/$clean_file
-
-            continue
-          fi
-
-          ln -sv nvidia-container-runtime-wrapper /rootfs/usr/local/bin/$(basename $clean_file)
-          cp $clean_file /rootfs/usr/local/bin/$(basename $clean_file).real
-        done
+        find . -maxdepth 1 -type f -executable -exec cp {} /rootfs/usr/local/bin/ \;
       - |
         mkdir -p /rootfs/etc/cri/conf.d
         cp /pkg/10-nvidia-container-runtime.part /rootfs/etc/cri/conf.d/10-nvidia-container-runtime.part
-
-        mkdir -p /rootfs/usr/local/etc/nvidia-container-runtime
-        cp /pkg/nvidia-container-runtime.toml /rootfs/usr/local/etc/nvidia-container-runtime/config.toml
     sbom:
       outputPath: /rootfs/usr/local/share/spdx/nvidia-container-runtime.spdx.json
       version: {{ .CONTAINER_TOOLKIT_VERSION }}
