@@ -1,7 +1,14 @@
-# https://download.nvidia.com/XFree86/Linux-x86_64/515.65.01/README/nvidia-persistenced.html
-name: nvidia-persistenced
+
+name: nvidia-cdi-gen
 container:
-  entrypoint: /usr/local/bin/nvidia-persistenced-wrapper
+  entrypoint: /usr/local/bin/nvidia-ctk
+  args:
+    - cdi
+    - generate
+    - --library-search-path
+    - /usr/local/glibc/usr/lib
+    - --output
+    - /run/cdi/nvidia.yaml
   mounts:
     # device files
     - source: /dev
@@ -10,7 +17,7 @@ container:
       options:
         - rshared
         - rbind
-        - rw
+        - ro
     # shared libraries
     - source: /lib64
       destination: /lib64
@@ -32,21 +39,14 @@ container:
       options:
         - bind
         - ro
-    # nvidia libraries
-    - source: /usr/local/lib
-      destination: /usr/local/lib
-      type: bind
-      options:
-        - bind
-        - ro
-    # service state file
-    - source: /run
-      destination: /var/run
+    # nvidia-persistenced service state file
+    - source: /var/run/nvidia-persistenced
+      destination: /var/run/nvidia-persistenced
       type: bind
       options:
         - rshared
         - rbind
-        - rw
+        - ro
     # binaries
     - source: /usr/local/bin
       destination: /usr/local/bin
@@ -54,8 +54,12 @@ container:
       options:
         - bind
         - ro
+    - source: /run/cdi
+      destination: /run/cdi
+      type: bind
+      options:
+        - bind
+        - rw
 depends:
-  # we need to depend on udevd so that the nvidia device files are created
-  - service: udevd
-  - path: /sys/bus/pci/drivers/nvidia
-restart: always
+  - service: ext-nvidia-persistenced
+restart: untilSuccess

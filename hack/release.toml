@@ -31,7 +31,6 @@ qemu-guest-agent: 10.2.0
 Linux Firmware: 20260221
 NVIDIA LTS: 580.126.16
 NVIDIA Production: 570.211.01
-libnvidia-container: v1.18.2
 nvidia-container-toolkit: v1.18.2
 DRBD: 9.3.0
 gvisor: 20260202.0
