@@ -6,7 +6,7 @@ container:
   entrypoint: ./qemu-ga
   mounts:
     # State files.
-    - source: /system/run/qemu-guest-agent
+    - source: /run
       destination: /var/run
       type: bind
       options:
