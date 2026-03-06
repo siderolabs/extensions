@@ -1,3 +1,61 @@
+## [Talos System Extensions 1.12.5](https://github.com/siderolabs/extensions/releases/tag/v1.12.5) (2026-03-06)
+
+Welcome to the v1.12.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20260221
+
+
+### Contributors
+
+* Andrey Smirnov
+* Max Makarov
+* Nico Berlee
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`f441440`](https://github.com/siderolabs/extensions/commit/f4414400b20fb71759200ff3941ad7a3e1f4bedd) feat: update Linux firmware to 20260221
+* [`3c40496`](https://github.com/siderolabs/extensions/commit/3c404964b4c50f97c9ac7d5c0fba5cd964550c0e) chore: sync pkgs and tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>7 commits</summary>
+<p>
+
+* [`e695c74`](https://github.com/siderolabs/pkgs/commit/e695c748964689dae2b6d2ee9daf872597d3fb75) feat: update Linux to 6.18.15
+* [`7d4ef68`](https://github.com/siderolabs/pkgs/commit/7d4ef68d124ffa962dfdd5a7a45c8bf4b58829e9) feat: update Linux to 6.18.14
+* [`300cd60`](https://github.com/siderolabs/pkgs/commit/300cd60733252b205be1c040d874d603fb3055c1) feat: update Linux firmware to 20260221
+* [`65f9fd3`](https://github.com/siderolabs/pkgs/commit/65f9fd377b03e8a10cfa853fc75dab69366a80cb) feat: update Linux to 6.18.13
+* [`96fc8e3`](https://github.com/siderolabs/pkgs/commit/96fc8e38c644ce90d30faa899ffb184466c4fd94) feat: enable MLX5 Scalable Functions and TC offload in kernel
+* [`f31edf1`](https://github.com/siderolabs/pkgs/commit/f31edf11c66852a5976b9eb54bbddf7d4ae48004) feat: add patch for Cilium BPF verifier rejection by the kernel
+* [`8b4b129`](https://github.com/siderolabs/pkgs/commit/8b4b1294d1c82f430892a5e80038250e86aa62f4) feat: update Go to 1.25.8
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`57916cb`](https://github.com/siderolabs/tools/commit/57916cb3ee3e29555dc1b689807e16a8a5600b7e) feat: update Go to 1.25.8
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-39-gb1fc4c6 -> v1.12.0-46-ge695c74
+* **github.com/siderolabs/tools**  v1.12.0-6-gdc37e09 -> v1.12.0-7-g57916cb
+
+Previous release can be found at [v1.12.4](https://github.com/siderolabs/extensions/releases/tag/v1.12.4)
+
 ## [Talos System Extensions 1.12.4](https://github.com/siderolabs/extensions/releases/tag/v1.12.4) (2026-02-12)
 
 Welcome to the v1.12.4 release of Talos System Extensions!
