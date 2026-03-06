@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-01-20T19:15:31Z by kres 1ffefb6.
+# Generated on 2026-03-06T12:48:55Z by kres 1dd7316.
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -57,7 +57,7 @@ jobs:
           done
         continue-on-error: true
       - name: checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # version: v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # version: v6.0.2
       - name: Unshallow
         run: |
           git fetch --prune --unshallow
@@ -80,7 +80,7 @@ jobs:
           make nonfree
       - name: Login to registry
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # version: v3.6.0
+        uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # version: v3.7.0
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
@@ -165,7 +165,7 @@ jobs:
           done
         continue-on-error: true
       - name: checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # version: v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # version: v6.0.2
       - name: Unshallow
         run: |
           git fetch --prune --unshallow
@@ -181,7 +181,7 @@ jobs:
           make grype-scan
       - name: save-results-artifacts
         if: always()
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # version: v6.0.0
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # version: v7.0.0
         with:
           name: results-grype-scan
           path: _out/grype-scan/**
@@ -219,7 +219,7 @@ jobs:
           done
         continue-on-error: true
       - name: checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # version: v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # version: v6.0.2
       - name: Unshallow
         run: |
           git fetch --prune --unshallow
