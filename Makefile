@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-03-06T12:48:55Z by kres 1dd7316.
+# Generated on 2026-03-18T16:47:13Z by kres 3675077.
 
 # common variables
 
@@ -53,7 +53,7 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.12.0-46-ge695c74
+PKGS ?= v1.12.0-50-ga92bed5
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.12.0-7-g57916cb
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -235,7 +235,7 @@ nonfree: $(NONFREE_TARGETS)  ## Builds all nonfree targets defined.
 
 .PHONY: $(TARGETS) $(NONFREE_TARGETS)
 $(TARGETS) $(NONFREE_TARGETS): $(ARTIFACTS)/bldr
-	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:$(shell $(ARTIFACTS)/bldr eval --target $@ --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) --push=$(PUSH)"
+	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:$(shell $(ARTIFACTS)/bldr eval --target $@ --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) --push=$(PUSH) --metadata-file=$(ARTIFACTS)/$@.metadata.json"
 
 .PHONY: deps.svg
 deps.svg:  ## Generates a dependency graph of the Pkgfile.
