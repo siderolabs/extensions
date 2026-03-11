@@ -78,7 +78,7 @@ steps:
           --override-file-type-destination=VULKAN_ICD_JSON:/rootfs/etc/vulkan/icd.d \
           --override-file-type-destination=VULKANSC_ICD_JSON:/rootfs/etc/vulkansc/icd.d \
           --override-file-type-destination=NVIDIA_MODPROBE:/rootfs/usr/local/bin \
-          --override-file-type-destination=FIRMWARE:/rootfs/usr/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_LTS_VERSION }} \
+          --override-file-type-destination=FIRMWARE:/rootfs/usr/lib/firmware/nvidia/{{ .NVIDIA_DRIVER_PRODUCTION_VERSION }} \
           --no-systemd \
           # {{ if eq .ARCH "x86_64" }}--no-install-compat32-libs{{ end }}
 
