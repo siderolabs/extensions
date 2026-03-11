@@ -1,3 +1,11 @@
+# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=amnezia-vpn/amneziawg-go
+AMNEZIAWG_GO_VERSION: 0.2.16
+AMNEZIAWG_GO_SHA256: 8327a22c7bcf4f6b05585d4b9536759c1e11fcc1e6830e5186fd55a14255eae1
+AMNEZIAWG_GO_SHA512: 40f438307bbdc760c58a0a692c08a64bdbdbd4468ccaf67f687a08f6ef3a3b102b8fe2103da61475074a472758db68c2d6e73786206c6deb355da0ee6dce6409
+# renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=amnezia-vpn/amneziawg-tools
+AMNEZIAWG_TOOLS_VERSION: 1.0.20260223
+AMNEZIAWG_TOOLS_SHA256: ab09cfafe6c1e9a6260964a8ba5cb2d657cc23862eb0c29253305e532ac40a16
+AMNEZIAWG_TOOLS_SHA512: 591afaef659e26be16c8d883da8d8ff026f855f60c9887440b566ef18b9948ca57754673d833f27e77d8c05f7e354f37b49adc9f5467334eeb7eda7165960c54
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=tailscale/tailscale
 TAILSCALE_VERSION: 1.94.2
 TAILSCALE_SHA256: c45975beb4cb7bab8047cfba77ec8b170570d184f3c806258844f3e49c60d7aa
