@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20260202.0
+GVISOR_VERSION: 20260309.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
 GVISOR_REV: 0bd9aedd142c213b4c718156e1e1c6e68c91a17c
@@ -15,7 +15,7 @@ SOCI_SNAPSHOTTER_REV: c140af2f22fffade79af74ddcc1c29388d763051
 SOCI_SNAPSHOTTER_SHA256: 3fb36fa5c330d817e748c565e27765d7290c1ac0e20ce4ffcd6ff5f938b32851
 SOCI_SNAPSHOTTER_SHA512: cf67566bbbe2e93f692cec835d8add0d40729fc463cfcd4a3f164a0514b38289721bac5cce55b5220a2e834116e871a83601ee3df668000eceecd3d150939de6
 # renovate: datasource=github-releases depName=kubernetes/cloud-provider-aws
-CLOUD_PROVIDER_AWS_VERSION: v1.35.0
+CLOUD_PROVIDER_AWS_VERSION: v1.35.1
 CLOUD_PROVIDER_AWS_SHA256: d1adc102c951c8e7e895dd8524b618d101455c257349ec8875a46d7c9981e00d
 CLOUD_PROVIDER_AWS_SHA512: c98d0a734b5f0e643fbc0f37558182e89e6fbf0c882abab9a85de50cf5b0fc7e054228e440f8cf7ed3970da4d944e2ca1005d67ccd1f13cdb4574c502c49f45b
 # renovate: datasource=git-tags extractVersion=^containerd-shim-wasmedge\/(?<version>.*)$ depName=https://github.com/containerd/runwasi.git
