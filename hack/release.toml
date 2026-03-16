@@ -23,29 +23,32 @@ bird2: 2.18
 crun: 1.26
 ctr: 2.2.2
 glibc: 2.43
-ecr-credential-provider: 1.35.0
-netbird: 0.66.2
+ecr-credential-provider: 1.35.1
+netbird: 0.66.4
 newt: 1.10.0
 fuse3: 3.18.1
 qemu-guest-agent: 10.2.0
-Linux Firmware: 20260221
+Linux Firmware: 20260309
 NVIDIA LTS: 580.126.20
 NVIDIA Production: 570.211.01
-nvidia-container-toolkit: v1.18.2
-DRBD: 9.3.0
-gvisor: 20260202.0
+nvidia-container-toolkit: v1.19.0
+DRBD: 9.3.1
+gvisor: 20260309.0
 Kata containers: 3.26.0
 stargz-snapshotter: 0.18.2
-cloudflared: 2026.2.0
+cloudflared: 2026.3.0
 nebula: 1.10.3
 tailscale: 1.94.2
 vmtoolsd-guest-agent: 1.5.0
 metal-agent: 0.1.4
-wolfi-base: 00f9662b838432de5f24eabe5dc86f20d1510d158eda1bcaf68bbba8412544cc
+wolfi-base: 2a43204178a08b8c7f5e881c550bb52733364beff904ed36eeabe33cc656c749
 spin: 0.23.0
 youki: 0.6.0
 Intel ucode: 20260227
 ZFS: 2.4.1
+lldpd: 1.0.21
+px-fuse: 4b7ade7d7a4afe10b87ff7a16a59e9d1e3fae68f
+gdrcopy: v2.5.2
 """
 
 [make_deps]

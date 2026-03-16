@@ -1,10 +1,10 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20260202.0
+GVISOR_VERSION: 20260309.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
-GVISOR_REV: 0bd9aedd142c213b4c718156e1e1c6e68c91a17c
-GVISOR_SHA256: 268577cfc8257a9181b4f08b7970cbcf3bb3d8b32a24455dbe197e432bb01936
-GVISOR_SHA512: f86cae4a70fea1a6bcc08aad317a77baf7b2040d34927f55a8a1c9e9c241930667c51f46b335c27782a8ebff235c0b9f7bd84a750e7bc04f0c8568c381f8a142
+GVISOR_REV: b4724f2443524be7ee12df8077851706c1f8d72b
+GVISOR_SHA256: f52e08c61241cfec91085db3a49d2e6a227b5a41450223a910d10c1c2e0406ea
+GVISOR_SHA512: fd0e9a5f1b7d117ca8cbf6d7f4cba38c0c50e1f388dac32e1dc0df1ba3c8e52521e86bf16b76217e31501c4fee991b5323c061abc34e447261e953abb34ba574
 # renovate: datasource=github-releases depName=containerd/stargz-snapshotter
 STARGZ_SNAPSHOTTER_VERSION: v0.18.2
 STARGZ_SNAPSHOTTER_SHA256: 9e92bd3aa7ca03b5265268f4db0878166cf33311b7c514e4bbd05e247484d32d
@@ -15,9 +15,9 @@ SOCI_SNAPSHOTTER_REV: c140af2f22fffade79af74ddcc1c29388d763051
 SOCI_SNAPSHOTTER_SHA256: 3fb36fa5c330d817e748c565e27765d7290c1ac0e20ce4ffcd6ff5f938b32851
 SOCI_SNAPSHOTTER_SHA512: cf67566bbbe2e93f692cec835d8add0d40729fc463cfcd4a3f164a0514b38289721bac5cce55b5220a2e834116e871a83601ee3df668000eceecd3d150939de6
 # renovate: datasource=github-releases depName=kubernetes/cloud-provider-aws
-CLOUD_PROVIDER_AWS_VERSION: v1.35.0
-CLOUD_PROVIDER_AWS_SHA256: d1adc102c951c8e7e895dd8524b618d101455c257349ec8875a46d7c9981e00d
-CLOUD_PROVIDER_AWS_SHA512: c98d0a734b5f0e643fbc0f37558182e89e6fbf0c882abab9a85de50cf5b0fc7e054228e440f8cf7ed3970da4d944e2ca1005d67ccd1f13cdb4574c502c49f45b
+CLOUD_PROVIDER_AWS_VERSION: v1.35.1
+CLOUD_PROVIDER_AWS_SHA256: e9dd3e4bc80feb18b02b4bad92c91b004a5b27ad0d950a7fd58b5ad21acdd624
+CLOUD_PROVIDER_AWS_SHA512: 8737fe2f20e4f9ded0bab6d9bf965fa9ea34f08ef0a5cc7628ec7964b75c34a35aab3d7aa3c2bc5900fc890e2178e2c5849dccae8a86429e830377ef867508e3
 # renovate: datasource=git-tags extractVersion=^containerd-shim-wasmedge\/(?<version>.*)$ depName=https://github.com/containerd/runwasi.git
 WASMEDGE_VERSION: v0.6.0
 WASMEDGE_ARM64_SHA256: b331a20e7b831da13721eea6b031e5ea79f295480777274b1593e5d612021110
