@@ -118,8 +118,6 @@ spec:
       toplevel: true
     - name: check-dirty
       toplevel: true
-    - name: extensions-metadata
-      toplevel: true
     - name: internal/extensions/image-digests
       toplevel: true
     - name: internal/extensions/descriptions.yaml
@@ -178,7 +176,7 @@ spec:
     condition: on-pull-request
 ---
 kind: custom.Step
-name: extensions-metadata
+name: internal/extensions/image-digests
 spec:
   makefile:
     enabled: true
@@ -187,22 +185,9 @@ spec:
       - $(ARTIFACTS)/bldr
     script:
       - |
-        @rm -f _out/extensions-metadata
-        @$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
-        @$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
----
-kind: custom.Step
-name: internal/extensions/image-digests
-spec:
-  makefile:
-    enabled: true
-    phony: true
-    depends:
-      - extensions-metadata
-    script:
-      - |
-        @echo "Generating image digests..."
-        @cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+        @rm -f internal/extensions/image-digests
+        @$(foreach target,$(TARGETS),echo $(shell yq -r '."image.name" + "@" + ."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+        @$(foreach target,$(NONFREE_TARGETS),echo $(shell yq -r '."image.name" + "@" + ."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
 ---
 kind: custom.Step
 name: internal/extensions/descriptions.yaml

@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-03-18T16:47:13Z by kres 3675077.
+# Generated on 2026-03-17T13:52:47Z by kres 7bfd168-dirty.
 
 # common variables
 
@@ -255,16 +255,11 @@ extensions-catalog: $(ARTIFACTS)/bldr
 check-dirty:
 	@if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
 
-.PHONY: extensions-metadata
-extensions-metadata: $(ARTIFACTS)/bldr
-	@rm -f _out/extensions-metadata
-	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
-	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
-
 .PHONY: internal/extensions/image-digests
-internal/extensions/image-digests: extensions-metadata
-	@echo "Generating image digests..."
-	@cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+internal/extensions/image-digests: $(ARTIFACTS)/bldr
+	@rm -f internal/extensions/image-digests
+	@$(foreach target,$(TARGETS),echo $(shell yq -r '."image.name" + "@" + ."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+	@$(foreach target,$(NONFREE_TARGETS),echo $(shell yq -r '."image.name" + "@" + ."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
 
 .PHONY: internal/extensions/descriptions.yaml
 internal/extensions/descriptions.yaml: internal/extensions/image-digests
@@ -305,4 +300,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-
