@@ -1,3 +1,59 @@
+## [Talos System Extensions 1.12.6](https://github.com/siderolabs/extensions/releases/tag/v1.12.6) (2026-03-19)
+
+Welcome to the v1.12.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20260309
+spin: 0.23.0
+youki: 0.6.0
+Intel ucode: 20260227
+netbird: 0.66.2
+newt: 1.10.0
+tailscale: 1.94.2
+ZFS: 2.4.1
+NVIDIA LTS: 580.126.20
+
+
+### Contributors
+
+* Andrey Smirnov
+* Kai Zhang
+* Noel Georgi
+* Zadkiel AHARONIAN
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`11e7611`](https://github.com/siderolabs/extensions/commit/11e7611dab8d57bd85e68203d383c9e097a76b3b) fix: rework image digests one more time
+* [`69cc222`](https://github.com/siderolabs/extensions/commit/69cc2225fbf0e6b4fc806a4256f1102fe93c5382) fix: calculate correctly image digests for the catalog
+* [`9f063c9`](https://github.com/siderolabs/extensions/commit/9f063c9a1864a8525ee5c0ed47f43ab1fe2bfdc9) feat: update dependencies
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>4 commits</summary>
+<p>
+
+* [`a92bed5`](https://github.com/siderolabs/pkgs/commit/a92bed5bdd0a3f14312218dd63d6822e38e6dedd) feat: enable AMD GPU peer-to-peer DMA
+* [`09e87a9`](https://github.com/siderolabs/pkgs/commit/09e87a97777586df20614708d50b36846ee65411) feat: backportable deps update
+* [`eb965e2`](https://github.com/siderolabs/pkgs/commit/eb965e2e58477a8c1406f7296873267e7a06db3e) feat(kernel): enable CONFIG_USB_UHCI_HCD on amd64
+* [`6804ebd`](https://github.com/siderolabs/pkgs/commit/6804ebdc01b949ffdc229143d2ef750dad0096fe) feat: update Linux 6.18.16, NVIDIA, ZFS
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.12.0-46-ge695c74 -> v1.12.0-50-ga92bed5
+
+Previous release can be found at [v1.12.5](https://github.com/siderolabs/extensions/releases/tag/v1.12.5)
+
 ## [Talos System Extensions 1.12.5](https://github.com/siderolabs/extensions/releases/tag/v1.12.5) (2026-03-06)
 
 Welcome to the v1.12.5 release of Talos System Extensions!
