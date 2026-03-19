@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=tailscale/tailscale
-TAILSCALE_VERSION: 1.94.2
+TAILSCALE_VERSION: 1.96.2
 TAILSCALE_SHA256: c45975beb4cb7bab8047cfba77ec8b170570d184f3c806258844f3e49c60d7aa
 TAILSCALE_SHA512: 483a3ee318dd80eb7d350b9f073efd2089438b13b35ae54627e4429d5f50c87112587e6d4053809c976e2902d915841211468e55fbd33fd406ec197469f8fcd4
 # renovate: datasource=github-releases depName=lldpd/lldpd
@@ -21,7 +21,7 @@ ZEROTIER_VERSION: 1.16.0
 ZEROTIER_SHA256: aa9de313d365bf0efb3871aaa56f2d323a08f46df47b627c4eff4f4203fa7fc5
 ZEROTIER_SHA512: 158ab83059ea1dcdfab073429404d6e9ef812c40e4be6b718c48e4eb9f7a9ab45f71ffdd9cf9179e6b5864a302201cbf96ee1441659ebf8a8293de57dc13a2b7
 # renovate: datasource=github-releases depName=fosrl/newt
-NEWT_VERSION: 1.10.2
+NEWT_VERSION: 1.10.3
 NEWT_SHA256: feaf94ad8b68a17748dfc181b760db55f3cca778fcc737e6232b93f0f87eb27b
 NEWT_SHA512: d0b5f5118fe5e95a4486b6fc1f54bfdf5b746e6411757e698fce3a94908915dd9dae81addc99d5ce35d5c4b0091f799c0d7d6653563ab40a4c7419dcca5e328c
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=netbirdio/netbird
