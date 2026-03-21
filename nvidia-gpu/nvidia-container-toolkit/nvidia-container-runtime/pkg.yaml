@@ -36,6 +36,10 @@ steps:
 
         find . -maxdepth 1 -type f -executable -exec cp {} /rootfs/usr/local/bin/ \;
       - |
+        mkdir -p /rootfs/usr/bin
+        ln -s /usr/local/bin/nvidia-ctk /rootfs/usr/bin/nvidia-ctk
+        ln -s /usr/local/bin/nvidia-cdi-hook /rootfs/usr/bin/nvidia-cdi-hook
+      - |
         mkdir -p /rootfs/etc/cri/conf.d
         cp /pkg/10-nvidia-container-runtime.part /rootfs/etc/cri/conf.d/10-nvidia-container-runtime.part
     sbom:
