@@ -30,7 +30,7 @@ fuse3: 3.18.1
 qemu-guest-agent: 10.2.0
 Linux Firmware: 20260309
 NVIDIA LTS: 580.126.20
-NVIDIA Production: 570.211.01
+NVIDIA Production: 595.58.03
 nvidia-container-toolkit: v1.19.0
 DRBD: 9.3.1
 gvisor: 20260309.0
