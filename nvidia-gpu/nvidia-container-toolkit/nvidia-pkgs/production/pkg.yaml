@@ -74,6 +74,8 @@ steps:
           --no-wine-files \
           --no-kernel-module-source \
           --no-check-for-alternate-installs \
+          --no-nouveau-check \
+          --allow-installation-with-running-driver \
           --override-file-type-destination=OPENGL_DATA:/rootfs/usr/local/share/nvidia \
           --override-file-type-destination=VULKAN_ICD_JSON:/rootfs/etc/vulkan/icd.d \
           --override-file-type-destination=VULKANSC_ICD_JSON:/rootfs/etc/vulkansc/icd.d \
