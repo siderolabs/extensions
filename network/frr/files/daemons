@@ -1,0 +1,10 @@
+zebra=true
+zebra_options="-A 127.0.0.1 -s 90000000"
+bgpd=true
+bgpd_options="-A 127.0.0.1"
+staticd=true
+staticd_options="-A 127.0.0.1"
+bfdd=true
+bfdd_options="-A 127.0.0.1"
+vtysh_enable=yes
+mgmtd_options="-A 127.0.0.1"
