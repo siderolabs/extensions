@@ -31,4 +31,11 @@ func main() {
 	if err := cmd.Run(); err != nil {
 		log.Fatalf("zfs-service: zfs unmount error: %v\n", err)
 	}
+
+	cmd = exec.Command("/usr/local/sbin/zpool", "export", "-a")
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		log.Fatalf("zfs-service: zpool export error: %v\n", err)
+	}
 }
