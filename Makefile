@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-03-26T11:27:37Z by kres 3675077.
+# Generated on 2026-04-02T08:55:15Z by kres 3675077.
 
 # common variables
 
@@ -99,6 +99,7 @@ TARGETS += mellanox-mstflint
 TARGETS += metal-agent
 TARGETS += multipath-tools
 TARGETS += nebula
+TARGETS += netbird
 TARGETS += newt
 TARGETS += nfs-utils
 TARGETS += nfsd
@@ -313,4 +314,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-

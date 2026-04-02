@@ -39,8 +39,7 @@ spec:
     - metal-agent
     - multipath-tools
     - nebula
-    # disabled until https://github.com/netbirdio/netbird/issues/5290 is addressed
-    # - netbird
+    - netbird
     - newt
     - nfs-utils
     - nfsd
