@@ -268,6 +268,8 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 - `/usr/lib/ld-linux-x86-64.so.2`
 - `/usr/lib/ld-linux-aarch64.so.1`
 - `/usr/bin/ldconfig` (used by NVIDIA Container Toolkit)
+- `/etc/ld.so.conf`
+- `/etc/ld.so.cache`
 - `/usr/lib/udev/rules.d/`
 - `/usr/local/`
 - `/usr/share/glvnd/`
