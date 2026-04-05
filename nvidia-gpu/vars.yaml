@@ -35,7 +35,7 @@ CONTAINER_TOOLKIT_REF: ec7b4e2fa2caecad6d89be4a26029b831fe7503a
 CONTAINER_TOOLKIT_SHA256: 8c5f8567671167fff208e8fca72b3e864b62bf7e89711f01aaa64b25765fe42e
 CONTAINER_TOOLKIT_SHA512: 5d7b08af43ec8e82f2dc1c1ff1eb5eb9451cbe69add6d58d721d59b5da35d008eaa37463d615ae742b50d4e9e12ad6e02dd3d5eb03b83cc8717b18fa7f5b12b9
 # renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:2a43204178a08b8c7f5e881c550bb52733364beff904ed36eeabe33cc656c749
+WOLFI_BASE_REF: sha256:52e71f61c6afd1f8d2625cff4465d8ecee156668ca665f7e9c582d1cc914eb6a
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=linux-rdma/rdma-core
 RDMA_CORE_VERSION: 57.0
 RDMA_CORE_SHA256: 5f94c463c931e4a9273f366ca7cb446b54d8bd4732288ade04679886be06862d
