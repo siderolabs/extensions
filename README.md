@@ -265,11 +265,17 @@ Any paths in the `rootfs` should be contained within the following hierarchies:
 - `/etc/cri/conf.d/`
 - `/usr/lib/firmware/`
 - `/usr/lib/modules/`
-- `/usr/lib/ld-linux-x86-64.so.2`
-- `/usr/lib/ld-linux-aarch64.so.1`
-- `/usr/bin/ldconfig` (used by NVIDIA Container Toolkit)
-- `/etc/ld.so.conf`
-- `/etc/ld.so.cache`
+- `/usr/lib/ld-linux-x86-64.so.2` (glibc)
+- `/usr/lib/ld-linux-aarch64.so.1` (glibc)
+- `/usr/bin/ldconfig` (glibc)
+- `/etc/ld.so.conf` (glibc)
+- `/etc/ld.so.cache` (glibc)
+- `/usr/bin/nvidia-modprobe` (nvidia)
+- `/usr/bin/nvidia-pcc` (nvidia)
+- `/usr/bin/nvidia-smi` (nvidia)
+- `/usr/bin/nvidia-ctk` (nvidia)
+- `/usr/bin/nvidia-cdi-hook` (nvidia)
+- `/usr/bin/nvme` (standard path tools expect this)
 - `/usr/lib/udev/rules.d/`
 - `/usr/local/`
 - `/usr/share/glvnd/`
