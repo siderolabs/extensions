@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-04-02T08:55:15Z by kres 3675077.
+# Generated on 2026-04-07T13:25:10Z by kres 4e3b74d.
 
 # common variables
 
@@ -227,7 +227,7 @@ reproducibility-test-local-%:  ## Builds the specified target defined in the Pkg
 	@diffoscope $(ARTIFACTS)/build-a $(ARTIFACTS)/build-b
 	@rm -rf $(ARTIFACTS)/build-a $(ARTIFACTS)/build-b
 
-$(ARTIFACTS)/bldr: $(ARTIFACTS)  ## Downloads bldr binary.
+$(ARTIFACTS)/bldr: | $(ARTIFACTS)  ## Downloads bldr binary.
 	@curl -sSL https://github.com/siderolabs/bldr/releases/download/$(BLDR_RELEASE)/bldr-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/bldr
 	@chmod +x $(ARTIFACTS)/bldr
 
