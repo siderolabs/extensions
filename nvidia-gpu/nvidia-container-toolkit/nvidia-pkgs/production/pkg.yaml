@@ -58,15 +58,11 @@ steps:
         ./nvidia-installer --silent \
           --opengl-prefix=/rootfs/usr/local \
           --utility-prefix=/rootfs/usr/local \
-          --utility-libdir=glibc/usr/lib \
           --documentation-prefix=/rootfs/usr/local \
           --glvnd-egl-config-path=/rootfs/usr/share/glvnd/egl_vendor.d \
           --egl-external-platform-config-path=/rootfs/usr/share/egl/egl_external_platform.d \
           --x-prefix=/rootfs/usr/local \
-          --x-library-path=glibc/usr/lib \
-          --x-module-path=/rootfs/usr/local/glibc/usr/lib/xorg/modules \
-          --gbm-backend-dir=glibc/usr/lib/gbm \
-          --opengl-libdir=glibc/usr/lib \
+          --x-module-path=/rootfs/usr/local/lib/xorg/modules \
           --no-rpms \
           --no-kernel-modules \
           --log-file-name=/tmp/nvidia-installer.log \
@@ -87,8 +83,12 @@ steps:
         # TODO: should we allow this in extension spec, cdi doesn't seem to check this files
         # --override-file-type-destination=CUDA_ICD:/rootfs/etc/OpenCL/vendors \
 
+        ln -s /usr/local/bin/nvidia-smi /rootfs/usr/bin/nvidia-smi
+        ln -s /usr/local/bin/nvidia-modprobe /rootfs/usr/bin/nvidia-modprobe
+        ln -s /usr/local/bin/nvidia-pcc /rootfs/usr/bin/nvidia-pcc
+
         # run ldconfig to update the cache
-        /rootfs/usr/local/glibc/sbin/ldconfig -r /rootfs
+        /rootfs/usr/local/sbin/ldconfig -r /rootfs
 
         mkdir -p /rootfs/usr/local/lib/containers/nvidia-persistenced \
           /rootfs/usr/local/etc/containers \
@@ -96,6 +96,15 @@ steps:
 
         # copy udev rule
         cp /pkg/files/15-nvidia-device.rules /rootfs/usr/lib/udev/rules.d
+      - |
+        # Fix symlinks whose targets are rooted under /rootfs
+        # currently this is only one file that I noticed but better to be safe and fix all of them
+        find /rootfs -type l | while read -r link; do
+          target="$(readlink "${link}")"
+          if [[ "${target}" == /rootfs/* ]]; then
+            ln -sfn "${target#/rootfs}" "${link}"
+          fi
+        done
 finalize:
   - from: /rootfs
     to: /rootfs

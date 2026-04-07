@@ -12,6 +12,7 @@ container:
         - rbind
         - rw
     # shared libraries
+    # for amd64 it's /lib64/ld-linux-x86-64.so.2
     - source: /lib64
       destination: /lib64
       type: bind
@@ -19,6 +20,7 @@ container:
         - bind
         - ro
     # shared libraries
+    # for arm64 it's /lib/ld-linux-aarch64.so.1
     - source: /lib
       destination: /lib
       type: bind
@@ -26,8 +28,8 @@ container:
         - bind
         - ro
     # shared libraries
-    - source: /usr/local/glibc
-      destination: /usr/local/glibc
+    - source: /usr/local/lib
+      destination: /usr/local/lib
       type: bind
       options:
         - bind

@@ -4,8 +4,6 @@ container:
   args:
     - cdi
     - generate
-    - --library-search-path
-    - /usr/local/glibc/usr/lib
     - --output
     - /run/cdi/nvidia.yaml
   mounts:
@@ -18,6 +16,7 @@ container:
         - rbind
         - ro
     # shared libraries
+    # for amd64 it's /lib64/ld-linux-x86-64.so.2
     - source: /lib64
       destination: /lib64
       type: bind
@@ -25,15 +24,37 @@ container:
         - bind
         - ro
     # shared libraries
+    # for arm64 it's /lib/ld-linux-aarch64.so.1
     - source: /lib
       destination: /lib
       type: bind
       options:
         - bind
         - ro
-    # shared libraries
-    - source: /usr/local/glibc
-      destination: /usr/local/glibc
+    # shared libraries /usr/local/lib, nvidia files in /usr/local/share
+    - source: /usr/local
+      destination: /usr/local
+      type: bind
+      options:
+        - bind
+        - ro
+    # nvidia files in /usr/share
+    - source: /usr/share
+      destination: /usr/share
+      type: bind
+      options:
+        - bind
+        - ro
+    # firmware files
+    - source: /lib/firmware
+      destination: /lib/firmware
+      type: bind
+      options:
+        - bind
+        - ro
+    # glibc etc files, nvidia etc files
+    - source: /etc
+      destination: /etc
       type: bind
       options:
         - bind
