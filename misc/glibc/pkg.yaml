@@ -28,10 +28,11 @@ steps:
         mkdir build
         cd build
 
+        # setting `--disable-sanity-checks` is fine in this case since glibc is an extension and base talos uses musl
         ../configure \
-          --prefix=/usr/local/glibc \
-          --libdir=/usr/local/glibc/usr/lib \
-          --libexecdir=/usr/local/glibc/usr/lib \
+          --prefix=/usr/local \
+          --sysconfdir=/etc \
+          --disable-sanity-checks \
           --enable-stack-protection=strong \
           --disable-werror
     build:
@@ -40,34 +41,26 @@ steps:
         make -j $(nproc)
     install:
       - |
-        mkdir -p \
-          /rootfs/usr/local/glibc/usr/bin \
-          /rootfs/usr/local/glibc/usr/lib \
-          /rootfs/usr/local/glibc/usr/lib32 \
-          /rootfs/usr/local/glibc/usr/sbin
-        ln -s usr/bin/ /rootfs/usr/local/glibc/bin
-        ln -s usr/lib/ /rootfs/usr/local/glibc/lib
-        ln -s usr/lib/ /rootfs/usr/local/glibc/lib64
-        ln -s usr/sbin/ /rootfs/usr/local/glibc/sbin
-        ln -s lib/ /rootfs/usr/local/glibc/usr/lib64
-
         cd build
-        make install DESTDIR=/rootfs
-
-        cp /pkg/ld.so.conf /rootfs/usr/local/glibc/etc/ld.so.conf
+        make install DESTDIR=/rootfs -j $(nproc)
 
         ARCH_UPPER="${ARCH^^}"
         LD_LINUX_PATH="LD_LINUX_${ARCH_UPPER}"
         export LD_LINUX_PATH="${!LD_LINUX_PATH}"
 
-        mkdir -p /rootfs/usr/lib /rootfs/usr/bin
-        ln -s /usr/local/glibc/usr/lib/${LD_LINUX_PATH} /rootfs/usr/lib/${LD_LINUX_PATH}
-        ln -s /usr/local/glibc/usr/sbin/ldconfig /rootfs/usr/bin/ldconfig
+        mkdir -p /rootfs/{etc,usr/{bin,lib}}
+
+        cp /pkg/ld.so.conf /rootfs/etc/ld.so.conf
+
+        ln -s /usr/local/lib/${LD_LINUX_PATH} /rootfs/usr/lib/${LD_LINUX_PATH}
+        ln -s /usr/local/sbin/ldconfig /rootfs/usr/bin/ldconfig
+        ln -s lib/ /rootfs/usr/local/lib64
 
         # cleanup
-        rm -rf /rootfs/usr/local/glibc/include
-        rm -rf /rootfs/usr/local/glibc/share
-        rm -rf /rootfs/usr/local/glibc/var
+        rm -rf /rootfs/usr/local/include
+        rm -rf /rootfs/usr/local/share
+        rm -rf /rootfs/usr/local/var
+        rm -f /rootfs/etc/rpc
     sbom:
       outputPath: /rootfs/usr/local/share/spdx/glibc.spdx.json
       version: {{ .GLIBC_VERSION }}
