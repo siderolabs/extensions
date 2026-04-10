@@ -20,25 +20,25 @@ See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configu
         title = "Component Updates"
         description = """\
 bird2: 2.18
-crun: 1.26
+crun: 1.27
 ctr: 2.2.2
 glibc: 2.43
 ecr-credential-provider: 1.35.1
-netbird: 0.66.4
-newt: 1.10.0
-fuse3: 3.18.1
-qemu-guest-agent: 10.2.0
+netbird: 0.67.4
+newt: 1.11.0
+fuse3: 3.18.2
+qemu-guest-agent: 10.2.2
 Linux Firmware: 20260309
 NVIDIA LTS: 580.126.20
 NVIDIA Production: 595.58.03
 nvidia-container-toolkit: v1.19.0
 DRBD: 9.3.1
-gvisor: 20260309.0
-Kata containers: 3.26.0
+gvisor: 20260406.0
+Kata containers: 3.28.0
 stargz-snapshotter: 0.18.2
 cloudflared: 2026.3.0
 nebula: 1.10.3
-tailscale: 1.94.2
+tailscale: 1.96.4
 vmtoolsd-guest-agent: 1.5.0
 metal-agent: 0.1.4
 wolfi-base: 2a43204178a08b8c7f5e881c550bb52733364beff904ed36eeabe33cc656c749
@@ -49,6 +49,8 @@ ZFS: 2.4.1
 lldpd: 1.0.21
 px-fuse: 4b7ade7d7a4afe10b87ff7a16a59e9d1e3fae68f
 gdrcopy: v2.5.2
+soci-snapshotter: v0.13.0
+nut: 2.8.5
 """
 
 [make_deps]
