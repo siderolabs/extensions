@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-04-07T13:25:10Z by kres 4e3b74d.
+# Generated on 2026-04-15T10:12:45Z by kres b6d29bf.
 
 # common variables
 
@@ -54,9 +54,9 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-beta.0-5-g142b074
+PKGS ?= v1.13.0-beta.0-14-gb121566
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.13.0-beta.0-1-g136f1de
+TOOLS ?= v1.13.0-beta.0-3-gc192d81
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 IMAGE_SIGNER_RELEASE ?= v0.2.0
 
@@ -314,3 +314,4 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
+
