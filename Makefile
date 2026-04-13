@@ -58,7 +58,7 @@ PKGS ?= v1.13.0-beta.0-14-gb121566
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.13.0-beta.0-3-gc192d81
 TOOLS_PREFIX ?= ghcr.io/siderolabs
-IMAGE_SIGNER_RELEASE ?= v0.2.0
+GO_TOOLS_RELEASE ?= v0.3.1
 
 # targets defines all the available targets
 
@@ -279,12 +279,20 @@ internal/extensions/descriptions.yaml: internal/extensions/image-digests
 
 .PHONY: $(ARTIFACTS)/image-signer
 $(ARTIFACTS)/image-signer:
-	@curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(IMAGE_SIGNER_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
+	@curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(GO_TOOLS_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
 	@chmod +x $(ARTIFACTS)/image-signer
 
 .PHONY: sign-images
 sign-images: $(ARTIFACTS)/image-signer
 	@$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
+
+.PHONY: extensions-validate
+extensions-validate:
+	@$(MAKE)
+	@$(MAKE) nonfree
+	@$(MAKE) extensions
+	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
+	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
 
 .PHONY: grype-scan
 grype-scan:
@@ -314,4 +322,3 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
-

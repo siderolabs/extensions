@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-04-07T13:25:10Z by kres 4e3b74d.
+# Generated on 2026-04-13T10:26:40Z by kres b6d29bf.
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
@@ -122,6 +122,13 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           make check-dirty
+      - name: extensions-validate
+        if: github.event_name == 'pull_request'
+        env:
+          PUSH: "true"
+          REGISTRY: registry.dev.siderolabs.io
+        run: |
+          make extensions-validate
       - name: release-notes
         if: startsWith(github.ref, 'refs/tags/')
         run: |
