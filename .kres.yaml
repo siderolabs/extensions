@@ -105,6 +105,8 @@ spec:
         defaultValue: v1.14.0-alpha.0-3-g027744f
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
+      - name: GO_TOOLS_RELEASE
+        defaultValue: v0.3.1
   useBldrPkgTagResolver: true
 ---
 kind: common.Build
@@ -131,6 +133,8 @@ spec:
     - name: $(ARTIFACTS)/image-signer
       toplevel: true
     - name: sign-images
+      toplevel: true
+    - name: extensions-validate
       toplevel: true
     - name: grype-scan
       toplevel: true
@@ -231,12 +235,9 @@ spec:
   makefile:
     enabled: true
     phony: true
-    variables:
-      - name: IMAGE_SIGNER_RELEASE
-        defaultValue: v0.2.0
     script:
       - |
-        @curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(IMAGE_SIGNER_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
+        @curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(GO_TOOLS_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
         @chmod +x $(ARTIFACTS)/image-signer
 ---
 kind: custom.Step
@@ -250,6 +251,26 @@ spec:
     script:
       - |
         @$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
+---
+kind: custom.Step
+name: extensions-validate
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    script:
+      - |
+        @$(MAKE)
+        @$(MAKE) nonfree
+        @$(MAKE) extensions
+        @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
+        @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
+  ghaction:
+    enabled: true
+    condition: on-pull-request
+    environment:
+      PUSH: true
+      REGISTRY: registry.dev.siderolabs.io
 ---
 kind: custom.Step
 name: grype-scan
