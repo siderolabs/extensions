@@ -1,0 +1,13 @@
+version: v1alpha1
+metadata:
+  name: uhid
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides the uhid kernel module built against a specific Talos version.
+    This kernel module provides user-space HID device support. Applications can create virtual HID
+    devices (such as gamepads and controllers) via /dev/uhid, which is required for game streaming
+    software like Sunshine to emulate gamepad input from Moonlight clients.
+  compatibility:
+    talos:
+      version: ">= v1.4.5"
