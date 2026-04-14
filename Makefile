@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-04-15T10:12:45Z by kres b6d29bf.
+# Generated on 2026-04-15T10:14:57Z by kres b6d29bf.
 
 # common variables
 
@@ -322,3 +322,4 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
+
