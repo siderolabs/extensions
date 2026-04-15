@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-04-14T18:29:48Z by kres b6d29bf.
+# Generated on 2026-04-15T10:20:01Z by kres b6d29bf.
 
 # common variables
 
@@ -91,6 +91,7 @@ TARGETS += intel-ice-firmware
 TARGETS += intel-npu
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
+TARGETS += joydev
 TARGETS += kata-containers
 TARGETS += lldpd
 TARGETS += mdadm
@@ -127,6 +128,7 @@ TARGETS += tailscale
 TARGETS += tenstorrent
 TARGETS += thunderbolt
 TARGETS += trident-iscsi-tools
+TARGETS += uhid
 TARGETS += uinput
 TARGETS += usb-modem-drivers
 TARGETS += usb-audio-drivers
