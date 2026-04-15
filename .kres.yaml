@@ -31,6 +31,7 @@ spec:
     - intel-npu
     - intel-ucode
     - iscsi-tools
+    - joydev
     - kata-containers
     - lldpd
     - mdadm
@@ -67,6 +68,7 @@ spec:
     - tenstorrent
     - thunderbolt
     - trident-iscsi-tools
+    - uhid
     - uinput
     - usb-modem-drivers
     - usb-audio-drivers
