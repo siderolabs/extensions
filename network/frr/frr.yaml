@@ -1,0 +1,37 @@
+# © 2026 Nokia
+# Licensed under the Mozilla Public License 2.0
+# SPDX-License-Identifier: MPL-2.0
+name: frr
+depends:
+  - service: cri
+  - network:
+      - addresses
+      - connectivity
+  - configuration: true
+container:
+  entrypoint: /sbin/tini
+  args:
+    - --
+    - /usr/local/bin/frr-wrapper.sh
+  security:
+    writeableRootfs: true
+    writeableSysfs: true
+    maskedPaths: []
+    readonlyPaths: []
+  mounts:
+    - source: /var/run/frr
+      destination: /var/run/frr
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /dev/log
+      destination: /dev/log
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - ro
+restart: always
+logToConsole: true
