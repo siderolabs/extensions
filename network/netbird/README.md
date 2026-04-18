@@ -18,7 +18,7 @@ apiVersion: v1alpha1
 kind: ExtensionServiceConfig
 name: netbird
 environment:
-  - NB_SETUP_KEYS=<peer setup key>
+  - NB_SETUP_KEY=<peer setup key>
 ```
 
 or if you are selfhosting it with something like :
