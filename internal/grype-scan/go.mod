@@ -8,7 +8,7 @@ tool (
 )
 
 // Changes from https://github.com/anchore/syft/pull/3932 for deterministic SBOM
-replace github.com/anchore/syft => github.com/dsseng/syft v1.42.4-0.20260415171054-31b9430f030f
+replace github.com/anchore/syft => github.com/dsseng/syft v1.42.4
 
 require (
 	cel.dev/expr v0.25.1 // indirect

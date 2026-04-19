@@ -25,7 +25,7 @@ NEWT_VERSION: 1.11.0
 NEWT_SHA256: b8ff0211622a82673ba6c33c2be3e09e7a13f1b38a66825797d0eba7dc3cac4f
 NEWT_SHA512: d921fbdb6391d394feb6a852aa1a1690b0a0da37dcb4f1bb1f75de6573a1f759431ddfc0724e03d1693740b5e13c6218c15efcfaf13842e27657ebe44577b5c6
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=netbirdio/netbird
-NETBIRD_VERSION: 0.67.4
+NETBIRD_VERSION: 0.68.3
 NETBIRD_SHA256: 019449719d236f02febe854b3ee0f4876ca07107196a418bee8f7b9bb8b7285e
 NETBIRD_SHA512: 8fb6184c1169fa3a76be97556323fe9737fe8aeb0741b85e62600e8786adf66b05f9aa3bafe870eff103b17ce1e1edff34e9732c6c480820421c9a74bce4445a
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://gitlab.nic.cz/labs/bird.git
