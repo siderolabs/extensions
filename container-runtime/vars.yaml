@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20260406.0
+GVISOR_VERSION: 20260413.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
 GVISOR_REV: db8d2c9abca39156c61ee2769d52b8a11accbe16
@@ -25,7 +25,7 @@ WASMEDGE_ARM64_SHA512: e3ba594c82231da3583d5c7e64d342d147883a8248905e39d3f75ce7e
 WASMEDGE_AMD64_SHA256: a41256af75bb587dfa6ab7d5d8ebe92e18ea281406c563266dd96f99fb60b073
 WASMEDGE_AMD64_SHA512: bd3624d3568e7d3ca44a3257bbdf60965af5b525150c38c4cf6183adba26da026b11cb7634db6ddd8e4f6375a94af2420cf11db332ea7f3bd9b42cdddb16938f
 # renovate: datasource=git-tags depName=https://github.com/spinkube/containerd-shim-spin.git
-SPIN_VERSION: v0.23.0
+SPIN_VERSION: v0.24.0
 SPIN_ARM64_SHA256: a923f08d91c110d2cda29fbc380273e6d0a97aa0bab455c55f613c8d5a8bfbe4
 SPIN_ARM64_SHA512: 782933e00b258a64ccbdddc5526b40120549d9ed55e3b5bf6ce9ff85276cdc55e2c0b51daf1a819e27e6d956c269f2bc55b3c5f8e9ab91c94747bf6809e972e8
 SPIN_AMD64_SHA256: eec8df96fa3a4fe5dbc57ffb706461692c055299dd6d22dff9444863a2a12281

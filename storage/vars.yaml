@@ -3,7 +3,7 @@ FUSE3_VERSION: 3.18.2
 FUSE3_SHA256: f01de85717e20adf5f98aff324acd85dd73d61a5ca3834d573dcf0bd6e54a298
 FUSE3_SHA512: b2ca702b74788230981d05dc85458ee3582970dcb1526e7eda8f46e23d0373b361ef1438874a7caa46aaf02a5b84f7e5341fbe61e856cfbce849d1209b4aabbe
 # renovate: datasource=git-tags extractVersion=^mdadm-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
-MDADM_VERSION: 4.4
+MDADM_VERSION: 4.6
 MDADM_SHA256: f4386dcd97d804ab92d5785515443da6a49d4a4ec56ef5ad28aa9cea4d774742
 MDADM_SHA512: ff08e8c099685ca19b0bcaf52b930cea0dafa00c429f481ade89b9b97764b9acbf27f5c7c10de5cdd2a97d2ab5bffcbdacd1e4c23ebfb2e89bf47f6c5ea42046
 # renovate: datasource=git-tags extractVersion=^nfs-utils-(?<version>.*)$ depName=git://linux-nfs.org/~steved/nfs-utils
@@ -15,6 +15,6 @@ LIBEVENT_VERSION: 2.1.12
 LIBEVENT_SHA256: 92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
 LIBEVENT_SHA512: 88d8944cd75cbe78bc4e56a6741ca67c017a3686d5349100f1c74f8a68ac0b6410ce64dff160be4a4ba0696ee29540dfed59aaf3c9a02f0c164b00307fcfe84f
 # renovate: datasource=github-tags extractVersion=^version-(?<version>.*)$ depName=sqlite/sqlite
-SQLITE_VERSION: 3.52.0
+SQLITE_VERSION: 3.53.0
 SQLITE_SHA256: 52218646a6ce3f9c866c0592ea3b9f6f25c56b24b529605c95de2d50739de5c3
 SQLITE_SHA512: 9dc708e50dcc23c08dedb9237a3e271cf386bc461567d48c614a2c9b043e59e5dc2aa5b0100305bfed0a0bc6abcaba50e4f1a00b2797a7e1bd84e6bd4c0e0d9f

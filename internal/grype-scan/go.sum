@@ -364,6 +364,7 @@ github.com/dsnet/compress v0.0.2-0.20230904184137-39efe44ab707/go.mod h1:qssHWj6
 github.com/dsnet/golib v0.0.0-20171103203638-1ea166775780/go.mod h1:Lj+Z9rebOhdfkVLjJ8T6VcRQv3SXugXy999NBtR9aFY=
 github.com/dsseng/syft v1.42.4-0.20260415171054-31b9430f030f h1:CvKCcGuUH33JE/WFmM21RXhh0ZDOSrBq45iQ9sK3ILY=
 github.com/dsseng/syft v1.42.4-0.20260415171054-31b9430f030f/go.mod h1:KZqrhA8moG2hXMXs1eE0w2FPp54hmTmDOAhsWr6nw2Q=
+github.com/dsseng/syft v1.42.4/go.mod h1:KZqrhA8moG2hXMXs1eE0w2FPp54hmTmDOAhsWr6nw2Q=
 github.com/dustin/go-humanize v1.0.1 h1:GzkhY7T5VNhEkwH0PVJgjz+fX1rhBrR7pRT3mDkpeCY=
 github.com/dustin/go-humanize v1.0.1/go.mod h1:Mu1zIs6XwVuF/gI1OepvI0qD18qycQx+mFykh5fBlto=
 github.com/elazarl/goproxy v1.7.2 h1:Y2o6urb7Eule09PjlhQRGNsqRfPmYI3KKQLFpCAV3+o=
