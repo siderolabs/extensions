@@ -3,15 +3,15 @@
 format: v1alpha2
 
 vars:
-  CONTAINERD_VERSION: v2.1.6 # update this when updating PKGS_VERSION in Makefile
-  LINUX_FIRMWARE_VERSION: "20260309" # update this when updating PKGS_VERSION in Makefile
+  CONTAINERD_VERSION: v2.1.7 # update this when updating PKGS_VERSION in Makefile
+  LINUX_FIRMWARE_VERSION: "20260410" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.2.16 # update this when updating PKGS_VERSION in Makefile
   ZFS_DRIVER_VERSION: 2.4.1 # update this when updating PKGS_VERSION in Makefile
   ZFS_TOOLS_SHA256: c17b69770f0023154f578eb8c7536a70f07d6a3bb0bd38f04fa0e8811c3c1390
   ZFS_TOOLS_SHA512: 15ef20ed8fb976dd123e1f5dca8f0f71a754a3be6edf826bf1d744a28cc8400969d33b79be90a4b5bef95dd200caaca942876f4462b7749667a9e4a225d82676
-  UTIL_LINUX_VERSION: 2.41.2 # update this when updating TOOLS in Makefile
-  UTIL_LINUX_SHA256: 6062a1d89b571a61932e6fc0211f36060c4183568b81ee866cf363bce9f6583e
-  UTIL_LINUX_SHA512: 696c87e7cf185acc9b4b969ddade6155ea2945ae494eaecfd7b1f35d9607166cb09be79878fb793dd31b4d4dcac8c9be4be76af3886185db7ae8b58c303fb0cf
+  UTIL_LINUX_VERSION: 2.41.4 # update this when updating TOOLS in Makefile
+  UTIL_LINUX_SHA256: a8c213cc06048862602a42b2d299b340001f6d05c4407b549f3e03521df83688
+  UTIL_LINUX_SHA512: c21ad77b787ab5892169c80cbec1ba46ed6bba36c1db278f2d1cd8712ae237f5cd25bfd20f2dc638334d1c47c5ff6102703147147d42f71c995bd397e735691a
   ENA_VERSION: 2.16.0 # update this when updating PKGS_VERSION in Makefile
   TENSTORRENT_VERSION: 2.5.0 # update this when updating PKGS_VERSION in Makefile
   HAILORT_VERSION: 4.23.0 # update this when updating PKGS_VERSION in Makefile

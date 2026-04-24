@@ -75,24 +75,24 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [amd-ucode](firmware/amd-ucode) | :green_square: core | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode) | `20260309` |  This system extension provides AMD microcode binaries. |
-| [bnx2-bnx2x](firmware/bnx2-bnx2x) | :green_square: core | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x) | `20260309` | This system extension provides bnx2 and bnx2x binaries. |
-| [chelsio-firmware](firmware/chelsio) | :white_large_square: contrib | [ghcr.io/siderolabs/chelsio-firmware](https://github.com/siderolabs/extensions/pkgs/container/chelsio-firmware) | `20260309` |  This system extension provides Chelsio NIC firmware binaries. |
-| [intel-ice-firmware](firmware/intel-ice-firmware) | :green_square: core | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | `20260309` |  This system extension provides Intel Ice firmware binaries. |
+| [amd-ucode](firmware/amd-ucode) | :green_square: core | [ghcr.io/siderolabs/amd-ucode](https://github.com/siderolabs/extensions/pkgs/container/amd-ucode) | `20260410` |  This system extension provides AMD microcode binaries. |
+| [bnx2-bnx2x](firmware/bnx2-bnx2x) | :green_square: core | [ghcr.io/siderolabs/bnx2-bnx2x](https://github.com/siderolabs/extensions/pkgs/container/bnx2-bnx2x) | `20260410` | This system extension provides bnx2 and bnx2x binaries. |
+| [chelsio-firmware](firmware/chelsio) | :white_large_square: contrib | [ghcr.io/siderolabs/chelsio-firmware](https://github.com/siderolabs/extensions/pkgs/container/chelsio-firmware) | `20260410` |  This system extension provides Chelsio NIC firmware binaries. |
+| [intel-ice-firmware](firmware/intel-ice-firmware) | :green_square: core | [ghcr.io/siderolabs/intel-ice-firmware](https://github.com/siderolabs/extensions/pkgs/container/intel-ice-firmware) | `20260410` |  This system extension provides Intel Ice firmware binaries. |
 | [intel-ucode](firmware/intel-ucode) | :green_square: core | [ghcr.io/siderolabs/intel-ucode](https://github.com/siderolabs/extensions/pkgs/container/intel-ucode) | `20260227` |  This system extension provides Intel microcode binaries. |
-| [qlogic-firmware](firmware/qlogic-firmware) | :green_square: core | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware) | `20260309` |  This system extension provides firmware for QLogic devices. |
-| [realtek-firmware](firmware/realtek-firmware) | :green_square: core | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware) | `20260309` |  This system extension provides realtek firmware binaries. |
+| [qlogic-firmware](firmware/qlogic-firmware) | :green_square: core | [ghcr.io/siderolabs/qlogic-firmware](https://github.com/siderolabs/extensions/pkgs/container/qlogic-firmware) | `20260410` |  This system extension provides firmware for QLogic devices. |
+| [realtek-firmware](firmware/realtek-firmware) | :green_square: core | [ghcr.io/siderolabs/realtek-firmware](https://github.com/siderolabs/extensions/pkgs/container/realtek-firmware) | `20260410` |  This system extension provides realtek firmware binaries. |
 | [revpi-firmware](firmware/revpi-firmware) | :white_large_square: contrib | [ghcr.io/siderolabs/revpi-firmware](https://github.com/siderolabs/extensions/pkgs/container/revpi-firmware) | `v1.0.0` |  This system extension provides tools e.g. udev rules for the RevolutionPi platform. |
 
 ### Direct Rendering Manager (DRM)
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [amdgpu](drm/amdgpu) | :green_square: core | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | `20260309-VERSION` |  This system extension provides AMDGPU firmware binaries and kernel modules. |
-| [i915](drm/i915) | :green_square: core | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915) | `20260309-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
-| [panfrost](drm/panfrost) | :white_large_square: contrib | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | `20260309-VERSION` |  This system extension provides ARM Mali Midgard, Bifrost, and Valhall firmware binaries and kernel modules. |
+| [amdgpu](drm/amdgpu) | :green_square: core | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | `20260410-VERSION` |  This system extension provides AMDGPU firmware binaries and kernel modules. |
+| [i915](drm/i915) | :green_square: core | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915) | `20260410-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
+| [panfrost](drm/panfrost) | :white_large_square: contrib | [ghcr.io/siderolabs/panfrost](https://github.com/siderolabs/extensions/pkgs/container/panfrost) | `20260410-VERSION` |  This system extension provides ARM Mali Midgard, Bifrost, and Valhall firmware binaries and kernel modules. |
 | [vc4](drm/vc4) | :yellow_square: extra | [ghcr.io/siderolabs/vc4](https://github.com/siderolabs/extensions/pkgs/container/vc4) | `VERSION` |  This system extension provides kernel modules for Broadcom VideoCore GPU. |
-| [xe](drm/xe) | :green_square: core | [ghcr.io/siderolabs/xe](https://github.com/siderolabs/extensions/pkgs/container/xe) | `20260309-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
+| [xe](drm/xe) | :green_square: core | [ghcr.io/siderolabs/xe](https://github.com/siderolabs/extensions/pkgs/container/xe) | `20260410-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
 
 ### Drivers
 
@@ -189,9 +189,9 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [ctr](tools/ctr) | :green_square: core | [ghcr.io/siderolabs/ctr](https://github.com/siderolabs/extensions/pkgs/container/ctr) | `v2.1.6` |  This extension provides ctr containerd helper binary |
+| [ctr](tools/ctr) | :green_square: core | [ghcr.io/siderolabs/ctr](https://github.com/siderolabs/extensions/pkgs/container/ctr) | `v2.1.7` |  This extension provides ctr containerd helper binary |
 | [nvme-cli](tools/nvme-cli) | :white_large_square: contrib | [ghcr.io/siderolabs/nvme-cli](https://github.com/siderolabs/extensions/pkgs/container/nvme-cli) | `v2.14` |  This system extension provides the NVMe command line interface. |
-| [util-linux-tools](tools/util-linux) | :white_large_square: contrib | [ghcr.io/siderolabs/util-linux-tools](https://github.com/siderolabs/extensions/pkgs/container/util-linux-tools) | `2.41.2` |  This system extension provides a minimal util-linux package. |
+| [util-linux-tools](tools/util-linux) | :white_large_square: contrib | [ghcr.io/siderolabs/util-linux-tools](https://github.com/siderolabs/extensions/pkgs/container/util-linux-tools) | `2.41.4` |  This system extension provides a minimal util-linux package. |
 
 <!-- ### END GENERATED CONTENT -->
 
