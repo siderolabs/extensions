@@ -3,18 +3,18 @@
 format: v1alpha2
 
 vars:
-  CONTAINERD_VERSION: v2.2.2 # update this when updating PKGS_VERSION in Makefile
+  CONTAINERD_VERSION: v2.2.3 # update this when updating PKGS_VERSION in Makefile
   LINUX_FIRMWARE_VERSION: "20260410" # update this when updating PKGS_VERSION in Makefile
   DRBD_DRIVER_VERSION: 9.3.1 # update this when updating PKGS_VERSION in Makefile
-  PX_FUSE_DRIVER_VERSION: 4b7ade7d7a4afe10b87ff7a16a59e9d1e3fae68f # update this when updating PKGS_VERSION in Makefile
+  PX_FUSE_DRIVER_VERSION: bcb1f75c4e7aaa382f6fd2ee2de292e3e2d3c738 # update this when updating PKGS_VERSION in Makefile
   ZFS_DRIVER_VERSION: 2.4.1 # update this when updating PKGS_VERSION in Makefile
   ZFS_TOOLS_SHA256: c17b69770f0023154f578eb8c7536a70f07d6a3bb0bd38f04fa0e8811c3c1390
   ZFS_TOOLS_SHA512: 15ef20ed8fb976dd123e1f5dca8f0f71a754a3be6edf826bf1d744a28cc8400969d33b79be90a4b5bef95dd200caaca942876f4462b7749667a9e4a225d82676
-  UTIL_LINUX_VERSION: 2.41.4 # update this when updating TOOLS in Makefile
-  UTIL_LINUX_SHA256: a8c213cc06048862602a42b2d299b340001f6d05c4407b549f3e03521df83688
-  UTIL_LINUX_SHA512: c21ad77b787ab5892169c80cbec1ba46ed6bba36c1db278f2d1cd8712ae237f5cd25bfd20f2dc638334d1c47c5ff6102703147147d42f71c995bd397e735691a
+  UTIL_LINUX_VERSION: 2.42.0 # update this when updating TOOLS in Makefile
+  UTIL_LINUX_SHA256: 3452b260bbaa775d6e749ac3bb22111785003fc1f444970025c8da26dfa758e9
+  UTIL_LINUX_SHA512: 909bba6c38d43ca4cb9bd974c399b4f0537b54709ac43e8acc823d9d9979fbc7523572469eb452b13c86116675d6d2ebb3764444781204f7e5bd0156252635d7
   ENA_VERSION: 2.16.1 # update this when updating PKGS_VERSION in Makefile
-  TENSTORRENT_VERSION: 2.7.0 # update this when updating PKGS_VERSION in Makefile
+  TENSTORRENT_VERSION: 2.8.0 # update this when updating PKGS_VERSION in Makefile
   HAILORT_VERSION: 4.23.0 # update this when updating PKGS_VERSION in Makefile
   MELLANOX_MSFTFLINT_VERSION: 4.34.1-4 # update this when updating PKGS_VERSION in Makefile
 

@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-04-28T10:30:00Z by kres e4dc583.
+# Generated on 2026-04-29T09:41:48Z by kres 980313d.
 
 # common variables
 
@@ -55,9 +55,9 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.14.0-alpha.0-13-g6ea49c7
+PKGS ?= v1.14.0-alpha.0-20-g6a53a93
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.14.0-alpha.0-4-g4ac4449
+TOOLS ?= v1.14.0-alpha.0-6-g44ad18c
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 GO_TOOLS_RELEASE ?= v0.3.1
 
