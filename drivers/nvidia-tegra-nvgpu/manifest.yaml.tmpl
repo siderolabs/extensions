@@ -1,0 +1,23 @@
+version: v1alpha1
+metadata:
+  name: nvidia-tegra-nvgpu
+  version: "{{ .VERSION }}"
+  author: Alexander Schwankner
+  description: |
+    [{{ .TIER }}] This system extension provides NVIDIA Jetson Orin GPU kernel modules built against a specific Talos version.
+    Targets the NVIDIA Tegra GA10B (Ampere) GPU found in Jetson Orin NX / Orin Nano SoMs (Tegra234).
+
+    Modules included:
+      - host1x.ko        — OE4T host1x syncpoint allocator (GA10B ERRATA_SYNCPT_INVALID_ID_0 fix)
+      - host1x_fence.ko  — DMA fence bridge for GPU/CPU synchronization
+      - nvmap.ko         — GPU memory allocator (NVIDIA memory management API)
+      - mc_utils.ko      — Memory controller bandwidth helper
+      - governor_pod_scaling.ko — nvhost_podgov devfreq governor (dynamic GPU frequency)
+      - nvhost_ctrl_shim.ko — /dev/nvhost-ctrl bridge for JetPack 6 CUDA runtime (SYNCPT_WAITMEX)
+      - nvgpu.ko         — Main GA10B GPU driver (OE4T patches, Clang-compatible)
+
+    Requires the nvidia-firmware-ext extension for GPU firmware blobs (pmu_pkc_prod_sig.bin etc.).
+    Load order is critical and must be specified via machine.kernel.modules in the Talos config.
+  compatibility:
+    talos:
+      version: ">= v1.13.0"
