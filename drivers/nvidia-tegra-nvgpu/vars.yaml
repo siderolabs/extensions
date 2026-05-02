@@ -1,0 +1,3 @@
+# update when pkgs version is updated (short SHA of the nvidia-tegra-nvgpu commit in siderolabs/pkgs)
+VERSION: "{{ .BUILD_ARG_PKGS }}-{{ .BUILD_ARG_TAG }}"
+TIER: "extra"
