@@ -302,8 +302,8 @@ extensions-validate:
 	@$(MAKE)
 	@$(MAKE) nonfree
 	@$(MAKE) extensions
-	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
-	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
+	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/frezbo/extensions-duplicate-finder:v0.3.1-dirty validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
+	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/frezbo/extensions-duplicate-finder:v0.3.1-dirty validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
 
 .PHONY: grype-scan
 grype-scan:
