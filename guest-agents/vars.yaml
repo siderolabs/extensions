@@ -1,9 +1,9 @@
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-QEMU_VERSION: 10.2.2
+QEMU_VERSION: 11.0.0
 QEMU_SHA256: 784b296ff29c1417aa72323abcb2d2ea9ab9771724f577dcd785c3b04f21e176
 QEMU_SHA512: c5409530505c2d1e69a80f1750e377261cea8fee42516a0a89d0343b19d55f9d33579cef181d7cc04d51519e50a55dff1b89175e7685bb803468c8ce03929591
 # renovate: datasource=git-tags depName=https://gitlab.gnome.org/GNOME/glib.git
-GLIB_VERSION: 2.88.0
+GLIB_VERSION: 2.88.1
 GLIB_SHA256: 3546251ccbb3744d4bc4eb48354540e1f6200846572bab68e3a2b7b2b64dfd07
 GLIB_SHA512: ceead8d88720db17dc6bbff7aff14f261f90afc5e8261448aae0657f89b5fcc616cf62f4b049be88a4ddd3f50a869bbcdb66b29777da4969a47987828ecac280
 # renovate: datasource=github-releases extractVersion=^pcre2-(?<version>.*)$ depName=PCRE2Project/pcre2
