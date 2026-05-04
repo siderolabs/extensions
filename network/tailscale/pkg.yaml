@@ -16,8 +16,8 @@ dependencies:
     from: /usr/lib
     to: /rootfs/usr/local/lib/containers/tailscale/usr/lib
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/iptables:{{ .BUILD_ARG_PKGS }}"
-    from: /usr/lib
-    to: /rootfs/usr/local/lib/containers/tailscale/usr/lib
+    from: /
+    to: /rootfs/usr/local/lib/containers/tailscale
 steps:
   - env:
       GOPATH: /tmp/go
