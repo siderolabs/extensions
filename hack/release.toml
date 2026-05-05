@@ -19,6 +19,8 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
+NVIDIA LTS: 580.159.03
+NVIDIA Production: 595.71.05
 """
 
 [make_deps]

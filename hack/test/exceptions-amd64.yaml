@@ -778,7 +778,9 @@
     - rootfs/usr/local/lib/libnvidia-egl-wayland.so.1
     - rootfs/usr/local/lib/libnvidia-egl-wayland.so.1.1.20
     - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1
+    - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1.0.5
     - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1
+    - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1.0.5
     - rootfs/usr/local/lib/libnvidia-encode.so
     - rootfs/usr/local/lib/libnvidia-encode.so.1
     - rootfs/usr/local/lib/libnvidia-fbc.so
