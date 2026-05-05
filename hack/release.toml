@@ -25,6 +25,7 @@ util-linux: 2.42.0
 tenstorrent: 2.8.0
 NVIDIA LTS: 580.159.03
 NVIDIA Production: 595.71.05
+DRBD: 9.3.2
 """
 
 [make_deps]
