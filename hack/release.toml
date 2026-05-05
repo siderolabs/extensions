@@ -23,6 +23,8 @@ ctr: 2.2.3
 px-fuse: bcb1f75c4e7aaa382f6fd2ee2de292e3e2d3c738
 util-linux: 2.42.0
 tenstorrent: 2.8.0
+NVIDIA LTS: 580.159.03
+NVIDIA Production: 595.71.05
 """
 
 [make_deps]
