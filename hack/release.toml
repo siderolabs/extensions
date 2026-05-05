@@ -21,6 +21,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
         description = """\
 NVIDIA LTS: 580.159.03
 NVIDIA Production: 595.71.05
+DRBD: 9.3.2
 """
 
 [make_deps]
