@@ -3,11 +3,6 @@
 # SPDX-License-Identifier: MPL-2.0
 name: bird2
 depends:
-  - service: cri
-  - network:
-      - addresses
-      - etcfiles
-      - hostname
   - configuration: true
 container:
   entrypoint: /usr/local/sbin/bird
