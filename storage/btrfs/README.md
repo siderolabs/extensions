@@ -1,6 +1,6 @@
 # btrfs
 
-This extension provides kernel modules needed to mount btrfs filesystems.
+This extension provides kernel modules and userspace tools needed to support btrfs filesystems.
 
 ## Installation
 
