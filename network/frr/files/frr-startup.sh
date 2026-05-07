@@ -23,7 +23,7 @@ FRR_PROFILE="${FRR_PROFILE:-datacenter}"
 [ -z "$NODE_IP" ] && error "NODE_IP is required"
 [ -z "$ASN_LOCAL" ] && error "ASN_LOCAL is required"
 
-# Validate: either FE_MACS or FE_PORT_NAlog syslogMES is required (not both)
+# Validate: either FE_MACS or FE_PORT_NAMES is required (not both)
 if [ -n "$FE_MACS" ] && [ -n "$FE_PORT_NAMES" ]; then
     error "Specify either FE_MACS or FE_PORT_NAMES, not both"
 elif [ -z "$FE_MACS" ] && [ -z "$FE_PORT_NAMES" ]; then
@@ -88,12 +88,14 @@ create_metallb_veth() {
     log "Setting MTU $INTERFACE_MTU on $veth_metallb..."
     /sbin/ip link set "$veth_metallb" mtu "$INTERFACE_MTU"
 
-    # Assign IPv6 addresses
-    # PEER_IP_FRR is on frr-metallb (in VRF) - FRR listens here
-    # PEER_IP_METALLB is on metallb-frr (in host ns) - MetalLB binds here
-    log "Assigning IPv6 addresses..."
-    /sbin/ip -6 addr add "${PEER_IP_FRR}/${PEER_IP_PREFIX}" dev "$veth_frr" 2>/dev/null || log "IPv6 $PEER_IP_FRR already assigned to $veth_frr"
-    /sbin/ip -6 addr add "${PEER_IP_METALLB}/${PEER_IP_PREFIX}" dev "$veth_metallb" 2>/dev/null || log "IPv6 $PEER_IP_METALLB already assigned to $veth_metallb"
+    # Assign p2p addresses (IPv4 or IPv6 from PEER_IP_* / PEER_IP_PREFIX)
+    # PEER_IP_FRR is on veth-frr (in VRF) - FRR listens here
+    # PEER_IP_METALLB is on veth-metallb (in host ns) - MetalLB binds here
+    local ip_family=-4
+    [[ "$PEER_IP_FRR" == *:* ]] && ip_family=-6
+    log "Assigning p2p addresses (${ip_family#-} family)..."
+    /sbin/ip "$ip_family" addr add "${PEER_IP_FRR}/${PEER_IP_PREFIX}" dev "$veth_frr" 2>/dev/null || log "Address $PEER_IP_FRR already assigned to $veth_frr"
+    /sbin/ip "$ip_family" addr add "${PEER_IP_METALLB}/${PEER_IP_PREFIX}" dev "$veth_metallb" 2>/dev/null || log "Address $PEER_IP_METALLB already assigned to $veth_metallb"
 
     # Bring up interfaces
     log "Bringing up interfaces..."
@@ -103,6 +105,16 @@ create_metallb_veth() {
     log "MetalLB veth pair configured:"
     log "  $veth_frr ($PEER_IP_FRR) in VRF $VRF_METALLB (FRR listens)"
     log "  $veth_metallb ($PEER_IP_METALLB) in host ns (MetalLB connects from)"
+
+    # Add ip rule for MetalLB peering traffic to use VRF routing table
+    local ip_family=-4
+    [[ "$PEER_IP_FRR" == *:* ]] && ip_family=-6
+    if ! /sbin/ip $ip_family rule show | grep -q "to ${PEER_IP_FRR}.*lookup ${METALLB_VRF_ROUTE_TABLE_ID}"; then
+        log "Adding ip rule for MetalLB peering traffic..."
+        /sbin/ip $ip_family rule add to "${PEER_IP_FRR}" table "$METALLB_VRF_ROUTE_TABLE_ID"
+    else
+        log "IP rule for MetalLB peering already exists"
+    fi
 }
 
 # Configure daemons based on ENABLE_BFD

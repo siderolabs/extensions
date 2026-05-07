@@ -38,11 +38,12 @@ route-map loopbacks permit 30
  match interface dummy1
 !
 
-router bgp {{ASN_VRF_METALLB}} vrf {{VRF_METALLB}}
+router bgp {{ASN_LOCAL}} vrf {{VRF_METALLB}}
  bgp router-id {{NODE_IP}}
  no bgp ebgp-requires-policy
  neighbor METALLB peer-group
  neighbor METALLB remote-as {{ASN_METALLB_SPEAKER}}
+ neighbor METALLB local-as {{ASN_VRF_METALLB}} no-prepend replace-as
  neighbor METALLB passive
  neighbor {{PEER_IP_METALLB}} peer-group METALLB
  !
