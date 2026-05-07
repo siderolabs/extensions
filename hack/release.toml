@@ -28,6 +28,14 @@ NVIDIA Production: 595.71.05
 DRBD: 9.3.2
 Amazon ENA: 2.17.0
 xdma-driver: afea0d5
+crun: 1.27.1
+gvisor: 20260427.0
+kata-containers: 3.30.0
+spin: 0.24.0
+netbird: 0.70.5
+newt: 1.12.3
+mdadm: 4.6
+qemu-guest-agent: 11.0.0
 """
 
 [make_deps]
