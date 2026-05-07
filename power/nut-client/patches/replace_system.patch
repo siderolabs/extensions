@@ -1,6 +1,6 @@
---- a/clients/upsmon.c	2022-04-23 04:56:06.000000000 -0700
-+++ b/clients/upsmon.c	2022-09-04 13:21:28.072170502 -0700
-@@ -26,6 +26,7 @@
+--- a/clients/upsmon.c
++++ b/clients/upsmon.c
+@@ -29,6 +29,7 @@
  # include <sys/socket.h>
  # include <unistd.h>
  # include <fcntl.h>
@@ -8,10 +8,28 @@
  #else	/* WIN32 */
  # include "wincompat.h"
  #endif	/* WIN32 */
-@@ -1874,6 +1875,22 @@
- static void runparent(int fd)
- 	__attribute__((noreturn));
+@@ -190,7 +191,8 @@
+ /* pre-declare internal methods */
+ static int get_var(utype_t *ups, const char *var, char *buf, size_t bufsize);
+ static void set_alarm(void);
+ static void clear_alarm(void);
++static int runcmd(const char *cmd);
 
+ static void setflag(int *val, int flag)
+ {
+@@ -1049,7 +1051,7 @@
+ 
+ 		upsdebugx(1, "%s: upsmon mono-process: Calling shutdown command: %s",
+ 			__func__, shutdowncmd);
+-		sret = system(shutdowncmd);
++		sret = runcmd(shutdowncmd);
+ 
+ 		if (sret != 0)
+ 			upslogx(LOG_ERR, "Unable to call shutdown command: %s",
+@@ -3491,6 +3493,22 @@
+ 	exit(EXIT_SUCCESS);
+ }
+ 
 +static int runcmd(const char *cmd)
 +{
 +	// TODO: Support tokenizing `cmd`.
@@ -28,15 +46,15 @@
 +	return WEXITSTATUS(status);
 +}
 +
+ #ifndef WIN32
  static void runparent(int fd)
- {
- 	ssize_t	ret;
-@@ -1907,7 +1925,7 @@
- 	/* have to do this here - child is unprivileged */
- 	set_pdflag();
-
+ 	__attribute__((noreturn));
+@@ -3544,7 +3562,7 @@
+ 
+ 	upsdebugx(1, "%s: upsmon parent: Calling shutdown command: %s",
+ 		__func__, shutdowncmd);
 -	sret = system(shutdowncmd);
 +	sret = runcmd(shutdowncmd);
-
+ 
  	if (sret != 0)
- 		upslogx(LOG_ERR, "parent: Unable to call shutdown command: %s",
+ 		upslogx(LOG_ERR, "upsmon parent: Unable to call shutdown command: %s",

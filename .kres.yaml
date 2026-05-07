@@ -31,6 +31,7 @@ spec:
     - intel-npu
     - intel-ucode
     - iscsi-tools
+    - joydev
     - kata-containers
     - lldpd
     - mdadm
@@ -39,8 +40,7 @@ spec:
     - metal-agent
     - multipath-tools
     - nebula
-    # disabled until https://github.com/netbirdio/netbird/issues/5290 is addressed
-    # - netbird
+    - netbird
     - newt
     - nfs-utils
     - nfsd
@@ -68,6 +68,7 @@ spec:
     - tenstorrent
     - thunderbolt
     - trident-iscsi-tools
+    - uhid
     - uinput
     - usb-modem-drivers
     - usb-audio-drivers
@@ -99,13 +100,15 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.13.0-alpha.0-61-g3c982f8
+        defaultValue: v1.14.0-alpha.0-32-g5a21d99
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
-        defaultValue: v1.13.0-alpha.0-16-g9de9770
+        defaultValue: v1.14.0-alpha.0-8-g618fd20
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
+      - name: GO_TOOLS_RELEASE
+        defaultValue: v0.3.1
   useBldrPkgTagResolver: true
 ---
 kind: common.Build
@@ -132,6 +135,8 @@ spec:
     - name: $(ARTIFACTS)/image-signer
       toplevel: true
     - name: sign-images
+      toplevel: true
+    - name: extensions-validate
       toplevel: true
     - name: grype-scan
       toplevel: true
@@ -191,12 +196,10 @@ spec:
     enabled: true
     phony: true
     depends:
-      - $(ARTIFACTS)/bldr
+      - internal/extensions/image-digests
     script:
       - |
-        @rm -f _out/extensions-metadata
-        @$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
-        @$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
+        @cp internal/extensions/image-digests $(ARTIFACTS)/extensions-metadata
 ---
 kind: custom.Step
 name: internal/extensions/image-digests
@@ -205,11 +208,12 @@ spec:
     enabled: true
     phony: true
     depends:
-      - extensions-metadata
+      - $(ARTIFACTS)/bldr
     script:
       - |
-        @echo "Generating image digests..."
-        @cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+        @rm -f internal/extensions/image-digests
+        @$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+        @$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
 ---
 kind: custom.Step
 name: internal/extensions/descriptions.yaml
@@ -233,12 +237,9 @@ spec:
   makefile:
     enabled: true
     phony: true
-    variables:
-      - name: IMAGE_SIGNER_RELEASE
-        defaultValue: v0.2.0
     script:
       - |
-        @curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(IMAGE_SIGNER_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
+        @curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(GO_TOOLS_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
         @chmod +x $(ARTIFACTS)/image-signer
 ---
 kind: custom.Step
@@ -252,6 +253,26 @@ spec:
     script:
       - |
         @$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
+---
+kind: custom.Step
+name: extensions-validate
+spec:
+  makefile:
+    enabled: true
+    phony: true
+    script:
+      - |
+        @$(MAKE)
+        @$(MAKE) nonfree
+        @$(MAKE) extensions
+        @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
+        @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
+  ghaction:
+    enabled: true
+    condition: on-pull-request
+    environment:
+      PUSH: true
+      REGISTRY: registry.dev.siderolabs.io
 ---
 kind: custom.Step
 name: grype-scan

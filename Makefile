@@ -1,18 +1,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-02-24T08:40:03Z by kres 6458cfd.
+# Generated on 2026-05-06T14:31:52Z by kres 1762ab2.
 
 # common variables
 
 SHA := $(shell git describe --match=none --always --abbrev=8 --dirty)
-TAG := $(shell git describe --tag --always --dirty --match v[0-9]\*)
+TAG ?= $(shell git describe --tag --always --dirty --match v[0-9]\*)
 TAG_SUFFIX ?=
-ABBREV_TAG := $(shell git describe --tags >/dev/null 2>/dev/null && git describe --tag --always --match v[0-9]\* --abbrev=0 || echo 'undefined')
+ABBREV_TAG ?= $(shell git describe --tags >/dev/null 2>/dev/null && git describe --tag --always --match v[0-9]\* --abbrev=0 || echo 'undefined')
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ARTIFACTS := _out
 IMAGE_TAG ?= $(TAG)$(TAG_SUFFIX)
 OPERATING_SYSTEM := $(shell uname -s | tr '[:upper:]' '[:lower:]')
 GOARCH := $(shell uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')
+CI_RELEASE_TAG := $(shell git log --oneline --format=%B -n 1 HEAD^2 -- 2>/dev/null | head -n 1 | sed -r "/^release\(.*\)/ s/^release\((.*)\):.*$$/\\1/; t; Q")
 REGISTRY ?= ghcr.io
 USERNAME ?= siderolabs
 REGISTRY_AND_USERNAME ?= $(REGISTRY)/$(USERNAME)
@@ -54,11 +55,11 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-alpha.0-60-gd065c59
+PKGS ?= v1.14.0-alpha.0-32-g5a21d99
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.13.0-alpha.0-16-g9de9770
+TOOLS ?= v1.14.0-alpha.0-8-g618fd20
 TOOLS_PREFIX ?= ghcr.io/siderolabs
-IMAGE_SIGNER_RELEASE ?= v0.2.0
+GO_TOOLS_RELEASE ?= v0.3.1
 
 # targets defines all the available targets
 
@@ -92,6 +93,7 @@ TARGETS += intel-ice-firmware
 TARGETS += intel-npu
 TARGETS += intel-ucode
 TARGETS += iscsi-tools
+TARGETS += joydev
 TARGETS += kata-containers
 TARGETS += lldpd
 TARGETS += mdadm
@@ -100,6 +102,7 @@ TARGETS += mellanox-mstflint
 TARGETS += metal-agent
 TARGETS += multipath-tools
 TARGETS += nebula
+TARGETS += netbird
 TARGETS += newt
 TARGETS += nfs-utils
 TARGETS += nfsd
@@ -127,6 +130,7 @@ TARGETS += tailscale
 TARGETS += tenstorrent
 TARGETS += thunderbolt
 TARGETS += trident-iscsi-tools
+TARGETS += uhid
 TARGETS += uinput
 TARGETS += usb-modem-drivers
 TARGETS += usb-audio-drivers
@@ -207,6 +211,14 @@ $(ARTIFACTS):  ## Creates artifacts directory.
 clean:  ## Cleans up all artifacts.
 	@rm -rf $(ARTIFACTS)
 
+.PHONY: ci-temp-release-tag
+ci-temp-release-tag:  ## Generates a temporary release tag for CI run.
+	@if [ -n "$(CI_RELEASE_TAG)" -a -n "$${GITHUB_ENV}" ]; then \
+		echo Setting temporary release tag "$(CI_RELEASE_TAG)"; \
+		echo "TAG=$(CI_RELEASE_TAG)" >> "$${GITHUB_ENV}"; \
+		echo "ABBREV_TAG=$(CI_RELEASE_TAG)" >> "$${GITHUB_ENV}"; \
+	fi
+
 target-%:  ## Builds the specified target defined in the Pkgfile. The build result will only remain in the build cache.
 	@$(BUILD) --target=$* $(COMMON_ARGS) $(TARGET_ARGS) $(CI_ARGS) .
 
@@ -227,7 +239,7 @@ reproducibility-test-local-%:  ## Builds the specified target defined in the Pkg
 	@diffoscope $(ARTIFACTS)/build-a $(ARTIFACTS)/build-b
 	@rm -rf $(ARTIFACTS)/build-a $(ARTIFACTS)/build-b
 
-$(ARTIFACTS)/bldr: $(ARTIFACTS)  ## Downloads bldr binary.
+$(ARTIFACTS)/bldr: | $(ARTIFACTS)  ## Downloads bldr binary.
 	@curl -sSL https://github.com/siderolabs/bldr/releases/download/$(BLDR_RELEASE)/bldr-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/bldr
 	@chmod +x $(ARTIFACTS)/bldr
 
@@ -239,7 +251,7 @@ nonfree: $(NONFREE_TARGETS)  ## Builds all nonfree targets defined.
 
 .PHONY: $(TARGETS) $(NONFREE_TARGETS)
 $(TARGETS) $(NONFREE_TARGETS): $(ARTIFACTS)/bldr
-	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:$(shell $(ARTIFACTS)/bldr eval --target $@ --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) --push=$(PUSH)"
+	@$(MAKE) docker-$@ TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:$(shell $(ARTIFACTS)/bldr eval --target $@ --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) --push=$(PUSH) --metadata-file=$(ARTIFACTS)/$@.metadata.json"
 
 .PHONY: deps.svg
 deps.svg:  ## Generates a dependency graph of the Pkgfile.
@@ -260,15 +272,14 @@ check-dirty:
 	@if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
 
 .PHONY: extensions-metadata
-extensions-metadata: $(ARTIFACTS)/bldr
-	@rm -f _out/extensions-metadata
-	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
-	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null) >> _out/extensions-metadata;)
+extensions-metadata: internal/extensions/image-digests
+	@cp internal/extensions/image-digests $(ARTIFACTS)/extensions-metadata
 
 .PHONY: internal/extensions/image-digests
-internal/extensions/image-digests: extensions-metadata
-	@echo "Generating image digests..."
-	@cat _out/extensions-metadata | xargs -I{} sh -c 'echo {}@$$(crane digest {})' > internal/extensions/image-digests
+internal/extensions/image-digests: $(ARTIFACTS)/bldr
+	@rm -f internal/extensions/image-digests
+	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
 
 .PHONY: internal/extensions/descriptions.yaml
 internal/extensions/descriptions.yaml: internal/extensions/image-digests
@@ -280,12 +291,20 @@ internal/extensions/descriptions.yaml: internal/extensions/image-digests
 
 .PHONY: $(ARTIFACTS)/image-signer
 $(ARTIFACTS)/image-signer:
-	@curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(IMAGE_SIGNER_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
+	@curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(GO_TOOLS_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
 	@chmod +x $(ARTIFACTS)/image-signer
 
 .PHONY: sign-images
 sign-images: $(ARTIFACTS)/image-signer
 	@$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
+
+.PHONY: extensions-validate
+extensions-validate:
+	@$(MAKE)
+	@$(MAKE) nonfree
+	@$(MAKE) extensions
+	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
+	@docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
 
 .PHONY: grype-scan
 grype-scan:
@@ -315,4 +334,16 @@ release-notes: $(ARTIFACTS)
 conformance:
 	@docker pull $(CONFORMANCE_IMAGE)
 	@docker run --rm -it -v $(PWD):/src -w /src $(CONFORMANCE_IMAGE) enforce
+
+.PHONY: renovate-local
+renovate-local:  ## runs renovate locally to check syntax and test configuration
+	@docker run --rm \
+		--user $(shell id -u):$(shell id -g) \
+		-v $(PWD):/src \
+		-w /src \
+		-e GITHUB_TOKEN \
+		-e LOG_LEVEL=debug \
+		-e RENOVATE_PLATFORM=local \
+		-e RENOVATE_DRY_RUN=full \
+	renovate/renovate
 

@@ -33,8 +33,12 @@ steps:
         meson compile -C .build
     install:
       - |
+        mkdir -p /rootfs/usr/bin
+
         DESTDIR=/rootfs meson install -C .build
         rm -rf /rootfs/{etc/nvme/discovery.conf,usr/local/{include,lib/{dracut,systemd},share}}
+
+        ln -s /usr/local/sbin/nvme /rootfs/usr/bin/nvme
     test:
       - |
         mkdir -p /extensions-validator-rootfs

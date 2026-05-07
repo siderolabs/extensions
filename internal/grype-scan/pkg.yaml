@@ -3,26 +3,40 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: glibc
-  - stage: stargz-snapshotter
-  - stage: crun
-  - stage: youki
-  - stage: gvisor
-  - stage: spin
-  - stage: kata-containers
-  - stage: wasmedge
-  - stage: ecr-credential-provider
-  - stage: lldpd
-  - stage: nebula
-  - stage: newt
-  - stage: tailscale
+  - stage: bird2
   - stage: cloudflared
-  - stage: zerotier
-  - stage: metal-agent
-  - stage: qemu-guest-agent
-  - stage: xen-guest-agent
+  - stage: crun
+  - stage: ecr-credential-provider
   - stage: fuse3
+  - stage: glibc
+  - stage: gvisor
+  - stage: intel-ucode
   - stage: iscsi-tools
+  - stage: kata-containers
+  - stage: libevent
+  - stage: libnvme
+  - stage: lldpd
+  - stage: metal-agent
+  - stage: nebula
+  - stage: netbird
+  - stage: newt
+  - stage: nut-client
+  - stage: nvidia-container-runtime
+  - stage: nvme-cli
+  - stage: pcre2
+  - stage: qemu-guest-agent
+  - stage: rpc-statd
+  - stage: rpcbind
+  - stage: soci-snapshotter
+  - stage: spin
+  - stage: sqlite
+  - stage: stargz-snapshotter
+  - stage: tailscale
+  - stage: vmtoolsd-guest-agent
+  - stage: wasmedge
+  - stage: xen-guest-agent
+  - stage: youki
+  - stage: zerotier
   - stage: nonfree-kmod-nvidia-lts
   - stage: nonfree-kmod-nvidia-production
 steps:

@@ -1,3 +1,110 @@
+## [Talos System Extensions 1.14.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.14.0-alpha.0) (2026-04-29)
+
+Welcome to the v1.14.0-alpha.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ctr: 2.2.3
+px-fuse: bcb1f75c4e7aaa382f6fd2ee2de292e3e2d3c738
+util-linux: 2.42.0
+tenstorrent: 2.8.0
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Ansgar Dahlen
+* Edward Sammut Alessi
+* Mateusz Urbanek
+* Galen Abell
+* Vassil Iordanov
+* sam
+
+### Changes
+<details><summary>21 commits</summary>
+<p>
+
+* [`7aabff3`](https://github.com/siderolabs/extensions/commit/7aabff30a3e15ceb6f440d2868b79ba12e8cd448) chore: update tools and pkgs version
+* [`74431c0`](https://github.com/siderolabs/extensions/commit/74431c05c96554e5bef81b5ad2c8603aca320ad7) chore: bump metal-agent to 0.1.5
+* [`fe0a99c`](https://github.com/siderolabs/extensions/commit/fe0a99c0042c9b5fcd5dba01aacd05a661fabb04) chore: rekres
+* [`2f45d7c`](https://github.com/siderolabs/extensions/commit/2f45d7ccb006554421677d49e07086447a5e354c) docs: fix setup key variable name in README
+* [`66f49bb`](https://github.com/siderolabs/extensions/commit/66f49bbb5706b0aa75791b80f1db6c669ecc6f38) chore: sync pkgs & tools
+* [`7871fc2`](https://github.com/siderolabs/extensions/commit/7871fc2f462e75ef3b4d0ed743fe012eedb11372) fix: grype scans
+* [`07b4337`](https://github.com/siderolabs/extensions/commit/07b43374f68816a3d78c46e4689df8a7d6c79d97) fix: enable for real joydev & uinput extensions
+* [`c5ef7eb`](https://github.com/siderolabs/extensions/commit/c5ef7eb00e02973375441fe8709564b10af7e7e2) feat: add uhid and joydev extensions
+* [`3670607`](https://github.com/siderolabs/extensions/commit/36706070f7a95e55f3e94a6e909fc393bed35173) feat: update pkgs to pull in Linux firmware 20260410
+* [`26dae82`](https://github.com/siderolabs/extensions/commit/26dae82e3846bf6b93fed0ae29ae88f4fdfc0a44) feat(ci): add extensions duplicate finder
+* [`a9a1e7d`](https://github.com/siderolabs/extensions/commit/a9a1e7dd9e8c759b365cf8fa0c8bc65be10174f8) chore: update dependencies
+* [`f525338`](https://github.com/siderolabs/extensions/commit/f52533829cfb52ec560e957ab5d5e03e25bc1ad1) chore: rekres
+* [`fdd0258`](https://github.com/siderolabs/extensions/commit/fdd02585f835159c1266f1b141f67423e3450d2a) feat: nvidia extension rework
+* [`5a0db53`](https://github.com/siderolabs/extensions/commit/5a0db5378c1f396448c1e339a8fd19e6c0326a8e) feat: allow more nvidia and nvme files from extensions
+* [`77208fd`](https://github.com/siderolabs/extensions/commit/77208fd162d3bd429f0245c9529ce0db4ddee91b) feat: allow glibc ld files in etc
+* [`ddd4720`](https://github.com/siderolabs/extensions/commit/ddd47209fb6a55616b7c81df2547c948a5f727f9) feat: reenable netbird
+* [`62d2176`](https://github.com/siderolabs/extensions/commit/62d2176758a959c63649612efb896876a623665d) fix: netbird config to a persistent location
+* [`5aeaf4e`](https://github.com/siderolabs/extensions/commit/5aeaf4e774be4b35feb8c522bfce01014e503591) fix: export zpools on zfs shutdown
+* [`b28a70d`](https://github.com/siderolabs/extensions/commit/b28a70da13f61b8c90be579d359a418d15beb95d) fix: disable NVIDIA GPU check while building the driver
+* [`faa5ccd`](https://github.com/siderolabs/extensions/commit/faa5ccd7eba9a203944912f120ee4af07e287f6a) feat: update musl to 1.2.6
+* [`a6b6bb9`](https://github.com/siderolabs/extensions/commit/a6b6bb91551623d266877df4dda5600c759e74a7) feat: update NVIDIA production to 595.58.03
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>22 commits</summary>
+<p>
+
+* [`6a53a93`](https://github.com/siderolabs/pkgs/commit/6a53a933d1b9bf3c3e3d9fae8d7bc3e9021d418e) feat: bump kernel to 6.18.25
+* [`f567bce`](https://github.com/siderolabs/pkgs/commit/f567bced2b6b5517cf70a5e925995e2dcdcd8444) feat: disable more stuff in Kconfig
+* [`ffd9790`](https://github.com/siderolabs/pkgs/commit/ffd97909dd732c3ba8520ea4354ab2ecf07e8ba9) feat: bump kernel to 6.18.24
+* [`b7c709a`](https://github.com/siderolabs/pkgs/commit/b7c709add255e09b3b1101abad06b4f3b17952cd) feat: bump deps
+* [`e5e5b3c`](https://github.com/siderolabs/pkgs/commit/e5e5b3c0e65911069be6a62326fea677baac7245) feat: update Linux to 6.18.23
+* [`1a4cd20`](https://github.com/siderolabs/pkgs/commit/1a4cd203fddcb04610bcf933c1f9058d94744863) fix: renovate config
+* [`d0ed6ed`](https://github.com/siderolabs/pkgs/commit/d0ed6ed134c4aca27b4c8ef9dfc87476905487d4) feat: update dependencies
+* [`6ea49c7`](https://github.com/siderolabs/pkgs/commit/6ea49c7264baf6948e8b793f0b8c1306f71efe5a) fix: support disabling module signature verification
+* [`6520ec4`](https://github.com/siderolabs/pkgs/commit/6520ec481c215cbfcd44996e07cdb87057f12c71) feat: update containerd to 2.2.3
+* [`37ce992`](https://github.com/siderolabs/pkgs/commit/37ce992e6a7d576fce9432fcf30fb7a656056d89) feat: enable CONFIG_UHID and CONFIG_INPUT_JOYDEV as modules
+* [`cddd934`](https://github.com/siderolabs/pkgs/commit/cddd934ff6704bce64fe5861518d40801d6574f4) feat: update backportable dependencies
+* [`32e4077`](https://github.com/siderolabs/pkgs/commit/32e4077a095576ac5b0f32fb08fd7601ccf4f30f) feat: update OpenSSL
+* [`2d241e7`](https://github.com/siderolabs/pkgs/commit/2d241e7ec587a16fcf16aac8ad2ed47dfa38253b) feat: update Go to 1.26.2 and small deps updates
+* [`7f540ce`](https://github.com/siderolabs/pkgs/commit/7f540ce7f367484cd44eb1d5ce25b59cf1cd1dce) feat: disable dynamic SCS
+* [`3bef043`](https://github.com/siderolabs/pkgs/commit/3bef04361931a686d163a0c3cc76165f1059b838) feat: update runc to 1.4.2
+* [`c6e6f10`](https://github.com/siderolabs/pkgs/commit/c6e6f1004e9f2947e0aea42a0baee197e745576f) feat: update Linux to 6.18.21
+* [`a9e8afa`](https://github.com/siderolabs/pkgs/commit/a9e8afa610b325c5cbc6470bc62be92849dc5b88) fix: libarchive install prefix
+* [`e4d0113`](https://github.com/siderolabs/pkgs/commit/e4d0113483e8c1920efc74037a10a82757493560) feat: update for musl 1.2.6
+* [`9142603`](https://github.com/siderolabs/pkgs/commit/9142603113d8668de274b2cb207c69ae0a630e1c) feat: update NVIDIA production to 595.58.03
+* [`22fa669`](https://github.com/siderolabs/pkgs/commit/22fa66967bf36b727a004495f0457049313be1f5) feat: update Linux to 6.18.19
+* [`03680ae`](https://github.com/siderolabs/pkgs/commit/03680ae6e2e00501115415733a09891a5fd2fc35) feat: update containerd patch verifier role
+* [`bdc239e`](https://github.com/siderolabs/pkgs/commit/bdc239e6a293bad5ba274874ceaf5f3d98a62284) feat: enable CHECKPOINT_RESTORE option
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>7 commits</summary>
+<p>
+
+* [`44ad18c`](https://github.com/siderolabs/tools/commit/44ad18c5a553eb2f728f369a8c56e3c257730da2) feat: bump deps
+* [`f3d0dd9`](https://github.com/siderolabs/tools/commit/f3d0dd9ca5c9006ca14890af1ab8a58248ae28d8) fix: renovate configs
+* [`4ac4449`](https://github.com/siderolabs/tools/commit/4ac444995923055b5c410dc957579f4b0b308394) feat: update dependencies
+* [`027744f`](https://github.com/siderolabs/tools/commit/027744f476f38f0fda9b1fd0ae7fb3aed0ab4ad1) feat: bump OpenSSL to 3.6.2
+* [`7067f1f`](https://github.com/siderolabs/tools/commit/7067f1f966cff98c83cf2a4ecfaf06021397d954) feat: update util-linux to 2.41.4
+* [`6cb3e56`](https://github.com/siderolabs/tools/commit/6cb3e561ff60abc78cefd570189651c8afdc7121) feat: update Go to 1.26.2
+* [`9186c5f`](https://github.com/siderolabs/tools/commit/9186c5ffff2bffa4b92d7377d254faedceba6036) feat: update musl to 1.2.6
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0 -> v1.14.0-alpha.0-20-g6a53a93
+* **github.com/siderolabs/tools**  v1.13.0 -> v1.14.0-alpha.0-6-g44ad18c
+
+Previous release can be found at [v1.13.0](https://github.com/siderolabs/extensions/releases/tag/v1.13.0)
+
 ## [Talos System Extensions 1.13.0-alpha.2](https://github.com/siderolabs/extensions/releases/tag/v1.13.0-alpha.2) (2026-02-24)
 
 Welcome to the v1.13.0-alpha.2 release of Talos System Extensions!  

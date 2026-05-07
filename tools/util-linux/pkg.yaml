@@ -12,7 +12,10 @@ steps:
     prepare:
       - |
         tar -xJf util-linux.tar.xz --strip-components=1
-
+      - |
+        # https://github.com/openwrt/openwrt/issues/23058
+        patch -p1 < /pkg/patches/0001-nsenter-Fix-AT_HANDLE_FID-on-musl.patch
+      - |
         mkdir build
         cd build
         ../configure \

@@ -24,6 +24,7 @@ kernel/drivers/net/usb/smsc95xx.ko
 kernel/drivers/net/usb/gl620a.ko
 kernel/drivers/net/usb/r8153_ecm.ko
 kernel/drivers/net/usb/cdc_ether.ko
+kernel/drivers/net/usb/ipheth.ko
 kernel/drivers/net/usb/cx82310_eth.ko
 kernel/drivers/net/usb/huawei_cdc_ncm.ko
 kernel/drivers/net/usb/kalmia.ko

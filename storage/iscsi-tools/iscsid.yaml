@@ -16,11 +16,40 @@ container:
     readonlyPaths: []
     writeableSysfs: true
   mounts:
-    - source: /etc/iscsi/initiatorname.iscsi
-      destination: /etc/iscsi/initiatorname.iscsi
+    # ld-musl-x86_64.so.1
+    - source: /lib
+      destination: /lib
       type: bind
       options:
         - bind
+        - ro
+    # libcrypto.so and libc.so
+    - source: /usr/lib
+      destination: /usr/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    # iscsi libs
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options:
+        - bind
+        - ro
+    - source: /usr/local/sbin
+      destination: /usr/local/sbin
+      type: bind
+      options:
+        - bind
+        - ro
+    # iscsi etc folder
+    - source: /etc/iscsi
+      destination: /etc/iscsi
+      type: bind
+      options:
+        - rshared
+        - rbind
         - ro
     - source: /var/lib/iscsi
       destination: /var/lib/iscsi

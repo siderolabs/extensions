@@ -1,0 +1,13 @@
+version: v1alpha1
+metadata:
+  name: joydev
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides the joydev kernel module built against a specific Talos version.
+    This kernel module provides the Linux joystick interface (/dev/input/js*) for the Gamepad API.
+    It is required for game streaming software like Sunshine to expose gamepad input to applications
+    that use the legacy joystick API or the browser Gamepad API via evdev-to-joydev translation.
+  compatibility:
+    talos:
+      version: ">= v1.4.5"
