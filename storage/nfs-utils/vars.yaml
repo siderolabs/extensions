@@ -1,9 +1,9 @@
 VERSION: v0.1.1
 
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://gitlab.gnome.org/GNOME/libxml2.git
-LIBXML2_VERSION: 2.15.2
-LIBXML2_SHA256: c8b9bc81f8b590c33af8cc6c336dbff2f53409973588a351c95f1c621b13d09d
-LIBXML2_SHA512: 35f18fee772e63e8ea6220e5f5435ef5aabb5692a4519a993ec9640576d08fa45d5097280add5c5ffb5c280359d05eeecab0df24cce0b7ec35eef102d607b0b8
+LIBXML2_VERSION: 2.15.3
+LIBXML2_SHA256: 78262a6e7ac170d6528ebfe2efccdf220191a5af6a6cd61ea4a9a9a5042c7a07
+LIBXML2_SHA512: 6f7f1aabd012454553e851bd1ee548fbd14d21c576f2b2ab9eeedab3dfba51392083f74b34f060e9b538baeea212cdb462b8669c214c711771fb9a897fdc1c60
 
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=thkukuk/rpcsvc-proto
 RPCSVC_PROTO_VERSION: 1.4.4
