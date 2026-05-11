@@ -1,0 +1,40 @@
+name: zlib-ng-nvidia
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
+install:
+  - bash
+  - build-base
+  - gcc-14
+steps:
+  - sources:
+      - url: https://github.com/zlib-ng/zlib-ng/archive/refs/tags/{{ .ZLIB_NG_VERSION }}.tar.gz
+        destination: zlib.tar.gz
+        sha256: "{{ .ZLIB_NG_SHA256 }}"
+        sha512: "{{ .ZLIB_NG_SHA512 }}"
+    prepare:
+      - |
+        tar -xf zlib.tar.gz --strip-components=1
+      - |
+        ./configure --prefix=/usr/local/ \
+          --zlib-compat
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs install
+
+        # we only need the shared libraries, so remove the static libraries and pkgconfig files that are not needed
+        rm -rf /rootfs/usr/local/{include,lib/{*.a,pkgconfig}}
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/zlib-ng.spdx.json
+      version: {{ .ZLIB_NG_VERSION }}
+      cpes:
+        - cpe:2.3:a:zlib-ng:zlib-ng:{{ .ZLIB_NG_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - Zlib
+finalize:
+  - from: /rootfs
+    to: /rootfs

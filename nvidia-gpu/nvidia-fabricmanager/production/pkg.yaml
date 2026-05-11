@@ -3,6 +3,15 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
+  - stage: glibc
+    from: /rootfs/
+    to: /rootfs/usr/local/lib/containers/nvidia-fabricmanager/
+  # nvidia-fabricmanager needs libz.so.1 on x86_64
+  # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - stage: zlib-ng-nvidia
+    from: /rootfs/
+    to: /rootfs/usr/local/lib/containers/nvidia-fabricmanager/
+  # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated
   - stage: nvidia-fabricmanager-gcc-runtime
   - stage: nvidia-fabricmanager-wrapper
 steps:
