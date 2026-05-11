@@ -7,6 +7,12 @@ steps:
       - |
         mkdir -p /rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/lib
         cp /usr/lib/libgcc_s.so.1 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/lib/
+
+        # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        ln -s usr/lib /rootfs/usr/local/lib/containers/nvidia-fabricmanager/lib
+        # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        ln -s usr/lib /rootfs/usr/local/lib/containers/nvidia-fabricmanager/lib64
+        # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
 finalize:
   - from: /rootfs
     to: /rootfs
