@@ -81,6 +81,9 @@ steps:
         else
           echo -e '\nDATABASE_PATH=/var/run\n' >>/rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
         fi
+
+        # run ldconfig to update the cache
+        /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/sbin/ldconfig -r /rootfs/usr/local/lib/containers/nvidia-fabricmanager
       - |
         mkdir -p /rootfs/usr/local/etc/containers
         cp /pkg/nvidia-fabricmanager.yaml /rootfs/usr/local/etc/containers/nvidia-fabricmanager.yaml
