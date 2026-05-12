@@ -1,3 +1,88 @@
+## [Talos System Extensions 1.13.1](https://github.com/siderolabs/extensions/releases/tag/v1.13.1) (2026-05-12)
+
+Welcome to the v1.13.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+NVIDIA LTS: 580.159.03
+NVIDIA Production: 595.71.05
+DRBD: 9.3.2
+Amazon ENA: 2.17.0
+xdma-driver: afea0d5
+crun: 1.27.1
+gvisor: 20260427.0
+kata-containers: 3.30.0
+spin: 0.24.0
+netbird: 0.70.5
+newt: 1.12.3
+mdadm: 4.6
+qemu-guest-agent: 11.0.0
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Lukasz Raczylo
+* Edward Sammut Alessi
+* YANG JOO WOONG
+* imusmanmalik
+
+### Changes
+<details><summary>10 commits</summary>
+<p>
+
+* [`f5bed72`](https://github.com/siderolabs/extensions/commit/f5bed72a945b30c4595b375eb73f84c61f3fbc7e) fix: add missing ldconfig step fabricmanager production
+* [`da53d40`](https://github.com/siderolabs/extensions/commit/da53d40ff15db85bb63f650bd152b38ed347820c) fix: nvidia-fabricmanager missing libz dependency
+* [`fbba8da`](https://github.com/siderolabs/extensions/commit/fbba8da99fcab5edf86a79fa6b81675555cbdf58) feat: bump dependencies
+* [`4042527`](https://github.com/siderolabs/extensions/commit/4042527f64fe39a7506e2da8c8a0ce450d0ab6e0) feat: allow bird to start in maintenance mode
+* [`0c8e6c9`](https://github.com/siderolabs/extensions/commit/0c8e6c96d9d017f162cdce88c75f9a2d87a8f1fe) feat: update DRBD to 9.3.2
+* [`e352ac1`](https://github.com/siderolabs/extensions/commit/e352ac1ee5d3a415b1ad08ed0f016fe1f94e5391) feat: update NVIDIA drivers
+* [`563d30f`](https://github.com/siderolabs/extensions/commit/563d30f0ee41c5127c3397c69f44aee6b7fd5dc3) fix: install iptables correctly into tailscale extension
+* [`b74d1e1`](https://github.com/siderolabs/extensions/commit/b74d1e1e64b52edc6f360bbedc32a443bd5d464d) chore: bump metal-agent to 0.1.5
+* [`373c4a1`](https://github.com/siderolabs/extensions/commit/373c4a1a1b8bf37e2c30a83ea12dd27cb87538ff) feat: promote multitpath-tools to extra, bump version
+* [`4029bf8`](https://github.com/siderolabs/extensions/commit/4029bf891451f69a9943f5db565a8f3e9490ce46) feat: update Go to 1.26.3
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>10 commits</summary>
+<p>
+
+* [`4be1aaa`](https://github.com/siderolabs/pkgs/commit/4be1aaa7e595a3260ca56bcd49ebed4918642482) feat: bump kernel 6.18.28
+* [`e49ad17`](https://github.com/siderolabs/pkgs/commit/e49ad17f93808c526543684ae64ebe19ab992cd0) feat(kernel): backport two PCI bridge realloc fixes from v6.19
+* [`27cea5f`](https://github.com/siderolabs/pkgs/commit/27cea5f429f1e2d42d54ba3ed4b5fad2246c1ccd) feat: update NVIDIA drivers
+* [`6c3007f`](https://github.com/siderolabs/pkgs/commit/6c3007f1ecf6fba1f2a5a00795a00741246236f2) feat: update Linux to 6.18.27
+* [`92bf093`](https://github.com/siderolabs/pkgs/commit/92bf093ccd5b004c214ea42df60e19e69fd89cce) feat: update Linux to 6.18.26
+* [`753307b`](https://github.com/siderolabs/pkgs/commit/753307b6728d17e611ecec33601b117e51d045c7) feat: update DRBD to 9.3.2
+* [`f6066dc`](https://github.com/siderolabs/pkgs/commit/f6066dcf0c1f63a523f9d46326335f1c2fce4a39) docs: list net macb silent TX stall fixes in kernel/build/patches/README.md
+* [`fe81e27`](https://github.com/siderolabs/pkgs/commit/fe81e27cfde73cb861f7a8236da7e01052068da3) fix: macb silent TX stall on BCM2712/RP1 (RFC patches from netdev)
+* [`dd2bd8a`](https://github.com/siderolabs/pkgs/commit/dd2bd8a612898ba3773680b466f7e280228b7700) feat: bump kernel to 6.18.25
+* [`4bad9ea`](https://github.com/siderolabs/pkgs/commit/4bad9eaf53bd18cbbe97adb753c9cc00348694e1) feat: update Go to 1.26.3
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>2 commits</summary>
+<p>
+
+* [`1fb762a`](https://github.com/siderolabs/tools/commit/1fb762acfdabba02481c7fc62af942801a7af7cc) feat: add Python wheel package
+* [`274fdf5`](https://github.com/siderolabs/tools/commit/274fdf57104e10882680de5bd2508bd9986aa31d) feat: update Go to 1.26.3
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0 -> v1.13.0-10-g4be1aaa
+* **github.com/siderolabs/tools**  v1.13.0 -> v1.13.0-2-g1fb762a
+
+Previous release can be found at [v1.13.0](https://github.com/siderolabs/extensions/releases/tag/v1.13.0)
+
 ## [Talos System Extensions 1.13.0](https://github.com/siderolabs/extensions/releases/tag/v1.13.0) (2026-04-27)
 
 Welcome to the v1.13.0 release of Talos System Extensions!
