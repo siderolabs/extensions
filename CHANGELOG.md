@@ -1,3 +1,45 @@
+## [Talos System Extensions 1.13.2](https://github.com/siderolabs/extensions/releases/tag/v1.13.2) (2026-05-12)
+
+Welcome to the v1.13.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+NVIDIA LTS: 580.159.03
+NVIDIA Production: 595.71.05
+DRBD: 9.3.2
+Amazon ENA: 2.17.0
+xdma-driver: afea0d5
+crun: 1.27.1
+gvisor: 20260427.0
+kata-containers: 3.30.0
+spin: 0.24.0
+netbird: 0.70.5
+newt: 1.12.3
+mdadm: 4.6
+qemu-guest-agent: 11.0.0
+
+
+### Contributors
+
+
+### Changes
+<details><summary>0 commit</summary>
+<p>
+
+</p>
+</details>
+
+### Dependency Changes
+
+This release has no dependency changes
+
+Previous release can be found at [v1.13.1](https://github.com/siderolabs/extensions/releases/tag/v1.13.1)
+
 ## [Talos System Extensions 1.13.1](https://github.com/siderolabs/extensions/releases/tag/v1.13.1) (2026-05-12)
 
 Welcome to the v1.13.1 release of Talos System Extensions!

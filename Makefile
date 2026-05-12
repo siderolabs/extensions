@@ -1,6 +1,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED, PLEASE DO NOT EDIT.
 #
-# Generated on 2026-05-08T16:34:08Z by kres 1762ab2.
+# Generated on 2026-05-12T17:16:05Z by kres 1762ab2.
 
 # common variables
 
@@ -55,7 +55,7 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.13.0-10-g4be1aaa
+PKGS ?= v1.13.0-11-g969f61c
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.13.0-2-g1fb762a
 TOOLS_PREFIX ?= ghcr.io/siderolabs
@@ -345,3 +345,4 @@ renovate-local:  ## runs renovate locally to check syntax and test configuration
 		-e RENOVATE_PLATFORM=local \
 		-e RENOVATE_DRY_RUN=full \
 	renovate/renovate
+
