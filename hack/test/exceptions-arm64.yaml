@@ -925,7 +925,6 @@
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/gconv/libKSC.so
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/gcrt1.o
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/grcrt1.o
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/ld-linux-x86-64.so.2
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libBrokenLocale.a
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libBrokenLocale.so
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libBrokenLocale.so.1
