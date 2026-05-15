@@ -22,6 +22,8 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
 Linux Firmware: 20260519
 ctr: 2.2.4
 Intel u-code: 20260512
+NVIDIA LTS: 580.159.04
+ZFS: 2.4.2
 """
 
 [make_deps]
