@@ -1,5 +1,11 @@
 # nfs-utils
 
+> **NOTE: Security Consideration**
+>
+> `rpcbind` listens on all network interfaces by default. This is required for remote NFS
+> clients to discover RPC services. Ensure that rpcbind is only exposed on trusted networks
+> and use host-level firewalling or Kubernetes network policies to restrict access to port 111.
+
 This extension provides `rpcbind` and `rpc.statd` daemons for NFSv3 file locking support.
 
 ## What's Included
