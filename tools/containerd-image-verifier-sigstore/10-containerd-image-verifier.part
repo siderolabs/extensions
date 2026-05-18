@@ -1,0 +1,5 @@
+[plugins]
+  [plugins."io.containerd.image-verifier.v1.bindir"]
+    bin_dir = "/usr/local/bin/containerd-image-verifier"
+    max_verifiers = 10
+    per_verifier_timeout = "10s"
