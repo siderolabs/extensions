@@ -86,6 +86,7 @@ TARGETS += glibc
 TARGETS += gvisor
 TARGETS += gvisor-debug
 TARGETS += hailort
+TARGETS += harbor-credential-provider
 TARGETS += hello-world-service
 TARGETS += i915
 TARGETS += intel-ice-firmware

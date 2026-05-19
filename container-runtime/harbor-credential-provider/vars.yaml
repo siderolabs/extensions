@@ -1,0 +1,2 @@
+VERSION: "{{ .HARBOR_WIF_VERSION }}"
+TIER: "extra"

@@ -18,6 +18,12 @@ SOCI_SNAPSHOTTER_SHA512: afaa4e775d7ee938664c7cc84b3c51ba9523e9bb94c0bcc3dcc0031
 CLOUD_PROVIDER_AWS_VERSION: v1.36.0
 CLOUD_PROVIDER_AWS_SHA256: 6f73331159205ee8c020f5420bd49e7e9f4a5f4ae1e7eb6c8d74165920a5c40f
 CLOUD_PROVIDER_AWS_SHA512: 3619ef804c1a677e710fdb3a1558e90d0899614d1fc05e0c6fd8b9e4b7fad01f9f1056eb824c4a59cfe84abc2a029011bf948fb5060792b8ec6043f80425833c
+
+# renovate: datasource=github-releases depName=container-registry/harbor-workload-identity-federation
+HARBOR_WIF_VERSION: v0.0.1
+HARBOR_WIF_SHA256: 49c24ce5c5bca87d4d022f69836d81a4d5ca8bda2aa49eaf5fca84b0551e9462
+HARBOR_WIF_SHA512: f75843847b3d4ae52f8f2ffd9838a38b6261e66cfab04f0c113a26507fc8edce8d6695fa6755e4790353fc833863acf27e6144c4b04b0c23c2b168ff4ddf1230
+
 # renovate: datasource=git-tags extractVersion=^containerd-shim-wasmedge\/(?<version>.*)$ depName=https://github.com/containerd/runwasi.git
 WASMEDGE_VERSION: v0.6.0
 WASMEDGE_ARM64_SHA256: b331a20e7b831da13721eea6b031e5ea79f295480777274b1593e5d612021110

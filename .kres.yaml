@@ -25,6 +25,7 @@ spec:
     - gvisor
     - gvisor-debug
     - hailort
+    - harbor-credential-provider
     - hello-world-service
     - i915
     - intel-ice-firmware

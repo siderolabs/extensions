@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: harbor-credential-provider
+  version: "{{ .VERSION }}"
+  author: Daniil Kivenko
+  description: |
+    [{{ .TIER }}] This system extension provides a binary which implements Kubelet's CredentialProvider API
+    to authenticate against Harbor / 8gears Container Registry via Workload Identity Federation
+    using short-lived Service Account tokens instead of static pull secrets.
+  compatibility:
+    talos:
+      version: ">= v1.11.0"
