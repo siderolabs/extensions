@@ -24,6 +24,7 @@ steps:
         meson setup \
           -Db_lto=true \
           -Dudevrulesdir=/usr/lib/udev/rules.d \
+          -Dsbindir=/usr/bin \
           -Djson-c=enabled \
           -Ddocs=false \
           -Dsysconfdir=/etc \
@@ -37,8 +38,6 @@ steps:
 
         DESTDIR=/rootfs meson install -C .build
         rm -rf /rootfs/{etc/nvme/discovery.conf,usr/local/{include,lib/{dracut,systemd},share}}
-
-        ln -s /usr/local/sbin/nvme /rootfs/usr/bin/nvme
     test:
       - |
         mkdir -p /extensions-validator-rootfs
