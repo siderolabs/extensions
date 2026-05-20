@@ -9,6 +9,12 @@ dependencies:
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/btrfsprogs:{{ .BUILD_ARG_PKGS }}"
     from: /usr
     to: /rootfs/usr/local
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/zlib:{{ .BUILD_ARG_PKGS }}"
+    from: /usr
+    to: /rootfs/usr/local
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/zstd:{{ .BUILD_ARG_PKGS }}"
+    from: /usr
+    to: /rootfs/usr/local
 steps:
   - install:
       - |
