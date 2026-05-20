@@ -19,7 +19,6 @@ kernel/drivers/net/usb/usbnet.ko
 kernel/drivers/net/usb/sr9800.ko
 kernel/drivers/net/usb/plusb.ko
 kernel/drivers/net/usb/lg-vl600.ko
-kernel/drivers/net/usb/cdc-phonet.ko
 kernel/drivers/net/usb/smsc95xx.ko
 kernel/drivers/net/usb/gl620a.ko
 kernel/drivers/net/usb/r8153_ecm.ko
