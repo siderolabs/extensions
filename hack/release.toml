@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.13.1"
+previous = "v1.13.2"
 
 pre_release = false
 
@@ -19,19 +19,8 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
-NVIDIA LTS: 580.159.03
-NVIDIA Production: 595.71.05
-DRBD: 9.3.2
-Amazon ENA: 2.17.0
-xdma-driver: afea0d5
-crun: 1.27.1
-gvisor: 20260427.0
-kata-containers: 3.30.0
-spin: 0.24.0
-netbird: 0.70.5
-newt: 1.12.3
-mdadm: 4.6
-qemu-guest-agent: 11.0.0
+Linux Firmware: 20260519
+ctr: 2.2.4
 """
 
 [make_deps]
