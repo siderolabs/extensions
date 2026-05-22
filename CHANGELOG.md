@@ -1,3 +1,76 @@
+## [Talos System Extensions 1.12.8](https://github.com/siderolabs/extensions/releases/tag/v1.12.8) (2026-05-22)
+
+Welcome to the v1.12.8 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+intel-ucode: 20260512
+Linux Firmware: 20260519
+ctr: v2.2.4
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Noel Georgi
+* Andrey Smirnov
+* Lukasz Raczylo
+* YANG JOO WOONG
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`2d2fc77`](https://github.com/siderolabs/extensions/commit/2d2fc7757670c53be5ff444c06a85cb0af7a56c9) chore: update dependencies
+* [`cb95d9f`](https://github.com/siderolabs/extensions/commit/cb95d9f6c64694cce0afe6246eca237cd5d435ba) feat: update intel ucode to 20260512
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>17 commits</summary>
+<p>
+
+* [`153574b`](https://github.com/siderolabs/pkgs/commit/153574ba9913451b1f2564e3548d3c292aa48f33) chore: update containerd to v2.2.4
+* [`a9a3868`](https://github.com/siderolabs/pkgs/commit/a9a38680e2719295c79750ca40b836be398c7f0e) chore: update deps
+* [`fe604f9`](https://github.com/siderolabs/pkgs/commit/fe604f96f51eb62c53ca0c3f0f3477bb5f628d04) feat: preserve System.map on kernel builds
+* [`b00971e`](https://github.com/siderolabs/pkgs/commit/b00971e539ed0d681b62000569c024f20a162901) chore: bump toolchain and tools
+* [`3b9b487`](https://github.com/siderolabs/pkgs/commit/3b9b487308fa858c8fadcf5bca788f76b75c26bc) feat: bump kernel 6.18.32
+* [`87acdb5`](https://github.com/siderolabs/pkgs/commit/87acdb5738a72dcb3e9f86b84ffff88efaba9793) feat: update Linux to 6.18.31
+* [`ea936f1`](https://github.com/siderolabs/pkgs/commit/ea936f19de47e689e9f366ef922a7c4ebf167c10) chore: run rekres
+* [`b2c955e`](https://github.com/siderolabs/pkgs/commit/b2c955edf1cc724da6fe7ff2830cacf7d905c999) feat: update Linux to 6.18.30
+* [`9a77690`](https://github.com/siderolabs/pkgs/commit/9a77690865195f89f4093e8dff02f140a1261247) fix: macb silent TX stall on BCM2712/RP1 (v2 patches from netdev)
+* [`d73927e`](https://github.com/siderolabs/pkgs/commit/d73927eeba03f6fd53d6281f7d682ae266a21421) feat: bump kernel to 6.18.29
+* [`57ab006`](https://github.com/siderolabs/pkgs/commit/57ab0068f8533594efcce996d8ed9976c5b9976e) feat: bump kernel 6.18.28
+* [`a3d2b15`](https://github.com/siderolabs/pkgs/commit/a3d2b152861efef13c90ce528bba6c72ea4fb45d) feat: update Linux to 6.18.27
+* [`dc3a7c1`](https://github.com/siderolabs/pkgs/commit/dc3a7c17c0a306841526721cff9fcd11be830402) feat(kernel): backport two PCI bridge realloc fixes from v6.19
+* [`cd6601f`](https://github.com/siderolabs/pkgs/commit/cd6601f881dfe68d832cfaa39b5615392c8e1397) feat: update Linux to 6.18.26
+* [`dd845d1`](https://github.com/siderolabs/pkgs/commit/dd845d1bca4bd3ec9db6d9a6ef2626e31b2314e7) docs: list net macb silent TX stall fixes in kernel/build/patches/README.md
+* [`df2aee2`](https://github.com/siderolabs/pkgs/commit/df2aee27d2c68c70509bc692b63c0db5bc675671) fix: macb silent TX stall on BCM2712/RP1 (RFC patches from netdev)
+* [`c0ef955`](https://github.com/siderolabs/pkgs/commit/c0ef9553d2d9bc3563cc2cf786d427b747703df5) feat: bump kernel to 6.18.25
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>2 commits</summary>
+<p>
+
+* [`cbb843d`](https://github.com/siderolabs/tools/commit/cbb843d1e4dc0e889b621a4c12a59f235c3c6165) chore: update dependencies for 1.12.8
+* [`2584442`](https://github.com/siderolabs/tools/commit/2584442dcbe95a0eac75fa621517c7eb8688b198) fix: renovate configs
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-58-g86d6af1 -> v1.12.0-75-g153574b
+* **github.com/siderolabs/tools**  v1.12.0-10-gbbd753d -> v1.12.0-12-gcbb843d
+
+Previous release can be found at [v1.12.7](https://github.com/siderolabs/extensions/releases/tag/v1.12.7)
+
 ## [Talos System Extensions 1.12.7](https://github.com/siderolabs/extensions/releases/tag/v1.12.7) (2026-04-24)
 
 Welcome to the v1.12.7 release of Talos System Extensions!
