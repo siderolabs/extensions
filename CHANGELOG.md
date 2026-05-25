@@ -1,3 +1,70 @@
+## [Talos System Extensions 1.13.3](https://github.com/siderolabs/extensions/releases/tag/v1.13.3) (2026-05-25)
+
+Welcome to the v1.13.3 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20260519
+ctr: 2.2.4
+Intel u-code: 20260512
+NVIDIA LTS: 580.159.04
+ZFS: 2.4.2
+cloud-provider-aws: v1.36.0
+lldpd: 1.0.22
+tailscale: 1.98.2
+kata containers: 3.31.0
+cloudflared: 2026.5.0
+netbird: 0.71.2
+newt: 1.12.5
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Mateusz Urbanek
+* Lukasz Raczylo
+
+### Changes
+<details><summary>5 commits</summary>
+<p>
+
+* [`91340a7`](https://github.com/siderolabs/extensions/commit/91340a79689f7dd70ab54c4ff8322ebff1a3bf15) chore: update tools, pkgs, extensions
+* [`2d76907`](https://github.com/siderolabs/extensions/commit/2d76907de6b0531cdbe36ed8ecc3f3342230d508) fix: nvme-cli install path
+* [`4ff40cc`](https://github.com/siderolabs/extensions/commit/4ff40ccf31225ec5a32c2f4467f6cb3732f05d21) feat: update ZFS & NVIDIA LTS
+* [`1cb92eb`](https://github.com/siderolabs/extensions/commit/1cb92eb03bde31d1f723e882f186bbeca1510449) feat: update intel ucode to 20260512
+* [`35baed8`](https://github.com/siderolabs/extensions/commit/35baed89cb8508e99dccefc1024fe5200003f9fc) feat: update pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>10 commits</summary>
+<p>
+
+* [`993d4a6`](https://github.com/siderolabs/pkgs/commit/993d4a604a8da3b5348c1614ad4eb74f990ba90b) feat: enable PPP and INFINIBAND_BNXT_RE
+* [`12d5337`](https://github.com/siderolabs/pkgs/commit/12d5337fa3f40391a95471e5567c0fc8da1ece6a) feat: enable more options for CRI-U checkpoint/restore
+* [`c2e43aa`](https://github.com/siderolabs/pkgs/commit/c2e43aa780db1de92327d171794e9430a16d8ba7) feat: preserve System.map on kernel builds
+* [`230b4bc`](https://github.com/siderolabs/pkgs/commit/230b4bcde10b27042cd14547840b91b651ed7182) chore: update deps
+* [`847a37e`](https://github.com/siderolabs/pkgs/commit/847a37e6cd2f4792d65cc7a2c7625d68285e779e) feat: bump kernel 6.18.32
+* [`d7ae843`](https://github.com/siderolabs/pkgs/commit/d7ae84366e30a2236feb3bea7b37c2c1385e325f) feat: update Linux to 6.18.31
+* [`a26d3c0`](https://github.com/siderolabs/pkgs/commit/a26d3c0f87356b014f39aab54ce0e4e35c98da77) feat: update ZFS & NVIDIA LTS
+* [`94d28c5`](https://github.com/siderolabs/pkgs/commit/94d28c5c5abb9012f7424ffff3b3a3794f0cc381) feat: update Linux to 6.18.30
+* [`b3dd525`](https://github.com/siderolabs/pkgs/commit/b3dd5252478cf266ed04cd34a2ecbdf028feae5e) fix: macb silent TX stall on BCM2712/RP1 (v2 patches from netdev)
+* [`8bdd5e0`](https://github.com/siderolabs/pkgs/commit/8bdd5e0e245e641170d3bd60f61f85be5006938c) feat: update containerd to 2.2.4
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.13.0-11-g969f61c -> v1.13.0-21-g993d4a6
+
+Previous release can be found at [v1.13.2](https://github.com/siderolabs/extensions/releases/tag/v1.13.2)
+
 ## [Talos System Extensions 1.13.2](https://github.com/siderolabs/extensions/releases/tag/v1.13.2) (2026-05-12)
 
 Welcome to the v1.13.2 release of Talos System Extensions!
