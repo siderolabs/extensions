@@ -5,13 +5,23 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 	"os/exec"
 	"os/signal"
+	"time"
 
 	"golang.org/x/sys/unix"
 )
+
+// defaultExportTimeout bounds the shutdown `zpool export -a` so this PID 1 exits
+// before Talos's fixed 10s SIGTERM->SIGKILL grace for extension services,
+// leaving headroom for `zfs unmount -au`, the 1s WaitDelay, and a clean process
+// exit so the containerd shim can unmount the /dev rbind in order. Override with
+// the ZFS_EXPORT_TIMEOUT env var (a Go duration); 0 skips the export entirely
+// (pre-v1.13.0 behavior, before #1028 added the export).
+const defaultExportTimeout = 8 * time.Second
 
 func main() {
 	cmd := exec.Command("/usr/local/sbin/zpool", "import", "-fal")
@@ -32,10 +42,35 @@ func main() {
 		log.Fatalf("zfs-service: zfs unmount error: %v\n", err)
 	}
 
-	cmd = exec.Command("/usr/local/sbin/zpool", "export", "-a")
+	// ZFS_EXPORT_TIMEOUT overrides the bound; 0 skips the export entirely.
+	timeout := defaultExportTimeout
+	if v := os.Getenv("ZFS_EXPORT_TIMEOUT"); v != "" {
+		d, err := time.ParseDuration(v)
+		if err != nil {
+			log.Printf("zfs-service: invalid ZFS_EXPORT_TIMEOUT %q: %v; using %s\n", v, err, timeout)
+		} else {
+			timeout = d
+		}
+	}
+
+	if timeout == 0 {
+		log.Printf("zfs-service: ZFS_EXPORT_TIMEOUT=0, skipping zpool export; pools will be re-imported on next boot\n")
+
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+
+	cmd = exec.CommandContext(ctx, "/usr/local/sbin/zpool", "export", "-a")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	cmd.WaitDelay = time.Second
+
 	if err := cmd.Run(); err != nil {
-		log.Fatalf("zfs-service: zpool export error: %v\n", err)
+		// Do NOT log.Fatalf: a non-zero exit blocks the containerd shim from
+		// unmounting the /dev rbind, which wedges shutdown for ~20 minutes.
+		// Un-exported pools are recovered next boot by `zpool import -fal`.
+		log.Printf("zfs-service: zpool export did not finish within %s: %v; leaving pools for boot-time import\n", timeout, err)
 	}
 }
