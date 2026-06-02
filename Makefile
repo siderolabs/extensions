@@ -78,6 +78,7 @@ TARGETS += ctr
 TARGETS += drbd
 TARGETS += dvb-cx23885
 TARGETS += dvb-m88ds3103
+TARGETS += dvb-usb-dvbsky
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
 TARGETS += gasket-driver
