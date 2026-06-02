@@ -31,6 +31,7 @@
     - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
     - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
     - registry.dev.siderolabs.io/siderolabs/dvb-pt3
+    - registry.dev.siderolabs.io/siderolabs/dvb-usb-dvbsky
     - registry.dev.siderolabs.io/siderolabs/usb-audio-drivers
     - registry.dev.siderolabs.io/siderolabs/v4l-uvc-drivers
   files:
@@ -40,18 +41,22 @@
     - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
     - registry.dev.siderolabs.io/siderolabs/dvb-pt3
   files:
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-core/dvb-core.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tc90522.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mxl301rf.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/qm1d1c0042.ko
 - images:
     - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
     - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
+    - registry.dev.siderolabs.io/siderolabs/dvb-pt3
+    - registry.dev.siderolabs.io/siderolabs/dvb-usb-dvbsky
+  files:
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-core/dvb-core.ko
+- images:
+    - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
+    - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
   files:
     - rootfs/usr/lib/firmware/dvb-demod-si2168-02.fw
-    - rootfs/usr/lib/firmware/dvb-demod-si2168-b40-01.fw
     - rootfs/usr/lib/firmware/v4l-cx23885-avcore-01.fw
-    - rootfs/usr/lib/modules/*/kernel/drivers/i2c/i2c-mux.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/common/cx2341x.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/common/tveeprom.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/common/videobuf2/videobuf2-dma-sg.ko
@@ -128,9 +133,7 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/s5h1432.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/s921.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/si2165.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/si2168.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/si21xx.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/sp2.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/sp887x.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/stb0899.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/stb6000.ko
@@ -156,7 +159,6 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tda8083.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tda8261.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tda826x.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/ts2020.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tua6100.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/ves1820.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/ves1x93.ko
@@ -304,7 +306,6 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-xbox-360.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-xbox-dvd.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-zx-irdec.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/rc-core.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/e4000.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/fc0011.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/fc0012.ko
@@ -324,7 +325,6 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/qm1d1b0004.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/qt1010.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/r820t.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/si2157.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/tda18212.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/tda18218.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/tda18250.ko
@@ -342,6 +342,23 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/xc5000.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/v4l2-core/tuner.ko
     - rootfs/usr/local/lib/modprobe.d/dvb-cx23885.conf
+- images:
+    - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
+    - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
+    - registry.dev.siderolabs.io/siderolabs/dvb-usb-dvbsky
+  files:
+    - rootfs/usr/lib/firmware/dvb-demod-si2168-b40-01.fw
+    - rootfs/usr/lib/modules/*/kernel/drivers/i2c/i2c-mux.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/si2168.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/sp2.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/ts2020.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/rc-core.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/si2157.ko
+- images:
+    - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
+    - registry.dev.siderolabs.io/siderolabs/dvb-usb-dvbsky
+  files:
+    - rootfs/usr/lib/firmware/dvb-demod-m88ds3103.fw
 - images:
     - registry.dev.siderolabs.io/siderolabs/glibc
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-lts
