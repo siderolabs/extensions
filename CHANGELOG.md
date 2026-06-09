@@ -1,3 +1,56 @@
+## [Talos System Extensions 1.13.4](https://github.com/siderolabs/extensions/releases/tag/v1.13.4) (2026-06-09)
+
+Welcome to the v1.13.4 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+tailscale: 1.98.3
+cloudflared: 2026.5.2
+netbird: 0.71.4
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Noel Georgi
+* Andrey Smirnov
+* Bernard Gütermann
+* Rokoucha
+* appkins
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`e8fe6ce`](https://github.com/siderolabs/extensions/commit/e8fe6ce44c79aa6764d06e03412529d22e7fd362) chore: update deps
+* [`558e19a`](https://github.com/siderolabs/extensions/commit/558e19ac5d9771576698df10b3a051435424e835) fix: bound zpool export at shutdown with a configurable timeout
+* [`fb134b5`](https://github.com/siderolabs/extensions/commit/fb134b5f81d8c14deed534b7d16613b347a25024) feat: bump dependencies
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>5 commits</summary>
+<p>
+
+* [`54ec9fc`](https://github.com/siderolabs/pkgs/commit/54ec9fc3b3890196c4202bca5845f4f12fb651b2) fix: disable PAGE_TABLE_CHECK_ENFORCED in kernel config
+* [`0d5985a`](https://github.com/siderolabs/pkgs/commit/0d5985a7c4a5d4b43670d317210281bc92985054) feat: enable USB hiddev for apcupsd support
+* [`593e34c`](https://github.com/siderolabs/pkgs/commit/593e34ce2c2c77657c0d86c7887c1f0096ae1c6e) feat: bump kernel to 6.18.34
+* [`366f575`](https://github.com/siderolabs/pkgs/commit/366f575acc1d927d9858222c9374fc94072c4fab) fix: enable CONFIG_BCM2712_MIP as built-in in arm64 kernel config
+* [`b45e84c`](https://github.com/siderolabs/pkgs/commit/b45e84ccb056057e3b2f41b0b18bf328704a067d) feat: bump Go to 1.26.4
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.13.0-23-g8c18616 -> v1.13.0-28-g54ec9fc
+
+Previous release can be found at [v1.13.3](https://github.com/siderolabs/extensions/releases/tag/v1.13.3)
+
 ## [Talos System Extensions 1.13.3](https://github.com/siderolabs/extensions/releases/tag/v1.13.3) (2026-05-25)
 
 Welcome to the v1.13.3 release of Talos System Extensions!
