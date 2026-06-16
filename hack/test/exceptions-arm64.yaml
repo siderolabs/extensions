@@ -374,6 +374,7 @@
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-production
   files:
+    - rootfs/usr/lib/modules/*/extras/nvidia-fs.ko
     - rootfs/usr/local/lib/modprobe.d/nvidia.conf
 - images:
     - registry.dev.siderolabs.io/siderolabs/nonfree-kmod-nvidia-lts
