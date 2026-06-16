@@ -24,7 +24,7 @@ cloudflared: 2026.5.2
 px-fuse: 6c31bb5022ef0bf4e120ce1a0abc5dd40ce7c74d
 util-linux: 2.42.0
 tenstorrent: 2.9.0
-NVIDIA LTS: 580.159.04
+NVIDIA LTS: 580.167.08
 NVIDIA Production: 595.71.05
 NVIDIA Container Toolkit: 1.19.1
 DRBD: 9.3.2
@@ -38,7 +38,7 @@ netbird: 0.71.4
 newt: 1.12.5
 mdadm: 4.6
 qemu-guest-agent: 11.0.1
-ZFS: 2.4.2
+ZFS: 2.4.3
 linux-firmware: 20260519
 intel-ucode: 20260512
 cloud-provider-aws: v1.36.0

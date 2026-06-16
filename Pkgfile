@@ -7,9 +7,9 @@ vars:
   LINUX_FIRMWARE_VERSION: "20260519" # update this when updating PKGS version tag in Makefile
   DRBD_DRIVER_VERSION: 9.3.2 # update this when updating PKGS version tag in Makefile
   PX_FUSE_DRIVER_VERSION: 6c31bb5022ef0bf4e120ce1a0abc5dd40ce7c74d # update this when updating PKGS version tag in Makefile
-  ZFS_DRIVER_VERSION: 2.4.2 # update this when updating PKGS_VERSION in Makefile
-  ZFS_TOOLS_SHA256: 7e260d0e6af295bea4c5e241cac0a1aef07b58d8dd8035f7898ade3b1bbec78f
-  ZFS_TOOLS_SHA512: 833cc076ae65a4ac6acc27c6c62f60568af0c291b9a1091a1835543861a291606e314b09ca14558cbed11239bb613e3f1f7f9e7fedeea6635e27aacde8c22378
+  ZFS_DRIVER_VERSION: 2.4.3 # update this when updating PKGS version tag in Makefile
+  ZFS_TOOLS_SHA256: 1f08f2d154f5189b5f1382848a32667b3d34066145b474c49cd3d41a5fba59a7
+  ZFS_TOOLS_SHA512: 343fbb19c0ca5f91254d216b6113fb8a7b028bdafc976ba9cb1ff6b7d3442a6a0fbf2cc4bde4f2fcc7cb7293cc17a1914664a943e5c798d261d00b22a0e56989
   UTIL_LINUX_VERSION: 2.42.0 # update this when updating TOOLS in Makefile
   UTIL_LINUX_SHA256: 3452b260bbaa775d6e749ac3bb22111785003fc1f444970025c8da26dfa758e9
   UTIL_LINUX_SHA512: 909bba6c38d43ca4cb9bd974c399b4f0537b54709ac43e8acc823d9d9979fbc7523572469eb452b13c86116675d6d2ebb3764444781204f7e5bd0156252635d7
