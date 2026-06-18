@@ -20,6 +20,7 @@ steps:
       - |
         mkdir -p /rootfs/usr/lib/firmware
         cp -R -p /usr/lib/firmware/xe /rootfs/usr/lib/firmware
+        cp -R -p /usr/lib/firmware/i915 /rootfs/usr/lib/firmware
   - test:
       - |
         # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
