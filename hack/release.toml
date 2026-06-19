@@ -19,7 +19,8 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
-ctr: 2.3.1
+ctr: 2.3.2
+containerd: 2.3.2
 cloudflared: 2026.5.2
 px-fuse: 6c31bb5022ef0bf4e120ce1a0abc5dd40ce7c74d
 util-linux: 2.42.0
