@@ -21,7 +21,7 @@ See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configu
         description = """\
 intel-ucode: 20260512
 Linux Firmware: 20260519
-ctr: v2.2.4
+ctr: v2.2.5
 newt: v1.10.4
 """
 
