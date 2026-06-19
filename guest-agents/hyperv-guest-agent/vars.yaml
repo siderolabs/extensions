@@ -1,0 +1,2 @@
+VERSION: "{{ .LINUX_HV_VERSION }}"
+TIER: "extra"

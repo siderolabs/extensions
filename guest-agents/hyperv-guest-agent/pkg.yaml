@@ -1,0 +1,58 @@
+name: hyperv-guest-agent
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  # hv_kvp_daemon and hv_vss_daemon are the upstream Linux Hyper-V integration
+  # daemons that live in the kernel tree under tools/hv. They are plain C with no
+  # dependencies beyond libc, so they are extracted from the official kernel.org
+  # release tarball (checksum-verified) and linked statically against the base
+  # toolchain — the same model qemu-guest-agent uses for a static guest agent.
+  - sources:
+      - url: https://www.kernel.org/pub/linux/kernel/v6.x/linux-{{ .LINUX_HV_VERSION }}.tar.xz
+        destination: linux.tar.xz
+        sha256: {{ .LINUX_HV_TARBALL_SHA256 }}
+        sha512: {{ .LINUX_HV_TARBALL_SHA512 }}
+    prepare:
+      - |
+        set -euo pipefail
+        tar -xf linux.tar.xz --strip-components=3 \
+          linux-{{ .LINUX_HV_VERSION }}/tools/hv/hv_kvp_daemon.c \
+          linux-{{ .LINUX_HV_VERSION }}/tools/hv/hv_vss_daemon.c
+        rm linux.tar.xz
+    build:
+      - |
+        set -euo pipefail
+        gcc -Os -static -o hv_kvp_daemon hv_kvp_daemon.c
+        gcc -Os -static -o hv_vss_daemon hv_vss_daemon.c
+    install:
+      - |
+        set -euo pipefail
+        kvp_root=/rootfs/usr/local/lib/containers/hyperv-kvp
+        vss_root=/rootfs/usr/local/lib/containers/hyperv-vss
+        mkdir -p "${kvp_root}" "${vss_root}" /rootfs/usr/local/etc/containers
+
+        install -m 0755 hv_kvp_daemon "${kvp_root}/hv_kvp_daemon"
+        install -m 0755 hv_vss_daemon "${vss_root}/hv_vss_daemon"
+
+        cp /pkg/hyperv-kvp.yaml /rootfs/usr/local/etc/containers/
+        cp /pkg/hyperv-vss.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/hyperv-guest-agent.spdx.json
+      version: {{ .LINUX_HV_VERSION }}
+      cpes:
+        - cpe:2.3:o:linux:linux_kernel:{{ .LINUX_HV_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - GPL-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

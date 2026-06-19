@@ -27,6 +27,7 @@ spec:
     - hailort
     - harbor-credential-provider
     - hello-world-service
+    - hyperv-guest-agent
     - i915
     - intel-ice-firmware
     - intel-npu
@@ -346,3 +347,6 @@ spec:
     - matchPackageNames:
         - https://gitlab.nic.cz/labs/bird.git
       allowedVersions: "< 3.0.0"
+    - matchPackageNames:
+        - git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+      allowedVersions: "< 6.19"

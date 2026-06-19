@@ -109,6 +109,12 @@
             "matchPackageNames": [
                 "https://gitlab.nic.cz/labs/bird.git"
             ]
+        },
+        {
+            "allowedVersions": "< 6.19",
+            "matchPackageNames": [
+                "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ]
         }
     ],
     "separateMajorMinor": false,
