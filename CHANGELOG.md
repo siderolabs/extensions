@@ -1,3 +1,73 @@
+## [Talos System Extensions 1.12.9](https://github.com/siderolabs/extensions/releases/tag/v1.12.9) (2026-06-19)
+
+Welcome to the v1.12.9 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+intel-ucode: 20260512
+Linux Firmware: 20260519
+ctr: v2.2.5
+newt: v1.10.4
+
+
+### Contributors
+
+* Maja Bojarska
+* Noel Georgi
+* Andrey Smirnov
+* Mateusz Urbanek
+* appkins
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`53bcc07`](https://github.com/siderolabs/extensions/commit/53bcc07e3f116d165b7e9904fa29c0fd684c1027) chore: bump containerd to 2.2.5
+* [`2d4926e`](https://github.com/siderolabs/extensions/commit/2d4926e335428355055805aa450195fde45cb339) chore: update newt to 1.10.4
+* [`372ae0c`](https://github.com/siderolabs/extensions/commit/372ae0c1a5bc9ca225358eb5751f312d23a55271) chore: update pkgs and tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>11 commits</summary>
+<p>
+
+* [`0516a46`](https://github.com/siderolabs/pkgs/commit/0516a46b4f2333f5e25aea37e1e0cf61b5aeb320) chore: bump containerd to 2.2.5 (cve patches)
+* [`8ce6127`](https://github.com/siderolabs/pkgs/commit/8ce61275c36bd4d2d1dd8dc15d94e2e9f9d9d0b8) chore: bump tools
+* [`becfefa`](https://github.com/siderolabs/pkgs/commit/becfefa0de7595fc30d492ab7157a6b4580d5001) feat: bump OpenSSL to 3.6.3
+* [`298b394`](https://github.com/siderolabs/pkgs/commit/298b39439cb97537baf9c96108dde4e452738748) feat: bump kernel to 6.18.35
+* [`435044b`](https://github.com/siderolabs/pkgs/commit/435044b2bf7e910f1e127f597aace9a7559b159e) fix: avoid page_table_check BUG on time namespace VVAR page
+* [`a909a84`](https://github.com/siderolabs/pkgs/commit/a909a84a51f4565bf677725414412911a5110e7f) fix: disable PAGE_TABLE_CHECK_ENFORCED in kernel config
+* [`af985d6`](https://github.com/siderolabs/pkgs/commit/af985d634e6534f4b1e458ce8ce5fe279843c1b1) fix: enable CONFIG_BCM2712_MIP as built-in in arm64 kernel config
+* [`de0e5b9`](https://github.com/siderolabs/pkgs/commit/de0e5b9970128a13b41de3014bc638637ed2f51e) feat: bump kernel to 6.18.34
+* [`1e6b222`](https://github.com/siderolabs/pkgs/commit/1e6b22205e88c4778e6819550ae95cebc25d6a41) feat: pre-generate drbd patches using spatch out of tree
+* [`283a3e6`](https://github.com/siderolabs/pkgs/commit/283a3e612627081bc80c347b365ab06376137e27) feat: update Linux to 6.18.33
+* [`56397e0`](https://github.com/siderolabs/pkgs/commit/56397e0aa89751ffbe261bebff1ffa996baae0fe) feat: bump runc to 1.3.6
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>3 commits</summary>
+<p>
+
+* [`3841297`](https://github.com/siderolabs/tools/commit/3841297fd023ffafa873f83cdd2f2f2250016139) chore: bump openssl, libcap, fakeroot; fix texinfo
+* [`4ff7ad2`](https://github.com/siderolabs/tools/commit/4ff7ad26f93e34e9832dc76a631bc2cb8fb2488c) chore: make rekres
+* [`2cc5cac`](https://github.com/siderolabs/tools/commit/2cc5caca55fd2e4bcd74b9733eeeb2733a58f282) chore: bump Go to 1.25.11
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-75-g153574b -> v1.12.0-86-g0516a46
+* **github.com/siderolabs/tools**  v1.12.0-12-gcbb843d -> v1.12.0-15-g3841297
+
+Previous release can be found at [v1.12.8](https://github.com/siderolabs/extensions/releases/tag/v1.12.8)
+
 ## [Talos System Extensions 1.12.8](https://github.com/siderolabs/extensions/releases/tag/v1.12.8) (2026-05-22)
 
 Welcome to the v1.12.8 release of Talos System Extensions!
