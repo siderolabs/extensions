@@ -29,6 +29,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | gvisor                                    | Sidero Labs        | NA                                                                                       |
 | gvisor-debug                              | Sidero Labs        | NA                                                                                       |
 | hello-world-service                       | Sidero Labs        | NA                                                                                       |
+| hyperv-guest-agent                        | Ryan VanGundy      | [rmvangun](https://github.com/rmvangun)                                                  |
 | i915                                      | Sidero Labs        | NA                                                                                       |
 | intel-ice-firmware                        | Sidero Labs        | NA                                                                                       |
 | intel-ucode                               | Sidero Labs        | NA                                                                                       |

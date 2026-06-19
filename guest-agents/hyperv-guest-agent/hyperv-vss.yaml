@@ -1,0 +1,43 @@
+name: hyperv-vss
+# The VSS daemon talks to the kernel over /dev/vmbus/hv_vss, which only exists once
+# the hv_utils module is loaded and the "Backup (volume checkpoint)" integration
+# service is enabled on the VM. Gate startup on that device node.
+depends:
+  - path: /dev/vmbus/hv_vss
+container:
+  entrypoint: ./hv_vss_daemon
+  # -n / --no-daemon: stay in the foreground so the extension service supervises it.
+  args:
+    - -n
+  security:
+    # Share mount propagation with the host (same pattern as the zfs extension) so
+    # the FIFREEZE/FITHAW the daemon issues act on the real host filesystems. FIFREEZE
+    # operates on the filesystem superblock, which a bind-mount shares with the host;
+    # the read-only squashfs root needs no freeze, so the mutable /var partition is
+    # the meaningful freeze target for an application-consistent checkpoint.
+    rootfsPropagation: shared
+  mounts:
+    # /dev/vmbus/hv_vss char device.
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    - source: /run
+      destination: /run
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # Mutable data partition — frozen/thawed during a Hyper-V checkpoint.
+    - source: /var
+      destination: /var
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always

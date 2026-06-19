@@ -172,6 +172,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
+| [hyperv-guest-agent](guest-agents/hyperv-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/hyperv-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/hyperv-guest-agent) | `6.12.28` |  This system extension provides the Hyper-V guest integration daemons: hv_kvp_daemon, which reports the guest IP, hostname, and OS to the host (populating Get-VMNetworkAdapter), and hv_vss_daemon, for application-consistent checkpoints. |
 | [metal-agent](guest-agents/metal-agent) | :green_square: core | [ghcr.io/siderolabs/metal-agent](https://github.com/siderolabs/extensions/pkgs/container/metal-agent) | `v0.1.5` |  This system extension provides talos-metal-agent |
 | [qemu-guest-agent](guest-agents/qemu-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/qemu-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/qemu-guest-agent) | `11.0.1` |  This system extension provides the QEMU Guest Agent service. |
 | [vmtoolsd-guest-agent](guest-agents/vmtoolsd-guest-agent) | :yellow_square: extra | [ghcr.io/siderolabs/vmtoolsd-guest-agent](https://github.com/siderolabs/extensions/pkgs/container/vmtoolsd-guest-agent) | `v1.5.0` |  This system extension provides talos-vmtoolsd |
