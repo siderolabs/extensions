@@ -1,3 +1,66 @@
+## [Talos System Extensions 1.13.5](https://github.com/siderolabs/extensions/releases/tag/v1.13.5) (2026-06-22)
+
+Welcome to the v1.13.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+NVIDIA LTS: 580.167.08
+ZFS: 2.4.3
+
+
+### Contributors
+
+* Andrey Smirnov
+* Maja Bojarska
+* Noel Georgi
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`e632ede`](https://github.com/siderolabs/extensions/commit/e632ede79b64760e5ab90bf3390992627cc9c9a3) chore: update zfs and nvidia
+* [`2620b26`](https://github.com/siderolabs/extensions/commit/2620b26406e3f3a58397eb4841700e162c3d880d) chore: sync pkgs and tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>8 commits</summary>
+<p>
+
+* [`6b315f7`](https://github.com/siderolabs/pkgs/commit/6b315f7b3531187931ed582f2ccdb84fa70a5e70) chore: update zfs to 2.4.3
+* [`ebf23f3`](https://github.com/siderolabs/pkgs/commit/ebf23f3a0560a571e273c6e8f270a595ecc91363) feat: update Linux to 6.18.36
+* [`7eed62d`](https://github.com/siderolabs/pkgs/commit/7eed62d5c41ee9ce7271f8d9f0c5c35b56e27b69) chore: bump containerd to 2.2.5 (cve patches)
+* [`8b67bab`](https://github.com/siderolabs/pkgs/commit/8b67babcc76372a374945b1bb1d78c6a45f37be0) chore: update nvidia driver lts to 580.167.08
+* [`8cb61b2`](https://github.com/siderolabs/pkgs/commit/8cb61b2ac1f2fe8d951a429b54a9aaeeff51cf09) feat: bump runc
+* [`d736aef`](https://github.com/siderolabs/pkgs/commit/d736aeffae84d09e97e2fe04d018c98e2c172dc1) feat: bump kernel to 6.18.35
+* [`7ede376`](https://github.com/siderolabs/pkgs/commit/7ede3765547ffbff83c73f0e4fb868a549c325a9) fix: avoid page_table_check BUG on time namespace VVAR page
+* [`e69debd`](https://github.com/siderolabs/pkgs/commit/e69debd4d5e85599116e3d0d473a8b0351559704) feat: update tools and rekres
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>4 commits</summary>
+<p>
+
+* [`9b78252`](https://github.com/siderolabs/tools/commit/9b782525fb570a0df96ab027d3e794028c4ad89c) feat: update ca-certificates to 2026-05-14
+* [`4d13aff`](https://github.com/siderolabs/tools/commit/4d13aff3392a0aaf57db505bfb8ca1bd98ca1af6) feat: bump OpenSSL to 3.6.3
+* [`a06bb31`](https://github.com/siderolabs/tools/commit/a06bb3153a95fe04625573972c0cd99a89fdf828) feat: bump go to 1.26.4
+* [`9bb7abe`](https://github.com/siderolabs/tools/commit/9bb7abe3f5e50c03beea9ab8b5e7787f9b88a374) feat: update libcap to 2.78
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-28-g54ec9fc -> v1.13.0-36-g6b315f7
+* **github.com/siderolabs/tools**  v1.13.0-2-g1fb762a -> v1.13.0-6-g9b78252
+
+Previous release can be found at [v1.13.4](https://github.com/siderolabs/extensions/releases/tag/v1.13.4)
+
 ## [Talos System Extensions 1.13.4](https://github.com/siderolabs/extensions/releases/tag/v1.13.4) (2026-06-09)
 
 Welcome to the v1.13.4 release of Talos System Extensions!
