@@ -1,347 +1,347 @@
 ---
 kind: pkgfile.Build
 spec:
-  targets:
-    - amazon-ena
-    - amdgpu
-    - amd-ucode
-    - binfmt-misc
-    - bird2
-    - bnx2-bnx2x
-    - btrfs
-    - chelsio-drivers
-    - chelsio-firmware
-    - cloudflared
-    - crun
-    - ctr
-    - drbd
-    - dvb-cx23885
-    - dvb-m88ds3103
-    - ecr-credential-provider
-    - fuse3
-    - gasket-driver
-    - gpio-pinctrl
-    - glibc
-    - gvisor
-    - gvisor-debug
-    - hailort
-    - hello-world-service
-    - i915
-    - intel-ice-firmware
-    - intel-npu
-    - intel-ucode
-    - iscsi-tools
-    - joydev
-    - kata-containers
-    - lldpd
-    - mdadm
-    - mei
-    - mellanox-mstflint
-    - metal-agent
-    - multipath-tools
-    - nebula
-    - netbird
-    - newt
-    - nfs-utils
-    - nfsd
-    - nfsrahead
-    - nut-client
-    - nvidia-container-toolkit-lts
-    - nvidia-container-toolkit-production
-    - nvidia-fabricmanager-lts
-    - nvidia-fabricmanager-production
-    - nvidia-gdrdrv-device
-    - nvidia-open-gpu-kernel-modules-lts
-    - nvidia-open-gpu-kernel-modules-production
-    - nvme-cli
-    - px-fuse
-    - soci-snapshotter
-    - panfrost
-    - qemu-guest-agent
-    - qlogic-firmware
-    - realtek-firmware
-    - revpi-firmware
-    - rockchip-rknn
-    - spin
-    - stargz-snapshotter
-    - tailscale
-    - tenstorrent
-    - thunderbolt
-    - trident-iscsi-tools
-    - uhid
-    - uinput
-    - usb-modem-drivers
-    - usb-audio-drivers
-    - util-linux-tools
-    - v4l-uvc-drivers
-    - vc4
-    - vmtoolsd-guest-agent
-    - wasmedge
-    - xdma-driver
-    - xe
-    - xen-guest-agent
-    - youki
-    - zerotier
-    - zfs
-  additionalTargets:
-    nonfree:
-      - nonfree-kmod-nvidia-lts
-      - nonfree-kmod-nvidia-production
-  reproducibleTargetName: reproducibility
-  extraBuildArgs:
-    - TAG
-    - PKGS
-    - PKGS_PREFIX
-    - TOOLS
-    - TOOLS_PREFIX
-    - TEST_STAGE
-  makefile:
-    extraVariables:
-      - name: EXTENSIONS_IMAGE_REF
-        defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-      - name: PKGS
-        defaultValue: v1.13.0-28-g54ec9fc
-      - name: PKGS_PREFIX
-        defaultValue: ghcr.io/siderolabs
-      - name: TOOLS
-        defaultValue: v1.13.0-4-ga06bb31
-      - name: TOOLS_PREFIX
-        defaultValue: ghcr.io/siderolabs
-      - name: GO_TOOLS_RELEASE
-        defaultValue: v0.3.1
-  useBldrPkgTagResolver: true
+    targets:
+        - amazon-ena
+        - amdgpu
+        - amd-ucode
+        - binfmt-misc
+        - bird2
+        - bnx2-bnx2x
+        - btrfs
+        - chelsio-drivers
+        - chelsio-firmware
+        - cloudflared
+        - crun
+        - ctr
+        - drbd
+        - dvb-cx23885
+        - dvb-m88ds3103
+        - ecr-credential-provider
+        - fuse3
+        - gasket-driver
+        - gpio-pinctrl
+        - glibc
+        - gvisor
+        - gvisor-debug
+        - hailort
+        - hello-world-service
+        - i915
+        - intel-ice-firmware
+        - intel-npu
+        - intel-ucode
+        - iscsi-tools
+        - joydev
+        - kata-containers
+        - lldpd
+        - mdadm
+        - mei
+        - mellanox-mstflint
+        - metal-agent
+        - multipath-tools
+        - nebula
+        - netbird
+        - newt
+        - nfs-utils
+        - nfsd
+        - nfsrahead
+        - nut-client
+        - nvidia-container-toolkit-lts
+        - nvidia-container-toolkit-production
+        - nvidia-fabricmanager-lts
+        - nvidia-fabricmanager-production
+        - nvidia-gdrdrv-device
+        - nvidia-open-gpu-kernel-modules-lts
+        - nvidia-open-gpu-kernel-modules-production
+        - nvme-cli
+        - px-fuse
+        - soci-snapshotter
+        - panfrost
+        - qemu-guest-agent
+        - qlogic-firmware
+        - realtek-firmware
+        - revpi-firmware
+        - rockchip-rknn
+        - spin
+        - stargz-snapshotter
+        - tailscale
+        - tenstorrent
+        - thunderbolt
+        - trident-iscsi-tools
+        - uhid
+        - uinput
+        - usb-modem-drivers
+        - usb-audio-drivers
+        - util-linux-tools
+        - v4l-uvc-drivers
+        - vc4
+        - vmtoolsd-guest-agent
+        - wasmedge
+        - xdma-driver
+        - xe
+        - xen-guest-agent
+        - youki
+        - zerotier
+        - zfs
+    additionalTargets:
+        nonfree:
+            - nonfree-kmod-nvidia-lts
+            - nonfree-kmod-nvidia-production
+    reproducibleTargetName: reproducibility
+    extraBuildArgs:
+        - TAG
+        - PKGS
+        - PKGS_PREFIX
+        - TOOLS
+        - TOOLS_PREFIX
+        - TEST_STAGE
+    makefile:
+        extraVariables:
+            - name: EXTENSIONS_IMAGE_REF
+              defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
+            - name: PKGS
+              defaultValue: v1.13.0-36-g6b315f7
+            - name: PKGS_PREFIX
+              defaultValue: ghcr.io/siderolabs
+            - name: TOOLS
+              defaultValue: v1.13.0-6-g9b78252
+            - name: TOOLS_PREFIX
+              defaultValue: ghcr.io/siderolabs
+            - name: GO_TOOLS_RELEASE
+              defaultValue: v0.3.1
+    useBldrPkgTagResolver: true
 ---
 kind: common.Build
 spec:
-  ignoredPaths:
-    - "internal/extensions/image-digests"
-    - "internal/extensions/descriptions.yaml"
+    ignoredPaths:
+        - "internal/extensions/image-digests"
+        - "internal/extensions/descriptions.yaml"
 ---
 kind: auto.CustomSteps
 spec:
-  steps:
-    - name: extensions
-      toplevel: true
-    - name: extensions-catalog
-      toplevel: true
-    - name: check-dirty
-      toplevel: true
-    - name: extensions-metadata
-      toplevel: true
-    - name: internal/extensions/image-digests
-      toplevel: true
-    - name: internal/extensions/descriptions.yaml
-      toplevel: true
-    - name: $(ARTIFACTS)/image-signer
-      toplevel: true
-    - name: sign-images
-      toplevel: true
-    - name: extensions-validate
-      toplevel: true
-    - name: grype-scan
-      toplevel: true
-    - name: test-%
-      toplevel: true
+    steps:
+        - name: extensions
+          toplevel: true
+        - name: extensions-catalog
+          toplevel: true
+        - name: check-dirty
+          toplevel: true
+        - name: extensions-metadata
+          toplevel: true
+        - name: internal/extensions/image-digests
+          toplevel: true
+        - name: internal/extensions/descriptions.yaml
+          toplevel: true
+        - name: $(ARTIFACTS)/image-signer
+          toplevel: true
+        - name: sign-images
+          toplevel: true
+        - name: extensions-validate
+          toplevel: true
+        - name: grype-scan
+          toplevel: true
+        - name: test-%
+          toplevel: true
 ---
 kind: custom.Step
 name: extensions
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    depends:
-      - internal/extensions/descriptions.yaml
-    script:
-      - |
-        @$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
-  ghaction:
-    enabled: true
-    condition: except-pull-request
-    environment:
-      PUSH: true
+    makefile:
+        enabled: true
+        phony: true
+        depends:
+            - internal/extensions/descriptions.yaml
+        script:
+            - |
+                @$(MAKE) docker-$@ TARGET_ARGS="--tag=$(EXTENSIONS_IMAGE_REF) --push=$(PUSH)"
+    ghaction:
+        enabled: true
+        condition: except-pull-request
+        environment:
+            PUSH: true
 ---
 kind: custom.Step
 name: extensions-catalog
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    depends:
-      - $(ARTIFACTS)/bldr
-    script:
-      - |
-        @$(ARTIFACTS)/bldr dump --build-arg TAG=VERSION --template hack/catalog.template > $(ARTIFACTS)/catalog.md 2>/dev/null
-        @lead='^<!-- ### BEGIN GENERATED CONTENT -->$$'; tail='^<!-- ### END GENERATED CONTENT -->$$'; sed -i -e "/$$lead/,/$$tail/{ /$$lead/{p; r $(ARTIFACTS)/catalog.md" -e "}; /$$tail/p; d }" README.md
-  ghaction:
-    enabled: true
-    condition: on-pull-request
+    makefile:
+        enabled: true
+        phony: true
+        depends:
+            - $(ARTIFACTS)/bldr
+        script:
+            - |
+                @$(ARTIFACTS)/bldr dump --build-arg TAG=VERSION --template hack/catalog.template > $(ARTIFACTS)/catalog.md 2>/dev/null
+                @lead='^<!-- ### BEGIN GENERATED CONTENT -->$$'; tail='^<!-- ### END GENERATED CONTENT -->$$'; sed -i -e "/$$lead/,/$$tail/{ /$$lead/{p; r $(ARTIFACTS)/catalog.md" -e "}; /$$tail/p; d }" README.md
+    ghaction:
+        enabled: true
+        condition: on-pull-request
 ---
 kind: custom.Step
 name: check-dirty
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    script:
-      - |
-        @if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
-  ghaction:
-    enabled: true
-    condition: on-pull-request
+    makefile:
+        enabled: true
+        phony: true
+        script:
+            - |
+                @if test -n "`git status --porcelain`"; then echo "Source tree is dirty"; git status; git diff; exit 1 ; fi
+    ghaction:
+        enabled: true
+        condition: on-pull-request
 ---
 kind: custom.Step
 name: extensions-metadata
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    depends:
-      - internal/extensions/image-digests
-    script:
-      - |
-        @cp internal/extensions/image-digests $(ARTIFACTS)/extensions-metadata
+    makefile:
+        enabled: true
+        phony: true
+        depends:
+            - internal/extensions/image-digests
+        script:
+            - |
+                @cp internal/extensions/image-digests $(ARTIFACTS)/extensions-metadata
 ---
 kind: custom.Step
 name: internal/extensions/image-digests
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    depends:
-      - $(ARTIFACTS)/bldr
-    script:
-      - |
-        @rm -f internal/extensions/image-digests
-        @$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
-        @$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+    makefile:
+        enabled: true
+        phony: true
+        depends:
+            - $(ARTIFACTS)/bldr
+        script:
+            - |
+                @rm -f internal/extensions/image-digests
+                @$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+                @$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
 ---
 kind: custom.Step
 name: internal/extensions/descriptions.yaml
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    depends:
-      - internal/extensions/image-digests
-    script:
-      - |
-        @echo "Generating image descriptions..."
-        @echo -n "" > internal/extensions/descriptions.yaml
-        @for image in $(shell cat internal/extensions/image-digests); do \
-          crane export $$image - | tar x -O --occurrence=1 manifest.yaml | yq -r ". += {\"$$image\": {\"author\": .metadata.author, \"description\": .metadata.description}} | del(.metadata, .version)" - >> internal/extensions/descriptions.yaml; \
-        done
+    makefile:
+        enabled: true
+        phony: true
+        depends:
+            - internal/extensions/image-digests
+        script:
+            - |
+                @echo "Generating image descriptions..."
+                @echo -n "" > internal/extensions/descriptions.yaml
+                @for image in $(shell cat internal/extensions/image-digests); do \
+                  crane export $$image - | tar x -O --occurrence=1 manifest.yaml | yq -r ". += {\"$$image\": {\"author\": .metadata.author, \"description\": .metadata.description}} | del(.metadata, .version)" - >> internal/extensions/descriptions.yaml; \
+                done
 ---
 kind: custom.Step
 name: $(ARTIFACTS)/image-signer
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    script:
-      - |
-        @curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(GO_TOOLS_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
-        @chmod +x $(ARTIFACTS)/image-signer
+    makefile:
+        enabled: true
+        phony: true
+        script:
+            - |
+                @curl -sSL https://github.com/siderolabs/go-tools/releases/download/$(GO_TOOLS_RELEASE)/image-signer-$(OPERATING_SYSTEM)-$(GOARCH) -o $(ARTIFACTS)/image-signer
+                @chmod +x $(ARTIFACTS)/image-signer
 ---
 kind: custom.Step
 name: sign-images
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    depends:
-      - $(ARTIFACTS)/image-signer
-    script:
-      - |
-        @$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
+    makefile:
+        enabled: true
+        phony: true
+        depends:
+            - $(ARTIFACTS)/image-signer
+        script:
+            - |
+                @$(ARTIFACTS)/image-signer sign --timeout=15m $(shell crane export $(EXTENSIONS_IMAGE_REF) | tar x --to-stdout image-digests) $(EXTENSIONS_IMAGE_REF)@$$(crane digest $(EXTENSIONS_IMAGE_REF))
 ---
 kind: custom.Step
 name: extensions-validate
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    script:
-      - |
-        @$(MAKE)
-        @$(MAKE) nonfree
-        @$(MAKE) extensions
-        @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
-        @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
-  ghaction:
-    enabled: true
-    condition: on-pull-request
-    environment:
-      PUSH: true
-      REGISTRY: registry.dev.siderolabs.io
+    makefile:
+        enabled: true
+        phony: true
+        script:
+            - |
+                @$(MAKE)
+                @$(MAKE) nonfree
+                @$(MAKE) extensions
+                @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-amd64.yaml --platform=linux/amd64
+                @docker run --rm --net=host --user $(shell id -u):$(shell id -g) -v $(PWD):/src -w /src ghcr.io/siderolabs/extensions-duplicate-finder:$(GO_TOOLS_RELEASE) validate --image $(EXTENSIONS_IMAGE_REF) --exceptions hack/test/exceptions-arm64.yaml --platform=linux/arm64
+    ghaction:
+        enabled: true
+        condition: on-pull-request
+        environment:
+            PUSH: true
+            REGISTRY: registry.dev.siderolabs.io
 ---
 kind: custom.Step
 name: grype-scan
 spec:
-  makefile:
-    enabled: true
-    phony: true
-    script:
-      - "@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan PLATFORM=linux/amd64"
-      # - "@$(MAKE) target-$@ TARGET_ARGS=\"--build-arg=GRYPE_EXTRA_ARGS='--fail-on=negligible'\""
-  ghaction:
-    enabled: true
-    cronOnly: true
-    jobs:
-      - name: grype-scan
-        runnerGroup: pkgs
-        triggerLabels:
-        - integration/grype
-        crons:
-          - '30 7 * * *'
-        artifacts:
-          enabled: true
-          skipArtifactDownload: true
-          additional:
-            - name: results
-              paths:
-                - _out/grype-scan/**
-              retentionDays: "180"
-              always: true
+    makefile:
+        enabled: true
+        phony: true
+        script:
+            - "@$(MAKE) local-$@ DEST=$(ARTIFACTS)/grype-scan PLATFORM=linux/amd64"
+            # - "@$(MAKE) target-$@ TARGET_ARGS=\"--build-arg=GRYPE_EXTRA_ARGS='--fail-on=negligible'\""
+    ghaction:
+        enabled: true
+        cronOnly: true
+        jobs:
+            - name: grype-scan
+              runnerGroup: pkgs
+              triggerLabels:
+                  - integration/grype
+              crons:
+                  - "30 7 * * *"
+              artifacts:
+                  enabled: true
+                  skipArtifactDownload: true
+                  additional:
+                      - name: results
+                        paths:
+                            - _out/grype-scan/**
+                        retentionDays: "180"
+                        always: true
 ---
 kind: custom.Step
 name: test-%
 spec:
-  makefile:
-    enabled: true
-    script:
-      - |
-        @$(MAKE) docker-test-extension TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:v0 --push=$(PUSH)" TEST_STAGE=$*
-        @docker pull $(REGISTRY)/$(USERNAME)/$@:v0
-        @orb debug $(REGISTRY)/$(USERNAME)/$@:v0
-        @docker image rm -f $(REGISTRY)/$(USERNAME)/$@:v0
+    makefile:
+        enabled: true
+        script:
+            - |
+                @$(MAKE) docker-test-extension TARGET_ARGS="--tag=$(REGISTRY)/$(USERNAME)/$@:v0 --push=$(PUSH)" TEST_STAGE=$*
+                @docker pull $(REGISTRY)/$(USERNAME)/$@:v0
+                @orb debug $(REGISTRY)/$(USERNAME)/$@:v0
+                @docker image rm -f $(REGISTRY)/$(USERNAME)/$@:v0
 ---
 kind: common.Renovate
 spec:
-  packageRules:
-    - matchPackageNames:
-        - nvidia/open-gpu-kernel-modules
-        - open-iscsi/open-isns
-        - containers/crun
-        - git://git.kernel.org/pub/scm/libs/libcap/libcap.git
-        - git://sourceware.org/git/elfutils.git
-        - git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
-        - linux-nvme/libnvme
-        - linux-nvme/nvme-cli
-        - cloudflare/cloudflared
-      versioning: 'regex:^(?<major>\d+)\.(?<minor>\d+)\.?(?<patch>\d+)?$'
-    - matchPackageNames:
-        - https://sourceware.org/git/glibc.git
-      versioning: 'regex:^(?<major>\d+)\.(?<minor>\d+)\.?(?<patch>[0-9]{1,3})?$'
-    - matchPackageNames:
-        - google/gvisor
-        - intel/Intel-Linux-Processor-Microcode-Data-Files
-      versioning: 'regex:^(?<major>\d{4})(?<minor>\d{2})(?<patch>\d{2})\.?(?<build>\d+)?$'
-    - matchPackageNames:
-        - git://linux-nfs.org/~steved/libtirpc
-      versioning: 'regex:^(?<major>\d+)-(?<minor>\d+)-?(?<patch>\d+)?$'
-    - matchPackageNames:
-        - systemd/systemd
-      versioning: 'regex:^(?<major>\d+)\.?(?<minor>\d+)?\.?(?<patch>\d+)?$'
-    - matchPackageNames:
-        - https://gitlab.nic.cz/labs/bird.git
-      allowedVersions: "< 3.0.0"
+    packageRules:
+        - matchPackageNames:
+              - nvidia/open-gpu-kernel-modules
+              - open-iscsi/open-isns
+              - containers/crun
+              - git://git.kernel.org/pub/scm/libs/libcap/libcap.git
+              - git://sourceware.org/git/elfutils.git
+              - git://git.kernel.org/pub/scm/utils/mdadm/mdadm.git
+              - linux-nvme/libnvme
+              - linux-nvme/nvme-cli
+              - cloudflare/cloudflared
+          versioning: 'regex:^(?<major>\d+)\.(?<minor>\d+)\.?(?<patch>\d+)?$'
+        - matchPackageNames:
+              - https://sourceware.org/git/glibc.git
+          versioning: 'regex:^(?<major>\d+)\.(?<minor>\d+)\.?(?<patch>[0-9]{1,3})?$'
+        - matchPackageNames:
+              - google/gvisor
+              - intel/Intel-Linux-Processor-Microcode-Data-Files
+          versioning: 'regex:^(?<major>\d{4})(?<minor>\d{2})(?<patch>\d{2})\.?(?<build>\d+)?$'
+        - matchPackageNames:
+              - git://linux-nfs.org/~steved/libtirpc
+          versioning: 'regex:^(?<major>\d+)-(?<minor>\d+)-?(?<patch>\d+)?$'
+        - matchPackageNames:
+              - systemd/systemd
+          versioning: 'regex:^(?<major>\d+)\.?(?<minor>\d+)?\.?(?<patch>\d+)?$'
+        - matchPackageNames:
+              - https://gitlab.nic.cz/labs/bird.git
+          allowedVersions: "< 3.0.0"
