@@ -6,20 +6,21 @@ dependencies:
 steps:
   # hv_kvp_daemon and hv_vss_daemon are the upstream Linux Hyper-V integration
   # daemons that live in the kernel tree under tools/hv. They are plain C with no
-  # dependencies beyond libc, so they are fetched (checksum-verified) and linked
-  # statically against the base toolchain — the same model qemu-guest-agent uses
-  # for a static guest agent. gregkh/linux is the official linux-stable GitHub
-  # mirror; only patch tags (e.g. v6.12.28) live there, and the tools/hv interface
-  # is stable across patch releases.
+  # dependencies beyond libc, so they are extracted from the official kernel.org
+  # release tarball (checksum-verified) and linked statically against the base
+  # toolchain — the same model qemu-guest-agent uses for a static guest agent.
   - sources:
-      - url: https://raw.githubusercontent.com/gregkh/linux/v{{ .LINUX_HV_VERSION }}/tools/hv/hv_kvp_daemon.c
-        destination: hv_kvp_daemon.c
-        sha256: {{ .LINUX_HV_KVP_DAEMON_SHA256 }}
-        sha512: {{ .LINUX_HV_KVP_DAEMON_SHA512 }}
-      - url: https://raw.githubusercontent.com/gregkh/linux/v{{ .LINUX_HV_VERSION }}/tools/hv/hv_vss_daemon.c
-        destination: hv_vss_daemon.c
-        sha256: {{ .LINUX_HV_VSS_DAEMON_SHA256 }}
-        sha512: {{ .LINUX_HV_VSS_DAEMON_SHA512 }}
+      - url: https://www.kernel.org/pub/linux/kernel/v6.x/linux-{{ .LINUX_HV_VERSION }}.tar.xz
+        destination: linux.tar.xz
+        sha256: {{ .LINUX_HV_TARBALL_SHA256 }}
+        sha512: {{ .LINUX_HV_TARBALL_SHA512 }}
+    prepare:
+      - |
+        set -euo pipefail
+        tar -xf linux.tar.xz --strip-components=3 \
+          linux-{{ .LINUX_HV_VERSION }}/tools/hv/hv_kvp_daemon.c \
+          linux-{{ .LINUX_HV_VERSION }}/tools/hv/hv_vss_daemon.c
+        rm linux.tar.xz
     build:
       - |
         set -euo pipefail

@@ -33,10 +33,9 @@ container:
         - rbind
         - ro
     # Writeable location for the KVP pool files (.kvp_pool_0..3). The daemon's
-    # compiled-in KVP_CONFIG_LOC is /var/lib/hyperv; it tolerates the directory
-    # already existing, so a writeable bind-mount satisfies it without patching
-    # the upstream source.
-    - source: /system/run/hyperv-kvp
+    # compiled-in KVP_CONFIG_LOC is /var/lib/hyperv; bind it to /run so state
+    # stays ephemeral and we do not patch upstream paths.
+    - source: /run/hyperv-kvp
       destination: /var/lib/hyperv
       type: bind
       options:

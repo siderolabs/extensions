@@ -25,13 +25,6 @@ container:
         - rshared
         - rbind
         - rw
-    - source: /run
-      destination: /run
-      type: bind
-      options:
-        - rshared
-        - rbind
-        - rw
     # Mutable data partition — frozen/thawed during a Hyper-V checkpoint.
     - source: /var
       destination: /var
