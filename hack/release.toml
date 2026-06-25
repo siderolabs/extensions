@@ -36,7 +36,7 @@ gvisor: 20260525.0
 kata-containers: 3.31.0
 spin: 0.24.0
 netbird: 0.71.4
-newt: 1.12.5
+newt: 1.13.0
 mdadm: 4.6
 qemu-guest-agent: 11.0.1
 ZFS: 2.4.3
