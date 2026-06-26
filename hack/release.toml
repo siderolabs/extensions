@@ -19,8 +19,14 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
-NVIDIA LTS: 580.167.08
-ZFS: 2.4.3
+cloudflared: 2026.6.1
+gvisor: 20260622.0
+kata-containers: 3.32.0
+spin: 0.25.1
+netbird: 0.73.2
+tailscale: 1.98.5
+soci-snapshotter: v0.14.1
+wasmedge: 0.6.1
 """
 
 [make_deps]
