@@ -22,7 +22,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
 ctr: 2.3.2
 containerd: 2.3.2
 cloudflared: 2026.5.2
-px-fuse: 6c31bb5022ef0bf4e120ce1a0abc5dd40ce7c74d
+px-fuse: be462e1841067208569aed2413e23b53a496843b-VERSION
 util-linux: 2.42.0
 tenstorrent: 2.9.0
 NVIDIA LTS: 580.167.08
@@ -30,7 +30,7 @@ NVIDIA Production: 595.71.05
 NVIDIA Container Toolkit: 1.19.1
 DRBD: 9.3.2
 Amazon ENA: 2.17.0
-xdma-driver: f09dce7
+xdma-driver: c15887d
 crun: 1.28
 gvisor: 20260525.0
 kata-containers: 3.31.0
@@ -47,7 +47,6 @@ lldpd: 1.0.22
 tailscale: 1.98.3
 zerotier: 1.16.2
 soci-snapshotter: v0.14.0
-runc: 1.5.0-rc.3
 """
 
 [make_deps]
