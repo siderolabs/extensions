@@ -24,6 +24,7 @@ gvisor: 20260622.0
 kata-containers: 3.32.0
 spin: 0.25.1
 netbird: 0.73.2
+linux-firmware: 20260622
 tailscale: 1.98.5
 soci-snapshotter: v0.14.1
 wasmedge: 0.6.1
