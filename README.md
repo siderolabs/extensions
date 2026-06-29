@@ -124,6 +124,7 @@ tiers based on support level:
 | ---- | ---- | ----- | ------- | ----------- |
 | [dvb-cx23885](dvb/cx23885) | :white_large_square: contrib | [ghcr.io/siderolabs/dvb-cx23885](https://github.com/siderolabs/extensions/pkgs/container/dvb-cx23885) | `VERSION` |  This system extension provides the dvb kernel modules required for Hauppage WinTV-quadHD PCIe tuner built against a specific Talos version. Includes the firmware required. |
 | [dvb-m88ds3103](dvb/dvb-m88ds3103) | :white_large_square: contrib | [ghcr.io/siderolabs/dvb-m88ds3103](https://github.com/siderolabs/extensions/pkgs/container/dvb-m88ds3103) | `VERSION` |  This system extension provides the dvb-demod-m88ds3103.fw firmware for DVB-S/S2 PCIe cards like DVBSky S952. It is intended to be used as a dependency on existing DVB driver extension dvb-cx23885 that provides the necessary kernel modules. |
+| [dvb-usb-dvbsky](dvb/dvb-usb-dvbsky) | :white_large_square: contrib | [ghcr.io/siderolabs/dvb-usb-dvbsky](https://github.com/siderolabs/extensions/pkgs/container/dvb-usb-dvbsky) | `VERSION` |  This system extension provides the dvb kernel modules required for DVBSky USB DVB devices, including the MyGica T230C DVB-T/T2/C USB stick built against a specific Talos version. Includes the firmware required. |
 
 ### Miscellaneous
 
