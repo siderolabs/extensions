@@ -1,0 +1,28 @@
+name: talosctl-oidc
+container:
+  entrypoint: /usr/local/bin/talosctl-oidc
+  args:
+    - serve
+  mounts:
+    # TLS root certificates for OIDC provider HTTPS validation
+    - source: /etc/ssl/certs
+      destination: /etc/ssl/certs
+      type: bind
+      options:
+        - rbind
+        - ro
+    # Persistent volume for self-signed TLS certificates
+    - source: /var/lib/talosctl-oidc
+      destination: /var/lib/talosctl-oidc
+      type: bind
+      options:
+        - bind
+        - rw
+depends:
+  - path: /var/lib
+  - network:
+      - addresses
+      - connectivity
+      - etcfiles
+  - configuration: true
+restart: always

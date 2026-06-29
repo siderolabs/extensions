@@ -1,0 +1,2 @@
+VERSION: "{{ .TALOSCTL_OIDC_VERSION }}"
+TIER: "contrib"

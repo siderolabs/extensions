@@ -1,0 +1,13 @@
+version: v1alpha1
+metadata:
+  name: talosctl-oidc
+  version: "{{ .VERSION }}"
+  author: Quentin JOLY
+  description: |
+    [{{ .TIER }}] OIDC certificate exchange server for Talos Linux.
+    Validates OIDC tokens and issues ephemeral short-lived client certificates
+    signed by the Talos CA, enabling OIDC-based access control for talosctl.
+    More info: https://github.com/qjoly/talosctl-oidc/
+  compatibility:
+    talos:
+      version: ">= v1.6.0"
