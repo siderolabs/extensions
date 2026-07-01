@@ -11,7 +11,7 @@
 {{ define "extension-list" }}
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-{{- $tiers := (dict "core" ":green_square:" "extra" ":yellow_square:" "contrib" ":white_large_square:") }}
+{{- $tiers := (dict "core" ":green_square:" "extra" ":yellow_square:" "contrib" ":white_large_square:" "deprecated" ":warning:") }}
 {{ range .Pkgs -}}
 {{ if hasPrefix $.BaseDir .Pkg.BaseDir -}}
 {{ if not .Pkg.Context.INTERNAL_PACKAGE -}}
