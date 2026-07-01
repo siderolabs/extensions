@@ -3,10 +3,34 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libucontext:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
 steps:
-  - install:
+  - sources:
+      - url: https://github.com/md-raid-utilities/mdadm/archive/refs/tags/mdadm-{{ .MDADM_VERSION }}.tar.gz
+        destination: mdadm.tar.gz
+        sha256: {{ .MDADM_SHA256 }}
+        sha512: {{ .MDADM_SHA512 }}
+    prepare:
       - |
-        mkdir -p /rootfs/usr/local/sbin
+        tar -xzf mdadm.tar.gz --strip-components=1
+      - |
+        patch -p1 < /pkg/patches/mdadm-include-sysmacros.patch
+        patch -p1 < /pkg/patches/no-werror.patch
+    build:
+      - |
+        mkdir -p /run/mdadm
+
+        CXFLAGS=-D_LARGEFILE64_SOURCE \
+        make -j $(nproc) mdadm
+        make -j $(nproc) mdmon
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/sbin /rootfs/usr/lib/udev/rules.d
+        cp mdadm /rootfs/usr/local/sbin/mdadm
+        cp mdmon /rootfs/usr/local/sbin/mdmon
+        cp /pkg/files/udev-md-raid-arrays.rules   /rootfs/usr/lib/udev/rules.d/63-md-raid-arrays.rules
+        cp /pkg/files/udev-md-raid-assembly.rules /rootfs/usr/lib/udev/rules.d/64-md-raid-assembly.rules
     test:
       - |
         mkdir -p /extensions-validator-rootfs

@@ -2,6 +2,10 @@
 FUSE3_VERSION: 3.18.2
 FUSE3_SHA256: f01de85717e20adf5f98aff324acd85dd73d61a5ca3834d573dcf0bd6e54a298
 FUSE3_SHA512: b2ca702b74788230981d05dc85458ee3582970dcb1526e7eda8f46e23d0373b361ef1438874a7caa46aaf02a5b84f7e5341fbe61e856cfbce849d1209b4aabbe
+# renovate: datasource=github-releases extractVersion=^mdadm-(?<version>.*)$ depName=md-raid-utilities/mdadm
+MDADM_VERSION: 4.6
+MDADM_SHA256: 202a7525e6f2b44395a9ef2c561082c7d6d8204e9addfe3f6268bfb141efc093
+MDADM_SHA512: bbcd13fa56951d6b70630616612f0dc6258f6a697a782d46a7577a039ada29f9d470cd5f73a3f8a672d5c5318dc7a93a55cd6bedcc99db399165cf84b1443c4b
 # renovate: datasource=git-tags extractVersion=^nfs-utils-(?<version>.*)$ depName=git://linux-nfs.org/~steved/nfs-utils
 NFS_UTILS_VERSION: 2-8-3
 NFS_UTILS_SHA256: 11e7c5847a8423a72931c865bd9296e7fd56ff270a795a849183900961711725

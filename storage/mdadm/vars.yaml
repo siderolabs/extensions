@@ -1,2 +1,2 @@
-VERSION: "v4.6" # this should never change, as the extension is now deprecated
-TIER: "deprecated"
+VERSION: "v{{ .MDADM_VERSION }}"
+TIER: "contrib"
