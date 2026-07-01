@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: hyperv-guest-agent
+  version: "{{ .VERSION }}"
+  author: Ryan VanGundy
+  description: |
+    [{{ .TIER }}] This system extension provides the Hyper-V guest integration daemons:
+    hv_kvp_daemon, which reports the guest IP, hostname, and OS to the host (populating
+    Get-VMNetworkAdapter), and hv_vss_daemon, for application-consistent checkpoints.
+  compatibility:
+    talos:
+      version: ">= v1.10.0"

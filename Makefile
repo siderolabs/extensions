@@ -89,6 +89,7 @@ TARGETS += gvisor-debug
 TARGETS += hailort
 TARGETS += harbor-credential-provider
 TARGETS += hello-world-service
+TARGETS += hyperv-guest-agent
 TARGETS += i915
 TARGETS += intel-ice-firmware
 TARGETS += intel-npu

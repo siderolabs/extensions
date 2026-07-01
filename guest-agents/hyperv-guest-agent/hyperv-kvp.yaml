@@ -1,0 +1,45 @@
+name: hyperv-kvp
+# The KVP daemon talks to the kernel over /dev/vmbus/hv_kvp, which only exists once
+# the hv_utils module is loaded and the "Key-Value Pair Exchange" integration service
+# is enabled on the VM. Gate startup on that device node.
+depends:
+  - path: /dev/vmbus/hv_kvp
+  # Start after the node has addresses so the first report to the host is complete
+  # (the daemon re-reports on each host poll regardless).
+  - network:
+      - addresses
+container:
+  entrypoint: ./hv_kvp_daemon
+  # -n / --no-daemon: stay in the foreground so the extension service supervises it.
+  args:
+    - -n
+  security:
+    writeableRootfs: false
+  mounts:
+    # /dev/vmbus/hv_kvp char device (rshared so the node is visible if it appears
+    # after the container starts; matches the qemu-guest-agent / zfs pattern).
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # Network interface and MAC enumeration for the IP/hostname report.
+    - source: /sys
+      destination: /sys
+      type: bind
+      options:
+        - rbind
+        - ro
+    # Writeable location for the KVP pool files (.kvp_pool_0..3). The daemon's
+    # compiled-in KVP_CONFIG_LOC is /var/lib/hyperv; bind it to /run so state
+    # stays ephemeral and we do not patch upstream paths.
+    - source: /run/hyperv-kvp
+      destination: /var/lib/hyperv
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always

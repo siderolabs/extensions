@@ -27,6 +27,7 @@ spec:
     - hailort
     - harbor-credential-provider
     - hello-world-service
+    - hyperv-guest-agent
     - i915
     - intel-ice-firmware
     - intel-npu
