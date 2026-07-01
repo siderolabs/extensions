@@ -67,6 +67,7 @@ GO_TOOLS_RELEASE ?= v0.3.1
 TARGETS = amazon-ena
 TARGETS += amdgpu
 TARGETS += amd-ucode
+TARGETS += amneziawg
 TARGETS += binfmt-misc
 TARGETS += bird2
 TARGETS += bnx2-bnx2x
