@@ -1,0 +1,15 @@
+# © 2026 Nokia
+# Licensed under the Mozilla Public License 2.0
+# SPDX-License-Identifier: MPL-2.0
+version: v1alpha1
+metadata:
+  name: frr
+  version: "{{ .VERSION }}"
+  author: Kai Zhang
+  description: |
+    [{{ .TIER }}] FRR (Free Range Routing) for BGP routing on Talos hosts.
+    Includes MetalLB VRF integration for advertising Kubernetes LoadBalancer IPs via BGP.
+    Based on quay.io/frrouting/frr:{{ .FRR_VERSION }}.
+  compatibility:
+    talos:
+      version: ">= v1.11.0"
