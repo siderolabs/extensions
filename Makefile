@@ -131,6 +131,7 @@ TARGETS += tailscale
 TARGETS += tenstorrent
 TARGETS += thunderbolt
 TARGETS += trident-iscsi-tools
+TARGETS += trident-nfs-tools
 TARGETS += uhid
 TARGETS += uinput
 TARGETS += usb-modem-drivers

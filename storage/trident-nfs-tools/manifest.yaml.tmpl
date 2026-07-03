@@ -1,0 +1,17 @@
+version: v1alpha1
+metadata:
+  name: trident-nfs-tools
+  version: "{{ .VERSION }}"
+  author: Oliver Hauer
+  description: |
+    [{{ .TIER }}] This system extension provides mkdir on the host for NetApp Trident CSI
+    NFS volume support on Talos Linux.
+
+    Trident's chwrap mechanism requires mkdir to be present on the host filesystem.
+    Without it, NFS mounts fail with "exit status 32".
+
+    See: https://github.com/NetApp/trident/issues/806
+    See: https://github.com/NetApp/trident/pull/1152
+  compatibility:
+    talos:
+      version: ">= v1.13.0"

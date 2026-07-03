@@ -1,0 +1,27 @@
+name: trident-nfs-tools
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - install:
+      - |
+        mkdir -p /rootfs/usr/local/sbin
+
+        # Use busybox mkdir from the build tools image.
+        # busybox is a multi-call binary; when invoked as "mkdir" (argv[0])
+        # it acts as mkdir. Only depends on musl libc which is on Talos.
+        cp /usr/bin/busybox /rootfs/usr/local/sbin/mkdir
+      - |
+        sed -i "s#\$VERSION#{{ .VERSION }}#" /pkg/manifest.yaml
+  - test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
