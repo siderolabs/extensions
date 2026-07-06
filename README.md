@@ -213,6 +213,30 @@ The rough flow should look like the following:
 - You can now build your extension using make like `make <extension-name> PLATFORM=linux/amd64`
 - If you wish to output the contents of the image and validate your install, you can issue `make local-<extension-name> PLATFORM=linux/amd64 DEST=_out`. The contents will then be present in the `_out` directory.
 
+### Local testing and development
+
+> **macOS:** some targets (e.g. `descriptions.yaml`) need GNU tar.
+
+To build and push an extension to a local registry use:
+
+```bash
+make <extension-name> PUSH=true REGISTRY=127.0.0.1:5005 USERNAME=<username> PUSH=true
+```
+
+Instructions on how to set up the builder can be found [here](https://docs.siderolabs.com/talos/latest/build-and-extend-talos/custom-images-and-development/developing-talos#prepare)
+
+#### Building the Extensions Catalog Locally
+
+The `extensions` target builds the catalog image (the `image-digests` and `descriptions.yaml` of all `TARGETS`).
+
+You can build the catalog scoping it with `TARGETS`/`NONFREE_TARGETS` with:
+
+```bash
+make extensions PUSH=true REGISTRY=host.docker.internal:5005 USERNAME=<your-name> \
+  TARGETS="<extension-name>" NONFREE_TARGETS= PUSH=true TAG=<target-talos-version>
+```
+
+
 ### Creating `manifest.yaml`
 
 The `manifest.yaml` file should match the following format:
