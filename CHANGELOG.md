@@ -1,3 +1,71 @@
+## [Talos System Extensions 1.13.6](https://github.com/siderolabs/extensions/releases/tag/v1.13.6) (2026-07-08)
+
+Welcome to the v1.13.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+cloudflared: 2026.6.1
+gvisor: 20260622.0
+kata-containers: 3.32.0
+spin: 0.25.1
+netbird: 0.73.2
+linux-firmware: 20260622
+tailscale: 1.98.5
+soci-snapshotter: v0.14.1
+wasmedge: 0.6.1
+
+
+### Contributors
+
+* Andrey Smirnov
+* Mateusz Urbanek
+* Noel Georgi
+
+### Changes
+<details><summary>4 commits</summary>
+<p>
+
+* [`8eb8710`](https://github.com/siderolabs/extensions/commit/8eb87105c580e7f150f207bb8113e724d3faed3f) fix: update checksum of fosrl/newt
+* [`02c957e`](https://github.com/siderolabs/extensions/commit/02c957efa2eba1c6810aff0d76f30d9a94e3e69d) chore: update pkgs and tools
+* [`0f40c99`](https://github.com/siderolabs/extensions/commit/0f40c990d99c82a173b9f5c31eafe1d4923c74b1) feat: update Linux firmware to 20260622
+* [`2116080`](https://github.com/siderolabs/extensions/commit/2116080a9daa96ac9cc19f796da3595bdc8f22ce) feat: update dependencies
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>7 commits</summary>
+<p>
+
+* [`d8c80cc`](https://github.com/siderolabs/pkgs/commit/d8c80cc52d6c60a25c7ab2a80fa78814c08a04da) chore: update toolchain and tools
+* [`71874fb`](https://github.com/siderolabs/pkgs/commit/71874fb48cab246870e28559782f951592bb3116) feat: bump kernel to 6.18.38
+* [`a2406a1`](https://github.com/siderolabs/pkgs/commit/a2406a1b487d02c1610bc3969f9c501d2b137028) feat: bump kernel 6.18.37
+* [`e410c35`](https://github.com/siderolabs/pkgs/commit/e410c3557eedad8aea76738af75aa15a469fdda0) feat: update Linux firmware to 20260622
+* [`389b8aa`](https://github.com/siderolabs/pkgs/commit/389b8aaf4dd96f37faa914ae9fbf2353cec81a55) fix: patch Linux kernel for tunnel metadata buffer overflow
+* [`7e4a719`](https://github.com/siderolabs/pkgs/commit/7e4a71958dfb6786ec05c4026b308c7e3dfe8043) feat: add support for AMD XGBE driver
+* [`1915c58`](https://github.com/siderolabs/pkgs/commit/1915c580e4e1b0f471875f1c7bf16cf6a25f4110) feat: enable NF_TABLES_ARP option
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`c58afd5`](https://github.com/siderolabs/tools/commit/c58afd571730474b923c817946c34f57bc920674) chore: bump toolchain
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-36-g6b315f7 -> v1.13.0-43-gd8c80cc
+* **github.com/siderolabs/tools**  v1.13.0-6-g9b78252 -> v1.13.0-7-gc58afd5
+
+Previous release can be found at [v1.13.5](https://github.com/siderolabs/extensions/releases/tag/v1.13.5)
+
 ## [Talos System Extensions 1.13.5](https://github.com/siderolabs/extensions/releases/tag/v1.13.5) (2026-06-22)
 
 Welcome to the v1.13.5 release of Talos System Extensions!
