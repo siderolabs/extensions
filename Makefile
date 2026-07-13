@@ -56,7 +56,7 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.14.0-alpha.0-95-g8922b6d
+PKGS ?= v1.14.0-alpha.0-99-ga264237
 PKGS_PREFIX ?= ghcr.io/siderolabs
 TOOLS ?= v1.14.0-alpha.0-18-g878f1db
 TOOLS_PREFIX ?= ghcr.io/siderolabs
