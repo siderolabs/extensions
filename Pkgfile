@@ -5,7 +5,7 @@ format: v1alpha2
 vars:
   CONTAINERD_VERSION: v2.3.2 # update this when updating PKGS version tag in Makefile
   LINUX_FIRMWARE_VERSION: "20260622" # update this when updating PKGS version tag in Makefile
-  DRBD_DRIVER_VERSION: 9.3.2 # update this when updating PKGS version tag in Makefile
+  DRBD_DRIVER_VERSION: 9.3.3 # update this when updating PKGS version tag in Makefile
   PX_FUSE_DRIVER_VERSION: be462e1841067208569aed2413e23b53a496843b # update this when updating PKGS version tag in Makefile
   ZFS_DRIVER_VERSION: 2.4.3 # update this when updating PKGS version tag in Makefile
   ZFS_TOOLS_SHA256: 1f08f2d154f5189b5f1382848a32667b3d34066145b474c49cd3d41a5fba59a7

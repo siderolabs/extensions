@@ -28,7 +28,7 @@ tenstorrent: 2.9.0
 NVIDIA LTS: 580.167.08
 NVIDIA Production: 595.71.05
 NVIDIA Container Toolkit: 1.19.1
-DRBD: 9.3.2
+DRBD: 9.3.3
 Amazon ENA: 2.17.0
 xdma-driver: c15887d
 crun: 1.28
