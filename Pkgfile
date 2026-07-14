@@ -1,18 +1,18 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.6.0
+# syntax = ghcr.io/siderolabs/bldr:v0.6.1
 
 format: v1alpha2
 
 vars:
-  CONTAINERD_VERSION: v2.3.2 # update this when updating PKGS version tag in Makefile
+  CONTAINERD_VERSION: v2.3.3 # update this when updating PKGS version tag in Makefile
   LINUX_FIRMWARE_VERSION: "20260622" # update this when updating PKGS version tag in Makefile
   DRBD_DRIVER_VERSION: 9.3.3 # update this when updating PKGS version tag in Makefile
   PX_FUSE_DRIVER_VERSION: be462e1841067208569aed2413e23b53a496843b # update this when updating PKGS version tag in Makefile
   ZFS_DRIVER_VERSION: 2.4.3 # update this when updating PKGS version tag in Makefile
   ZFS_TOOLS_SHA256: 1f08f2d154f5189b5f1382848a32667b3d34066145b474c49cd3d41a5fba59a7
   ZFS_TOOLS_SHA512: 343fbb19c0ca5f91254d216b6113fb8a7b028bdafc976ba9cb1ff6b7d3442a6a0fbf2cc4bde4f2fcc7cb7293cc17a1914664a943e5c798d261d00b22a0e56989
-  UTIL_LINUX_VERSION: 2.42.0 # update this when updating TOOLS in Makefile
-  UTIL_LINUX_SHA256: 3452b260bbaa775d6e749ac3bb22111785003fc1f444970025c8da26dfa758e9
-  UTIL_LINUX_SHA512: 909bba6c38d43ca4cb9bd974c399b4f0537b54709ac43e8acc823d9d9979fbc7523572469eb452b13c86116675d6d2ebb3764444781204f7e5bd0156252635d7
+  UTIL_LINUX_VERSION: 2.42.2 # update this when updating TOOLS in Makefile
+  UTIL_LINUX_SHA256: 03a05d3adf9602ef128f2da05b84b3205ce60c351e5737c0370f74000679ce8a
+  UTIL_LINUX_SHA512: 7415add0be2930654e322830808dde03ff6d511bd357f0679e6b6287a13ca79fe58ce4ac05edef86b76fb381b3a36ca2da9d3c31b5dc0a1d889c203156a57277
   ENA_VERSION: 2.17.0 # update this when updating PKGS version tag in Makefile
   TENSTORRENT_VERSION: 2.9.0 # update this when updating PKGS version tag in Makefile
   HAILORT_VERSION: 4.23.0 # update this when updating PKGS version tag in Makefile

@@ -19,13 +19,13 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
-ctr: 2.3.2
-containerd: 2.3.2
+ctr: 2.3.3
+containerd: 2.3.3
 cloudflared: 2026.6.1
 px-fuse: be462e1841067208569aed2413e23b53a496843b-VERSION
-util-linux: 2.42.0
+util-linux: 2.42.2
 tenstorrent: 2.9.0
-NVIDIA LTS: 580.167.08
+NVIDIA LTS: 580.173.02
 NVIDIA Production: 595.71.05
 NVIDIA Container Toolkit: 1.19.1
 DRBD: 9.3.3
