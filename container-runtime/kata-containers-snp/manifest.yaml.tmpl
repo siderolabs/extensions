@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: kata-containers-snp
+  version: "{{ .VERSION }}"
+  author: Calin Stefan
+  description: |
+    [{{ .TIER }}] This system extension provides AMD SEV-SNP confidential VMs for Kata Containers (Confidential Containers), using containerd's runtime handlers kata-qemu-snp and kata-qemu-coco-dev. Requires the kata-containers extension.
+  compatibility:
+    talos:
+      version: ">= v1.12.0"

@@ -13,6 +13,7 @@ dependencies:
   - stage: intel-ucode
   - stage: iscsi-tools
   - stage: kata-containers
+  - stage: kata-containers-snp
   - stage: libevent
   - stage: libnvme
   - stage: lldpd

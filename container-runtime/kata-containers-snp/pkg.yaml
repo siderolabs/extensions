@@ -1,0 +1,108 @@
+name: kata-containers-snp
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+# {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - sources:
+      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.zst
+        destination: kata-static.tar.zst
+        sha256: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA256 }}
+        sha512: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA512 }}
+# {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - prepare:
+      - |
+        mkdir -p /rootfs
+# {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - network: default
+    prepare:
+      - |
+        mkdir -p kata-static
+        tar xf kata-static.tar.zst -C kata-static
+# {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - network: none
+    # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    install:
+      # SNP layer on top of the kata-containers extension: that extension
+      # provides containerd-shim-kata-v2, virtiofsd, and the standard QEMU
+      # with its datadir; this one adds only what SEV-SNP needs — the OVMF
+      # build with SNP support, the confidential guest kernel + dm-verity
+      # guest image, and the two handler configs.
+      - |
+        cd kata-static
+
+        mkdir -p /rootfs/usr/local/share/{kata-containers,ovmf}
+
+        cp ./opt/kata/share/ovmf/AMDSEV.fd /rootfs/usr/local/share/ovmf/AMDSEV.fd
+        cp ./opt/kata/share/kata-containers/vmlinuz.container /rootfs/usr/local/share/kata-containers/vmlinuz.container
+        cp ./opt/kata/share/kata-containers/kata-containers-confidential.img /rootfs/usr/local/share/kata-containers/kata-containers-confidential.img
+      # The handler configs are generated from the release's own defaults
+      # (same approach as the kata-containers extension): the /opt/kata ->
+      # /usr/local path rewrite, guest-pull (Talos cannot run the nydus
+      # snapshotter host daemon kata-deploy defaults to), and
+      # create_container_timeout raised for guest-pull of multi-GB images.
+      # Everything else — including the guest image's dm-verity parameters —
+      # comes from the release itself, so a Kata bump needs no config
+      # maintenance here; the test phase asserts every edit landed.
+      - |
+        cd kata-static
+
+        for f in configuration-qemu-snp.toml configuration-qemu-coco-dev.toml; do
+          sed -e 's|/opt/kata|/usr/local|g' \
+              -e 's|^experimental_force_guest_pull = .*|experimental_force_guest_pull = true|' \
+              -e 's|^create_container_timeout = .*|create_container_timeout = 1200|' \
+              ./opt/kata/share/defaults/kata-containers/${f} \
+              > /rootfs/usr/local/share/kata-containers/${f}
+        done
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/11-kata-containers-snp.part /rootfs/etc/cri/conf.d/11-kata-containers-snp.part
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    test:
+    # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      # Fail closed if an upstream rename or format change makes a sed miss:
+      # assert the exact final state of every generated field, and that no
+      # /opt/kata reference survived the rewrite.
+      - |
+        for f in configuration-qemu-snp.toml configuration-qemu-coco-dev.toml; do
+          g="/rootfs/usr/local/share/kata-containers/${f}"
+          grep -q '^path = "/usr/local/bin/qemu-system-x86_64"$' "${g}"
+          grep -q '^valid_hypervisor_paths = \["/usr/local/bin/qemu-system-x86_64"\]$' "${g}"
+          grep -q '^experimental_force_guest_pull = true$' "${g}"
+          grep -q '^create_container_timeout = 1200$' "${g}"
+          grep -q '^kernel_verity_params = "root_hash=' "${g}"
+          if grep -q '/opt/kata' "${g}"; then
+            echo "${f}: /opt/kata reference survived the path rewrite"
+            exit 1
+          fi
+        done
+        grep -q '^firmware = "/usr/local/share/ovmf/AMDSEV.fd"$' /rootfs/usr/local/share/kata-containers/configuration-qemu-snp.toml
+        grep -q '^firmware = ""$' /rootfs/usr/local/share/kata-containers/configuration-qemu-coco-dev.toml
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/kata-containers-snp.spdx.json
+      version: {{ .KATA_CONTAINERS_VERSION }}
+      cpes:
+        - cpe:2.3:a:katacontainers:kata_containers:{{ .KATA_CONTAINERS_VERSION }}:*:*:*:*:*:*:*
+      # Apache-2.0: kata-agent (in the guest image). GPL-2.0: guest kernel,
+      # guest image userspace. LGPL-2.1: libseccomp statically linked into
+      # the kata-agent (kata's own release notice). BSD-2-Clause-Patent:
+      # edk2/OVMF (AMDSEV.fd).
+      licenses:
+        - Apache-2.0
+        - GPL-2.0
+        - LGPL-2.1
+        - BSD-2-Clause-Patent
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

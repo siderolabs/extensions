@@ -53,6 +53,8 @@ wasmedge: 0.6.1
     title = "Kata Containers"
     description = """\
 Kata Containers now has support for the `kata-qemu` runtime handler which uses QEMU instead of Cloud Hypervisor for virtualization.
+
+The new extension `kata-container-snp` provides additional support for AMD SEV-SNP confidential VMs.
 """
 
 [make_deps]
