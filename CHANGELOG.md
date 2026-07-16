@@ -1,3 +1,70 @@
+## [Talos System Extensions 1.12.10](https://github.com/siderolabs/extensions/releases/tag/v1.12.10) (2026-07-16)
+
+Welcome to the v1.12.10 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20260622
+
+
+### Contributors
+
+* Maja Bojarska
+* Andrey Smirnov
+* Noel Georgi
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`db3014a`](https://github.com/siderolabs/extensions/commit/db3014a75ca099a55cbb25b941eb824c76d1f627) chore: pkgs and tools based on bldr v0.5.6
+* [`d95e5c1`](https://github.com/siderolabs/extensions/commit/d95e5c1d4081305bd8547db20b900addcd738207) chore: update tools, pkgs
+* [`7850b44`](https://github.com/siderolabs/extensions/commit/7850b446bb9de99bc6bbe8f979711ef1d64f5844) chore: rekres
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>11 commits</summary>
+<p>
+
+* [`4f4aef1`](https://github.com/siderolabs/pkgs/commit/4f4aef170f000001e08af6bdd0d819da327fc59b) chore: bldr back to v0.5.6
+* [`361b417`](https://github.com/siderolabs/pkgs/commit/361b41703327208dee363ebc7bf208901533690d) chore: bump tools 2026-07-15
+* [`22cfe5b`](https://github.com/siderolabs/pkgs/commit/22cfe5b99b18463264cc449752a10da87879c3ac) chore: bump toolchain-musl
+* [`19e08f6`](https://github.com/siderolabs/pkgs/commit/19e08f6f937075f34da0664ddb22f4c52c76eafa) feat: bump kernel to 6.18.38
+* [`ddc55a1`](https://github.com/siderolabs/pkgs/commit/ddc55a1a22e833100fe8ae5d2a86aedf83ebd1a9) feat: bump kernel 6.18.37
+* [`1eb6fa2`](https://github.com/siderolabs/pkgs/commit/1eb6fa2ded402747bdd0d60350a5090568834412) feat: update Linux firmware to 20260622
+* [`2befe8b`](https://github.com/siderolabs/pkgs/commit/2befe8bf742786cb53996cc9b879cb3e09de6349) fix: patch Linux kernel for tunnel metadata buffer overflow
+* [`59392e8`](https://github.com/siderolabs/pkgs/commit/59392e8253fc8e26bd657317fa6720cd233b8d39) fix: enable CONFIG_IFB as a module
+* [`494385a`](https://github.com/siderolabs/pkgs/commit/494385aaa79b0ba781a6e84992940ea35187ac53) feat: update Linux to 6.18.36
+* [`07a16e0`](https://github.com/siderolabs/pkgs/commit/07a16e019e3d996ca89fb91cfdcef637797be179) chore: rekres, bump bldr to v0.6.1
+* [`29d272d`](https://github.com/siderolabs/pkgs/commit/29d272d85042ebde01090522ff8c5fc1279cd8ad) chore: bump tools
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>5 commits</summary>
+<p>
+
+* [`7a5d6da`](https://github.com/siderolabs/tools/commit/7a5d6da4b362734a9e15d4174e323397bf204e9f) chore: restore bldr to v0.5.6
+* [`b77038c`](https://github.com/siderolabs/tools/commit/b77038ca30c18d15ca8add32c70c22a1fe4a8195) chore: quote ca certs calendar version
+* [`1ce1232`](https://github.com/siderolabs/tools/commit/1ce1232100545841503bcfde541a266897ac6659) chore: bump util-linux to 2.42.2 (cve)
+* [`6a3b198`](https://github.com/siderolabs/tools/commit/6a3b1987a7de05494dfdfb9ecd060ab5ec131539) chore: rekres, bldr v0.6.1
+* [`7b9cec2`](https://github.com/siderolabs/tools/commit/7b9cec2dd715ca2fe6c98cf1afa975aff3ebd7d9) chore: update toolchain for release 1.12
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-86-g0516a46 -> v1.12.0-97-g4f4aef1
+* **github.com/siderolabs/tools**  v1.12.0-15-g3841297 -> v1.12.0-20-g7a5d6da
+
+Previous release can be found at [v1.12.9](https://github.com/siderolabs/extensions/releases/tag/v1.12.9)
+
 ## [Talos System Extensions 1.12.9](https://github.com/siderolabs/extensions/releases/tag/v1.12.9) (2026-06-19)
 
 Welcome to the v1.12.9 release of Talos System Extensions!
