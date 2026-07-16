@@ -1,10 +1,10 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20260622.0
+GVISOR_VERSION: 20260706.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
-GVISOR_REV: d10071d635665b840936420353a489ca5f9f250d
-GVISOR_SHA256: b882dfa51a5a8ff18a12ff47c266d91efbe1a4c3d491c7ea44e31e5d0961620b
-GVISOR_SHA512: 0bc5805673fcccb0ac6facbc6af5da97714343bc1360bf036533673fecbb63a55ea10fb960593eb935971d4630d255e8c8525dc8ff6d63fd0c8f856a3f5031d3
+GVISOR_REV: 8ed0c00a3f9091a193bc83ac42a0d3b21009524b
+GVISOR_SHA256: c342984d327b6854139d0afe1f625c45d28d14d67ea9948894017ac8971bbf41
+GVISOR_SHA512: 6c2d892b3cb424b9f9c5ca8139dc7b43e6a745f11b8bc126eee2a5c96f7d6cb2dbc23275600f11a1342ba61d7f670b2251b2e8a3ff5011bbfb9ddda5d7aa768c
 # renovate: datasource=github-releases depName=containerd/stargz-snapshotter
 STARGZ_SNAPSHOTTER_VERSION: v0.18.2
 STARGZ_SNAPSHOTTER_SHA256: 9e92bd3aa7ca03b5265268f4db0878166cf33311b7c514e4bbd05e247484d32d
