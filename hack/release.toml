@@ -35,7 +35,7 @@ crun: 1.28
 gvisor: 20260622.0
 kata-containers: 3.32.0
 spin: 0.25.1
-netbird: 0.73.2
+netbird: 0.74.6
 newt: 1.13.0
 mdadm: 4.6
 qemu-guest-agent: 11.0.1
