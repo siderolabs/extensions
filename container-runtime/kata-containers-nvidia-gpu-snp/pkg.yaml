@@ -1,0 +1,169 @@
+name: kata-containers-nvidia-gpu-snp
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+# {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - sources:
+      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.zst
+        destination: kata-static.tar.zst
+        sha256: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA256 }}
+        sha512: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA512 }}
+# {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - prepare:
+      - |
+        mkdir -p /rootfs
+# {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - network: default
+    prepare:
+      - |
+        mkdir -p kata-static
+        tar xf kata-static.tar.zst -C kata-static
+# {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+  - network: none
+    # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    build:
+      # The nvidia-vfio-cdi extension service helper: a small stdlib-only Go
+      # program (source in this directory), built static non-PIE like the
+      # base extension's shim — the service container rootfs is assembled
+      # from scratch, so the binary must load with no dynamic loader. The
+      # test phase asserts it.
+      - |
+        cd /pkg/nvidia-vfio-cdi
+        GOCACHE=/tmp/gocache CGO_ENABLED=0 go build -buildmode=exe -trimpath -ldflags "-s -w" -o /tmp/nvidia-vfio-cdi .
+    install:
+      # The handler config is generated from the release's own default with
+      # the same recipe as kata-containers-snp (path rewrite, guest-pull,
+      # create_container_timeout — upstream's NVIDIA default already ships
+      # 1200, so that edit is a no-op here). The guest image's dm-verity
+      # parameters come from the release itself; the test phase asserts
+      # every generated field.
+      - |
+        cd kata-static
+
+        mkdir -p /rootfs/usr/local/share/kata-containers
+        sed -e 's|/opt/kata|/usr/local|g' \
+            -e 's|^experimental_force_guest_pull = .*|experimental_force_guest_pull = true|' \
+            -e 's|^create_container_timeout = .*|create_container_timeout = 1200|' \
+            ./opt/kata/share/defaults/kata-containers/configuration-qemu-nvidia-gpu-snp.toml \
+            > /rootfs/usr/local/share/kata-containers/configuration-qemu-nvidia-gpu-snp.toml
+      # SNP-experimental QEMU + its datadir. Only this handler's config names
+      # the snp-experimental binary — the siblings' handlers run on the
+      # standard QEMU from kata-containers, so it ships here. Stripped and
+      # pruned the same way kata-containers treats its QEMU: the removed
+      # files are outside this handler's boot path (firmware is the
+      # sibling's AMDSEV.fd) and the QEMU binary is not an SNP-measured
+      # input.
+      - |
+        cd kata-static
+
+        mkdir -p /rootfs/usr/local/{bin,share/kata-qemu-snp-experimental}
+
+        cp ./opt/kata/bin/qemu-system-x86_64-snp-experimental /rootfs/usr/local/bin/
+        strip /rootfs/usr/local/bin/qemu-system-x86_64-snp-experimental
+
+        cp -a ./opt/kata/share/kata-qemu-snp-experimental/qemu /rootfs/usr/local/share/kata-qemu-snp-experimental/qemu
+        rm -f /rootfs/usr/local/share/kata-qemu-snp-experimental/qemu/edk2-*.fd
+        rm -rf /rootfs/usr/local/share/kata-qemu-snp-experimental/qemu/firmware
+        rm -f /rootfs/usr/local/share/kata-qemu-snp-experimental/qemu/{hppa-firmware*.img,s390-*.img,slof.bin,vof*.bin,qemu_vga.ndrv,pnv-pnor.bin,*_bootrom.bin,qemu-nsis.bmp}
+      # Same qemu-bundle datadir redirect as the kata-containers extension
+      # (rationale there): this add-on ships the bundle entry for ITS
+      # datadir; the entries merge under the shared /usr/local/bin/qemu-bundle
+      # tree in a combined install.
+      - |
+        mkdir -p /rootfs/usr/local/bin/qemu-bundle/opt/kata/share/kata-qemu-snp-experimental
+        ln -s ../../../../../../share/kata-qemu-snp-experimental/qemu /rootfs/usr/local/bin/qemu-bundle/opt/kata/share/kata-qemu-snp-experimental/qemu
+      # NVIDIA guest kernel + confidential guest image (Ubuntu rootfs with the
+      # NVIDIA driver + NVRC init baked in; the guest kernel version tracks
+      # the Kata release). cp dereferences the tarball's version symlinks.
+      - |
+        cd kata-static
+
+        cp ./opt/kata/share/kata-containers/vmlinuz-nvidia-gpu.container /rootfs/usr/local/share/kata-containers/vmlinuz-nvidia-gpu.container
+        cp ./opt/kata/share/kata-containers/kata-containers-nvidia-gpu-confidential.img /rootfs/usr/local/share/kata-containers/kata-containers-nvidia-gpu-confidential.img
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/12-kata-containers-nvidia-gpu-snp.part /rootfs/etc/cri/conf.d/12-kata-containers-nvidia-gpu-snp.part
+      # The guest image embeds NVIDIA's proprietary userspace driver; NVIDIA's
+      # driver license permits redistribution only if the agreement text
+      # accompanies the binaries, and the kata guest image ships none. Vendored
+      # verbatim from the driver's own LICENSE (as also shipped by the
+      # nvidia-container-toolkit extension under NVIDIA_GLX-1.0/LICENSE).
+      - |
+        mkdir -p /rootfs/usr/local/share/doc/NVIDIA-driver
+        cp /pkg/NVIDIA-driver-LICENSE /rootfs/usr/local/share/doc/NVIDIA-driver/LICENSE
+      # nvidia-vfio-cdi extension service: spec + container rootfs (the
+      # static Go helper above; the service writes the IOMMUFD-cdev CDI spec
+      # for vfio-bound GPUs to /run/cdi at every boot).
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/nvidia-vfio-cdi.yaml /rootfs/usr/local/etc/containers/nvidia-vfio-cdi.yaml
+
+        mkdir -p /rootfs/usr/local/lib/containers/nvidia-vfio-cdi
+        cp /tmp/nvidia-vfio-cdi /rootfs/usr/local/lib/containers/nvidia-vfio-cdi/nvidia-vfio-cdi
+        chmod 0755 /rootfs/usr/local/lib/containers/nvidia-vfio-cdi/nvidia-vfio-cdi
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    test:
+    # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      # The service helper must be a static non-PIE executable — the service
+      # container has no dynamic loader. EXEC type (not DYN) and no INTERP
+      # header assert exactly that.
+      - |
+        readelf -h /rootfs/usr/local/lib/containers/nvidia-vfio-cdi/nvidia-vfio-cdi | grep -qE "Type:[[:space:]]+EXEC"
+        ! readelf -l /rootfs/usr/local/lib/containers/nvidia-vfio-cdi/nvidia-vfio-cdi | grep -q "INTERP"
+      # QEMU's compiled-in datadir, looked up through <exec_dir>/qemu-bundle,
+      # must land on the shipped datadir tree.
+      - |
+        test -d /rootfs/usr/local/bin/qemu-bundle/opt/kata/share/kata-qemu-snp-experimental/qemu
+      # Fail closed if an upstream rename or format change makes a sed miss:
+      # assert the exact final state of every generated field, and that no
+      # /opt/kata reference survived the rewrite.
+      - |
+        g="/rootfs/usr/local/share/kata-containers/configuration-qemu-nvidia-gpu-snp.toml"
+        grep -q '^path = "/usr/local/bin/qemu-system-x86_64-snp-experimental"$' "${g}"
+        grep -q '^valid_hypervisor_paths = \["/usr/local/bin/qemu-system-x86_64-snp-experimental"\]$' "${g}"
+        grep -q '^firmware = "/usr/local/share/ovmf/AMDSEV.fd"$' "${g}"
+        grep -q '^experimental_force_guest_pull = true$' "${g}"
+        grep -q '^create_container_timeout = 1200$' "${g}"
+        grep -q '^kernel_verity_params = "root_hash=' "${g}"
+        # The generated config's kernel/image must name files this extension
+        # ships — catches an upstream re-point of the guest kernel/image
+        # that would otherwise leave the build green and the runtime broken.
+        k=$(sed -n 's/^kernel = "\(.*\)"$/\1/p' "${g}"); test -f "/rootfs${k}"
+        i=$(sed -n 's/^image = "\(.*\)"$/\1/p' "${g}"); test -f "/rootfs${i}"
+        if grep -q '/opt/kata' "${g}"; then
+          echo "configuration-qemu-nvidia-gpu-snp.toml: /opt/kata reference survived the path rewrite"
+          exit 1
+        fi
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/kata-containers-nvidia-gpu-snp.spdx.json
+      version: {{ .KATA_CONTAINERS_VERSION }}
+      cpes:
+        - cpe:2.3:a:katacontainers:kata_containers:{{ .KATA_CONTAINERS_VERSION }}:*:*:*:*:*:*:*
+      # Apache-2.0: kata-agent (in the guest image), NVRC. GPL-2.0: QEMU
+      # and its datadir blobs, guest kernel, guest image userspace.
+      # LGPL-2.1: libseccomp statically linked into the kata-agent (kata's
+      # own release notice). MPL-2.0: the nvidia-vfio-cdi helper (source in
+      # this directory). CUSTOM: NVIDIA proprietary userspace + GSP
+      # firmware in the guest image (the string the nonfree-kmod-nvidia
+      # sbom in siderolabs/pkgs uses for the driver).
+      licenses:
+        - Apache-2.0
+        - GPL-2.0
+        - LGPL-2.1
+        - MPL-2.0
+        - CUSTOM
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

@@ -35,6 +35,7 @@ spec:
     - iscsi-tools
     - joydev
     - kata-containers
+    - kata-containers-nvidia-gpu-snp
     - kata-containers-snp
     - lldpd
     - mdadm

@@ -1,0 +1,17 @@
+version: v1alpha1
+metadata:
+  name: kata-containers-nvidia-gpu-snp
+  version: "{{ .VERSION }}"
+  author: Calin Stefan
+  description: |
+    [{{ .TIER }}] This system extension provides the kata-qemu-nvidia-gpu-snp containerd runtime handler: Kata Containers AMD SEV-SNP confidential VMs with NVIDIA GPU VFIO passthrough (the GPU driver runs inside the encrypted guest, never on the host). Requires the kata-containers and kata-containers-snp extensions from the same release on the same node.
+  compatibility:
+    talos:
+      # PLACEHOLDER floor (inherited from kata-containers-snp): the real
+      # requirement is Talos >= v1.14.0 — the first release whose kernel
+      # ships CONFIG_IOMMUFD (iommufd.ko) + CONFIG_VFIO_DEVICE_CDEV=y, and
+      # also the first extensions release that can include this extension.
+      # The validator rejects any floor above the repo's pinned Talos
+      # version, so the placeholder stays until the pin reaches v1.14.0 —
+      # raise to ">= v1.14.0" before merge.
+      version: ">= v1.12.0"
