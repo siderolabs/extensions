@@ -54,7 +54,9 @@ wasmedge: 0.6.1
     description = """\
 Kata Containers now has support for the `kata-qemu` runtime handler which uses QEMU instead of Cloud Hypervisor for virtualization.
 
-The new extension `kata-container-snp` provides additional support for AMD SEV-SNP confidential VMs.
+The new extension `kata-containers-snp` provides additional support for AMD SEV-SNP confidential VMs.
+
+The new extension `kata-containers-nvidia-gpu-snp` adds NVIDIA GPU VFIO passthrough into SEV-SNP confidential VMs (the GPU driver runs inside the encrypted guest).
 """
 
 [make_deps]

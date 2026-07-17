@@ -97,6 +97,7 @@ TARGETS += intel-ucode
 TARGETS += iscsi-tools
 TARGETS += joydev
 TARGETS += kata-containers
+TARGETS += kata-containers-nvidia-gpu-snp
 TARGETS += kata-containers-snp
 TARGETS += lldpd
 TARGETS += mdadm
