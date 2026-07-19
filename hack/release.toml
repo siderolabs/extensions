@@ -49,6 +49,12 @@ soci-snapshotter: v0.14.1
 wasmedge: 0.6.1
 """
 
+[notes.kata]
+    title = "Kata Containers"
+    description = """\
+Kata Containers now has support for the `kata-qemu` runtime handler which uses QEMU instead of Cloud Hypervisor for virtualization.
+"""
+
 [make_deps]
 
     [make_deps.tools]

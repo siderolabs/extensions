@@ -61,6 +61,40 @@ steps:
 
         mkdir -p /rootfs/usr/local/share/kata-containers
         cp /pkg/configuration.toml /rootfs/usr/local/share/kata-containers/
+      - |
+        cd kata-static
+
+        qemu={{ if eq .ARCH "aarch64" }}qemu-system-aarch64{{ else }}qemu-system-x86_64{{ end }}
+        cp ./opt/kata/bin/${qemu} /rootfs/usr/local/bin/${qemu}
+        strip /rootfs/usr/local/bin/${qemu}
+
+        mkdir -p /rootfs/usr/local/share/kata-qemu
+        cp -a ./opt/kata/share/kata-qemu/qemu /rootfs/usr/local/share/kata-qemu/qemu
+        rm -f /rootfs/usr/local/share/kata-qemu/qemu/edk2-*.fd
+        rm -rf /rootfs/usr/local/share/kata-qemu/qemu/firmware
+        # ROMs for platforms kata's q35/virt machines never use (hppa, ppc, s390, arm boards)
+        rm -f /rootfs/usr/local/share/kata-qemu/qemu/{hppa-firmware*.img,s390-*.img,slof.bin,vof*.bin,qemu_vga.ndrv,pnv-pnor.bin,*_bootrom.bin,qemu-nsis.bmp}
+
+        # kata builds QEMU with --disable-relocatable, so the firmware search path is
+        # hardcoded to /opt/kata/share/kata-qemu/qemu. QEMU still consults
+        # <exec_dir>/qemu-bundle/<compiled path> first; route that back to the datadir
+        mkdir -p /rootfs/usr/local/bin/qemu-bundle/opt/kata/share/kata-qemu
+        ln -s ../../../../../../share/kata-qemu/qemu /rootfs/usr/local/bin/qemu-bundle/opt/kata/share/kata-qemu/qemu
+        # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+        mkdir -p /rootfs/usr/local/share/aavmf
+        cp ./opt/kata/share/aavmf/AAVMF_CODE.fd /rootfs/usr/local/share/aavmf/AAVMF_CODE.fd
+        # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+
+        # AAVMF_VARS.fd is not shipped: kata ignores firmware_volume for
+        # non-confidential guests, so blank it instead of pointing at a missing file
+        mkdir -p /rootfs/usr/local/share/kata-containers
+        sed -e 's|/opt/kata|/usr/local|g' \
+          -e 's|^firmware_volume = .*|firmware_volume = ""|' \
+          ./opt/kata/share/defaults/kata-containers/configuration-qemu.toml \
+          > /rootfs/usr/local/share/kata-containers/configuration-qemu.toml
+
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/11-kata-qemu.part /rootfs/etc/cri/conf.d/11-kata-qemu.part
     test:
       - |
         mkdir -p /extensions-validator-rootfs
