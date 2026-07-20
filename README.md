@@ -149,7 +149,7 @@ tiers based on support level:
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
 | [btrfs](storage/btrfs) | :yellow_square: extra | [ghcr.io/siderolabs/btrfs](https://github.com/siderolabs/extensions/pkgs/container/btrfs) | `VERSION` |  This system extension provides kernel module driver for BTRFS built against a specific Talos version. |
-| [drbd](storage/drbd) | :yellow_square: extra | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd) | `9.3.2-VERSION` |  This system extension provides kernel module driver for DRBD built against a specific Talos version. |
+| [drbd](storage/drbd) | :yellow_square: extra | [ghcr.io/siderolabs/drbd](https://github.com/siderolabs/extensions/pkgs/container/drbd) | `9.3.3-VERSION` |  This system extension provides kernel module driver for DRBD built against a specific Talos version. |
 | [fuse3](storage/fuse3) | :green_square: core | [ghcr.io/siderolabs/fuse3](https://github.com/siderolabs/extensions/pkgs/container/fuse3) | `3.18.2` |  This system extension provides fuse3 functionality. |
 | [iscsi-tools](storage/iscsi-tools) | :green_square: core | [ghcr.io/siderolabs/iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/iscsi-tools) | `v0.2.0` |  This system extension provides iscsi-tools. |
 | [mdadm](storage/mdadm) | :white_large_square: contrib | [ghcr.io/siderolabs/mdadm](https://github.com/siderolabs/extensions/pkgs/container/mdadm) | `v4.6` |  This system extension provides mdadm binary. |
@@ -180,23 +180,23 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [nonfree-kmod-nvidia-lts](nvidia-gpu/nonfree/kmod-nvidia/lts) | :green_square: core | [ghcr.io/siderolabs/nonfree-kmod-nvidia-lts](https://github.com/siderolabs/extensions/pkgs/container/nonfree-kmod-nvidia-lts) | `580.167.08-VERSION` |  This system extension provides nvidia proprietary kernel modules built against a specific Talos version. |
+| [nonfree-kmod-nvidia-lts](nvidia-gpu/nonfree/kmod-nvidia/lts) | :green_square: core | [ghcr.io/siderolabs/nonfree-kmod-nvidia-lts](https://github.com/siderolabs/extensions/pkgs/container/nonfree-kmod-nvidia-lts) | `580.173.02-VERSION` |  This system extension provides nvidia proprietary kernel modules built against a specific Talos version. |
 | [nonfree-kmod-nvidia-production](nvidia-gpu/nonfree/kmod-nvidia/production) | :green_square: core | [ghcr.io/siderolabs/nonfree-kmod-nvidia-production](https://github.com/siderolabs/extensions/pkgs/container/nonfree-kmod-nvidia-production) | `595.71.05-VERSION` |  This system extension provides nvidia proprietary kernel modules built against a specific Talos version. |
-| [nvidia-container-toolkit-lts](nvidia-gpu/nvidia-container-toolkit/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-container-toolkit-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-container-toolkit-lts) | `580.167.08-v1.19.1` |  This system extension provides nvidia runtime and its dependencies using NVIDIA's runtime handler. |
+| [nvidia-container-toolkit-lts](nvidia-gpu/nvidia-container-toolkit/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-container-toolkit-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-container-toolkit-lts) | `580.173.02-v1.19.1` |  This system extension provides nvidia runtime and its dependencies using NVIDIA's runtime handler. |
 | [nvidia-container-toolkit-production](nvidia-gpu/nvidia-container-toolkit/production) | :green_square: core | [ghcr.io/siderolabs/nvidia-container-toolkit-production](https://github.com/siderolabs/extensions/pkgs/container/nvidia-container-toolkit-production) | `595.71.05-v1.19.1` |  This system extension provides nvidia runtime and its dependencies using NVIDIA's runtime handler. |
-| [nvidia-fabricmanager-lts](nvidia-gpu/nvidia-fabricmanager/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-fabricmanager-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-fabricmanager-lts) | `580.167.08` |  This system extension provides the Nvidia fabricmanager for GPUs that need NVLink support. |
+| [nvidia-fabricmanager-lts](nvidia-gpu/nvidia-fabricmanager/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-fabricmanager-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-fabricmanager-lts) | `580.173.02` |  This system extension provides the Nvidia fabricmanager for GPUs that need NVLink support. |
 | [nvidia-fabricmanager-production](nvidia-gpu/nvidia-fabricmanager/production) | :green_square: core | [ghcr.io/siderolabs/nvidia-fabricmanager-production](https://github.com/siderolabs/extensions/pkgs/container/nvidia-fabricmanager-production) | `595.71.05` |  This system extension provides the Nvidia fabricmanager for GPUs that need NVLink support. |
 | [nvidia-gdrdrv-device](nvidia-gpu/nvidia-gdrdrv-device) | :yellow_square: extra | [ghcr.io/siderolabs/nvidia-gdrdrv-device](https://github.com/siderolabs/extensions/pkgs/container/nvidia-gdrdrv-device) | `v2.5.2` |  This system extension provides NVIDIA GPUDirect RDMA (gdrcopy) device file. The gdrdrv kernel module enables low-latency GPU memory access for RDMA operations. |
-| [nvidia-open-gpu-kernel-modules-lts](nvidia-gpu/nvidia-modules/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules-lts) | `580.167.08-VERSION` |  This system extension provides nvidia open source driver kernel modules built against a specific Talos version. |
+| [nvidia-open-gpu-kernel-modules-lts](nvidia-gpu/nvidia-modules/lts) | :green_square: core | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules-lts](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules-lts) | `580.173.02-VERSION` |  This system extension provides nvidia open source driver kernel modules built against a specific Talos version. |
 | [nvidia-open-gpu-kernel-modules-production](nvidia-gpu/nvidia-modules/production) | :green_square: core | [ghcr.io/siderolabs/nvidia-open-gpu-kernel-modules-production](https://github.com/siderolabs/extensions/pkgs/container/nvidia-open-gpu-kernel-modules-production) | `595.71.05-VERSION` |  This system extension provides nvidia open source driver kernel modules built against a specific Talos version. |
 
 ### Tools
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [ctr](tools/ctr) | :green_square: core | [ghcr.io/siderolabs/ctr](https://github.com/siderolabs/extensions/pkgs/container/ctr) | `v2.2.5` |  This extension provides ctr containerd helper binary |
+| [ctr](tools/ctr) | :green_square: core | [ghcr.io/siderolabs/ctr](https://github.com/siderolabs/extensions/pkgs/container/ctr) | `v2.2.6` |  This extension provides ctr containerd helper binary |
 | [nvme-cli](tools/nvme-cli) | :white_large_square: contrib | [ghcr.io/siderolabs/nvme-cli](https://github.com/siderolabs/extensions/pkgs/container/nvme-cli) | `v2.14` |  This system extension provides the NVMe command line interface. |
-| [util-linux-tools](tools/util-linux) | :white_large_square: contrib | [ghcr.io/siderolabs/util-linux-tools](https://github.com/siderolabs/extensions/pkgs/container/util-linux-tools) | `2.41.4` |  This system extension provides a minimal util-linux package. |
+| [util-linux-tools](tools/util-linux) | :white_large_square: contrib | [ghcr.io/siderolabs/util-linux-tools](https://github.com/siderolabs/extensions/pkgs/container/util-linux-tools) | `2.42.2` |  This system extension provides a minimal util-linux package. |
 
 <!-- ### END GENERATED CONTENT -->
 
