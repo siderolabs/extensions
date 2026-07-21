@@ -1,3 +1,69 @@
+## [Talos System Extensions 1.13.7](https://github.com/siderolabs/extensions/releases/tag/v1.13.7) (2026-07-21)
+
+Welcome to the v1.13.7 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ctr: 2.2.6
+DRBD: 9.3.3
+NVIDIA LTS: 580.173.02
+cloudflared: 2026.7.1
+gvisor: 20260706.0
+netbird: 0.74.5
+newt: 1.14.0
+qemu-guest-agent: 11.0.2
+tailscale: 1.98.8
+
+
+### Contributors
+
+* Andrey Smirnov
+* Calin
+* Dario Emerson
+* Maja Bojarska
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`e180ea9`](https://github.com/siderolabs/extensions/commit/e180ea95b1390d8f8a4ca1de2e39dcd7791888ed) feat: update dependencies
+* [`21e20cf`](https://github.com/siderolabs/extensions/commit/21e20cfe247b32991826b97fcb3d9d0592c1253c) feat: update tools & pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>6 commits</summary>
+<p>
+
+* [`91fe0a0`](https://github.com/siderolabs/pkgs/commit/91fe0a0dc065c93f0405eb60b4bbec19c7e96e12) feat: update Linux to 6.18.39
+* [`1018556`](https://github.com/siderolabs/pkgs/commit/10185561bffe77af08f2404fd1731bb304a9c242) feat: enable CONFIG_IOMMUFD and CONFIG_VFIO_DEVICE_CDEV
+* [`d529479`](https://github.com/siderolabs/pkgs/commit/d529479e471ccf92d6bc3910f5d06e727aad8db1) chore: bump nvidia to 580.167.08
+* [`971fd23`](https://github.com/siderolabs/pkgs/commit/971fd23a4b3cec65c353c02cae17a090c3f2e525) fix: enable CONFIG_IFB as a module
+* [`acece91`](https://github.com/siderolabs/pkgs/commit/acece916f8e8aaefc1cc017fdbb8d56d7d516107) feat: update DRBD to 9.3.3
+* [`b91905c`](https://github.com/siderolabs/pkgs/commit/b91905c6a7086918c0aaa74a076662c50695ea17) feat: update containerd to 2.2.6
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`c2844e6`](https://github.com/siderolabs/tools/commit/c2844e6b4b01d66e781e53b6b261048fadf80be8) feat: update util-linux to 2.42.2
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-43-gd8c80cc -> v1.13.0-49-g91fe0a0
+* **github.com/siderolabs/tools**  v1.13.0-7-gc58afd5 -> v1.13.0-8-gc2844e6
+
+Previous release can be found at [v1.13.6](https://github.com/siderolabs/extensions/releases/tag/v1.13.6)
+
 ## [Talos System Extensions 1.13.6](https://github.com/siderolabs/extensions/releases/tag/v1.13.6) (2026-07-08)
 
 Welcome to the v1.13.6 release of Talos System Extensions!
