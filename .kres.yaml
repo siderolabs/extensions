@@ -17,6 +17,7 @@ spec:
     - drbd
     - dvb-cx23885
     - dvb-m88ds3103
+    - dvb-usb-dvbsky
     - ecr-credential-provider
     - fuse3
     - gasket-driver
