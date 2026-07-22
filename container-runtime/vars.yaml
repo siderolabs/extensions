@@ -1,10 +1,10 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20260706.0
+GVISOR_VERSION: 20260714.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
-GVISOR_REV: 8ed0c00a3f9091a193bc83ac42a0d3b21009524b
-GVISOR_SHA256: c342984d327b6854139d0afe1f625c45d28d14d67ea9948894017ac8971bbf41
-GVISOR_SHA512: 6c2d892b3cb424b9f9c5ca8139dc7b43e6a745f11b8bc126eee2a5c96f7d6cb2dbc23275600f11a1342ba61d7f670b2251b2e8a3ff5011bbfb9ddda5d7aa768c
+GVISOR_REV: 54750655040756ea6fcbaf962e308d1e85b82925
+GVISOR_SHA256: 5addfad4bf6eca1a3c334ded8c179dac898b8afff1a273c5c955286022636a5e
+GVISOR_SHA512: cbe0455abed7830b1636c7998455bd11d29ec57e52d0072f36d0d79c9d6789bf3437df3010335c56ee285521ac9132d3e4ff5eb1474a699306f3e415f470bcc8
 # renovate: datasource=github-releases depName=containerd/stargz-snapshotter
 STARGZ_SNAPSHOTTER_VERSION: v0.18.2
 STARGZ_SNAPSHOTTER_SHA256: 9e92bd3aa7ca03b5265268f4db0878166cf33311b7c514e4bbd05e247484d32d
@@ -15,9 +15,9 @@ SOCI_SNAPSHOTTER_REV: e5a21c6772046d6bc0366666a78b0286260284e4
 SOCI_SNAPSHOTTER_SHA256: 4c9a6592383d89dbad104725e3a92fd10fe988b6a1aa7d73bfa9ebebf25877b3
 SOCI_SNAPSHOTTER_SHA512: e9e70ec10e9094502295bc1d903f76b6a5fa20fd1bf87f751ba9a8d38262755cae0852ab3338762273c3667e6d81f9e4c4983913efa1609d5771f981bfb5dc15
 # renovate: datasource=github-releases depName=kubernetes/cloud-provider-aws
-CLOUD_PROVIDER_AWS_VERSION: v1.36.0
-CLOUD_PROVIDER_AWS_SHA256: 6f73331159205ee8c020f5420bd49e7e9f4a5f4ae1e7eb6c8d74165920a5c40f
-CLOUD_PROVIDER_AWS_SHA512: 3619ef804c1a677e710fdb3a1558e90d0899614d1fc05e0c6fd8b9e4b7fad01f9f1056eb824c4a59cfe84abc2a029011bf948fb5060792b8ec6043f80425833c
+CLOUD_PROVIDER_AWS_VERSION: v1.36.1
+CLOUD_PROVIDER_AWS_SHA256: e92d26ffe7441f58562680c2dce4a68b35aa9b8d0f8318a73c809dfdc0f4c842
+CLOUD_PROVIDER_AWS_SHA512: 4a1a5f1d4b2c29f7afbfb4ca1f88470d212068bcd2ec2a2a4f9a044023b646e5b63dc319407a3f84987b52cabdcadac016d04629b5cac39abb9ebf0c9c7b834b
 
 # renovate: datasource=github-releases depName=container-registry/harbor-workload-identity-federation
 HARBOR_WIF_VERSION: v0.0.1
