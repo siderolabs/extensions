@@ -1,0 +1,56 @@
+# Talos extension service: generate the VFIO CDI spec for vfio-bound NVIDIA
+# GPUs at boot (/run/cdi is tmpfs — must be re-created every boot).
+# restart: untilSuccess -> retries until the GPU is bound to vfio-pci
+# (machine.kernel.modules vfio_pci ids=... happens early in boot), then exits.
+# Also guards the extension chain: the helper fails loudly if the files the
+# siblings provide (containerd-shim-kata-v2 and virtiofsd from
+# kata-containers, AMDSEV.fd from kata-containers-snp) are absent from
+# /usr/local — the runtime end of the
+# kata-containers -> kata-containers-snp -> this add-on pairing.
+#
+# Container rootfs = /usr/local/lib/containers/nvidia-vfio-cdi (Talos derives
+# it from `name`); entrypoint/args paths are relative to that root.
+name: nvidia-vfio-cdi
+container:
+  entrypoint: /nvidia-vfio-cdi
+  mounts:
+    - source: /sys
+      destination: /sys
+      type: bind
+      options:
+        - rbind
+        - ro
+    # Only the CDI directory, not all of /run (machined and containerd keep
+    # runtime state there). /run is tmpfs and machined pre-creates missing
+    # bind sources, so the narrow source works on first boot — same shape as
+    # the nvidia-container-toolkit's nvidia-cdi-gen service.
+    - source: /run/cdi
+      destination: /run/cdi
+      type: bind
+      options:
+        - bind
+        - rw
+    # Host /usr/local (ro) — for the base-extension presence check (the
+    # guard reads base-provided files under it). The mount SOURCE must be
+    # /usr/local (not /usr/local/bin): /usr/local is guaranteed to exist
+    # wherever this service is loaded (this very spec file is installed
+    # under it), while /usr/local/bin only exists when an extension ships
+    # files there — and machined pre-creates missing bind sources with
+    # MkdirAll, which fails (EROFS) on the read-only merged rootfs and
+    # would kill the service with a cryptic error in exactly the
+    # missing-base case this guard is meant to report.
+    # Plain `bind` (NOT rbind) on purpose: an rbind would replicate the
+    # rw overlay machined mounts on this service's own rootfs (under
+    # /usr/local/lib/containers/) into the container, giving it a
+    # writable alias of its rootfs despite the ro root. A non-recursive
+    # bind copies only the read-only merged root — the guard target is a
+    # regular file there. Same shape as the iscsi-tools mounts.
+    - source: /usr/local
+      destination: /usr/local
+      type: bind
+      options:
+        - bind
+        - ro
+depends:
+  - service: cri
+restart: untilSuccess
