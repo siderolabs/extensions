@@ -32,6 +32,7 @@ dependencies:
   - stage: spin
   - stage: sqlite
   - stage: stargz-snapshotter
+  - stage: sysbox
   - stage: tailscale
   - stage: vmtoolsd-guest-agent
   - stage: wasmedge
