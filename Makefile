@@ -134,6 +134,7 @@ TARGETS += revpi-firmware
 TARGETS += rockchip-rknn
 TARGETS += spin
 TARGETS += stargz-snapshotter
+TARGETS += sysbox
 TARGETS += tailscale
 TARGETS += tenstorrent
 TARGETS += thunderbolt
