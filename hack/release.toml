@@ -28,7 +28,7 @@ NVIDIA LTS: 580.173.02
 NVIDIA Production: 595.71.05
 NVIDIA Container Toolkit: 1.19.1
 DRBD: 9.3.3
-Amazon ENA: 2.17.0
+Amazon ENA: 2.17.2
 xdma-driver: 8721136
 crun: 1.28
 gvisor: 20260714.0
@@ -47,6 +47,7 @@ tailscale: 1.98.9
 zerotier: 1.16.2
 soci-snapshotter: v0.14.1
 wasmedge: 0.6.1
+hailort: 4.24.0
 """
 
 [notes.kata]
