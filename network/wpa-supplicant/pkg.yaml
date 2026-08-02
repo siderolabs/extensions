@@ -1,0 +1,62 @@
+name: wpa-supplicant
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://w1.fi/releases/wpa_supplicant-{{ .WPA_SUPPLICANT_VERSION }}.tar.gz
+        destination: wpa-supplicant.tar.gz
+        sha256: {{ .WPA_SUPPLICANT_SHA256 }}
+        sha512: {{ .WPA_SUPPLICANT_SHA512 }}
+      - url: https://git.kernel.org/pub/scm/linux/kernel/git/wens/wireless-regdb.git/snapshot/wireless-regdb-{{ .WIRELESS_REGDB_VERSION }}.tar.gz
+        destination: wireless-regdb.tar.gz
+        sha256: {{ .WIRELESS_REGDB_SHA256 }}
+        sha512: {{ .WIRELESS_REGDB_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        mkdir wpa-supplicant wireless-regdb
+        tar -xf wpa-supplicant.tar.gz --strip-components=1 -C wpa-supplicant
+        tar -xf wireless-regdb.tar.gz --strip-components=1 -C wireless-regdb
+    build:
+      - |
+        # static single binary; drop the unused D-Bus control interface
+        cd wpa-supplicant/wpa_supplicant
+        cp defconfig .config
+        sed -i '/^CONFIG_CTRL_IFACE_DBUS/d' .config
+        make -j $(nproc) LDFLAGS="-static"
+        strip wpa_supplicant
+        cd ../..
+    install:
+      - |
+        mkdir -p /rootfs/usr/lib/firmware
+        cp wireless-regdb/regulatory.db     /rootfs/usr/lib/firmware/
+        cp wireless-regdb/regulatory.db.p7s /rootfs/usr/lib/firmware/
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/wpa-supplicant.yaml /rootfs/usr/local/etc/containers/
+      - |
+        rootfs=/rootfs/usr/local/lib/containers/wpa-supplicant
+        mkdir -p "$rootfs/usr/local/bin" "$rootfs/etc/wpa_supplicant" "$rootfs/run/wpa_supplicant"
+        cp wpa-supplicant/wpa_supplicant/wpa_supplicant "$rootfs/usr/local/bin/"
+        chmod +x "$rootfs/usr/local/bin/wpa_supplicant"
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/wpa-supplicant.spdx.json
+      version: {{ .WPA_SUPPLICANT_VERSION }}
+      cpes:
+        - cpe:2.3:a:w1.fi:wpa_supplicant:{{ .WPA_SUPPLICANT_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - BSD-3-Clause
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

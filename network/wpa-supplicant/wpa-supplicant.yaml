@@ -1,0 +1,23 @@
+name: wpa-supplicant
+depends:
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/wpa_supplicant
+  args:
+    - -i
+    - wlan0
+    - -Dnl80211
+    - -c
+    - /etc/wpa_supplicant/wpa_supplicant.conf
+  security:
+    maskedPaths: []
+    readonlyPaths: []
+    writeableSysfs: true
+  mounts:
+    - source: /run/wpa_supplicant
+      destination: /run/wpa_supplicant
+      type: bind
+      options:
+        - bind
+        - rw
+restart: always

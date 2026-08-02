@@ -1,0 +1,2 @@
+VERSION: "{{ .WPA_SUPPLICANT_VERSION }}"
+TIER: "contrib"
