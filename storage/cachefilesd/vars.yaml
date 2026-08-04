@@ -1,0 +1,3 @@
+VERSION: "{{ .CACHEFILESD_VERSION}}-{{ .BUILD_ARG_TAG }}"
+
+TIER: "contrib"

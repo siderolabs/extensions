@@ -1,0 +1,37 @@
+name: cachefilesd
+depends:
+  - path: /dev/cachefiles
+  - path: /etc/cachefilesd.conf
+  - path: /var/mnt/fscache
+container:
+  entrypoint: /usr/local/sbin/cachefilesd
+  args:
+    - -s
+    - -n
+    - -f
+    - /usr/local/etc/cachefilesd.conf
+  mounts:
+    # cache root, rw: the cachefiles kernel module sets xattrs on it
+    - source: /var/mnt/fscache
+      destination: /var/mnt/fscache
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # config file, populated by EtcFileConfig
+    - source: /etc/cachefilesd.conf
+      destination: /usr/local/etc/cachefilesd.conf
+      type: bind
+      options:
+        - rbind
+        - ro
+    # /dev for /dev/cachefiles and /dev/null
+    - source: /dev
+      destination: /dev
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+restart: always
