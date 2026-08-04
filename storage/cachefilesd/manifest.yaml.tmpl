@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: cachefilesd
+  version: "{{ .VERSION }}"
+  author: Sidero Labs
+  description: |
+    [{{ .TIER }}] This system extension provides cachefilesd (FS-Cache caching backend daemon) and the cachefiles kernel module built against a specific Talos version.
+  compatibility:
+    talos:
+      version: ">= v1.14.0"
