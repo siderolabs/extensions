@@ -9,6 +9,7 @@ spec:
     - bird2
     - bnx2-bnx2x
     - btrfs
+    - cachefilesd
     - chelsio-drivers
     - chelsio-firmware
     - cloudflared

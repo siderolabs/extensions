@@ -62,6 +62,13 @@ Kata Containers now has support for the `kata-qemu` runtime handler which uses Q
 The new extension `kata-container-snp` provides additional support for AMD SEV-SNP confidential VMs.
 """
 
+[notes.cachefilesd]
+    title = "cachefilesd"
+    description = """\
+The `cachefilesd` extension has been added to provide support for the `cachefilesd` daemon, which is used to cache files from a network filesystem (NFS) on a local disk.
+This can improve performance and reduce network load for frequently accessed files.
+"""
+
 [make_deps]
 
     [make_deps.tools]

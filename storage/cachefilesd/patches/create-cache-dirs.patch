@@ -1,0 +1,53 @@
+Create the 'cache' and 'graveyard' subdirectories of the cache root if they
+don't exist yet, instead of failing to start.
+
+cachefilesd requires both to be present under the directory given by the 'dir'
+config option, but never creates them: distro packaging normally ships them, and
+in a Talos extension service container there is nothing to do that. Create them
+right after the config file is parsed, before the cache is bound.
+
+--- a/cachefilesd.c
++++ b/cachefilesd.c
+@@ -214,6 +214,7 @@
+ #define debug(DL, FMT,...)	__message(DL, LOG_DEBUG,  FMT"\n" ,##__VA_ARGS__)
+ #define notice(FMT,...)		__message(0,  LOG_NOTICE, FMT"\n" ,##__VA_ARGS__)
+ 
++static void create_cache_subdir(const char *name);
+ static void open_cache(void);
+ static void cachefilesd(void) __attribute__((noreturn));
+ static void reap_graveyard(void);
+@@ -528,6 +529,13 @@
+ 	if (fclose(config) == EOF)
+ 		oserror("Unable to close %s", configfile);
+ 
++	/* make sure the subdirectories the kernel module and the scanner
++	 * require exist before the cache is bound */
++	if (cacheroot) {
++		create_cache_subdir("cache");
++		create_cache_subdir("graveyard");
++	}
++
+ 	/* allocate the cull tables */
+ 	if (!culling_disabled) {
+ 		cullbuild = calloc(culltable_size, sizeof(cullbuild[0]));
+@@ -592,6 +600,20 @@
+ }
+ 
+ /*****************************************************************************/
++/*
++ * create a subdirectory of the cache root if it doesn't exist yet
++ */
++static void create_cache_subdir(const char *name)
++{
++	char buffer[PATH_MAX + 1];
++
++	snprintf(buffer, sizeof(buffer), "%s/%s", cacheroot, name);
++
++	if (mkdir(buffer, 0700) < 0 && errno != EEXIST)
++		oserror("Unable to create %s", buffer);
++}
++
++/*****************************************************************************/
+ /*
+  * open the cache directories
+  */
