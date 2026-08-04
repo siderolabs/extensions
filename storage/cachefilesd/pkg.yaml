@@ -1,0 +1,62 @@
+name: cachefilesd
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  # The pkgs version for a particular release of Talos as defined in
+  # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kernel:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://deb.debian.org/debian/pool/main/c/cachefilesd/cachefilesd_{{ .CACHEFILESD_VERSION }}.orig.tar.bz2
+        destination: cachefilesd.tar.bz2
+        sha256: {{ .CACHEFILESD_SHA256 }}
+        sha512: {{ .CACHEFILESD_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xjf cachefilesd.tar.bz2 --strip-components=1
+    build:
+      - |
+        # musl has no stat64/fstatat64; _LARGEFILE64_SOURCE aliases them to the base functions
+        make CFLAGS="-O2 -Wall -D_LARGEFILE64_SOURCE" cachefilesd
+    install:
+      - |
+        export KERNELRELEASE=$(find /usr/lib/modules -type d -name "*-talos" -exec basename {} \+)
+
+        mkdir -p /rootfs
+
+        # install cachefiles kernel module
+        xargs -a /pkg/files/modules.txt -I {} install -D /usr/lib/modules/${KERNELRELEASE}/{} /rootfs/usr/lib/modules/${KERNELRELEASE}/{}
+        depmod -b /rootfs/usr ${KERNELRELEASE}
+
+        # install cachefilesd daemon
+        install -D -m 0755 cachefilesd /rootfs/usr/local/sbin/cachefilesd
+        install -D -m 0644 /pkg/files/cachefilesd.conf /rootfs/usr/local/etc/cachefilesd.conf
+
+        # install service container definition
+        mkdir -p /rootfs/usr/local/etc/containers
+        mkdir -p /rootfs/usr/local/lib/containers/cachefilesd
+        cp /pkg/cachefilesd.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
+        find /rootfs/usr/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/cachefilesd.spdx.json
+      version: {{ .CACHEFILESD_VERSION }}
+      cpes:
+        - cpe:2.3:a:cachefilesd_project:cachefilesd:{{ .CACHEFILESD_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - GPL-2.0-or-later
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
