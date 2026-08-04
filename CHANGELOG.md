@@ -1,3 +1,59 @@
+## [Talos System Extensions 1.13.8](https://github.com/siderolabs/extensions/releases/tag/v1.13.8) (2026-08-04)
+
+Welcome to the v1.13.8 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+cloudflared: 2026.7.2
+ecr-credential-provider: 1.36.1
+gvisor: 20260714.0
+metal-agent: 0.1.6
+netbird: 0.74.7
+newt: 1.15.0
+tailscale: 1.98.9
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Noel Georgi
+* Andrey Smirnov
+* ctr49
+* imusmanmalik
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`8c6bffe`](https://github.com/siderolabs/extensions/commit/8c6bffe630f0eb7b53f373768ba0552c31c51fae) chore: update pkgs
+* [`e7fdc0a`](https://github.com/siderolabs/extensions/commit/e7fdc0a3b7de3e9d68180304316dc411a32f8cb4) feat: update backportable dependencies
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>6 commits</summary>
+<p>
+
+* [`f677246`](https://github.com/siderolabs/pkgs/commit/f677246a73ed1353a1e0ec9e92f0027b2f759978) chore: update kernel
+* [`6c5daf2`](https://github.com/siderolabs/pkgs/commit/6c5daf21828e3305e2efef7e5a1cd8d8304df2fb) chore: replace gnu mirror
+* [`4304e87`](https://github.com/siderolabs/pkgs/commit/4304e87fe468b379b16eecaf970b0271f8d6c1ad) feat: bump kernel to 6.18.41
+* [`e66edeb`](https://github.com/siderolabs/pkgs/commit/e66edebb6e3bd0621388e36c32765fd06de369c6) feat: enable PCF8523 RTC support for arm64
+* [`b2e51fc`](https://github.com/siderolabs/pkgs/commit/b2e51fc7a135c9a7d08970b7e154d1fbf46305ab) feat: bump kernel to 6.18.40
+* [`33195c5`](https://github.com/siderolabs/pkgs/commit/33195c57a081d8507ed79a4820def5b97123e827) feat: enable CONFIG_NFT_SOCKET in the kernel
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.13.0-49-g91fe0a0 -> v1.13.0-55-gf677246
+
+Previous release can be found at [v1.13.7](https://github.com/siderolabs/extensions/releases/tag/v1.13.7)
+
 ## [Talos System Extensions 1.13.7](https://github.com/siderolabs/extensions/releases/tag/v1.13.7) (2026-07-21)
 
 Welcome to the v1.13.7 release of Talos System Extensions!
