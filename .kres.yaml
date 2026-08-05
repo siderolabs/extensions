@@ -89,6 +89,7 @@ spec:
     - PKGS_PREFIX
     - TOOLS
     - TOOLS_PREFIX
+    - GNU_MIRROR_URL
   makefile:
     extraVariables:
       - name: EXTENSIONS_IMAGE_REF
@@ -101,6 +102,8 @@ spec:
         defaultValue: v1.12.0-24-g6c999e3
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
+      - name: GNU_MIRROR_URL
+        defaultValue: https://mirrors.kernel.org
   useBldrPkgTagResolver: true
 ---
 kind: common.Build
