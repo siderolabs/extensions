@@ -60,6 +60,7 @@ dependencies:
   # - stage: nvidia-open-gpu-kernel-modules-lts
   # nvidia-open-gpu-kernel-modules-production can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: nvidia-open-gpu-kernel-modules-production
+  - stage: qemu
   - stage: qemu-guest-agent
   # qlogic-firmware can be ignored from reproducibility test since it's linux-firmware copied from pkgs
   # - stage: qlogic-firmware

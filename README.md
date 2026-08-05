@@ -73,6 +73,12 @@ tiers based on support level:
 | [wasmedge](container-runtime/wasmedge) | :yellow_square: extra | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge) | `v0.6.1` |  This system extension provides support for WasmEdge runtime (WebAssembly) containers. |
 | [youki](container-runtime/youki) | :white_large_square: contrib | [ghcr.io/siderolabs/youki](https://github.com/siderolabs/extensions/pkgs/container/youki) | `0.6.0` |  This system extension provides youki using containerd's runtime handler. |
 
+### Hypervisors
+
+| Name | Tier | Image | Version | Description |
+| ---- | ---- | ----- | ------- | ----------- |
+| [qemu](hypervisors/qemu) | :green_square: core | [ghcr.io/siderolabs/qemu](https://github.com/siderolabs/extensions/pkgs/container/qemu) | `11.0.2` |  This system extension provides the QEMU machine emulator and virtualizer. |
+
 ### Firmware
 
 | Name | Tier | Image | Version | Description |

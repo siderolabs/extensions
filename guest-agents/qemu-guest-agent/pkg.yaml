@@ -3,14 +3,13 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: pcre2
   - stage: glib
 steps:
   - sources:
       - url: https://download.qemu.org/qemu-{{ .QEMU_VERSION }}.tar.xz
         destination: qemu.tar.xz
-        sha256: {{ .QEMU_SHA256 }}
-        sha512: {{ .QEMU_SHA512 }}
+        sha256: "{{ .QEMU_SHA256 }}"
+        sha512: "{{ .QEMU_SHA512 }}"
     prepare:
       - |
         tar -xf qemu.tar.xz --strip-components=1
@@ -26,6 +25,7 @@ steps:
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
         ./configure \
+          --disable-download \
           --static \
           --prefix=/usr/local \
           --localstatedir=/var \
@@ -64,7 +64,7 @@ steps:
         /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
     sbom:
       outputPath: /rootfs/usr/local/share/spdx/qemu-guest-agent.spdx.json
-      version: {{ .QEMU_VERSION }}
+      version: "{{ .QEMU_VERSION }}"
       cpes:
         - cpe:2.3:a:qemu:qemu:{{ .QEMU_VERSION }}:*:*:*:*:*:*:*
       licenses:

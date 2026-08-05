@@ -1,0 +1,105 @@
+name: qemu
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: glib
+  - stage: glib
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: pixman
+  - stage: pixman
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: numactl
+  - stage: numactl
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: ceph
+  - stage: ceph
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/cryptsetup:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libaio:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libucontext:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/lvm2:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libjson-c:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://download.qemu.org/qemu-{{ .QEMU_VERSION }}.tar.xz
+        destination: qemu.tar.xz
+        sha256: "{{ .QEMU_SHA256 }}"
+        sha512: "{{ .QEMU_SHA512 }}"
+    prepare:
+      - |
+        tar -xf qemu.tar.xz --strip-components=1
+      - |
+        extra_args=( )
+
+        # if [[ "${ARCH}" == aarch64 ]]; then
+        #   # FIXME: Workaround for “read-only segment has dynamic relocations” linking error.
+        #   extra_args+=( --disable-pie )
+        # fi
+
+        case "${ARCH}" in
+          x86_64) extra_args+=( --target-list=x86_64-softmmu ) ;;
+          aarch64) extra_args+=( --target-list=aarch64-softmmu ) ;;
+        esac
+
+        export CFLAGS="${CFLAGS:-} -I/usr/local/include"
+        export LDFLAGS="${LDFLAGS:-} -L/usr/local/lib -Wl,-rpath-link,/usr/local/lib"
+        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+
+        if ! ./configure \
+          --disable-download \
+          --prefix=/usr/local \
+          --enable-kvm \
+          --enable-tools \
+          --enable-numa \
+          --enable-linux-aio \
+          --enable-rbd \
+          --disable-user \
+          --disable-linux-user \
+          --disable-bsd-user \
+          --disable-docs \
+          --disable-werror \
+          --disable-sdl \
+          --disable-gtk \
+          --disable-spice \
+          --disable-opengl \
+          --disable-curses \
+          --disable-vte \
+          --enable-stack-protector \
+          "${extra_args[@]}"; then
+          cat build/meson-logs/meson-log.txt
+
+          exit 1
+        fi
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs install
+    test:
+      - |
+        /rootfs/usr/local/bin/qemu-img --help 2>&1 | grep -qw rbd
+
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/qemu.spdx.json
+      version: "{{ .QEMU_VERSION }}"
+      cpes:
+        - cpe:2.3:a:qemu:qemu:{{ .QEMU_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - GPL-2.0
+        - LGPL-2.1
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

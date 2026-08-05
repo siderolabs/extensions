@@ -1,0 +1,85 @@
+name: ceph
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/cryptsetup:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://download.ceph.com/tarballs/ceph-{{ .CEPH_VERSION }}.tar.gz
+        destination: ceph.tar.gz
+        sha256: "{{ .CEPH_SHA256 }}"
+        sha512: "{{ .CEPH_SHA512 }}"
+    prepare:
+      - |
+        tar -xf ceph.tar.gz --strip-components=1
+    build:
+      - |
+        # Ceph requires keyutils unconditionally on Linux even with KRBD and CephFS disabled.
+        sed -i '/find_package(keyutils REQUIRED)/d' CMakeLists.txt
+        # libnbd only enables RBD migration from NBD sources; QEMU's RBD backend does not use it.
+        sed -i '/find_package(libnbd 1.0 REQUIRED)/d' CMakeLists.txt
+        # Ceph has no switch for disabling the unused snappy compressor.
+        sed -i '/find_package(snappy REQUIRED)/d' CMakeLists.txt
+        sed -i '/add_subdirectory(snappy)/d' src/compressor/CMakeLists.txt
+        # Ceph builds the Lua object class unconditionally on non-Windows platforms.
+        sed -i '/find_package(Lua 5.3 REQUIRED)/d' src/cls/CMakeLists.txt
+        # Ceph has no switch for disabling Python bindings, which require Cython.
+        sed -i '/add_subdirectory(pybind)/d' src/CMakeLists.txt
+        # Ceph does not expose Boost's option for disabling the unused bzip2 backend.
+        sed -i '/set(b2 ${bjam})/a\  list(APPEND b2 -sNO_BZIP2=1)' cmake/modules/BuildBoost.cmake
+
+        # musl lacks the newer Linux TCP_INFO option macros and the lseek64 alias.
+        export CXXFLAGS="${CXXFLAGS:-} -DTCPI_OPT_ECN_SEEN=16 -DTCPI_OPT_SYN_DATA=32 -Dlseek64=lseek"
+
+        cmake -B _build \
+        -DWITH_MANPAGE=OFF \
+        -DWITH_RDMA=OFF \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DALLOCATOR=libc \
+        -DWITH_RADOSGW_BACKTRACE_LOGGING=off \
+        -DWITH_SYSTEMD=OFF \
+        -DWITH_TESTS=OFF \
+        -DCMAKE_INSTALL_PREFIX=/usr/local \
+        -DWITH_RADOSGW=OFF \
+        -DWITH_OPENLDAP=OFF \
+        -DWITH_FUSE=OFF \
+        -DWITH_RBD=ON \
+        -DWITH_RBD_MIGRATION_FORMAT_QCOW_V1=OFF \
+        -DWITH_QATLIB=OFF \
+        -DWITH_QATZIP=OFF \
+        -DWITH_BLUESTORE=OFF \
+        -DWITH_CEPHFS=OFF \
+        -DWITH_LIBCEPHFS=OFF \
+        -DWITH_LIBCEPHSQLITE=OFF \
+        -DWITH_LIBRADOSSTRIPER=OFF \
+        -DWITH_KRBD=OFF \
+        -DWITH_LZ4=OFF \
+        -DWITH_LTTNG=OFF \
+        -DWITH_BABELTRACE=OFF \
+        -DWITH_JAEGER=OFF \
+        -DWITH_BREAKPAD=OFF \
+        -DWITH_CATCH2=OFF \
+        -DWITH_MGR=OFF \
+        -DWITH_NVMEOF_GATEWAY_MONITOR_CLIENT=OFF \
+        -DWITH_XFS=OFF
+
+        cmake --build _build --target librbd -j "$(nproc)"
+    install:
+      - |
+        install -d /rootfs/usr/local/include/rados
+        install -d /rootfs/usr/local/include/rbd
+        install -d /rootfs/usr/local/lib/
+
+        install -m 0644 src/include/rados/librados.h /rootfs/usr/local/include/rados/
+        install -m 0644 src/include/rados/rados_types.h /rootfs/usr/local/include/rados/
+        install -m 0644 src/include/rbd/features.h /rootfs/usr/local/include/rbd/
+        install -m 0644 src/include/rbd/librbd.h /rootfs/usr/local/include/rbd/
+
+        cp -a _build/lib/librados.so* /rootfs/usr/local/lib/
+        cp -a _build/lib/librbd.so* /rootfs/usr/local/lib/
+        install -m 0755 _build/lib/libceph-common.so.2 /rootfs/usr/local/lib/
+finalize:
+  - from: /rootfs
+    to: /

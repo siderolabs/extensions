@@ -3,23 +3,19 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
-  - stage: pcre2
 steps:
   - sources:
       - url: https://download.gnome.org/sources/glib/{{ regexReplaceAll ".\\d+$" .GLIB_VERSION "${1}" }}/glib-{{ .GLIB_VERSION }}.tar.xz
         destination: glib.tar.xz
-        sha256: {{ .GLIB_SHA256 }}
-        sha512: {{ .GLIB_SHA512 }}
+        sha256: "{{ .GLIB_SHA256 }}"
+        sha512: "{{ .GLIB_SHA512 }}"
     prepare:
       - |
         tar -xf glib.tar.xz --strip-components=1
-        rm glib.tar.xz
     build:
       - |
-        export PKG_CONFIG_PATH=/usr/lib/pkgconfig
-
         meson setup \
-          --prefix=/usr \
+          --prefix=/usr/local \
           -Ddefault_library=both \
           -Dlibelf=disabled \
           -Dselinux=disabled \

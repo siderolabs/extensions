@@ -1,0 +1,2 @@
+VERSION: "{{ .QEMU_VERSION }}"
+TIER: "core"

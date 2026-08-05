@@ -1293,3 +1293,8 @@
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/sbin/zic
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/share/spdx/glibc.spdx.json
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/share/spdx/zlib-ng.spdx.json
+- images:
+    - registry.dev.siderolabs.io/siderolabs/qemu
+    - registry.dev.siderolabs.io/siderolabs/kata-containers
+  files:
+    - rootfs/usr/local/bin/qemu-system-x86_64

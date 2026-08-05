@@ -24,7 +24,7 @@ dependencies:
   - stage: nut-client
   - stage: nvidia-container-runtime
   - stage: nvme-cli
-  - stage: pcre2
+  - stage: qemu
   - stage: qemu-guest-agent
   - stage: rpc-statd
   - stage: rpcbind

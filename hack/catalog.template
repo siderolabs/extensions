@@ -24,6 +24,9 @@
 ### Container Runtimes
 {{ template "extension-list" (dict "Pkgs" . "BaseDir" "container-runtime/") -}}
 
+### Hypervisors
+{{ template "extension-list" (dict "Pkgs" . "BaseDir" "hypervisors/") -}}
+
 ### Firmware
 {{ template "extension-list" (dict "Pkgs" . "BaseDir" "firmware/") -}}
 

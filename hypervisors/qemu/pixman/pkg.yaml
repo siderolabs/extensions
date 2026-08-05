@@ -1,0 +1,28 @@
+name: pixman
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://www.cairographics.org/releases/pixman-{{ .PIXMAN_VERSION }}.tar.gz
+        destination: pixman.tar.gz
+        sha256: "{{ .PIXMAN_SHA256 }}"
+        sha512: "{{ .PIXMAN_SHA512 }}"
+    prepare:
+      - |
+        tar -xzf pixman.tar.gz --strip-components=1
+    build:
+      - |
+        meson setup --prefix=/usr/local \
+          --buildtype=release \
+          -Dtests=disabled \
+          -Ddemos=disabled _build
+
+        ninja -j $(nproc) -C _build
+    install:
+      - |
+        DESTDIR=/rootfs ninja -C _build install
+finalize:
+  - from: /rootfs
+    to: /
