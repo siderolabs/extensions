@@ -98,6 +98,7 @@ spec:
     - TOOLS
     - TOOLS_PREFIX
     - TEST_STAGE
+    - GNU_MIRROR_URL
   makefile:
     extraVariables:
       - name: EXTENSIONS_IMAGE_REF
@@ -112,6 +113,8 @@ spec:
         defaultValue: ghcr.io/siderolabs
       - name: GO_TOOLS_RELEASE
         defaultValue: v0.3.1
+      - name: GNU_MIRROR_URL
+        defaultValue: https://mirrors.kernel.org
   useBldrPkgTagResolver: true
 ---
 kind: common.Build
