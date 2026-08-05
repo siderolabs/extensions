@@ -15,28 +15,29 @@ machine:
       - name: cachefiles
 ```
 
-The `cachefilesd` extension service starts automatically once `/dev/cachefiles` appears (i.e., the module is loaded).
+The `cachefilesd` extension service starts automatically once `/dev/cachefiles` appears (i.e., the module is loaded) and the user has provided a configuration file (see below).
 
 ### Configuration
 
-The extension ships a default `/usr/local/etc/cachefilesd.conf` which caches under `/var/cache/fscache` on the node's ephemeral partition. To override it, supply your own config via [`ExtensionServiceConfig`](https://www.talos.dev/v1.14/reference/configuration/extensions/extensionserviceconfig/):
+The extension ships no default config. The service waits until you provide `/etc/cachefilesd.conf` via [`EtcFileConfig`](https://www.talos.dev/v1.14/reference/configuration/runtime/etcfileconfig/), which is bind-mounted into the service container:
 
 ```yaml
 apiVersion: v1alpha1
-kind: ExtensionServiceConfig
-name: cachefilesd
-configFiles:
-  - mountPath: /usr/local/etc/cachefilesd.conf
-    content: |
-      dir /var/cache/fscache
-      tag mycache
-      brun 10%
-      bcull 7%
-      bstop 3%
-      frun 10%
-      fcull 7%
-      fstop 3%
+kind: EtcFileConfig
+name: cachefilesd.conf
+mode: 0o644
+contents: |
+  dir /var/cache/fscache
+  tag mycache
+  brun 10%
+  bcull 7%
+  bstop 3%
+  frun 10%
+  fcull 7%
+  fstop 3%
 ```
+
+This example caches under `/var/cache/fscache` on the node's ephemeral partition.
 
 ### Enabling fscache on NFS mounts
 

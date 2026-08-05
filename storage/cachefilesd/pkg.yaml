@@ -38,9 +38,9 @@ steps:
         xargs -a /pkg/files/modules.txt -I {} install -D /usr/lib/modules/${KERNELRELEASE}/{} /rootfs/usr/lib/modules/${KERNELRELEASE}/{}
         depmod -b /rootfs/usr ${KERNELRELEASE}
 
-        # install cachefilesd daemon and default config into the service container rootfs
+        # install cachefilesd daemon into the service container rootfs
+        # (no default config: the user provides /etc/cachefilesd.conf via EtcFileConfig)
         install -D -m 0755 cachefilesd /rootfs/usr/local/lib/containers/cachefilesd/usr/local/sbin/cachefilesd
-        install -D -m 0644 /pkg/files/cachefilesd.conf /rootfs/usr/local/lib/containers/cachefilesd/usr/local/etc/cachefilesd.conf
 
         # install service container definition
         mkdir -p /rootfs/usr/local/etc/containers

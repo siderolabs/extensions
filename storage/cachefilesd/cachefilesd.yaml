@@ -1,6 +1,7 @@
 name: cachefilesd
 depends:
   - path: /dev/cachefiles
+  - path: /etc/cachefilesd.conf
 container:
   entrypoint: /usr/local/sbin/cachefilesd
   args:
@@ -33,6 +34,12 @@ container:
         - rshared
         - rbind
         - rw
+    - source: /etc/cachefilesd.conf
+      destination: /usr/local/etc/cachefilesd.conf
+      type: bind
+      options:
+        - rbind
+        - ro
     # /dev for /dev/cachefiles and /dev/null
     - source: /dev
       destination: /dev
