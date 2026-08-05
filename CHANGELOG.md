@@ -1,3 +1,49 @@
+## [Talos System Extensions 1.12.11](https://github.com/siderolabs/extensions/releases/tag/v1.12.11) (2026-08-05)
+
+Welcome to the v1.12.11 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+
+
+### Contributors
+
+* Mateusz Urbanek
+* Noel Georgi
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`cccee8e`](https://github.com/siderolabs/extensions/commit/cccee8e93adbc22bffdffb87720a056b2e81632f) chore: update pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>6 commits</summary>
+<p>
+
+* [`f921142`](https://github.com/siderolabs/pkgs/commit/f921142408daaa99034aee9c9e5070274a6cc329) fix: patch nvidia support pci_resize_resource exclude_bars argument
+* [`c80e83f`](https://github.com/siderolabs/pkgs/commit/c80e83f29469cf4858911f9876fc1fff7b27d8a2) chore: replace gnu mirror
+* [`45e036d`](https://github.com/siderolabs/pkgs/commit/45e036d15c2bb75991a303b832b74302f6cd4b04) chore: update kernel
+* [`fbd81c3`](https://github.com/siderolabs/pkgs/commit/fbd81c3eca242a6464d2ac323cd3cebe3749ed6a) feat: bump kernel to 6.18.41
+* [`cf0d226`](https://github.com/siderolabs/pkgs/commit/cf0d226a82fb539e56ea1cf7659a39132249a274) feat: bump kernel to 6.18.40
+* [`1a9c50a`](https://github.com/siderolabs/pkgs/commit/1a9c50a76825c96bcf90b80dbb4fc35082cf80d2) feat: update Linux to 6.18.39
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.12.0-97-g4f4aef1 -> v1.12.0-103-gf921142
+
+Previous release can be found at [v1.12.10](https://github.com/siderolabs/extensions/releases/tag/v1.12.10)
+
 ## [Talos System Extensions 1.12.10](https://github.com/siderolabs/extensions/releases/tag/v1.12.10) (2026-07-16)
 
 Welcome to the v1.12.10 release of Talos System Extensions!
