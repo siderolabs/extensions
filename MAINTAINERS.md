@@ -16,6 +16,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | binfmt-misc                               | Serge Logvinov     | [sergelogvinov](https://github.com/sergelogvinov)                                        |
 | bnx2-bnx2x                                | Sidero Labs        | NA                                                                                       |
 | btrfs                                     | Enno Boland        | [Gottox](https://github.com/Gottox)                                                      |
+| cachefilesd                               | Christian Jacobsen | [ChristianJacobsen](https://github.com/ChristianJacobsen)                                |
 | chelsio-drivers                           | Sidero Labs        | NA                                                                                       |
 | chelsio-firmware                          | Sidero Labs        | NA                                                                                       |
 | cloudflared                               | Maxime Nrb         | [maxnrb](https://github.com/maxnrb)                                                      |

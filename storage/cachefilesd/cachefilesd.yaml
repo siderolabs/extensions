@@ -9,34 +9,6 @@ container:
     - -f
     - /usr/local/etc/cachefilesd.conf
   mounts:
-    # musl dynamic linker
-    - source: /lib
-      destination: /lib
-      type: bind
-      options:
-        - bind
-        - ro
-    # libc
-    - source: /usr/lib
-      destination: /usr/lib
-      type: bind
-      options:
-        - bind
-        - ro
-    # cachefilesd binary
-    - source: /usr/local/sbin
-      destination: /usr/local/sbin
-      type: bind
-      options:
-        - bind
-        - ro
-    # config file
-    - source: /usr/local/etc/cachefilesd.conf
-      destination: /usr/local/etc/cachefilesd.conf
-      type: bind
-      options:
-        - bind
-        - ro
     # cache root, rw: the cachefiles kernel module sets xattrs on it
     - source: /var/cache/fscache
       destination: /var/cache/fscache

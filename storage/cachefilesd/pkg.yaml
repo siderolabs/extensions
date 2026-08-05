@@ -6,6 +6,13 @@ dependencies:
   # The pkgs version for a particular release of Talos as defined in
   # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kernel:{{ .BUILD_ARG_PKGS }}"
+  # self-contained service container rootfs (same recipe as lldpd)
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+    from: /
+    to: /rootfs/usr/local/lib/containers/cachefilesd
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib/containers/cachefilesd/usr/lib
 steps:
   - sources:
       - url: https://deb.debian.org/debian/pool/main/c/cachefilesd/cachefilesd_{{ .CACHEFILESD_VERSION }}.orig.tar.bz2
@@ -31,13 +38,12 @@ steps:
         xargs -a /pkg/files/modules.txt -I {} install -D /usr/lib/modules/${KERNELRELEASE}/{} /rootfs/usr/lib/modules/${KERNELRELEASE}/{}
         depmod -b /rootfs/usr ${KERNELRELEASE}
 
-        # install cachefilesd daemon
-        install -D -m 0755 cachefilesd /rootfs/usr/local/sbin/cachefilesd
-        install -D -m 0644 /pkg/files/cachefilesd.conf /rootfs/usr/local/etc/cachefilesd.conf
+        # install cachefilesd daemon and default config into the service container rootfs
+        install -D -m 0755 cachefilesd /rootfs/usr/local/lib/containers/cachefilesd/usr/local/sbin/cachefilesd
+        install -D -m 0644 /pkg/files/cachefilesd.conf /rootfs/usr/local/lib/containers/cachefilesd/usr/local/etc/cachefilesd.conf
 
         # install service container definition
         mkdir -p /rootfs/usr/local/etc/containers
-        mkdir -p /rootfs/usr/local/lib/containers/cachefilesd
         cp /pkg/cachefilesd.yaml /rootfs/usr/local/etc/containers/
     test:
       - |
