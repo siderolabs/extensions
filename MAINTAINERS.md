@@ -35,6 +35,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | intel-ucode                               | Sidero Labs        | NA                                                                                       |
 | iscsi-tools                               | Sidero Labs        | NA                                                                                       |
 | kata-containers                           | Fabiano Fidêncio   | [fidencio](https://github.com/fidencio)                                                  |
+| kata-containers-nvidia-gpu-snp            | Calin Stefan       | [calintkd](https://github.com/calintkd)                                                  |
 | kata-containers-snp                       | Calin Stefan       | [calintkd](https://github.com/calintkd)                                                  |
 | lldpd                                     | Nokia (Niklas Wik) | [salkin](https://github.com/salkin)                                                      |
 | mdadm                                     | Serge Logvinov     | [sergelogvinov](https://github.com/sergelogvinov)                                        |
