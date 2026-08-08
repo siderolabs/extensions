@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: wpa-supplicant
+  version: "{{ .VERSION }}"
+  author: Kurt
+  description: |
+    [{{ .TIER }}] wpa-supplicant lets a Talos node join a WPA2/WPA3-Personal WiFi network via wpa_supplicant.
+  compatibility:
+    talos:
+      version: ">= v1.10.0"

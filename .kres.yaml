@@ -81,6 +81,7 @@ spec:
     - vc4
     - vmtoolsd-guest-agent
     - wasmedge
+    - wpa-supplicant
     - xdma-driver
     - xe
     - xen-guest-agent
