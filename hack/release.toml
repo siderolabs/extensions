@@ -58,6 +58,14 @@ Kata Containers now has support for the `kata-qemu` runtime handler which uses Q
 The new extension `kata-container-snp` provides additional support for AMD SEV-SNP confidential VMs.
 """
 
+[notes.sysbox]
+    title = "Sysbox"
+    description = """\
+The new extension `sysbox` provides the Sysbox container runtime, which runs unprivileged system containers (Docker, Kubernetes, systemd inside a pod), via the `sysbox-runc` containerd runtime handler.
+
+It requires `user.max_user_namespaces` to be set in the machine configuration, and pods have to opt into user namespaces with `hostUsers: false`.
+"""
+
 [make_deps]
 
     [make_deps.tools]
