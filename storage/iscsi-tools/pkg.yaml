@@ -18,6 +18,7 @@ steps:
         patch -p1 < /pkg/patches/musl-fixes.patch
         patch -p1 < /pkg/patches/dont-use-lib64.patch
         patch -p1 < /pkg/patches/remove-werror.patch
+        patch -p1 < /pkg/patches/node-reopen-log-freq-compat.patch
     build:
       - |
         export PKG_CONFIG_PATH=/usr/lib/pkgconfig
@@ -52,6 +53,46 @@ steps:
 
         cp /pkg/iscsid.yaml /rootfs/usr/local/etc/containers/
     test:
+      - |
+        test_root=/var/lib/iscsi/nodes
+        legacy_target=iqn.2000-01.test:legacy-record
+        current_target=iqn.2000-01.test:current-record
+
+        legacy_record=${test_root}/${legacy_target}/127.0.0.1,3260,1/default
+        current_record=${test_root}/${current_target}/127.0.0.2,3260,1/default
+
+        mkdir -p "$(dirname "${legacy_record}")" "$(dirname "${current_record}")" /etc/iscsi
+        ln -s "${test_root}" /etc/iscsi/nodes
+
+        printf '%s\n' \
+          "node.name = ${legacy_target}" \
+          'node.tpgt = 1' \
+          'iface.iscsi_ifacename = default' \
+          'node.session.scan = auto' \
+          'node.session.conn_reopen_log_freq = 1' \
+          'node.conn[0].address = 127.0.0.1' \
+          'node.conn[0].port = 3260' >"${legacy_record}"
+        printf '%s\n' \
+          "node.name = ${current_target}" \
+          'node.tpgt = 1' \
+          'iface.iscsi_ifacename = default' \
+          'node.session.scan = auto' \
+          'node.session.sess_reopen_log_freq = 1' \
+          'node.conn[0].address = 127.0.0.2' \
+          'node.conn[0].port = 3260' >"${current_record}"
+
+        output/iscsiadm -m node -T "${legacy_target}" -p 127.0.0.1:3260 -o show >/dev/null
+        output/iscsiadm -m node -T "${current_target}" -p 127.0.0.2:3260 -o show >/dev/null
+
+        output/iscsiadm -m node -T "${current_target}" -p 127.0.0.2:3260 \
+          -o update -n node.session.sess_reopen_log_freq -v 2
+
+        grep -q '^node.session.conn_reopen_log_freq = 2$' "${current_record}"
+        test "$(grep -c '^node.session.sess_reopen_log_freq' "${current_record}")" -eq 0
+
+        rm -rf /var/lib/iscsi
+        rm -f /etc/iscsi/nodes
+        rmdir /etc/iscsi
       - |
         mkdir -p /extensions-validator-rootfs
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs

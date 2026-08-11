@@ -1,0 +1,58 @@
+diff --git a/libopeniscsiusr/idbm.c b/libopeniscsiusr/idbm.c
+index 783c7f5..ac51340 100644
+--- a/libopeniscsiusr/idbm.c
++++ b/libopeniscsiusr/idbm.c
+@@ -1118,9 +1118,12 @@ static void _idbm_node_rec_link(struct iscsi_node *node, struct idbm_rec *recs,
+ 	_rec_int_o2(SESSION_SCAN, recs, node, session.scan, IDBM_SHOW, "manual",
+ 		    "auto", num, _CAN_MODIFY);
+ 	_rec_int64(SESSION_REOPEN_MAX, recs, node, session.reopen_max, IDBM_SHOW, num,
+ 		   _CAN_MODIFY);
+-	_rec_int64(SESSION_REOPEN_LOG_FREQ, recs, node, session.sess_reopen_log_freq, IDBM_SHOW, num,
++	_rec_int64(SESSION_REOPEN_LOG_FREQ_LEGACY, recs, node,
++		   session.sess_reopen_log_freq, IDBM_SHOW, num, _CAN_MODIFY);
++	_rec_int64(SESSION_REOPEN_LOG_FREQ, recs, node,
++		   session.sess_reopen_log_freq, IDBM_HIDE, num,
+ 		   _CAN_MODIFY);
+ 
+ 	_rec_str(CONN_ADDR, recs, node, conn.address, IDBM_SHOW, num,
+ 		 _CANNOT_MODIFY);
+diff --git a/libopeniscsiusr/idbm_fields.h b/libopeniscsiusr/idbm_fields.h
+index 6d26126..439551c 100644
+--- a/libopeniscsiusr/idbm_fields.h
++++ b/libopeniscsiusr/idbm_fields.h
+@@ -138,6 +138,7 @@
+ #define SESSION_ERL		"node.session.iscsi.ERL"
+ #define SESSION_SCAN		"node.session.scan"
+ #define SESSION_REOPEN_MAX	"node.session.reopen_max"
++#define SESSION_REOPEN_LOG_FREQ_LEGACY "node.session.conn_reopen_log_freq"
+ #define SESSION_REOPEN_LOG_FREQ "node.session.sess_reopen_log_freq"
+ 
+ /* connections fields */
+diff --git a/usr/idbm.c b/usr/idbm.c
+index 8b20f44..72e4f9e 100644
+--- a/usr/idbm.c
++++ b/usr/idbm.c
+@@ -526,8 +526,10 @@ void idbm_recinfo_node(node_rec_t *r, recinfo_t *ri)
+ 			 num, 1);
+ 	__recinfo_int(SESSION_REOPEN_MAX, ri, r,
+ 			session.reopen_max, IDBM_SHOW, num, 1);
++	__recinfo_int(SESSION_REOPEN_LOG_FREQ_LEGACY, ri, r,
++			session.sess_reopen_log_freq, IDBM_SHOW, num, 1);
+ 	__recinfo_int(SESSION_REOPEN_LOG_FREQ, ri, r,
+-			session.sess_reopen_log_freq, IDBM_SHOW, num, 1);
++			session.sess_reopen_log_freq, IDBM_HIDE, num, 1);
+ 
+ 	for (i = 0; i < ISCSI_CONN_MAX; i++) {
+ 		char key[NAME_MAXVAL];
+diff --git a/usr/idbm_fields.h b/usr/idbm_fields.h
+index 9fd681c..59e0250 100644
+--- a/usr/idbm_fields.h
++++ b/usr/idbm_fields.h
+@@ -48,6 +48,7 @@
+ #define SESSION_ERL		"node.session.iscsi.ERL"
+ #define SESSION_SCAN		"node.session.scan"
+ #define SESSION_REOPEN_MAX	"node.session.reopen_max"
++#define SESSION_REOPEN_LOG_FREQ_LEGACY "node.session.conn_reopen_log_freq"
+ #define SESSION_REOPEN_LOG_FREQ "node.session.sess_reopen_log_freq"
+ 
+ /* connections fields */
