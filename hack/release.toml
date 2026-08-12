@@ -30,6 +30,7 @@ tailscale: 1.102.2
 vmtoolsd-guest-agent: 1.5.1
 NVIDIA LTS: 580.178.04
 NVIDIA Production: 595.91.07
+intel-ucode: 20260811
 """
 
 [make_deps]
