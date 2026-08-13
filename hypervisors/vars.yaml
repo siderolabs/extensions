@@ -1,7 +1,7 @@
 # renovate: datasource=git-tags depName=https://gitlab.gnome.org/GNOME/glib.git
-GLIB_VERSION: 2.89.2
-GLIB_SHA256: 894fd527e305041f7723071297d79a78af4719dbd0d8fb77f6b1a85c9f5475b9
-GLIB_SHA512: 5fffc076934e5825e1003f30c337c706145ac8e6e5ee4f541c47805cc148a030c80fc7b9bb4114ae7c33359da3f8dc8f943dcdf0f4fbde2dd7ee66c0bbe4975e
+GLIB_VERSION: 2.89.3
+GLIB_SHA256: 09fd1e99f991067749ad66090e482ec4bd6514ad53abb4e9fbbdc2a4d2753532
+GLIB_SHA512: af6ba2f0832916e92338b809b7f4b34e0b02d58d68f216c2dfe9cb0e7b8944d70116a81e1e58fc0f18abceff168d2367817fd4d2ee3e0674dcbb83edc430ed6e
 # renovate: datasource=github-releases extractVersion=^pixman-(?<version>.*)$ depName=pixman-0/pixman
 PIXMAN_VERSION: "0.46.4"
 PIXMAN_SHA256: d09c44ebc3bd5bee7021c79f922fe8fb2fb57f7320f55e97ff9914d2346a591c

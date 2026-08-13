@@ -30,17 +30,18 @@ NVIDIA Container Toolkit: 1.19.1
 DRBD: 9.3.3
 Amazon ENA: 2.17.2
 xdma-driver: 8721136
-crun: 1.28
-gvisor: 20260727.0
+crun: 1.29
+gvisor: 20260810.0
 kata-containers: 3.32.0
 spin: 0.25.1
-netbird: 0.76.1
+netbird: 0.76.3
 newt: 1.15.0
 mdadm: 4.6
-qemu-guest-agent: 11.0.2
+qemu-guest-agent: 11.1.0
+hyperv-guest-agent: 6.18.44
 ZFS: 2.4.3
 linux-firmware: 20260810
-intel-ucode: 20260811
+intel-ucode: 20260812
 cloud-provider-aws: v1.36.1
 lldpd: 1.0.22
 tailscale: 1.102.2

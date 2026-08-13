@@ -1,4 +1,4 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.6.1
+# syntax = ghcr.io/siderolabs/bldr:v0.6.2
 
 format: v1alpha2
 
@@ -32,9 +32,9 @@ vars:
   LINUX_DVB_FIRMWARE_SHA256: cef3ce537d213e020af794cecf9de207e2882c375ceda39102eb6fa2580bad8d
   LINUX_DVB_FIRMWARE_SHA512: 2372dba98083c76865f5f0f8101b1160888e03cdbe911dd08621e7b6f38e8a25ae5d56eefc21728bf65fd09ea613b53606df4021d3972b0bc9d2bd8b6cbe20a1
   # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-  QEMU_VERSION: 11.0.2
-  QEMU_SHA256: 3745f6ea88e2e87fe0dc838b2b1d4e0a770bf48e01a1d5a186842a1fff76ccf5
-  QEMU_SHA512: 23d64d05381eaefc8894bb0ece2213d068594b42600931c4b32eb7a5c851e0539977449fb0f9940f58af6489bb15aa2dc8f27472e4fa2d7de8983232136eed00
+  QEMU_VERSION: 11.1.0
+  QEMU_SHA256: 6ee1d1a61f68212476b27108c26da5f449dc09b626d42f8279ba0dc2e08fa858
+  QEMU_SHA512: 17009c49b1a4f35b150f98c7c3955cb44bf9c63593f124276b328da97568f600724b8f26759fbac88e96e814bda389491713e34b3aae53fa515277f5a868ea5a
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions
