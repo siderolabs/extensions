@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: bluetooth-usb-drivers
+  version: "{{ .VERSION }}"
+  author: Dima Aratin
+  description: |
+    [{{ .TIER }}] This system extension provides the Linux Bluetooth core, USB HCI,
+    and vendor helper kernel modules built against a specific Talos version.
+    Firmware and Bluetooth userspace are intentionally not included.
+  compatibility:
+    talos:
+      version: ">= v1.13.0-alpha.2"

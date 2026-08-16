@@ -14,6 +14,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | amdgpu                                    | Sidero Labs        | NA                                                                                       |
 | amd-ucode                                 | Sidero Labs        | NA                                                                                       |
 | binfmt-misc                               | Serge Logvinov     | [sergelogvinov](https://github.com/sergelogvinov)                                        |
+| bluetooth-usb-drivers                     | Dima Aratin        | [staners2](https://github.com/staners2)                                                   |
 | bnx2-bnx2x                                | Sidero Labs        | NA                                                                                       |
 | btrfs                                     | Enno Boland        | [Gottox](https://github.com/Gottox)                                                      |
 | cachefilesd                               | Christian Jacobsen | [ChristianJacobsen](https://github.com/ChristianJacobsen)                                |
