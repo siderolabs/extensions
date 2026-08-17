@@ -18,8 +18,8 @@ customization:
 ```
 
 Check documentation for install:
-* https://www.talos.dev/latest/talos-guides/configuration/system-extensions/
-* https://www.talos.dev/latest/talos-guides/install/boot-assets/
+* https://docs.siderolabs.com/talos/latest/build-and-extend-talos/custom-images-and-development/system-extensions
+* https://docs.siderolabs.com/talos/latest/platform-specific-installations/boot-assets
 
 ## Usage
 

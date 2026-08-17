@@ -7,7 +7,7 @@ gdrcopy provide a low-latency GPU memory kernel-mode driver for NVIDIA GPUs. Thi
 - Support for GPUDirect RDMA technology
 The extension creates the `/dev/gdrdrv` device required to use gdrcopy. The kernel modules required are already bundled in the nvidia-open-gpu-kernel-modules.
 ## Installation
-See [Installing Extensions](https://www.talos.dev/latest/talos-guides/configuration/system-extensions/) for general information on installing system extensions.
+See [Installing Extensions](https://docs.siderolabs.com/talos/latest/build-and-extend-talos/custom-images-and-development/system-extensions) for general information on installing system extensions.
 ## Usage
 After installing this extension, the `gdrdrv` kernel module will can be loaded by adding it to your machine config:
 ```yaml

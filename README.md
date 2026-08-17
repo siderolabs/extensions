@@ -7,8 +7,8 @@ Things like gVisor, GPU support, etc. are good candidates for extensions.
 ## Using Extensions
 
 Extensions in this repo are published as container images.
-These images can be added to Talos Linux [boot asset](https://www.talos.dev/latest/talos-guides/install/boot-assets/) to produce a final boot asset containing a base Talos `initramfs` and
-a set of [system extensions](https://www.talos.dev/latest/talos-guides/configuration/system-extensions/) appended to it.
+These images can be added to Talos Linux [boot asset](https://docs.siderolabs.com/talos/latest/platform-specific-installations/boot-assets) to produce a final boot asset containing a base Talos `initramfs` and
+a set of [system extensions](https://docs.siderolabs.com/talos/latest/build-and-extend-talos/custom-images-and-development/system-extensions) appended to it.
 
 The extension image is composed of a `manifest.yaml` file that provides information and compatibility information, as well as a `rootfs` that contains things like compiled binaries that are bind-mounted into the system.
 
