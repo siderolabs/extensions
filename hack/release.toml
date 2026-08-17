@@ -19,13 +19,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
-cloudflared: 2026.7.2
-ecr-credential-provider: 1.36.1
-gvisor: 20260714.0
-metal-agent: 0.1.6
-netbird: 0.74.7
-newt: 1.15.0
-tailscale: 1.98.9
+Linux Firmware: 20260810
 """
 
 [make_deps]
