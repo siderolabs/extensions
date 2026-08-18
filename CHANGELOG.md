@@ -1,3 +1,74 @@
+## [Talos System Extensions 1.13.9](https://github.com/siderolabs/extensions/releases/tag/v1.13.9) (2026-08-18)
+
+Welcome to the v1.13.9 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Linux Firmware: 20260810
+gvisor: 20260810.0
+soci-snapshotter: v0.15.0
+youki: 0.7.0
+cloudflared: 2026.7.3
+nebula: 1.11.0
+netbird: 0.76.3
+tailscale: 1.102.2
+vmtoolsd-guest-agent: 1.5.1
+NVIDIA LTS: 580.178.04
+NVIDIA Production: 595.91.07
+intel-ucode: 20260812
+crun: 1.29
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Maja Bojarska
+
+### Changes
+<details><summary>5 commits</summary>
+<p>
+
+* [`8749151`](https://github.com/siderolabs/extensions/commit/87491516c3e996f7aa2e95fd5105c9d4d0f2104d) chore: bump dependencies 2026-08-13
+* [`8f6a474`](https://github.com/siderolabs/extensions/commit/8f6a474bc0e80274cbcc4a83ba69c717a0cadb4c) feat: update Intel ucode to 20260811
+* [`8135db0`](https://github.com/siderolabs/extensions/commit/8135db0429e0e2ca7cdaee8a1a1d0e8abf9c68b5) fix: preserve open-iscsi node record compatibility
+* [`3380f8b`](https://github.com/siderolabs/extensions/commit/3380f8b6aee2e68e56246dbc1f54158add553484) feat: update backportable dependencies
+* [`c797b24`](https://github.com/siderolabs/extensions/commit/c797b24a9c91222a6f2e1b7b2818849c40721c6a) feat: update tools, pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>5 commits</summary>
+<p>
+
+* [`f541ca4`](https://github.com/siderolabs/pkgs/commit/f541ca434ee63964319bb912e370f0ed407f8a18) feat: bump kernel to 6.18.44
+* [`a4f2c26`](https://github.com/siderolabs/pkgs/commit/a4f2c2607bdb1326760ce08edaeabec8d5e02d9a) feat: bump kernel to 6.18.43
+* [`79a7531`](https://github.com/siderolabs/pkgs/commit/79a753140cee4bb8f968b7f95683773938cdb37f) feat: update Linux firmware to 20260810
+* [`89d76bf`](https://github.com/siderolabs/pkgs/commit/89d76bf7e1aca2b750e93d6c2492421518aef86c) feat: update backportable dependencies
+* [`af6c08a`](https://github.com/siderolabs/pkgs/commit/af6c08a34b7b94c48b09dd6022d151406fef5c32) feat: update Go to 1.26.6
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`a201d19`](https://github.com/siderolabs/tools/commit/a201d197a0ddb199a8a81d7d6043664bb16dca4a) feat: update Go to 1.26.6
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-55-gf677246 -> v1.13.0-60-gf541ca4
+* **github.com/siderolabs/tools**  v1.13.0-8-gc2844e6 -> v1.13.0-9-ga201d19
+
+Previous release can be found at [v1.13.8](https://github.com/siderolabs/extensions/releases/tag/v1.13.8)
+
 ## [Talos System Extensions 1.13.8](https://github.com/siderolabs/extensions/releases/tag/v1.13.8) (2026-08-04)
 
 Welcome to the v1.13.8 release of Talos System Extensions!
