@@ -1,4 +1,4 @@
 # renovate: datasource=git-tags extractVersion=^glibc-(?<version>.*)$ depName=https://sourceware.org/git/glibc.git
-GLIBC_VERSION: 2.43
+GLIBC_VERSION: 2.44
 GLIBC_SHA256: d9c86c6b5dbddb43a3e08270c5844fc5177d19442cf5b8df4be7c07cd5fa3831
 GLIBC_SHA512: 25765f86bf54a22fc69dd13023ec9be59bd7e1f9d6ea1630cf21851898df2043bb8a01538c4b5fdd06495d0163289362b0768b391b0617f709b89a777168291c
