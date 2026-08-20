@@ -40,6 +40,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | lldpd                                     | Nokia (Niklas Wik) | [salkin](https://github.com/salkin)                                                      |
 | mdadm                                     | Serge Logvinov     | [sergelogvinov](https://github.com/sergelogvinov)                                        |
 | mei                                       | Nick Meyer         | [e3b0c442](https://github.com/e3b0c442)                                                  |
+| mediatek-bluetooth-firmware               | Dima Aratin        | [staners2](https://github.com/staners2)                                                   |
 | metal-agent                               | Sidero Labs        | NA                                                                                       |
 | multipath-tools                           | INS                | [Untersander](https://github.com/Untersander), [SimLi1333](https://github.com/SimLi1333) |
 | nebula                                    | s e                | [iamwacko](https://github.com/iamwacko)                                                  |

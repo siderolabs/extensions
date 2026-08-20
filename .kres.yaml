@@ -40,6 +40,7 @@ spec:
     - lldpd
     - mdadm
     - mei
+    - mediatek-bluetooth-firmware
     - mellanox-mstflint
     - metal-agent
     - multipath-tools

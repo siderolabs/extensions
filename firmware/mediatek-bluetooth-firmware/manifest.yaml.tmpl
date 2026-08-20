@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: mediatek-bluetooth-firmware
+  version: "{{ .VERSION }}"
+  author: Dima Aratin
+  description: |
+    [{{ .TIER }}] This system extension provides the MediaTek MT7922 Bluetooth
+    firmware binary from the pinned Sidero Labs linux-firmware package.
+  compatibility:
+    talos:
+      version: ">= v1.13.0-alpha.2"
