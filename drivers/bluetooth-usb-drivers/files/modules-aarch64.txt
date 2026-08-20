@@ -1,0 +1,10 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/crypto/ecc.ko
+kernel/crypto/ecdh_generic.ko
+kernel/net/bluetooth/bluetooth.ko
+kernel/drivers/bluetooth/btintel.ko
+kernel/drivers/bluetooth/btrtl.ko
+kernel/drivers/bluetooth/btmtk.ko
+kernel/drivers/bluetooth/btusb.ko

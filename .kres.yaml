@@ -7,6 +7,7 @@ spec:
     - amd-ucode
     - binfmt-misc
     - bird2
+    - bluetooth-usb-drivers
     - bnx2-bnx2x
     - btrfs
     - cachefilesd
