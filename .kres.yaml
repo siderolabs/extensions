@@ -4,6 +4,7 @@ spec:
   targets:
     - amazon-ena
     - amdgpu
+    - amneziawg
     - amd-ucode
     - binfmt-misc
     - bird2
