@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: dvb-usb-dvbsky
+  version: "{{ .VERSION }}"
+  author: Rokoucha
+  description: |
+    [{{ .TIER }}] This system extension provides the dvb kernel modules required for DVBSky USB DVB devices, including the MyGica T230C DVB-T/T2/C USB stick built against a specific Talos version.
+    Includes the firmware required.
+  compatibility:
+    talos:
+      version: ">= v1.14.0"
