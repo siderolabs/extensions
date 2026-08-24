@@ -4,15 +4,12 @@ shell: /bin/bash
 dependencies:
   - stage: base
   - stage: nvidia-pkgs-lts
-  - stage: nvidia-container-runtime
   - stage: nvidia-persistenced-wrapper
 steps:
   - install:
       - |
         mkdir -p /rootfs/usr/local/etc/containers
-        mkdir -p /rootfs/usr/local/lib/containers/nvidia-cdi-gen
         cp /pkg/nvidia-persistenced.yaml /rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
-        cp /pkg/nvidia-cdi-gen.yaml /rootfs/usr/local/etc/containers/nvidia-cdi-gen.yaml
     test:
       - |
         mkdir -p /extensions-validator-rootfs

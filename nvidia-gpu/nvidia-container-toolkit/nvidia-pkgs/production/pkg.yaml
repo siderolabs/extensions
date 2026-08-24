@@ -94,11 +94,7 @@ steps:
         /rootfs/usr/local/sbin/ldconfig -r /rootfs
 
         mkdir -p /rootfs/usr/local/lib/containers/nvidia-persistenced \
-          /rootfs/usr/local/etc/containers \
-          /rootfs/usr/lib/udev/rules.d
-
-        # copy udev rule
-        cp /pkg/files/15-nvidia-device.rules /rootfs/usr/lib/udev/rules.d
+          /rootfs/usr/local/etc/containers
       - |
         # Fix symlinks whose targets are rooted under /rootfs
         # currently this is only one file that I noticed but better to be safe and fix all of them

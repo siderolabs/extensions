@@ -390,23 +390,12 @@
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
   files:
-    - rootfs/etc/cri/conf.d/10-nvidia-container-runtime.part
     - rootfs/etc/vulkan/icd.d/nvidia_icd.json
     - rootfs/etc/vulkan/implicit_layer.d/nvidia_layers.json
-    - rootfs/usr/bin/nvidia-cdi-hook
-    - rootfs/usr/bin/nvidia-ctk
     - rootfs/usr/bin/nvidia-modprobe
     - rootfs/usr/bin/nvidia-pcc
     - rootfs/usr/bin/nvidia-smi
-    - rootfs/usr/lib/udev/rules.d/15-nvidia-device.rules
     - rootfs/usr/local/bin/nvidia-bug-report.sh
-    - rootfs/usr/local/bin/nvidia-cdi-hook
-    - rootfs/usr/local/bin/nvidia-container-runtime
-    - rootfs/usr/local/bin/nvidia-container-runtime-hook
-    - rootfs/usr/local/bin/nvidia-container-runtime.cdi
-    - rootfs/usr/local/bin/nvidia-container-runtime.legacy
-    - rootfs/usr/local/bin/nvidia-ctk
-    - rootfs/usr/local/bin/nvidia-ctk-installer
     - rootfs/usr/local/bin/nvidia-cuda-mps-control
     - rootfs/usr/local/bin/nvidia-cuda-mps-server
     - rootfs/usr/local/bin/nvidia-debugdump
@@ -421,7 +410,6 @@
     - rootfs/usr/local/bin/nvidia-smi
     - rootfs/usr/local/bin/nvidia-uninstall
     - rootfs/usr/local/bin/nvidia-xconfig
-    - rootfs/usr/local/etc/containers/nvidia-cdi-gen.yaml
     - rootfs/usr/local/etc/containers/nvidia-persistenced.yaml
     - rootfs/usr/local/lib/gbm/nvidia-drm_gbm.so
     - rootfs/usr/local/lib/libEGL.so
@@ -568,7 +556,6 @@
     - rootfs/usr/local/share/man/man1/nvidia-smi.1.gz
     - rootfs/usr/local/share/man/man1/nvidia-xconfig.1.gz
     - rootfs/usr/local/share/nvidia/nvoptix.bin
-    - rootfs/usr/local/share/spdx/nvidia-container-runtime.spdx.json
     - rootfs/usr/share/egl/egl_external_platform.d/10_nvidia_wayland.json
     - rootfs/usr/share/egl/egl_external_platform.d/15_nvidia_gbm.json
     - rootfs/usr/share/egl/egl_external_platform.d/20_nvidia_xcb.json
