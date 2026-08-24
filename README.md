@@ -168,7 +168,7 @@ tiers based on support level:
 | [nfsrahead](storage/nfsrahead) | :white_large_square: contrib | [ghcr.io/siderolabs/nfsrahead](https://github.com/siderolabs/extensions/pkgs/container/nfsrahead) | `2.8.3` |  This system extension provides nfsrahead, a tool to configure the readahead for NFS mounts. |
 | [px-fuse](storage/px-fuse) | :yellow_square: extra | [ghcr.io/siderolabs/px-fuse](https://github.com/siderolabs/extensions/pkgs/container/px-fuse) | `8b52ef67d261369cbc93f132db299e5dcf64ad7c-VERSION` |  This system extension provides kernel module driver for Portworx px-fuse built against a specific Talos version. |
 | [trident-iscsi-tools](storage/trident-iscsi-tools) | :white_large_square: contrib | [ghcr.io/siderolabs/trident-iscsi-tools](https://github.com/siderolabs/extensions/pkgs/container/trident-iscsi-tools) | `v0.0.1` |  This system extension provides the tools and binaries used by the NetApp Trident CSI for iSCSI. It contains lsscsi, ls, free, pgrep, cat and dd. |
-| [zfs](storage/zfs) | :yellow_square: extra | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs) | `2.4.3-VERSION` |  This system extension provides the ZFS kernel module, the ZFS utilities, and a service to import all ZFS pools on start and unmount all pools on stop. |
+| [zfs](storage/zfs) | :yellow_square: extra | [ghcr.io/siderolabs/zfs](https://github.com/siderolabs/extensions/pkgs/container/zfs) | `2.4.4-VERSION` |  This system extension provides the ZFS kernel module, the ZFS utilities, and a service to import all ZFS pools on start and unmount all pools on stop. |
 
 ### Power
 
