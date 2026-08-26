@@ -20,21 +20,22 @@ kernel:
       - name: dm_multipath
       - name: dm_round-robin # or dm-queue-length
 ```
-To configure multipath accordingly you need to apply something like:
+The extension ships no default configuration. The service waits until you provide `/etc/multipath.conf` via [`EtcFileConfig`](https://www.talos.dev/v1.14/reference/configuration/runtime/etcfileconfig/), which is bind-mounted read-only into the service container:
+
 ```yaml
 apiVersion: v1alpha1
-kind: ExtensionServiceConfig
-name: multipathd
-configFiles:
-    - content: |
-        defaults {
-            user_friendly_names yes
-            find_multipaths no
-            path_selector "round-robin 0"
-        }
-      mountPath: /etc/multipath.conf
+kind: EtcFileConfig
+name: multipath.conf
+mode: 0o644
+contents: |
+  defaults {
+      user_friendly_names yes
+      find_multipaths no
+      path_selector "round-robin 0"
+  }
 ```
-You probably need to use `round-robin` or `queue-length` (if that is supported by your use case) as the default `service-time` is not supported, since `dm-service-time` kernel module is not jet in talos build at the moment.
+
+You probably need to use `round-robin` or `queue-length` (if that is supported by your use case) as the default `service-time` is not supported, since the `dm-service-time` kernel module is not yet in the Talos build.
 
 
 ## References

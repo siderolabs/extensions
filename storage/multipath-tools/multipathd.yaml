@@ -49,6 +49,13 @@ container:
       options:
         - bind
         - ro
+    # config file, populated by EtcFileConfig
+    - source: /etc/multipath.conf
+      destination: /etc/multipath.conf
+      type: bind
+      options:
+        - rbind
+        - ro
 depends:
   - network:
       - addresses
@@ -57,5 +64,5 @@ depends:
       - etcfiles
   - service: udevd
   - path: /dev/mapper/control
-  # - configuration: true
+  - path: /etc/multipath.conf
 restart: always
