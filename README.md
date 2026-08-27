@@ -78,7 +78,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [qemu](hypervisors/qemu) | :green_square: core | [ghcr.io/siderolabs/qemu](https://github.com/siderolabs/extensions/pkgs/container/qemu) | `11.1.0` |  This system extension provides the QEMU machine emulator and virtualizer. |
+| [libvirtd](hypervisors/libvirtd) | :green_square: core | [ghcr.io/siderolabs/libvirtd](https://github.com/siderolabs/extensions/pkgs/container/libvirtd) | `12.6.0` |  This system extension provides the libvirt virtualization daemon. |
 
 ### Firmware
 

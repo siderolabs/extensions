@@ -1,0 +1,13 @@
+name: virtstoraged
+runnerMode: host
+depends:
+  - service: cri
+  - service: ext-virtlogd
+  - path: /etc/passwd
+  - path: /etc/group
+container:
+  entrypoint: /usr/local/sbin/virtstoraged
+  args:
+    - --timeout
+    - "0"
+restart: always

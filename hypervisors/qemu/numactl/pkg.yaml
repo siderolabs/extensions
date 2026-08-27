@@ -12,9 +12,10 @@ steps:
     prepare:
       - |
         tar -xf numactl.tar.gz --strip-components=1
-    build:
       - |
         ./configure --prefix=/usr/local
+    build:
+      - |
         make -j $(nproc)
     install:
       - |

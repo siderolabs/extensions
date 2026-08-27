@@ -1,0 +1,32 @@
+name: libxslt
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: libxml2
+    from: /rootfs
+    to: /
+steps:
+  - sources:
+      - url: https://download.gnome.org/sources/libxslt/{{ regexReplaceAll ".\\d+$" .LIBXSLT_VERSION "${1}" }}/libxslt-{{ .LIBXSLT_VERSION }}.tar.xz
+        destination: libxslt.tar.xz
+        sha256: "{{ .LIBXSLT_SHA256 }}"
+        sha512: "{{ .LIBXSLT_SHA512 }}"
+    prepare:
+      - |
+        tar -xf libxslt.tar.xz --strip-components=1
+      - |
+        ./configure --prefix=/usr/local \
+          --with-python=no \
+          --disable-static
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs install
+
+        rm -rf /rootfs/usr/local/share
+finalize:
+  - from: /rootfs
+    to: /

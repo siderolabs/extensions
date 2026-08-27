@@ -1,2 +1,3 @@
 VERSION: "{{ .QEMU_VERSION }}"
 TIER: "core"
+INTERNAL_PACKAGE: true

@@ -984,7 +984,22 @@
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/share/spdx/glibc.spdx.json
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/share/spdx/zlib-ng.spdx.json
 - images:
-    - registry.dev.siderolabs.io/siderolabs/qemu
+    - registry.dev.siderolabs.io/siderolabs/libvirtd
     - registry.dev.siderolabs.io/siderolabs/kata-containers
   files:
     - rootfs/usr/local/bin/qemu-system-aarch64
+- images:
+    - registry.dev.siderolabs.io/siderolabs/libvirtd
+    - registry.dev.siderolabs.io/siderolabs/multipath-tools
+  files:
+    - rootfs/usr/local/lib/libgcc_s.so.1
+- images:
+    - registry.dev.siderolabs.io/siderolabs/libvirtd
+    - registry.dev.siderolabs.io/siderolabs/zfs
+  files:
+    - rootfs/usr/local/lib/libtirpc.a
+    - rootfs/usr/local/lib/libtirpc.la
+    - rootfs/usr/local/lib/libtirpc.so
+    - rootfs/usr/local/lib/libtirpc.so.3
+    - rootfs/usr/local/lib/libtirpc.so.3.0.0
+    - rootfs/usr/local/lib/pkgconfig/libtirpc.pc
