@@ -391,7 +391,7 @@
   files:
     - rootfs/etc/cri/conf.d/10-nvidia-container-runtime.part
     - rootfs/etc/vulkan/icd.d/nvidia_icd.json
-    - rootfs/etc/vulkan/icd.d/nvidia_layers.json
+    - rootfs/etc/vulkan/implicit_layer.d/nvidia_layers.json
     - rootfs/usr/bin/nvidia-cdi-hook
     - rootfs/usr/bin/nvidia-ctk
     - rootfs/usr/bin/nvidia-modprobe
