@@ -1,0 +1,10 @@
+name: virtlogd
+runnerMode: host
+depends:
+  - service: cri
+container:
+  entrypoint: /usr/local/sbin/virtlogd
+  args:
+    - --timeout
+    - "0"
+restart: always

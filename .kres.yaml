@@ -38,6 +38,7 @@ spec:
     - kata-containers
     - kata-containers-nvidia-gpu-snp
     - kata-containers-snp
+    - libvirtd
     - lldpd
     - mdadm
     - mei

@@ -1,0 +1,17 @@
+name: virtqemud
+runnerMode: host
+depends:
+  - service: cri
+  - service: ext-virtlogd
+  - service: ext-virtlockd
+  - path: /etc/passwd
+  - path: /etc/group
+container:
+  entrypoint: /usr/local/sbin/virtqemud
+  args:
+    - --timeout
+    - "0"
+restart: always
+preShutdown:
+  entrypoint: /usr/local/libexec/libvirt-guests-shutdown
+  timeout: 5m10s

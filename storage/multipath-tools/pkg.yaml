@@ -3,6 +3,9 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/gcc-runtime:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib/libgcc_s.so.1
+    to: /rootfs/usr/local/lib/libgcc_s.so.1
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libucontext:{{ .BUILD_ARG_PKGS }}"
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libjson-c:{{ .BUILD_ARG_PKGS }}"
@@ -34,7 +37,6 @@ steps:
     install:
       - |
         mkdir -p /rootfs/usr/local/lib/containers/multipathd/ /rootfs/usr/local/lib/
-        cp /usr/lib/libgcc_s.so.1 /rootfs/usr/local/lib/
         make prefix="/usr/local" DESTDIR=/rootfs LIB=lib install
       - |
         mkdir -p /rootfs/usr/local/etc/containers

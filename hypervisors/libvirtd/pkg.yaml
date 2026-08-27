@@ -1,0 +1,196 @@
+name: libvirtd
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/gcc-runtime:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/gmp:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/gnutls:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libffi:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libtasn1:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libunistring:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/nettle:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - stage: libxml2
+    from: /rootfs
+    to: /
+  - stage: libxml2
+    from: /rootfs/usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: libxslt
+  - stage: libxslt
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: glib
+  - stage: glib
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: libtirpc
+    from: /rootfs
+    to: /
+  - stage: libtirpc
+    from: /rootfs/usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: numactl
+  - stage: numactl
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: qemu
+    from: /rootfs
+    to: /rootfs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libjson-c:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libjson-c:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+steps:
+  - env:
+      GOPATH: /tmp/go
+    cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+    sources:
+      - url: https://download.libvirt.org/libvirt-{{ .LIBVIRT_VERSION }}.tar.xz
+        destination: libvirt.tar.xz
+        sha256: "{{ .LIBVIRT_SHA256 }}"
+        sha512: "{{ .LIBVIRT_SHA512 }}"
+    prepare:
+      - |
+        tar -xf libvirt.tar.xz --strip-components=1
+      - |
+        export PATH=$PATH:/usr/local/bin
+
+        meson setup \
+          --prefix=/usr/local \
+          --localstatedir=/var \
+          --sysconfdir=/var/libvirtd/etc \
+          -Dinit_script=none \
+          -Ddocs=disabled \
+          -Dtests=disabled \
+          -Dexpensive_tests=disabled \
+          -Dnls=disabled \
+          -Ddriver_qemu=enabled \
+          -Dqemu_user=root \
+          -Dqemu_group=root \
+          -Ddriver_remote=enabled \
+          -Ddriver_libvirtd=enabled \
+          -Dstorage_dir=enabled \
+          -Djson_c=enabled \
+          -Ddriver_network=disabled \
+          -Ddriver_interface=disabled \
+          -Ddriver_lxc=disabled \
+          -Ddriver_libxl=disabled \
+          -Ddriver_vbox=disabled \
+          -Ddriver_esx=disabled \
+          -Ddriver_vmware=disabled \
+          -Ddriver_openvz=disabled \
+          -Ddriver_test=disabled \
+          -Ddriver_ch=disabled \
+          -Ddriver_bhyve=disabled \
+          -Ddriver_hyperv=disabled \
+          -Ddriver_vz=disabled \
+          -Dsecdriver_selinux=enabled \
+          -Dsecdriver_apparmor=disabled \
+          -Dselinux=enabled \
+          -Dapparmor=disabled \
+          -Dsasl=disabled \
+          -Dpolkit=disabled \
+          -Dreadline=disabled \
+          -Dlibpcap=disabled \
+          -Dlibnl=disabled \
+          -Dnetcf=disabled \
+          -Dudev=disabled \
+          -Dwireshark_dissector=disabled \
+          -Dlibssh=disabled \
+          -Dlibssh2=disabled \
+          -Dcurl=disabled \
+          -Dfirewalld=disabled \
+          -Dsanlock=disabled \
+          -Dnumactl=enabled \
+          -Dnumad=disabled \
+          -Daudit=disabled \
+          -Dbash_completion=disabled \
+          -Ddtrace=disabled \
+          -Dfuse=disabled \
+          -Dglusterfs=disabled \
+          -Dcapng=disabled \
+          -Dpciaccess=disabled \
+          -Dattr=disabled \
+          -Dblkid=disabled \
+          -Dlibiscsi=disabled \
+          -Dnbdkit=disabled \
+          -Dssh_proxy=disabled \
+          -Dnss=disabled \
+          -Dlogin_shell=disabled \
+          -Dpm_utils=disabled \
+          -Dhost_validate=disabled \
+          -Dstorage_fs=disabled \
+          -Dstorage_scsi=disabled \
+          -Dstorage_mpath=disabled \
+          -Dstorage_vstorage=disabled \
+          -Dstorage_disk=disabled \
+          -Dstorage_lvm=disabled \
+          -Dstorage_zfs=disabled \
+          -Dstorage_rbd=disabled \
+          -Dstorage_iscsi=disabled \
+          -Dstorage_iscsi_direct=disabled \
+          -Dstorage_gluster=disabled \
+          build
+    build:
+      - |
+        ninja -C build -j $(nproc)
+      - |
+        cd /pkg/libvirt-guests-shutdown
+
+        go test ./...
+        CGO_ENABLED=0 go build -ldflags "-s -w" -trimpath -o /tmp/libvirt-guests-shutdown .
+    install:
+      - |
+        DESTDIR=/rootfs ninja -C build install
+
+        rm -rf /rootfs/var/libvirtd
+      - |
+        mkdir -p /rootfs/usr/local/libexec
+        cp /tmp/libvirt-guests-shutdown /rootfs/usr/local/libexec/
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp \
+          /pkg/virtlogd.yaml \
+          /pkg/virtlockd.yaml \
+          /pkg/virtqemud.yaml \
+          /pkg/virtstoraged.yaml \
+          /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libvirtd.spdx.json
+      version: "{{ .LIBVIRT_VERSION }}"
+      cpes:
+        - cpe:2.3:a:libvirt:libvirt:{{ .LIBVIRT_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - GPL-2.0
+        - LGPL-2.1
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

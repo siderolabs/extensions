@@ -3,6 +3,27 @@ variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/curl:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/dtc:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/elfutils:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/gcc-runtime:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libbpf:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl-fts:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/musl-obstack:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
   - stage: glib
   - stage: glib
     from: /usr/local/lib
@@ -51,7 +72,7 @@ steps:
         export LDFLAGS="${LDFLAGS:-} -L/usr/local/lib -Wl,-rpath-link,/usr/local/lib"
         export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
 
-        if ! ./configure \
+        ./configure \
           --disable-download \
           --prefix=/usr/local \
           --enable-kvm \
@@ -71,11 +92,7 @@ steps:
           --disable-curses \
           --disable-vte \
           --enable-stack-protector \
-          "${extra_args[@]}"; then
-          cat build/meson-logs/meson-log.txt
-
-          exit 1
-        fi
+          "${extra_args[@]}"
     build:
       - |
         make -j $(nproc)

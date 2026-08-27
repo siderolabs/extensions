@@ -1,0 +1,10 @@
+name: virtlockd
+runnerMode: host
+depends:
+  - service: cri
+container:
+  entrypoint: /usr/local/sbin/virtlockd
+  args:
+    - --timeout
+    - "0"
+restart: always
