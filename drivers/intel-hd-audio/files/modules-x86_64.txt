@@ -1,0 +1,41 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+
+# Core modules
+kernel/sound/soundcore.ko
+kernel/sound/core/snd.ko
+kernel/sound/core/snd-ctl-led.ko
+kernel/sound/core/snd-pcm.ko
+kernel/sound/core/snd-timer.ko
+kernel/sound/core/snd-hwdep.ko
+
+# HDA Core modules
+kernel/sound/hda/core/snd-hda-core.ko
+kernel/sound/hda/core/snd-intel-dspcfg.ko
+kernel/sound/hda/core/snd-intel-sdw-acpi.ko
+kernel/sound/hda/controllers/snd-hda-intel.ko
+
+# Codec modules
+kernel/sound/hda/common/snd-hda-codec.ko
+kernel/sound/hda/codecs/snd-hda-codec-generic.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc260.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc262.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc268.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc269.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc662.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc680.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc861.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc861vd.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc880.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-alc882.ko
+kernel/sound/hda/codecs/realtek/snd-hda-codec-realtek-lib.ko
+kernel/sound/hda/codecs/side-codecs/snd-hda-scodec-component.ko
+
+# HDMI Code modules
+kernel/sound/hda/codecs/hdmi/snd-hda-codec-hdmi.ko
+kernel/sound/hda/codecs/hdmi/snd-hda-codec-simplehdmi.ko
+kernel/sound/hda/codecs/hdmi/snd-hda-codec-intelhdmi.ko
+kernel/sound/hda/codecs/hdmi/snd-hda-codec-atihdmi.ko
+kernel/sound/hda/codecs/hdmi/snd-hda-codec-nvhdmi.ko
+kernel/sound/hda/codecs/hdmi/snd-hda-codec-tegrahdmi.ko
