@@ -7,6 +7,9 @@ depends:
   - path: /etc/passwd
   - path: /etc/group
 container:
+  # Talos doesn't run systemd-machined; probing it over D-Bus blocks QEMU reconnect.
+  environment:
+    - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/libvirt/no-dbus
   entrypoint: /usr/local/sbin/virtqemud
   args:
     - --timeout
