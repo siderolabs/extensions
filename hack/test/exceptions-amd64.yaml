@@ -1,12 +1,18 @@
 - images:
     - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
     - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
+    - registry.dev.siderolabs.io/siderolabs/intel-hd-audio
     - registry.dev.siderolabs.io/siderolabs/usb-audio-drivers
   files:
     - rootfs/usr/lib/modules/*/kernel/sound/core/snd-pcm.ko
     - rootfs/usr/lib/modules/*/kernel/sound/core/snd-timer.ko
     - rootfs/usr/lib/modules/*/kernel/sound/core/snd.ko
     - rootfs/usr/lib/modules/*/kernel/sound/soundcore.ko
+- images:
+    - registry.dev.siderolabs.io/siderolabs/intel-hd-audio
+    - registry.dev.siderolabs.io/siderolabs/usb-audio-drivers
+  files:
+    - rootfs/usr/lib/modules/*/kernel/sound/core/snd-hwdep.ko
 - images:
     - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
     - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103

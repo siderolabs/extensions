@@ -1,0 +1,4 @@
+# Intel HD Audio is not supported on arm64; kept so the per-arch build passes.
+modules.order
+modules.builtin
+modules.builtin.modinfo

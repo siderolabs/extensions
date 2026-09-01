@@ -30,6 +30,7 @@ spec:
     - hello-world-service
     - hyperv-guest-agent
     - i915
+    - intel-hd-audio
     - intel-ice-firmware
     - intel-npu
     - intel-ucode
