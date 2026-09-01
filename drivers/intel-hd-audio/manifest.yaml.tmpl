@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: intel-hd-audio
+  version: "{{ .VERSION }}"
+  author: d23
+  description: |
+    [{{ .TIER }}] This system extension provides ALSA Audio kernel modules enabling onboard intel hd audio. 
+    Only x86_64/amd64 architecture is supported, because the chipset is specific to Intel platforms.
+  compatibility:
+    talos:
+      version: ">= v1.13.0"

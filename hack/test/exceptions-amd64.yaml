@@ -1313,3 +1313,7 @@
     - rootfs/usr/local/lib/libtirpc.so.3
     - rootfs/usr/local/lib/libtirpc.so.3.0.0
     - rootfs/usr/local/lib/pkgconfig/libtirpc.pc
+- images:
+    - registry.dev.siderolabs.io/siderolabs/intel-hd-audio
+  files:
+    - rootfs/usr/local/lib/modprobe.d/intel-hda.conf
