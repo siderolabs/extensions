@@ -8,7 +8,7 @@ match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 # previous release
 previous = "v1.13.0"
 
-pre_release = true
+pre_release = false
 
 preface = """\
 See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
@@ -19,7 +19,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
-ctr: 2.3.3
+ctr: 2.3.4
 cloudflared: 2026.7.3
 px-fuse: 8b52ef67d261369cbc93f132db299e5dcf64ad7c-VERSION
 util-linux: 2.42.2
