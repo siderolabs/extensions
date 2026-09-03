@@ -19,6 +19,8 @@ See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configu
     [notes.updates]
         title = "Component Updates"
         description = """\
+Containerd: 2.2.7
+Linux firmware: 20260810
 """
 
 [make_deps]
