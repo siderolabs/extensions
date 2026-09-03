@@ -1,0 +1,54 @@
+name: glibc-dev
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .STAGEX_PREFIX }}/core-linux-headers:{{ .STAGEX_VERSION }}@sha256:{{ .STAGEX_LINUX_HEADERS_SHA256 }}"
+    from: /usr/include
+    to: /linux-headers
+steps:
+  - env:
+      CC: gcc
+      CXX: g++
+    sources:
+      - url: "{{ .GNU_MIRROR_URL }}/gnu/glibc/glibc-{{ .GLIBC_VERSION }}.tar.xz"
+        destination: glibc.tar.xz
+        sha256: {{ .GLIBC_SHA256 }}
+        sha512: {{ .GLIBC_SHA512 }}
+    prepare:
+      - |
+        tar -xf glibc.tar.xz --strip-components=1
+
+        TRIPLE="${ARCH}-linux-gnu"
+        INCDIR="/usr/include/${TRIPLE}"
+
+        mkdir -p "${INCDIR}"
+        cp -R /linux-headers/* "${INCDIR}/"
+
+        mkdir build
+        cd build
+
+        # setting `--disable-sanity-checks` is fine in this case since glibc is an extension and base talos uses musl
+        ../configure \
+          --prefix=/usr/local \
+          --sysconfdir=/etc \
+          --includedir="${INCDIR}" \
+          --with-headers="${INCDIR}" \
+          --without-selinux \
+          --disable-sanity-checks \
+          --enable-stack-protection=strong \
+          --disable-werror
+    build:
+      - |
+        cd build
+        make -j $(nproc) build-programs=no 'libsupport-inhibit-o=.o .os .oS'
+    install:
+      - |
+        cd build
+        make install DESTDIR=/rootfs -j $(nproc) 'libsupport-inhibit-o=.o .os .oS'
+
+        TRIPLE="${ARCH}-linux-gnu"
+        cp -R /linux-headers/* "/rootfs/usr/include/${TRIPLE}/"
+finalize:
+  - from: /rootfs
+    to: /rootfs

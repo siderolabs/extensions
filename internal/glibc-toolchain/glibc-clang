@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -eu
+
+target="$(uname -m)-linux-gnu"
+gcc_libdir="$(dirname "$(gcc -print-libgcc-file-name)")"
+
+exec clang \
+    --target="${target}" \
+    --sysroot=/sysroot \
+    -Wno-unused-command-line-argument \
+    -isystem "/sysroot/usr/include/${target}" \
+    -B/sysroot/usr/local/lib \
+    -B"${gcc_libdir}" \
+    -L/sysroot/usr/local/lib \
+    -L"${gcc_libdir}" \
+    -fuse-ld=lld \
+    -static-libgcc \
+    "$@"

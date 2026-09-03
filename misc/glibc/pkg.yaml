@@ -1,49 +1,15 @@
 name: glibc
 variant: scratch
 shell: /bin/bash
-install:
-  - build-base
-  - gcc-14
-  - bash
-  - gawk
-  - bison
-  - python3
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
+  - stage: base
+  - stage: glibc-dev
 steps:
   - env:
-      CC: gcc-14
-      CXX: g++-14
       LD_LINUX_X86_64: ld-linux-x86-64.so.2
       LD_LINUX_AARCH64: ld-linux-aarch64.so.1
-    sources:
-      - url: "{{ .GNU_MIRROR_URL }}/gnu/glibc/glibc-{{ .GLIBC_VERSION }}.tar.xz"
-        destination: glibc.tar.xz
-        sha256: {{ .GLIBC_SHA256 }}
-        sha512: {{ .GLIBC_SHA512 }}
-    prepare:
-      - |
-        tar -xf glibc.tar.xz --strip-components=1
-
-        mkdir build
-        cd build
-
-        # setting `--disable-sanity-checks` is fine in this case since glibc is an extension and base talos uses musl
-        ../configure \
-          --prefix=/usr/local \
-          --sysconfdir=/etc \
-          --disable-sanity-checks \
-          --enable-stack-protection=strong \
-          --disable-werror
-    build:
-      - |
-        cd build
-        make -j $(nproc)
     install:
       - |
-        cd build
-        make install DESTDIR=/rootfs -j $(nproc)
-
         ARCH_UPPER="${ARCH^^}"
         LD_LINUX_PATH="LD_LINUX_${ARCH_UPPER}"
         export LD_LINUX_PATH="${!LD_LINUX_PATH}"
@@ -57,7 +23,7 @@ steps:
         ln -s lib/ /rootfs/usr/local/lib64
 
         # cleanup
-        rm -rf /rootfs/usr/local/include
+        rm -rf /rootfs/usr/include
         rm -rf /rootfs/usr/local/share
         rm -rf /rootfs/usr/local/var
         rm -f /rootfs/etc/rpc

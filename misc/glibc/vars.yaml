@@ -1,5 +1,6 @@
-# renovate: datasource=docker versioning=docker depName=cgr.dev/chainguard/wolfi-base
-WOLFI_BASE_REF: sha256:103eb3f4444c68ea2453bf3aad09d860eaa5a698effb3e656cd607f630f0e46d
+STAGEX_PREFIX: ghcr.io/siderolabs/stagex
+STAGEX_VERSION: 2026.06.0
+STAGEX_LINUX_HEADERS_SHA256: 75d5911f8a6c5befc8f4c0e2ae4609c8defb0d316f2c5651af718c1fee8c7ed1
 
 VERSION: "{{ .GLIBC_VERSION }}"
 
