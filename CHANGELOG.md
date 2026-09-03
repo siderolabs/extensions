@@ -1,3 +1,61 @@
+## [Talos System Extensions 1.13.10](https://github.com/siderolabs/extensions/releases/tag/v1.13.10) (2026-09-03)
+
+Welcome to the v1.13.10 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+glibc: 2.44
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+* Mateusz Urbanek
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`8ad3dbd`](https://github.com/siderolabs/extensions/commit/8ad3dbd303cf68384842384f26a44df76ce1ab6a) feat: update glibc to 2.44
+* [`f6db2f7`](https://github.com/siderolabs/extensions/commit/f6db2f74bab09e65fd3b3245dcf6156d320cc55b) feat: backports for v1.13.10
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>5 commits</summary>
+<p>
+
+* [`9b044c5`](https://github.com/siderolabs/pkgs/commit/9b044c593c71b0ea6deb9985b7907e008b91220c) feat: update kernel to 6.18.48
+* [`de74a50`](https://github.com/siderolabs/pkgs/commit/de74a5043a90292cc8ef7e2ea6fa974f83cf8328) feat: bump kernel to 6.18.47
+* [`bb15c62`](https://github.com/siderolabs/pkgs/commit/bb15c6296167ca47d5aa14d6f55bbbc9f87a3f07) chore: update toolchain and tools
+* [`49c50f7`](https://github.com/siderolabs/pkgs/commit/49c50f7c9d23e540eeba5453c87e4f077523dd4b) feat: bump kernel to 6.18.46
+* [`2da2cdc`](https://github.com/siderolabs/pkgs/commit/2da2cdcd7c1985bec07764fd0ca4dbaffff692a2) feat: backport aes256k support (Ceph)
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>3 commits</summary>
+<p>
+
+* [`c70be08`](https://github.com/siderolabs/tools/commit/c70be08137ff2b7feea97c977e15e3fb04850d32) chore: update toolchain
+* [`7791f48`](https://github.com/siderolabs/tools/commit/7791f4879d066f6d1bb9f31cb0cb5bfc10944586) feat: use kernel gnu mirrors
+* [`d908dc0`](https://github.com/siderolabs/tools/commit/d908dc05b6092f2c48ac1feb57d5453e224a7387) fix: update OpenSSL to 3.6.4
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-60-gf541ca4 -> v1.13.0-65-g9b044c5
+* **github.com/siderolabs/tools**  v1.13.0-9-ga201d19 -> v1.13.0-12-gc70be08
+
+Previous release can be found at [v1.13.9](https://github.com/siderolabs/extensions/releases/tag/v1.13.9)
+
 ## [Talos System Extensions 1.13.9](https://github.com/siderolabs/extensions/releases/tag/v1.13.9) (2026-08-18)
 
 Welcome to the v1.13.9 release of Talos System Extensions!
