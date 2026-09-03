@@ -323,6 +323,7 @@
     - rootfs/usr/local/lib/libdl.so.2
     - rootfs/usr/local/lib/libg.a
     - rootfs/usr/local/lib/libm-2.43.a
+    - rootfs/usr/local/lib/libm-2.44.a
     - rootfs/usr/local/lib/libm.a
     - rootfs/usr/local/lib/libm.so
     - rootfs/usr/local/lib/libm.so.6
@@ -942,6 +943,7 @@
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libdl.so.2
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libg.a
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libm-2.43.a
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libm-2.44.a
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libm.a
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libm.so
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/lib/libm.so.6
