@@ -1,3 +1,69 @@
+## [Talos System Extensions 1.12.12](https://github.com/siderolabs/extensions/releases/tag/v1.12.12) (2026-09-04)
+
+Welcome to the v1.12.12 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://www.talos.dev/v1.12/talos-guides/configuration/system-extensions/) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+Containerd: 2.2.7
+Linux firmware: 20260810
+
+
+### Contributors
+
+* Noel Georgi
+* Andrey Smirnov
+* Mateusz Urbanek
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`085bc2b`](https://github.com/siderolabs/extensions/commit/085bc2b7b241d54167d1d4e3aa2e5d9349d17e78) feat: support overriding gnu mirror source
+* [`52486cc`](https://github.com/siderolabs/extensions/commit/52486cca4f0fc351fc9781458ade142d0df6873e) feat: bump pkgs and tools
+* [`acae0d5`](https://github.com/siderolabs/extensions/commit/acae0d52ef47db52eb821d12bf5dbe72c08bbccd) feat: update glibc to 2.44
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>10 commits</summary>
+<p>
+
+* [`5eb9201`](https://github.com/siderolabs/pkgs/commit/5eb92010829a064d8df326316978f24c3dcd334e) chore: rekres
+* [`8f2f189`](https://github.com/siderolabs/pkgs/commit/8f2f189aa50e672d31ddeb16b78a1a0aef3ca4f6) feat: support confiuring gnu mirror urls
+* [`0c89ae0`](https://github.com/siderolabs/pkgs/commit/0c89ae0e4a1b6f42abf008371c66055ee4bcf4a0) feat: bump linux-firmware to 20260810
+* [`eb4a8dc`](https://github.com/siderolabs/pkgs/commit/eb4a8dcf61d7c2006a6dda3d0ef05e23cd1f6dcd) feat: bump flannel to v1.9.1-flannel3
+* [`ce90bd5`](https://github.com/siderolabs/pkgs/commit/ce90bd5cd14bc0115fef1550cdae678412d8229d) feat: bump containerd to 2.2.7
+* [`935b8b2`](https://github.com/siderolabs/pkgs/commit/935b8b2a3e3f74c1ad59fffdb4ef6eca32159736) feat: bump go to 1.25.14
+* [`13cf7a6`](https://github.com/siderolabs/pkgs/commit/13cf7a64da16afc05bc956c6b4f1098c5b275b75) feat: bump kernel to 6.18.49
+* [`449db13`](https://github.com/siderolabs/pkgs/commit/449db133391306444f65b9b58fd86e1a69d36c81) feat: update kernel to 6.18.48
+* [`3584845`](https://github.com/siderolabs/pkgs/commit/3584845ce1262a092f6e6552bfd872a7d2819eb3) feat: bump kernel to 6.18.47
+* [`122c8d2`](https://github.com/siderolabs/pkgs/commit/122c8d23f1cd18ffabeae86a5ef4cce561c25b5d) feat: bump kernel to 6.18.46
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>4 commits</summary>
+<p>
+
+* [`6c999e3`](https://github.com/siderolabs/tools/commit/6c999e394d6bd4e6eff5dc36b0c25edcb3a5129e) fix: fakeroot url
+* [`5aeec5b`](https://github.com/siderolabs/tools/commit/5aeec5bb631283172f5af9c0fb7f076742ffe187) feat: use kernel gnu mirrors
+* [`5fcfa57`](https://github.com/siderolabs/tools/commit/5fcfa57a728b0d37c7da1bf4dc47b871575bb35a) feat: bump go to 1.25.14
+* [`89d3bee`](https://github.com/siderolabs/tools/commit/89d3bee0ff6d724c9753b8e3bda5e0e965772e02) fix: update OpenSSL to 3.6.4
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.12.0-103-gf921142 -> v1.12.0-113-g5eb9201
+* **github.com/siderolabs/tools**  v1.12.0-20-g7a5d6da -> v1.12.0-24-g6c999e3
+
+Previous release can be found at [v1.12.11](https://github.com/siderolabs/extensions/releases/tag/v1.12.11)
+
 ## [Talos System Extensions 1.12.11](https://github.com/siderolabs/extensions/releases/tag/v1.12.11) (2026-08-05)
 
 Welcome to the v1.12.11 release of Talos System Extensions!
