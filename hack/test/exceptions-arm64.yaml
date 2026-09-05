@@ -984,6 +984,7 @@
     - rootfs/usr/local/lib/libgcc_s.so.1
 - images:
     - registry.dev.siderolabs.io/siderolabs/libvirtd
+    - registry.dev.siderolabs.io/siderolabs/nfs-server
     - registry.dev.siderolabs.io/siderolabs/zfs
   files:
     - rootfs/usr/local/lib/libtirpc.a
