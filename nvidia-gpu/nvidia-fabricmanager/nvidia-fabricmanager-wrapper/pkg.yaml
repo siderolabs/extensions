@@ -2,16 +2,7 @@ name: nvidia-fabricmanager-wrapper
 variant: scratch
 shell: /bin/bash
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
-install:
-  - bash
-  - build-base
-  - gcc-14
-  - cmake
-  - ninja
-  - python3
-  - libnl3-dev
-  - go-1.24
+  - stage: glibc-toolchain
 steps:
   - sources:
       - url: https://github.com/linux-rdma/rdma-core/releases/download/v{{ .RDMA_CORE_VERSION }}/rdma-core-{{ .RDMA_CORE_VERSION }}.tar.gz
@@ -19,8 +10,7 @@ steps:
         sha256: {{ .RDMA_CORE_SHA256 }}
         sha512: {{ .RDMA_CORE_SHA512 }}
   - env:
-      CC: gcc-14
-      CXX: g++-14
+      CC: glibc-clang
       GOPATH: /tmp/go
   - cachePaths:
       - /.cache/go-build

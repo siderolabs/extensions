@@ -1,0 +1,16 @@
+name: glibc-toolchain
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_TOOLS_PREFIX }}/llvm:{{ .BUILD_ARG_TOOLS }}"
+  - stage: glibc-dev
+    from: /rootfs
+    to: /sysroot
+steps:
+  - install:
+      - |
+        install -m 0755 /pkg/glibc-clang /usr/bin/glibc-clang
+finalize:
+  - from: /
+    to: /

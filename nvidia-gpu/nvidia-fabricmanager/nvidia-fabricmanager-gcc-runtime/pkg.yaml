@@ -1,7 +1,7 @@
 name: nvidia-fabricmanager-gcc-runtime
 variant: scratch
 dependencies:
-  - image: cgr.dev/chainguard/wolfi-base@{{ .WOLFI_BASE_REF }}
+  - stage: base
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/gcc-runtime:{{ .BUILD_ARG_PKGS }}"
     from: /usr/lib/libgcc_s.so.1
     to: /rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/lib/libgcc_s.so.1

@@ -1,91 +1,66 @@
-# NVIDIA Container toolkit extension
-
+# NVIDIA driver userspace extension
 
 ## Installation
 
 See [Installing Extensions](https://github.com/siderolabs/extensions#installing-extensions).
 
+Install this extension together with the matching NVIDIA kernel module extension.
 
 ## Usage
 
-The following NVIDIA modules needs to be loaded, so add this to the talos config:
+Load the NVIDIA modules in the Talos machine configuration:
 
 ```yaml
-machine:
-  kernel:
-    modules:
-      - name: nvidia
-      - name: nvidia_uvm
-      - name: nvidia_drm
-      - name: nvidia_modeset
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: nvidia
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: nvidia_uvm
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: nvidia_drm
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: nvidia_modeset
 ```
 
-`nvidia-container-cli` loads BPF programs and requires relaxed KSPP setting for [bpf_jit_harden](https://sysctl-explorer.net/net/core/bpf_jit_harden/), so Talos default setting
-should be overridden:
+Install NVIDIA GPU Operator with its driver disabled. The operator installs the container toolkit under writable `/var` and registers it with containerd through NRI. No NVIDIA `RuntimeClass` is required.
 
-```yaml
-machine:
-  sysctls:
-    net.core.bpf_jit_harden: 1
+```bash
+helm install gpu-operator gpu-operator \
+  --repo https://helm.ngc.nvidia.com/nvidia \
+  --namespace gpu-operator \
+  --create-namespace \
+  --set driver.enabled=false \
+  --set toolkit.enabled=true \
+  --set toolkit.installDir=/var/lib/nvidia \
+  --set cdi.enabled=true \
+  --set cdi.nriPluginEnabled=true \
+  --set hostPaths.driverInstallDir=/usr/local
 ```
-
-> Warning! This disables [KSPP best practices](https://kernsec.org/wiki/index.php/Kernel_Self_Protection_Project/Recommended_Settings#sysctls) setting.
 
 ## Testing
 
-Apply the following manifest to create a runtime class that uses the extension:
+Run a normal CUDA workload requesting a GPU. Do not set `runtimeClassName`.
 
 ```yaml
----
-apiVersion: node.k8s.io/v1
-kind: RuntimeClass
-metadata:
-  name: nvidia
-handler: nvidia
-```
-
-Install the NVIDIA device plugin:
-
-```bash
-helm repo add nvdp https://nvidia.github.io/k8s-device-plugin
-helm repo update
-helm install nvidia-device-plugin nvdp/nvidia-device-plugin --version=0.14.1 --set=runtimeClassName=nvidia
-```
-
-Apply the following manifest to run CUDA pod via nvidia runtime:
-
-```yaml
----
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gpu-operator-test
+  name: cuda-test
 spec:
   restartPolicy: OnFailure
-  runtimeClassName: nvidia
   containers:
-  - name: cuda-vector-add
-    image: "nvidia/samples:vectoradd-cuda11.6.0"
-    resources:
-      limits:
-         nvidia.com/gpu: 1
+    - name: cuda-test
+      image: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda12.5.0
+      resources:
+        limits:
+          nvidia.com/gpu: 1
 ```
 
-
-The status can be viewed by running:
-
-```bash
-❯ kubectl get pods
-NAME                READY   STATUS      RESTARTS   AGE
-gpu-operator-test   0/1     Completed   0          13s
-```
-
-```bash
-❯ kubectl logs gpu-operator-test
-[Vector addition of 50000 elements]
-Copy input data from the host memory to the CUDA device
-CUDA kernel launch with 196 blocks of 256 threads
-Copy output data from the CUDA device to the host memory
-Test PASSED
-Done
-```
+A successful run ends with `Test PASSED` in the pod logs.
