@@ -1,0 +1,17 @@
+name: nfs-etc
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - install:
+      - |
+        # /etc/{netconfig,services,passwd} needed by every nfs-server service
+        # container: libtirpc reads netconfig, and the daemons resolve the nfs
+        # and sunrpc port numbers through services.
+        mkdir -p /rootfs/etc
+
+        cp /pkg/files/* /rootfs/etc/
+finalize:
+  - from: /rootfs
+    to: /rootfs

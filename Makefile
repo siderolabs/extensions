@@ -112,6 +112,7 @@ TARGETS += multipath-tools
 TARGETS += nebula
 TARGETS += netbird
 TARGETS += newt
+TARGETS += nfs-server
 TARGETS += nfs-utils
 TARGETS += nfsd
 TARGETS += nfsrahead

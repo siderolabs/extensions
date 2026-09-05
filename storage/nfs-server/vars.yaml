@@ -1,0 +1,11 @@
+VERSION: v0.1.0
+
+# Duplicated from storage/nfs-utils/vars.yaml rather than hoisted into
+# storage/vars.yaml: the NFS_UTILS_VERSION there is consumed by nfsrahead,
+# whose extension version is derived from it.
+# renovate: datasource=git-tags extractVersion=^nfs-utils-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/rw/nfs-utils.git
+NFS_UTILS_VERSION: 2.8.4
+NFS_UTILS_SHA256: 11c4cc598a434d7d340bad3e072a373ba1dcc2c49f855d44b202222b78ecdbf5
+NFS_UTILS_SHA512: 2b547b2dfd96672a4867a2d385e58309a242c8fab457f7e48f79c3f362f652d1f81ea356ac5c56837cf2e6c2754fd02b499f75d044251090a161d4c28dd9ca32
+
+TIER: "contrib"
