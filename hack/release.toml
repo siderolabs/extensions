@@ -71,6 +71,14 @@ The `cachefilesd` extension has been added to provide support for the `cachefile
 This can improve performance and reduce network load for frequently accessed files.
 """
 
+[notes.sysbox]
+    title = "Sysbox"
+    description = """\
+The new extension `sysbox` provides the Sysbox container runtime, which runs unprivileged system containers (Docker, Kubernetes, systemd inside a pod), via the `sysbox-runc` containerd runtime handler.
+
+It requires `user.max_user_namespaces` to be set in the machine configuration, and pods have to opt into user namespaces with `hostUsers: false`.
+"""
+
 [make_deps]
 
     [make_deps.tools]

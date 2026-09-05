@@ -1,0 +1,207 @@
+name: sysbox
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+    # sysbox-runc (seccomp build tag) and sysbox-fs link against libseccomp
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libseccomp:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      # sysbox keeps its sources in git submodules, and GitHub source archives do
+      # not carry submodule contents, so each one is fetched at the commit the
+      # SYSBOX_VERSION tag points at. See README.md for how to re-resolve them.
+      - url: https://github.com/nestybox/sysbox-runc/archive/{{ .SYSBOX_RUNC_REV }}.tar.gz
+        destination: sysbox-runc.tar.gz
+        sha256: {{ .SYSBOX_RUNC_SHA256 }}
+        sha512: {{ .SYSBOX_RUNC_SHA512 }}
+      - url: https://github.com/nestybox/sysbox-fs/archive/{{ .SYSBOX_FS_REV }}.tar.gz
+        destination: sysbox-fs.tar.gz
+        sha256: {{ .SYSBOX_FS_SHA256 }}
+        sha512: {{ .SYSBOX_FS_SHA512 }}
+      - url: https://github.com/nestybox/sysbox-mgr/archive/{{ .SYSBOX_MGR_REV }}.tar.gz
+        destination: sysbox-mgr.tar.gz
+        sha256: {{ .SYSBOX_MGR_SHA256 }}
+        sha512: {{ .SYSBOX_MGR_SHA512 }}
+      - url: https://github.com/nestybox/sysbox-ipc/archive/{{ .SYSBOX_IPC_REV }}.tar.gz
+        destination: sysbox-ipc.tar.gz
+        sha256: {{ .SYSBOX_IPC_SHA256 }}
+        sha512: {{ .SYSBOX_IPC_SHA512 }}
+      - url: https://github.com/nestybox/sysbox-libs/archive/{{ .SYSBOX_LIBS_REV }}.tar.gz
+        destination: sysbox-libs.tar.gz
+        sha256: {{ .SYSBOX_LIBS_SHA256 }}
+        sha512: {{ .SYSBOX_LIBS_SHA512 }}
+      # nestybox's fork of bazil.org/fuse, a submodule of sysbox-fs itself
+      - url: https://github.com/nestybox/fuse/archive/{{ .SYSBOX_BAZIL_REV }}.tar.gz
+        destination: sysbox-bazil.tar.gz
+        sha256: {{ .SYSBOX_BAZIL_SHA256 }}
+        sha512: {{ .SYSBOX_BAZIL_SHA512 }}
+      # sysbox-ipc ships no generated gRPC stubs, so protoc is a build dependency
+    # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/protocolbuffers/protobuf/releases/download/v{{ .SYSBOX_PROTOC_VERSION }}/protoc-{{ .SYSBOX_PROTOC_VERSION }}-linux-aarch_64.zip
+        destination: protoc.zip
+        sha256: {{ .SYSBOX_PROTOC_ARM64_SHA256 }}
+        sha512: {{ .SYSBOX_PROTOC_ARM64_SHA512 }}
+    # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/protocolbuffers/protobuf/releases/download/v{{ .SYSBOX_PROTOC_VERSION }}/protoc-{{ .SYSBOX_PROTOC_VERSION }}-linux-x86_64.zip
+        destination: protoc.zip
+        sha256: {{ .SYSBOX_PROTOC_AMD64_SHA256 }}
+        sha512: {{ .SYSBOX_PROTOC_AMD64_SHA512 }}
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      # sysbox-mgr refuses to start unless rsync is installed, and uses it to sync
+      # the contents of the sysbox data stores (e.g. /var/lib/docker of a system
+      # container) in and out of the container
+      - url: https://download.samba.org/pub/rsync/src/rsync-{{ .RSYNC_VERSION }}.tar.gz
+        destination: rsync.tar.gz
+        sha256: {{ .RSYNC_SHA256 }}
+        sha512: {{ .RSYNC_SHA512 }}
+      # sysbox-fs mounts its per-container FUSE filesystem by executing
+      # fusermount3, which it looks up in PATH
+      - url: https://github.com/libfuse/libfuse/releases/download/fuse-{{ .FUSE3_SYSBOX_VERSION }}/fuse-{{ .FUSE3_SYSBOX_VERSION }}.tar.gz
+        destination: fuse.tar.gz
+        sha256: {{ .FUSE3_SYSBOX_SHA256 }}
+        sha512: {{ .FUSE3_SYSBOX_SHA512 }}
+    env:
+      GOPATH: /tmp/go
+      # the go.mod files replace each other by relative path (for example
+      # github.com/nestybox/sysbox-ipc => ../sysbox-ipc), so the submodules have
+      # to sit side by side, the way the superproject checks them out
+      SYSBOX_DIR: /tmp/sysbox
+      # the sysbox makefiles stamp these into the binaries
+      VERSION: {{ .SYSBOX_VERSION }}
+      EDITION: Community Edition (CE)
+      # they also take SYS_ARCH from `uname -m` and switch to cross-compilation
+      # as soon as it differs from TARGET_ARCH, with a toolchain triple that does
+      # not exist here. Both are set to the target instead.
+      SYS_ARCH: '{{ if eq .ARCH "aarch64" }}arm64{{ else }}amd64{{ end }}'
+      TARGET_ARCH: '{{ if eq .ARCH "aarch64" }}arm64{{ else }}amd64{{ end }}'
+    cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+  - network: default
+    prepare:
+      - |
+        mkdir -p ${SYSBOX_DIR}/{sysbox-runc,sysbox-fs/bazil,sysbox-mgr,sysbox-ipc,sysbox-libs}
+
+        tar -xzf sysbox-runc.tar.gz --strip-components=1 -C ${SYSBOX_DIR}/sysbox-runc
+        tar -xzf sysbox-fs.tar.gz --strip-components=1 -C ${SYSBOX_DIR}/sysbox-fs
+        tar -xzf sysbox-mgr.tar.gz --strip-components=1 -C ${SYSBOX_DIR}/sysbox-mgr
+        tar -xzf sysbox-ipc.tar.gz --strip-components=1 -C ${SYSBOX_DIR}/sysbox-ipc
+        tar -xzf sysbox-libs.tar.gz --strip-components=1 -C ${SYSBOX_DIR}/sysbox-libs
+        tar -xzf sysbox-bazil.tar.gz --strip-components=1 -C ${SYSBOX_DIR}/sysbox-fs/bazil
+      - |
+        # sysbox-ipc's protobuf makefiles call protoc with a hardcoded
+        # -I /usr/local/include, so protoc is unpacked there
+        unzip -q -o protoc.zip -d /usr/local 'bin/*' 'include/*'
+        chmod -R a+rX /usr/local/include/google
+
+        # they also generate with `--go_out=plugins=grpc`, which only the
+        # pre-v1.4 protoc-gen-go implements
+        go install github.com/golang/protobuf/protoc-gen-go@{{ .SYSBOX_PROTOC_GEN_GO_VERSION }}
+
+        PATH="/usr/local/bin:${GOPATH}/bin:${PATH}" make -C ${SYSBOX_DIR}/sysbox-ipc sysbox-ipc
+      - |
+        for module in sysbox-runc sysbox-fs sysbox-mgr; do
+            cd ${SYSBOX_DIR}/${module}
+
+            # the generated stubs import packages the checked-in go.mod files do
+            # not require yet, so those requirements are added here, while the
+            # network is available. Upstream runs `go mod tidy` for this, which
+            # would also bump the pinned dependencies.
+            go list -mod=mod ./... >/dev/null
+            go mod download
+        done
+      - |
+        mkdir -p rsync fuse
+
+        tar -xzf rsync.tar.gz --strip-components=1 -C rsync
+
+        cd rsync
+        LDFLAGS="-static" ./configure \
+            --prefix=/usr/local \
+            --disable-md2man \
+            --disable-openssl \
+            --disable-xxhash \
+            --disable-zstd \
+            --disable-lz4 \
+            --disable-iconv \
+            --disable-acl-support \
+            --disable-xattr-support \
+            --enable-roll-simd=no \
+            --enable-roll-asm=no \
+            --enable-md5-asm=no \
+            --with-included-popt \
+            --with-included-zlib
+      - |
+        tar -xzf fuse.tar.gz --strip-components=1 -C fuse
+
+        cd fuse
+        # only fusermount3 is built, and statically: it is the single binary
+        # sysbox-fs executes, and a static one keeps the pod running it free of
+        # any dependency on the host's libraries
+        meson setup _build \
+            -Dc_link_args=-static \
+            -Dexamples=false \
+            -Dtests=false \
+            -Duseroot=false \
+            -Dinitscriptdir=''
+  - network: none
+    build:
+      - |
+        # the static targets, so that the binaries run both on the host, where
+        # containerd execs sysbox-runc, and in the sysbox static pod. Neither has
+        # a userspace to link against.
+        #
+        # the build tags are the ones upstream picks for a kernel 5.12 or later.
+        # They are written out because upstream reads them from the build host's
+        # `uname -r`, not from the Talos kernel the binaries end up on.
+        make -C ${SYSBOX_DIR}/sysbox-runc static BUILDTAGS="seccomp apparmor idmapped_mnt"
+        make -C ${SYSBOX_DIR}/sysbox-fs sysbox-fs-static
+        make -C ${SYSBOX_DIR}/sysbox-mgr sysbox-mgr-static BUILDTAGS="idmapped_mnt"
+      - |
+        make -C rsync -j $(nproc)
+      - |
+        ninja -C fuse/_build util/fusermount3
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+
+        # sysbox-runc is executed on the host by containerd; sysbox-mgr and
+        # sysbox-fs are executed by the sysbox static pod, which bind mounts
+        # /usr/local/bin from the host
+        cp ${SYSBOX_DIR}/sysbox-fs/build/${TARGET_ARCH}/sysbox-fs /rootfs/usr/local/bin/sysbox-fs
+        cp ${SYSBOX_DIR}/sysbox-mgr/build/${TARGET_ARCH}/sysbox-mgr /rootfs/usr/local/bin/sysbox-mgr
+        cp ${SYSBOX_DIR}/sysbox-runc/build/${TARGET_ARCH}/sysbox-runc /rootfs/usr/local/bin/sysbox-runc
+        chmod +x /rootfs/usr/local/bin/sysbox-{fs,mgr,runc}
+
+        cp rsync/rsync /rootfs/usr/local/bin/rsync
+        strip /rootfs/usr/local/bin/rsync
+        chmod +x /rootfs/usr/local/bin/rsync
+      - |
+        # kept out of /usr/local/bin: the fuse3 extension installs its own
+        # fusermount3 there, and two extensions cannot provide the same path
+        mkdir -p /rootfs/usr/local/lib/sysbox
+
+        cp fuse/_build/util/fusermount3 /rootfs/usr/local/lib/sysbox/fusermount3
+        strip /rootfs/usr/local/lib/sysbox/fusermount3
+        chmod +x /rootfs/usr/local/lib/sysbox/fusermount3
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/10-sysbox.part /rootfs/etc/cri/conf.d/10-sysbox.part
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/sysbox.spdx.json
+      version: {{ .SYSBOX_VERSION }}
+      cpes:
+        - cpe:2.3:a:nestybox:sysbox:{{ .SYSBOX_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - Apache-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

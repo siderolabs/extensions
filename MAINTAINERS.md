@@ -64,6 +64,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | revpi-firmware                            | Martin Schuessler  | [c0ffee](https://github.com/c0ffee)                                                      |
 | spin                                      | Sven Pfennig       | [0xE282B0](https://github.com/0xE282B0)                                                  |
 | stargz-snapshotter                        | Sidero Labs        | NA                                                                                       |
+| sysbox                                    | Tristan SMAGGHE | [yyewolf](https://github.com/yyewolf)                                                 |
 | tailscale                                 | Beau Trepp         | [btrepp](https://github.com/btrepp)                                                      |
 | thunderbolt                               | Igor Rzegocki      | [ajgon](https://github.com/ajgon)                                                        |
 | trident-iscsi-tools                       | INS                | [Untersander](https://github.com/Untersander), [SimLi1333](https://github.com/SimLi1333) |

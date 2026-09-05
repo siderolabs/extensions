@@ -70,6 +70,7 @@ spec:
     - rockchip-rknn
     - spin
     - stargz-snapshotter
+    - sysbox
     - tailscale
     - tenstorrent
     - thunderbolt
