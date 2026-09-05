@@ -1,0 +1,19 @@
+version: v1alpha1
+metadata:
+  name: nfs-server
+  version: "{{ .VERSION }}"
+  author: Mateusz Urbanek
+  description: |
+    [{{ .TIER }}] This system extension provides the nfs-utils server-side daemons, turning
+    the node into an NFS server serving NFSv3, v4.0, v4.1 and v4.2.
+
+    exportfs syncs the kernel export table from /etc/exports.
+    rpc.mountd services NFSv3 mount requests and the kernel's export upcalls.
+    nfsdcld tracks NFSv4 clients so they can reclaim state after a server restart.
+    rpc.nfsd starts the kernel NFS server threads.
+
+    Requires the nfsd kernel module from the `nfsd` extension, and the `nfs-utils`
+    extension for rpcbind and rpc.statd.
+  compatibility:
+    talos:
+      version: ">= v1.14.0"

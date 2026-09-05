@@ -1,0 +1,16 @@
+name: nfs-server
+runnerMode: host
+depends:
+  - service: cri
+  - service: ext-rpcbind
+  - path: /sys/module/nfsd
+  - path: /etc/exports
+  - path: /etc/netconfig
+  - network:
+      - addresses
+      - connectivity
+      - hostname
+      - etcfiles
+container:
+  entrypoint: /usr/local/libexec/nfs-server
+restart: always

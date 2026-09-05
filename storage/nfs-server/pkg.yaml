@@ -1,0 +1,29 @@
+name: nfs-server
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: rpc-mountd
+  - stage: exportfs
+  - stage: nfsdcld
+  - stage: rpc-nfsd
+steps:
+  - env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    build:
+      - |
+        cd /pkg/mounts
+
+        go test ./...
+        CGO_ENABLED=0 go build -ldflags "-s -w" -trimpath -o /tmp/nfs-server ./cmd/nfs-server
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/libexec /rootfs/usr/local/etc/containers
+
+        cp /tmp/nfs-server /rootfs/usr/local/libexec/
+        cp /pkg/nfs-server.yaml /rootfs/usr/local/etc/containers/
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

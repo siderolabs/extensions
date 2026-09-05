@@ -2,10 +2,10 @@
 FUSE3_VERSION: 3.18.2
 FUSE3_SHA256: f01de85717e20adf5f98aff324acd85dd73d61a5ca3834d573dcf0bd6e54a298
 FUSE3_SHA512: b2ca702b74788230981d05dc85458ee3582970dcb1526e7eda8f46e23d0373b361ef1438874a7caa46aaf02a5b84f7e5341fbe61e856cfbce849d1209b4aabbe
-# renovate: datasource=git-tags extractVersion=^nfs-utils-(?<version>.*)$ depName=git://linux-nfs.org/~steved/nfs-utils
-NFS_UTILS_VERSION: 2-8-3
-NFS_UTILS_SHA256: 11e7c5847a8423a72931c865bd9296e7fd56ff270a795a849183900961711725
-NFS_UTILS_SHA512: ed8ac3a79f347a1dc91cba060f87f687eefc204430648099ca867114295dd8dd8e745bd809807d5bc79dfb1ad86eaf2a6f4506ec7889c54b231d8f65dcb59bd4
+# renovate: datasource=git-tags extractVersion=^nfs-utils-(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/rw/nfs-utils.git
+NFS_UTILS_VERSION: 2.8.4
+NFS_UTILS_SHA256: 11c4cc598a434d7d340bad3e072a373ba1dcc2c49f855d44b202222b78ecdbf5
+NFS_UTILS_SHA512: 2b547b2dfd96672a4867a2d385e58309a242c8fab457f7e48f79c3f362f652d1f81ea356ac5c56837cf2e6c2754fd02b499f75d044251090a161d4c28dd9ca32
 # renovate: datasource=github-releases extractVersion=^release-(?<version>.*)-stable$ depName=libevent/libevent
 LIBEVENT_VERSION: 2.1.13
 LIBEVENT_SHA256: f7e9383b8c0baa81b687e5b5eecc01beefaf1b19b64151d95ed61647fe7a315c

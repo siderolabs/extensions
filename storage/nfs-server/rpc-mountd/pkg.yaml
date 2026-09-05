@@ -1,0 +1,82 @@
+name: rpc-mountd
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libcap:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - stage: libtirpc
+    from: /rootfs/usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: libtirpc
+    from: /rootfs
+  - stage: rpcsvc-proto
+    from: /rootfs
+  - stage: libevent
+    from: /rootfs
+  - stage: sqlite
+    from: /rootfs
+  # libdevmapper headers/libs: configure hard-requires them for --enable-nfsv41
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libucontext:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/systemd-udevd:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/lvm2:{{ .BUILD_ARG_PKGS }}"
+
+steps:
+  - sources:
+      - url: https://www.kernel.org/pub/linux/utils/nfs-utils/{{ .NFS_UTILS_VERSION }}/nfs-utils-{{ .NFS_UTILS_VERSION }}.tar.xz
+        destination: nfs-utils.tar.xz
+        sha256: {{ .NFS_UTILS_SHA256 }}
+        sha512: {{ .NFS_UTILS_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xJf nfs-utils.tar.xz --strip-components=1
+
+    build:
+      - |
+        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/lib/pkgconfig
+        export CFLAGS="${CFLAGS} -I/usr/local/include"
+        export LDFLAGS="${LDFLAGS} -L/usr/local/lib"
+
+        ./configure \
+          --prefix=/usr/local \
+          --sbindir=/usr/local/sbin \
+          --enable-nfsv4 \
+          --enable-nfsv41 \
+          --disable-junction \
+          --disable-gss \
+          --disable-svcgss \
+          --disable-kprefix \
+          --disable-nfsdctl \
+          --without-tcp-wrappers \
+          --with-rpcgen=/usr/local/bin/rpcgen \
+          --with-statedir=/var/lib/nfs \
+          --with-statdpath=/var/lib/nfs/statd
+      - |
+        # build the whole support/ tree rather than enumerating the individual
+        # convenience libraries mountd links against
+        make -C support -j $(nproc)
+        make -C utils/mountd -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs install -C utils/mountd
+
+        # cleanup
+        rm -rf /rootfs/usr/local/share
+      - |
+        # rpc.mountd links against libblkid/libuuid for the `uuid` export option;
+        # both come from the build image rather than a separate stage
+        cp -a /usr/lib/libblkid.so.1* /usr/lib/libuuid.so.1* \
+          /rootfs/usr/local/lib/
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/rpc-mountd.spdx.json
+      version: {{ .NFS_UTILS_VERSION }}
+      cpes:
+        - cpe:2.3:a:linux-nfs:nfs-utils:{{ .NFS_UTILS_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - GPL-2.0
+finalize:
+  - from: /rootfs
+    to: /rootfs
