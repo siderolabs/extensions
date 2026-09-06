@@ -1,0 +1,9 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/media/mc/mc.ko
+kernel/drivers/media/dvb-core/dvb-core.ko
+kernel/drivers/media/dvb-frontends/tc90522.ko
+kernel/drivers/media/tuners/qm1d1c0042.ko
+kernel/drivers/media/tuners/mxl301rf.ko
+kernel/drivers/media/pci/pt3/earth-pt3.ko

@@ -30,10 +30,20 @@
 - images:
     - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
     - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
+    - registry.dev.siderolabs.io/siderolabs/dvb-pt3
     - registry.dev.siderolabs.io/siderolabs/usb-audio-drivers
     - registry.dev.siderolabs.io/siderolabs/v4l-uvc-drivers
   files:
     - rootfs/usr/lib/modules/*/kernel/drivers/media/mc/mc.ko
+- images:
+    - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
+    - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
+    - registry.dev.siderolabs.io/siderolabs/dvb-pt3
+  files:
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-core/dvb-core.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tc90522.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mxl301rf.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/qm1d1c0042.ko
 - images:
     - registry.dev.siderolabs.io/siderolabs/dvb-cx23885
     - registry.dev.siderolabs.io/siderolabs/dvb-m88ds3103
@@ -46,7 +56,6 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/common/tveeprom.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/common/videobuf2/videobuf2-dma-sg.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/common/videobuf2/videobuf2-dvb.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-core/dvb-core.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/a8293.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/af9033.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/ascot2e.ko
@@ -136,7 +145,6 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/stv6110.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/stv6110x.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/stv6111.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tc90522.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tda10021.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tda10023.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/dvb-frontends/tda10048.ko
@@ -311,11 +319,9 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mt20xx.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mt2131.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mt2266.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mxl301rf.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mxl5005s.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/mxl5007t.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/qm1d1b0004.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/qm1d1c0042.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/qt1010.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/r820t.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/tuners/si2157.ko

@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: dvb-pt3
+  version: "{{ .VERSION }}"
+  author: Ruk Doe
+  description: |
+    [{{ .TIER }}] This system extension provides the dvb kernel modules required for the Earthsoft PT3 ISDB-T/S PCIe tuner built against a specific Talos version.
+    No firmware is required by this card.
+  compatibility:
+    talos:
+      version: ">= v1.0.0"
