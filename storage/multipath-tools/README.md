@@ -13,13 +13,20 @@ It enables consistent, fault-tolerant access to storage devices that expose mult
 
 ## Use Case
 
-To run this daemon you need the following **kernel** modules:
+To run this daemon, load `dm_multipath` and the module required by the configured path selector. Talos does not automatically load path selector modules. For example, `round-robin` requires `dm_round_robin`:
+
 ```yaml
-kernel:
-    modules:
-      - name: dm_multipath
-      - name: dm_round-robin # or dm-queue-length
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: dm_multipath
+---
+apiVersion: v1alpha1
+kind: KernelModuleConfig
+name: dm_round_robin
 ```
+
+The `service-time` selector requires `dm_service_time` instead.
+
 The extension ships no default configuration. The service waits until you provide `/etc/multipath.conf` via [`EtcFileConfig`](https://www.talos.dev/v1.14/reference/configuration/runtime/etcfileconfig/), which is bind-mounted read-only into the service container:
 
 ```yaml
@@ -34,9 +41,6 @@ contents: |
       path_selector "round-robin 0"
   }
 ```
-
-You probably need to use `round-robin` or `queue-length` (if that is supported by your use case) as the default `service-time` is not supported, since the `dm-service-time` kernel module is not yet in the Talos build.
-
 
 ## References
 
