@@ -1,3 +1,113 @@
+## [Talos System Extensions 1.15.0-alpha.0](https://github.com/siderolabs/extensions/releases/tag/v1.15.0-alpha.0) (2026-09-08)
+
+Welcome to the v1.15.0-alpha.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ctr: 2.3.5
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Mateusz Urbanek
+* Dmitrii Sharshakov
+* Calin Stefan
+* Christian A. Jacobsen
+* Dennis Docter
+* Evan Champion
+* Licia Seiker
+* Maja Bojarska
+* Max Makarov
+* Pranav Patil
+* Sacha Weatherstone
+* usman.malik_ext
+
+### Changes
+<details><summary>19 commits</summary>
+<p>
+
+* [`cf7ad2b`](https://github.com/siderolabs/extensions/commit/cf7ad2b75d812d8ad2ea5b6affb7640eddb2cdc1) fix(nfs-server): harden bind mounts with nodev,noexec,nosuid
+* [`1df903b`](https://github.com/siderolabs/extensions/commit/1df903bda0092bf0f6eee1b82dc22b84373f23ee) docs: multipathd
+* [`777096f`](https://github.com/siderolabs/extensions/commit/777096f9d71ae2fc284af3f522dc27b74d2e5cf5) feat: update to containerd 2.3.5
+* [`cc0c57c`](https://github.com/siderolabs/extensions/commit/cc0c57c56ab6b024cc62f79e9c912d06db2192b7) feat: add NFS server extension
+* [`e9498f6`](https://github.com/siderolabs/extensions/commit/e9498f6ade0b203b0e274512e1eeb6457b81c48c) feat: switch to nri for nvidia
+* [`508c918`](https://github.com/siderolabs/extensions/commit/508c918b131fac713b4bd0ae4ed47047c98441d3) feat: replace wolfi build roots with stagex
+* [`d804199`](https://github.com/siderolabs/extensions/commit/d804199fbf9b1e22bd25ac9a681be611ef77690c) feat: update glibc to 2.44
+* [`09b2b40`](https://github.com/siderolabs/extensions/commit/09b2b40c7ff800d647cc255a9369882a9b59a6a7) fix: avoid virtqemud reconnect deadlock
+* [`1097ccd`](https://github.com/siderolabs/extensions/commit/1097ccd279389f733ae6a91313d3104798097c34) feat: add libvirtd
+* [`678bf42`](https://github.com/siderolabs/extensions/commit/678bf4223262a25691f78c1fa3a46085a0c207b3) fix: nvidia vulkan paths
+* [`a0f602c`](https://github.com/siderolabs/extensions/commit/a0f602c58248ca9c108e521dbc847ec9abe4e560) feat: add kata-containers-nvidia-gpu-snp extension
+* [`f0d8914`](https://github.com/siderolabs/extensions/commit/f0d891421506d226a335f7d05bf1d3345120a047) fix: wait for multipath configuration
+* [`631db05`](https://github.com/siderolabs/extensions/commit/631db053516f27e7df265110af763b4a59c17a40) fix: update multipath-tools to 0.14.3
+* [`eac6c72`](https://github.com/siderolabs/extensions/commit/eac6c72a44f2850e375a041f184eedb6a3cdac4a) fix: update CRI configs for version 4
+* [`ba4b275`](https://github.com/siderolabs/extensions/commit/ba4b2750047bc067aa006ecc163816a1d2c9d700) feat: update OpenZFS to 2.4.4
+* [`26822f5`](https://github.com/siderolabs/extensions/commit/26822f5c95ab96da26eedfeb83c5a035b48670a4) chore: update Go to 1.26.7
+* [`853c219`](https://github.com/siderolabs/extensions/commit/853c219b1e5e5ded915c6237d97d4bc2826af927) fix: drop multipath dependency on cri
+* [`85f5bfb`](https://github.com/siderolabs/extensions/commit/85f5bfbf3c49e7d9504b251f4f9cd4c063b67df8) docs: update broken talos.dev URLs to docs.siderolabs.com
+* [`f2c879a`](https://github.com/siderolabs/extensions/commit/f2c879a7c5ab806063b6a48d347ae0d78df91b28) feat: add cachefilesd extension
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>25 commits</summary>
+<p>
+
+* [`977b61f`](https://github.com/siderolabs/pkgs/commit/977b61fb151992e74cbd89a4dcd921f91dc30ac8) feat: update containerd to 2.3.5
+* [`43e6298`](https://github.com/siderolabs/pkgs/commit/43e6298f76423318f9d8aa4469ed171271dd24a4) fix: add a kernel patch for EFI SecureBoot integrity lockdown
+* [`a8b682b`](https://github.com/siderolabs/pkgs/commit/a8b682b77160d065c4662dd9f06f31c38a298ac6) feat: add kernel modules to enable Intel HD audio
+* [`ff111ff`](https://github.com/siderolabs/pkgs/commit/ff111ff2db66442544a8dc97871f6eba44f1481e) feat: enable Apple Silicon platform drivers
+* [`e68eeb5`](https://github.com/siderolabs/pkgs/commit/e68eeb5a2c78f4dedad087e33a87a272f060d8ef) feat: enable VIRTIO_INPUT as built-in for amd64/arm64
+* [`381fc2d`](https://github.com/siderolabs/pkgs/commit/381fc2d45303a4909f65196c9875063e8010a009) feat: bump kernel to 6.18.49
+* [`5394321`](https://github.com/siderolabs/pkgs/commit/539432102f629aaaac3467052d88c1c8c092e2bd) feat: enable CONFIG_USB_LAN78XX and CONFIG_MICROCHIP_PHY on amd64
+* [`4b9bf36`](https://github.com/siderolabs/pkgs/commit/4b9bf36f402384842238f2f191451ba90e7bc3ef) fix: preserve symlinks for libudev
+* [`50bf09f`](https://github.com/siderolabs/pkgs/commit/50bf09fe4bc7cbc7e09d015d891506a6f30032d5) fix: update OpenSSL to 3.6.4
+* [`f2b7acf`](https://github.com/siderolabs/pkgs/commit/f2b7acf132341319c8e0f309487f5b714857c968) feat: update kernel to 6.18.48
+* [`73327ff`](https://github.com/siderolabs/pkgs/commit/73327ff97cac2cf3d544cbc3d8f417ee46e694f9) feat: bump kernel to 6.18.47
+* [`b6b2843`](https://github.com/siderolabs/pkgs/commit/b6b284315268fa0bd4d5d9067ebaf35c3488fcd5) feat: enable CONFIG_XFRM_INTERFACE in the kernel
+* [`696fa3c`](https://github.com/siderolabs/pkgs/commit/696fa3c27c4d2928d3cbf9fcaf89d3b7db1de47b) feat: expose more software as pkgs
+* [`aa069d3`](https://github.com/siderolabs/pkgs/commit/aa069d3df40ad2150e7db3ba7b677441b33f8ac6) chore: update OpenZFS to 2.4.4
+* [`c1837b6`](https://github.com/siderolabs/pkgs/commit/c1837b630397e1b331876e99f9dbe7ab1c8ce52e) feat: bump kernel to 6.18.46
+* [`28f5f23`](https://github.com/siderolabs/pkgs/commit/28f5f23ccf05ac8633e9f85146e47f27bbbae99f) feat: enable SPD5118 sensor driver
+* [`bc45b69`](https://github.com/siderolabs/pkgs/commit/bc45b690bd6008343a99df03c516e22f73e30fce) feat: backport aes256k support (Ceph)
+* [`b914c26`](https://github.com/siderolabs/pkgs/commit/b914c261a6141b40d6fc93514c458985467b1585) feat: update Go to 1.26.7
+* [`caac515`](https://github.com/siderolabs/pkgs/commit/caac51549df4350dda473edd848166b2ce1b8a39) feat: update Linux to 6.18.45
+* [`ada230a`](https://github.com/siderolabs/pkgs/commit/ada230ad41a2c869c558f2a0b4241e4f4c4c1a2a) feat: enable IPSec offload and dma-buf heaps
+* [`33d14e0`](https://github.com/siderolabs/pkgs/commit/33d14e0e8432917a3404ab7ac2b8339dbdff8818) feat(kernel): enable CONFIG_MLX5_VFIO_PCI
+* [`107b628`](https://github.com/siderolabs/pkgs/commit/107b62874966d6acab1a0509c89f68e6015552af) feat: kernel: enable MPTCP, sched_ext
+* [`c9173bb`](https://github.com/siderolabs/pkgs/commit/c9173bb3fa60ae23ad8f2c6e8cee0499a8c45077) feat: move IPVS into modules
+* [`d418aa7`](https://github.com/siderolabs/pkgs/commit/d418aa74ca7237ea573f4580f469d9ece839c7fb) feat: update containerd to 2.3.4
+* [`c4a6a61`](https://github.com/siderolabs/pkgs/commit/c4a6a61a1a6ea195e67fe9e5d4cb6984c90b50b0) feat: update Go to 1.26.6
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>6 commits</summary>
+<p>
+
+* [`09ccc74`](https://github.com/siderolabs/tools/commit/09ccc74617a534838109bc64bb663f7c7c40fcd2) feat: bump go to 1.26.8
+* [`35fab51`](https://github.com/siderolabs/tools/commit/35fab513ae40e9532a9db17bdaace50d4578a470) fix: update OpenSSL to 3.6.4
+* [`e033f2a`](https://github.com/siderolabs/tools/commit/e033f2af700a81a4199188cefced8b43e94487ff) feat: move more packages into separate images
+* [`d102f15`](https://github.com/siderolabs/tools/commit/d102f15b6ce95fb526a964a3eb8908bc235d1989) feat: update Go to 1.26.7
+* [`fd531a3`](https://github.com/siderolabs/tools/commit/fd531a36b8f9668316e1dd1f7938ef26e36df77e) feat: update Go to 1.26.6
+* [`5eabe31`](https://github.com/siderolabs/tools/commit/5eabe31f240b3f80df0956f53651df706e0dbf4e) chore: rekres 2026-08-12
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.14.0-15-g2f03590 -> v1.15.0-alpha.0-24-g977b61f
+* **github.com/siderolabs/tools**  v1.14.0-5-g87316ca -> v1.15.0-alpha.0-5-g09ccc74
+
+Previous release can be found at [v1.14.0](https://github.com/siderolabs/extensions/releases/tag/v1.14.0)
+
 ## [Talos System Extensions 1.14.0-beta.1](https://github.com/siderolabs/extensions/releases/tag/v1.14.0-beta.1) (2026-07-31)
 
 Welcome to the v1.14.0-beta.1 release of Talos System Extensions!  
