@@ -48,7 +48,9 @@ func Ensure(mounter Mounter) error {
 			return fmt.Errorf("create %s mountpoint: %w", mount.fstype, err)
 		}
 
-		if err := mounter.Mount(mount.source, mount.target, mount.fstype, 0, ""); err != nil && !errors.Is(err, syscall.EBUSY) {
+		flags := uintptr(syscall.MS_NODEV | syscall.MS_NOEXEC | syscall.MS_NOSUID)
+
+		if err := mounter.Mount(mount.source, mount.target, mount.fstype, flags, ""); err != nil && !errors.Is(err, syscall.EBUSY) {
 			return fmt.Errorf("mount %s at %s: %w", mount.fstype, mount.target, err)
 		}
 	}
