@@ -1,0 +1,53 @@
+name: dvb-usb-dvbsky
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: v4l-uvc-drivers
+  # The pkgs version for a particular release of Talos as defined in
+  # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/kernel:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://raw.githubusercontent.com/osmc/dvb-firmware-osmc/master/dvb-demod-si2168-d60-01.fw
+        destination: dvb-demod-si2168-d60-01.fw
+        sha256: 753e338163d10244837a2fa4ad1258e1f270e3040e21ffa574609814943437c9
+        sha512: 25d3f6ac7f194b39b7cde7a21abd4acea2fe62fd86e2329010d679537fac83f4b0ef40cb3fafe110bc1f922941a14f111b15c1142267ac69b779a8c093f7627d
+      - url: https://raw.githubusercontent.com/osmc/dvb-firmware-osmc/master/dvb-tuner-si2141-a10-01.fw
+        destination: dvb-tuner-si2141-a10-01.fw
+        sha256: 29cf0b0d20a3040f8e59b0ed548e9d3d54eda0b2d2869708f7bcee9d7cbf7e34
+        sha512: cbcbc2b9b5b1735e049f2dd57b01fed153a1ed173054ef324ce779f0ac98cbead7bc3883d3f69c2e4e4339a15a13ebaec2168c31e3a1c0982ecd86d9640279b9
+    prepare:
+      - |
+        mkdir -p /rootfs
+      # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    install:
+      - |
+        export KERNELRELEASE=$(find /usr/lib/modules -type d -name "*-talos" -exec basename {} \+)
+
+        mkdir -p /rootfs
+
+        xargs -a /pkg/files/modules.txt -I {} install -D /usr/lib/modules/${KERNELRELEASE}/{} /rootfs/usr/lib/modules/${KERNELRELEASE}/{}
+        depmod -b /rootfs/usr ${KERNELRELEASE}
+      - |
+        mkdir -p /rootfs/usr/local/lib/modprobe.d
+        cp /pkg/files/dvb.conf /rootfs/usr/local/lib/modprobe.d/dvb-usb-dvbsky.conf
+      - |
+        mkdir -p /rootfs/usr/lib/firmware
+        cp dvb-demod-si2168-d60-01.fw /rootfs/usr/lib/firmware
+        cp dvb-tuner-si2141-a10-01.fw /rootfs/usr/lib/firmware
+    test:
+      - |
+        # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
+        find /rootfs/usr/lib/modules -name '*.ko' -exec grep -FL '~Module signature appended~' {} \+
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
