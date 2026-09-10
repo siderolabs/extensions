@@ -1,3 +1,3 @@
 module github.com/siderolabs/extensions/storage/nfs-server/mounts
 
-go 1.25
+go 1.27.1
