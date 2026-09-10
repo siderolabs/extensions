@@ -110,15 +110,15 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.15.0-alpha.0-27-ge7b09e2
+        defaultValue: v1.15.0-alpha.0-30-gf380535
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
-        defaultValue: v1.15.0-alpha.0-5-g09ccc74
+        defaultValue: v1.15.0-alpha.0-9-g19bb4b7
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: GO_TOOLS_RELEASE
-        defaultValue: v0.3.1
+        defaultValue: v0.3.2
       - name: GNU_MIRROR_URL
         defaultValue: https://mirrors.kernel.org
   useBldrPkgTagResolver: true
