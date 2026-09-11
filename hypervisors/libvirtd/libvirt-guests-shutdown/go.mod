@@ -1,3 +1,3 @@
 module github.com/siderolabs/extensions/hypervisors/libvirtd/libvirt-guests-shutdown
 
-go 1.27.1
+go 1.26.8

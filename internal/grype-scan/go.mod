@@ -1,6 +1,6 @@
 module grype-scan
 
-go 1.27.1
+go 1.26.8
 
 tool (
 	github.com/anchore/grype/cmd/grype
