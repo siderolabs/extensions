@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: sysbox
+  version: "{{ .VERSION }}"
+  author: Tristan Smagghe
+  description: |
+    [{{ .TIER }}] This system extension provides Sysbox using containerd's runtime handler.
+  compatibility:
+    talos:
+      version: ">= v1.11.0"
