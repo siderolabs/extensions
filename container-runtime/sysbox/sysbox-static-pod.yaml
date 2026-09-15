@@ -1,0 +1,129 @@
+# Machine configuration patch running the Sysbox daemons as a static pod on
+# every node that has the sysbox extension installed.
+#
+# Apply with: talosctl patch mc --patch @sysbox-static-pod.yaml
+machine:
+  pods:
+    - apiVersion: v1
+      kind: Pod
+      metadata:
+        name: sysbox
+        namespace: kube-system
+      spec:
+        # sysbox-mgr and sysbox-fs act on the PIDs of the containers
+        # sysbox-runc creates on the host: seccomp notifications and
+        # pidfd_open(2) only resolve those in the host PID namespace
+        hostPID: true
+        priorityClassName: system-node-critical
+        initContainers:
+          # a sidecar, so that it is started (and stays running) before sysbox-fs
+          - name: sysbox-mgr
+            restartPolicy: Always
+            image: busybox:stable
+            command:
+              - /usr/local/bin/sysbox-mgr
+              # inner container image preloading is not used with the CRI, and
+              # skipping it makes container stop faster
+              - --disable-inner-image-preload
+            env:
+              # sysbox-mgr requires rsync, modprobe and iptables to be present:
+              # it looks them up with `/bin/sh -c "command -v <prog>"`. rsync is
+              # shipped by the extension and statically linked, so it runs as
+              # is; modprobe and iptables are Talos binaries and only need to be
+              # found, they are not executed. Note that /lib and /usr/lib must
+              # NOT be mounted from the host: that shadows the image's loader
+              # and /bin/sh can no longer be executed, which fails every check.
+              - name: PATH
+                value: /usr/local/bin:/usr/bin
+            securityContext:
+              privileged: true
+            volumeMounts:
+              - name: usr-local-bin
+                mountPath: /usr/local/bin
+                readOnly: true
+              - name: usr-bin
+                mountPath: /usr/bin
+                readOnly: true
+              - name: os-release
+                mountPath: /etc/os-release
+                readOnly: true
+              # sysbox-mgr looks for /lib/modules/<kernel release> in its own
+              # mount namespace and, when found, has sysbox-runc bind the very
+              # same path into the containers, so that apps in them can check
+              # which modules are loaded. Talos keeps the modules in
+              # /usr/lib/modules, with /lib a usr-merge symlink, so the path
+              # resolves on the host side as well.
+              - name: lib-modules
+                mountPath: /lib/modules
+                readOnly: true
+              # the mounts sysbox-mgr sets up under the data store have to
+              # propagate back to the host, where sysbox-runc runs
+              - name: var
+                mountPath: /var
+                mountPropagation: Bidirectional
+              - name: run
+                mountPath: /run
+                mountPropagation: Bidirectional
+        containers:
+          - name: sysbox-fs
+            image: busybox:stable
+            command:
+              - /usr/local/bin/sysbox-fs
+            env:
+              # sysbox-fs mounts its per-container FUSE filesystem by executing
+              # fusermount3, which the extension installs (statically linked)
+              # in /usr/local/lib/sysbox
+              - name: PATH
+                value: /usr/local/lib/sysbox:/usr/local/bin
+            securityContext:
+              privileged: true
+            volumeMounts:
+              - name: usr-local-bin
+                mountPath: /usr/local/bin
+                readOnly: true
+              - name: sysbox-lib
+                mountPath: /usr/local/lib/sysbox
+                readOnly: true
+              - name: os-release
+                mountPath: /etc/os-release
+                readOnly: true
+              # the FUSE filesystem is mounted at /var/lib/sysboxfs and bind
+              # mounted into the containers by sysbox-runc, on the host
+              - name: var
+                mountPath: /var
+                mountPropagation: Bidirectional
+              - name: run
+                mountPath: /run
+                mountPropagation: Bidirectional
+              # /dev/fuse
+              - name: dev
+                mountPath: /dev
+                mountPropagation: HostToContainer
+        # no hostPath `type:` checks: the kubelet validates those inside its own
+        # container, which has no /usr/local at all, while the bind mount itself
+        # is resolved by containerd on the host
+        volumes:
+          - name: usr-local-bin
+            hostPath:
+              path: /usr/local/bin
+          - name: usr-bin
+            hostPath:
+              path: /usr/bin
+          - name: sysbox-lib
+            hostPath:
+              path: /usr/local/lib/sysbox
+          - name: os-release
+            hostPath:
+              path: /etc/os-release
+          - name: lib-modules
+            hostPath:
+              path: /usr/lib/modules
+          - name: var
+            hostPath:
+              path: /var
+          - name: run
+            hostPath:
+              path: /run
+          - name: dev
+            hostPath:
+              path: /dev
