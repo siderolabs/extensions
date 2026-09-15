@@ -1,0 +1,31 @@
+name: amneziawg
+depends:
+  - network:
+      - addresses
+      - connectivity
+  - configuration: true
+container:
+  entrypoint: /usr/local/bin/entrypoint.sh
+  environment:
+    - PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/bin
+    - WG_SOCKET_DIR=/run/amneziawg
+    - AWG_INTERFACE=awg0
+    - AWG_CONFIG=/etc/amneziawg/awg0.conf
+    - AWG_LOG_LEVEL=info
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+    - source: /dev/net/tun
+      destination: /dev/net/tun
+      type: bind
+      options:
+        - bind
+        - rw
+    - source: /run/amneziawg
+      destination: /run/amneziawg
+      type: bind
+      options:
+        - bind
+        - rw
+restart: always
