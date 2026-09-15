@@ -36,7 +36,7 @@ steps:
             --disable-nfsv41 \
             --disable-uuid \
             --enable-junction=no \
-            --with-nfsconfig=/usr/local/etc/nfsrahead/nfs.conf \
+            --with-nfsconfig=/etc/nfs.conf \
             --with-rpcgen=internal \
             --prefix=/usr/local
     build:
@@ -46,8 +46,6 @@ steps:
         make -C tools/nfsrahead
     install:
       - |
-        mkdir -p /rootfs/usr/local/etc/nfsrahead
-        cp /pkg/files/nfs.conf /rootfs/usr/local/etc/nfsrahead/nfs.conf
         make DESTDIR=/rootfs install -C tools/nfsrahead
         rm -rf /rootfs/usr/local/share
     test:
