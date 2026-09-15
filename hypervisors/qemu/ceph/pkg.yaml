@@ -7,7 +7,7 @@ dependencies:
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/cryptsetup:{{ .BUILD_ARG_PKGS }}"
 steps:
   - sources:
-      - url: https://download.ceph.com/tarballs/ceph-{{ .CEPH_VERSION }}.tar.gz
+      - url: https://eu.ceph.com/tarballs/ceph-{{ .CEPH_VERSION }}.tar.gz
         destination: ceph.tar.gz
         sha256: "{{ .CEPH_SHA256 }}"
         sha512: "{{ .CEPH_SHA512 }}"
