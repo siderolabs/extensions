@@ -1,3 +1,86 @@
+## [Talos System Extensions 1.14.1](https://github.com/siderolabs/extensions/releases/tag/v1.14.1) (2026-09-15)
+
+Welcome to the v1.14.1 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+cloud-provider-aws: v1.37.0
+cloudflared: 2026.8.3
+crun: 1.29.1
+ctr: 2.3.5
+fuse: 3.18.3
+glib: 2.90.0
+gvisor: 20260831.0
+hyperv-guest-agent: 6.18.50
+libvirt: 12.7.0
+libxml2: 2.15.4
+nebula: 1.11.1
+netbird: 0.78.1
+newt: 1.16.0
+Open-iSCSI: 2.1.13
+qemu-guest-agent: 11.1.1
+tailscale: 1.102.3
+
+
+### Contributors
+
+* Andrey Smirnov
+* Dennis Docter
+* Maja Bojarska
+* Noel Georgi
+* Sacha Weatherstone
+* usman.malik_ext
+
+### Changes
+<details><summary>5 commits</summary>
+<p>
+
+* [`c31a7f0`](https://github.com/siderolabs/extensions/commit/c31a7f09dcd4ca521d1e1aa25ec83181a1f5d378) chore: switch Ceph mirror
+* [`74e919f`](https://github.com/siderolabs/extensions/commit/74e919fe7e5357c545d0a1f6106947725f4cbf65) chore: component updates (2026-09-10)
+* [`b6adf53`](https://github.com/siderolabs/extensions/commit/b6adf537508cc9c271a3565299e648da725dbae5) feat: add Intel HD audio system extension
+* [`d20bb93`](https://github.com/siderolabs/extensions/commit/d20bb93a7892700975181f831b86ff258b2dc77f) feat: update glibc to 2.44
+* [`a83608e`](https://github.com/siderolabs/extensions/commit/a83608ed74717130b33ff0ba8d1f2a1fa6bbdae2) chore: sync pkgs/tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>10 commits</summary>
+<p>
+
+* [`f694e1b`](https://github.com/siderolabs/pkgs/commit/f694e1bfb5c5bedd69b030ef00e9784986e64de3) feat: update Linux to 6.18.51
+* [`85a249a`](https://github.com/siderolabs/pkgs/commit/85a249a59fb97bcfce08d85af611ab86202dbac6) feat: update libpathrs to 0.2.6
+* [`fe037b6`](https://github.com/siderolabs/pkgs/commit/fe037b6bd5b737b1ccc8459a2120c8b79228e73b) feat: update Linux to 6.18.50
+* [`35e3898`](https://github.com/siderolabs/pkgs/commit/35e38987de3738c658d4da6d4349cdf61ab4a2ed) feat: update containerd to 2.3.5
+* [`fd0c2b2`](https://github.com/siderolabs/pkgs/commit/fd0c2b2a5e0eb870dac4c75fccc1c205e20b5fe4) fix: add a kernel patch for EFI SecureBoot integrity lockdown
+* [`2415a01`](https://github.com/siderolabs/pkgs/commit/2415a010f6c115bde419cd9614b48b2a881c9f7c) feat: add kernel modules to enable Intel HD audio
+* [`202a677`](https://github.com/siderolabs/pkgs/commit/202a6778528823898d767696cf1701ac786ccfc0) feat: bump kernel to 6.18.49
+* [`5ddbb53`](https://github.com/siderolabs/pkgs/commit/5ddbb530adcd048dc01350a302b10b71217a303a) feat: enable CONFIG_USB_LAN78XX and CONFIG_MICROCHIP_PHY on amd64
+* [`c61bcc3`](https://github.com/siderolabs/pkgs/commit/c61bcc3b627d064ef162ee1f11944ea950d3eb39) feat: enable CONFIG_XFRM_INTERFACE in the kernel
+* [`40ccb0d`](https://github.com/siderolabs/pkgs/commit/40ccb0d0c51f96ccc63b4e839992699e7f6f225f) chore: sync tools & toolchain
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>2 commits</summary>
+<p>
+
+* [`a404efb`](https://github.com/siderolabs/tools/commit/a404efbcb2cd7fc610fc8c606e0bbba5fbcfd020) chore: bump util-linux 2.42.3
+* [`3c49a3c`](https://github.com/siderolabs/tools/commit/3c49a3cb0121f53aa0f76233ea4fa163b795f0f0) feat: bump go to 1.26.8
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.14.0-15-g2f03590 -> v1.14.0-25-gf694e1b
+* **github.com/siderolabs/tools**  v1.14.0-5-g87316ca -> v1.14.0-7-ga404efb
+
+Previous release can be found at [v1.14.0](https://github.com/siderolabs/extensions/releases/tag/v1.14.0)
+
 ## [Talos System Extensions 1.14.0](https://github.com/siderolabs/extensions/releases/tag/v1.14.0) (2026-09-03)
 
 Welcome to the v1.14.0 release of Talos System Extensions!
