@@ -1,0 +1,325 @@
+From bd994aef47959bec3bc3290359d373cba24e548a Mon Sep 17 00:00:00 2001
+From: Ali Mohamed <amx746@gmail.com>
+Date: Thu, 3 Sep 2026 10:11:20 +0300
+Subject: [PATCH] fix(unikraft): set the guest DNS server from the container's
+ resolv.conf
+
+Unikraft guests used a hardcoded DNS server, so name resolution inside
+the unikernel ignored the DNS configuration of the container. Parse the
+nameserver entry from the container's resolv.conf and pass it to the
+guest through the kernel command line.
+
+PR: https://github.com/urunc-dev/urunc/pull/966
+Signed-off-by: Ali Mohamed <amx746@gmail.com>
+Signed-off-by: Charalampos Mainas <charalampos.mainas@gmail.com>
+Reviewed-by: Charalampos Mainas <cmainas@nubificus.co.uk>
+Approved-by: Charalampos Mainas <cmainas@nubificus.co.uk>
+---
+ .github/contributors.yaml                |  3 +
+ .github/linters/urunc-dict.txt           |  3 +
+ pkg/unikontainers/monitor.go             |  2 +
+ pkg/unikontainers/monitor_spec.go        |  1 +
+ pkg/unikontainers/types/types.go         | 13 ++--
+ pkg/unikontainers/unikernels/unikraft.go | 12 +++-
+ pkg/unikontainers/unikontainers.go       |  6 ++
+ pkg/unikontainers/utils.go               | 34 +++++++++++
+ pkg/unikontainers/utils_test.go          | 77 ++++++++++++++++++++++++
+ tests/e2e/test_cases.go                  | 17 ++++++
+ 10 files changed, 159 insertions(+), 9 deletions(-)
+
+diff --git a/.github/contributors.yaml b/.github/contributors.yaml
+index 19e35c4af..95943b29e 100644
+--- a/.github/contributors.yaml
++++ b/.github/contributors.yaml
+@@ -143,3 +143,6 @@ users:
+   r0binak:
+     name: Sergey Kanibor
+     email: r081n4k@gmail.com
++  alimx07:
++    name: Ali Mohamed
++    email: amx746@gmail.com
+diff --git a/.github/linters/urunc-dict.txt b/.github/linters/urunc-dict.txt
+index 12a9510e3..68b898334 100644
+--- a/.github/linters/urunc-dict.txt
++++ b/.github/linters/urunc-dict.txt
+@@ -449,3 +449,6 @@ bhyve
+ GHSA
+ crxr
+ hmpj
++ndots
++resolv
++dupword
+diff --git a/pkg/unikontainers/monitor.go b/pkg/unikontainers/monitor.go
+index 5cef0fbc4..aaaa48e75 100644
+--- a/pkg/unikontainers/monitor.go
++++ b/pkg/unikontainers/monitor.go
+@@ -87,6 +87,8 @@ func runMonitor(metrics m.Writer, ms monitorSpec) error {
+ 		return fmt.Errorf("failed to setup network: %w", err)
+ 	}
+ 	metrics.Capture(m.TS16)
++	// SetupNet does not resolve DNS; carry the server resolved at spec build.
++	netArgs.DNSServer = ms.DNSServer
+ 	ms.ExecArgs.Net = netArgs
+ 	ms.GuestParams.Net = netArgs
+ 
+diff --git a/pkg/unikontainers/monitor_spec.go b/pkg/unikontainers/monitor_spec.go
+index 7344a59ce..d45b04264 100644
+--- a/pkg/unikontainers/monitor_spec.go
++++ b/pkg/unikontainers/monitor_spec.go
+@@ -41,6 +41,7 @@ type monitorSpec struct {
+ 	ExecArgs      types.ExecArgs        `json:"execArgs"`
+ 	GuestParams   types.UnikernelParams `json:"guestParams"`
+ 	NetworkType   string                `json:"networkType"`
++	DNSServer     string                `json:"dnsServer,omitempty"`
+ 	User          specs.User            `json:"user"`
+ 	PreStartCmd   []string              `json:"preStartCmd,omitempty"`
+ }
+diff --git a/pkg/unikontainers/types/types.go b/pkg/unikontainers/types/types.go
+index b80b1fbbe..a3d630416 100644
+--- a/pkg/unikontainers/types/types.go
++++ b/pkg/unikontainers/types/types.go
+@@ -45,12 +45,13 @@ type VMM interface {
+ }
+ 
+ type NetDevParams struct {
+-	IP      string // The veth device IP
+-	Mask    string // The veth device mask
+-	Gateway string // The veth device gateway
+-	MAC     string // The MAC address of the guest network device
+-	TapDev  string // The tap device name
+-	MTU     int    // The MTU value of the tap device
++	IP        string // The veth device IP
++	Mask      string // The veth device mask
++	Gateway   string // The veth device gateway
++	MAC       string // The MAC address of the guest network device
++	TapDev    string // The tap device name
++	MTU       int    // The MTU value of the tap device
++	DNSServer string // The nameserver of the container, empty if there is none
+ }
+ 
+ type BlockDevParams struct {
+diff --git a/pkg/unikontainers/unikernels/unikraft.go b/pkg/unikontainers/unikernels/unikraft.go
+index 6b3c9bdeb..00f915d93 100644
+--- a/pkg/unikontainers/unikernels/unikraft.go
++++ b/pkg/unikontainers/unikernels/unikraft.go
+@@ -27,6 +27,8 @@ import (
+ const UnikraftUnikernel string = "unikraft"
+ const UnikraftCompatVersion string = "0.16.1"
+ 
++const defaultDNSServer string = "8.8.8.8"
++
+ var ErrUndefinedVersion = errors.New("version is undefined, using default version")
+ var ErrVersionParsing = errors.New("failed to parse provided version, using default version")
+ 
+@@ -107,10 +109,14 @@ func (u *Unikraft) Init(data types.UnikernelParams) error {
+ 	u.Monitor = data.Monitor
+ 	u.Command = strings.Join(data.CmdLine, " ")
+ 
+-	return u.configureUnikraftArgs(data.Rootfs.Type, data.Net.IP, data.Net.Gateway, data.Net.Mask)
++	return u.configureUnikraftArgs(data.Rootfs.Type, data.Net.IP, data.Net.Gateway, data.Net.Mask, data.Net.DNSServer)
+ }
+ 
+-func (u *Unikraft) configureUnikraftArgs(rootFsType, ethDeviceIP, ethDeviceGateway, ethDeviceMask string) error {
++func (u *Unikraft) configureUnikraftArgs(rootFsType, ethDeviceIP, ethDeviceGateway, ethDeviceMask, dnsServer string) error {
++	if dnsServer == "" {
++		dnsServer = defaultDNSServer
++	}
++
+ 	setCompatArgs := func() {
+ 		u.Net.Address = "netdev.ipv4_addr=" + ethDeviceIP
+ 		u.Net.Gateway = "netdev.ipv4_gw_addr=" + ethDeviceGateway
+@@ -125,7 +131,7 @@ func (u *Unikraft) configureUnikraftArgs(rootFsType, ethDeviceIP, ethDeviceGatew
+ 	}
+ 
+ 	setCurrentArgs := func() {
+-		u.Net.Address = "netdev.ip=" + ethDeviceIP + "/24:" + ethDeviceGateway + ":8.8.8.8"
++		u.Net.Address = "netdev.ip=" + ethDeviceIP + "/24:" + ethDeviceGateway + ":" + dnsServer
+ 		switch rootFsType {
+ 		case "initrd":
+ 			// TODO: This needs better handling. We need to revisit this
+diff --git a/pkg/unikontainers/unikontainers.go b/pkg/unikontainers/unikontainers.go
+index 910358db3..8c101ed19 100644
+--- a/pkg/unikontainers/unikontainers.go
++++ b/pkg/unikontainers/unikontainers.go
+@@ -552,6 +552,10 @@ func (u *Unikontainer) buildMonitorSpec(rootfsParams types.RootfsParams, monRes
+ 	mSpec.ExecArgs = vmmArgs
+ 	mSpec.GuestParams = guest
+ 	mSpec.PreStartCmd = monRes.PreStartCmd
++	// Resolve the guest DNS server once, here in the builder shared by both the
++	// libcontainer and non-libcontainer paths, where the container mount
++	// sources are available.
++	mSpec.DNSServer = getDNSServer(u.Spec.Mounts)
+ 
+ 	return mSpec
+ }
+@@ -638,6 +642,8 @@ func (u *Unikontainer) Exec(metrics m.Writer) error {
+ 	}
+ 	metrics.Capture(m.TS16)
+ 	withTUNTAP := netArgs.IP != ""
++	// SetupNet does not resolve DNS; carry the server resolved at spec build.
++	netArgs.DNSServer = ms.DNSServer
+ 	unikernelParams.Net = netArgs
+ 	vmmArgs.Net = netArgs
+ 
+diff --git a/pkg/unikontainers/utils.go b/pkg/unikontainers/utils.go
+index 6fcf4b5fd..a2f1d1bb6 100644
+--- a/pkg/unikontainers/utils.go
++++ b/pkg/unikontainers/utils.go
+@@ -20,6 +20,7 @@ import (
+ 	"encoding/json"
+ 	"fmt"
+ 	"io"
++	"net"
+ 	"os"
+ 	"os/exec"
+ 	"path/filepath"
+@@ -375,3 +376,36 @@ func executeHook(hook specs.Hook, state []byte) error {
+ 
+ 	return nil
+ }
++
++func getDNSServer(mounts []specs.Mount) string {
++	resolvConf := ""
++	for _, mount := range mounts {
++		if filepath.Clean(mount.Destination) == "/etc/resolv.conf" {
++			resolvConf = mount.Source
++			break
++		}
++	}
++	if resolvConf == "" {
++		return ""
++	}
++
++	data, err := os.ReadFile(resolvConf)
++	if err != nil {
++		uniklog.Warnf("Failed to read %s: %v", resolvConf, err)
++		return ""
++	}
++
++	for _, line := range strings.Split(string(data), "\n") {
++		fields := strings.Fields(line)
++		if len(fields) < 2 || fields[0] != "nameserver" {
++			continue
++		}
++		addr := net.ParseIP(fields[1])
++		if addr != nil && addr.To4() != nil && !addr.IsLoopback() {
++			return addr.String()
++		}
++	}
++
++	uniklog.Warnf("no usable IPv4 nameserver found in %s; the guest will use the default DNS server", resolvConf)
++	return ""
++}
+diff --git a/pkg/unikontainers/utils_test.go b/pkg/unikontainers/utils_test.go
+index c335aca4f..3e8d57c0a 100644
+--- a/pkg/unikontainers/utils_test.go
++++ b/pkg/unikontainers/utils_test.go
+@@ -340,3 +340,80 @@ func TestLoadSpec(t *testing.T) {
+ 		assert.Contains(t, err.Error(), "failed to parse specification json", "Expected specific error message")
+ 	})
+ }
++
++func TestGetDNSServer(t *testing.T) {
++	tests := []struct {
++		name     string
++		content  string
++		expected string
++	}{
++		{
++			name:     "single nameserver",
++			content:  "nameserver 10.96.0.10\n",
++			expected: "10.96.0.10",
++		},
++		{
++			name:     "first nameserver is used",
++			content:  "search svc.cluster.local\nnameserver 10.96.0.10\nnameserver 8.8.4.4\noptions ndots:5\n",
++			expected: "10.96.0.10",
++		},
++		{
++			name:     "comments are ignored",
++			content:  "# nameserver 1.1.1.1\n\n   nameserver\t192.168.1.1  \n",
++			expected: "192.168.1.1",
++		},
++		{
++			name:     "loopback nameserver is skipped",
++			content:  "nameserver 127.0.0.11\nnameserver 1.1.1.1\n",
++			expected: "1.1.1.1",
++		},
++		{
++			name:     "IPv6 nameserver is skipped",
++			content:  "nameserver fd00::1\nnameserver 1.1.1.1\n",
++			expected: "1.1.1.1",
++		},
++		{
++			name:     "invalid entries are skipped",
++			content:  "nameserver\nnameserver not-an-ip\nnameserver 1.1.1.1\n", //nolint:dupword
++			expected: "1.1.1.1",
++		},
++		{
++			name:     "no usable nameserver",
++			content:  "search svc.cluster.local\nnameserver 127.0.0.53\n",
++			expected: "",
++		},
++	}
++
++	for _, tc := range tests {
++		t.Run(tc.name, func(t *testing.T) {
++			t.Parallel()
++			resolvConf := filepath.Join(t.TempDir(), "resolv.conf")
++			err := os.WriteFile(resolvConf, []byte(tc.content), 0600)
++			assert.NoError(t, err)
++			mounts := []specs.Mount{
++				{Destination: "/etc/hostname", Source: "/dummy/hostname"},
++				{Destination: "/etc/resolv.conf", Source: resolvConf},
++			}
++
++			assert.Equal(t, tc.expected, getDNSServer(mounts))
++		})
++	}
++
++	t.Run("no resolv.conf mount", func(t *testing.T) {
++		t.Parallel()
++		mounts := []specs.Mount{
++			{Destination: "/etc/hostname", Source: "/dummy/hostname"},
++		}
++
++		assert.Equal(t, "", getDNSServer(mounts))
++	})
++
++	t.Run("missing resolv.conf file", func(t *testing.T) {
++		t.Parallel()
++		mounts := []specs.Mount{
++			{Destination: "/etc/resolv.conf", Source: filepath.Join(t.TempDir(), "resolv.conf")},
++		}
++
++		assert.Equal(t, "", getDNSServer(mounts))
++	})
++}
+diff --git a/tests/e2e/test_cases.go b/tests/e2e/test_cases.go
+index 3b90a381e..e6b9dc8a7 100644
+--- a/tests/e2e/test_cases.go
++++ b/tests/e2e/test_cases.go
+@@ -472,6 +472,23 @@ func nerdctlTestCases() []containerTestArgs {
+ 			Skippable:      false,
+ 			TestFunc:       pingTest,
+ 		},
++		{
++			Image:          "harbor.nbfc.io/nubificus/urunc/dns-test-qemu-unikraft-initrd:latest",
++			Name:           "Qemu-unikraft-dns-external",
++			Devmapper:      false,
++			Seccomp:        true,
++			UID:            0,
++			GID:            0,
++			Groups:         []int64{},
++			Memory:         "",
++			Cli:            "",
++			Volumes:        []containerVolume{},
++			StaticNet:      false,
++			SideContainers: []string{},
++			Skippable:      true,
++			ExpectOut:      "github.com OK",
++			TestFunc:       matchTest,
++		},
+ 	}
+ }
+ 
