@@ -20,30 +20,24 @@ handler: urunc
 
 ## Configuration
 
-Create the configuration under `/var` with a Talos machine configuration patch, then set `URUNC_CONFIG_FILE` so both `urunc` and its containerd shim use it:
+On Talos Linux 1.14 and later, provide `/etc/urunc/config.toml` with an [`EtcFileConfig`](https://docs.siderolabs.com/talos/v1.14/reference/configuration/runtime/etcfileconfig):
 
 ```yaml
-machine:
-  files:
-    - path: /var/etc/urunc/config.toml
-      op: create
-      content: |
-        [log]
-        level = "info"
-        syslog = false
-
-        [extra_binaries.virtiofsd]
-        path = "/usr/local/bin/virtiofsd"
-        options = "--cache always --sandbox none"
----
 apiVersion: v1alpha1
-kind: EnvironmentConfig
-variables:
-  URUNC_CONFIG_FILE: /var/etc/urunc/config.toml
+kind: EtcFileConfig
+name: urunc/config.toml
+mode: 0o644
+contents: |
+  [log]
+  level = "info"
+  syslog = false
+
+  [extra_binaries.virtiofsd]
+  path = "/usr/local/bin/virtiofsd"
+  options = "--cache always --sandbox none"
 ```
 
-Talos restricts user-created machine files to `/var`, while urunc defaults to `/etc/urunc/config.toml`.
-The patch writes the file to the allowed location and overrides the default path; otherwise urunc logs a warning and uses defaults.
+The `name` is relative to `/etc`, so the document writes the file to urunc's default configuration path without an environment override.
 
 The extension installs monitor binaries under `/usr/local/bin`; set their paths in the TOML when overriding monitor configuration.
 A complete example is available in the upstream [`config.toml`](https://github.com/urunc-dev/urunc/blob/v0.8.0/deployment/urunc-deploy/config.toml).
