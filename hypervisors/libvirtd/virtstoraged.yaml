@@ -6,6 +6,9 @@ depends:
   - path: /etc/passwd
   - path: /etc/group
 container:
+  # Talos's D-Bus socket is a kubelet-only proxy, not a general system bus.
+  environment:
+    - DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/libvirt/no-dbus
   entrypoint: /usr/local/sbin/virtstoraged
   args:
     - --timeout
