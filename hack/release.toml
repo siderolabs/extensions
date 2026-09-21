@@ -20,6 +20,8 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
         title = "Component Updates"
         description = """\
 ctr: 2.2.9
+drbd: 9.3.4
+Linux firmware: 20260916
 """
 
 [make_deps]
