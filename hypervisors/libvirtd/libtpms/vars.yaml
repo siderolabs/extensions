@@ -1,0 +1,5 @@
+INTERNAL_PACKAGE: true
+# renovate: datasource=github-releases depName=stefanberger/libtpms
+LIBTPMS_VERSION: v0.10.2
+LIBTPMS_SHA256: edac03680f8a4a1c5c1d609a10e3f41e1a129e38ff5158f0c8deaedc719fb127
+LIBTPMS_SHA512: e30297289a03d4fefb2cdf44654d6f77719a021deb9b721f08d4a23e20706b903ef5e979ba05ad333d052cf35681ba5e143fb883bed0dc37626eca2807d0c01f

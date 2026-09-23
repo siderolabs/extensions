@@ -27,6 +27,28 @@ dependencies:
   - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/openssl:{{ .BUILD_ARG_PKGS }}"
     from: /usr/lib
     to: /rootfs/usr/local/lib
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/gnutls:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/bin/certtool
+    to: /rootfs/usr/local/bin/certtool
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libseccomp:{{ .BUILD_ARG_PKGS }}"
+    from: /usr/lib
+    to: /rootfs/usr/local/lib
+  - stage: libtpms
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: json-glib
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: swtpm
+    from: /usr/local
+    to: /rootfs/usr/local
+  # Partial runtime copies above do not include the libraries' license metadata.
+  - stage: libtpms
+    from: /usr/local/share/spdx/libtpms.spdx.json
+    to: /rootfs/usr/local/share/spdx/libtpms.spdx.json
+  - stage: json-glib
+    from: /usr/local/share/spdx/json-glib.spdx.json
+    to: /rootfs/usr/local/share/spdx/json-glib.spdx.json
   - stage: libxml2
     from: /rootfs
     to: /

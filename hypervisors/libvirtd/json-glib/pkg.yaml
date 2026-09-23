@@ -1,0 +1,41 @@
+name: json-glib
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: glib
+steps:
+  - sources:
+      - url: https://download.gnome.org/sources/json-glib/{{ regexReplaceAll "\\.[0-9]+$" .JSON_GLIB_VERSION "" }}/json-glib-{{ .JSON_GLIB_VERSION }}.tar.xz
+        destination: json-glib.tar.xz
+        sha256: "{{ .JSON_GLIB_SHA256 }}"
+        sha512: "{{ .JSON_GLIB_SHA512 }}"
+    prepare:
+      - |
+        tar -xf json-glib.tar.xz --strip-components=1
+        meson setup build \
+          --prefix=/usr/local \
+          --libdir=/usr/local/lib \
+          --buildtype=plain \
+          --wrap-mode=nodownload \
+          -Dintrospection=disabled \
+          -Ddocumentation=disabled \
+          -Dtests=false \
+          -Dconformance=false \
+          -Dinstalled_tests=false \
+          -Dnls=disabled
+    build:
+      - |
+        meson compile -C build
+    install:
+      - |
+        DESTDIR=/rootfs meson install --no-rebuild -C build
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/json-glib.spdx.json
+      version: {{ .JSON_GLIB_VERSION }}
+      # No JSON-GLib CPE was found in Grype or the NVD dictionary.
+      licenses:
+        - LGPL-2.1-or-later
+finalize:
+  - from: /rootfs
+    to: /

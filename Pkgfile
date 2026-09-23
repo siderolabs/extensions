@@ -1,4 +1,4 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.6.3
+# syntax = ghcr.io/siderolabs/bldr:v0.6.4
 
 format: v1alpha2
 
@@ -6,18 +6,18 @@ vars:
   CONTAINERD_VERSION: v2.3.5 # update this when updating PKGS version tag in Makefile
   LINUX_FIRMWARE_VERSION: "20260916" # update this when updating PKGS version tag in Makefile
   DRBD_DRIVER_VERSION: 9.3.4 # update this when updating PKGS version tag in Makefile
-  PX_FUSE_DRIVER_VERSION: 8b52ef67d261369cbc93f132db299e5dcf64ad7c # update this when updating PKGS version tag in Makefile
+  PX_FUSE_DRIVER_VERSION: 89758677301c91c9667559bb0a6b553f61ab17c1 # update this when updating PKGS version tag in Makefile
   ZFS_DRIVER_VERSION: 2.4.4 # update this when updating PKGS version tag in Makefile
   ZFS_TOOLS_SHA256: 2a3c70d55a37cc71618a95a60e81ad66530201eb118d37741dc92efcf848c8b1
   ZFS_TOOLS_SHA512: 8be81dedc0c0ec38728248151a33b8cbc78b042bc27a913279009bd735faa6149ad5b4a2db5811d25f4a03820dd398e14f59a4aec07f6bd4bc39405190c4e4ad
   UTIL_LINUX_VERSION: 2.42.2 # update this when updating TOOLS in Makefile
   UTIL_LINUX_SHA256: 03a05d3adf9602ef128f2da05b84b3205ce60c351e5737c0370f74000679ce8a
   UTIL_LINUX_SHA512: 7415add0be2930654e322830808dde03ff6d511bd357f0679e6b6287a13ca79fe58ce4ac05edef86b76fb381b3a36ca2da9d3c31b5dc0a1d889c203156a57277
-  ENA_VERSION: 2.17.2 # update this when updating PKGS version tag in Makefile
-  TENSTORRENT_VERSION: 2.10.0 # update this when updating PKGS version tag in Makefile
+  ENA_VERSION: 2.17.3 # update this when updating PKGS version tag in Makefile
+  TENSTORRENT_VERSION: 2.11.0 # update this when updating PKGS version tag in Makefile
   HAILORT_VERSION: 4.24.0 # update this when updating PKGS version tag in Makefile
   MELLANOX_MSFTFLINT_VERSION: 4.34.1-4 # update this when updating PKGS version tag in Makefile
-  XDMA_VERSION: 8721136 # update this when updating PKGS version tag in Makefile
+  XDMA_VERSION: b846609 # update this when updating PKGS version tag in Makefile
 
   # renovate: datasource=git-tags extractVersion=^libtiprc-(?<version>.*)$ depName=git://git.linux-nfs.org/projects/steved/libtirpc.git
   LIBTIRPC_VERSION: 1-3-6
