@@ -1,0 +1,50 @@
+name: swtpm
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: glib
+  - stage: json-glib
+  - stage: libtpms
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/libseccomp:{{ .BUILD_ARG_PKGS }}"
+steps:
+  - sources:
+      - url: https://github.com/stefanberger/swtpm/archive/refs/tags/{{ .SWTPM_VERSION }}.tar.gz
+        destination: swtpm.tar.gz
+        sha256: "{{ .SWTPM_SHA256 }}"
+        sha512: "{{ .SWTPM_SHA512 }}"
+    env:
+      BUILD_DATE: "1"
+    prepare:
+      - |
+        tar -xzf swtpm.tar.gz --strip-components=1
+        NOCONFIGURE=1 ./autogen.sh
+
+        # Keep immutable configuration/helpers in the extension and CA state in /var.
+        ./configure \
+          --prefix=/usr/local \
+          --libdir=/usr/local/lib \
+          --sysconfdir=/usr/local/etc/swtpm \
+          --localstatedir=/var \
+          --with-tss-user=root \
+          --with-tss-group=root \
+          --without-cuse \
+          --without-selinux \
+          --disable-tests
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        make install DESTDIR=/rootfs
+        rm -rf /rootfs/usr/local/share/man /rootfs/usr/local/libexec/installed-tests
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/swtpm.spdx.json
+      version: {{ .SWTPM_VERSION | trimPrefix "v" }}
+      cpes:
+        - cpe:2.3:a:swtpm_project:swtpm:{{ .SWTPM_VERSION | trimPrefix "v" }}:*:*:*:*:*:*:*
+      licenses:
+        - BSD-3-Clause
+finalize:
+  - from: /rootfs
+    to: /

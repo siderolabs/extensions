@@ -1,0 +1,5 @@
+INTERNAL_PACKAGE: true
+# renovate: datasource=github-releases depName=stefanberger/swtpm
+SWTPM_VERSION: v0.10.2
+SWTPM_SHA256: f61cf6f1e9bbcb4cefb30b70cafaf1c4df54c6961e65cfa63830e8ad0e220134
+SWTPM_SHA512: 412034286eab4245127cf063ec637e3ca8cabcd8b58692d55b4eab49f4e9519da3107c104b771d2a097a09ffacd78aa825d0882558eff3128d7f4d2af7871574
