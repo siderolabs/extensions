@@ -21,6 +21,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
         description = """\
 drbd: 9.3.4
 Linux firmware: 20260916
+metal-agent: 0.1.7
 """
 
 [make_deps]
