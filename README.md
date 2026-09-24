@@ -71,6 +71,7 @@ tiers based on support level:
 | [soci-snapshotter](container-runtime/soci-snapshotter) | :yellow_square: extra | [ghcr.io/siderolabs/soci-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/soci-snapshotter) | `v0.15.0` |  This system extension provides AWS SOCI Snapshotter using containerd's runtime handler. |
 | [spin](container-runtime/spin) | :yellow_square: extra | [ghcr.io/siderolabs/spin](https://github.com/siderolabs/extensions/pkgs/container/spin) | `v0.25.1` |  This system extension provides support for spin runtime (WebAssembly) containers. |
 | [stargz-snapshotter](container-runtime/stargz-snapshotter) | :green_square: core | [ghcr.io/siderolabs/stargz-snapshotter](https://github.com/siderolabs/extensions/pkgs/container/stargz-snapshotter) | `v0.18.2` |  This system extension provides Stargz Snapshotter using containerd's runtime handler. |
+| [urunc](container-runtime/urunc) | :yellow_square: extra | [ghcr.io/siderolabs/urunc](https://github.com/siderolabs/extensions/pkgs/container/urunc) | `0.8.0` |  This system extension provides urunc using containerd's runtime handler. |
 | [wasmedge](container-runtime/wasmedge) | :yellow_square: extra | [ghcr.io/siderolabs/wasmedge](https://github.com/siderolabs/extensions/pkgs/container/wasmedge) | `v0.6.1` |  This system extension provides support for WasmEdge runtime (WebAssembly) containers. |
 | [youki](container-runtime/youki) | :white_large_square: contrib | [ghcr.io/siderolabs/youki](https://github.com/siderolabs/extensions/pkgs/container/youki) | `0.7.0` |  This system extension provides youki using containerd's runtime handler. |
 
@@ -233,7 +234,7 @@ The rough flow should look like the following:
 To build and push an extension to a local registry use:
 
 ```bash
-make <extension-name> PUSH=true REGISTRY=127.0.0.1:5005 USERNAME=<username> PUSH=true
+make <extension-name> PUSH=true REGISTRY=127.0.0.1:5005 USERNAME=<username>
 ```
 
 Instructions on how to set up the builder can be found [here](https://docs.siderolabs.com/talos/latest/build-and-extend-talos/custom-images-and-development/developing-talos#prepare)
