@@ -1,0 +1,2 @@
+VERSION: "{{ .SYSBOX_VERSION }}"
+TIER: "contrib"
