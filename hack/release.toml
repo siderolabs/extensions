@@ -33,6 +33,7 @@ kata-containers: 4.1.0
 libvirt: 12.7.0
 libxml2: 2.15.4
 Linux firmware: 20260916
+metal-agent: 0.1.7
 nebula: 1.11.1
 netbird: 0.78.1
 newt: 1.16.0
