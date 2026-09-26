@@ -94,6 +94,8 @@ steps:
     prepare:
       - |
         tar -xf libvirt.tar.xz --strip-components=1
+        patch -p1 < /pkg/patches/0001-qemu-cgroup-allow-block-device-backing-emulator-TPM-state.patch
+        patch -p1 < /pkg/patches/0002-qemu-tpm-don-t-unlink-block-device-backing-TPM-state.patch
       - |
         export PATH=$PATH:/usr/local/bin
 

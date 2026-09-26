@@ -1,0 +1,24 @@
+From: Neil Levien <neil.levien@siderolabs.com>
+Subject: [PATCH 2/2] qemu: tpm: don't unlink block device backing TPM state
+
+Removing the state unlinked the file source. For a block device that
+removes the node, not the state. Skip it, as for disks and nvram.
+
+Signed-off-by: Neil Levien <neil.levien@siderolabs.com>
+---
+diff --git a/src/qemu/qemu_tpm.c b/src/qemu/qemu_tpm.c
+--- a/src/qemu/qemu_tpm.c
++++ b/src/qemu/qemu_tpm.c
+@@ -263,6 +263,12 @@
+ 
+     switch (tpm->data.emulator.source_type) {
+     case VIR_DOMAIN_TPM_SOURCE_TYPE_FILE: {
++        struct stat sb;
++
++        /* a block device holds the state; its node is not ours to remove */
++        if (stat(source_path, &sb) == 0 && S_ISBLK(sb.st_mode))
++            break;
++
+         if (unlink(source_path) && errno != ENOENT)
+             virReportSystemError(errno,
+                                  _("Cannot delete file '%1$s'"),

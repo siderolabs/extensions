@@ -1,0 +1,25 @@
+From: Neil Levien <neil.levien@siderolabs.com>
+Subject: [PATCH 1/2] qemu: cgroup: allow block device backing emulator TPM state
+
+The emulator's <source type='file'> may be a block device. swtpm runs
+in the domain cgroup, but qemuSetupTPMCgroup only handled passthrough,
+so the first TPM command fails with EPERM.
+
+Signed-off-by: Neil Levien <neil.levien@siderolabs.com>
+---
+diff --git a/src/qemu/qemu_cgroup.c b/src/qemu/qemu_cgroup.c
+--- a/src/qemu/qemu_cgroup.c
++++ b/src/qemu/qemu_cgroup.c
+@@ -411,6 +411,12 @@
+     case VIR_DOMAIN_TPM_TYPE_PASSTHROUGH:
+         return qemuSetupChrSourceCgroup(vm, dev->data.passthrough.source);
+     case VIR_DOMAIN_TPM_TYPE_EMULATOR:
++        /* swtpm runs in the domain cgroup; its state file may be a block device */
++        if (dev->data.emulator.source_type == VIR_DOMAIN_TPM_SOURCE_TYPE_FILE &&
++            dev->data.emulator.source_path)
++            return qemuCgroupAllowDevicePath(vm, dev->data.emulator.source_path,
++                                             VIR_CGROUP_DEVICE_RW, false);
++        break;
+     case VIR_DOMAIN_TPM_TYPE_EXTERNAL:
+     case VIR_DOMAIN_TPM_TYPE_LAST:
+         break;
