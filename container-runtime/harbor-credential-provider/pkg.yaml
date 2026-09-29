@@ -31,7 +31,7 @@ steps:
           -o ./dist/harbor-credential-provider \
           -ldflags "-s -w \
                    -X main.version={{ .VERSION }}" \
-          ./cmd/credential-provider-harbor
+          ./cmd/harbor-credential-provider
     install:
       - install -D -m 0755
         ${GOPATH}/src/github.com/container-registry/harbor-workload-identity-federation/dist/harbor-credential-provider

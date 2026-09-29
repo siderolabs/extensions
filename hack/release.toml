@@ -20,6 +20,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
         title = "Component Updates"
         description = """\
 ctr: 2.3.7
+harbor-credential-provider: 0.2.0
 """
 
 [make_deps]
