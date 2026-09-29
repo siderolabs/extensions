@@ -28,6 +28,7 @@ drbd: 9.3.4
 fuse: 3.18.3
 glib: 2.90.0
 gvisor: 20260831.0
+harbor-credential-provider: 0.2.0
 hyperv-guest-agent: 6.18.50
 kata-containers: 4.1.0
 libvirt: 12.7.0

@@ -1,7 +1,7 @@
 # Kubelet Harbor Credential Provider extension
 
 This extension provides the `harbor-credential-provider` binary (built from
-[container-registry/harbor-workload-identity-federation](https://github.com/container-registry/harbor-workload-identity-federation/tree/main/cmd/credential-provider-harbor)),
+[container-registry/harbor-workload-identity-federation](https://github.com/container-registry/harbor-workload-identity-federation/tree/main/cmd/harbor-credential-provider)),
 which can be executed by Kubelet to obtain short-lived credentials for pulling container images
 from a [Harbor](https://goharbor.io/) / [8gears Container Registry](https://8gears.container-registry.com/)
 instance configured for [Workload Identity Federation](https://github.com/container-registry/harbor-workload-identity-federation).
