@@ -329,6 +329,14 @@ spec:
 ---
 kind: common.Renovate
 spec:
+  customDatasources:
+    # The upstream release tags are named libnlX_Y_Z, so the tag name is rewritten into the
+    # dotted version the source URL and the SBOM use.
+    libnl:
+      defaultRegistryUrlTemplate: https://api.github.com/repos/thom311/libnl/releases
+      format: json
+      transformTemplates:
+        - '{ "releases": $map($, function($r) { { "version": $replace($substringAfter($r.tag_name, "libnl"), "_", ".") } }) }'
   packageRules:
     - matchPackageNames:
         - nvidia/open-gpu-kernel-modules

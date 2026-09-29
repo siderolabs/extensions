@@ -1,0 +1,41 @@
+name: libnl
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/thom311/libnl/releases/download/libnl{{ .LIBNL_VERSION | replace "." "_" }}/libnl-{{ .LIBNL_VERSION }}.tar.gz
+        destination: libnl.tar.gz
+        sha256: "{{ .LIBNL_SHA256 }}"
+        sha512: "{{ .LIBNL_SHA512 }}"
+    prepare:
+      - |
+        tar -xzf libnl.tar.gz --strip-components=1
+      - |
+        # libvirt links libnl-3 and libnl-route-3 only. The command line tools are not
+        # shipped, and their config files under etc are dropped with the rest of share.
+        ./configure \
+          --prefix=/usr/local \
+          --libdir=/usr/local/lib \
+          --disable-static \
+          --enable-cli=no
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        make install DESTDIR=/rootfs
+
+        rm -rf /rootfs/usr/local/share/man
+        rm -f /rootfs/usr/local/lib/*.la
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/libnl.spdx.json
+      version: {{ .LIBNL_VERSION }}
+      cpes:
+        - cpe:2.3:a:libnl_project:libnl:{{ .LIBNL_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - LGPL-2.1-only
+finalize:
+  - from: /rootfs
+    to: /

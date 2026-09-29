@@ -8,6 +8,15 @@
         ":semanticCommitScopeDisabled",
         "schedule:nonOfficeHours"
     ],
+    "customDatasources": {
+        "libnl": {
+            "defaultRegistryUrlTemplate": "https://api.github.com/repos/thom311/libnl/releases",
+            "format": "json",
+            "transformTemplates": [
+                "{ \"releases\": $map($, function($r) { { \"version\": $replace($substringAfter($r.tag_name, \"libnl\"), \"_\", \".\") } }) }"
+            ]
+        }
+    },
     "customManagers": [
         {
             "customType": "regex",

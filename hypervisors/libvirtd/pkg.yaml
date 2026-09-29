@@ -49,6 +49,9 @@ dependencies:
   - stage: json-glib
     from: /usr/local/share/spdx/json-glib.spdx.json
     to: /rootfs/usr/local/share/spdx/json-glib.spdx.json
+  - stage: libnl
+    from: /usr/local/share/spdx/libnl.spdx.json
+    to: /rootfs/usr/local/share/spdx/libnl.spdx.json
   - stage: libxml2
     from: /rootfs
     to: /
@@ -71,6 +74,10 @@ dependencies:
     to: /rootfs/usr/local/lib
   - stage: numactl
   - stage: numactl
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
+  - stage: libnl
+  - stage: libnl
     from: /usr/local/lib
     to: /rootfs/usr/local/lib
   - stage: qemu
@@ -137,7 +144,7 @@ steps:
           -Dpolkit=disabled \
           -Dreadline=disabled \
           -Dlibpcap=disabled \
-          -Dlibnl=disabled \
+          -Dlibnl=enabled \
           -Dnetcf=disabled \
           -Dudev=disabled \
           -Dwireshark_dissector=disabled \
