@@ -1,3 +1,75 @@
+## [Talos System Extensions 1.14.2](https://github.com/siderolabs/extensions/releases/tag/v1.14.2) (2026-09-29)
+
+Welcome to the v1.14.2 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+drbd: 9.3.4
+Linux firmware: 20260916
+metal-agent: 0.1.7
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Jarrad S
+* Joakim Nohlgård
+* Neil Levien
+* Utku Ozdemir
+
+### Changes
+<details><summary>6 commits</summary>
+<p>
+
+* [`23b0e11`](https://github.com/siderolabs/extensions/commit/23b0e111efdd09397915f733a4198ad26e432ea2) fix(libvirtd): allow block device behind emulator TPM state
+* [`7356857`](https://github.com/siderolabs/extensions/commit/7356857ec171dd269d7a0d1d07c9bac02fb0f1c0) chore: bump metal-agent version to v0.1.7
+* [`92eefc4`](https://github.com/siderolabs/extensions/commit/92eefc4bb9a89a1b052fe629952380b68a2292cf) feat: add software TPM support to libvirtd
+* [`fca5a04`](https://github.com/siderolabs/extensions/commit/fca5a041693d94c15ac05c8db30d195e686a5075) feat: update DRBD to 9.3.4 & Linux firmware
+* [`efdf8fe`](https://github.com/siderolabs/extensions/commit/efdf8fe772cc24b78f08c6430a87378788cc08c8) fix: point to non-existent dbus path for virtstoraged
+* [`88705cc`](https://github.com/siderolabs/extensions/commit/88705cc043bc99f3bf303944735e209ed54b099c) chore: sync tools and pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>12 commits</summary>
+<p>
+
+* [`6c312e4`](https://github.com/siderolabs/pkgs/commit/6c312e4b77817a9c1bd4975a532b3fd23d33430c) fix: add a patch to fix booting on Apple hardware
+* [`e1a76c7`](https://github.com/siderolabs/pkgs/commit/e1a76c744dda5c49f3824cdbfb9428cb1c662a55) feat: update Linux to 6.18.54, runc to 1.5.2
+* [`3f054f6`](https://github.com/siderolabs/pkgs/commit/3f054f64acb35457a0a2bf4df3dd596b61c15450) feat: enable CONFIG_CRYPTO_ECC, CONFIG_CRYPTO_ECDH on arm64 to match amd64
+* [`cc717ed`](https://github.com/siderolabs/pkgs/commit/cc717ed354b9129dc2373d2fa9d54ad4aaf46b2c) feat: enable CONFIG_BLK_WBT
+* [`cc32ceb`](https://github.com/siderolabs/pkgs/commit/cc32ceb3e8a23e225998ecc92223bb5008ae5f98) feat: update containerd to 2.3.6
+* [`b9f707f`](https://github.com/siderolabs/pkgs/commit/b9f707ff38a4c17ed2f0f577c2cf37c13f32a58f) feat: update Linux to 6.18.53
+* [`cf70858`](https://github.com/siderolabs/pkgs/commit/cf7085828281c30aef8d9c6375f740d452bc801a) fix: add missing sboms for swtpm
+* [`7f22731`](https://github.com/siderolabs/pkgs/commit/7f22731f041b5d6f0130a72cc813e5fe28a6f495) feat: enable CONFIG_MACSEC in the kernel
+* [`3e199fb`](https://github.com/siderolabs/pkgs/commit/3e199fb3ade42a84bc219d4279f39ce9fc00d96b) feat: add swtpm
+* [`31af1a6`](https://github.com/siderolabs/pkgs/commit/31af1a6be2952d81dcb8b60c26e7786a60eb2a1f) feat: update DRBD & Linux firmware
+* [`612628d`](https://github.com/siderolabs/pkgs/commit/612628d159fc1b19c341a2cfd42db80313f11b83) feat: update Linux to 6.18.52
+* [`ed28ebb`](https://github.com/siderolabs/pkgs/commit/ed28ebb9efc5bf177abf92655a0d4719792ca35b) chore: sync tools with release-1.14
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`9776960`](https://github.com/siderolabs/tools/commit/9776960bd8b0b0c3b2938e1e4c85c5a5700bb2ab) feat: update pcre to 10.48
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.14.0-25-gf694e1b -> v1.14.0-37-g6c312e4
+* **github.com/siderolabs/tools**  v1.14.0-7-ga404efb -> v1.14.0-8-g9776960
+
+Previous release can be found at [v1.14.1](https://github.com/siderolabs/extensions/releases/tag/v1.14.1)
+
 ## [Talos System Extensions 1.14.1](https://github.com/siderolabs/extensions/releases/tag/v1.14.1) (2026-09-15)
 
 Welcome to the v1.14.1 release of Talos System Extensions!
