@@ -46,6 +46,7 @@ spec:
     - mei
     - mellanox-mstflint
     - metal-agent
+    - msr
     - multipath-tools
     - nebula
     - netbird
