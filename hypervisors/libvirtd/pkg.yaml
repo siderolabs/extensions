@@ -111,6 +111,7 @@ steps:
           --prefix=/usr/local \
           --localstatedir=/var \
           --sysconfdir=/var/libvirtd/etc \
+          -Dchrdev_lock_files=/var/run/lock \
           -Dinit_script=none \
           -Ddocs=disabled \
           -Dtests=disabled \
