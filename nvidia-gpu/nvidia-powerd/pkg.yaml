@@ -1,0 +1,57 @@
+name: nvidia-powerd
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  # {{ if eq .ARCH "x86_64" }} Evaluated by bldr before parsing YAML.
+  - stage: nvidia-powerd-dbus
+    from: /rootfs/usr/bin/dbus-daemon
+    to: /rootfs/usr/local/lib/containers/nvidia-powerd/usr/bin/dbus-daemon
+  - stage: nvidia-powerd-dbus
+    from: /rootfs/usr/lib
+    to: /rootfs/usr/local/lib/containers/nvidia-powerd/usr/lib
+  - stage: nvidia-powerd-expat
+    from: /rootfs/usr/lib
+    to: /rootfs/usr/local/lib/containers/nvidia-powerd/usr/lib
+  - stage: nvidia-powerd-dbus
+    from: /rootfs/usr/share/licenses/nvidia-powerd-dbus
+    to: /rootfs/usr/local/lib/containers/nvidia-powerd/usr/share/licenses/nvidia-powerd-dbus
+  - stage: nvidia-powerd-expat
+    from: /rootfs/usr/share/licenses/nvidia-powerd-expat
+    to: /rootfs/usr/local/lib/containers/nvidia-powerd/usr/share/licenses/nvidia-powerd-expat
+  - stage: nvidia-powerd-dbus
+    from: /rootfs/usr/share/spdx/nvidia-powerd-dbus.spdx.json
+    to: /rootfs/usr/local/share/spdx/nvidia-powerd-dbus.spdx.json
+  - stage: nvidia-powerd-expat
+    from: /rootfs/usr/share/spdx/nvidia-powerd-expat.spdx.json
+    to: /rootfs/usr/local/share/spdx/nvidia-powerd-expat.spdx.json
+  - stage: nvidia-powerd-wrapper
+  # {{ end }} Evaluated by bldr before parsing YAML.
+steps:
+  - prepare:
+      - |
+        mkdir -p /rootfs
+  # {{ if eq .ARCH "x86_64" }} Evaluated by bldr before parsing YAML.
+  - install:
+      - |
+        service=/rootfs/usr/local/lib/containers/nvidia-powerd
+        install -D /pkg/files/system.conf "${service}/etc/dbus-1/system.conf"
+        mkdir -p "${service}/run/nvidia-powerd" "${service}/dev"
+        printf 'root:x:0:0:root:/root:/sbin/nologin\n' > "${service}/etc/passwd"
+        printf 'root:x:0:\n' > "${service}/etc/group"
+        install -D /pkg/nvidia-powerd.yaml /rootfs/usr/local/etc/containers/nvidia-powerd.yaml
+        # Only runtime libraries are needed in the service container.
+        rm -rf "${service}/usr/lib/pkgconfig"
+        rm -f "${service}/usr/lib/"*.a "${service}/usr/lib/"*.la
+  # {{ end }} Evaluated by bldr before parsing YAML.
+  - test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

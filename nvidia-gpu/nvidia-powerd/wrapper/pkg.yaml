@@ -1,0 +1,19 @@
+name: nvidia-powerd-wrapper
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - prepare:
+      - |
+        cp /pkg/*.go /pkg/go.mod .
+    build:
+      - |
+        GOWORK=off CGO_ENABLED=0 go test ./...
+        GOWORK=off CGO_ENABLED=0 go build -trimpath -o nvidia-powerd-wrapper .
+    install:
+      - |
+        install -D nvidia-powerd-wrapper /rootfs/usr/local/lib/containers/nvidia-powerd/nvidia-powerd-wrapper
+finalize:
+  - from: /rootfs
+    to: /rootfs

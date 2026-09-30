@@ -1,0 +1,36 @@
+name: nvidia-powerd
+container:
+  entrypoint: /nvidia-powerd-wrapper
+  security:
+    writeableRootfs: true
+    writeableSysfs: true
+  mounts:
+    # Keep /dev/log private while making NVIDIA device discovery possible.
+    - source: /dev
+      destination: /host/dev
+      type: bind
+      options: [rbind, rshared, rw]
+    - source: /usr/local/bin/nvidia-powerd
+      destination: /usr/bin/nvidia-powerd
+      type: bind
+      options: [bind, ro]
+    # Reuse the toolkit's matching NVIDIA userspace and glibc runtime.
+    - source: /usr/local/lib
+      destination: /usr/local/lib
+      type: bind
+      options: [bind, ro]
+    - source: /sys
+      destination: /sys
+      type: bind
+      options: [rbind, rshared, rw]
+    - source: /proc/driver/nvidia
+      destination: /proc/driver/nvidia
+      type: bind
+      options: [bind, ro]
+depends:
+  - service: udevd
+  - path: /dev/nvidiactl
+  - path: /dev/cpu/0/msr
+  - path: /usr/local/bin/nvidia-powerd
+  - path: /usr/local/lib/ld-linux-x86-64.so.2
+restart: always
