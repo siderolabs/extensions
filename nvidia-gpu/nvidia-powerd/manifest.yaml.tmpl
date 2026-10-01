@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: nvidia-powerd
+  version: "{{ .VERSION }}"
+  author: Francisco Facioni
+  description: |
+    [{{ .TIER }}] This system extension runs NVIDIA Dynamic Boost with a private D-Bus service.
+    It requires matching NVIDIA kernel and toolkit extensions and native CPU MSR access on Intel systems.
+  compatibility:
+    talos:
+      version: ">= v1.14.0-beta.1"

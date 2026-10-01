@@ -1,0 +1,52 @@
+name: nvidia-powerd-dbus
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: glibc-toolchain
+  - stage: glibc
+    from: /rootfs
+    to: /
+  - stage: nvidia-powerd-expat
+    from: /rootfs
+    to: /sysroot
+steps:
+  - sources:
+      - url: https://dbus.freedesktop.org/releases/dbus/dbus-{{ .POWERD_DBUS_VERSION }}.tar.xz
+        destination: dbus.tar.xz
+        sha256: {{ .POWERD_DBUS_SHA256 }}
+        sha512: {{ .POWERD_DBUS_SHA512 }}
+    env:
+      CC: /usr/bin/meson-glibc-clang
+      CFLAGS: -O2 -fstack-protector-strong
+      LDFLAGS: -Wl,-z,relro,-z,now
+      PKG_CONFIG_LIBDIR: /sysroot/usr/lib/pkgconfig
+      PKG_CONFIG_SYSROOT_DIR: /sysroot
+    prepare:
+      - |
+        tar -xf dbus.tar.xz --strip-components=1
+        install -m 0755 /pkg/files/meson-glibc-clang /usr/bin/meson-glibc-clang
+        mkdir -p /lib64
+        ln -sf /usr/local/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
+        meson setup build --prefix=/usr --libdir=/usr/lib --buildtype=plain --wrap-mode=nodownload \
+          -Dapparmor=disabled -Dselinux=disabled -Dlibaudit=disabled -Dsystemd=disabled \
+          -Dx11_autolaunch=disabled -Dlaunchd=disabled -Dmodular_tests=disabled \
+          -Dinstalled_tests=false -Ddoxygen_docs=disabled -Dducktype_docs=disabled \
+          -Dxml_docs=disabled -Dqt_help=disabled -Dtraditional_activation=false -Duser_session=false
+        grep -q '^#define HAVE_UNISTD_H 1' build/config.h
+    build:
+      - |
+        meson compile -C build
+    install:
+      - |
+        DESTDIR=/rootfs meson install --no-rebuild -C build
+        install -D COPYING /rootfs/usr/share/licenses/nvidia-powerd-dbus/COPYING
+    sbom:
+      outputPath: /rootfs/usr/share/spdx/nvidia-powerd-dbus.spdx.json
+      version: {{ .POWERD_DBUS_VERSION }}
+      cpes:
+        - cpe:2.3:a:freedesktop:dbus:{{ .POWERD_DBUS_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - AFL-2.1 OR GPL-2.0-or-later
+finalize:
+  - from: /rootfs
+    to: /rootfs

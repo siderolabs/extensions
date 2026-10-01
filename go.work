@@ -6,4 +6,5 @@ use (
 	./internal/grype-scan
 	./nvidia-gpu/nvidia-container-toolkit/nvidia-persistenced-wrapper
 	./nvidia-gpu/nvidia-fabricmanager/nvidia-fabricmanager-wrapper
+	./nvidia-gpu/nvidia-powerd/wrapper
 )

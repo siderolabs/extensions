@@ -1,0 +1,41 @@
+name: nvidia-powerd-expat
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: glibc-toolchain
+  - stage: glibc
+    from: /rootfs
+    to: /
+steps:
+  - sources:
+      - url: https://github.com/libexpat/libexpat/releases/download/R_{{ .POWERD_EXPAT_VERSION | replace "." "_" }}/expat-{{ .POWERD_EXPAT_VERSION }}.tar.xz
+        destination: expat.tar.xz
+        sha256: {{ .POWERD_EXPAT_SHA256 }}
+        sha512: {{ .POWERD_EXPAT_SHA512 }}
+    env:
+      CC: glibc-clang
+      CFLAGS: -O2 -fstack-protector-strong
+      LDFLAGS: -Wl,-z,relro,-z,now
+    prepare:
+      - |
+        tar -xf expat.tar.xz --strip-components=1
+        mkdir -p /lib64
+        ln -sf /usr/local/lib/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2
+        ./configure --prefix=/usr --libdir=/usr/lib --disable-static --without-xmlwf --without-examples --without-tests
+    build:
+      - |
+        make -j $(nproc)
+    install:
+      - |
+        make DESTDIR=/rootfs install
+        install -D COPYING /rootfs/usr/share/licenses/nvidia-powerd-expat/COPYING
+    sbom:
+      outputPath: /rootfs/usr/share/spdx/nvidia-powerd-expat.spdx.json
+      version: {{ .POWERD_EXPAT_VERSION }}
+      cpes:
+        - cpe:2.3:a:libexpat:expat:{{ .POWERD_EXPAT_VERSION }}:*:*:*:*:*:*:*
+      licenses:
+        - MIT
+finalize:
+  - from: /rootfs
+    to: /rootfs

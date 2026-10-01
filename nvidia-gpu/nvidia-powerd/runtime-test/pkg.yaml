@@ -1,0 +1,57 @@
+name: nvidia-powerd-runtime-test
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - stage: nvidia-powerd
+    from: /rootfs/usr/local/lib/containers/nvidia-powerd
+    to: /test-root
+  - stage: glibc
+    from: /rootfs
+    to: /test-root
+  - stage: nvidia-powerd-dbus
+    from: /rootfs/usr/bin/dbus-send
+    to: /test-root/usr/bin/dbus-send
+steps:
+  - test:
+      - |
+        printf '0123456789abcdef0123456789abcdef\n' > /test-root/etc/machine-id
+        mkdir -p /test-root/run/nvidia-powerd
+        # Talos/containerd supplies this device in the real service container.
+        mknod -m 0666 /test-root/dev/null c 1 3
+
+        chroot /test-root /usr/local/lib/ld-linux-x86-64.so.2 --library-path /usr/lib:/usr/local/lib \
+          /usr/bin/dbus-daemon --nofork --nopidfile --config-file=/etc/dbus-1/system.conf &
+        bus_pid=$!
+        trap 'kill "$bus_pid" 2>/dev/null || true; wait "$bus_pid" || true' EXIT
+
+        ready=false
+        for attempt in $(seq 1 100); do
+          if test -S /test-root/run/nvidia-powerd/system_bus_socket; then
+            ready=true
+            break
+          fi
+          kill -0 "$bus_pid"
+          sleep 0.1
+        done
+        test "$ready" = true
+
+        export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/nvidia-powerd/system_bus_socket
+        chroot /test-root /usr/local/lib/ld-linux-x86-64.so.2 --library-path /usr/lib:/usr/local/lib \
+          /usr/bin/dbus-send --system --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus \
+          org.freedesktop.DBus.RequestName string:nvidia.powerd.server uint32:0 | grep -q 'uint32 1'
+
+        if chroot /test-root /usr/local/lib/ld-linux-x86-64.so.2 --library-path /usr/lib:/usr/local/lib \
+          /usr/bin/dbus-send --system --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus \
+          org.freedesktop.DBus.RequestName string:unrelated.test uint32:0 > /tmp/denied.log 2>&1; then
+          echo 'private bus allowed an unexpected service name' >&2
+          exit 1
+        fi
+        grep -q 'AccessDenied' /tmp/denied.log
+
+  - install:
+      - |
+        touch /passed
+finalize:
+  - from: /passed
+    to: /passed

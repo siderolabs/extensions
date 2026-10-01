@@ -1,0 +1,5 @@
+INTERNAL_PACKAGE: true
+# renovate: datasource=gitlab-tags depName=desktop/dbus registryUrl=https://gitlab.freedesktop.org extractVersion=^dbus-(?<version>.*)$
+POWERD_DBUS_VERSION: 1.16.2
+POWERD_DBUS_SHA256: 0ba2a1a4b16afe7bceb2c07e9ce99a8c2c3508e5dec290dbb643384bd6beb7e2
+POWERD_DBUS_SHA512: 5c26f52d85984bb9ae1dde8d7e73921eacbdf020a61ff15f00a4c240cb38a121553ee04bd66e62b28425ff9bc50f4f5e15135166573ac0888332a01a0db1faa2
