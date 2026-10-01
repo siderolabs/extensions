@@ -1,3 +1,67 @@
+## [Talos System Extensions 1.13.11](https://github.com/siderolabs/extensions/releases/tag/v1.13.11) (2026-10-01)
+
+Welcome to the v1.13.11 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ctr: 2.2.9
+drbd: 9.3.4
+Linux firmware: 20260916
+
+
+### Contributors
+
+* Andrey Smirnov
+* Maja Bojarska
+* Noel Georgi
+
+### Changes
+<details><summary>2 commits</summary>
+<p>
+
+* [`59ec93c`](https://github.com/siderolabs/extensions/commit/59ec93c2ca13453b627a918f2858be3b2ed175f5) feat: update DRBD to 9.3.4 & Linux firmware
+* [`ab2a11d`](https://github.com/siderolabs/extensions/commit/ab2a11dd8948effd7bea67a1700afe3143c31a47) feat: bring in latest tools/pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>10 commits</summary>
+<p>
+
+* [`642a01b`](https://github.com/siderolabs/pkgs/commit/642a01b7744a6cd35ee0ea16f38a87a6e9fdadec) feat: update containerd to 2.2.9
+* [`3016b61`](https://github.com/siderolabs/pkgs/commit/3016b6144996eb872c0284bd7100bc5f570a1828) fix: add a patch to fix booting on Apple hardware
+* [`889ec2b`](https://github.com/siderolabs/pkgs/commit/889ec2b6772f180a9029f8bc7a945a39f710d6c9) feat: update Linux to 6.18.54
+* [`b554743`](https://github.com/siderolabs/pkgs/commit/b554743a52b54a6139e0468c76dde0ce7e00e417) feat: update Linux to 6.18.53
+* [`574809b`](https://github.com/siderolabs/pkgs/commit/574809b890bc160a3f1377a51440c8d837adcd2c) feat: update DRBD & Linux firmware
+* [`6f29f5d`](https://github.com/siderolabs/pkgs/commit/6f29f5d3c0d09082532d530b29c522ad2a16653e) feat: update Linux to 6.18.52
+* [`1737c02`](https://github.com/siderolabs/pkgs/commit/1737c02edf248c32236aad8b4ea6c04e1994337f) feat: update Linux to 6.18.51
+* [`6b76586`](https://github.com/siderolabs/pkgs/commit/6b76586c6329e8dcf60f5911d6d031042d8238c6) feat: update Linux to 6.18.50
+* [`bb9fe70`](https://github.com/siderolabs/pkgs/commit/bb9fe7099554c188b3d3bc7c6cc48e95716217a4) feat: bump kernel to 6.18.49
+* [`6187366`](https://github.com/siderolabs/pkgs/commit/61873666a8105ea41fc683d55669e32d208db722) chore: sync tools
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>2 commits</summary>
+<p>
+
+* [`b912600`](https://github.com/siderolabs/tools/commit/b912600505fcaf5ea8d0858078a2a5a9b61db0ae) feat: update pcre to 10.48
+* [`7b95365`](https://github.com/siderolabs/tools/commit/7b953659c39c4068122d944881e302a2b4f27be3) chore: bump util-linux 2.42.3
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-65-g9b044c5 -> v1.13.0-75-g642a01b
+* **github.com/siderolabs/tools**  v1.13.0-12-gc70be08 -> v1.13.0-14-gb912600
+
+Previous release can be found at [v1.13.10](https://github.com/siderolabs/extensions/releases/tag/v1.13.10)
+
 ## [Talos System Extensions 1.13.10](https://github.com/siderolabs/extensions/releases/tag/v1.13.10) (2026-09-03)
 
 Welcome to the v1.13.10 release of Talos System Extensions!
