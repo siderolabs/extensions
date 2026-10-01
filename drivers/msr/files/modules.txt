@@ -1,0 +1,4 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/arch/x86/kernel/msr.ko

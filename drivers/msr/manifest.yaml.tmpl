@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: msr
+  version: "{{ .VERSION }}"
+  author: Francisco Facioni
+  description: |
+    [{{ .TIER }}] This system extension provides the x86 msr kernel module built against a specific Talos version.
+    It exposes CPU model-specific registers through /dev/cpu/<CPU>/msr for privileged monitoring and power management workloads.
+  compatibility:
+    talos:
+      version: ">= v1.14.0-beta.1"
