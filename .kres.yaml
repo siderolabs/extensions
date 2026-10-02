@@ -64,6 +64,7 @@ spec:
     - px-fuse
     - soci-snapshotter
     - panfrost
+    - qaic
     - qemu-guest-agent
     - qlogic-firmware
     - realtek-firmware
