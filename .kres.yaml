@@ -45,6 +45,7 @@ spec:
     - mdadm
     - mei
     - mellanox-mstflint
+    - mergerfs
     - metal-agent
     - multipath-tools
     - nebula

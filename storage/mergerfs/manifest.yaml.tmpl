@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: mergerfs
+  version: "{{ .VERSION }}"
+  author: Micke Lisinge
+  description: |
+    [{{ .TIER }}] This system extension provides mergerfs, a FUSE union filesystem, as a host
+    service that mounts one pool per /etc/mergerfs/*.ini file.
+  compatibility:
+    talos:
+      version: ">= v1.14.0"
