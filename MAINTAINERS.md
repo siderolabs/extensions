@@ -59,6 +59,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | nonfree-kmod-nvidia-lts                   | Sidero Labs        | NA                                                                                       |
 | nonfree-kmod-nvidia-production            | Sidero Labs        | NA                                                                                       |
 | panfrost                                  | Adam Cirillo       | [adamcirillo](https://github.com/adamcirillo)                                            |
+| qaic                                      | Angelos Petheriotis | [apetheriotis](https://github.com/apetheriotis)                                         |
 | qemu-guest-agent                          | Markus Reiter      | [reitermarkus](https://github.com/reitermarkus)                                          |
 | qlogic-firmware                           | Sidero Labs        | NA                                                                                       |
 | realtek-firmware                          | Sidero Labs        | NA                                                                                       |

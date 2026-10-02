@@ -1,0 +1,5 @@
+modules.order
+modules.builtin
+modules.builtin.modinfo
+kernel/drivers/bus/mhi/host/mhi.ko
+kernel/drivers/accel/qaic/qaic.ko

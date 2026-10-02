@@ -66,6 +66,7 @@ spec:
     - px-fuse
     - soci-snapshotter
     - panfrost
+    - qaic
     - qemu-guest-agent
     - qlogic-firmware
     - realtek-firmware
@@ -110,7 +111,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.15.0-alpha.0-39-ga2b57ee
+        defaultValue: v1.15.0-alpha.0-46-g64af669
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
