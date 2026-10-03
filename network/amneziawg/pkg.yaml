@@ -1,0 +1,72 @@
+name: amneziawg
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/fhs:{{ .BUILD_ARG_PKGS }}"
+    from: /
+    to: /rootfs/usr/local/lib/containers/amneziawg
+steps:
+  - env:
+      GOPATH: /tmp/go
+      CGO_ENABLED: 0
+  - cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+    sources:
+      - url: https://github.com/amnezia-vpn/amneziawg-go/archive/refs/tags/v{{ .AMNEZIAWG_GO_VERSION }}.tar.gz
+        destination: amneziawg-go.tar.gz
+        sha256: {{ .AMNEZIAWG_GO_SHA256 }}
+        sha512: {{ .AMNEZIAWG_GO_SHA512 }}
+      - url: https://github.com/amnezia-vpn/amneziawg-tools/archive/refs/tags/v{{ .AMNEZIAWG_TOOLS_VERSION }}.tar.gz
+        destination: amneziawg-tools.tar.gz
+        sha256: {{ .AMNEZIAWG_TOOLS_SHA256 }}
+        sha512: {{ .AMNEZIAWG_TOOLS_SHA512 }}
+  - network: default
+    prepare:
+      - |
+        mkdir amneziawg-go amneziawg-tools
+        tar -xzf amneziawg-go.tar.gz --strip-components=1 -C amneziawg-go
+        tar -xzf amneziawg-tools.tar.gz --strip-components=1 -C amneziawg-tools
+      - |
+        cd amneziawg-go
+        go mod download
+  - network: none
+    build:
+      - |
+        cd amneziawg-go
+        CGO_ENABLED=0 go build -v -o ../amneziawg-go-bin .
+      - |
+        cd amneziawg-tools/src
+        make CC="gcc -static" WITH_WGQUICK=yes
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/amneziawg/usr/local/bin/
+        cp -p amneziawg-go-bin /rootfs/usr/local/lib/containers/amneziawg/usr/local/bin/amneziawg-go
+        cp -p amneziawg-tools/src/wg /rootfs/usr/local/lib/containers/amneziawg/usr/local/bin/awg
+        cp -p amneziawg-tools/src/wg-quick/linux.bash /rootfs/usr/local/lib/containers/amneziawg/usr/local/bin/awg-quick
+        chmod +x /rootfs/usr/local/lib/containers/amneziawg/usr/local/bin/*
+      - |
+        cp -p /pkg/entrypoint.sh /rootfs/usr/local/lib/containers/amneziawg/usr/local/bin/entrypoint.sh
+        chmod +x /rootfs/usr/local/lib/containers/amneziawg/usr/local/bin/entrypoint.sh
+      - |
+        mkdir -p /rootfs/usr/local/lib/containers/amneziawg/sbin
+        cp /sbin/ip /rootfs/usr/local/lib/containers/amneziawg/sbin/ip 2>/dev/null || true
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        cp /pkg/amneziawg.yaml /rootfs/usr/local/etc/containers/
+      - |
+        mkdir -p /rootfs/usr/local/bin
+        cp -p amneziawg-go-bin /rootfs/usr/local/bin/amneziawg-go
+        cp -p amneziawg-tools/src/wg /rootfs/usr/local/bin/awg
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

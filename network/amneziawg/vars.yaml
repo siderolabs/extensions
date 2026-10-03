@@ -1,0 +1,2 @@
+VERSION: "{{ .AMNEZIAWG_GO_VERSION }}"
+TIER: "contrib"
