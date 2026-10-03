@@ -69,6 +69,7 @@ GNU_MIRROR_URL ?= https://mirrors.kernel.org
 TARGETS = amazon-ena
 TARGETS += amdgpu
 TARGETS += amd-ucode
+TARGETS += amneziawg
 TARGETS += binfmt-misc
 TARGETS += bird2
 TARGETS += bnx2-bnx2x

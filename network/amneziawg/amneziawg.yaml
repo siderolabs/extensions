@@ -1,0 +1,32 @@
+name: amneziawg
+depends:
+  # awg-up needs /etc files + interfaces present; the kernel module is loaded
+  # via machine.kernel.modules. configuration:true waits for the per-node
+  # ExtensionServiceConfig (awg0.conf) to be delivered.
+  - network:
+      - etcfiles
+      - addresses
+  - configuration: true
+container:
+  # Shell-free: awg-up does its own netlink (link/addr/route) and only execs
+  # the bundled `awg` C binary for `awg setconf`. No bash, no iproute2, no
+  # /proc or /dev bind needed.
+  entrypoint: /usr/local/bin/awg-up
+  args:
+    - /var/run/amneziawg/awg0.conf
+  security:
+    writeableRootfs: false
+    writeableSysfs: true
+  mounts:
+    # Per-node config, delivered via ExtensionServiceConfig.
+    - source: /var/run/amneziawg
+      destination: /var/run/amneziawg
+      type: bind
+      options: [bind, rw]
+    # netlink for link/addr/route.
+    - source: /sys
+      destination: /sys
+      type: bind
+      options: [rbind, ro]
+# awg-up exits 0 once the interface is up; the kernel state persists.
+restart: never
