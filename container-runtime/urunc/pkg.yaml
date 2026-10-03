@@ -1,0 +1,94 @@
+name: urunc
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/urunc-dev/urunc/archive/refs/tags/v{{ .URUNC_UPSTREAM_VERSION }}.tar.gz
+        destination: urunc-source.tar.gz
+        sha256: {{ .URUNC_SOURCE_SHA256 }}
+        sha512: {{ .URUNC_SOURCE_SHA512 }}
+      # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/urunc-dev/monitors-build/releases/download/{{ .URUNC_MONITORS_VERSION }}/release-arm64-{{ .URUNC_MONITORS_VERSION }}.tar.gz
+        destination: urunc-monitors.tar.gz
+        sha256: {{ .URUNC_MONITORS_ARM64_SHA256 }}
+        sha512: {{ .URUNC_MONITORS_ARM64_SHA512 }}
+      # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/urunc-dev/monitors-build/releases/download/{{ .URUNC_MONITORS_VERSION }}/release-amd64-{{ .URUNC_MONITORS_VERSION }}.tar.gz
+        destination: urunc-monitors.tar.gz
+        sha256: {{ .URUNC_MONITORS_AMD64_SHA256 }}
+        sha512: {{ .URUNC_MONITORS_AMD64_SHA512 }}
+    # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+    env:
+      GOPATH: /tmp/go
+    cachePaths:
+      - /.cache/go-build
+      - /tmp/go/pkg
+  - network: default
+    prepare:
+      - |
+        mkdir -p ${GOPATH}/src/github.com/urunc-dev/urunc
+        tar -xzf urunc-source.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/urunc-dev/urunc
+        patch -d ${GOPATH}/src/github.com/urunc-dev/urunc -p1 < /pkg/patches/0001-use-oci-resolver-for-unikraft.patch
+      - |
+        cd ${GOPATH}/src/github.com/urunc-dev/urunc
+        make prepare VERSION="{{ .URUNC_VERSION }}"
+  - network: none
+    build:
+      - |
+        case "{{ .ARCH }}" in
+          x86_64) go_arch=amd64 ;;
+          aarch64) go_arch=arm64 ;;
+          *) echo "unsupported architecture: {{ .ARCH }}" >&2; exit 1 ;;
+        esac
+        make -C ${GOPATH}/src/github.com/urunc-dev/urunc static ARCH="${go_arch}" VERSION="{{ .URUNC_VERSION }}"
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin
+        cp -av ${GOPATH}/src/github.com/urunc-dev/urunc/dist/urunc_static_* /rootfs/usr/local/bin/urunc
+        cp -av ${GOPATH}/src/github.com/urunc-dev/urunc/dist/containerd-shim-urunc-v2_static_* /rootfs/usr/local/bin/containerd-shim-urunc-v2
+        chmod +x /rootfs/usr/local/bin/urunc /rootfs/usr/local/bin/containerd-shim-urunc-v2
+
+      - |
+        mkdir -p /tmp/urunc-monitors /rootfs/usr/local/bin /rootfs/usr/local/share
+        tar -xzf urunc-monitors.tar.gz -C /tmp/urunc-monitors
+
+        cp -av /tmp/urunc-monitors/urunc/bin/firecracker /rootfs/usr/local/bin/firecracker
+        cp -av /tmp/urunc-monitors/urunc/bin/cloud-hypervisor /rootfs/usr/local/bin/cloud-hypervisor
+        cp -av /tmp/urunc-monitors/urunc/bin/solo5-hvt /rootfs/usr/local/bin/solo5-hvt
+        cp -av /tmp/urunc-monitors/urunc/bin/solo5-spt /rootfs/usr/local/bin/solo5-spt
+        cp -av /tmp/urunc-monitors/urunc/bin/virtiofsd /rootfs/usr/local/bin/virtiofsd
+        cp -av /tmp/urunc-monitors/urunc/share/qemu/qemu /rootfs/usr/local/share/qemu
+
+        qemu_binary="$(basename /tmp/urunc-monitors/urunc/bin/qemu-system-*)"
+        cp -av "/tmp/urunc-monitors/urunc/bin/${qemu_binary}" "/rootfs/usr/local/bin/${qemu_binary}"
+
+        chmod +x /rootfs/usr/local/bin/firecracker \
+          /rootfs/usr/local/bin/cloud-hypervisor \
+          /rootfs/usr/local/bin/solo5-hvt \
+          /rootfs/usr/local/bin/solo5-spt \
+          /rootfs/usr/local/bin/qemu-system-* \
+          /rootfs/usr/local/bin/virtiofsd
+
+      - |
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/10-urunc.part /rootfs/etc/cri/conf.d/10-urunc.part
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/urunc.spdx.json
+      version: {{ .URUNC_VERSION }}
+      licenses:
+        - Apache-2.0
+        - GPL-2.0
+        - ISC
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /

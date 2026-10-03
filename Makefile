@@ -144,6 +144,7 @@ TARGETS += thunderbolt
 TARGETS += trident-iscsi-tools
 TARGETS += uhid
 TARGETS += uinput
+TARGETS += urunc
 TARGETS += usb-modem-drivers
 TARGETS += usb-audio-drivers
 TARGETS += util-linux-tools
@@ -358,4 +359,3 @@ renovate-local:  ## runs renovate locally to check syntax and test configuration
 		-e RENOVATE_PLATFORM=local \
 		-e RENOVATE_DRY_RUN=full \
 	renovate/renovate
-
