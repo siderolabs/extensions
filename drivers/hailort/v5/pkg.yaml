@@ -1,22 +1,20 @@
-name: hailort
+name: hailort-v5
 variant: scratch
 shell: /bin/bash
 dependencies:
   - stage: base
   # The pkgs version for a particular release of Talos as defined in
   # https://github.com/siderolabs/talos/blob/<talos version>/pkg/machinery/gendata/data/pkgs
-  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/hailort-v4-pkg:{{ .BUILD_ARG_PKGS }}"
+  - image: "{{ .BUILD_ARG_PKGS_PREFIX }}/hailort-v5-pkg:{{ .BUILD_ARG_PKGS }}"
 steps:
   - install:
       - |
         mkdir -p /rootfs/usr/lib/modules/
         mkdir -p /rootfs/usr/lib/firmware/hailo/
-        mkdir -p /rootfs/usr/lib/udev/rules.d/
 
       - |
         cp -R /usr/lib/modules/* /rootfs/usr/lib/modules/
         cp -R /usr/lib/firmware/hailo/* /rootfs/usr/lib/firmware/hailo/
-        cp -R /usr/lib/udev/rules.d/* /rootfs/usr/lib/udev/rules.d/
     test:
       - |
         mkdir -p /extensions-validator-rootfs

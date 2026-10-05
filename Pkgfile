@@ -16,6 +16,7 @@ vars:
   ENA_VERSION: 2.17.3 # update this when updating PKGS version tag in Makefile
   TENSTORRENT_VERSION: 2.11.0 # update this when updating PKGS version tag in Makefile
   HAILORT_VERSION: 4.24.0 # update this when updating PKGS version tag in Makefile
+  HAILORT_V5_VERSION: 5.4.0 # update this when updating PKGS version tag in Makefile
   MELLANOX_MSFTFLINT_VERSION: 4.34.1-4 # update this when updating PKGS version tag in Makefile
   XDMA_VERSION: b846609 # update this when updating PKGS version tag in Makefile
 
