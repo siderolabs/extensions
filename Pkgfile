@@ -3,17 +3,17 @@
 format: v1alpha2
 
 vars:
-  CONTAINERD_VERSION: v2.3.5 # update this when updating PKGS version tag in Makefile
+  CONTAINERD_VERSION: v2.3.6 # update this when updating PKGS version tag in Makefile
   LINUX_FIRMWARE_VERSION: "20260916" # update this when updating PKGS version tag in Makefile
   DRBD_DRIVER_VERSION: 9.3.4 # update this when updating PKGS version tag in Makefile
-  PX_FUSE_DRIVER_VERSION: 89758677301c91c9667559bb0a6b553f61ab17c1 # update this when updating PKGS version tag in Makefile
+  PX_FUSE_DRIVER_VERSION: b9636ca93ec981f826476235e414ff4d34a93cc1 # update this when updating PKGS version tag in Makefile
   ZFS_DRIVER_VERSION: 2.4.4 # update this when updating PKGS version tag in Makefile
   ZFS_TOOLS_SHA256: 2a3c70d55a37cc71618a95a60e81ad66530201eb118d37741dc92efcf848c8b1
   ZFS_TOOLS_SHA512: 8be81dedc0c0ec38728248151a33b8cbc78b042bc27a913279009bd735faa6149ad5b4a2db5811d25f4a03820dd398e14f59a4aec07f6bd4bc39405190c4e4ad
-  UTIL_LINUX_VERSION: 2.42.2 # update this when updating TOOLS in Makefile
-  UTIL_LINUX_SHA256: 03a05d3adf9602ef128f2da05b84b3205ce60c351e5737c0370f74000679ce8a
-  UTIL_LINUX_SHA512: 7415add0be2930654e322830808dde03ff6d511bd357f0679e6b6287a13ca79fe58ce4ac05edef86b76fb381b3a36ca2da9d3c31b5dc0a1d889c203156a57277
-  ENA_VERSION: 2.17.3 # update this when updating PKGS version tag in Makefile
+  UTIL_LINUX_VERSION: 2.42.4 # update this when updating TOOLS in Makefile
+  UTIL_LINUX_SHA256: fbd62a100ab7bb8746ba0661255c3c48185b1e9021507c624da01fbc696330ec
+  UTIL_LINUX_SHA512: 3aea9ebd835b353e0c73356f0e4543ba4c3ad448e4f50a386c35cfaac81cbf45425b1a6c7552ed5673580acf2b58f8af2792f5b3019ffe478edd77c7ebf444dc
+  ENA_VERSION: 2.17.4 # update this when updating PKGS version tag in Makefile
   TENSTORRENT_VERSION: 2.11.0 # update this when updating PKGS version tag in Makefile
   HAILORT_VERSION: 4.24.0 # update this when updating PKGS version tag in Makefile
   HAILORT_V5_VERSION: 5.4.0 # update this when updating PKGS version tag in Makefile
@@ -33,9 +33,9 @@ vars:
   LINUX_DVB_FIRMWARE_SHA256: cef3ce537d213e020af794cecf9de207e2882c375ceda39102eb6fa2580bad8d
   LINUX_DVB_FIRMWARE_SHA512: 2372dba98083c76865f5f0f8101b1160888e03cdbe911dd08621e7b6f38e8a25ae5d56eefc21728bf65fd09ea613b53606df4021d3972b0bc9d2bd8b6cbe20a1
   # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://github.com/qemu/qemu.git
-  QEMU_VERSION: 11.1.1
-  QEMU_SHA256: 079ffbff8a7111bbc89022107cbabf3bbfd614d5fc9d7cc675991196aca12482
-  QEMU_SHA512: f30b36800b44ac0370e63341a8c5591019648a78d5929e18b0177873c0b6e4a0cbbddc069337cb06a3b5d20d15779c9b9786d0a92073c421fb07ae14a67d4646
+  QEMU_VERSION: 11.1.2
+  QEMU_SHA256: 731b5681e4bb18be313231579b8efd0296c5b015fa36dc533874b639ba838016
+  QEMU_SHA512: 6e32ebc1adfb5223488fa760a32f900a24a121b3b0637de561f55e3852f3f6fb47ba6e4776320924990d9cebd33d2908f520f017703c4f438dfa528dcb714600
 
 labels:
   org.opencontainers.image.source: https://github.com/siderolabs/extensions

@@ -57,9 +57,9 @@ COMMON_ARGS += $(BUILD_ARGS)
 # extra variables
 
 EXTENSIONS_IMAGE_REF ?= $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
-PKGS ?= v1.15.0-alpha.0-47-gf6b8411
+PKGS ?= v1.15.0-alpha.0-52-g305b1b6
 PKGS_PREFIX ?= ghcr.io/siderolabs
-TOOLS ?= v1.15.0-alpha.0-10-gd40b203
+TOOLS ?= v1.15.0-alpha.0-12-g32e115c
 TOOLS_PREFIX ?= ghcr.io/siderolabs
 GO_TOOLS_RELEASE ?= v0.3.2
 GNU_MIRROR_URL ?= https://mirrors.kernel.org
