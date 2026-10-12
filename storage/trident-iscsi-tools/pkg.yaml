@@ -5,7 +5,7 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      - url: "https://sg.danny.cz/scsi/lsscsi-{{ .LSSCSI_VERSION }}.tar.gz"
+      - url: "https://github.com/doug-gilbert/lsscsi/archive/refs/tags/r{{ .LSSCSI_VERSION }}.tar.gz"
         destination: lsscsi.tar.gz
         sha256: {{ .LSSCSI_SHA256 }}
         sha512: {{ .LSSCSI_SHA512 }}
