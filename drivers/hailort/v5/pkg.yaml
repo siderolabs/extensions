@@ -14,7 +14,7 @@ steps:
 
       - |
         cp -R /usr/lib/modules/* /rootfs/usr/lib/modules/
-        cp -R /usr/lib/firmware/hailo/* /rootfs/usr/lib/firmware/hailo/
+        cp -RL /usr/lib/firmware/hailo/* /rootfs/usr/lib/firmware/hailo/
     test:
       - |
         mkdir -p /extensions-validator-rootfs
