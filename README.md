@@ -60,6 +60,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
+| [acr-credential-provider](container-runtime/acr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/acr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/acr-credential-provider) | `v1.37.0` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against Azure Container Registry and pull images. |
 | [crun](container-runtime/crun) | :yellow_square: extra | [ghcr.io/siderolabs/crun](https://github.com/siderolabs/extensions/pkgs/container/crun) | `1.30.1` |  This system extension provides crun using containerd's runtime handler. |
 | [ecr-credential-provider](container-runtime/ecr-credential-provider) | :yellow_square: extra | [ghcr.io/siderolabs/ecr-credential-provider](https://github.com/siderolabs/extensions/pkgs/container/ecr-credential-provider) | `v1.37.0` |  This system extension provides a binary which implements Kubelet's CredentialProvider API to authenticate against AWS' Elastic Container Registry and pull images. |
 | [gvisor](container-runtime/gvisor) | :green_square: core | [ghcr.io/siderolabs/gvisor](https://github.com/siderolabs/extensions/pkgs/container/gvisor) | `20261005.0` |  This system extension provides gVisor using containerd's runtime handler. |
