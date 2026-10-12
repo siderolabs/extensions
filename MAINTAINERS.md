@@ -10,6 +10,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 
 | Name                                      | Maintainer         | Github ID                                                                                |
 | ----------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------- |
+| acr-credential-provider                   | Jiri Tyr           | [jtyr](https://github.com/jtyr)                                                          |
 | amazon-ena                                | Sidero Labs        | NA                                                                                       |
 | amd-npu                                   | saguila            | [saguila](https://github.com/saguila)                                                    |
 | amdgpu                                    | Sidero Labs        | NA                                                                                       |

@@ -1,6 +1,7 @@
 name: reproducibility
 variant: scratch
 dependencies:
+  - stage: acr-credential-provider
   # amdgpu-firmware can be ignored from reproducibility test since it's linux-firmware copied from pkgs
   # - stage: amdgpu-firmware
   # amd-ucode can be ignored from reproducibility test since it's linux-firmware copied from pkgs
