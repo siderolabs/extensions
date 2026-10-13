@@ -1,0 +1,81 @@
+name: glibc-libgcc
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: glibc-toolchain
+  # gawk 5.4 changes option record ordering and breaks GCC 16.2's generated options.cc.
+  - image: "{{ .STAGEX_PREFIX }}/core-gawk:{{ .STAGEX_VERSION }}@sha256:{{ .STAGEX_GAWK_SHA256 }}"
+steps:
+  - sources:
+      - url: "{{ .GNU_MIRROR_URL }}/gnu/gcc/gcc-{{ .GCC_VERSION }}/gcc-{{ .GCC_VERSION }}.tar.xz"
+        destination: gcc.tar.xz
+        sha256: "{{ .GCC_SHA256 }}"
+        sha512: "{{ .GCC_SHA512 }}"
+    prepare:
+      - |
+        tar -xf gcc.tar.xz --strip-components=1
+
+        target="${ARCH}-linux-gnu"
+
+        # The libc target differs from the build triple, but the CPU does not.
+        for tool in ar as ld nm objcopy objdump ranlib readelf strip; do
+          ln -s "$(command -v "${tool}")" "/usr/bin/${target}-${tool}"
+        done
+
+        mkdir -p \
+          /gcc-sysroot/usr/include \
+          /gcc-sysroot/usr/lib \
+          /gcc-sysroot/usr/local
+
+        # GCC searches /usr/lib, while glibc's linker scripts use /usr/local/lib.
+        cp -a "/sysroot/usr/include/${target}/." /gcc-sysroot/usr/include/
+        cp -a /sysroot/usr/local/lib/. /gcc-sysroot/usr/lib/
+        cp -a /sysroot/usr/local/lib /gcc-sysroot/usr/local/
+
+        mkdir build
+        cd build
+
+        build="$(gcc -dumpmachine)"
+
+        ../configure \
+          --build="${build}" \
+          --host="${build}" \
+          --target="${target}" \
+          --prefix=/opt/cross \
+          --with-sysroot=/gcc-sysroot \
+          --with-native-system-header-dir=/usr/include \
+          --enable-languages=c,c++ \
+          --enable-shared \
+          --disable-bootstrap \
+          --disable-multilib \
+          --disable-nls \
+          --disable-libsanitizer \
+          --disable-libssp \
+          --without-isl \
+          --without-zstd
+    build:
+      - |
+        cd build
+
+        make -j "$(nproc)" all-gcc
+      - |
+        cd build
+
+        make -j "$(nproc)" all-target-libgcc
+    install:
+      - |
+        cd build
+        make DESTDIR=/install install-target-libgcc
+
+        libgcc="$(find /install -name libgcc_s.so.1 -print -quit)"
+
+        install -Dm0755 "$(readlink -f "${libgcc}")" /rootfs/usr/lib/libgcc_s.so.1
+    test:
+      - |
+        readelf -d /rootfs/usr/lib/libgcc_s.so.1 > dynamic-section
+
+        ! grep -F 'libc.musl' dynamic-section
+        grep -F 'Shared library: [libc.so.6]' dynamic-section
+finalize:
+  - from: /rootfs
+    to: /rootfs
