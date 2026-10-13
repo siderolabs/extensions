@@ -69,7 +69,7 @@ steps:
         github.com/anchore/syft/cmd/syft \
         scan --from dir /rootfs/usr/local/share/spdx \
         --select-catalogers "+sbom-cataloger" \
-        --source-name "Talos extensions" --source-version {{ .BUILD_ARG_TAG }} \
+        --source-name "Talos extensions" --source-version {{ .BUILD_ARG_ABBREV_TAG }} \
         -o spdx-json > /results/combined.spdx.json
   - network: default
     cachePaths:
