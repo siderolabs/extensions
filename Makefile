@@ -41,6 +41,7 @@ CI_ARGS ?=
 WITH_BUILD_DEBUG ?=
 BUILD_ARGS = --build-arg=SOURCE_DATE_EPOCH=$(SOURCE_DATE_EPOCH)
 BUILD_ARGS += --build-arg=TAG="$(TAG)"
+BUILD_ARGS += --build-arg=ABBREV_TAG="$(ABBREV_TAG)"
 BUILD_ARGS += --build-arg=PKGS="$(PKGS)"
 BUILD_ARGS += --build-arg=PKGS_PREFIX="$(PKGS_PREFIX)"
 BUILD_ARGS += --build-arg=TOOLS="$(TOOLS)"
@@ -274,7 +275,7 @@ extensions: internal/extensions/descriptions.yaml
 
 .PHONY: extensions-catalog
 extensions-catalog: $(ARTIFACTS)/bldr
-	@$(ARTIFACTS)/bldr dump --build-arg TAG=VERSION --template hack/catalog.template > $(ARTIFACTS)/catalog.md 2>/dev/null
+	@$(ARTIFACTS)/bldr dump --build-arg ABBREV_TAG=VERSION --template hack/catalog.template > $(ARTIFACTS)/catalog.md 2>/dev/null
 	@lead='^<!-- ### BEGIN GENERATED CONTENT -->$$'; tail='^<!-- ### END GENERATED CONTENT -->$$'; sed -i -e "/$$lead/,/$$tail/{ /$$lead/{p; r $(ARTIFACTS)/catalog.md" -e "}; /$$tail/p; d }" README.md
 
 .PHONY: check-dirty
@@ -288,8 +289,8 @@ extensions-metadata: internal/extensions/image-digests
 .PHONY: internal/extensions/image-digests
 internal/extensions/image-digests: $(ARTIFACTS)/bldr
 	@rm -f internal/extensions/image-digests
-	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
-	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg TAG=$(TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+	@$(foreach target,$(TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg ABBREV_TAG=$(ABBREV_TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
+	@$(foreach target,$(NONFREE_TARGETS),echo $(REGISTRY)/$(USERNAME)/$(target):$(shell $(ARTIFACTS)/bldr eval --target $(target) --build-arg ABBREV_TAG=$(ABBREV_TAG) '{{.VERSION}}' 2>/dev/null)@$(shell yq -r '."containerimage.digest"' $(ARTIFACTS)/$(target).metadata.json) >> internal/extensions/image-digests;)
 
 .PHONY: internal/extensions/descriptions.yaml
 internal/extensions/descriptions.yaml: internal/extensions/image-digests

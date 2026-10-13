@@ -1,2 +1,2 @@
-VERSION: "{{ .ENA_VERSION }}-{{ .BUILD_ARG_TAG }}"
+VERSION: "{{ .ENA_VERSION }}-{{ .BUILD_ARG_ABBREV_TAG }}"
 TIER: "core"
