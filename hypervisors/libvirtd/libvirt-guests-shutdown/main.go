@@ -95,7 +95,7 @@ func shutdownGuestsWith(ctx, managedSaveCtx context.Context, run virshCommand) e
 }
 
 func activeDomains(ctx context.Context, run virshCommand) ([]string, error) {
-	output, err := run(ctx, "list", "--uuid")
+	output, err := run(ctx, "list", "--uuid", "--persistent")
 	if err != nil {
 		return nil, err
 	}
