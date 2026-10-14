@@ -169,7 +169,16 @@ image via pod annotations (e.g.
 `io.katacontainers.config.hypervisor.default_memory: "16384"`). The pull
 budget is the lesser of kubelet's `runtimeRequestTimeout` and the shipped
 `create_container_timeout = 1200`, and kubelet defaults to 2 m, so raise it
-too for images that take longer:
+too for images that take longer (Talos 1.14 and later, `KubeletConfig` document):
+
+```yaml
+apiVersion: v1alpha1
+kind: KubeletConfig
+config:
+  runtimeRequestTimeout: 20m
+```
+
+or, if the machine config still uses the legacy `.machine.kubelet` section:
 
 ```yaml
 machine:
