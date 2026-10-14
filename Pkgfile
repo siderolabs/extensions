@@ -1,9 +1,9 @@
-# syntax = ghcr.io/siderolabs/bldr:v0.6.4
+# syntax = ghcr.io/siderolabs/bldr:v0.6.5
 
 format: v1alpha2
 
 vars:
-  CONTAINERD_VERSION: v2.3.5 # update this when updating PKGS version tag in Makefile
+  CONTAINERD_VERSION: v2.3.7 # update this when updating PKGS version tag in Makefile
   LINUX_FIRMWARE_VERSION: "20260916" # update this when updating PKGS version tag in Makefile
   DRBD_DRIVER_VERSION: 9.3.4 # update this when updating PKGS version tag in Makefile
   PX_FUSE_DRIVER_VERSION: 89758677301c91c9667559bb0a6b553f61ab17c1 # update this when updating PKGS version tag in Makefile
