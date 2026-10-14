@@ -51,12 +51,24 @@ func scriptedVirsh(t *testing.T, replies []virshReply) virshCommand {
 
 func TestShutdownGuests(t *testing.T) {
 	run := scriptedVirsh(t, []virshReply{
-		{args: []string{"list", "--uuid"}, output: "domain-a\ndomain-b\n"},
+		{args: []string{"list", "--uuid", "--persistent"}, output: "domain-a\ndomain-b\n"},
 		{args: []string{"managedsave", "--running", "domain-a"}},
-		{args: []string{"managedsave", "--running", "domain-b"}, err: errors.New("transient domain")},
-		{args: []string{"list", "--uuid"}, output: "domain-b\n"},
+		{args: []string{"managedsave", "--running", "domain-b"}, err: errors.New("save failed")},
+		{args: []string{"list", "--uuid", "--persistent"}, output: "domain-b\n"},
 		{args: []string{"destroy", "domain-b"}},
-		{args: []string{"list", "--uuid"}},
+		{args: []string{"list", "--uuid", "--persistent"}},
+	})
+
+	if err := shutdownGuestsWith(t.Context(), t.Context(), run); err != nil {
+		t.Fatalf("shutdown failed: %v", err)
+	}
+}
+
+func TestShutdownGuestsSkipsTransientDomains(t *testing.T) {
+	run := scriptedVirsh(t, []virshReply{
+		{args: []string{"list", "--uuid", "--persistent"}},
+		{args: []string{"list", "--uuid", "--persistent"}},
+		{args: []string{"list", "--uuid", "--persistent"}},
 	})
 
 	if err := shutdownGuestsWith(t.Context(), t.Context(), run); err != nil {
@@ -66,11 +78,11 @@ func TestShutdownGuests(t *testing.T) {
 
 func TestShutdownGuestsReportsRemainingDomains(t *testing.T) {
 	run := scriptedVirsh(t, []virshReply{
-		{args: []string{"list", "--uuid"}, output: "domain-a\n"},
+		{args: []string{"list", "--uuid", "--persistent"}, output: "domain-a\n"},
 		{args: []string{"managedsave", "--running", "domain-a"}, err: errors.New("save failed")},
-		{args: []string{"list", "--uuid"}, output: "domain-a\n"},
+		{args: []string{"list", "--uuid", "--persistent"}, output: "domain-a\n"},
 		{args: []string{"destroy", "domain-a"}, err: errors.New("destroy failed")},
-		{args: []string{"list", "--uuid"}, output: "domain-a\n"},
+		{args: []string{"list", "--uuid", "--persistent"}, output: "domain-a\n"},
 	})
 
 	err := shutdownGuestsWith(t.Context(), t.Context(), run)
@@ -91,10 +103,10 @@ func TestShutdownGuestsReportsRemainingDomains(t *testing.T) {
 func TestShutdownGuestsDestroysDomainsAfterManagedSaveTimeout(t *testing.T) {
 	managedSaveCtx, cancel := context.WithCancel(t.Context())
 	run := scriptedVirsh(t, []virshReply{
-		{args: []string{"list", "--uuid"}, output: "domain-a\n", after: cancel},
-		{args: []string{"list", "--uuid"}, output: "domain-a\n"},
+		{args: []string{"list", "--uuid", "--persistent"}, output: "domain-a\n", after: cancel},
+		{args: []string{"list", "--uuid", "--persistent"}, output: "domain-a\n"},
 		{args: []string{"destroy", "domain-a"}},
-		{args: []string{"list", "--uuid"}},
+		{args: []string{"list", "--uuid", "--persistent"}},
 	})
 
 	if err := shutdownGuestsWith(t.Context(), managedSaveCtx, run); err != nil {
