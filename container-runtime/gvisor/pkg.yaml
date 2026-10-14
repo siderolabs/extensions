@@ -9,6 +9,10 @@ steps:
         destination: gvisor.tar.gz
         sha256: {{ .GVISOR_SHA256 }}
         sha512: {{ .GVISOR_SHA512 }}
+      - url: https://github.com/google/gvisor/archive/refs/tags/release-{{ .GVISOR_VERSION }}.tar.gz
+        destination: gvisor-release.tar.gz
+        sha256: {{ .GVISOR_RELEASE_SHA256 }}
+        sha512: {{ .GVISOR_RELEASE_SHA512 }}
     env:
       GOPATH: /tmp/go
     cachePaths:
@@ -20,20 +24,56 @@ steps:
         mkdir -p ${GOPATH}/src/github.com/google/gvisor
 
         tar -xzf gvisor.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/google/gvisor
+
+        mkdir -p /tmp/gvisor-release
+
+        tar -xzf gvisor-release.tar.gz --strip-components=1 -C /tmp/gvisor-release
       - |
         cd ${GOPATH}/src/github.com/google/gvisor
         patch -p1 < /pkg/patches/go127-dependencies.patch
+
+        # The "go" branch strips the sources of the sidecar binaries that runsc
+        # expects in "gvisor-bin/" next to itself, so take them from the release tag.
+        cp /tmp/gvisor-release/runsc/cmd/sentry/sentry_main.go ./runsc/cmd/sentry/
+        cp /tmp/gvisor-release/runsc/cmd/metricserver/metricserver_main.go ./runsc/cmd/metricserver/
+        # runsc/checkpointgofer is a library package in the "go" branch, so keep main in its own directory
+        mkdir -p ./runsc/checkpointgofer/main
+        cp /tmp/gvisor-release/runsc/checkpointgofer/main.go ./runsc/checkpointgofer/main/
+        for pkg in runsc/checkpointgofer/gcs runsc/metricserver; do
+          mkdir -p ./${pkg}
+          find /tmp/gvisor-release/${pkg} -maxdepth 1 -name '*.go' ! -name '*_test.go' -exec cp {} ./${pkg}/ \;
+        done
+        mkdir -p ./runsc/prewarmer ./runsc/fdparking
+        cp /tmp/gvisor-release/runsc/prewarmer/prewarmer.c ./runsc/prewarmer/
+        cp /tmp/gvisor-release/runsc/fdparking/fdparking.c ./runsc/fdparking/
+
         go mod download
   - network: none
     build:
       - |
         cd ${GOPATH}/src/github.com/google/gvisor
 
-        mkdir ./bin
+        mkdir -p ./bin/gvisor-bin
 
-        CGO_ENABLED=0 go build -o ./bin/runsc ./runsc
+        # runsc verifies that all sidecars come from the same release
+        LDFLAGS="-X gvisor.dev/gvisor/runsc/version.version=release-{{ .GVISOR_VERSION }}"
 
-        CGO_ENABLED=0 go build -o ./bin/containerd-shim-runsc-v1 ./shim
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/runsc ./runsc
+
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/containerd-shim-runsc-v1 ./shim
+
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/gvisor_sentry ./runsc/cmd/sentry
+
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/runsc-metric-server ./runsc/cmd/metricserver
+
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/checkpointgofer ./runsc/checkpointgofer/main
+
+        # Freestanding static C binaries, flags match upstream Bazel genrules.
+        CFLAGS="-Os -fno-pie -no-pie -ffreestanding -fno-stack-protector -fno-asynchronous-unwind-tables -fno-unwind-tables -static -nostdlib -nostartfiles -Wl,--build-id=none -Wl,--gc-sections -Wl,-s -Wl,-n"
+
+        cc ${CFLAGS} -o ./bin/gvisor-bin/gvisor-sentry-prewarmer ./runsc/prewarmer/prewarmer.c
+
+        cc ${CFLAGS} -o ./bin/gvisor-bin/runsc-fd-parking ./runsc/fdparking/fdparking.c
     install:
       - |
         mkdir -p /rootfs/usr/local/bin
@@ -45,6 +85,9 @@ steps:
 
         cp ./bin/containerd-shim-runsc-v1 /rootfs/usr/local/bin/containerd-shim-runsc-v1
         chmod +x /rootfs/usr/local/bin/containerd-shim-runsc-v1
+
+        cp -r ./bin/gvisor-bin /rootfs/usr/local/bin/gvisor-bin
+        chmod +x /rootfs/usr/local/bin/gvisor-bin/*
 
       - |
         mkdir -p /rootfs/etc/cri/conf.d
