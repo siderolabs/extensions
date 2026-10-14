@@ -6,24 +6,40 @@ container:
   - PATH=/usr/local/bin
   entrypoint: ./containerd-stargz-grpc
   args:
-    - --address=/var/run/containerd-stargz-grpc/containerd-stargz-grpc.sock
+    - --address=/run/containerd-stargz-grpc/containerd-stargz-grpc.sock
     - --root=/var/lib/containerd/io.containerd.snapshotter.v1.stargz
     - --log-level=debug
   security:
     rootfsPropagation: shared
   mounts:
+    # rbind: Talos mounts the generated CA bundle on top of /etc/ssl/certs,
+    # rro: keep the submounts read-only as well
     - source: /etc/ssl
       destination: /etc/ssl
       type: bind
       options:
-        - bind
-        - ro
+        - rbind
+        - rro
     - source: /var
       destination: /var
       type: bind
       options:
         - rshared
         - rbind
+        - rw
+    # snapshotter socket, must be visible to containerd
+    - source: /run/containerd-stargz-grpc
+      destination: /run/containerd-stargz-grpc
+      type: bind
+      options:
+        - bind
+        - rw
+    # CRI containerd socket, used by the CRI keychain image service proxy
+    - source: /run/containerd
+      destination: /run/containerd
+      type: bind
+      options:
+        - bind
         - rw
     - source: /dev
       destination: /dev
