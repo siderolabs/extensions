@@ -10,29 +10,10 @@ See [Installing Extensions](https://github.com/siderolabs/extensions#installing-
 
 The `acr-credential-provider` requires an Azure cloud provider configuration file
 which defines how to authenticate against Azure (e.g. managed identity or service principal).
-The file must be placed in a location accessible to Kubelet, e.g. `/var/lib/kubelet/azure.json`.
 
-> **Note:** `machine.files` is deprecated, but its replacement (`EtcFileConfig`)
-> can't write files to any location visible to the Kubelet, so `machine.files`
-> remains the only way to provide the configuration file.
-
-```yaml
-machine:
-  files:
-    - path: /var/lib/kubelet/azure.json
-      permissions: 0o600
-      op: create
-      content: |
-        {
-          "cloud": "AzurePublicCloud",
-          "tenantId": "<tenant-id>",
-          "useManagedIdentityExtension": true,
-          "userAssignedIdentityID": "<managed-identity-client-id>"
-        }
-```
-
-You also need to configure `acr-credential-provider` as a Kubelet image
-credential provider. For this you'll need patch the machine config with the following:
+Configure `acr-credential-provider` as a Kubelet image credential provider and
+provide the configuration file by patching the machine config with the following
+(Talos v1.15+):
 
 ```yaml
 apiVersion: v1alpha1
@@ -50,10 +31,44 @@ configuration:
       defaultCacheDuration: "10m"
       apiVersion: credentialprovider.kubelet.k8s.io/v1
       args:
-        - /var/lib/kubelet/azure.json
+        - /etc/kubernetes/credentialproviders/azure.json
+configFiles:
+  - name: azure.json
+    content: |
+      {
+        "cloud": "AzurePublicCloud",
+        "tenantId": "<tenant-id>",
+        "useManagedIdentityExtension": true,
+        "userAssignedIdentityID": "<managed-identity-client-id>"
+      }
 ```
 
-For Talos versions older than v1.14, use the `machine.kubelet.credentialProviderConfig`
+Each entry of `configFiles` is written to the `/etc/kubernetes/credentialproviders`
+directory with the permissions `0600`.
+
+### Older Talos versions
+
+Talos versions older than v1.15 don't support `configFiles`. Create the
+configuration file via `machine.files` instead and reference it in the `args`:
+
+```yaml
+machine:
+  files:
+    - path: /var/lib/kubelet/azure.json
+      permissions: 0o600
+      op: create
+      content: |
+        {
+          "cloud": "AzurePublicCloud",
+          "tenantId": "<tenant-id>",
+          "useManagedIdentityExtension": true,
+          "userAssignedIdentityID": "<managed-identity-client-id>"
+        }
+```
+
+On Talos v1.14, use the `KubeCredentialProviderConfig` document above without
+`configFiles` and with `args` set to `/var/lib/kubelet/azure.json`. On Talos
+versions older than v1.14, use the `machine.kubelet.credentialProviderConfig`
 field instead:
 
 ```yaml
@@ -64,7 +79,15 @@ machine:
       kind: CredentialProviderConfig
       providers:
         - name: acr-credential-provider
-          # ... same as above
+          matchImages:
+            - "*.azurecr.io"
+            - "*.azurecr.cn"
+            - "*.azurecr.de"
+            - "*.azurecr.us"
+          defaultCacheDuration: "10m"
+          apiVersion: credentialprovider.kubelet.k8s.io/v1
+          args:
+            - /var/lib/kubelet/azure.json
 ```
 
 ## More Information
