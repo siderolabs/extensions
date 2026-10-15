@@ -12,14 +12,23 @@ container:
   security:
     rootfsPropagation: shared
   mounts:
+    # rbind: Talos mounts the generated CA bundle on top of /etc/ssl/certs
     - source: /etc/ssl
       destination: /etc/ssl
       type: bind
       options:
-        - bind
+        - rbind
         - ro
     - source: /var
       destination: /var
+      type: bind
+      options:
+        - rshared
+        - rbind
+        - rw
+    # /var/run is a symlink to /run, the socket must be visible to containerd
+    - source: /run
+      destination: /run
       type: bind
       options:
         - rshared

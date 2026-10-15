@@ -1,5 +1,5 @@
 # Enable stargz snapshotter for CRI
-[plugins."io.containerd.cri.v1.runtime".containerd]
+[plugins."io.containerd.cri.v1.images"]
   snapshotter = "stargz"
   disable_snapshot_annotations = false
 
