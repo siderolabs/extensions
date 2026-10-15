@@ -1,3 +1,69 @@
+## [Talos System Extensions 1.14.3](https://github.com/siderolabs/extensions/releases/tag/v1.14.3) (2026-10-15)
+
+Welcome to the v1.14.3 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ctr: 2.3.7
+harbor-credential-provider: 0.2.0
+
+
+### Contributors
+
+* Andrey Smirnov
+* Angelos Petheriotis
+* Mateusz Urbanek
+* Christoph Engelbert (noctarius)
+* Prasanth Baskar
+* Steve Wills
+
+### Changes
+<details><summary>8 commits</summary>
+<p>
+
+* [`cd7dfe0`](https://github.com/siderolabs/extensions/commit/cd7dfe0a89eca490dc30864945c175162741dba1) chore: update pixman mirror
+* [`c77db19`](https://github.com/siderolabs/extensions/commit/c77db19b6a6279bc43d303d644edfdcbfe62e65c) fix: pull in libgcc which is glibc based
+* [`33bfafc`](https://github.com/siderolabs/extensions/commit/33bfafcd767306bbb144b27eeb44e3d853039a80) chore: use bldr 0.6.5 and shortened tag
+* [`c5b85c8`](https://github.com/siderolabs/extensions/commit/c5b85c83897c8c50da97b67af51f0b0563e005f5) fix: replace lsscsi mirror
+* [`991a530`](https://github.com/siderolabs/extensions/commit/991a53039f81c2523945bb9c3939a49703d3afc1) feat: add qaic extension
+* [`11ac8fc`](https://github.com/siderolabs/extensions/commit/11ac8fc1f5e7de050c9374709e70807f82f76247) fix: switch to correct chrdev lock dir
+* [`6a590df`](https://github.com/siderolabs/extensions/commit/6a590df026317b127604052b3345eec0e91fb073) feat: update harbor-credential-provider to v0.2.0
+* [`5cd5572`](https://github.com/siderolabs/extensions/commit/5cd5572550f9b75b3687210fb2144686f87cdcb5) chore: sync pkgs/tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>5 commits</summary>
+<p>
+
+* [`5fa47d1`](https://github.com/siderolabs/pkgs/commit/5fa47d10bd62b005a1c1362d87e20a3f076f4b4a) feat: update to containerd 2.3.7
+* [`6873154`](https://github.com/siderolabs/pkgs/commit/6873154bb1f25209848adc8ffda59aa3778f0695) feat: update Linux to 6.18.56
+* [`ecd53d0`](https://github.com/siderolabs/pkgs/commit/ecd53d0943edee82510fe4b82fd2bf0501fd38cc) feat: enable pNFS block and SCSI layouts in nfsd
+* [`473b20c`](https://github.com/siderolabs/pkgs/commit/473b20c83dbec4f84d8fe9f5ed58f48a4bdf3c05) feat: enable bhyve guest support on amd64
+* [`f3add0c`](https://github.com/siderolabs/pkgs/commit/f3add0c04f67e9b0749eb2a47f1dcd89132eb3bf) feat: enable Qualcomm Cloud AI 100 (QAIC) driver
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`6b71647`](https://github.com/siderolabs/tools/commit/6b7164796dfc98f35803841978d845492ae9d8ff) feat: update Go to 1.26.9
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.14.0-37-g6c312e4 -> v1.14.0-42-g5fa47d1
+* **github.com/siderolabs/tools**  v1.14.0-8-g9776960 -> v1.14.0-9-g6b71647
+
+Previous release can be found at [v1.14.2](https://github.com/siderolabs/extensions/releases/tag/v1.14.2)
+
 ## [Talos System Extensions 1.14.2](https://github.com/siderolabs/extensions/releases/tag/v1.14.2) (2026-09-29)
 
 Welcome to the v1.14.2 release of Talos System Extensions!
