@@ -5,7 +5,7 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      - url: https://www.cairographics.org/releases/pixman-{{ .PIXMAN_VERSION }}.tar.gz
+      - url: https://mirror-hk.koddos.net/blfs/13.0/p/pixman-{{ .PIXMAN_VERSION }}.tar.gz
         destination: pixman.tar.gz
         sha256: "{{ .PIXMAN_SHA256 }}"
         sha512: "{{ .PIXMAN_SHA512 }}"
