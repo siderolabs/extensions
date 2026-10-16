@@ -1,3 +1,43 @@
+## [Talos System Extensions 1.14.4](https://github.com/siderolabs/extensions/releases/tag/v1.14.4) (2026-10-16)
+
+Welcome to the v1.14.4 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+
+
+### Contributors
+
+* Andrey Smirnov
+
+### Changes
+<details><summary>1 commit</summary>
+<p>
+
+* [`5e4df48`](https://github.com/siderolabs/extensions/commit/5e4df484c8337b96525bf9c9c3f8e5dc2ce2db48) chore: sync pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>2 commits</summary>
+<p>
+
+* [`2ec10eb`](https://github.com/siderolabs/pkgs/commit/2ec10ebdb2bf210d08ec222d21a453806dfc9d53) chore: update DRBD compat
+* [`643b731`](https://github.com/siderolabs/pkgs/commit/643b731b6193e1593ea2c2b7711a9dd5048c0281) feat: update Linux to 6.18.57
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.14.0-42-g5fa47d1 -> v1.14.0-44-g2ec10eb
+
+Previous release can be found at [v1.14.3](https://github.com/siderolabs/extensions/releases/tag/v1.14.3)
+
 ## [Talos System Extensions 1.14.3](https://github.com/siderolabs/extensions/releases/tag/v1.14.3) (2026-10-15)
 
 Welcome to the v1.14.3 release of Talos System Extensions!
