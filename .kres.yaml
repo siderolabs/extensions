@@ -2,6 +2,7 @@
 kind: pkgfile.Build
 spec:
   targets:
+    - acr-credential-provider
     - amazon-ena
     - amdgpu
     - amd-ucode
