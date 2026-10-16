@@ -109,6 +109,7 @@ TARGETS += joydev
 TARGETS += kata-containers
 TARGETS += kata-containers-nvidia-gpu-snp
 TARGETS += kata-containers-snp
+TARGETS += kubelet-credential-provider-vault
 TARGETS += libvirtd
 TARGETS += lldpd
 TARGETS += mdadm

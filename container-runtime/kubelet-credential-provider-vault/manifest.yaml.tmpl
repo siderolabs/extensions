@@ -1,0 +1,12 @@
+version: v1alpha1
+metadata:
+  name: kubelet-credential-provider-vault
+  version: "{{ .VERSION }}"
+  author: Simon Ostendorf
+  description: |
+    [{{ .TIER }}] This system extension provides a binary which implements Kubelet's CredentialProvider API
+    to read image registry credentials from HashiCorp Vault or OpenBao, authenticating with the
+    pod's Service Account token through Vault's Kubernetes auth method.
+  compatibility:
+    talos:
+      version: ">= v1.11.0"
