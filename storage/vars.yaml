@@ -11,7 +11,7 @@ LIBEVENT_VERSION: 2.1.13
 LIBEVENT_SHA256: f7e9383b8c0baa81b687e5b5eecc01beefaf1b19b64151d95ed61647fe7a315c
 LIBEVENT_SHA512: 5c7a1b9f48087258f49653ecb4ce24d7015a9ef4015ad6ffa910a101d5bd37c657c26fc948eaae30c4abeb54d1cda33290878161bd73bb50e4e85f7dc667c36d
 # renovate: datasource=github-tags extractVersion=^version-(?<version>.*)$ depName=sqlite/sqlite
-SQLITE_VERSION: 3.54.0
+SQLITE_VERSION: 3.54.1
 SQLITE_SHA256: 9ab31e2b1064e8147ccbaf5ae8f4d679d5ed894a35ba7ac1cc21025ee02cf61f
 SQLITE_SHA512: 9d6a11fc68982dd3f5a3a9e073802086b9fb0a62eb5e77adbafc384345c1ef1b3f3bb0206d0950c74fd48c22311cd78175a399d0f67e2022fa3ff2d6bf44140e
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/cachefilesd.git

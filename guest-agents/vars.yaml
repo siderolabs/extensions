@@ -7,6 +7,6 @@ TALOS_VMTOOLSD_VERSION: v1.5.2
 # renovate: datasource=github-releases depName=siderolabs/talos-metal-agent
 TALOS_METAL_AGENT_VERSION: v0.1.7
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-LINUX_HV_VERSION: 6.18.55
+LINUX_HV_VERSION: 6.18.57
 LINUX_HV_TARBALL_SHA256: f410638061a165c12f42ab871d2f3fcd525515359b5faeee80969cff84524df9
 LINUX_HV_TARBALL_SHA512: 4c8c6ec5a87d695a2ab2141ed75101911996f24a1c3cbb8497d9642e168a7145a724f12433aa46febe85b8a4257ceeff3ee4a4e1765ab08f1fec904ca2a42663
