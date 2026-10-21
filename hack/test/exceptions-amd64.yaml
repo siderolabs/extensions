@@ -292,7 +292,7 @@
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-twinhan-dtv-cab-ci.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-twinhan1027.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-vega-s9x.ko
-    - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-videomate-m1f.ko
+    - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-videomate-k100.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-videomate-s350.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-videomate-tv-pvr.ko
     - rootfs/usr/lib/modules/*/kernel/drivers/media/rc/keymaps/rc-videostrong-kii-pro.ko

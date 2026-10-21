@@ -166,7 +166,7 @@ kernel/drivers/media/rc/keymaps/rc-tt-1500.ko
 kernel/drivers/media/rc/keymaps/rc-twinhan1027.ko
 kernel/drivers/media/rc/keymaps/rc-twinhan-dtv-cab-ci.ko
 kernel/drivers/media/rc/keymaps/rc-vega-s9x.ko
-kernel/drivers/media/rc/keymaps/rc-videomate-m1f.ko
+kernel/drivers/media/rc/keymaps/rc-videomate-k100.ko
 kernel/drivers/media/rc/keymaps/rc-videomate-s350.ko
 kernel/drivers/media/rc/keymaps/rc-videomate-tv-pvr.ko
 kernel/drivers/media/rc/keymaps/rc-videostrong-kii-pro.ko
