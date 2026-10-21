@@ -1,3 +1,61 @@
+## [Talos System Extensions 1.13.12](https://github.com/siderolabs/extensions/releases/tag/v1.13.12) (2026-10-21)
+
+Welcome to the v1.13.12 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+ctr: 2.2.10
+
+
+### Contributors
+
+* Andrey Smirnov
+* Mateusz Urbanek
+
+### Changes
+<details><summary>4 commits</summary>
+<p>
+
+* [`a5a3586`](https://github.com/siderolabs/extensions/commit/a5a3586c64b98b974c3b2241172e87027cee9432) fix: replace lsscsi mirror
+* [`7b6e29b`](https://github.com/siderolabs/extensions/commit/7b6e29bc497d005b6b4fed330912a243128e7406) chore: use bldr 0.6.5 and shortened tag
+* [`7646073`](https://github.com/siderolabs/extensions/commit/76460734201d02f7d683dbc7be035b0008df6c49) chore: update bldr with empty dir fixes
+* [`1a19345`](https://github.com/siderolabs/extensions/commit/1a193452b8dee834b6e197b22f7d9a26c3b93f36) feat: update tools/pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>5 commits</summary>
+<p>
+
+* [`19e92dc`](https://github.com/siderolabs/pkgs/commit/19e92dceb2ed2ee5568a298ccf960aa2137dc9b7) feat: update Linux to 6.18.57
+* [`008f852`](https://github.com/siderolabs/pkgs/commit/008f85263fed81d29587f10e1186024e773f2fe2) fix: restore ACPI power button
+* [`e112479`](https://github.com/siderolabs/pkgs/commit/e11247973b914d620b4631211ed3151617158c7e) chore: update DRBD compat
+* [`97c9a42`](https://github.com/siderolabs/pkgs/commit/97c9a42af4e37ff3923715e45944823aa40fd75c) feat: update Linux to 6.18.56
+* [`2cb821e`](https://github.com/siderolabs/pkgs/commit/2cb821e3704c06af4e747b4be4429d9911bad3a8) feat: sync toolchain, tools, containerd 2.2.10
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>2 commits</summary>
+<p>
+
+* [`38b4a6e`](https://github.com/siderolabs/tools/commit/38b4a6e656cadd4127da665d5d8298e1af2514eb) feat: update Go to 1.26.10
+* [`3d10a45`](https://github.com/siderolabs/tools/commit/3d10a45c8a299100004c1942ea70c44d770fd80a) feat: update for Talos 1.13.12
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-75-g642a01b -> v1.13.0-80-g19e92dc
+* **github.com/siderolabs/tools**  v1.13.0-14-gb912600 -> v1.13.0-16-g38b4a6e
+
+Previous release can be found at [v1.13.11](https://github.com/siderolabs/extensions/releases/tag/v1.13.11)
+
 ## [Talos System Extensions 1.13.11](https://github.com/siderolabs/extensions/releases/tag/v1.13.11) (2026-10-01)
 
 Welcome to the v1.13.11 release of Talos System Extensions!
