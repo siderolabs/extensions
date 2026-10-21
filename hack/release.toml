@@ -6,7 +6,7 @@ github_repo = "siderolabs/extensions"
 match_deps = "^github.com/((talos-systems|siderolabs)/[a-zA-Z0-9-]+)$"
 
 # previous release
-previous = "v1.13.10"
+previous = "v1.13.11"
 
 pre_release = false
 
@@ -19,9 +19,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
-ctr: 2.2.9
-drbd: 9.3.4
-Linux firmware: 20260916
+ctr: 2.2.10
 """
 
 [make_deps]
