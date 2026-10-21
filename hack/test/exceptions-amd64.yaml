@@ -346,6 +346,7 @@
     - registry.dev.siderolabs.io/siderolabs/glibc
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-new-feature
   files:
     - rootfs/etc/ld.so.cache
     - rootfs/etc/ld.so.conf
@@ -708,12 +709,14 @@
     - registry.dev.siderolabs.io/siderolabs/nonfree-kmod-nvidia-production
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-new-feature
   files:
     - rootfs/usr/lib/modules/*/extras/nvidia-fs.ko
     - rootfs/usr/local/lib/modprobe.d/nvidia.conf
 - images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-new-feature
   files:
     - rootfs/etc/vulkan/icd.d/nvidia_icd.json
     - rootfs/etc/vulkan/implicit_layer.d/nvidia_layers.json
@@ -780,9 +783,7 @@
     - rootfs/usr/local/lib/libnvidia-egl-wayland.so.1
     - rootfs/usr/local/lib/libnvidia-egl-wayland.so.1.1.20
     - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1
-    - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1.0.5
     - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1
-    - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1.0.5
     - rootfs/usr/local/lib/libnvidia-encode.so
     - rootfs/usr/local/lib/libnvidia-encode.so.1
     - rootfs/usr/local/lib/libnvidia-fbc.so
@@ -869,7 +870,6 @@
     - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/wayland-issues.html
     - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/xcompositeextension.html
     - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/xconfigoptions.html
-    - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/xineramaglx.html
     - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/xrandrextension.html
     - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/xwayland.html
     - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/nvidia-dbus.conf
@@ -892,6 +892,7 @@
 - images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-new-feature
   files:
     - rootfs/usr/local/etc/containers/nvidia-fabricmanager.yaml
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/opt/nvidia/nvlsm/lib/libgcc_s.so.1
@@ -935,6 +936,7 @@
 - images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-new-feature
   files:
     - rootfs/usr/lib/modules/*/extras/gdrdrv.ko
     - rootfs/usr/lib/modules/*/extras/nv-p2p-dummy.ko
@@ -946,6 +948,7 @@
 - images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-new-feature
   files:
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/etc/ld.so.cache
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/etc/ld.so.conf
@@ -1315,3 +1318,22 @@
     - rootfs/usr/local/lib/libtirpc.so.3
     - rootfs/usr/local/lib/libtirpc.so.3.0.0
     - rootfs/usr/local/lib/pkgconfig/libtirpc.pc
+- images:
+    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-new-feature
+  files:
+    - rootfs/usr/local/lib/libnvidia-egl-wayland2.so.1
+    - rootfs/usr/share/egl/egl_external_platform.d/09_nvidia_wayland2.json
+- images:
+    - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-new-feature
+  files:
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl576r4_c2g4_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb300_nvl72r1_c2g4_kyber_topology
+- images:
+    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-lts
+    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
+  files:
+    - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1.0.5
+    - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1.0.5
+    - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/xineramaglx.html

@@ -57,11 +57,14 @@ spec:
     - nfsrahead
     - nut-client
     - nvidia-container-toolkit-lts
+    - nvidia-container-toolkit-new-feature
     - nvidia-container-toolkit-production
     - nvidia-fabricmanager-lts
+    - nvidia-fabricmanager-new-feature
     - nvidia-fabricmanager-production
     - nvidia-gdrdrv-device
     - nvidia-open-gpu-kernel-modules-lts
+    - nvidia-open-gpu-kernel-modules-new-feature
     - nvidia-open-gpu-kernel-modules-production
     - nvme-cli
     - px-fuse
@@ -113,7 +116,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.15.0-alpha.0-59-g9b40a60
+        defaultValue: v1.15.0-alpha.0-60-gb4b1cec
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS

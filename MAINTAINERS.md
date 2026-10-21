@@ -50,10 +50,13 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | nut-client                                | Sidero Labs        | NA                                                                                       |
 | nvidia-container-toolkit-lts              | Sidero Labs        | NA                                                                                       |
 | nivida-container-toolkit-production       | Sidero Labs        | NA                                                                                       |
+| nvidia-container-toolkit-new-feature      | Sidero Labs        | NA                                                                                       |
 | nvidia-fabricmanager-lts                  | Sidero Labs        | NA                                                                                       |
 | nvidia-fabricmanager-production           | Sidero Labs        | NA                                                                                       |
+| nvidia-fabricmanager-new-feature          | Sidero Labs        | NA                                                                                       |
 | nvidia-open-gpu-kernel-modules-lts        | Sidero Labs        | NA                                                                                       |
 | nvidia-open-gpu-kernel-modules-production | Sidero Labs        | NA                                                                                       |
+| nvidia-open-gpu-kernel-modules-new-feature | Sidero Labs       | NA                                                                                       |
 | nvme-cli                                  | Sidelo Labs        | NA                                                                                       |
 | px-fuse                                   | Sidero Labs        | NA                                                                                       |
 | nonfree-kmod-nvidia-lts                   | Sidero Labs        | NA                                                                                       |

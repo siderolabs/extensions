@@ -52,14 +52,21 @@ dependencies:
   - stage: nvidia-container-toolkit-production
     from: /
     to: /nvidia-container-toolkit-production
+  - stage: nvidia-container-toolkit-new-feature
+    from: /
+    to: /nvidia-container-toolkit-new-feature
   # nvidia-fabricmanage-lts can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
   # - stage: nvidia-fabricmanager-lts
   # nvidia-fabricmanage-production can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
   # - stage: nvidia-fabricmanager-production
+  # nvidia-fabricmanage-new-feature can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
+  # - stage: nvidia-fabricmanager-new-feature
   # nvidia-open-gpu-kernel-modules-lts can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: nvidia-open-gpu-kernel-modules-lts
   # nvidia-open-gpu-kernel-modules-production can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: nvidia-open-gpu-kernel-modules-production
+  # nvidia-open-gpu-kernel-modules-new-feature can be ignored from reproducibility test since it's kernel modules copied from pkgs
+  # - stage: nvidia-open-gpu-kernel-modules-new-feature
   - stage: qemu
   - stage: qemu-guest-agent
   # qlogic-firmware can be ignored from reproducibility test since it's linux-firmware copied from pkgs
