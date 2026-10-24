@@ -1,5 +1,5 @@
 # renovate: datasource=github-tags extractVersion=^release-(?<version>.*)$ depName=google/gvisor
-GVISOR_VERSION: 20261005.0
+GVISOR_VERSION: 20261019.0
 # gvisor repo 'master' branch is Bazel-bazed, so we need to find matching commit in the "go" branch
 # find the go-branch specific merge commit ("Merge release-... (automated)") which has the release-tagged commit as a parent
 GVISOR_REV: d1302ad8f7aa36378f4e4e459b6673b836e10ee3
@@ -40,7 +40,7 @@ SPIN_ARM64_SHA512: 2851e7b2210336d05d5e992b65a1c8ec24dc6618e8c28d73f0b20f3817799
 SPIN_AMD64_SHA256: 392945ca82c11abc7006a32c4e5dc12821954b5e2c35cb28e924aeea6bad5286
 SPIN_AMD64_SHA512: a1e1b0d67435944f2b83285864c733b3854160f8e1a005af9a0d4d87cb5c41e2a74b3a15188f3d9c168407fcf56755210ab3d3718764902e5d5806d062f3793e
 # renovate: datasource=github-releases depName=kata-containers/kata-containers
-KATA_CONTAINERS_VERSION: 3.32.0
+KATA_CONTAINERS_VERSION: 4.3.1
 KATA_CONTAINERS_SHA256: 722a022d873e6742788eca9f6ed74e8b7c4f70ffe4713144bd2e91fc3db620d0
 KATA_CONTAINERS_SHA512: 79720868960439d708d8e1157981226c9e6fd1c340d35dc9a7a382232b177572e5684c7ba91b1c80735235e1781d5d97b1e21b84efc2d65210994c92c2549f5a
 KATA_CONTAINERS_STATIC_ARM64_SHA256: 8736c054d9223974735394f822000823baef509e1c33405ec798240fa9b6e4b5
