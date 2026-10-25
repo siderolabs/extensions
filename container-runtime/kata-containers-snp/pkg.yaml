@@ -6,7 +6,7 @@ dependencies:
 steps:
 # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
   - sources:
-      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.zst
+      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-go-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.zst
         destination: kata-static.tar.zst
         sha256: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA256 }}
         sha512: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA512 }}
