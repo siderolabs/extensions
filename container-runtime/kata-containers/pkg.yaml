@@ -55,12 +55,21 @@ steps:
       - |
         cd ${GOPATH}/src/github.com/kata-containers/src/runtime
         cp containerd-shim-kata-v2 /rootfs/usr/local/bin/containerd-shim-kata-v2
+      # The CLH handler config is generated from the release's own default
+      # (only the /opt/kata -> /usr/local path rewrite), so upstream default
+      # changes are picked up on every Kata bump.
+      # It keeps the configuration.toml name the CRI part points at; upstream's
+      # own configuration.toml is a symlink to the QEMU config.
       - |
-        mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/10-kata-containers.part /rootfs/etc/cri/conf.d/10-kata-containers.part
+        cd kata-static
 
         mkdir -p /rootfs/usr/local/share/kata-containers
-        cp /pkg/configuration.toml /rootfs/usr/local/share/kata-containers/
+        sed -e 's|/opt/kata|/usr/local|g' \
+          ./opt/kata/share/defaults/kata-containers/configuration-clh.toml \
+          > /rootfs/usr/local/share/kata-containers/configuration.toml
+
+        mkdir -p /rootfs/etc/cri/conf.d
+        cp /pkg/10-kata-containers.part /rootfs/etc/cri/conf.d/10-kata-containers.part
       - |
         cd kata-static
 
@@ -96,6 +105,26 @@ steps:
         mkdir -p /rootfs/etc/cri/conf.d
         cp /pkg/11-kata-qemu.part /rootfs/etc/cri/conf.d/11-kata-qemu.part
     test:
+      # Fail closed if an upstream rename or format change makes a sed miss:
+      # assert the hypervisor paths, that the config's kernel/image name files
+      # this extension ships, and that no /opt/kata reference survived the
+      # rewrite.
+      - |
+        qemu={{ if eq .ARCH "aarch64" }}qemu-system-aarch64{{ else }}qemu-system-x86_64{{ end }}
+
+        for f in configuration.toml:cloud-hypervisor configuration-qemu.toml:${qemu}; do
+          g="/rootfs/usr/local/share/kata-containers/${f%%:*}"
+          hv="/usr/local/bin/${f#*:}"
+          grep -q "^path = \"${hv}\"$" "${g}"
+          grep -q "^valid_hypervisor_paths = \[\"${hv}\"\]$" "${g}"
+          grep -q '^virtio_fs_daemon = "/usr/local/libexec/virtiofsd"$' "${g}"
+          k=$(sed -n 's/^kernel = "\(.*\)"$/\1/p' "${g}"); test -f "/rootfs${k}"
+          i=$(sed -n 's/^image = "\(.*\)"$/\1/p' "${g}"); test -f "/rootfs${i}"
+          if grep -q '/opt/kata' "${g}"; then
+            echo "${g}: /opt/kata reference survived the path rewrite"
+            exit 1
+          fi
+        done
       - |
         mkdir -p /extensions-validator-rootfs
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs
