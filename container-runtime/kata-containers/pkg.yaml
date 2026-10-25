@@ -4,14 +4,17 @@ shell: /bin/bash
 dependencies:
   - stage: base
 steps:
+  # Since Kata 4.0 the default kata-static tarball carries the Rust runtime
+  # (runtime-rs) and its guest image layout; the Go runtime, which is built
+  # from source below, ships with its configs and guest images in kata-go-static.
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-arm64.tar.zst
+      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-go-static-{{ .KATA_CONTAINERS_VERSION }}-arm64.tar.zst
         destination: kata-static.tar.zst
         sha256: {{ .KATA_CONTAINERS_STATIC_ARM64_SHA256 }}
         sha512: {{ .KATA_CONTAINERS_STATIC_ARM64_SHA512 }}
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.zst
+      - url: https://github.com/kata-containers/kata-containers/releases/download/{{ .KATA_CONTAINERS_VERSION }}/kata-go-static-{{ .KATA_CONTAINERS_VERSION }}-amd64.tar.zst
         destination: kata-static.tar.zst
         sha256: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA256 }}
         sha512: {{ .KATA_CONTAINERS_STATIC_AMD64_SHA512 }}
