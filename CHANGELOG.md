@@ -1,3 +1,60 @@
+## [Talos System Extensions 1.14.5](https://github.com/siderolabs/extensions/releases/tag/v1.14.5) (2026-10-26)
+
+Welcome to the v1.14.5 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+
+
+### Contributors
+
+* Andrey Smirnov
+* Johan Thomsen
+* Noel Georgi
+
+### Changes
+<details><summary>4 commits</summary>
+<p>
+
+* [`f3c15b7`](https://github.com/siderolabs/extensions/commit/f3c15b7c5a896fb6e29ed6d0923a8834ef47a09b) fix: generate kata-containers config from the upstream one
+* [`2e13dd8`](https://github.com/siderolabs/extensions/commit/2e13dd89d509956a073b04aaace1782af49774f8) fix(multipathd): move statedir path from /etc to /var/lib
+* [`7d0be79`](https://github.com/siderolabs/extensions/commit/7d0be795c600fd6a2ff7e88ffe4923efed5048e9) fix: skip transient domains during shutdown
+* [`48d0755`](https://github.com/siderolabs/extensions/commit/48d0755835168cbdc90373f213a866f94b22314f) chore: sync pkgs/tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>4 commits</summary>
+<p>
+
+* [`f4bda77`](https://github.com/siderolabs/pkgs/commit/f4bda77bb9f8202cac8443a7284ce1c7aa129f38) feat: update Linux to 6.18.58
+* [`a068a03`](https://github.com/siderolabs/pkgs/commit/a068a03bc66383b955e8384c96528d213e3c1f77) feat: enable EDAC_10NM kernel option
+* [`ec11950`](https://github.com/siderolabs/pkgs/commit/ec119504d705475ebc7c51c1840ef4fcbca2728b) fix: restore ACPI power button
+* [`42b6fe2`](https://github.com/siderolabs/pkgs/commit/42b6fe258b648e1d59513a23e1f1ef5a5d8e58d4) feat: update tools/toolchain
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>2 commits</summary>
+<p>
+
+* [`8dad45e`](https://github.com/siderolabs/tools/commit/8dad45ecea6483e25a3b680ed710e6cfa98c4534) feat: update ca-certificates to 2026-10-20
+* [`c6b3f5c`](https://github.com/siderolabs/tools/commit/c6b3f5c3c0a06d8ab9cdfa801a718f9d02988f9c) chore: update the toolchain
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.14.0-44-g2ec10eb -> v1.14.0-48-gf4bda77
+* **github.com/siderolabs/tools**  v1.14.0-9-g6b71647 -> v1.14.0-11-g8dad45e
+
+Previous release can be found at [v1.14.4](https://github.com/siderolabs/extensions/releases/tag/v1.14.4)
+
 ## [Talos System Extensions 1.14.4](https://github.com/siderolabs/extensions/releases/tag/v1.14.4) (2026-10-16)
 
 Welcome to the v1.14.4 release of Talos System Extensions!
