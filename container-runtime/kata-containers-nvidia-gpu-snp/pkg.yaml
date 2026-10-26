@@ -73,9 +73,14 @@ steps:
 
         cp ./opt/kata/share/kata-containers/vmlinuz-nvidia-gpu.container /rootfs/usr/local/share/kata-containers/vmlinuz-nvidia-gpu.container
         cp ./opt/kata/share/kata-containers/kata-containers-nvidia-gpu-confidential.img /rootfs/usr/local/share/kata-containers/kata-containers-nvidia-gpu-confidential.img
+      # pod_annotations is derived from the handler config's enable_annotations
+      # (same recipe as the kata-containers extension).
       - |
+        a=$(sed -n 's/^enable_annotations = \[\(.*\)\]$/\1/p' /rootfs/usr/local/share/kata-containers/configuration-qemu-nvidia-gpu-snp.toml \
+          | sed 's/"\([^"]*\)"/"io.katacontainers.config.hypervisor.\1"/g')
+
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/12-kata-containers-nvidia-gpu-snp.part /rootfs/etc/cri/conf.d/12-kata-containers-nvidia-gpu-snp.part
+        sed -e "s|@POD_ANNOTATIONS@|${a}|" /pkg/12-kata-containers-nvidia-gpu-snp.part > /rootfs/etc/cri/conf.d/12-kata-containers-nvidia-gpu-snp.part
       # The guest image embeds NVIDIA's proprietary userspace driver; NVIDIA's
       # driver license permits redistribution only if the agreement text
       # accompanies the binaries, and the kata guest image ships none, so
@@ -121,6 +126,15 @@ steps:
           echo "configuration-qemu-nvidia-gpu-snp.toml: /opt/kata reference survived the path rewrite"
           exit 1
         fi
+      # pod_annotations must be a non-empty list of exact hypervisor
+      # annotations (no wildcard, no leftover placeholder), and must keep
+      # cc_init_data (attestation init-data) and default_memory (the README's
+      # guest-pull sizing advice).
+      - |
+        p=/rootfs/etc/cri/conf.d/12-kata-containers-nvidia-gpu-snp.part
+        grep -Eq '^  pod_annotations = \["io\.katacontainers\.config\.hypervisor\.[a-z_]+"(, "io\.katacontainers\.config\.hypervisor\.[a-z_]+")*\]$' "${p}"
+        grep -q '^  pod_annotations = .*"io\.katacontainers\.config\.hypervisor\.cc_init_data"' "${p}"
+        grep -q '^  pod_annotations = .*"io\.katacontainers\.config\.hypervisor\.default_memory"' "${p}"
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - |
         mkdir -p /extensions-validator-rootfs

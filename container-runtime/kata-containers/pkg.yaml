@@ -63,6 +63,11 @@ steps:
       # changes are picked up on every Kata bump.
       # It keeps the configuration.toml name the CRI part points at; upstream's
       # own configuration.toml is a symlink to the QEMU config.
+      #
+      # Each CRI part's pod_annotations is derived from its handler config's
+      # enable_annotations (the same allowlist kata-deploy derives), so
+      # containerd forwards only the hypervisor annotations Kata enables, and
+      # pods cannot override any other runtime or agent setting.
       - |
         cd kata-static
 
@@ -71,8 +76,11 @@ steps:
           ./opt/kata/share/defaults/kata-containers/configuration-clh.toml \
           > /rootfs/usr/local/share/kata-containers/configuration.toml
 
+        a=$(sed -n 's/^enable_annotations = \[\(.*\)\]$/\1/p' /rootfs/usr/local/share/kata-containers/configuration.toml \
+          | sed 's/"\([^"]*\)"/"io.katacontainers.config.hypervisor.\1"/g')
+
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/10-kata-containers.part /rootfs/etc/cri/conf.d/10-kata-containers.part
+        sed -e "s|@POD_ANNOTATIONS@|${a}|" /pkg/10-kata-containers.part > /rootfs/etc/cri/conf.d/10-kata-containers.part
       - |
         cd kata-static
 
@@ -105,8 +113,11 @@ steps:
           ./opt/kata/share/defaults/kata-containers/configuration-qemu.toml \
           > /rootfs/usr/local/share/kata-containers/configuration-qemu.toml
 
+        a=$(sed -n 's/^enable_annotations = \[\(.*\)\]$/\1/p' /rootfs/usr/local/share/kata-containers/configuration-qemu.toml \
+          | sed 's/"\([^"]*\)"/"io.katacontainers.config.hypervisor.\1"/g')
+
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/11-kata-qemu.part /rootfs/etc/cri/conf.d/11-kata-qemu.part
+        sed -e "s|@POD_ANNOTATIONS@|${a}|" /pkg/11-kata-qemu.part > /rootfs/etc/cri/conf.d/11-kata-qemu.part
     test:
       # Fail closed if an upstream rename or format change makes a sed miss:
       # assert the hypervisor paths, that the config's kernel/image name files
@@ -125,6 +136,16 @@ steps:
           i=$(sed -n 's/^image = "\(.*\)"$/\1/p' "${g}"); test -f "/rootfs${i}"
           if grep -q '/opt/kata' "${g}"; then
             echo "${g}: /opt/kata reference survived the path rewrite"
+            exit 1
+          fi
+        done
+      # Every runtime's pod_annotations must be a non-empty list of exact
+      # hypervisor annotations (no wildcard, no leftover placeholder).
+      - |
+        for p in /rootfs/etc/cri/conf.d/10-kata-containers.part /rootfs/etc/cri/conf.d/11-kata-qemu.part; do
+          test "$(grep -c '^  pod_annotations = ' "${p}")" -eq "$(grep -c '^  runtime_type = ' "${p}")"
+          if grep '^  pod_annotations = ' "${p}" | grep -Evq '^  pod_annotations = \["io\.katacontainers\.config\.hypervisor\.[a-z_]+"(, "io\.katacontainers\.config\.hypervisor\.[a-z_]+")*\]$'; then
+            echo "${p}: unexpected pod_annotations"
             exit 1
           fi
         done

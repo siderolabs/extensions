@@ -55,9 +55,18 @@ steps:
               ./opt/kata/share/defaults/kata-containers/${f} \
               > /rootfs/usr/local/share/kata-containers/${f}
         done
+      # Each runtime's pod_annotations is derived from its handler config's
+      # enable_annotations (same recipe as the kata-containers extension).
       - |
+        pod_annotations() {
+          sed -n 's/^enable_annotations = \[\(.*\)\]$/\1/p' "/rootfs/usr/local/share/kata-containers/$1" \
+            | sed 's/"\([^"]*\)"/"io.katacontainers.config.hypervisor.\1"/g'
+        }
+
         mkdir -p /rootfs/etc/cri/conf.d
-        cp /pkg/11-kata-containers-snp.part /rootfs/etc/cri/conf.d/11-kata-containers-snp.part
+        sed -e "s|@SNP_POD_ANNOTATIONS@|$(pod_annotations configuration-qemu-snp.toml)|" \
+            -e "s|@COCO_DEV_POD_ANNOTATIONS@|$(pod_annotations configuration-qemu-coco-dev.toml)|" \
+            /pkg/11-kata-containers-snp.part > /rootfs/etc/cri/conf.d/11-kata-containers-snp.part
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     test:
     # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
@@ -78,6 +87,17 @@ steps:
           fi
         done
         grep -q '^firmware = "/usr/local/share/ovmf/AMDSEV.fd"$' /rootfs/usr/local/share/kata-containers/configuration-qemu-snp.toml
+      # Every runtime's pod_annotations must be a non-empty list of exact
+      # hypervisor annotations (no wildcard, no leftover placeholder), and
+      # must keep cc_init_data, which attestation init-data is passed through.
+      - |
+        p=/rootfs/etc/cri/conf.d/11-kata-containers-snp.part
+        test "$(grep -c '^  pod_annotations = ' "${p}")" -eq "$(grep -c '^  runtime_type = ' "${p}")"
+        test "$(grep -c '^  pod_annotations = .*"io\.katacontainers\.config\.hypervisor\.cc_init_data"' "${p}")" -eq "$(grep -c '^  runtime_type = ' "${p}")"
+        if grep '^  pod_annotations = ' "${p}" | grep -Evq '^  pod_annotations = \["io\.katacontainers\.config\.hypervisor\.[a-z_]+"(, "io\.katacontainers\.config\.hypervisor\.[a-z_]+")*\]$'; then
+          echo "${p}: unexpected pod_annotations"
+          exit 1
+        fi
         grep -q '^firmware = ""$' /rootfs/usr/local/share/kata-containers/configuration-qemu-coco-dev.toml
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
       - |
