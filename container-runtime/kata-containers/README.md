@@ -6,6 +6,14 @@ See [Installing Extensions](https://github.com/siderolabs/extensions#installing-
 
 ## Usage
 
+### Pod annotations
+
+containerd forwards to Kata only the `io.katacontainers.config.hypervisor.*`
+annotations the handler's Kata configuration enables (the same allowlist
+kata-deploy uses); for both handlers these are `enable_iommu`, `kernel_params`
+and `kernel_verity_params`. Any other `io.katacontainers.*` pod annotation is
+dropped, so pods cannot override other runtime or agent settings.
+
 ## Testing
 
 Apply the following manifest to run nginx pod using Kata Containers:
