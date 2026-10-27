@@ -20,6 +20,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
         title = "Component Updates"
         description = """\
 kata-containers: 4.3.1
+Linux firmware: 20261019
 """
 
 [make_deps]
