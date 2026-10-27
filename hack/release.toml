@@ -20,6 +20,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-an
         title = "Component Updates"
         description = """\
 DRBD: 9.3.5
+Linux firmware: 20261019
 """
 
 [make_deps]
