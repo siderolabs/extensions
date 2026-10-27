@@ -116,7 +116,7 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.15.0-alpha.0-65-g4451182
+        defaultValue: v1.15.0-alpha.0-66-gbfdc8ae
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS

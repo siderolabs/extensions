@@ -37,6 +37,8 @@ metal-agent: 0.1.7
 nebula: 1.11.1
 netbird: 0.78.1
 newt: 1.16.0
+NVIDIA LTS: 580.196.07
+NVIDIA Production: 595.112.07
 NVIDIA New Feature: 615.71.10
 Open-iSCSI: 2.1.13
 qemu-guest-agent: 11.1.1
