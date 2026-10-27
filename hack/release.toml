@@ -32,7 +32,7 @@ hyperv-guest-agent: 6.18.50
 kata-containers: 4.3.1
 libvirt: 12.7.0
 libxml2: 2.15.4
-Linux firmware: 20260916
+Linux firmware: 20261019
 metal-agent: 0.1.7
 nebula: 1.11.1
 netbird: 0.78.1
