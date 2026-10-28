@@ -47,12 +47,14 @@ func (process *fakeProcess) fail(err error) {
 }
 
 type fakeRuntime struct {
-	mu        sync.Mutex
-	calls     []string
-	processes map[string]*fakeProcess
-	exports   []byte
-	reloaded  chan struct{}
-	blocked   map[string]bool
+	mu           sync.Mutex
+	calls        []string
+	processes    map[string]*fakeProcess
+	exports      []byte
+	reloaded     chan struct{}
+	blocked      map[string]bool
+	mounted      map[string]bool
+	mountChecked chan string
 }
 
 func newFakeRuntime() *fakeRuntime {
@@ -61,6 +63,7 @@ func newFakeRuntime() *fakeRuntime {
 		exports:   []byte("/srv *(rw)\n"),
 		reloaded:  make(chan struct{}, 1),
 		blocked:   map[string]bool{},
+		mounted:   map[string]bool{},
 	}
 }
 
@@ -120,11 +123,32 @@ func (runtime *fakeRuntime) Run(ctx context.Context, name string, args ...string
 	return nil
 }
 
-func (runtime *fakeRuntime) ReadFile(string) ([]byte, error) {
+func (runtime *fakeRuntime) ReadExports() ([]byte, error) {
 	runtime.mu.Lock()
 	defer runtime.mu.Unlock()
 
 	return slices.Clone(runtime.exports), nil
+}
+
+func (runtime *fakeRuntime) IsMountPoint(path string) (bool, error) {
+	runtime.mu.Lock()
+	defer runtime.mu.Unlock()
+
+	if runtime.mountChecked != nil {
+		select {
+		case runtime.mountChecked <- path:
+		default:
+		}
+	}
+
+	return runtime.mounted[path], nil
+}
+
+func (runtime *fakeRuntime) setMounted(path string, mounted bool) {
+	runtime.mu.Lock()
+	defer runtime.mu.Unlock()
+
+	runtime.mounted[path] = mounted
 }
 
 func (runtime *fakeRuntime) setExports(contents string) {
@@ -228,6 +252,139 @@ func TestRunReloadsExportsWhenConfigurationChanges(t *testing.T) {
 	}
 }
 
+func TestRunDefersChangedExportsUntilDeclaredMountAppears(t *testing.T) {
+	t.Parallel()
+
+	runtime := newFakeRuntime()
+	ctx, cancel := context.WithCancel(t.Context())
+	defer cancel()
+	errCh := make(chan error, 1)
+	go func() { errCh <- server.Run(ctx, runtime, server.Config{ReloadInterval: time.Millisecond}) }()
+	select {
+	case <-runtime.reloaded:
+	case <-time.After(time.Second):
+		t.Fatal("initial export load timed out")
+	}
+	runtime.setExports("/var/mnt/nfs *(rw,mountpoint)\n")
+	select {
+	case <-runtime.reloaded:
+		t.Fatal("reloaded before the declared mount appeared")
+	case <-time.After(50 * time.Millisecond):
+	}
+	runtime.setMounted("/var/mnt/nfs", true)
+	select {
+	case <-runtime.reloaded:
+	case <-time.After(time.Second):
+		t.Fatal("did not reload after the declared mount appeared")
+	}
+	cancel()
+	if err := <-errCh; err != nil {
+		t.Fatalf("Run() error = %v", err)
+	}
+}
+
+func TestRunRecognizesMountRequirements(t *testing.T) {
+	t.Parallel()
+
+	for _, test := range []struct {
+		name    string
+		exports string
+		mount   string
+	}{
+		{name: "directory volume", exports: "/var/mnt/nfs *(rw)\n"},
+		{name: "mountpoint", exports: "/var/mnt/nfs *(rw,mountpoint)\n", mount: "/var/mnt/nfs"},
+		{name: "subdirectory", exports: "/var/mnt/nfs/data *(rw,mp=/var/mnt/nfs)\n", mount: "/var/mnt/nfs"},
+		{name: "continuation", exports: "/var/mnt/nfs \\\n *(rw,mountpoint)\n", mount: "/var/mnt/nfs"},
+		{name: "quoted path", exports: "\"/var/mnt/nfs data\" *(rw,mountpoint)\n", mount: "/var/mnt/nfs data"},
+		{name: "escaped path", exports: "/var/mnt/nfs\\040data *(rw,mountpoint)\n", mount: "/var/mnt/nfs data"},
+		{name: "default options", exports: "/var/mnt/nfs -rw,mountpoint 10.0.0.0/8\n", mount: "/var/mnt/nfs"},
+		{name: "empty mountpoint", exports: "/var/mnt/nfs *(rw,mountpoint=)\n", mount: "/var/mnt/nfs"},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			t.Parallel()
+
+			runtime := newFakeRuntime()
+			runtime.mountChecked = make(chan string, 1)
+			runtime.setExports(test.exports)
+			ctx, cancel := context.WithCancel(t.Context())
+			errCh := make(chan error, 1)
+			go func() { errCh <- server.Run(ctx, runtime, server.DefaultConfig()) }()
+			t.Cleanup(func() { cancel(); <-errCh })
+
+			select {
+			case path := <-runtime.mountChecked:
+				if path != test.mount {
+					t.Fatalf("checked mount %q, want %q", path, test.mount)
+				}
+			case <-runtime.reloaded:
+				if test.mount != "" {
+					t.Fatalf("exported without checking backing mount %q", test.mount)
+				}
+			case <-time.After(time.Second):
+				t.Fatal("neither checked a backing mount nor exported the directory")
+			}
+		})
+	}
+}
+
+func TestRunRechecksConfigurationWhileWaitingForMount(t *testing.T) {
+	t.Parallel()
+
+	runtime := newFakeRuntime()
+	runtime.mountChecked = make(chan string, 1)
+	runtime.setExports("/var/mnt/old *(rw,mountpoint)\n")
+	ctx, cancel := context.WithCancel(t.Context())
+	errCh := make(chan error, 1)
+	go func() { errCh <- server.Run(ctx, runtime, server.Config{ReloadInterval: time.Millisecond}) }()
+	t.Cleanup(func() { cancel(); <-errCh })
+
+	select {
+	case <-runtime.mountChecked:
+	case <-time.After(time.Second):
+		t.Fatal("backing mount was not checked")
+	}
+
+	for _, call := range runtime.snapshot() {
+		if strings.HasPrefix(call, "start ") {
+			t.Errorf("started daemon while backing mount was absent: %s", call)
+		}
+	}
+
+	runtime.setExports("/srv *(rw)\n")
+	select {
+	case <-runtime.reloaded:
+	case <-time.After(time.Second):
+		t.Fatal("did not load replacement configuration while original mount was absent")
+	}
+}
+
+func TestRunWaitsForDeclaredBackingMountBeforeExport(t *testing.T) {
+	t.Parallel()
+
+	runtime := newFakeRuntime()
+	runtime.setExports("/var/mnt/nfs/subdir 10.0.0.0/8(rw,mountpoint=/var/mnt/nfs)\n")
+	ctx, cancel := context.WithCancel(t.Context())
+	defer cancel()
+	errCh := make(chan error, 1)
+	go func() { errCh <- server.Run(ctx, runtime, server.Config{ReloadInterval: time.Millisecond}) }()
+
+	select {
+	case <-runtime.reloaded:
+		t.Fatal("exportfs ran before the declared backing mount was ready")
+	case <-time.After(50 * time.Millisecond):
+	}
+	runtime.setMounted("/var/mnt/nfs", true)
+	select {
+	case <-runtime.reloaded:
+	case <-time.After(time.Second):
+		t.Fatal("exportfs did not run after the backing mount appeared")
+	}
+	cancel()
+	if err := <-errCh; err != nil {
+		t.Fatalf("Run() error = %v", err)
+	}
+}
+
 func TestRunStopsKernelServerWhenTrackedDaemonExits(t *testing.T) {
 	t.Parallel()
 
@@ -321,6 +478,22 @@ func TestRunAttemptsAllCleanupAfterBlockedKernelStop(t *testing.T) {
 	}
 }
 
+func TestOSRuntimeDistinguishesDirectoryFromMountPoint(t *testing.T) {
+	t.Parallel()
+
+	mounted, err := server.NewOSRuntime().IsMountPoint(t.TempDir())
+	if err != nil {
+		t.Fatalf("IsMountPoint() error = %v", err)
+	}
+	if mounted {
+		t.Fatal("ordinary existing directory is not a mountpoint")
+	}
+	mounted, err = server.NewOSRuntime().IsMountPoint("/")
+	if err != nil || !mounted {
+		t.Fatalf("root mountpoint = %t, error = %v", mounted, err)
+	}
+}
+
 func TestOSRuntimeRejectsMountdPortOwnedByAnotherProcess(t *testing.T) {
 	listener, err := net.Listen("tcp", "127.0.0.1:20048")
 	if err != nil {
@@ -370,7 +543,7 @@ func TestManifestRequiresHostRunnerCapableTalos(t *testing.T) {
 }
 
 func manifestTalosVersion(contents string) string {
-	for _, line := range strings.Split(contents, "\n") {
+	for line := range strings.SplitSeq(contents, "\n") {
 		const prefix = "      version: \""
 		if strings.HasPrefix(line, prefix) && strings.HasSuffix(line, "\"") {
 			return strings.TrimSuffix(strings.TrimPrefix(line, prefix), "\"")

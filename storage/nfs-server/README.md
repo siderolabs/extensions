@@ -35,7 +35,7 @@ kind: EtcFileConfig
 name: exports
 mode: 0o644
 contents: |
-  /var/mnt/nfs 10.0.0.0/8(rw,sync,no_subtree_check,fsid=0)
+  /var/mnt/nfs 10.0.0.0/8(rw,sync,no_subtree_check,fsid=0,mountpoint)
 ```
 
 This preserves the safer default `root_squash` behavior. Add `no_root_squash` only
@@ -53,7 +53,19 @@ contents: |
   tcp        tpi_cots_ord  v     inet     tcp     -       -
 ```
 
-Use a Talos user volume under `/var/mnt` as the export backing store.
+For a separately mounted backing volume, retain `mountpoint` in the export options.
+The supervisor checks `/proc/self/mountinfo` before starting the daemons and again before
+`exportfs -r -v`. Directory-backed user volumes are also supported: omit `mountpoint`
+when the export is an ordinary directory, including a Talos user volume of kind
+`Directory`. The path alone does not identify the backing volume kind.
+
+For an exported subdirectory, use `mountpoint=/var/mnt/nfs` to require its backing mount
+without requiring the subdirectory itself to be a mountpoint. The `mp` alias is also
+supported. The supervisor polls `/etc/exports` and non-hidden `/etc/exports.d/*.exports`
+files once per second, including while waiting for mounts, so a configuration correction
+takes effect without a restart. Waiting is cancelled when the service stops.
+Configuration reloads are deferred until their declared mounts are present; the last
+applied exports remain in effect until then.
 
 `rpc.mountd` listens on TCP and UDP port 20048. NFSv3 clients that do not use rpcbind
 discovery should set `mountPort: 20048`; the NFS data port is 2049.

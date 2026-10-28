@@ -117,9 +117,67 @@ func (OSRuntime) Run(ctx context.Context, name string, args ...string) error {
 	return cmd.Run()
 }
 
-// ReadFile reads a host configuration file.
-func (OSRuntime) ReadFile(path string) ([]byte, error) {
-	return os.ReadFile(path)
+// ReadExports reads the same export files consumed by exportfs -r.
+func (OSRuntime) ReadExports() ([]byte, error) {
+	return readExports(exportsPath)
+}
+
+func readExports(path string) ([]byte, error) {
+	contents, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+
+	entries, err := os.ReadDir(path + ".d")
+	if errors.Is(err, os.ErrNotExist) {
+		return contents, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	for _, entry := range entries {
+		if strings.HasPrefix(entry.Name(), ".") || !strings.HasSuffix(entry.Name(), ".exports") {
+			continue
+		}
+		filePath := filepath.Join(path+".d", entry.Name())
+		dropIn, readErr := os.ReadFile(filePath)
+		if readErr != nil {
+			return nil, fmt.Errorf("read %s: %w", filePath, readErr)
+		}
+		// Keep logical lines separate even if the previous file has no final
+		// newline or ends with a line continuation.
+		contents = append(contents, '\n', '\n')
+		contents = append(contents, dropIn...)
+	}
+
+	return contents, nil
+}
+
+// IsMountPoint checks the host mount table, not path existence (which can be true
+// before a Talos user volume is mounted).
+func (OSRuntime) IsMountPoint(path string) (bool, error) {
+	contents, err := os.ReadFile("/proc/self/mountinfo")
+	if err != nil {
+		return false, err
+	}
+
+	return mountInfoContains(contents, path), nil
+}
+
+func mountInfoContains(contents []byte, path string) bool {
+	for line := range strings.SplitSeq(string(contents), "\n") {
+		fields := strings.Fields(line)
+		if len(fields) < 5 {
+			continue
+		}
+		mountpoint := strings.NewReplacer(`\040`, " ", `\011`, "\t", `\012`, "\n", `\134`, `\`).Replace(fields[4])
+		if mountpoint == path {
+			return true
+		}
+	}
+
+	return false
 }
 
 func executablePath(name string) (string, error) {

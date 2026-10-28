@@ -10,6 +10,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
+	"path/filepath"
+	"strconv"
+	"strings"
 	"sync"
 	"time"
 )
@@ -38,7 +42,8 @@ type Runtime interface {
 	Start(name string, args ...string) (Process, error)
 	WaitReady(context.Context, string, Process) error
 	Run(context.Context, string, ...string) error
-	ReadFile(string) ([]byte, error)
+	ReadExports() ([]byte, error)
+	IsMountPoint(string) (bool, error)
 }
 
 // Config controls server supervision.
@@ -79,6 +84,14 @@ func Run(ctx context.Context, runtime Runtime, config Config) error {
 
 	if err := runtime.EnsureMounts(); err != nil {
 		return fmt.Errorf("prepare NFS filesystems: %w", err)
+	}
+
+	if err := waitForBackingMounts(ctx, runtime, config.ReloadInterval); err != nil {
+		if ctx.Err() != nil {
+			return nil
+		}
+
+		return fmt.Errorf("wait for NFS backing mounts: %w", err)
 	}
 
 	mountd, err := runtime.Start("rpc.mountd", "--foreground", "--port", "20048")
@@ -139,9 +152,17 @@ func Run(ctx context.Context, runtime Runtime, config Config) error {
 		return fail(fmt.Errorf("wait for nfsdcld: %w", err))
 	}
 
-	exports, err := runtime.ReadFile(exportsPath)
+	exports, err := runtime.ReadExports()
 	if err != nil {
 		return fail(fmt.Errorf("read %s: %w", exportsPath, err))
+	}
+
+	ready, err := backingMountsReady(runtime, exports)
+	if err != nil {
+		return fail(fmt.Errorf("check NFS backing mounts: %w", err))
+	}
+	if !ready {
+		return fail(errors.New("NFS backing mount disappeared or configuration changed during startup"))
 	}
 
 	if err = runCommand(ctx, runtime, config.CommandTimeout, "exportfs", "-r", "-v"); err != nil {
@@ -168,8 +189,13 @@ func Run(ctx context.Context, runtime Runtime, config Config) error {
 		case <-nfsdcld.Done():
 			return fail(childExitError("nfsdcld", nfsdcld.Err()))
 		case <-ticker.C:
-			currentExports, readErr := runtime.ReadFile(exportsPath)
+			currentExports, readErr := runtime.ReadExports()
 			if readErr != nil || bytes.Equal(exports, currentExports) {
+				continue
+			}
+
+			ready, mountErr := backingMountsReady(runtime, currentExports)
+			if mountErr != nil || !ready {
 				continue
 			}
 
@@ -180,6 +206,140 @@ func Run(ctx context.Context, runtime Runtime, config Config) error {
 			exports = currentExports
 		}
 	}
+}
+
+func waitForBackingMounts(ctx context.Context, runtime Runtime, interval time.Duration) error {
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+
+	waiting := false
+	for {
+		if err := ctx.Err(); err != nil {
+			return err
+		}
+
+		exports, err := runtime.ReadExports()
+		if err != nil {
+			return fmt.Errorf("read %s: %w", exportsPath, err)
+		}
+
+		ready, err := backingMountsReady(runtime, exports)
+		if err != nil {
+			return err
+		}
+		if ready {
+			if waiting {
+				log.Print("NFS export mounts are ready.")
+			}
+			return nil
+		}
+		if !waiting {
+			log.Printf("Waiting for NFS export mounts. Check the mountpoint options in %s and the backing volume configuration.", exportsPath)
+			waiting = true
+		}
+
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-ticker.C:
+		}
+	}
+}
+
+// backingMountsReady only gates exports that explicitly declare the NFS mountpoint
+// option. A plain directory cannot be distinguished from an unmounted volume.
+func backingMountsReady(runtime Runtime, exports []byte) (bool, error) {
+	contents := strings.NewReplacer("\\\r\n", "", "\\\n", "").Replace(string(exports))
+	for line := range strings.SplitSeq(contents, "\n") {
+		fields, err := exportsFields(line)
+		if err != nil {
+			return false, err
+		}
+		if len(fields) < 2 {
+			continue
+		}
+		for _, client := range fields[1:] {
+			var options string
+			if defaults, ok := strings.CutPrefix(client, "-"); ok {
+				options = defaults
+			} else {
+				start := strings.IndexByte(client, '(')
+				end := strings.LastIndexByte(client, ')')
+				if start < 0 || end <= start {
+					continue
+				}
+				options = client[start+1 : end]
+			}
+			for option := range strings.SplitSeq(options, ",") {
+				name, path, _ := strings.Cut(option, "=")
+				if name != "mountpoint" && name != "mp" {
+					continue
+				}
+				if path == "" {
+					path = fields[0]
+				}
+				if !filepath.IsAbs(path) {
+					return false, fmt.Errorf("invalid NFS mountpoint %q", path)
+				}
+				mounted, err := runtime.IsMountPoint(filepath.Clean(path))
+				if err != nil {
+					return false, fmt.Errorf("check NFS mountpoint %q: %w", path, err)
+				}
+				if !mounted {
+					return false, nil
+				}
+			}
+		}
+	}
+
+	return true, nil
+}
+
+// exportsFields preserves quoted paths and decodes exports(5) octal escapes.
+// Parsing failures stop startup rather than silently bypassing a mount requirement.
+func exportsFields(line string) ([]string, error) {
+	var fields []string
+	var field strings.Builder
+	quoted := false
+	flush := func() {
+		if field.Len() > 0 {
+			fields = append(fields, field.String())
+			field.Reset()
+		}
+	}
+
+	for i := 0; i < len(line); i++ {
+		switch ch := line[i]; {
+		case ch == '"':
+			quoted = !quoted
+		case ch == '\\':
+			if i+1 == len(line) {
+				return nil, errors.New("incomplete escape in NFS exports")
+			}
+			if i+3 < len(line) {
+				if value, err := strconv.ParseUint(line[i+1:i+4], 8, 8); err == nil {
+					field.WriteByte(byte(value))
+					i += 3
+					continue
+				}
+			}
+			i++
+			field.WriteByte(line[i])
+		case !quoted && ch == '#':
+			flush()
+			return fields, nil
+		case !quoted && (ch == ' ' || ch == '\t' || ch == '\r'):
+			flush()
+		default:
+			field.WriteByte(ch)
+		}
+	}
+	if quoted {
+		return nil, errors.New("unterminated quoted path in NFS exports")
+	}
+	flush()
+
+	return fields, nil
 }
 
 func runCommand(ctx context.Context, runtime Runtime, timeout time.Duration, name string, args ...string) error {
