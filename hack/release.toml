@@ -19,10 +19,17 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
+cloudflared: 2026.10.5
+gvisor: 20261026.0
 kata-containers: 4.3.1
+lldpd: 1.0.23
 Linux firmware: 20261019
+netbird: 0.81.5
+newt: 1.19.0
 NVIDIA LTS: 580.196.07
 NVIDIA Production: 595.112.07
+stargz-snapshotter: 0.19.1
+tailscale: 1.104.2
 """
 
 [make_deps]
