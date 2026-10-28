@@ -1,0 +1,11 @@
+version: v1alpha1
+metadata:
+  name: acr-credential-provider
+  version: "{{ .VERSION }}"
+  author: Jiri Tyr
+  description: |
+    [{{ .TIER }}] This system extension provides a binary which implements Kubelet's CredentialProvider API
+    to authenticate against Azure Container Registry and pull images.
+  compatibility:
+    talos:
+      version: ">= v1.6.0"
