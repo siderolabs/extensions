@@ -28,7 +28,7 @@ fuse: 3.18.3
 glib: 2.90.0
 gvisor: 20260831.0
 harbor-credential-provider: 0.2.0
-hyperv-guest-agent: 6.18.50
+hyperv-guest-agent: 7.3
 kata-containers: 4.3.1
 libvirt: 12.7.0
 libxml2: 2.15.4
@@ -41,8 +41,10 @@ NVIDIA LTS: 580.196.07
 NVIDIA Production: 595.112.07
 NVIDIA New Feature: 615.71.10
 Open-iSCSI: 2.1.13
+px-fuse: 80a472b147b59614a77cd60f390a9044a7d8d37b
 qemu-guest-agent: 11.1.1
 tailscale: 1.102.3
+xdma-driver: a918c51
 """
 
     [notes.nvidia-new-feature]

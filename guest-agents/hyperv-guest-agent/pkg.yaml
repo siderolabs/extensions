@@ -10,7 +10,7 @@ steps:
   # release tarball (checksum-verified) and linked statically against the base
   # toolchain — the same model qemu-guest-agent uses for a static guest agent.
   - sources:
-      - url: https://www.kernel.org/pub/linux/kernel/v6.x/linux-{{ .LINUX_HV_VERSION }}.tar.xz
+      - url: https://www.kernel.org/pub/linux/kernel/v{{ regexReplaceAll "(\\d+)(.\\d+)(\\.\\d+)?$" .LINUX_HV_VERSION "${1}" }}.x/linux-{{ .LINUX_HV_VERSION }}.tar.xz
         destination: linux.tar.xz
         sha256: {{ .LINUX_HV_TARBALL_SHA256 }}
         sha512: {{ .LINUX_HV_TARBALL_SHA512 }}

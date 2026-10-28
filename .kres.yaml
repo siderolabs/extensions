@@ -116,11 +116,11 @@ spec:
       - name: EXTENSIONS_IMAGE_REF
         defaultValue: $(REGISTRY_AND_USERNAME)/extensions:$(TAG)
       - name: PKGS
-        defaultValue: v1.15.0-alpha.0-66-gbfdc8ae
+        defaultValue: v1.15.0-alpha.0-67-gff868eb
       - name: PKGS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: TOOLS
-        defaultValue: v1.15.0-alpha.0-15-g2d70a26
+        defaultValue: v1.15.0-alpha.0-16-g54f72f9
       - name: TOOLS_PREFIX
         defaultValue: ghcr.io/siderolabs
       - name: GO_TOOLS_RELEASE
@@ -373,4 +373,4 @@ spec:
       allowedVersions: "< 3.0.0"
     - matchPackageNames:
         - git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
-      allowedVersions: "< 6.19"
+      allowedVersions: "< 7.4"
