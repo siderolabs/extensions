@@ -30,7 +30,6 @@ steps:
         tar -xzf gvisor-release.tar.gz --strip-components=1 -C /tmp/gvisor-release
       - |
         cd ${GOPATH}/src/github.com/google/gvisor
-        patch -p1 < /pkg/patches/go127-dependencies.patch
 
         # The "go" branch strips the sources of the sidecar binaries that runsc
         # expects in "gvisor-bin/" next to itself, so take them from the release tag.
