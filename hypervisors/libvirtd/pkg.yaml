@@ -104,6 +104,7 @@ steps:
       - |
         patch -p1 < /pkg/patches/0001-qemu-cgroup-allow-block-device-backing-emulator-TPM-state.patch
         patch -p1 < /pkg/patches/0002-qemu-tpm-don-t-unlink-block-device-backing-TPM-state.patch
+        patch -p1 < /pkg/patches/0003-build-set-firewall_backend_priority-regardless-of-driver_network.patch
       - |
         export PATH=$PATH:/usr/local/bin
 

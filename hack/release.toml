@@ -30,7 +30,7 @@ gvisor: 20260831.0
 harbor-credential-provider: 0.2.0
 hyperv-guest-agent: 7.3
 kata-containers: 4.3.1
-libvirt: 12.7.0
+libvirt: 12.8.0
 libxml2: 2.15.4
 Linux firmware: 20261019
 metal-agent: 0.1.7

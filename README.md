@@ -78,7 +78,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
-| [libvirtd](hypervisors/libvirtd) | :green_square: core | [ghcr.io/siderolabs/libvirtd](https://github.com/siderolabs/extensions/pkgs/container/libvirtd) | `12.7.0` |  This system extension provides the libvirt virtualization daemon. |
+| [libvirtd](hypervisors/libvirtd) | :green_square: core | [ghcr.io/siderolabs/libvirtd](https://github.com/siderolabs/extensions/pkgs/container/libvirtd) | `12.8.0` |  This system extension provides the libvirt virtualization daemon. |
 
 ### Firmware
 
