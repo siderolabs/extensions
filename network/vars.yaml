@@ -1,5 +1,5 @@
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=tailscale/tailscale
-TAILSCALE_VERSION: 1.104.2
+TAILSCALE_VERSION: 1.104.4
 TAILSCALE_SHA256: 4c1c806e16507414a1459afcdc399f6a1323c21a1ac90f07bea0465fd8fd7e1d
 TAILSCALE_SHA512: 7280c968a2f0018c54d2e409ef11ee4829887a7813df7ce62d9e660728b9e239bf7d8d907212e8509160801f110f50bc3a2eb233167521e635963e4febfe2cb2
 # renovate: datasource=github-releases depName=lldpd/lldpd
@@ -7,13 +7,13 @@ LLDPD_VERSION: 1.0.23
 LLDPD_SHA256: e30284aa015d518345b67e7d1eae3aa22de7bad10550e760010a104fd77675aa
 LLDPD_SHA512: 0682e524d1fe8b8ccc6ab84f5a4eaaa5e3ecfb5bd7ddc86a3d968e5d716f2f0b4945ffadfc05738677e9fdf6aeaa4c64acb312e3583aa1dd0f84a457b412211a
 # renovate: datasource=github-releases depName=cloudflare/cloudflared
-CLOUDFLARED_VERSION: 2026.10.5
+CLOUDFLARED_VERSION: 2026.10.6
 CLOUDFLARED_ARM64_SHA256: 72e0d05a67e09da87cf495e409a28c3cc5994dd23fc66a982eebea6a55923b7d
 CLOUDFLARED_ARM64_SHA512: 842885ae754b4cd5d50ff7c0e4d53fd9b0024fe42c0172d52b814e7b5cbc6c2af0441b0d61f99088e4d0b36e526d5b931cba58d39cfdf7207b8ca88885b0c330
 CLOUDFLARED_AMD64_SHA256: e1bc0cf084fd9e590554fe769a86b1db46701c3f847a43d902f7b974a4e16298
 CLOUDFLARED_AMD64_SHA512: 41d80fad6b8c0c99bb14f6832e2e020d853a3d90d29c128a1821f7d03fc3b5ed8896b3b624da673ee8c08de4ff402de45fa72ca5de63c59e6f03f6f003556226
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=slackhq/nebula
-NEBULA_VERSION: 1.11.2
+NEBULA_VERSION: 1.12.0
 NEBULA_SHA256: 0031d1ddd616f5e25dc29f4b67d6a0c58864251be17095a68d15e4d0edb54843
 NEBULA_SHA512: a929da1cfe53522d2f8d114992e564e773049806388ce93430f8132d1870ebbef214e9cf6ce7c7cba2fbf36595d1688fd8b1d5f1fe8cd2387a79ac98965d2166
 # renovate: datasource=github-releases depName=zerotier/ZeroTierOne
@@ -25,7 +25,7 @@ NEWT_VERSION: 1.19.0
 NEWT_SHA256: 98c9df97d2c06fa1bc4b19cbb2c5ec551a9ca1c40e0e98719d3307ec90f8b159
 NEWT_SHA512: a02adc89f86a132ade81907f56966156cfc49dd2f73294e84e96c43346ae0cfb69d1b260f1e0bbf941dae579315600bfc9b0a05998d7fd9af7bfa4749c9e6c28
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=netbirdio/netbird
-NETBIRD_VERSION: 0.81.5
+NETBIRD_VERSION: 0.82.0
 NETBIRD_SHA256: 66732071b57f710dcf7dc062f6e6b747056e5613924b7eef770ad07b58f30de0
 NETBIRD_SHA512: 1b3c345e7008c4812690160ee491f34e7796056a38339ebbc78bb8e9ee27106ccb9d56ee863e30ffe75c066c1508de53da7be169a85cbd5497a349f3b779ae09
 # renovate: datasource=git-tags extractVersion=^v(?<version>.*)$ depName=https://gitlab.nic.cz/labs/bird.git
