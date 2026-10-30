@@ -97,6 +97,7 @@ tiers based on support level:
 
 | Name | Tier | Image | Version | Description |
 | ---- | ---- | ----- | ------- | ----------- |
+| [amd-npu](drm/amd-npu) | :white_large_square: contrib | [ghcr.io/siderolabs/amd-npu](https://github.com/siderolabs/extensions/pkgs/container/amd-npu) | `20261019-VERSION` |  This system extension provides AMD NPU (XDNA) firmware binaries and kernel modules. |
 | [amdgpu](drm/amdgpu) | :green_square: core | [ghcr.io/siderolabs/amdgpu](https://github.com/siderolabs/extensions/pkgs/container/amdgpu) | `20261019-VERSION` |  This system extension provides AMDGPU firmware binaries and kernel modules. |
 | [i915](drm/i915) | :green_square: core | [ghcr.io/siderolabs/i915](https://github.com/siderolabs/extensions/pkgs/container/i915) | `20261019-VERSION` |  This system extension provides Intel GPU microcode binaries and kernel modules. |
 | [intel-npu](drm/intel-npu) | :white_large_square: contrib | [ghcr.io/siderolabs/intel-npu](https://github.com/siderolabs/extensions/pkgs/container/intel-npu) | `20261019-VERSION` |  This system extension provides Intel NPU firmware binaries and kernel modules. |
