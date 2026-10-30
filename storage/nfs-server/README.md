@@ -70,6 +70,69 @@ applied exports remain in effect until then.
 `rpc.mountd` listens on TCP and UDP port 20048. NFSv3 clients that do not use rpcbind
 discovery should set `mountPort: 20048`; the NFS data port is 2049.
 
+## Daemon settings
+
+Optionally supply `/etc/nfs.conf` through an `EtcFileConfig`. The host-side
+`rpc.nfsd`, `rpc.mountd`, `nfsdcld`, and `exportfs` read it automatically when
+invoked; no configuration file is required for the default setup.
+
+```yaml
+apiVersion: v1alpha1
+kind: EtcFileConfig
+name: nfs.conf
+mode: 0o644
+contents: |
+  [nfsd]
+  threads = 8
+```
+
+This example retains the previous supervisor's eight NFS worker threads. Without
+`threads`, the packaged nfs-utils 2.8.4 default is **16**. Threads are workers, not
+a client or connection limit. The supervisor does not override the thread count.
+
+The following service ports remain fixed by command-line arguments, which take
+precedence over `nfs.conf`:
+
+| Setting | Fixed value |
+| --- | --- |
+| `[nfsd] port` | 2049 |
+| `[mountd] port` | 20048 |
+
+Other daemon settings use nfs-utils configuration, for example:
+
+| Section | Settings |
+| --- | --- |
+| `[nfsd]` | `threads`, `lease-time`, `grace-time`, `tcp`, `udp`, `vers3`, `vers4`, `vers4.0`, `vers4.1`, `vers4.2`, `debug` |
+| `[mountd]` | `threads`, `manage-gids`, `reverse-lookup`, `cache-use-ipaddr`, `ttl`, `debug` |
+| `[nfsdcld]` | `debug` |
+| `[exportfs]` | `debug` |
+
+These are upstream settings, not a separate extension configuration format. See
+[nfs.conf(5) for the packaged version](https://github.com/linux-nfs/nfs-utils/blob/nfs-utils-2-8-4/systemd/nfs.conf.man)
+for their meanings and additional options. Daemons remain in the foreground under
+the supervisor. Keep runtime paths at their defaults: the supervisor mounts and
+checks `/var/lib/nfs/rpc_pipefs` and probes the client database at
+`/var/lib/nfs/nfsdcld/main.sqlite`. Relocating runtime state is not supported.
+Keep mountd's TCP listener enabled; readiness checks require it on port 20048.
+Enabling RDMA would introduce an additional listener outside the two fixed ports
+above and requires separate kernel and hardware support.
+
+The separate `rpc.statd` service from `nfs-utils` runs in a container, and its
+service manifest does not mount the host's `nfs.conf`; do not assume `[statd]`
+settings reach it. `rpcbind` does not read this file.
+
+Unlike export changes, `nfs.conf` changes are **not automatically reloaded**.
+After applying an updated machine configuration, restart the server during a
+maintenance window; this interrupts NFS service and may trigger client recovery:
+
+```sh
+talosctl service ext-nfs-server restart
+talosctl read /proc/fs/nfsd/threads
+```
+
+Export permissions such as `rw`, `root_squash`, and `fsid` still belong in
+`/etc/exports`, not `nfs.conf`.
+
 ## How It Works
 
 A single host-mode supervisor shares the Talos host's mount namespace and starts the server
@@ -111,8 +174,9 @@ State persists across reboots in `/var/lib/nfs`.
 
 ## Protocol versions
 
-`nfs-utils` is built with `--enable-nfsv4 --enable-nfsv41`, and `rpc.nfsd` is started
-without any `--no-nfs-version` flag, so NFSv3, v4.0, v4.1 and v4.2 are all served.
+`nfs-utils` is built with `--enable-nfsv4 --enable-nfsv41`, and the supervisor does
+not override protocol versions. By default NFSv3, v4.0, v4.1 and v4.2 are served;
+use the `[nfsd]` version settings in `nfs.conf` to change the enabled versions.
 
 For NFSv4 the export table needs a pseudo-root — give the top-level export `fsid=0`, as in
 the example above.

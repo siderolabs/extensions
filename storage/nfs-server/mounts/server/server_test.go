@@ -88,7 +88,7 @@ func (runtime *fakeRuntime) EnsureMounts() error {
 }
 
 func (runtime *fakeRuntime) Start(name string, args ...string) (server.Process, error) {
-	runtime.record("start " + name)
+	runtime.record(strings.TrimSpace("start " + name + " " + strings.Join(args, " ")))
 
 	process := newFakeProcess(len(runtime.processes)+100, func() { runtime.record("stop " + name) })
 	runtime.processes[name] = process
@@ -197,12 +197,12 @@ func TestRunStartsComponentsOnlyAfterTheirPrerequisitesAreReady(t *testing.T) {
 
 	wantPrefix := []string{
 		"mount filesystems",
-		"start rpc.mountd",
+		"start rpc.mountd --foreground --port 20048",
 		"ready rpc.mountd",
-		"start nfsdcld",
+		"start nfsdcld -F",
 		"ready nfsdcld",
 		"run exportfs -r -v",
-		"run rpc.nfsd --port 2049 8",
+		"run rpc.nfsd --port 2049",
 		"ready nfsdcld-attached",
 		"run rpc.nfsd 0",
 		"run exportfs -a -u",

@@ -169,7 +169,8 @@ func Run(ctx context.Context, runtime Runtime, config Config) error {
 		return fail(fmt.Errorf("load NFS exports: %w", err))
 	}
 
-	if err = runCommand(ctx, runtime, config.CommandTimeout, "rpc.nfsd", "--port", "2049", "8"); err != nil {
+	// Keep the service port fixed, but let rpc.nfsd read threads and other settings from nfs.conf.
+	if err = runCommand(ctx, runtime, config.CommandTimeout, "rpc.nfsd", "--port", "2049"); err != nil {
 		return fail(fmt.Errorf("start kernel NFS server: %w", err))
 	}
 
