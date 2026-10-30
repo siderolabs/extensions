@@ -11,6 +11,7 @@ If the field is marked as `Needs Maintainer`, it means that the package is curre
 | Name                                      | Maintainer         | Github ID                                                                                |
 | ----------------------------------------- | ------------------ | ---------------------------------------------------------------------------------------- |
 | amazon-ena                                | Sidero Labs        | NA                                                                                       |
+| amd-npu                                   | saguila            | [saguila](https://github.com/saguila)                                                    |
 | amdgpu                                    | Sidero Labs        | NA                                                                                       |
 | amd-ucode                                 | Sidero Labs        | NA                                                                                       |
 | binfmt-misc                               | Serge Logvinov     | [sergelogvinov](https://github.com/sergelogvinov)                                        |

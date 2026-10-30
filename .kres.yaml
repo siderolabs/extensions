@@ -3,6 +3,7 @@ kind: pkgfile.Build
 spec:
   targets:
     - amazon-ena
+    - amd-npu
     - amdgpu
     - amd-ucode
     - binfmt-misc
