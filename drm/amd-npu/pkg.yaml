@@ -20,6 +20,14 @@ steps:
       - |
         mkdir -p /rootfs/usr/lib/firmware
         cp -R -p /usr/lib/firmware/amdnpu /rootfs/usr/lib/firmware/
+
+        cd /rootfs/usr/lib/firmware/amdnpu
+        mv 1502_00/npu.sbin.1.5.2.380 1502_00/npu.sbin
+        mv 1502_00/npu.sbin.1.5.5.391 1502_00/npu_7.sbin
+        mv 17f0_10/npu.sbin.1.0.0.63 17f0_10/npu.sbin
+        mv 17f0_10/npu.sbin.1.1.2.64 17f0_10/npu_7.sbin
+        mv 17f0_11/npu.sbin.1.0.0.166 17f0_11/npu.sbin
+        mv 17f0_11/npu.sbin.1.1.2.65 17f0_11/npu_7.sbin
   - test:
       - |
         # https://www.kernel.org/doc/html/v4.15/admin-guide/module-signing.html#signed-modules-and-stripping
