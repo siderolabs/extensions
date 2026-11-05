@@ -23,21 +23,6 @@ steps:
       - |
         cd ${GOPATH}/src/github.com/google/gvisor
 
-        # The "go" branch strips the sources of the sidecar binaries that runsc
-        # expects in "gvisor-bin/" next to itself, so take them from the release tag.
-        cp /tmp/gvisor-release/runsc/cmd/sentry/sentry_main.go ./runsc/cmd/sentry/
-        cp /tmp/gvisor-release/runsc/cmd/metricserver/metricserver_main.go ./runsc/cmd/metricserver/
-        # runsc/checkpointgofer is a library package in the "go" branch, so keep main in its own directory
-        mkdir -p ./runsc/checkpointgofer/main
-        cp /tmp/gvisor-release/runsc/checkpointgofer/main.go ./runsc/checkpointgofer/main/
-        for pkg in runsc/checkpointgofer/gcs runsc/metricserver; do
-          mkdir -p ./${pkg}
-          find /tmp/gvisor-release/${pkg} -maxdepth 1 -name '*.go' ! -name '*_test.go' -exec cp {} ./${pkg}/ \;
-        done
-        mkdir -p ./runsc/prewarmer ./runsc/fdparking
-        cp /tmp/gvisor-release/runsc/prewarmer/prewarmer.c ./runsc/prewarmer/
-        cp /tmp/gvisor-release/runsc/fdparking/fdparking.c ./runsc/fdparking/
-
         go mod download
   - network: none
     build:
@@ -46,9 +31,24 @@ steps:
 
         mkdir ./bin
 
-        CGO_ENABLED=0 go build -o ./bin/runsc ./runsc
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/runsc ./runsc
 
-        CGO_ENABLED=0 go build -o ./bin/containerd-shim-runsc-v1 ./shim
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/containerd-shim-runsc-v1 ./shim
+
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/gvisor_sentry ./runsc/cmd/sentry
+
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/runsc-metric-server ./runsc/cmd/metricserver
+
+        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/checkpointgofer ./runsc/checkpointgofer
+
+        # Freestanding static C binaries, flags match upstream Bazel genrules.
+        CFLAGS="-Os -fno-pie -no-pie -ffreestanding -fno-stack-protector -fno-asynchronous-unwind-tables -fno-unwind-tables -static -nostdlib -nostartfiles -Wl,--build-id=none -Wl,--gc-sections -Wl,-s -Wl,-n"
+
+        cc ${CFLAGS} -o ./bin/gvisor-bin/gvisor-sentry-prewarmer ./runsc/prewarmer/prewarmer.c
+
+        cc ${CFLAGS} -o ./bin/gvisor-bin/runsc-fd-parking ./runsc/fdparking/fdparking.c
+
+        cc ${CFLAGS} -o ./bin/gvisor-bin/gvisor-proc-umounter ./runsc/procumounter/procumounter.c
     install:
       - |
         mkdir -p /rootfs/usr/local/bin
