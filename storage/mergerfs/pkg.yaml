@@ -1,0 +1,64 @@
+name: mergerfs
+variant: scratch
+shell: /bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/trapexit/mergerfs/releases/download/{{ .MERGERFS_VERSION }}/mergerfs-{{ .MERGERFS_VERSION }}.tar.gz
+        destination: mergerfs.tar.gz
+        sha256: {{ .MERGERFS_SHA256 }}
+        sha512: {{ .MERGERFS_SHA512 }}
+    env:
+      SOURCE_DATE_EPOCH: {{ .BUILD_ARG_SOURCE_DATE_EPOCH }}
+    prepare:
+      - |
+        tar -xzf mergerfs.tar.gz --strip-components=1
+    build:
+      - |
+        # The Makefile only applies its own flags (including -static, -flto
+        # and -DNDEBUG) when CFLAGS/CXXFLAGS are unset, so drop the bldr
+        # defaults. Same flags as upstream's static releases; libfuse is vendored.
+        unset CFLAGS CXXFLAGS LDFLAGS
+
+        make NDEBUG=1 LTO=1 STATIC=1 LDFLAGS=-s -j $(nproc) build/mergerfs
+      - |
+        cd /pkg/mounts
+
+        go test ./...
+        CGO_ENABLED=0 go build -ldflags "-s -w" -trimpath -o /tmp/mergerfs-supervisor ./cmd/mergerfs-supervisor
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/bin /rootfs/usr/local/libexec /rootfs/usr/local/etc/containers
+
+        cp build/mergerfs /rootfs/usr/local/bin/mergerfs
+        cp /tmp/mergerfs-supervisor /rootfs/usr/local/libexec/mergerfs-supervisor
+        cp /pkg/mergerfs.yaml /rootfs/usr/local/etc/containers/
+    test:
+      - |
+        mkdir -p /extensions-validator-rootfs
+        cp -r /rootfs/ /extensions-validator-rootfs/rootfs
+        cp /pkg/manifest.yaml /extensions-validator-rootfs/manifest.yaml
+        /extensions-validator validate --rootfs=/extensions-validator-rootfs --pkg-name="${PKG_NAME}"
+      - |
+        [[ $(/rootfs/usr/local/bin/mergerfs --version) == *{{ .MERGERFS_VERSION }}* ]]
+      - |
+        # The host service runs it straight from the Talos rootfs: no loader, no shared libraries.
+        readelf -l /rootfs/usr/local/bin/mergerfs > /tmp/mergerfs.phdrs
+        grep -q ' LOAD ' /tmp/mergerfs.phdrs
+        if grep -q INTERP /tmp/mergerfs.phdrs; then
+          echo "mergerfs is dynamically linked" >&2
+          exit 1
+        fi
+    sbom:
+      outputPath: /rootfs/usr/local/share/spdx/mergerfs.spdx.json
+      version: {{ .MERGERFS_VERSION }}
+      # mergerfs, and the libfuse fork it vendors and links statically.
+      licenses:
+        - ISC
+        - LGPL-2.1
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
