@@ -21,7 +21,7 @@ ZEROTIER_VERSION: 1.16.2
 ZEROTIER_SHA256: 2c607f573c6e38815433af289d364a689a203b18b51125f06c4472014d0657f0
 ZEROTIER_SHA512: c955fe75930cdecb806b766aa3ae07f18dd2b4ee772d69f20375e043bdd3473d8e12fe530cfb8663f194fe63d5a66c545983be93b4c81b171fe4da930062ad7b
 # renovate: datasource=github-releases depName=fosrl/newt
-NEWT_VERSION: 1.19.0
+NEWT_VERSION: 1.20.0
 NEWT_SHA256: 98c9df97d2c06fa1bc4b19cbb2c5ec551a9ca1c40e0e98719d3307ec90f8b159
 NEWT_SHA512: a02adc89f86a132ade81907f56966156cfc49dd2f73294e84e96c43346ae0cfb69d1b260f1e0bbf941dae579315600bfc9b0a05998d7fd9af7bfa4749c9e6c28
 # renovate: datasource=github-releases extractVersion=^v(?<version>.*)$ depName=netbirdio/netbird
