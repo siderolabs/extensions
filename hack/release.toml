@@ -27,6 +27,7 @@ drbd: 9.3.4
 fuse: 3.18.3
 glib: 2.90.0
 gvisor: 20261026.0
+hailort v5: 5.5.0
 harbor-credential-provider: 0.2.0
 hyperv-guest-agent: 7.3
 kata-containers: 4.3.1
@@ -47,6 +48,7 @@ qemu-guest-agent: 11.1.3
 spin: 0.27.1
 stargz-snapshotter: 0.19.1
 tailscale: 1.104.5
+tenstorrent: 2.12.0
 xdma-driver: a918c51
 """
 

@@ -14,9 +14,9 @@ vars:
   UTIL_LINUX_SHA256: fbd62a100ab7bb8746ba0661255c3c48185b1e9021507c624da01fbc696330ec
   UTIL_LINUX_SHA512: 3aea9ebd835b353e0c73356f0e4543ba4c3ad448e4f50a386c35cfaac81cbf45425b1a6c7552ed5673580acf2b58f8af2792f5b3019ffe478edd77c7ebf444dc
   ENA_VERSION: 2.17.4 # update this when updating PKGS version tag in Makefile
-  TENSTORRENT_VERSION: 2.11.0 # update this when updating PKGS version tag in Makefile
+  TENSTORRENT_VERSION: 2.12.0 # update this when updating PKGS version tag in Makefile
   HAILORT_VERSION: 4.24.0 # update this when updating PKGS version tag in Makefile
-  HAILORT_V5_VERSION: 5.4.0 # update this when updating PKGS version tag in Makefile
+  HAILORT_V5_VERSION: 5.5.0 # update this when updating PKGS version tag in Makefile
   MELLANOX_MSFTFLINT_VERSION: 4.34.1-4 # update this when updating PKGS version tag in Makefile
   XDMA_VERSION: a918c51 # update this when updating PKGS version tag in Makefile
 
