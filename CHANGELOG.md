@@ -1,3 +1,322 @@
+## [Talos System Extensions 1.15.0-beta.0](https://github.com/siderolabs/extensions/releases/tag/v1.15.0-beta.0) (2026-11-10)
+
+Welcome to the v1.15.0-beta.0 release of Talos System Extensions!  
+*This is a pre-release of Talos System Extensions*
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### NVIDIA New Feature Branch
+
+New `nvidia-open-gpu-kernel-modules-new-feature`, `nvidia-container-toolkit-new-feature` and `nvidia-fabricmanager-new-feature`
+extensions track the NVIDIA "new feature" driver branch (615.x), in addition to the existing `lts` and `production` variants.
+Only the open-source kernel modules are provided for this branch, as NVIDIA does not ship a proprietary build of 615.x.
+
+
+### Component Updates
+
+ceph: 21.3.0
+cloud-provider-aws: v1.37.0
+cloudflared: 2026.10.7
+crun: 1.29.1
+ctr: 2.3.7
+drbd: 9.3.4
+fuse: 3.18.3
+glib: 2.90.0
+gvisor: 20261026.0
+hailort v5: 5.5.0
+harbor-credential-provider: 0.2.0
+hyperv-guest-agent: 7.3
+kata-containers: 4.3.1
+libvirt: 12.9.0
+libxml2: 2.15.4
+Linux firmware: 20261019
+metal-agent: 0.1.7
+nebula: 1.12.0
+netbird: 0.82.0
+newt: 1.19.0
+NVIDIA LTS: 580.196.07
+NVIDIA Production: 595.112.07
+NVIDIA New Feature: 615.71.10
+Open-iSCSI: 2.1.13
+px-fuse: 80a472b147b59614a77cd60f390a9044a7d8d37b
+qemu: 11.1.3
+qemu-guest-agent: 11.1.3
+spin: 0.27.1
+stargz-snapshotter: 0.19.1
+tailscale: 1.104.5
+tenstorrent: 2.12.0
+xdma-driver: a918c51
+
+
+### Contributors
+
+* Andrey Smirnov
+* Noel Georgi
+* Maja Bojarska
+* Mateusz Urbanek
+* Justin Garrison
+* Angelos Petheriotis
+* Dennis Docter
+* Dmitrii Sharshakov
+* Mateusz Urbanek
+* Max Makarov
+* saguila
+* Calin Stefan
+* Christian A. Jacobsen
+* Christoph Engelbert (noctarius)
+* Evan Champion
+* Jake Watson
+* Jarrad S
+* Jiri Tyr
+* Joakim Nohlgård
+* Johan Thomsen
+* Licia Seiker
+* Maxime Louet
+* Neil Levien
+* Pranav Patil
+* Prasanth Baskar
+* Rokoucha
+* Ruk Doe
+* Ryuki Maruyama
+* Sacha Weatherstone
+* Scott Vandiver
+* Simon Ostendorf
+* Steffen Windoffer
+* Steve Wills
+* Steven Kreitzer
+* Tom Plant
+* Utku Ozdemir
+* domitoridesu
+* nahsi
+* usman.malik_ext
+* zavermax
+
+### Changes
+<details><summary>76 commits</summary>
+<p>
+
+* [`70bdada8`](https://github.com/siderolabs/extensions/commit/70bdada873ce16a6591d02c37cefa30643384b7d) chore: sync pkgs & tools
+* [`d1acc64e`](https://github.com/siderolabs/extensions/commit/d1acc64eebe20b3caa6704872af9e7fa17d10221) feat: update tools/pkgs
+* [`d66154d8`](https://github.com/siderolabs/extensions/commit/d66154d882d8e683151cd126b89e42beda785711) fix: add one more sidecar to gvisor build
+* [`e5a1af71`](https://github.com/siderolabs/extensions/commit/e5a1af7154daf85207878b0b2ebe24c235b70e85) fix: install amd-npu firmware under the names the driver requests
+* [`224af5b7`](https://github.com/siderolabs/extensions/commit/224af5b7d88a37b26979388e6795cb1bde68babd) feat: update virtualization components
+* [`4910f07b`](https://github.com/siderolabs/extensions/commit/4910f07bf82fff52e0a95126b6e0f1e187c44e99) feat: update backportable dependencies
+* [`af5a9f72`](https://github.com/siderolabs/extensions/commit/af5a9f7230b012934c02a16849694ef73047aa38) feat: add ACR credential provider
+* [`ae2e4ed5`](https://github.com/siderolabs/extensions/commit/ae2e4ed566b99bc59ab0f74a8c1c753675e5e3b6) feat: add kubelet-credential-provider-vault extension
+* [`0ebe9e31`](https://github.com/siderolabs/extensions/commit/0ebe9e3191a60697dc3071068972b2859972ff24) feat: add amd-npu extension
+* [`8f31f100`](https://github.com/siderolabs/extensions/commit/8f31f100b24c652c693ef85f72790f5100e820a7) feat(nfs-server): honor non-port daemon configuration
+* [`7ab5c88f`](https://github.com/siderolabs/extensions/commit/7ab5c88fa0b318bb284f27f30a24767908a0f78e) fix(nfs-server): wait for declared export backing mounts
+* [`305535ad`](https://github.com/siderolabs/extensions/commit/305535ad647d18ab19dae037f9e32377bf08b269) feat: add dvb-usb-dvbsky extension for DVBSky USB DVB devices
+* [`863e9079`](https://github.com/siderolabs/extensions/commit/863e90798a881eda4425827bad3d4ddea90e76e9) feat: update backportable dependencies
+* [`2c96f83d`](https://github.com/siderolabs/extensions/commit/2c96f83d634710ea1c6a0c19137708c535a2c426) feat: update libvirt to 12.8.0
+* [`6cc55966`](https://github.com/siderolabs/extensions/commit/6cc5596605851748cae34dcf1d232c43fdb7afbb) feat: catch up with pkgs/tools updates
+* [`578c50a1`](https://github.com/siderolabs/extensions/commit/578c50a1a90d14f149e6aa663746aee6760184d4) feat: update NVIDIA drivers
+* [`8f2dc1bb`](https://github.com/siderolabs/extensions/commit/8f2dc1bb42190f36abee9ededdfc0a6fd5d8051a) feat: update Linux firmware to 20261019
+* [`6efe6205`](https://github.com/siderolabs/extensions/commit/6efe62057e8ec45953805983ff317340eb89d400) fix(stargz-snapshotter): add correct config, paths and mounts for estargz
+* [`e455ac03`](https://github.com/siderolabs/extensions/commit/e455ac03c2c6d8f0cb161eda4559f751273916d8) release(v1.15.0-alpha.2): prepare release
+* [`6b216763`](https://github.com/siderolabs/extensions/commit/6b2167636f28e03bec012b05e511133374a44eef) chore: sync pkgs
+* [`523354d9`](https://github.com/siderolabs/extensions/commit/523354d9b4912adef2c288e02f4dc945e4b4ef9a) fix: harden kata-containers allowed pod annotations
+* [`9baa6fa0`](https://github.com/siderolabs/extensions/commit/9baa6fa09e9ea31caddfe524f38c5e5fdecf29fe) feat: update kata containers to 4.3.1
+* [`a4198e25`](https://github.com/siderolabs/extensions/commit/a4198e2560a8e8f5e12673908b64c6c4a52e8ae6) fix: generate kata-containers config from the upstream one
+* [`1c8a4086`](https://github.com/siderolabs/extensions/commit/1c8a408648be949ec207ceffe90cb894bf23770b) feat: adapt to the kTLS changes
+* [`9f2aa1d4`](https://github.com/siderolabs/extensions/commit/9f2aa1d47747b86b9c2697eb0308932c57b33513) feat: add new extensions for NVIDIA 'new feature' branch
+* [`80d66960`](https://github.com/siderolabs/extensions/commit/80d66960d6d22e8dd3e8d3707a91eae60739109b) feat: update to Linux 7.3
+* [`6e96d793`](https://github.com/siderolabs/extensions/commit/6e96d79367783e1c93f4aa5ed5bc7641a9a6604f) fix(multipathd): move statedir path from /etc to /var/lib
+* [`776e232e`](https://github.com/siderolabs/extensions/commit/776e232ebe821f961ead4ccd4ec9aa315fdaa6f2) fix(soci-snapshotter): remove hardcoded debug log level
+* [`9a265f4e`](https://github.com/siderolabs/extensions/commit/9a265f4e76f5d909cbcb0e79d26baeb40c65143f) chore: update pixman mirror
+* [`3bb9a06e`](https://github.com/siderolabs/extensions/commit/3bb9a06e5078665c91e9854fceb14e494ade5dcd) fix: skip transient domains during shutdown
+* [`502ca481`](https://github.com/siderolabs/extensions/commit/502ca481e91385baee4a7573c946c1717846ab47) fix: build glibc libgcc for fabric manager
+* [`b0c76552`](https://github.com/siderolabs/extensions/commit/b0c76552144c8407543efe881a4e62772f36691d) fix: dereference hailo firmware symlinks
+* [`02310d43`](https://github.com/siderolabs/extensions/commit/02310d439997c85f50e7a02d200bc357e9c59d8c) fix(gvisor): ship sidecar binaries in gvisor-bin
+* [`2d54d361`](https://github.com/siderolabs/extensions/commit/2d54d3616fef021262b490db547465aee3461d45) chore: use bldr 0.6.5 and shortened tag
+* [`5e2b32e0`](https://github.com/siderolabs/extensions/commit/5e2b32e0afceadcf21bd193de752cc84ff74cfe2) release(v1.15.0-alpha.1): prepare release
+* [`e93d2424`](https://github.com/siderolabs/extensions/commit/e93d24249f04bcd949d626158e7a203935937c50) fix: replace lsscsi mirror
+* [`c62786da`](https://github.com/siderolabs/extensions/commit/c62786da405476dfe11765ede9217891079998bc) feat: bump deps
+* [`140de060`](https://github.com/siderolabs/extensions/commit/140de060968b28b17ef118808fb993e7a5332e8d) feat: add hailo v5 system extension
+* [`7d75c4be`](https://github.com/siderolabs/extensions/commit/7d75c4be16b3e6455363a2e826a147d0de2c6761) feat: add qaic extension
+* [`e17bf6f6`](https://github.com/siderolabs/extensions/commit/e17bf6f6a208888c1f424d02eb3b6ed4471d4a03) fix: switch to correct chrdev lock dir
+* [`378217d9`](https://github.com/siderolabs/extensions/commit/378217d9733c05e0b6dce324f71941738dcbdf39) feat: update harbor-credential-provider to v0.2.0
+* [`993f14ab`](https://github.com/siderolabs/extensions/commit/993f14ab1a9c3a3fe88c06f28692a226ac58f916) feat: add libnl to libvirt
+* [`fdd57579`](https://github.com/siderolabs/extensions/commit/fdd5757940ece58052eadbcfc253bfe8b65ea4f9) fix(libvirtd): allow block device behind emulator TPM state
+* [`5f08d0c1`](https://github.com/siderolabs/extensions/commit/5f08d0c19d52d1a705966bf822ffae455574a9d9) chore: bump metal-agent version to v0.1.7
+* [`e3b52eb4`](https://github.com/siderolabs/extensions/commit/e3b52eb428fd75e97dab5a505eee492e791d3cbe) feat: add software TPM support to libvirtd
+* [`f585712f`](https://github.com/siderolabs/extensions/commit/f585712f408131e66be55dc307880c508cde341d) chore: sync pkgs/tools with the latest
+* [`6d4c0349`](https://github.com/siderolabs/extensions/commit/6d4c03499f32364e1814a1e54b736784b2809d5b) feat: update DRBD to 9.3.4 & Linux firmware
+* [`1d78a28c`](https://github.com/siderolabs/extensions/commit/1d78a28c322eb4030142990662fc143d195a7cf0) feat(nfsrahead): read config from /etc/nfs.conf
+* [`62074ae1`](https://github.com/siderolabs/extensions/commit/62074ae1a111e464df9fb616d4fe31504e4df16d) fix: point to non-existent dbus path for virtstoraged
+* [`0a16e7d8`](https://github.com/siderolabs/extensions/commit/0a16e7d8f25b9990d565663c6af1f06df092739a) chore: switch Ceph mirror
+* [`e3769b44`](https://github.com/siderolabs/extensions/commit/e3769b44b73be40dc1a40e042f5715b2326343c4) chore: downgrade to go 1.26.8
+* [`bfa89ca4`](https://github.com/siderolabs/extensions/commit/bfa89ca41ba1240edc8c6c28722e254b955425f7) chore: bump tools, pkgs, go-tools
+* [`083f238c`](https://github.com/siderolabs/extensions/commit/083f238cf28fde8aeb4a2017e7f33d526a31f69a) chore: update go to 1.27.1, direct dep updates
+* [`baf12744`](https://github.com/siderolabs/extensions/commit/baf12744408e18749e98d5a1d21444b77c1bbd30) chore: component updates (2026-09-10)
+* [`2a2873c1`](https://github.com/siderolabs/extensions/commit/2a2873c10156f62c8e144ea43523127fbc065d8a) feat: add dvb-pt3 extension
+* [`acb82c6b`](https://github.com/siderolabs/extensions/commit/acb82c6b89030ff50e60020316955989f9ecfce1) feat: add Intel HD audio system extension
+* [`7d8b5c9f`](https://github.com/siderolabs/extensions/commit/7d8b5c9fe72e669592e0a6cfb37d5d3fda00bba0) release(v1.15.0-alpha.0): prepare release
+* [`cf7ad2b7`](https://github.com/siderolabs/extensions/commit/cf7ad2b75d812d8ad2ea5b6affb7640eddb2cdc1) fix(nfs-server): harden bind mounts with nodev,noexec,nosuid
+* [`1df903bd`](https://github.com/siderolabs/extensions/commit/1df903bda0092bf0f6eee1b82dc22b84373f23ee) docs: multipathd
+* [`777096f9`](https://github.com/siderolabs/extensions/commit/777096f9d71ae2fc284af3f522dc27b74d2e5cf5) feat: update to containerd 2.3.5
+* [`cc0c57c5`](https://github.com/siderolabs/extensions/commit/cc0c57c56ab6b024cc62f79e9c912d06db2192b7) feat: add NFS server extension
+* [`e9498f6a`](https://github.com/siderolabs/extensions/commit/e9498f6ade0b203b0e274512e1eeb6457b81c48c) feat: switch to nri for nvidia
+* [`508c918b`](https://github.com/siderolabs/extensions/commit/508c918b131fac713b4bd0ae4ed47047c98441d3) feat: replace wolfi build roots with stagex
+* [`d804199f`](https://github.com/siderolabs/extensions/commit/d804199fbf9b1e22bd25ac9a681be611ef77690c) feat: update glibc to 2.44
+* [`09b2b40c`](https://github.com/siderolabs/extensions/commit/09b2b40c7ff800d647cc255a9369882a9b59a6a7) fix: avoid virtqemud reconnect deadlock
+* [`1097ccd2`](https://github.com/siderolabs/extensions/commit/1097ccd279389f733ae6a91313d3104798097c34) feat: add libvirtd
+* [`678bf422`](https://github.com/siderolabs/extensions/commit/678bf4223262a25691f78c1fa3a46085a0c207b3) fix: nvidia vulkan paths
+* [`a0f602c5`](https://github.com/siderolabs/extensions/commit/a0f602c58248ca9c108e521dbc847ec9abe4e560) feat: add kata-containers-nvidia-gpu-snp extension
+* [`f0d89142`](https://github.com/siderolabs/extensions/commit/f0d891421506d226a335f7d05bf1d3345120a047) fix: wait for multipath configuration
+* [`631db053`](https://github.com/siderolabs/extensions/commit/631db053516f27e7df265110af763b4a59c17a40) fix: update multipath-tools to 0.14.3
+* [`eac6c72a`](https://github.com/siderolabs/extensions/commit/eac6c72a44f2850e375a041f184eedb6a3cdac4a) fix: update CRI configs for version 4
+* [`ba4b2750`](https://github.com/siderolabs/extensions/commit/ba4b2750047bc067aa006ecc163816a1d2c9d700) feat: update OpenZFS to 2.4.4
+* [`26822f5c`](https://github.com/siderolabs/extensions/commit/26822f5c95ab96da26eedfeb83c5a035b48670a4) chore: update Go to 1.26.7
+* [`853c219b`](https://github.com/siderolabs/extensions/commit/853c219b1e5e5ded915c6237d97d4bc2826af927) fix: drop multipath dependency on cri
+* [`85f5bfbf`](https://github.com/siderolabs/extensions/commit/85f5bfbf3c49e7d9504b251f4f9cd4c063b67df8) docs: update broken talos.dev URLs to docs.siderolabs.com
+* [`f2c879a7`](https://github.com/siderolabs/extensions/commit/f2c879a7c5ab806063b6a48d347ae0d78df91b28) feat: add cachefilesd extension
+</p>
+</details>
+
+### Changes since v1.15.0-alpha.2
+<details><summary>18 commits</summary>
+<p>
+
+* [`70bdada8`](https://github.com/siderolabs/extensions/commit/70bdada873ce16a6591d02c37cefa30643384b7d) chore: sync pkgs & tools
+* [`d1acc64e`](https://github.com/siderolabs/extensions/commit/d1acc64eebe20b3caa6704872af9e7fa17d10221) feat: update tools/pkgs
+* [`d66154d8`](https://github.com/siderolabs/extensions/commit/d66154d882d8e683151cd126b89e42beda785711) fix: add one more sidecar to gvisor build
+* [`e5a1af71`](https://github.com/siderolabs/extensions/commit/e5a1af7154daf85207878b0b2ebe24c235b70e85) fix: install amd-npu firmware under the names the driver requests
+* [`224af5b7`](https://github.com/siderolabs/extensions/commit/224af5b7d88a37b26979388e6795cb1bde68babd) feat: update virtualization components
+* [`4910f07b`](https://github.com/siderolabs/extensions/commit/4910f07bf82fff52e0a95126b6e0f1e187c44e99) feat: update backportable dependencies
+* [`af5a9f72`](https://github.com/siderolabs/extensions/commit/af5a9f7230b012934c02a16849694ef73047aa38) feat: add ACR credential provider
+* [`ae2e4ed5`](https://github.com/siderolabs/extensions/commit/ae2e4ed566b99bc59ab0f74a8c1c753675e5e3b6) feat: add kubelet-credential-provider-vault extension
+* [`0ebe9e31`](https://github.com/siderolabs/extensions/commit/0ebe9e3191a60697dc3071068972b2859972ff24) feat: add amd-npu extension
+* [`8f31f100`](https://github.com/siderolabs/extensions/commit/8f31f100b24c652c693ef85f72790f5100e820a7) feat(nfs-server): honor non-port daemon configuration
+* [`7ab5c88f`](https://github.com/siderolabs/extensions/commit/7ab5c88fa0b318bb284f27f30a24767908a0f78e) fix(nfs-server): wait for declared export backing mounts
+* [`305535ad`](https://github.com/siderolabs/extensions/commit/305535ad647d18ab19dae037f9e32377bf08b269) feat: add dvb-usb-dvbsky extension for DVBSky USB DVB devices
+* [`863e9079`](https://github.com/siderolabs/extensions/commit/863e90798a881eda4425827bad3d4ddea90e76e9) feat: update backportable dependencies
+* [`2c96f83d`](https://github.com/siderolabs/extensions/commit/2c96f83d634710ea1c6a0c19137708c535a2c426) feat: update libvirt to 12.8.0
+* [`6cc55966`](https://github.com/siderolabs/extensions/commit/6cc5596605851748cae34dcf1d232c43fdb7afbb) feat: catch up with pkgs/tools updates
+* [`578c50a1`](https://github.com/siderolabs/extensions/commit/578c50a1a90d14f149e6aa663746aee6760184d4) feat: update NVIDIA drivers
+* [`8f2dc1bb`](https://github.com/siderolabs/extensions/commit/8f2dc1bb42190f36abee9ededdfc0a6fd5d8051a) feat: update Linux firmware to 20261019
+* [`6efe6205`](https://github.com/siderolabs/extensions/commit/6efe62057e8ec45953805983ff317340eb89d400) fix(stargz-snapshotter): add correct config, paths and mounts for estargz
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>76 commits</summary>
+<p>
+
+* [`17fdd33`](https://github.com/siderolabs/pkgs/commit/17fdd3333e028525c10cbd90197c4958c03936da) feat: enable cost-based cgroup IO controller
+* [`711a307`](https://github.com/siderolabs/pkgs/commit/711a307c2e24d205d704693cbd964896bd6282c3) feat: enable NTSYNC module
+* [`af6b1f8`](https://github.com/siderolabs/pkgs/commit/af6b1f86ce2f174d6bc40207d57d4f0b5b7273ee) feat: enable AMD Pensando ionic and ionic_rdma
+* [`eb9b5dd`](https://github.com/siderolabs/pkgs/commit/eb9b5ddaf49d9786f0e79334bc6bb85ec1c70e7d) feat: enable EFI vars pstore and dynamic netconsole
+* [`8359f7f`](https://github.com/siderolabs/pkgs/commit/8359f7f7e6a7bfa71963405b8e99cac35a3ac9c5) feat: bump dependencies
+* [`33486c9`](https://github.com/siderolabs/pkgs/commit/33486c9b94bc677f1e13ea1f24a231006895efc4) feat: enable arm64 SMMUv3 SVA for ATS (NVIDIA Grace Hopper)
+* [`5c111c8`](https://github.com/siderolabs/pkgs/commit/5c111c8079a8e0114aeecdf61131ce45fd5897b0) fix: enable BROADCOM PHY on amd64
+* [`c827b30`](https://github.com/siderolabs/pkgs/commit/c827b30043a504beee23ec951132cceb48622c2e) feat: update dependencies
+* [`ff868eb`](https://github.com/siderolabs/pkgs/commit/ff868eb6cc7dd5180ad4c994db2b0d57e2dc89d7) feat: bump remaining dependencies
+* [`bfdc8ae`](https://github.com/siderolabs/pkgs/commit/bfdc8ae6c75a57623fd22c66a748e98476bd6e72) feat: update NVIDIA drivers
+* [`4451182`](https://github.com/siderolabs/pkgs/commit/4451182794b44a05862a31f8d300b9243ac90ee0) feat: update backportable dependencies
+* [`e406ef2`](https://github.com/siderolabs/pkgs/commit/e406ef2a80e82fe75b7c6aace6c8bf3cf569d9d4) feat: enable arm64 ff-a tpm crb support
+* [`6e225ae`](https://github.com/siderolabs/pkgs/commit/6e225ae6d52833b6981d396e032d3759ea326df5) feat: enable applesmc on amd64
+* [`2c33dc1`](https://github.com/siderolabs/pkgs/commit/2c33dc199ae794acafe493d9634817036526cdad) feat: enable EDAC_10NM kernel option
+* [`5a48570`](https://github.com/siderolabs/pkgs/commit/5a48570db39ebf82a762a7e8f265437b3e03185f) feat: enable kTLS device offload (CONFIG_TLS_DEVICE, CONFIG_MLX5_EN_TLS)
+* [`b4b1cec`](https://github.com/siderolabs/pkgs/commit/b4b1cecfcf3d27cfd00ecd7b8284469fd8d09d5a) feat: add new flavor of NVIDIA 'new feature' for 615.x
+* [`9b40a60`](https://github.com/siderolabs/pkgs/commit/9b40a60e5b7ad6fec3eda0adf6f243f0b41d8730) feat: update Linux to 7.3
+* [`641c033`](https://github.com/siderolabs/pkgs/commit/641c033581593597d60351fe497e8d2f08a6ed71) fix: restore ACPI power button
+* [`8eab26a`](https://github.com/siderolabs/pkgs/commit/8eab26a6a03e61ceecdd7947b84acd17ad94d254) chore: update DRBD compat
+* [`3890840`](https://github.com/siderolabs/pkgs/commit/389084023a15ce0abf09c3314b73dd5945a386b6) feat: update Linux to 6.18.57
+* [`465612a`](https://github.com/siderolabs/pkgs/commit/465612a4410cce94a793f19b3c4f4b555d8df977) feat: update to containerd 2.3.7
+* [`cbcef4d`](https://github.com/siderolabs/pkgs/commit/cbcef4d69709d5f40ebe68d827ea83d0abe93634) feat: update Linux to 6.18.56
+* [`7bb6d79`](https://github.com/siderolabs/pkgs/commit/7bb6d79be1c6c2478fc18a92e84f7dd1af948ed2) feat: bump deps
+* [`305b1b6`](https://github.com/siderolabs/pkgs/commit/305b1b6422ceb1d4e753302f7a7b6fc0afcc5e5e) feat: bump deps
+* [`2a7769e`](https://github.com/siderolabs/pkgs/commit/2a7769ed74b945f6b019514692101bd521b551db) feat: enable bhyve guest support on amd64
+* [`ce4bafb`](https://github.com/siderolabs/pkgs/commit/ce4bafbaa8752613a0a2f2107bfc4150d77e3641) feat: enable CONFIG_DRM_ACCEL_AMDXDNA on amd64
+* [`8f7ce6c`](https://github.com/siderolabs/pkgs/commit/8f7ce6c9e4be02161ae3287695f6a6a1b09cf692) feat: enable CONFIG_MOTORCOMM_PHY on arm64
+* [`fa71c34`](https://github.com/siderolabs/pkgs/commit/fa71c34e441d4b7426658c70b0073fdb917404ca) feat: enable pNFS block and SCSI layouts in nfsd
+* [`f6b8411`](https://github.com/siderolabs/pkgs/commit/f6b8411d0c6fd17c273bbf46a42e18a12587e0e0) feat: add hailort v5 package
+* [`64af669`](https://github.com/siderolabs/pkgs/commit/64af6690ae487a9d8b8e0344035ccf09c00e3fca) feat: enable Qualcomm Cloud AI 100 (QAIC) driver
+* [`518972a`](https://github.com/siderolabs/pkgs/commit/518972a578a09b2bee7a6ba45546f844747bcb57) fix: add a patch to fix booting on Apple hardware
+* [`2b782b6`](https://github.com/siderolabs/pkgs/commit/2b782b61997c1dfc4aa12c02cabc18b7d6bea2e6) feat: update Linux to 6.18.54, runc to 1.5.2
+* [`4871c10`](https://github.com/siderolabs/pkgs/commit/4871c10ff33a9ad588efb2401187fb3429e08475) feat: enable CONFIG_CRYPTO_ECC, CONFIG_CRYPTO_ECDH on arm64 to match amd64
+* [`b4cb94c`](https://github.com/siderolabs/pkgs/commit/b4cb94c75af8e3255eb9e14fd157a77e8f85dd97) feat: enable CONFIG_BLK_WBT
+* [`6868054`](https://github.com/siderolabs/pkgs/commit/686805431e59ac4853c51c05d766c81f74e2c451) feat: update containerd to 2.3.6
+* [`55806c6`](https://github.com/siderolabs/pkgs/commit/55806c609ddd629616d8e84a35106628e1bf2ec8) feat: update systemd to v262
+* [`a2b57ee`](https://github.com/siderolabs/pkgs/commit/a2b57eea7abc028701e39a5a5960e75d61d9416e) fix: add missing sboms for swtpm
+* [`12b29b3`](https://github.com/siderolabs/pkgs/commit/12b29b3a1b09c185c8c09651caca89026b3ab57c) feat: update Linux to 6.18.53
+* [`6868000`](https://github.com/siderolabs/pkgs/commit/686800055f2ef93adf254abb7ae339f5cb33627f) feat: bump dependencies
+* [`bed8e18`](https://github.com/siderolabs/pkgs/commit/bed8e185ade6f90e911b02f515a0ed4106c69c24) feat: add swtpm
+* [`777c95f`](https://github.com/siderolabs/pkgs/commit/777c95fb11e6c2a32927b152c80a4723a7394a70) feat: enable CONFIG_MACSEC in the kernel
+* [`99ec357`](https://github.com/siderolabs/pkgs/commit/99ec35767254e1785b730f923166b2a61f242ba7) feat: update DRBD & Linux firmware
+* [`a51429b`](https://github.com/siderolabs/pkgs/commit/a51429b07a01e3494df91a1bbf2048e52ab839ec) feat(kernel): enable CONFIG_NO_HZ_FULL
+* [`b39d2c3`](https://github.com/siderolabs/pkgs/commit/b39d2c385802da6f4001520fb3107b52c7f152f9) feat: update Linux to 6.18.52
+* [`69ed550`](https://github.com/siderolabs/pkgs/commit/69ed550370d9ab9935fdef4fba5f90705aa97922) feat: update Linux to 6.18.51
+* [`f380535`](https://github.com/siderolabs/pkgs/commit/f3805354497f17d96a774e5b5622b1fbdbf45ae1) chore: rekres
+* [`05913b5`](https://github.com/siderolabs/pkgs/commit/05913b5a67e09da6713fec4310488602b7214d02) chore: updates 2026-09-10
+* [`1a28bfb`](https://github.com/siderolabs/pkgs/commit/1a28bfb9dfa24b0b1cf69020f62781cc23153529) chore: update tools, toolchain, rustc
+* [`e7b09e2`](https://github.com/siderolabs/pkgs/commit/e7b09e28164e85ab448e47e073864ee6fef09975) feat: enable earth-pt3 dvb driver
+* [`5096469`](https://github.com/siderolabs/pkgs/commit/5096469b3d563ff043d23146bcc5d2252e31323c) feat: update libpathrs to 0.2.6
+* [`43e533c`](https://github.com/siderolabs/pkgs/commit/43e533c8387a9b2751b0036bf19351291556306e) feat: update Linux to 6.18.50
+* [`977b61f`](https://github.com/siderolabs/pkgs/commit/977b61fb151992e74cbd89a4dcd921f91dc30ac8) feat: update containerd to 2.3.5
+* [`43e6298`](https://github.com/siderolabs/pkgs/commit/43e6298f76423318f9d8aa4469ed171271dd24a4) fix: add a kernel patch for EFI SecureBoot integrity lockdown
+* [`a8b682b`](https://github.com/siderolabs/pkgs/commit/a8b682b77160d065c4662dd9f06f31c38a298ac6) feat: add kernel modules to enable Intel HD audio
+* [`ff111ff`](https://github.com/siderolabs/pkgs/commit/ff111ff2db66442544a8dc97871f6eba44f1481e) feat: enable Apple Silicon platform drivers
+* [`e68eeb5`](https://github.com/siderolabs/pkgs/commit/e68eeb5a2c78f4dedad087e33a87a272f060d8ef) feat: enable VIRTIO_INPUT as built-in for amd64/arm64
+* [`381fc2d`](https://github.com/siderolabs/pkgs/commit/381fc2d45303a4909f65196c9875063e8010a009) feat: bump kernel to 6.18.49
+* [`5394321`](https://github.com/siderolabs/pkgs/commit/539432102f629aaaac3467052d88c1c8c092e2bd) feat: enable CONFIG_USB_LAN78XX and CONFIG_MICROCHIP_PHY on amd64
+* [`4b9bf36`](https://github.com/siderolabs/pkgs/commit/4b9bf36f402384842238f2f191451ba90e7bc3ef) fix: preserve symlinks for libudev
+* [`50bf09f`](https://github.com/siderolabs/pkgs/commit/50bf09fe4bc7cbc7e09d015d891506a6f30032d5) fix: update OpenSSL to 3.6.4
+* [`f2b7acf`](https://github.com/siderolabs/pkgs/commit/f2b7acf132341319c8e0f309487f5b714857c968) feat: update kernel to 6.18.48
+* [`73327ff`](https://github.com/siderolabs/pkgs/commit/73327ff97cac2cf3d544cbc3d8f417ee46e694f9) feat: bump kernel to 6.18.47
+* [`b6b2843`](https://github.com/siderolabs/pkgs/commit/b6b284315268fa0bd4d5d9067ebaf35c3488fcd5) feat: enable CONFIG_XFRM_INTERFACE in the kernel
+* [`696fa3c`](https://github.com/siderolabs/pkgs/commit/696fa3c27c4d2928d3cbf9fcaf89d3b7db1de47b) feat: expose more software as pkgs
+* [`aa069d3`](https://github.com/siderolabs/pkgs/commit/aa069d3df40ad2150e7db3ba7b677441b33f8ac6) chore: update OpenZFS to 2.4.4
+* [`c1837b6`](https://github.com/siderolabs/pkgs/commit/c1837b630397e1b331876e99f9dbe7ab1c8ce52e) feat: bump kernel to 6.18.46
+* [`28f5f23`](https://github.com/siderolabs/pkgs/commit/28f5f23ccf05ac8633e9f85146e47f27bbbae99f) feat: enable SPD5118 sensor driver
+* [`bc45b69`](https://github.com/siderolabs/pkgs/commit/bc45b690bd6008343a99df03c516e22f73e30fce) feat: backport aes256k support (Ceph)
+* [`b914c26`](https://github.com/siderolabs/pkgs/commit/b914c261a6141b40d6fc93514c458985467b1585) feat: update Go to 1.26.7
+* [`caac515`](https://github.com/siderolabs/pkgs/commit/caac51549df4350dda473edd848166b2ce1b8a39) feat: update Linux to 6.18.45
+* [`ada230a`](https://github.com/siderolabs/pkgs/commit/ada230ad41a2c869c558f2a0b4241e4f4c4c1a2a) feat: enable IPSec offload and dma-buf heaps
+* [`33d14e0`](https://github.com/siderolabs/pkgs/commit/33d14e0e8432917a3404ab7ac2b8339dbdff8818) feat(kernel): enable CONFIG_MLX5_VFIO_PCI
+* [`107b628`](https://github.com/siderolabs/pkgs/commit/107b62874966d6acab1a0509c89f68e6015552af) feat: kernel: enable MPTCP, sched_ext
+* [`c9173bb`](https://github.com/siderolabs/pkgs/commit/c9173bb3fa60ae23ad8f2c6e8cee0499a8c45077) feat: move IPVS into modules
+* [`d418aa7`](https://github.com/siderolabs/pkgs/commit/d418aa74ca7237ea573f4580f469d9ece839c7fb) feat: update containerd to 2.3.4
+* [`c4a6a61`](https://github.com/siderolabs/pkgs/commit/c4a6a61a1a6ea195e67fe9e5d4cb6984c90b50b0) feat: update Go to 1.26.6
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>18 commits</summary>
+<p>
+
+* [`960cf75`](https://github.com/siderolabs/tools/commit/960cf75b9925c59c2ccb695c13a1d30a028c7985) feat: update dependencies
+* [`54f72f9`](https://github.com/siderolabs/tools/commit/54f72f992fe7dcc1c038c5d6435fba6cfd4768d5) feat: update dependencies
+* [`2d70a26`](https://github.com/siderolabs/tools/commit/2d70a26416b84373885c755ce628d62542cb0a5c) feat: update Go to 1.27.3
+* [`151acc5`](https://github.com/siderolabs/tools/commit/151acc57e11886110bffcf89cb4e7a6a59da4cf5) feat: update dependencies
+* [`e952d34`](https://github.com/siderolabs/tools/commit/e952d347780c0b72ccc1191f3804be11e4ccd8cf) feat: update llvm to 23.1.3
+* [`32e115c`](https://github.com/siderolabs/tools/commit/32e115c36cbc94cc7cfb0299497bbb4bd6b1b1e4) fix: restore llvm 22 for rust compatibility
+* [`47166ad`](https://github.com/siderolabs/tools/commit/47166adc2b76ff4ead4843fbe0ad5b42e54ec520) feat: bump deps
+* [`d40b203`](https://github.com/siderolabs/tools/commit/d40b203821b63da62f9b04aab6c116b500bc0327) feat: update tools components
+* [`19bb4b7`](https://github.com/siderolabs/tools/commit/19bb4b7facf4cb83f7f0c979422ae4642bc1a4c9) chore: downgrade llvm to major 22
+* [`b28aa66`](https://github.com/siderolabs/tools/commit/b28aa66476f19f3449a9651edfdca6900a325537) chore: bump util-linux 2.42.3
+* [`1023701`](https://github.com/siderolabs/tools/commit/1023701f7b0a51dbb67d03fb204313151c095ba9) chore: update dependencies 2026-09-08
+* [`c3165c7`](https://github.com/siderolabs/tools/commit/c3165c77d1f7cecce410d49aad533b9e2af546fe) chore: update toolchain image
+* [`09ccc74`](https://github.com/siderolabs/tools/commit/09ccc74617a534838109bc64bb663f7c7c40fcd2) feat: bump go to 1.26.8
+* [`35fab51`](https://github.com/siderolabs/tools/commit/35fab513ae40e9532a9db17bdaace50d4578a470) fix: update OpenSSL to 3.6.4
+* [`e033f2a`](https://github.com/siderolabs/tools/commit/e033f2af700a81a4199188cefced8b43e94487ff) feat: move more packages into separate images
+* [`d102f15`](https://github.com/siderolabs/tools/commit/d102f15b6ce95fb526a964a3eb8908bc235d1989) feat: update Go to 1.26.7
+* [`fd531a3`](https://github.com/siderolabs/tools/commit/fd531a36b8f9668316e1dd1f7938ef26e36df77e) feat: update Go to 1.26.6
+* [`5eabe31`](https://github.com/siderolabs/tools/commit/5eabe31f240b3f80df0956f53651df706e0dbf4e) chore: rekres 2026-08-12
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.14.0-15-g2f03590 -> v1.15.0-alpha.0-75-g17fdd33
+* **github.com/siderolabs/tools**  v1.14.0-5-g87316ca -> v1.15.0-alpha.0-17-g960cf75
+
+Previous release can be found at [v1.14.0](https://github.com/siderolabs/extensions/releases/tag/v1.14.0)
+
 ## [Talos System Extensions 1.15.0-alpha.2](https://github.com/siderolabs/extensions/releases/tag/v1.15.0-alpha.2) (2026-10-27)
 
 Welcome to the v1.15.0-alpha.2 release of Talos System Extensions!  
