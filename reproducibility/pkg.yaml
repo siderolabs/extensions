@@ -29,7 +29,8 @@ dependencies:
   # - stage: gasket-driver
 
   - stage: glibc
-  - stage: gvisor
+  # gvisor can be ignored from reproducibility test since it's a tarball downloaded and extracted (no build happens)
+  # - stage: gvisor
   - stage: gvisor-debug
   - stage: hello-world-service
   # i915-ucode can be ignored from reproducibility test since it's linux-firmware copied from pkgs

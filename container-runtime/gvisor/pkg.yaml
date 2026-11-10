@@ -5,73 +5,36 @@ dependencies:
   - stage: base
 steps:
   - sources:
-      - url: https://github.com/google/gvisor/archive/{{ .GVISOR_REV }}.tar.gz
-        destination: gvisor.tar.gz
-        sha256: {{ .GVISOR_SHA256 }}
-        sha512: {{ .GVISOR_SHA512 }}
-    env:
-      GOPATH: /tmp/go
-    cachePaths:
-      - /.cache/go-build
-      - /tmp/go/pkg
-  - network: default
-    prepare:
-      - |
-        mkdir -p ${GOPATH}/src/github.com/google/gvisor
-
-        tar -xzf gvisor.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/google/gvisor
-      - |
-        cd ${GOPATH}/src/github.com/google/gvisor
-
-        go mod download
-  - network: none
-    build:
-      - |
-        cd ${GOPATH}/src/github.com/google/gvisor
-
-        mkdir -p ./bin/gvisor-bin
-
-        # runsc verifies that all sidecars come from the same release
-        LDFLAGS="-X gvisor.dev/gvisor/runsc/version.version=release-{{ .GVISOR_VERSION }}"
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/runsc ./runsc
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/containerd-shim-runsc-v1 ./shim
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/gvisor_sentry ./runsc/cmd/sentry
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/runsc-metric-server ./runsc/cmd/metricserver
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/checkpointgofer ./runsc/checkpointgofer
-
-        # Freestanding static C binaries, flags match upstream Bazel genrules.
-        CFLAGS="-Os -fno-pie -no-pie -ffreestanding -fno-stack-protector -fno-asynchronous-unwind-tables -fno-unwind-tables -static -nostdlib -nostartfiles -Wl,--build-id=none -Wl,--gc-sections -Wl,-s -Wl,-n"
-
-        cc ${CFLAGS} -o ./bin/gvisor-bin/gvisor-sentry-prewarmer ./runsc/prewarmer/prewarmer.c
-
-        cc ${CFLAGS} -o ./bin/gvisor-bin/runsc-fd-parking ./runsc/fdparking/fdparking.c
-
-        cc ${CFLAGS} -o ./bin/gvisor-bin/gvisor-proc-umounter ./runsc/procumounter/procumounter.c
+      # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/google/gvisor/releases/download/release-{{ .GVISOR_VERSION }}/gvisor-aarch64.tar.zstd
+        destination: gvisor.tar.zstd
+        sha256: {{ .GVISOR_ARM64_SHA256 }}
+        sha512: {{ .GVISOR_ARM64_SHA512 }}
+      # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
+      - url: https://github.com/google/gvisor/releases/download/release-{{ .GVISOR_VERSION }}/gvisor-x86_64.tar.zstd
+        destination: gvisor.tar.zstd
+        sha256: {{ .GVISOR_AMD64_SHA256 }}
+        sha512: {{ .GVISOR_AMD64_SHA512 }}
+      # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     install:
       - |
+        # The release tarball holds runsc, containerd-shim-runsc-v1 and the
+        # gvisor-bin/ sidecars in the layout runsc expects.
         mkdir -p /rootfs/usr/local/bin
-
-        cd ${GOPATH}/src/github.com/google/gvisor
-
-        cp ./bin/runsc /rootfs/usr/local/bin/runsc
-        chmod +x /rootfs/usr/local/bin/runsc
-
-        cp ./bin/containerd-shim-runsc-v1 /rootfs/usr/local/bin/containerd-shim-runsc-v1
-        chmod +x /rootfs/usr/local/bin/containerd-shim-runsc-v1
-
-        cp -r ./bin/gvisor-bin /rootfs/usr/local/bin/gvisor-bin
-        chmod +x /rootfs/usr/local/bin/gvisor-bin/*
-
+        tar -xf gvisor.tar.zstd -C /rootfs/usr/local/bin
       - |
         mkdir -p /rootfs/etc/cri/conf.d
 
         cp /pkg/10-gvisor.part /pkg/runsc.toml /pkg/10-gvisor-kvm.part /pkg/runsc-kvm.toml /rootfs/etc/cri/conf.d/
     test:
+      - |
+        # The release tarball is extracted as-is, so check that the expected
+        # binaries are there and that runsc is the version we asked for.
+        for bin in runsc containerd-shim-runsc-v1 gvisor-bin/gvisor_sentry; do
+          test -x "/rootfs/usr/local/bin/${bin}" || { echo "missing ${bin}"; exit 1; }
+        done
+
+        /rootfs/usr/local/bin/runsc --version | grep -Fx "runsc version release-{{ .GVISOR_VERSION }}"
       - |
         mkdir -p /extensions-validator-rootfs
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs
