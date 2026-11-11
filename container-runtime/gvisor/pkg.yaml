@@ -22,7 +22,6 @@ steps:
         tar -xzf gvisor.tar.gz --strip-components=1 -C ${GOPATH}/src/github.com/google/gvisor
       - |
         cd ${GOPATH}/src/github.com/google/gvisor
-
         go mod download
   - network: none
     build:
@@ -31,24 +30,9 @@ steps:
 
         mkdir ./bin
 
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/runsc ./runsc
+        CGO_ENABLED=0 go build -o ./bin/runsc ./runsc
 
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/containerd-shim-runsc-v1 ./shim
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/gvisor_sentry ./runsc/cmd/sentry
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/runsc-metric-server ./runsc/cmd/metricserver
-
-        CGO_ENABLED=0 go build -ldflags "${LDFLAGS}" -o ./bin/gvisor-bin/checkpointgofer ./runsc/checkpointgofer
-
-        # Freestanding static C binaries, flags match upstream Bazel genrules.
-        CFLAGS="-Os -fno-pie -no-pie -ffreestanding -fno-stack-protector -fno-asynchronous-unwind-tables -fno-unwind-tables -static -nostdlib -nostartfiles -Wl,--build-id=none -Wl,--gc-sections -Wl,-s -Wl,-n"
-
-        cc ${CFLAGS} -o ./bin/gvisor-bin/gvisor-sentry-prewarmer ./runsc/prewarmer/prewarmer.c
-
-        cc ${CFLAGS} -o ./bin/gvisor-bin/runsc-fd-parking ./runsc/fdparking/fdparking.c
-
-        cc ${CFLAGS} -o ./bin/gvisor-bin/gvisor-proc-umounter ./runsc/procumounter/procumounter.c
+        CGO_ENABLED=0 go build -o ./bin/containerd-shim-runsc-v1 ./shim
     install:
       - |
         mkdir -p /rootfs/usr/local/bin
