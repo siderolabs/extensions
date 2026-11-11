@@ -1,3 +1,92 @@
+## [Talos System Extensions 1.14.6](https://github.com/siderolabs/extensions/releases/tag/v1.14.6) (2026-11-11)
+
+Welcome to the v1.14.6 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+cloudflared: 2026.10.7
+kata-containers: 4.3.1
+lldpd: 1.0.23
+Linux firmware: 20261019
+nebula: 1.12.0
+netbird: 0.82.0
+newt: 1.19.0
+NVIDIA LTS: 580.196.07
+NVIDIA Production: 595.112.07
+spin: 0.27.1
+stargz-snapshotter: 0.19.1
+tailscale: 1.104.5
+
+
+### Contributors
+
+* Andrey Smirnov
+* saguila
+* Jake Watson
+* Justin Garrison
+* Scott Vandiver
+* domitoridesu
+* nahsi
+* zavermax
+
+### Changes
+<details><summary>13 commits</summary>
+<p>
+
+* [`4a77f5c1`](https://github.com/siderolabs/extensions/commit/4a77f5c19a3bb1b338cff626e550956c70a4b0e7) fix: build of soci-snapshotter with Go 1.26.11
+* [`daaef932`](https://github.com/siderolabs/extensions/commit/daaef9320c00d19a84ca83c4a49896e0d11b66fb) fix: revert gvisor
+* [`018515b7`](https://github.com/siderolabs/extensions/commit/018515b7ca16528cfc1c29af2da6787e2411083b) fix: add one more sidecar to gvisor build
+* [`40fdc639`](https://github.com/siderolabs/extensions/commit/40fdc6395cbbb86ea16067149e605e7f40d8b31a) fix: install amd-npu firmware under the names the driver requests
+* [`38aded45`](https://github.com/siderolabs/extensions/commit/38aded45dedfdb250d23640fb058e7184c3d943f) feat: update backportable dependencies
+* [`b27fde56`](https://github.com/siderolabs/extensions/commit/b27fde562eb5497823b1e20e1c69fb47651fcd17) feat: add amd-npu extension
+* [`80a76cde`](https://github.com/siderolabs/extensions/commit/80a76cde2f8325947997f181f823c3e1813235be) feat: update backportable dependencies
+* [`0eac1898`](https://github.com/siderolabs/extensions/commit/0eac1898f29df81f895bb09202ffef3e8a314768) feat: update NVIDIA drivers
+* [`54545f5b`](https://github.com/siderolabs/extensions/commit/54545f5ba914e55349e133ecdce135cb88aff875) feat: update Linux firmware to 20261019
+* [`38aa013e`](https://github.com/siderolabs/extensions/commit/38aa013e32266d44a21d347ae6d118786a3d5c65) fix: harden kata-containers allowed pod annotations
+* [`eb428bc5`](https://github.com/siderolabs/extensions/commit/eb428bc5952c7724027c817af29b2df4bc668882) feat: update kata containers to 4.3.1
+* [`6e1ee705`](https://github.com/siderolabs/extensions/commit/6e1ee705562f913b60114e6cce4b761530a2002b) fix(stargz-snapshotter): add correct config, paths and mounts for estargz
+* [`9c261a9c`](https://github.com/siderolabs/extensions/commit/9c261a9c75a44c4ae7ed856fa7a8cb232e0d1f98) feat: sync pkgs and tools, rekres
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>11 commits</summary>
+<p>
+
+* [`e6ad19d`](https://github.com/siderolabs/pkgs/commit/e6ad19df338a763890910b142f820d6712c39585) feat: update Linux to 6.18.63
+* [`28f56b5`](https://github.com/siderolabs/pkgs/commit/28f56b5e58863d34e479ca0045e680a9d787fb6e) feat: enable AMD Pensando ionic and ionic_rdma
+* [`64ec876`](https://github.com/siderolabs/pkgs/commit/64ec876294d7aa5f1bae7ef8ad3dab7802605101) fix: enable BROADCOM PHY on amd64
+* [`52e7730`](https://github.com/siderolabs/pkgs/commit/52e7730766f03275d063673fef4494dc3e2cfb87) feat: enable arm64 SMMUv3 SVA for ATS (NVIDIA Grace Hopper)
+* [`5645412`](https://github.com/siderolabs/pkgs/commit/5645412aa0bc92e22ecd780297ca4e31e3c8d37f) feat: update dependencies
+* [`5255939`](https://github.com/siderolabs/pkgs/commit/5255939854fff51d5292cfd110726835843bacd7) feat: enable CONFIG_DRM_ACCEL_AMDXDNA on amd64
+* [`0190570`](https://github.com/siderolabs/pkgs/commit/0190570bd54fd604a2932ad8e85e059ecd9fdb14) feat: update NVIDIA drivers
+* [`ef77f92`](https://github.com/siderolabs/pkgs/commit/ef77f92da47615c7e2f7a34396911319dd68dcb6) feat: update backportable dependencies
+* [`6c2142e`](https://github.com/siderolabs/pkgs/commit/6c2142ebbe62c78b7b3328d632c65de8333a249e) feat: enable arm64 ff-a tpm crb support
+* [`e06cc60`](https://github.com/siderolabs/pkgs/commit/e06cc606d894708130e5d25623ce58550bd64965) feat: enable applesmc on amd64
+* [`f26bb1b`](https://github.com/siderolabs/pkgs/commit/f26bb1b8414d5841f4134c3692ce806249b2d357) feat: update Go to 1.26.11
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`5959f76`](https://github.com/siderolabs/tools/commit/5959f76cc92245aabfd1162cb6946ee7dc19a257) feat: update Go to 1.26.11
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.14.0-48-gf4bda77 -> v1.14.0-59-ge6ad19d
+* **github.com/siderolabs/tools**  v1.14.0-11-g8dad45e -> v1.14.0-12-g5959f76
+
+Previous release can be found at [v1.14.5](https://github.com/siderolabs/extensions/releases/tag/v1.14.5)
+
 ## [Talos System Extensions 1.14.5](https://github.com/siderolabs/extensions/releases/tag/v1.14.5) (2026-10-26)
 
 Welcome to the v1.14.5 release of Talos System Extensions!
