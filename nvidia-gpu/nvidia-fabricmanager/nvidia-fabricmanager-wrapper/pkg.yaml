@@ -22,6 +22,8 @@ steps:
       CC: gcc-14
       CXX: g++-14
       GOPATH: /tmp/go
+      # nvswitch.go links libibumad statically via `#cgo LDFLAGS: -l:libibumad.a`, which newer Go rejects by default
+      CGO_LDFLAGS_ALLOW: '-l:libibumad\.a'
   - cachePaths:
       - /.cache/go-build
       - /tmp/go/pkg
