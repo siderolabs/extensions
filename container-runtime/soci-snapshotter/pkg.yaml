@@ -13,6 +13,8 @@ steps:
       GOPATH: /tmp/go
       VERSION: {{ .SOCI_SNAPSHOTTER_VERSION }}
       REVISION: {{ .SOCI_SNAPSHOTTER_REV }}
+      # soci-snapshotter links zlib statically via `#cgo LDFLAGS: -l:libz.a`, which newer Go rejects by default
+      CGO_LDFLAGS_ALLOW: '-l:libz\.a'
     cachePaths:
       - /.cache/go-build
       - /tmp/go/pkg
