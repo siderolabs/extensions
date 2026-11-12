@@ -115,6 +115,7 @@ TARGETS += lldpd
 TARGETS += mdadm
 TARGETS += mei
 TARGETS += mellanox-mstflint
+TARGETS += mergerfs
 TARGETS += metal-agent
 TARGETS += multipath-tools
 TARGETS += nebula
