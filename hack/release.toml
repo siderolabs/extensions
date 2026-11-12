@@ -30,6 +30,7 @@ gvisor: 20261026.0
 hailort v5: 5.5.0
 harbor-credential-provider: 0.2.0
 hyperv-guest-agent: 7.3
+Intel u-code: 20261110
 kata-containers: 4.3.1
 libvirt: 12.9.0
 libxml2: 2.15.4
