@@ -371,7 +371,6 @@
   files:
     - rootfs/etc/cri/conf.d/runsc.toml
 - images:
-    - registry.dev.siderolabs.io/siderolabs/nonfree-kmod-nvidia-lts
     - registry.dev.siderolabs.io/siderolabs/nonfree-kmod-nvidia-production
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-production
@@ -379,15 +378,6 @@
   files:
     - rootfs/usr/lib/modules/*/extras/nvidia-fs.ko
     - rootfs/usr/local/lib/modprobe.d/nvidia.conf
-- images:
-    - registry.dev.siderolabs.io/siderolabs/nonfree-kmod-nvidia-lts
-    - registry.dev.siderolabs.io/siderolabs/nonfree-kmod-nvidia-production
-  files:
-    - rootfs/usr/lib/modules/*/extras/nvidia-drm.ko
-    - rootfs/usr/lib/modules/*/extras/nvidia-modeset.ko
-    - rootfs/usr/lib/modules/*/extras/nvidia-peermem.ko
-    - rootfs/usr/lib/modules/*/extras/nvidia-uvm.ko
-    - rootfs/usr/lib/modules/*/extras/nvidia.ko
 - images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-lts
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
@@ -455,6 +445,7 @@
     - rootfs/usr/local/lib/libnvidia-egl-gbm.so.1.1.3
     - rootfs/usr/local/lib/libnvidia-egl-wayland.so.1
     - rootfs/usr/local/lib/libnvidia-egl-wayland.so.1.1.20
+    - rootfs/usr/local/lib/libnvidia-egl-wayland2.so.1
     - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1
     - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1
     - rootfs/usr/local/lib/libnvidia-encode.so
@@ -556,6 +547,7 @@
     - rootfs/usr/local/share/man/man1/nvidia-smi.1.gz
     - rootfs/usr/local/share/man/man1/nvidia-xconfig.1.gz
     - rootfs/usr/local/share/nvidia/nvoptix.bin
+    - rootfs/usr/share/egl/egl_external_platform.d/09_nvidia_wayland2.json
     - rootfs/usr/share/egl/egl_external_platform.d/10_nvidia_wayland.json
     - rootfs/usr/share/egl/egl_external_platform.d/15_nvidia_gbm.json
     - rootfs/usr/share/egl/egl_external_platform.d/20_nvidia_xcb.json
@@ -580,30 +572,9 @@
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvlsm/nvlsm.conf
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgx2_hgx2_topology
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxa100_hgxa100_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_osfp_cable_connections.csv
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_osfp_connections.csv
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_trunk_connections.csv
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_osfp_cable_connections.csv
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_osfp_connections.csv
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_trunk_connections.csv
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_8gpus_topology
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxh100_hgxh100_topology
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxh800_hgxh800_topology
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl36r1_c2g2_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl36r1_c2g4_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl4r1_c2g2_etf_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl576r16_c2g4_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl72r1_c2g4_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl72r2_c2g2_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl72r2_c2g4_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl8r1_c2g4_etf_nso_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl8r1_c2g4_etf_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb300_nvl72r1_c2g4_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb300_nvl72r2_c2g4_topology
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gh200_nvlink_32gpus_topology
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/mgxh20_nvl16_topology
 - images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-open-gpu-kernel-modules-lts
@@ -974,7 +945,6 @@
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/sbin/sln
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/sbin/zic
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/share/spdx/glibc.spdx.json
-    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/share/spdx/zlib-ng.spdx.json
 - images:
     - registry.dev.siderolabs.io/siderolabs/libvirtd
     - registry.dev.siderolabs.io/siderolabs/kata-containers
@@ -997,21 +967,42 @@
     - rootfs/usr/local/lib/libtirpc.so.3.0.0
     - rootfs/usr/local/lib/pkgconfig/libtirpc.pc
 - images:
-    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
-    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-new-feature
-  files:
-    - rootfs/usr/local/lib/libnvidia-egl-wayland2.so.1
-    - rootfs/usr/share/egl/egl_external_platform.d/09_nvidia_wayland2.json
-- images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-production
     - registry.dev.siderolabs.io/siderolabs/nvidia-fabricmanager-new-feature
   files:
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/local/share/spdx/zlib-ng.spdx.json
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_osfp_cable_connections.csv
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_osfp_connections.csv
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_16gpus_trunk_connections.csv
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_osfp_cable_connections.csv
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_osfp_connections.csv
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_32gpus_trunk_connections.csv
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/dgxgh200_hgxgh200_8gpus_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl36r1_c2g2_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl36r1_c2g4_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl4r1_c2g2_etf_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl576r16_c2g4_topology
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl576r4_c2g4_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl72r1_c2g4_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl72r2_c2g2_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl72r2_c2g4_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl8r1_c2g4_etf_nso_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb200_nvl8r1_c2g4_etf_topology
     - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb300_nvl72r1_c2g4_kyber_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb300_nvl72r1_c2g4_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gb300_nvl72r2_c2g4_topology
+    - rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/gh200_nvlink_32gpus_topology
 - images:
     - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-lts
-    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-production
+    - registry.dev.siderolabs.io/siderolabs/nvidia-container-toolkit-new-feature
   files:
-    - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1.0.5
-    - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1.0.5
-    - rootfs/usr/local/share/doc/NVIDIA_GLX-1.0/html/xineramaglx.html
+    - rootfs/usr/local/bin/nvidia-networking-bug-report.py
+    - rootfs/usr/local/lib/libnvcuextend.so
+    - rootfs/usr/local/lib/libnvcuextend.so.1
+    - rootfs/usr/local/lib/libnvidia-egl-wayland2.so.1.0.2
+    - rootfs/usr/local/lib/libnvidia-egl-xcb.so.1.0.6
+    - rootfs/usr/local/lib/libnvidia-egl-xlib.so.1.0.6
+    - rootfs/usr/local/lib/libnvidia-fmdrv.so.1
+    - rootfs/usr/local/lib/libnvidia-imex.so.1

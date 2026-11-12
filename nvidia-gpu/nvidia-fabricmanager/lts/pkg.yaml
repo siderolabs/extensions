@@ -6,40 +6,45 @@ dependencies:
   - stage: glibc
     from: /rootfs/
     to: /rootfs/usr/local/lib/containers/nvidia-fabricmanager/
-  # nvidia-fabricmanager needs libz.so.1 on x86_64
-  # {{ if eq .ARCH "x86_64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-  - stage: zlib-ng-nvidia
-    from: /rootfs/
-    to: /rootfs/usr/local/lib/containers/nvidia-fabricmanager/
-  # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated
   - stage: nvidia-fabricmanager-gcc-runtime
   - stage: nvidia-fabricmanager-wrapper
 steps:
   - sources:
     # {{ if eq .ARCH "aarch64" }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-sbsa/fabricmanager-linux-sbsa-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager_snnvl/linux-sbsa/fabricmanager_snnvl-linux-sbsa-{{ .NVIDIA_FABRIC_MANAGER_LTS_VERSION }}-archive.tar.xz
         destination: fabricmanager.tar.xz
         sha256: {{ .NVIDIA_FABRIC_MANAGER_LTS_ARM64_SHA256 }}
         sha512: {{ .NVIDIA_FABRIC_MANAGER_LTS_ARM64_SHA512 }}
-      - url: https://developer.download.nvidia.com/compute/cuda/redist/nvlsm/linux-sbsa/nvlsm-linux-sbsa-{{ .NVIDIA_NVLSM_LTS_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvlsm/linux-sbsa/nvlsm-linux-sbsa-{{ .NVIDIA_NVLSM_LTS_VERSION }}-archive.tar.xz
         destination: nvlsm.tar.xz
         sha256: {{ .NVIDIA_NVLSM_LTS_ARM64_SHA256 }}
         sha512: {{ .NVIDIA_NVLSM_LTS_ARM64_SHA512 }}
+      # libnvidia-fmdrv.so (driver-specific part of fabric manager) is shipped with the driver
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvidia_driver/linux-sbsa/nvidia_driver-linux-sbsa-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
+        destination: nvidia.tar.xz
+        sha256: {{ .NVIDIA_PKGS_LTS_ARM64_SHA256 }}
+        sha512: {{ .NVIDIA_PKGS_LTS_ARM64_SHA512 }}
     # {{ else }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
-      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager/linux-x86_64/fabricmanager-linux-x86_64-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/fabricmanager_snnvl/linux-x86_64/fabricmanager_snnvl-linux-x86_64-{{ .NVIDIA_FABRIC_MANAGER_LTS_VERSION }}-archive.tar.xz
         destination: fabricmanager.tar.xz
         sha256: {{ .NVIDIA_FABRIC_MANAGER_LTS_AMD64_SHA256 }}
         sha512: {{ .NVIDIA_FABRIC_MANAGER_LTS_AMD64_SHA512 }}
-      - url: https://developer.download.nvidia.com/compute/cuda/redist/nvlsm/linux-x86_64/nvlsm-linux-x86_64-{{ .NVIDIA_NVLSM_LTS_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvlsm/linux-x86_64/nvlsm-linux-x86_64-{{ .NVIDIA_NVLSM_LTS_VERSION }}-archive.tar.xz
         destination: nvlsm.tar.xz
         sha256: {{ .NVIDIA_NVLSM_LTS_AMD64_SHA256 }}
         sha512: {{ .NVIDIA_NVLSM_LTS_AMD64_SHA512 }}
+      # libnvidia-fmdrv.so (driver-specific part of fabric manager) is shipped with the driver
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvidia_driver/linux-x86_64/nvidia_driver-linux-x86_64-{{ .NVIDIA_DRIVER_LTS_VERSION }}-archive.tar.xz
+        destination: nvidia.tar.xz
+        sha256: {{ .NVIDIA_PKGS_LTS_AMD64_SHA256 }}
+        sha512: {{ .NVIDIA_PKGS_LTS_AMD64_SHA512 }}
     # {{ end }} This in fact is YAML comment, but Go templating instruction is evaluated by bldr
     prepare:
       - |
-        mkdir fm sm
+        mkdir fm sm drv
         tar -xf fabricmanager.tar.xz --strip-components=1 -C fm
         tar -xf nvlsm.tar.xz --strip-components=1 -C sm
+        tar -xf nvidia.tar.xz --strip-components=1 -C drv --wildcards '*/lib/libnvidia-fmdrv.so.*'
     install:
       - |
         mkdir -p /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/bin \
@@ -67,8 +72,11 @@ steps:
         cp fm/lib/libnvfm.so.1 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/lib/
         ln -s libnvfm.so.1 /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/lib/libnvfm.so
 
+        cp drv/lib/libnvidia-fmdrv.so.{{ .NVIDIA_DRIVER_LTS_VERSION }} /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/lib/
+        ln -s libnvidia-fmdrv.so.{{ .NVIDIA_DRIVER_LTS_VERSION }} /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/lib/libnvidia-fmdrv.so.1
+
+        # fabricmanager_snnvl ships fabricmanager.cfg in share/nvidia/nvswitch/
         cp fm/share/nvidia/nvswitch/* \
-           fm/etc/fabricmanager.cfg  \
            /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/
 
         sed -i 's/DAEMONIZE=.*/DAEMONIZE=0/g' /rootfs/usr/local/lib/containers/nvidia-fabricmanager/usr/share/nvidia/nvswitch/fabricmanager.cfg
