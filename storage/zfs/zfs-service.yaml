@@ -3,6 +3,7 @@ depends:
   - service: udevd
   - service: cri
   - path: /dev/zfs
+  - configuration: true
 container:
   entrypoint: /zfs-service
   mounts:
