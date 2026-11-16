@@ -13,6 +13,35 @@ machine:
       - name: zfs
 ```
 
+Configure the extension via `ExtensionServiceConfig` document.
+The `zfs-service` waits for this document before importing pools.
+The minimum document is:
+
+```yaml
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: zfs-service
+```
+
+Use `configFiles` to provide key files for encrypted pools, e.g. for a pool with `keylocation=file:///etc/zfs/<pool>.key`:
+
+```yaml
+---
+apiVersion: v1alpha1
+kind: ExtensionServiceConfig
+name: zfs-service
+configFiles:
+  - content: |
+      <your pool key>
+    mountPath: /etc/zfs/<pool>.key
+```
+
+Then apply the patch to your node's MachineConfigs
+```bash
+talosctl patch mc -p @zfs-config.yaml
+```
+
 ## Setup zfs raid
 
 To create the zfs raid make sure the node with the zfs extension is running:
