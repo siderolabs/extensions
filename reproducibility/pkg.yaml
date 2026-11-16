@@ -94,8 +94,6 @@ dependencies:
   - stage: xen-guest-agent
   - stage: zfs
 
-  # nonfree-kmod-nvidia-lts can be ignored from reproducibility test since it's kernel modules copied from pkgs
-  # - stage: nonfree-kmod-nvidia-lts
   # nonfree-kmod-nvidia-production can be ignored from reproducibility test since it's kernel modules copied from pkgs
   # - stage: nonfree-kmod-nvidia-production
 finalize:

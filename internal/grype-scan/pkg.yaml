@@ -39,7 +39,6 @@ dependencies:
   - stage: xen-guest-agent
   - stage: youki
   - stage: zerotier
-  - stage: nonfree-kmod-nvidia-lts
   - stage: nonfree-kmod-nvidia-production
 steps:
   - env:
