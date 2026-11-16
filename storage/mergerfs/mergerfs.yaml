@@ -1,0 +1,15 @@
+name: mergerfs
+runnerMode: host
+depends:
+  # /var (and the user volumes and ZFS datasets under /var/mnt) is mounted.
+  - service: cri
+container:
+  entrypoint: /usr/local/libexec/mergerfs-supervisor
+restart: always
+# Unmount every pool while the services that own the branches (ZFS, NFS)
+# still run; without it they race mergerfs for the branches at shutdown.
+preShutdown:
+  entrypoint: /usr/local/libexec/mergerfs-supervisor
+  args:
+    - pre-shutdown
+  timeout: 30s
