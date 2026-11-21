@@ -19,6 +19,7 @@ See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-an
     [notes.updates]
         title = "Component Updates"
         description = """\
+drbd: 9.3.5
 Intel u-code: 20261110
 """
 
