@@ -1,3 +1,54 @@
+## [Talos System Extensions 1.14.7](https://github.com/siderolabs/extensions/releases/tag/v1.14.7) (2026-11-24)
+
+Welcome to the v1.14.7 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.14/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+drbd: 9.3.5
+Intel u-code: 20261110
+
+
+### Contributors
+
+* Andrey Smirnov
+* Fred Heinecke
+* GitBluub
+
+### Changes
+<details><summary>3 commits</summary>
+<p>
+
+* [`4992d03`](https://github.com/siderolabs/extensions/commit/4992d032a886dc87975233be455ae8d8bf6f13b1) feat: uodate DRBD to 9.3.5
+* [`c2703da`](https://github.com/siderolabs/extensions/commit/c2703dad4a3e9c01edfbcc80b27538975dffba33) feat: update Intel u-code to 20261110
+* [`0d3ec9f`](https://github.com/siderolabs/extensions/commit/0d3ec9fa02a8abb3cab9421a44c3d305fc6da046) feat: sync pkgs
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>7 commits</summary>
+<p>
+
+* [`a1a4897`](https://github.com/siderolabs/pkgs/commit/a1a4897db70d69ca5b2d8466668b5d3f7d405840) feat: update Linux to 6.18.65
+* [`62c1972`](https://github.com/siderolabs/pkgs/commit/62c197207a2501d20b4744f85433780abde60571) feat: update libseccomp to 2.6.2
+* [`e5ea794`](https://github.com/siderolabs/pkgs/commit/e5ea7940e5b8453747e27018dc2afad1061616a3) feat: enable MEMORY_FAILURE
+* [`d81814b`](https://github.com/siderolabs/pkgs/commit/d81814b9eaa585b5ae3b2a6538d9bb5a51440de4) feat: enable DCB support in the i40e driver
+* [`ecf0095`](https://github.com/siderolabs/pkgs/commit/ecf0095ee91eb2c0cc35204485021422fdd9029c) feat: update DRBD to 9.3.5
+* [`9c51ef6`](https://github.com/siderolabs/pkgs/commit/9c51ef6aeb3144b9dd702b17fb4cf8b4e29770b3) fix: add azure nvme udev rules
+* [`ef78851`](https://github.com/siderolabs/pkgs/commit/ef7885153f7142f35377d998e6c4cfdf5bb26ebb) fix: backport virtio UDP tunnel GSO outer protocol validation
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**  v1.14.0-59-ge6ad19d -> v1.14.0-66-ga1a4897
+
+Previous release can be found at [v1.14.6](https://github.com/siderolabs/extensions/releases/tag/v1.14.6)
+
 ## [Talos System Extensions 1.14.6](https://github.com/siderolabs/extensions/releases/tag/v1.14.6) (2026-11-11)
 
 Welcome to the v1.14.6 release of Talos System Extensions!
