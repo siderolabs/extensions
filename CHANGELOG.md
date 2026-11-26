@@ -1,3 +1,64 @@
+## [Talos System Extensions 1.13.13](https://github.com/siderolabs/extensions/releases/tag/v1.13.13) (2026-11-26)
+
+Welcome to the v1.13.13 release of Talos System Extensions!
+
+See [Talos Linux documentation](https://docs.siderolabs.com/talos/v1.13/build-and-extend-talos/custom-images-and-development/system-extensions) for information on using system extensions.
+
+Please try out the release binaries and report any issues at
+https://github.com/siderolabs/extensions/issues.
+
+### Component Updates
+
+DRBD: 9.3.5
+Intel u-code: 20261110
+Linux firmware: 20261019
+
+
+### Contributors
+
+* Andrey Smirnov
+* domitoridesu
+
+### Changes
+<details><summary>8 commits</summary>
+<p>
+
+* [`cf9b210b`](https://github.com/siderolabs/extensions/commit/cf9b210bd5f51d515232e947be78c3f20756a30f) fix: nvidia fabric manager build with Go 1.27.4
+* [`b829df0c`](https://github.com/siderolabs/extensions/commit/b829df0c054f008261ada725f4c30382abd218ca) fix: build of soci-snapshotter with Go 1.26.11
+* [`9999f65c`](https://github.com/siderolabs/extensions/commit/9999f65c419440fe8dba58a7dbbde7d8a8a20efd) feat: update Intel u-code to 20261110
+* [`881637c8`](https://github.com/siderolabs/extensions/commit/881637c823c70224dbb472fe3ee4e633ed13c3e9) feat: update Linux firmware to 20261019
+* [`a403687e`](https://github.com/siderolabs/extensions/commit/a403687e5540f37d17eb4d180ee4e47b2509ecf3) fix: harden kata-containers allowed pod annotations
+* [`d4aae4e5`](https://github.com/siderolabs/extensions/commit/d4aae4e5a4bb1323ffb3973766398124034c8459) fix: generate kata-containers config from the upstream one
+* [`582f54b2`](https://github.com/siderolabs/extensions/commit/582f54b255075fa6b066de26ff0c5606c1ac3762) fix(stargz-snapshotter): add correct config, paths and mounts for estargz
+* [`9af62c89`](https://github.com/siderolabs/extensions/commit/9af62c893ebb8b6cfb93577753ede011530625b7) feat: sync pkgs/tools
+</p>
+</details>
+
+### Changes from siderolabs/pkgs
+<details><summary>3 commits</summary>
+<p>
+
+* [`6558de8`](https://github.com/siderolabs/pkgs/commit/6558de81c45e6b27ab89568891eeb26f650bdb36) fix: backport virtio UDP tunnel GSO outer protocol validation
+* [`9061646`](https://github.com/siderolabs/pkgs/commit/9061646569b95470372a8c1bc5ef5912ff255c96) feat: update backportable dependencies
+* [`47d13ce`](https://github.com/siderolabs/pkgs/commit/47d13ce6429f55173b719b720c529ab081bf6e3f) feat: update Linux 6.18.65
+</p>
+</details>
+
+### Changes from siderolabs/tools
+<details><summary>1 commit</summary>
+<p>
+
+* [`23de717`](https://github.com/siderolabs/tools/commit/23de7173a1fa8aa2dd199c4b0cc672cdf293d0d5) feat: update Go to 1.26.11
+</p>
+</details>
+
+### Dependency Changes
+
+* **github.com/siderolabs/pkgs**   v1.13.0-80-g19e92dc -> v1.13.0-83-g6558de8
+* **github.com/siderolabs/tools**  v1.13.0-16-g38b4a6e -> v1.13.0-17-g23de717
+
+Previous release can be found at [v1.13.12](https://github.com/siderolabs/extensions/releases/tag/v1.13.12)
+
 ## [Talos System Extensions 1.13.12](https://github.com/siderolabs/extensions/releases/tag/v1.13.12) (2026-10-21)
 
 Welcome to the v1.13.12 release of Talos System Extensions!
