@@ -19,6 +19,8 @@ vars:
   HAILORT_V5_VERSION: 5.5.0 # update this when updating PKGS version tag in Makefile
   MELLANOX_MSFTFLINT_VERSION: 4.34.1-4 # update this when updating PKGS version tag in Makefile
   XDMA_VERSION: a918c51 # update this when updating PKGS version tag in Makefile
+  GDRCOPY_VERSION: v2.7 # update this when updating PKGS version tag in Makefile
+
 
   # renovate: datasource=git-tags extractVersion=^libtiprc-(?<version>.*)$ depName=git://git.linux-nfs.org/projects/steved/libtirpc.git
   LIBTIRPC_VERSION: 1-3-6

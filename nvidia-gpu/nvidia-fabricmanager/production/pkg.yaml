@@ -21,7 +21,7 @@ steps:
         destination: fabricmanager.tar.xz
         sha256: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_ARM64_SHA256 }}
         sha512: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_ARM64_SHA512 }}
-      - url: https://developer.download.nvidia.com/compute/cuda/redist/nvlsm/linux-sbsa/nvlsm-linux-sbsa-{{ .NVIDIA_NVLSM_PRODUCTION_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvlsm/linux-sbsa/nvlsm-linux-sbsa-{{ .NVIDIA_NVLSM_PRODUCTION_VERSION }}-archive.tar.xz
         destination: nvlsm.tar.xz
         sha256: {{ .NVIDIA_NVLSM_PRODUCTION_ARM64_SHA256 }}
         sha512: {{ .NVIDIA_NVLSM_PRODUCTION_ARM64_SHA512 }}
@@ -30,7 +30,7 @@ steps:
         destination: fabricmanager.tar.xz
         sha256: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_AMD64_SHA256 }}
         sha512: {{ .NVIDIA_FABRIC_MANAGER_PRODUCTION_AMD64_SHA512 }}
-      - url: https://developer.download.nvidia.com/compute/cuda/redist/nvlsm/linux-x86_64/nvlsm-linux-x86_64-{{ .NVIDIA_NVLSM_PRODUCTION_VERSION }}-archive.tar.xz
+      - url: https://developer.download.nvidia.com/compute/nvidia-driver/redist/nvlsm/linux-x86_64/nvlsm-linux-x86_64-{{ .NVIDIA_NVLSM_PRODUCTION_VERSION }}-archive.tar.xz
         destination: nvlsm.tar.xz
         sha256: {{ .NVIDIA_NVLSM_PRODUCTION_AMD64_SHA256 }}
         sha512: {{ .NVIDIA_NVLSM_PRODUCTION_AMD64_SHA512 }}
