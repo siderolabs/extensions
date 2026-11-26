@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: nvidia-tegra-nvgpu
+  version: "{{ .VERSION }}"
+  author: Alexander Schwankner
+  description: |
+    [{{ .TIER }}] This system extension provides the NVIDIA Jetson Orin (Tegra234, GA10B) GPU kernel modules and firmware from NVIDIA Jetson Linux r39.2.1 (JetPack 7.2).
+  compatibility:
+    talos:
+      version: ">= v1.14.0"
