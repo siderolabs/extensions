@@ -1,0 +1,13 @@
+version: v1alpha1
+metadata:
+  name: amneziawg
+  version: "{{ .VERSION }}"
+  author: gentoosys
+  description: |
+    [{{ .TIER }}] AmneziaWG kernel module + userspace, providing a
+    DPI-resistant WireGuard-compatible interface for inter-node mesh
+    networking. Brings up an `awg0` interface at boot via a shell-free
+    Go helper, before etcd/kubelet, so it can serve as a cluster underlay.
+  compatibility:
+    talos:
+      version: ">= v1.13.0"
