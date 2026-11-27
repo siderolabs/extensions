@@ -376,3 +376,7 @@ spec:
     - matchPackageNames:
         - git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
       allowedVersions: "< 7.4"
+    # 1.6 is the only stable line; 1.7 never left beta and 1.8 (to be released as 2.0) drops APIs.
+    - matchPackageNames:
+        - pnggroup/libpng
+      allowedVersions: "< 1.7.0"

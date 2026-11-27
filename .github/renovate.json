@@ -124,6 +124,12 @@
             "matchPackageNames": [
                 "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ]
+        },
+        {
+            "allowedVersions": "< 1.7.0",
+            "matchPackageNames": [
+                "pnggroup/libpng"
+            ]
         }
     ],
     "separateMajorMinor": false,

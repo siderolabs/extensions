@@ -36,6 +36,11 @@ dependencies:
   - stage: numactl
     from: /usr/local/lib
     to: /rootfs/usr/local/lib
+  # libpng backs the PNG format of QMP screendump, which libvirt requests for domain screenshots.
+  - stage: libpng
+  - stage: libpng
+    from: /usr/local/lib
+    to: /rootfs/usr/local/lib
   - stage: ceph
   - stage: ceph
     from: /usr/local/lib
@@ -80,6 +85,7 @@ steps:
           --enable-numa \
           --enable-linux-aio \
           --enable-rbd \
+          --enable-png \
           --disable-user \
           --disable-linux-user \
           --disable-bsd-user \
@@ -101,7 +107,10 @@ steps:
         make DESTDIR=/rootfs install
     test:
       - |
-        /rootfs/usr/local/bin/qemu-img --help 2>&1 | grep -qw rbd
+        /rootfs/usr/local/bin/qemu-img --help 2>&1 | grep -w rbd
+
+        # libvirt requests PNG screenshots whenever QEMU advertises the format, which it does even without libpng.
+        readelf -d /rootfs/usr/local/bin/qemu-system-* | grep 'libpng16\.so'
 
         mkdir -p /extensions-validator-rootfs
         cp -r /rootfs/ /extensions-validator-rootfs/rootfs
