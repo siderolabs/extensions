@@ -17,6 +17,7 @@ vars:
   TENSTORRENT_VERSION: 2.12.0 # update this when updating PKGS version tag in Makefile
   HAILORT_VERSION: 4.24.0 # update this when updating PKGS version tag in Makefile
   HAILORT_V5_VERSION: 5.5.0 # update this when updating PKGS version tag in Makefile
+  NVIDIA_TEGRA_NVGPU_VERSION: 39.2.1 # update this when updating PKGS version tag in Makefile
   MELLANOX_MSFTFLINT_VERSION: 4.34.1-4 # update this when updating PKGS version tag in Makefile
   XDMA_VERSION: a918c51 # update this when updating PKGS version tag in Makefile
   GDRCOPY_VERSION: v2.7 # update this when updating PKGS version tag in Makefile

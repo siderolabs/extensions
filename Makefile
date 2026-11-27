@@ -135,6 +135,7 @@ TARGETS += nvidia-gdrdrv-device
 TARGETS += nvidia-open-gpu-kernel-modules-lts
 TARGETS += nvidia-open-gpu-kernel-modules-new-feature
 TARGETS += nvidia-open-gpu-kernel-modules-production
+TARGETS += nvidia-tegra-nvgpu
 TARGETS += nvme-cli
 TARGETS += px-fuse
 TARGETS += soci-snapshotter

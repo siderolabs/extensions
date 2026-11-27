@@ -1,0 +1,3 @@
+# update when the nvidia-tegra-nvgpu package in pkgs is updated
+VERSION: "{{ .NVIDIA_TEGRA_NVGPU_VERSION }}-{{ .BUILD_ARG_ABBREV_TAG }}"
+TIER: "extra"

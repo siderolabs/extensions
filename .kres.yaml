@@ -69,6 +69,7 @@ spec:
     - nvidia-open-gpu-kernel-modules-lts
     - nvidia-open-gpu-kernel-modules-new-feature
     - nvidia-open-gpu-kernel-modules-production
+    - nvidia-tegra-nvgpu
     - nvme-cli
     - px-fuse
     - soci-snapshotter
